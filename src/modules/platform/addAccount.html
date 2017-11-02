@@ -1,0 +1,75 @@
+<div class="dataContent">
+    <div class="search-container addContent">
+        <form id="addAccount" class="search_form" autocomplete="off">
+            <table>
+                <tr>
+                    <td class="title">真实姓名<i class="must">*</i></td>
+                    <td class="content">
+                        <input type="text" name="real_name" id="real_name" minlength="2" maxlength="10" class="required max-width" >
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">所属公司<i class="must">*</i></td>
+                    <td class="content long_select">
+                        <select id="company" name="company" class="required max-width">
+                          
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">所属部门<i class="must">*</i></td>
+                    <td class="content long_select">
+                        <select id="office" name="office" class="required max-width">
+                          
+                        </select>
+                    </td>
+                </tr>
+                 <tr>
+                    <td class="title">手机号码<i class="must">*</i></td>
+                    <td class="content">
+                        <input type="text" class="isMobile required max-width" name="mobile" id="mobile" >
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">用户名<i class="must">*</i></td>
+                    <td class="content">
+                        <input type="text" name="nick_name" id="nick_name" class="required max-width letter" autocomplete="new-nick_name">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">密码<i class="must">*</i></td>
+                    <td class="content">
+                        <input type="password" class="checkPassword passwordRepeat required max-width" name="passwd" id="passwd" value="" autocomplete="new-password">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">角色<i class="must">*</i></td>
+                    <td class="content long_select">
+                        <select id="role_id" name="role_id" class="required max-width">
+                           
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">账号是否启用<i class="must">*</i></td>
+                    <td class="content">
+                        <input type="checkbox" name="status" id="status">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="btn_input">
+                       <input type="submit" class="button orange_btn" id="submit" value="提交" />
+                        <input type="reset"  class="button grey_btn goBack" id="reset" value="取消" />
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    seajs.use('modules/platform/addAccount',function(AddAccount){
+        var obj = new AddAccount();
+        obj.init();
+    });
+</script>

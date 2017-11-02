@@ -1,0 +1,1601 @@
+/**
+ * @authors jiaguishan (jiaguishan@gmail.com)
+ * @date    2017-04-18 11:39:52 测试版本回退
+ * @version 1.0
+ */
+'use strict';
+define(function(require, exports, module) {
+    //tammy 全局命名空间
+    var tammy = tammy || {
+        version: '1.0.0'
+    };
+    tammy.utils = tammy.utils || {}; //公共函数
+    tammy.ui = tammy.ui || {}; //公共UI函数及插件
+
+    var rootUrl = '/manage';
+    var basePath = rootUrl + '/src/'; //基础根路径
+
+    //加载插件
+    require('jquery.validate'); //表单验证
+    require('plugin/webuploader/webuploader.min'); //上传模块
+    require('common/validator'); //表单验证扩展
+    require('jsencrypt'); //js encrypt
+    var FINAL_OPTIONS = {
+        rootUrl: rootUrl,
+        basePath: basePath,
+        public_key: '',
+        viewImgRoot: 'http://static.9hds.com/',
+        pageSize: 10, //默认每页显示条数
+        pageIndex: basePath + 'modules/index/index.html',
+        pageLogin: basePath + 'modules/login/login.html', //登陆页面路径
+        page500: basePath + 'modules/error/500.html', //数据请求异常页面
+        page404: basePath + 'modules/error/404.html' // 加载异常页面
+    };
+    tammy.arguments = FINAL_OPTIONS;
+    //数据类型判断
+    //select验证
+    (function() {
+        function isType(type) {
+            return function(obj) {
+                return {}.toString.call(obj) == '[object ' + type + ']';
+            };
+        }
+
+        function objIsNull(obj) {
+            for (var i in obj) {
+                return false;
+            }
+            return true;
+        }
+        tammy.utils.isObject = isType('Object');
+        tammy.utils.isString = isType('String'); //是否为字符串
+        tammy.utils.isArray = Array.isArray || isType('Array'); //是否为数组
+        tammy.utils.isFunction = isType('Function'); //是否为Function
+        tammy.utils.isNumber = isType('Number'); //是否为数字
+        tammy.utils.objIsNull = objIsNull; //对象是否为空
+    })();
+    /**
+     * log 控制台输出方法
+     */
+    function log(msg) {
+        if (window.console) {
+            window.console.log(msg);
+        }
+    }
+
+    (function() {
+        function imgLoad(obj) {
+            var winWidth = $(window).width(),
+                winHeight = $(window).height(),
+                left, top, objWidth, objHeight;
+            var wRatio = (winWidth * 0.7) / obj.width;
+            var hRatio = (winHeight * 0.7) / obj.height;
+            if (obj.height > winHeight * 0.7 || obj.width > winWidth * 0.7) {
+                var Ratio = wRatio <= hRatio ? wRatio : hRatio;
+                objWidth = obj.width * Ratio;
+                objHeight = obj.height * Ratio;
+                obj.setAttribute('width', objWidth);
+                obj.setAttribute('height', objHeight);
+            } else {
+                objWidth = obj.width;
+                objHeight = obj.height;
+            }
+
+            left = (winWidth - objWidth) / 2;
+            top = (winHeight - objHeight - 50) / 2;
+            return {
+                left: left,
+                top: top,
+                width: objWidth,
+                height: objHeight
+            };
+        }
+        tammy.utils.imgLoad = imgLoad;
+    })();
+
+
+    /**
+     * 弹窗口统一调用
+     */
+    (function() {
+        require('art-dialog');
+        var poup = {
+            showModal: function(opt) {
+                var defaults = {
+                    title: '温馨提示',
+                    okValue: '确定',
+                    cancelValue: '取消'
+                };
+                $.extend(defaults, opt);
+                var dg = dialog(defaults);
+                dg.showModal();
+                return dg;
+            },
+            confirm: function(opt) {
+                var defaults = {
+                    title: '温馨提示',
+                    content: opt.content,
+                    ok: opt.ok || function() {},
+                    okValue: opt.okValue || '确定',
+                    cancel: function() {
+                        this.close();
+                    },
+                    cancelValue: opt.okValue || '取消'
+                };
+                var dg = dialog(defaults);
+                dg.showModal();
+            },
+            alertTime: function(opt) {
+                var defaults = {
+                    content: opt.content,
+                };
+                var dg = dialog(defaults);
+                dg.showModal();
+                window.setTimeout(function() {
+                    dg.close().remove();
+                }, opt.time * 1000);
+            },
+            tips: function(opt) {
+                var defaults = {
+                    content: opt.content,
+                    quickClose: true,
+                    align: opt.align || 'bottom'
+                };
+                var dg = dialog(defaults);
+                dg.show(opt.target);
+            }
+        };
+        tammy.utils.alert = poup.showModal;
+        tammy.utils.confirm = poup.confirm;
+        tammy.utils.alertTime = poup.alertTime;
+        tammy.utils.tips = poup.tips;
+    })();
+
+    /**
+     *  数组内查找
+     * @param  val string 要查找字符
+     * @return number 存在则返回索引 不存在则返回 -1
+     */
+    Array.prototype.indexOf = function(val) {
+        for (var i = 0; i < this.length; i++) {
+            if (this[i] == val) return i;
+        }
+        return -1;
+    };
+
+    /**
+     * 数组内删除
+     * @param val string 要删除的字符
+     */
+    Array.prototype.remove = Array.remove || function(val) {
+        var index = this.indexOf(val);
+        if (index > -1) {
+            this.splice(index, 1);
+        }
+    };
+
+    /**
+     * 表单转换JSON对象方法
+     * @return object json对象
+     */
+    (function() {
+        function FormToJSON(form) {
+            var arr = $(form).serializeArray();
+            var final_json = {};
+            $.each(arr, function(index, item) {
+                var attrName = item.name;
+                var attrVal = item.value;
+                if (typeof final_json[attrName] === 'undefined') {
+                    final_json[attrName] = attrVal;
+                } else {
+                    var tempStr = final_json[attrName];
+                    if (jh.utils.isArray(tempStr)) {
+                        final_json[attrName].push(attrVal);
+                    } else {
+                        var newArr = [];
+                        newArr.push(tempStr);
+                        newArr.push(attrVal);
+                        final_json[attrName] = newArr;
+                    }
+                }
+            });
+
+            var radios = $('input[type=radio],input[type=checkbox]', $(form));
+            $.each(radios, function(index, item) {
+                if (!final_json.hasOwnProperty(item.name)) {
+                    final_json[item.name] = '';
+                }
+            });
+            return final_json;
+        }
+        tammy.utils.formToJson = FormToJSON;
+    })();
+
+    /**
+     * 字符串操作
+     */
+    (function() {
+        function _String() {}
+        /**
+         * 去掉两边空格
+         * @param s
+         * @return Boolean
+         */
+        _String.trim = function(s) {
+            return s.replace(/(^\s*)|(\s*$)/g, '');
+        };
+        /**
+         * 去掉中间空格
+         * @param s
+         * @return Boolean
+         */
+        _String.trimmoddle = function(s) {
+            return s.replace(/\s/g, '');
+        };
+        /**
+         * 去掉左边空格
+         * @param s
+         * @return Boolean
+         */
+        _String.trimLeft = function(s) {
+            return s.replace(/^\s*/, '');
+        };
+        /**
+         * 去掉右边空格
+         * @param s
+         * @return Boolean
+         */
+        _String.trimRight = function(s) {
+            return s.replace(/\s*$/, '');
+        };
+        /**
+         * 格式化金额
+         * @param string, separator
+         * @return string
+         */
+        _String.formateMoney = function(string, separator) {
+            if (!separator) separator = ',';
+            if (typeof string === 'number') {
+                string = string.toString();
+            }
+            return string.replace(/\b\d+\b/, function(str) {
+                var len = str.length,
+                    miu = Math.floor((len % 3 === 0 ? (len - 1) : len) / 3);
+                if (len < 4) {
+                    return str;
+                }
+                str = str.split('');
+                for (var i = 1, j = 0; i <= miu; i++, j++) {
+                    str.splice(len - i * 3 - j, 0, separator);
+                    len++;
+                }
+                return str.join('');
+            });
+        };
+        /**
+         * 反格式化金额
+         * @param string, separator
+         * @return string
+         */
+        _String.unformateMoney = function(string, separator) {
+            if (!separator) separator = ',';
+            return string.split(separator).join('');
+        };
+        /**
+         * 忽略大小写检测字符串是不是相等
+         * @param s1
+         * @param s2
+         * @return Boolean
+         */
+        _String.equalsIgnoreCase = function(s1, s2) {
+            return s1.toUpperCase() == s2.toUpperCase();
+        };
+        /**
+         * 检测是否全为中文
+         * @param s
+         * @return Boolean
+         */
+        _String.isChinese = function(s) {
+            return /^[\u4E00-\uFA29]*$/.test(s) && (!/^[\uE7C7-\uE7F3]*$/.test(s.replace(/(^\s*)|(\s*$)/g, '')));
+        };
+        /**
+         * 检测是否为Email
+         * @param s
+         * @return Boolean
+         */
+        _String.isEmail = function(s) {
+            var reg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/i;
+            return reg.exec(s) !== null;
+        };
+        /**
+         * 是否为邮编
+         * @param s
+         * @return Boolean
+         */
+        _String.isPost = function(s) {
+            return /^\d{6}$/.test(s);
+        };
+        /**
+         * 检测扩展名是否为图片
+         * @param s
+         * @return Boolean
+         */
+        _String.isImg = function(s) {
+            var reg = /[.]+(jpg|jpeg|png|bmp|gif)$/gi;
+            return reg.test(s);
+        };
+        /**
+         * 是否为手机号
+         * @param mobile
+         * @return Boolean
+         */
+        _String.isMobile = function(mobile) {
+            var reg = /^1[3|4|5|7|8][0-9]{9}$/;
+            return reg.test(mobile);
+        };
+        /**
+         * 数字是否正整数
+         * @param number
+         * @return Boolean
+         */
+        _String.isPositiveInteger = function(num) {
+            return /^[1-9]\d*$/.test(num);
+        };
+        /**
+         * 数字是否为身份证号
+         * @param number
+         * @return Boolean
+         */
+        _String.isIdCard = function(num) {
+            return /^[1-9]((\d{14})|(\d{16}(\d|X|x)))$/.test(num);
+        };
+        /**
+         * 判断字符串不含特殊字符
+         * @param string
+         * @return Boolean
+         */
+        _String.hasNoSpecial = function(str) {
+            return /^[a-zA-Z0-9\u4E00-\u9FA5]+$/.test(str);
+        };
+        /**
+         * 时间格式转时间戳
+         * @param time,seperator
+         * @return number
+         */
+        _String.timeFormate2Number = function(time, seperator) {
+            var str, arr, newTime;
+            if (!seperator) seperator = '-';
+            str = time.replace(/:/g, seperator);
+            str = str.replace(/ /g, seperator);
+            arr = str.split(seperator);
+            newTime = new Date(Date.UTC(arr[0], arr[1] - 1, arr[2], arr[3] - 8, arr[4], arr[5]));
+            return newTime.getTime();
+        };
+        /**
+         * 时间戳转时间格式
+         * @param time,seperator
+         * @return string
+         */
+        _String.timeNumber2Formate = function(time, seperator) {
+            var str, first, second, arr;
+            if (!seperator) seperator = '-';
+            if (typeof time === 'string') {
+                time = parseInt(time, 10);
+            }
+            str = new Date(time);
+            first = str.toLocaleDateString().replace(/\//g, seperator);
+            second = str.toLocaleTimeString();
+            if (second.indexOf('上午') >= 0) {
+                arr = second.replace('上午', '').split(':');
+                if (parseInt(arr[0], 10) < 10) {
+                    arr[0] = '0' + arr[0];
+                }
+                second = arr.join(':');
+            }
+            if (second.indexOf('下午') >= 0) {
+                arr = second.replace('下午', '').split(':');
+                arr[0] = parseInt(arr[0], 10) + 12;
+                arr[0] += '';
+                second = arr.join(':');
+            }
+            return first + ' ' + second;
+        };
+
+        /**
+         * 隐藏手机号中间四位
+         * @param string
+         * @return string
+         */
+        _String.dealMobile = function(str) {
+            if (typeof str === 'number') {
+                str = str.toString();
+            }
+            return str.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+        };
+
+        /**
+         * 隐藏身份证号中间几位
+         * @param string
+         * @return string
+         */
+        _String.dealIDCard = function(str) {
+            if (typeof str === 'number') {
+                str += '';
+            }
+            var s;
+            s = str.length === 18 ? str.replace(/(\d{3})\d{12}([\d{3}]|[\d{2}]X)/, '$1************$2') : str.replace(/(\d{3})\d{9}(\d{3})/, '$1*********$2');
+            return s;
+        };
+
+        /**
+         * 判断数字的奇偶性
+         * @param number
+         * @return boolean
+         * 奇数返回true，偶数返回false，非数字报错
+         */
+
+        _String.isOdd = function(number) {
+            if (typeof number !== 'number') {
+                throw new Error('parameter must be number type');
+            } else {
+                return number % 2 === 1;
+            }
+        };
+        tammy.utils.string = tammy.utils.string || _String;
+    })();
+
+    /**ajax*/
+    (function() {
+        var ajax = {};
+        var singoutTimer = null;
+        ajax.settings = {
+            url: '',
+            method: 'GET',
+            dataType: 'json',
+            data: {},
+            async: true,
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            done: function() {},
+            fail: function() {},
+            always: function() {},
+            beforeSend: function() {}
+        };
+        ajax.setting = function(data) {
+            var that = this;
+            that.url = data.hasOwnProperty('url') ? data.url : '';
+            that.method = data.hasOwnProperty('method') ? data.method : 'GET';
+            that.dataType = data.hasOwnProperty('dataType') ? data.dataType : 'json';
+            that.data = data.hasOwnProperty('data') ? data.data : {};
+            that.async = data.hasOwnProperty('async') ? data.async : true;
+            that.contentType = data.hasOwnProperty('contentType') ? data.contentType : 'application/x-www-form-urlencoded; charset=UTF-8';
+            that.fail = data.hasOwnProperty('fail') ? data.fail : function() {};
+            that.done = data.hasOwnProperty('done') ? data.done : function() {};
+            that.always = data.hasOwnProperty('always') ? data.always : function() {};
+            that.beforeSend = data.hasOwnProperty('beforeSend') ? data.beforeSend : function() {};
+
+            return that;
+        };
+        ajax.array = [];
+        ajax.send = function(opt) {
+            clearTimeout(singoutTimer);
+            var arr = ajax.array;
+            var setting = new ajax.setting(opt);
+            arr.push(setting);
+            if (arr.length > 0) {
+                var opts = arr.shift();
+                ajax.arrSend(opts);
+            }
+            if (window.location.host === 'local.product.com') {
+                return false;
+            }
+            if (window.location.hash || window.location.pathname == tammy.arguments.pageIndex) {
+                singoutTimer = window.setTimeout(function() {
+                    jh.utils.alert({
+                        content: '长时间未操作,点击确定重新登录！',
+                        ok: function() {
+                            var sout = new tammy.utils.singout();
+                            sout.init();
+                        },
+                        cancel: false
+                    });
+                }, 1000 * 60 * 30);
+            }
+        };
+
+        ajax.arrSend = function(settings) {
+            $.ajax({
+                url: settings.url,
+                method: settings.method,
+                dataType: settings.dataType,
+                contentType: settings.contentType,
+                data: settings.data,
+                cache: false,
+                async: settings.async,
+                beforeSend: function(xhr) {
+                    (new tammy.ui.shadow()).init();
+                    var token = tammy.utils.cookie.get('X-Token');
+                    xhr.setRequestHeader("X-Token", token);
+                    settings.beforeSend.call(null, xhr);
+                }
+            }).
+            done(function(responseText, statusText, xhr) {
+                if (responseText && responseText.code === 60001) {
+                    tammy.utils.alert({
+                        content: '您没有相应权限,点击确定重新登录！',
+                        ok: function() {
+                            var sout = new tammy.utils.singout();
+                            sout.init();
+                        },
+                        cancel: false
+                    });
+                    return false;
+                }
+                if (responseText && responseText.code === 10007) {
+                    if (settings.data.username) {
+                        settings.fail.call(null, responseText);
+                        return false;
+                    }
+                }
+                if (responseText && responseText.code !== 'SUCCESS' && settings.url.indexOf('public_key') === -1) {
+                    //错误时提示信息
+                    tammy.utils.alert({
+                        content: responseText.msg
+                    });
+                    settings.fail.call(null, responseText);
+                    return false;
+                }
+                settings.done.call(null, responseText, statusText, xhr);
+            }).
+            fail(function(response) {
+                settings.fail.call(null, response);
+            }).
+            always(function(response, text) {
+                settings.always.call(null, response, text);
+                (new tammy.ui.shadow()).close();
+            });
+            $('body').dequeue();
+        };
+        tammy.utils.ajax = ajax;
+    })();
+
+    (function() {
+        function Singout() {
+            this.init = function() {
+                tammy.utils.ajax.send({
+                    url: '/admin/user/login-out',
+                    always: function() {
+                        window.location.href = jh.arguments.pageLogin;
+                    }
+                });
+            };
+        }
+        tammy.utils.singout = Singout;
+    })();
+
+    /*修改菜单区域高度*/
+    (function() {
+        var updateMenuBoxHeight = function() {
+            var winHeight = $(window).height();
+            var docHeight = $(document).height();
+            var menuEle = $('.left-side');
+            var final_height = winHeight >= docHeight ? winHeight : docHeight;
+            menuEle.height(final_height - 50);
+
+            var rigthCon = $('.right-side');
+            var rcHeight = rigthCon.height();
+            if (rcHeight < final_height - 50) {
+                rigthCon.height(final_height - 50);
+            }
+        };
+        tammy.utils.updateMenuBoxHeight = updateMenuBoxHeight;
+    })();
+
+    /**
+     * 请求页面
+     */
+    (function() {
+        var showHTML = function(targetURL) {
+            if (targetURL.indexOf(rootUrl + '/') === -1) {
+                var firstChart = targetURL.substring(0, 1);
+                if (firstChart === '/') {
+                    targetURL = rootUrl + targetURL;
+                } else {
+                    targetURL = rootUrl + '/' + targetURL;
+                }
+            }
+            $('#content-container').load(targetURL, function(response, status, xhr) {
+                if (xhr.status === 404) {
+                    tammy.utils.load(FINAL_OPTIONS.page404);
+                } else {
+                    //tammy.utils.updateMenuBoxHeight();
+                    var txt = '';
+                    var breadCrumb = $('#breadCrumb'); //面包屑容器
+                    var breadParnet = breadCrumb.parent();
+                    var moduleCon = $('#leftMenu-box').children('li.active'); //一级菜单
+                    var activeFirst = moduleCon.children('a'); //一级选中的文字
+                    var submoduleCon = moduleCon.find('ul li.active');
+                    if (submoduleCon.children('a').data('flag') == 'protocol') {
+                        var page = new tammy.ui.page({});
+                        page.init();
+                    }
+                    txt += activeFirst.text();
+                    if (submoduleCon) {
+                        var activeSecond = submoduleCon.children('a');
+                        txt += ' > ' + activeSecond.text();
+                    }
+                    if (txt === ' > ') {
+                        breadParnet.addClass('hide');
+                        return false;
+                    }
+                    breadCrumb.text(txt);
+                    if (!breadParnet.is(':visible')) {
+                        breadParnet.show();
+                    }
+                }
+            });
+        };
+        tammy.utils.showHTML = showHTML;
+    })();
+
+    /**
+     * 加载页面
+     */
+    (function() {
+        var kyload = function(targetURL, data) {
+            var dataStr = '';
+            for (var temp in data) {
+                var item = data[temp];
+                dataStr += ',' + temp + '=' + item;
+            }
+            dataStr = dataStr.substring(1);
+            window.location.href = tammy.utils.BASICURL + '#routeModule=' + targetURL + '#routeData=' + dataStr;
+        };
+        tammy.utils.load = kyload;
+    })();
+
+    /**
+     * 获取URL中模块信息及参数
+     */
+    (function(win) {
+        var getURLValue = function() {
+            var hashs = win.hash;
+            var returnData = {
+                module: '',
+                args: {}
+            };
+            hashs = hashs.replace(/#/ig, '');
+            var datas = hashs.substring(hashs.indexOf('routeData=') + 10);
+            var moduleStr = hashs.substring(hashs.indexOf('routeModule=') + 12, hashs.indexOf('routeData='));
+            returnData.module = moduleStr.indexOf('.html') === -1 ? moduleStr + '.html' : moduleStr;
+
+            var dataArr = datas.split(',');
+            for (var i = 0; i < dataArr.length; ++i) {
+                var temp = dataArr[i].split('=');
+                var name = temp[0],
+                    val = temp[1];
+                returnData.args[name] = val;
+            }
+            return returnData;
+        };
+        tammy.utils.getURLValue = getURLValue;
+    })(window.location);
+
+    /**
+     * 获取当前文档地址
+     */
+    (function() {
+        var dispathHost = function() {
+            var baseUrl = window.location;
+            var protocol = baseUrl.protocol; //协议
+            var host = baseUrl.host; //域名端口
+            var pathName = baseUrl.pathname; //当前页面的路径和文件名
+            var finalUrl = protocol + '//' + host + pathName; //完整目录
+            return finalUrl;
+        };
+        tammy.utils.BASICURL = dispathHost();
+    })();
+
+    /**
+     * 加载默认页面
+     *感觉可以再模板处直接判断。之后测试一下
+     */
+    (function() {
+        var defaultContent = function(targetURL, fn) {
+            var currURL = window.location;
+            if (currURL.hash) {
+                var args = targetURL ? targetURL : (tammy.utils.getURLValue()).module;
+                var allMenu = $('#leftMenu-box').children('li');
+                for (var i = 0, len = allMenu.length; i < len; ++i) {
+                    var item = allMenu.eq(i);
+                    var itemModule = item.children('a').data('url');
+                    var subMenu = item.find('li a');
+                    for (var j = 0, jLen = subMenu.length; j < jLen; ++j) {
+                        var subItem = subMenu.eq(j);
+                        var subMenuName = subItem.data('url');
+                        var resultUrl = itemModule + subMenuName;
+                        if (args === resultUrl + '.html') {
+                            if (typeof fn === 'function') {
+                                fn(item, subItem);
+                            } else {
+                                allMenu.removeClass('active').find('li').removeClass('active');
+                                subItem.parent().addClass('active').parent().removeClass('hide').parent().addClass('active');
+                            }
+                        }
+                    }
+                }
+            } else {
+                jh.utils.load('src/modules/welcome/welcome.html');
+            }
+        };
+        tammy.utils.defaultPage = defaultContent;
+    })();
+
+    (function() {
+        function Shadow(option) {
+            var m = this;
+            m.option = {};
+            $.extend(m.option, option);
+        }
+        Shadow.prototype.addShadow = function() {
+            if ($('#kyPoupshadow').length > 0) {
+                $('#kyPoupshadow').remove();
+            }
+            var shadowstr = '<div id="kyPoupshadow" class="loading"><div class="loading-img"><div/></div>';
+            $('body').append(shadowstr).end().find('#kyPoupshadow').css('height', $(document).height());
+        };
+        Shadow.prototype.close = function() {
+            $('#kyPoupshadow').fadeOut(600);
+        };
+        Shadow.prototype.init = function() {
+            var m = this;
+            m.addShadow();
+        };
+        tammy.ui.shadow = Shadow;
+    })();
+
+    (function() {
+        var data_flag = {};
+
+        function Page(options) {
+            var m = this;
+            m.settings = {
+                url: '',
+                method: 'GET',
+                show_page_number: 5,
+                jump: true,
+                noData: '',
+                ident: '', //模块标识
+                data: {
+                    page: 1,
+                    pageSize: tammy.arguments.pageSize
+                },
+                data_container: $('.data_container'), //数据容器
+                page_container: $('.page_container'), //分页容器
+                firstText: '<',
+                preText: '上一页',
+                nextText: '下一页',
+                lastText: '>',
+                isSearch: false,
+                callback: function() {},
+                btnClickCallBack: function() {},
+                beforRender: function() {},
+                onload: function() {},
+                flag: function() {
+                    // let liActive = $('#leftMenu-box').find('.active').get(1);
+                    // // let flag = options.ident;
+                    // let flag = $('body').data('flag');
+                    // let aFlag = $(liActive).children('a').data('flag');
+                    // $.each($('.moduleFlag').children(), function(index, val) {
+                    //     var btnArr = $(val).attr('class').split(' ');
+                    //     if (btnArr[0] !== 'button') {
+                    //         var x = $.inArray(btnArr[0], flag[aFlag]);
+                    //         if (x == -1) {
+                    //             $(val).remove();
+                    //         }
+                    //     }
+                    // });
+                    // $.each($('.dataShow').children('tbody').children('tr'), function(index, val) {
+                    //     $.each($(val).children('td:last-child').children('ul').children('li'), function(index, item) {
+                    //         var btnArr = $(item).children('a').attr('class').split(' ');
+                    //         var x = $.inArray(btnArr[0], flag[aFlag]);
+                    //         if (x == -1) {
+                    //             $(item).remove();
+                    //         }
+                    //     });
+                    // });
+                }
+            };
+            if (jh.utils.objIsNull(options.data)) {
+                delete options.data;
+            }
+            options.data = $.extend({}, m.settings.data, options.data);
+            $.extend(m.settings, options);
+        }
+        Page.prototype.init = function() {
+            var m = this;
+            m.settings.page_container.addClass('pagination');
+            //第一版本按照默认回到第一页进行处理，第二版本再进行优化
+            // var s = m.settings;
+            // if (data_flag[s.url] == undefined || s.isSearch) {
+            //     m.render(1);
+            // } else {
+            //     m.render(data_flag[s.url]);
+            // }
+            m.render(1);
+            m.regEvent();
+        };
+        Page.prototype.create = function(num) {
+            var m = this;
+            if (typeof num !== 'number') {
+                if (parseInt(num, 10)) {
+                    num = parseInt(num, 10);
+                } else {
+                    num = 1;
+                }
+            }
+            m.makepage(num);
+        };
+        Page.prototype.makepage = function(num) {
+            var m = this,
+                arr = [],
+                s = m.settings,
+                half;
+            if (m.page_total <= s.show_page_number + 2) {
+                //如果总页数<=展示页数 + 2，则直接循环输出分页按钮
+                for (var i = 1; i <= m.page_total; i++) {
+                    if (i !== num) {
+                        arr.push('<a href="#page- ' + i + '">' + i + '</a>');
+                    } else {
+                        arr.push('<span class="jh_current_page">' + i + '</span>');
+                    }
+                }
+            } else {
+                half = tammy.utils.string.isOdd(s.show_page_number) ? Math.ceil(s.show_page_number / 2) : s.show_page_number / 2;
+                var lastPage = '<span class="ellipsis">...</span>'; //中间省略号部分
+                lastPage += '<a href="#page-' + m.page_last_second + '">' + m.page_last_second + '</a>'; //倒数第二页
+                lastPage += '<a href="#page-' + m.page_total + '">' + m.page_total + '</a>'; //最后一页
+                if (num <= half) {
+                    for (var i = 1; i <= s.show_page_number; i++) {
+                        if (i !== num) {
+                            arr.push('<a href="#page- ' + i + '">' + i + '</a>');
+                        } else {
+                            arr.push('<span class="jh_current_page">' + i + '</span>');
+                        }
+                    }
+                    arr.push(lastPage);
+                } else {
+                    var j = Math.floor(s.show_page_number / 2);
+                    if (num >= 3 + half) {
+                        arr.push('<a href="#page-1">1</a><a href="#page-2">2</a><span class="ellipsis">...</span>');
+                        var start = m.page_total - s.show_page_number - 3;
+                        if (num > start) {
+                            if (start < 4) {
+                                start = 4;
+                            }
+                            for (var i = start; i <= m.page_total; i++) {
+                                if (i !== num) {
+                                    arr.push('<a href="#page- ' + i + '">' + i + '</a>');
+                                } else {
+                                    arr.push('<span class="jh_current_page">' + i + '</span>');
+                                }
+                            }
+                        } else {
+                            half = tammy.utils.string.isOdd(s.show_page_number) ? j : (j - 1);
+                            for (var i = num - half; i <= num + j; i++) {
+                                if (i !== num) {
+                                    arr.push('<a href="#page- ' + i + '">' + i + '</a>');
+                                } else {
+                                    arr.push('<span class="jh_current_page">' + i + '</span>');
+                                }
+                            }
+                            arr.push(lastPage);
+                        }
+                    } else {
+                        var i, tmp = num + j;
+                        for (i = 1; i <= tmp; i++) {
+                            if (i >= m.page_last_second) {
+                                continue;
+                            }
+                            if (i !== num) {
+                                arr.push('<a href="#page- ' + i + '">' + i + '</a>');
+                            } else {
+                                arr.push('<span class="jh_current_page">' + i + '</span>');
+                            }
+                        }
+                        if (m.page_total - tmp > 2) {
+                            arr.push('<span class="ellipsis">...</span>');
+                        }
+                        arr.push('<a href="#page-' + m.page_last_second + '">' + m.page_last_second + '</a><a href="#page-' + m.page_total + '">' + m.page_total + '</a>');
+                    }
+                }
+            }
+            s.page_container.find('.jh_page').html(arr.join(''));
+            if (s.jump) {
+                s.page_container.find('.jh_jump_text').val(num);
+            }
+        };
+        /**
+         * [makeHtml 拼接分页主容器
+         * @return string 分页主容器结构字符串
+         */
+        Page.prototype.makeHtml = function() {
+            var m = this,
+                s = m.settings,
+                arr = [];
+            arr.push('<div class="jh_pages">');
+            //pre容器
+            arr.push('<div class="jh_page_pre">');
+            // arr.push('<span class="jh_first_page">' + s.firstText + '</span>'); //首页 不可点击状态
+            arr.push('<span class="jh_pre_page">' + s.preText + '</span>'); //上一页 不可点击状态
+            arr.push('</div>'); //pre容器结束
+            //中间页数容器
+            arr.push('<div class="jh_page"></div>');
+            //next容器
+            arr.push('<div class="jh_page_next">');
+            arr.push(' <a href="#page-" ' + m.page_total + ' class="jh_next_page"> ' + s.nextText + ' </a> '); //下一页
+            // arr.push(' <a href="#page-" ' + m.page_total + ' class="jh_last_page"> ' + s.lastText + ' </a> '); //尾页
+            arr.push('</div>'); //next容器结束
+
+            if (s.jump) {
+                arr.push('<div class="jh_jump_to">');
+                arr.push('<form>');
+                arr.push('<span class="noBg">跳至</span>');
+                arr.push('<input type="text" value="1" class="jh_jump_text"  maxlength="6" id="jh_jump_text"/>'); //默认显示第一页
+                arr.push('<span class="noBg">页</span>');
+                arr.push('<input type="submit" value="跳转" class="jh_jump_button" />');
+                arr.push('</form></div>'); //跳转结束
+            }
+
+            arr.push('</div>'); //分页容器结束
+            return arr.join('');
+        };
+        Page.prototype.render = function(pageNum) {
+            var m = this,
+                s = m.settings;
+            data_flag = {};
+            data_flag[s.url] = pageNum;
+            s.data.page = pageNum;
+            tammy.utils.ajax.send({
+                url: s.url,
+                method: s.method,
+                data: s.data,
+                done: function(returnData) {
+                    var response = returnData.data;
+                    //如果返回数据没有total数据总条数，则清空内容和分页容器 显示错误信息
+                    if (!response.total) {
+                        s.data_container.html(s.noData);
+                        s.page_container.empty();
+                        return false;
+                    }
+
+                    m.page_total = Math.ceil(response.total / s.data.pageSize); //分页总数
+                    m.page_last_second = m.page_total - 1; //倒数第二页
+
+                    try {
+                        var viewStr = s.callback.call(null, response); //获取拼接后的展示数据，增加容错处理
+                        s.data_container.html(viewStr); //插入数据
+                        m.onload();
+                    } catch (e) {
+                        log('模板拼接错误，请检查模板！');
+                        log(e);
+                    }
+
+                    //如果数据超过 1 页则进行分页显示
+                    if (m.page_total > 1) {
+                        if (s.page_container.children('.jh_pages').length === 0) {
+
+                            s.page_container.html(m.makeHtml()); //如果分页容器未进行初始化，则进行初始化操作
+                        }
+                        m.create(pageNum); //处理分页
+
+                        if (pageNum === 1) {
+                            s.page_container.find('.jh_page_pre').html('<span class="jh_pre_page">' + s.preText + '</span>');
+                            s.page_container.find('.jh_page_next').html('<a class="jh_next_page" href="#page-' + m.page_total + '">' + s.nextText + '</a>');
+                        } else if (pageNum === m.page_total) {
+                            s.page_container.find('.jh_page_pre').html('<a class="jh_pre_page" href="#page-1">' + s.preText + '</a>');
+                            s.page_container.find('.jh_page_next').html('<span class="jh_next_page">' + s.nextText + '</span>');
+                        } else {
+                            s.page_container.find('.jh_page_pre').html('<a class="jh_pre_page" href="#page-1">' + s.preText + '</a>');
+                            s.page_container.find('.jh_page_next').html('<a class="jh_next_page" href="#page-' + m.page_total + '">' + s.nextText + '</a>');
+                        }
+                    } else {
+                        s.page_container.empty();
+                    }
+                }
+            });
+        };
+        Page.prototype.current = function() {
+            var m = this;
+            return parseInt(m.settings.page_container.find('.jh_page .jh_current_page').html(), 10);
+        };
+        Page.prototype.regEvent = function() {
+            var m = this,
+                s = m.settings;
+            //首页
+            s.page_container.off('click', '.jh_first_page').on('click', '.jh_first_page', function(event) {
+                event.preventDefault();
+                var cur = m.current();
+                if (cur === 1) {
+                    return false;
+                }
+                s.beforRender(1);
+                m.render(1);
+                s.btnClickCallBack();
+
+            });
+            //上一页
+            s.page_container.off('click', '.jh_pre_page').on('click', '.jh_pre_page', function(event) {
+                event.preventDefault();
+                var cur = m.current();
+                if (cur === 1) {
+                    return false;
+                }
+                var preNum = cur - 1;
+                s.beforRender(preNum);
+                m.render(preNum);
+                s.btnClickCallBack(preNum);
+            });
+            //第几页
+            s.page_container.off('click', '.jh_page a').on('click', '.jh_page a', function(event) {
+                event.preventDefault();
+                var me = $(this),
+                    val = me.text();
+                if (me.hasClass('jh_current_page')) {
+                    return false;
+                }
+                val = parseInt(val, 10);
+                s.beforRender(val);
+                m.render(val);
+                s.btnClickCallBack();
+            });
+            //下一页
+            s.page_container.off('click', '.jh_next_page').on('click', '.jh_next_page', function(event) {
+                event.preventDefault();
+                var cur = m.current();
+                if (cur === m.page_total) {
+                    return false;
+                }
+                var preNum = cur + 1;
+                s.beforRender(preNum);
+                m.render(preNum);
+                s.btnClickCallBack(preNum);
+            });
+            //尾页
+            s.page_container.off('click', '.jh_last_page').on('click', '.jh_last_page', function(event) {
+                event.preventDefault();
+                var cur = m.current();
+                if (cur === m.page_total) {
+                    return;
+                }
+                s.beforRender(m.page_total);
+                m.render(m.page_total);
+                s.btnClickCallBack();
+            });
+            //跳转
+            if (s.jump) {
+                s.page_container.off('click', '.jh_jump_to .jh_jump_button').on('click', '.jh_jump_to .jh_jump_button', function(event) {
+                    event.preventDefault();
+                    var me = $(this).siblings('.jh_jump_text'),
+                        val = me.val();
+                    if (val.match(/^[1-9][0-9]*$/)) {
+                        val = parseInt(val, 10);
+                        if (val > m.page_total) {
+                            val = m.page_total;
+                        }
+                        m.render(val);
+                    } else {
+                        tammy.utils.tips({
+                            content: '请输入正确的页数！',
+                            target: me[0]
+                        });
+                    }
+                    return false;
+                });
+            }
+        };
+        Page.prototype.onload = function() {
+            var m = this,
+                s = m.settings;
+            $(document).ready(function() {
+                s.onload();
+                s.flag();
+            });
+
+        };
+        tammy.ui.page = Page;
+    })();
+
+    (function() {
+        var cookie = {};
+        cookie.set = function(key, value, expires) {
+            var date = new Date(),
+                s = '',
+                day = /^[1-9]([0-9]+)?d$/.test(expires),
+                hour = /^[1-9]([0-9]+)?h$/.test(expires),
+                minute = /^[1-9]([0-9]+)?m$/.test(expires),
+                second = /^[1-9]([0-9]+)?s$/.test(expires);
+            if (!expires || !(day || hour || second || minute)) {
+                if (expires < 0) {
+                    date.setDate(date.getDate() + expires);
+                    expires = "; expires=" + date.toGMTString();
+                } else {
+                    expires = '';
+                }
+            } else {
+                expires = parseInt(expires.substr(0, expires.length - 1), 10);
+                if (day) {
+                    date.setDate(date.getDate() + expires);
+                } else if (hour) {
+                    date.setHours(date.getHours() + expires);
+                } else if (minute) {
+                    date.setMinutes(date.getMinutes() + expires);
+                } else if (second) {
+                    date.setSeconds(date.getSeconds() + expires);
+                }
+                expires = "; expires=" + date.toGMTString();
+            }
+            return (document.cookie = key + "=" + (!value ? "" : value.toString()) + expires + "; path=/", "; domain=." + document.domain + s);
+        };
+        cookie.get = function(key) {
+            var value;
+            return (value = new RegExp("(?:^|; )" + key + "=([^;]*)").exec(document.cookie)) ? value[1] : null;
+        };
+        cookie.deleteCookie = function(key) {
+            if (!key) {
+                return false;
+            }
+            var val = cookie.get(key);
+            if (val != null) cookie.set(key, val, -1);
+        };
+        tammy.utils.cookie = cookie;
+    })();
+
+    (function() {
+        var tammy_webuploader = {
+            init: function(opts, callbackObj) {
+                var _this = this;
+                //配置参数
+                var options = {
+                    auto: true, //自动上传
+                    isAppend: true, //是否加入队列，false为覆盖
+                    hiddenName: '',
+                    swf: basePath + 'js/plugin/webuploader/Uploader.swf', //swf文件路径
+                    server: '/admin/file/upload-image', //后台server
+                    pick: {
+                        id: '#file',
+                        multiple: false
+                    }, //上传按钮id,是否可以多个文件同时上传
+                    fileNumLimit: 10, //可上传数量
+                    fileSingleSizeLimit: 5242880,
+                    duplicate: true, //可重复上传同一张图片
+                    fileVal: 'upfile',
+                    formData: {
+                        size_type: 'all'
+
+                    }, //向后台发送的formData数据
+                    accept: {
+                        title: 'Images',
+                        extensions: 'jpg,jpeg,bmp,png',
+                        mimeTypes: 'image/jpg,image/jpeg,image/png,image/bmp'
+                    }
+                };
+                var opt = $.extend({}, options, opts); //合并参数
+
+                var uploader = WebUploader.create(opt); //创建上传对象
+                var pickId = uploader.options.pick.id.replace(/#/, '');
+                var queueList = $('#' + pickId).siblings('.upload-list');
+                $('#' + pickId + ' .webuploader-pick').text('+');
+
+                //文件被添加进队列之前
+                uploader.on('beforeFileQueued', function() {
+                    //当前已上传数量如已达到最大限制数量，则提示并中断加入加入队列
+                    if (uploader.options.fileNumLimit === queueList.children('div').length) {
+                        tammy.utils.alert({
+                            content: '最多上传' + uploader.options.fileNumLimit + '个文件'
+                        });
+                        return false;
+                    }
+                });
+
+                // 文件上传失败，显示上传出错。
+                uploader.on('uploadError', function(file) {
+                    var li = $('#' + file.id),
+                        error = li.find('div.error');
+                    // 避免重复创建
+                    if (!error.length) {
+                        error = $('<div class="error"></div>').appendTo(li);
+                    }
+                    error.text('上传失败');
+                });
+
+                //错误处理
+                uploader.on('error', function(type) {
+                    var errstr = '';
+                    var isOk = _this.fileLengthCheck.call(this, queueList, uploader);
+                    if (!isOk) {
+                        switch (type) {
+                            case 'Q_EXCEED_NUM_LIMIT':
+                                errstr = '最多上传' + uploader.options.fileNumLimit + '个文件';
+                                break;
+                            case 'F_EXCEED_SIZE':
+                                errstr = '文件大小超过限制,请上传5MB文件';
+                                break;
+                            case 'Q_TYPE_DENIED':
+                                var accept = tammy.utils.isArray(uploader.options.accept) ? uploader.options.accept[0].extensions : uploader.options.accept.extensions;
+                                errstr = '文件格式不正确,仅限 ' + accept;
+                        }
+                    }
+                    if (errstr) {
+                        tammy.utils.alert({
+                            content: errstr
+                        });
+                    }
+                });
+
+                //服务端响应事件
+                uploader.on('uploadAccept', function(file, returnData) {
+                    var result = returnData.result;
+                    var response = returnData.response;
+
+                    uploader.reset(); //重置队列
+
+                    //上传本身错误时，控制台打印错误信息，并阻止继续执行
+                    if (result.code !== 10000) {
+                        tammy.utils.alert({
+                            content: result.message
+                        });
+                        return false;
+                    }
+
+                    //图片展示,如若传入回调函数，则直接已回调函数执行，传递文件本身和服务器返回
+                    if (typeof callbackObj !== 'undefined' && !tammy.utils.objIsNull(callbackObj)) {
+                        response.uploader = uploader;
+                        callbackObj.uploadAccept(file, response);
+                    } else {
+                        var item = $(
+                            '<div class="upfile-item">' +
+                            '<img />' +
+                            '<span class="delete-img"></span>' +
+                            '<input type="hidden" />' +
+                            '</div>'
+                        );
+                        var img = item.find('img'); //预览图对象
+                        var span = item.find('span'); //删除按钮
+                        var input = item.find('input'); //隐藏域
+                        span.attr({
+                            'data-domId': pickId,
+                            'data-fileId': file.file.id
+                        });
+                        img.attr({
+                            'data-id': response.url,
+                            'src': tammy.arguments.viewImgRoot + response.url
+                        });
+                        var inputName = uploader.options.hiddenName === '' ? pickId : uploader.options.hiddenName;
+                        input.attr({
+                            name: inputName,
+                            value: response.url
+                        });
+                        if (uploader.options.isAppend) {
+                            queueList.append(item); //加入展示容器
+                        } else {
+                            queueList.empty().html(item); //覆盖容器内容
+                        }
+                    }
+                });
+
+                // 上传完了，成功或者失败，先删除进度条。
+                uploader.on('uploadComplete', function() {});
+                window._selfUploader = window._selfUploader || {}; //存储当前实例
+                window._selfUploader[pickId] = uploader;
+            },
+            fileLengthCheck: function(queueList, uploader) {
+                var list = queueList.children('div');
+                if (list.length < uploader.options.fileNumLimit) {
+                    for (var i = 0, len = uploader.options.fileNumLimit - list.length; i < len; i++) {
+                        var files = this.getFiles('complete');
+                        if (files.length === 0) {
+                            break;
+                        }
+                        var file = files[files.length - 1];
+                        this.removeFile(file);
+                    }
+                    return false;
+                }
+                return true;
+            }
+        };
+        tammy.utils.uploader = tammy_webuploader;
+    })();
+
+    (function() {
+        function validateImg() {
+            var imgStatus = true;
+            var uploaderRequired = $('.uploaderRequired');
+            for (var i = 0; i < uploaderRequired.length; i++) {
+                var item = uploaderRequired.eq(i);
+                var uploader = item.siblings('.webuploader-container');
+                item.siblings('label.error').remove().end();
+                if (item.children('div').length === 0) {
+                    $('<label class="error clearfix">此项必填</label>').insertAfter(uploader);
+                    uploader.addClass('fl');
+                    item.addClass('fl');
+                    imgStatus = false;
+                    break;
+                }
+            }
+            return imgStatus;
+        }
+        tammy.utils.validateImg = validateImg;
+    })();
+    (function() {
+        function validateUeditor() {
+            var ueStatus = true;
+            var ueRequired = $('.ueRequired');
+            if (ueRequired.length == 0) {
+                return true;
+            }
+            var content = $('.ueRequired').children().attr('id');
+            var ue = window.ueditor[content];
+            ue.ready(function() {
+                if (ue.hasContents()) {
+                    ueStatus = true;
+                } else {
+                    ueRequired.children('.error').remove();
+                    $('<label class="error clearfix">此项必填</label>').insertAfter($('#' + content));
+                    ueStatus = false;
+                }
+            });
+            return ueStatus;
+
+        }
+        tammy.utils.validateUeditor = validateUeditor;
+    })();
+    (function() {
+        var validator = {};
+        validator.init = function(options) {
+            var m = this;
+            m.settings = {
+                id: 'formValidator',
+                returnFlag: false,
+                debug: false,
+                errorPlacement: function(error, element) {
+                    var el = $(element); //当前元素
+                    var errMsg = $(error).text(); //错误信息
+                    var isRight = errMsg ? false : true; //是否正确
+                    el.siblings('label.error').remove();
+                    if (!isRight) {
+                        var errStr = '<label class="error">' + errMsg + '</label>';
+                        if (el.hasClass('code')) {
+                            el.parent().append(errStr);
+                        } else {
+                            if ($(el).is('select')) {
+                                var targetTmp = el.next('span.select2').length > 0 ? el.next('span.select2') : el;
+                                $(errStr).insertAfter(targetTmp);
+                            } else {
+                                $(errStr).insertAfter(el);
+                            }
+                        }
+                    }
+                },
+                success: function(error, element) {
+                    var ele = $(element);
+                    ele.siblings('label.error').remove();
+                },
+                submitHandler: function() {}
+            };
+            $.extend(m.settings, options);
+            var sets = m.settings;
+            $.validator.setDefaults({
+                onfocusout: function(element) {
+                    $(element).valid();
+                },
+                onkeyup: function() {},
+                errorPlacement: sets.errorPlacement,
+                success: sets.success,
+                debug: sets.debug,
+                showErrors: function(errors) {
+                    var objIsNull = tammy.utils.objIsNull(errors);
+                    if (objIsNull) {
+                        this.settings.success($('<span></span>'), $(this.currentElements[0]));
+                        return false;
+                    }
+                    for (var item in errors) {
+                        this.settings.errorPlacement($('<span>' + errors[item] + '</span>'), document.getElementsByName(item));
+                    }
+                },
+                submitHandler: function(form) {
+                    form = $(form);
+                    var imgStatus = tammy.utils.validateImg();
+                    var ueStatus = tammy.utils.validateUeditor();
+                    if (!imgStatus || !ueStatus) {
+                        return false;
+                    }
+                    sets.submitHandler.call(null, form);
+                    return false;
+                }
+            });
+            $('#' + sets.id).validate();
+        };
+
+        tammy.utils.validator = validator;
+    })();
+
+    (function() {
+        require('plugin/ueditor/ueditor.all.min');
+
+        function UEditorExtend(id, opt) {
+            opt = opt || {};
+            opt.toolbars = [
+                ['135editor']
+            ];
+            opt.selfId = id;
+            if (window['ueditor'] === undefined) {
+                window['ueditor'] = {};
+            }
+            if (window['ueditor'][id] === undefined) {
+                window['ueditor'][id] = UE.getEditor(id, opt);
+            } else {
+                window['ueditor'][id].destroy();
+                window['ueditor'][id] = UE.getEditor(id, opt);
+            }
+            window['ueditor'][id].addListener('ready', function() {
+                $('[id$=_toolbarbox]').hide();
+            });
+            window['ueditor'][id].addListener('click', function(event) {
+                $('#' + opt.selfId).find('[id$=_body]').click();
+            });
+
+            return window['ueditor'][id];
+        }
+        tammy.utils.ueditor = UEditorExtend;
+    })();
+    // 地图三级联动
+    (function() {
+        function mapSelect(name, callback) {
+            name = name || {};
+            var that = this;
+            that.status = 0;
+
+            jh.utils.ajax.send({
+                method: 'get',
+                url: '/admin/service-region/get-province',
+                done: function(data) {
+                    var htmls = '';
+                    $.each(data.response.list, function(index, val) {
+                        htmls += '<option value="' + val.code + '">' + val.area + '</option>';
+                    });
+                    $('#' + name + '_province').html(htmls);
+                    jh.utils.ajax.send({
+                        method: 'get',
+                        url: '/admin/service-region/get-city-by-province',
+                        data: {
+                            code: $('#' + name + '_province').val()
+                        },
+                        done: function(data) {
+                            var htmls = '';
+                            $.each(data.response.list, function(index, val) {
+                                htmls += '<option value="' + val.code + '">' + val.area + '</option>';
+                            });
+                            $('#' + name + '_city').html(htmls);
+                            jh.utils.ajax.send({
+                                method: 'get',
+                                url: '/admin/service-region/get-region',
+                                data: {
+                                    code: $('#' + name + '_city').val()
+                                },
+                                done: function(data) {
+                                    var htmls = '';
+                                    $.each(data.response.list, function(index, val) {
+                                        htmls += '<option value="' + val.code + '">' + val.area + '</option>';
+                                    });
+                                    $('#' + name + '_district').html(htmls);
+                                    if (callback) {
+                                        callback();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+            $('#mapSelect').on('change', '#' + name + '_province', function() {
+                jh.utils.ajax.send({
+                    method: 'get',
+                    url: '/admin/service-region/get-city-by-province',
+                    data: {
+                        code: $('#' + name + '_province').val(),
+                    },
+                    done: function(data) {
+                        var htmls = '';
+                        $.each(data.response.list, function(index, val) {
+                            htmls += '<option value="' + val.code + '">' + val.area + '</option>';
+                        });
+                        $('#' + name + '_city').html(htmls);
+                        jh.utils.ajax.send({
+                            method: 'get',
+                            url: '/admin/service-region/get-region',
+                            data: {
+                                code: $('#' + name + '_city').val(),
+                            },
+                            done: function(data) {
+                                var htmls = '';
+                                $.each(data.response.list, function(index, val) {
+                                    htmls += '<option value="' + val.code + '">' + val.area + '</option>';
+                                });
+                                $('#' + name + '_district').html(htmls);
+                            }
+                        });
+                    }
+                });
+            });
+            $('#mapSelect').on('change', '#' + name + '_city', function() {
+                jh.utils.ajax.send({
+                    method: 'get',
+                    url: '/admin/service-region/get-region',
+                    data: {
+                        code: $('#' + name + '_city').val(),
+                    },
+                    done: function(data) {
+                        var htmls = '';
+                        $.each(data.response.list, function(index, val) {
+                            htmls += '<option value="' + val.code + '">' + val.area + '</option>';
+                        });
+                        $('#' + name + '_district').html(htmls);
+                    }
+                });
+            });
+        }
+        tammy.utils.mapSelect = mapSelect;
+    })();
+
+    (function() {
+        function InitPublicKey() {
+            tammy.utils.ajax.send({
+                url: tammy.arguments.basePath + 'js/common/public_key.cer',
+                dataType: 'text',
+                done: function(data) {
+                    tammy.arguments.public_key = data;
+                }
+            });
+        }
+        tammy.utils.init_publick = InitPublicKey;
+    })();
+    tammy.utils.init_publick(); //初始化key
+
+    // select默认选中
+    (function() {
+        function setSelectValue(selectId, value) {
+            $.each($('#' + selectId).find('option'), function(index, val) {
+                if (val.innerText === value || val.value === value) {
+                    $('#' + selectId).val(val.value);
+                    return true;
+                }
+            });
+        }
+        tammy.utils.setSelectValue = setSelectValue;
+    })();
+    //html转码与解码
+    (function() {
+        function HTMLDecode(text) {
+            var temp = document.createElement('div');
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+        tammy.utils.HTMLDecode = HTMLDecode;
+    })();
+    (function() {
+        function HTMLEncode(html) {
+            var temp = document.createElement('div');
+            (temp.textContent != null) ? (temp.textContent = html) : (temp.innerText = html);
+            var output = temp.innerHTML;
+            temp = null;
+            return output;
+        }
+        tammy.utils.HTMLEncode = HTMLEncode;
+    })();
+    window.log = log;
+    module.exports = tammy;
+});

@@ -1,0 +1,150 @@
+<div class="dataContent addSupplier">
+    <div class="search-container">
+        <form action="" id="addSupplier" class="search_form">
+            <table>
+                <tr>
+                    <td class="title">供应商名称：<sup class="must">*</sup></td>
+                    <td class="content">
+                        <input type="text" name="provider_name" id="provider_name" class="required" maxlength="50" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">供应商编码：<sup class="must">*</sup></td>
+                    <td class="content">
+                        <input type="text" name="provider_code" id="provider_code" class="required" maxlength="50" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">经营类别：<i class="must">*</i></td>
+                    <td class="content">
+                        <select id="business_category" name="business_category" class="required"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">服务区域：<sup class="must">*</sup></td>
+                    <td class="content">
+                        <div id="citySelect">
+                            <input type="text" id="inputCity" value="请输入您要搜索的地区" autocapitalize="off" autocorrect="off" autocomplete="off" />
+                            <ul id="cityList" class="clearfix"></ul>
+                        </div>
+                        <ul id="service_region" class="clearfix">
+                        </ul>
+                        <div>
+                            <input type="text" id="service" name="service" class="required" style="height: 10px;opacity: 0;" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">企业类型：<i class="must">*</i></td>
+                    <td class="content">
+                        <select id="type" name="type" class="required">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">企业规模：<i class="must">*</i></td>
+                    <td class="content">
+                        <select id="scale" name="scale" class="required">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title ">行业类别：<i class="must">*</i></td>
+                    <td class="content">
+                        <select id="industry_category" name="industry_category" class="required">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">供应商联系人姓名：<sup class="must">*</sup></td>
+                    <td class="content">
+                        <input type="text" name="contact_person" id="contact_person" class="required" maxlength="50" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">供应商联系人电话：<sup class="must">*</sup></td>
+                    <td class="content">
+                        <input type="text" name="contact_tel" id="contact_tel" class="isMobile required" maxlength="11" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">职位：</td>
+                    <td class="content">
+                        <input type="text" name="contact_position" id="contact_position" maxlength="20" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">业务员：<sup class="must">*</sup></td>
+                    <td class="content">
+                        <input type="text" name="sailor" id="sailor" class="required" maxlength="50" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">业务员电话：<i class="must">*</i></td>
+                    <td class="content">
+                        <input type="text" name="sailor_tel" id="sailor_tel" class="required isMobile" maxlength="11" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">所属公司：<sup class="must">*</sup></td>
+                    <td class="content">
+                        <select name="belong_company" id="belong_company" class="required">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">营业证书：<sup class="must">*</sup></td>
+                    <td class="content" id="certificate">
+                        <div class="uploaderDemo">
+                            <div class="upload-list uploaderRequired"></div>
+                            <div id="file_0">上传文件</div>
+                        </div>
+                        <p class="tips">图片建议大小：250KB；图片张数：最多5张；图片格式：jpg,jpeg,png,bmp。</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">供应商logo：<sup class="must">*</sup></td>
+                    <td class="content" id="logo">
+                        <div class="uploaderDemo">
+                            <div class="upload-list uploaderRequired"></div>
+                            <div id="file_1">上传文件</div>
+                        </div>
+                        <p class="tips">图片建议大小：82*82像素，250KB；图片张数：最多1张；图片格式：jpg,jpeg,png,bmp。</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">宣传主页：<sup class="must">*</sup></td>
+                    <td class="content" id="main">
+                        <div class="uploaderDemo">
+                            <div class="upload-list uploaderRequired"></div>
+                            <div id="file_2">上传文件</div>
+                        </div>
+                        <p class="tips">图片建议大小：750*750像素，250KB；图片张数：最多5张；图片格式：jpg,jpeg,png,bmp。</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">详情：<sup class="must">*</sup></td>
+                    <td class="content">
+                        <div style="width:90%;height:500px;" class="ueRequired">
+                            <textarea name="corp_introduction" id="corp_introduction"></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="opertionCon">
+                            <input type="submit" value="提交" class="button orange_btn" id="confirm" />
+                            <input type="button" value="取消" class="button grey_btn goBack" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+seajs.use('modules/supplier/addSupplier', function(AddSupplier) {
+    var addSupplier = new AddSupplier();
+    addSupplier.init();
+});
+</script>

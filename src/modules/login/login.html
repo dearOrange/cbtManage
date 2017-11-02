@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <title>车捕头运营平台</title>
+    <meta name="description" content="车捕头后台管理系统" />
+    <meta name="keywords" content="车捕头 后台 管理 系统" />
+    <link href="../../css/base.css?version=20170609" rel="stylesheet" />
+    <link href="../../css/modules.css?version=20170609" rel="stylesheet" />
+</head>
+<body class="login">
+    <div class="login-logo">
+        <!-- <img src="../../img/login/login_hq51.png" /><img src="../../img/login/login_admin.png" /> -->
+    </div>
+    <div class="login-form">
+        <form class="loginForm" id="form_login">
+            <h1 class="color-white">系统登录</h1>
+            <div class="inputGroup">
+                <input class="txt required" type="text" maxlength="40" name="username" placeholder="用户名" id="username">
+            </div>
+            <div class="inputGroup">
+                <input class="txt required" type="password" maxlength="40" name="password" placeholder="密码" id="password"/>        
+            </div>
+            <div class="inputGroup noborder">
+                <input class="code required txt" type="text" maxlength="4" name="code" placeholder="验证码"/>    
+                <img class="checkCode" id="checkCode" src="https://api.9hds.com/admin/verify-code/create-image?random=44977996"/>     
+            </div>
+            <div class="inputGroup noborder">
+                <input type="submit" value="登录"/>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript" src="../../js/lib/seajs/3.0.1/sea.js?version=20170609"></script>
+    <script type="text/javascript">
+        seajs.use('modules/login/login', function(Login) {
+            var login = new Login();
+            login.init();
+        });
+    </script>
+</body>
+</html>

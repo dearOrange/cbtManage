@@ -1,0 +1,60 @@
+<div class="dataContent editMessage">
+    <div class="search-container">
+        <form id="editMessage" class="search_form">
+            <table>
+                <tr>
+                    <td class="title">标题：<sup class="must">*</sup></td>
+                    <td class="content">
+                        <input type="text" name="title" id="title" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">分类：<sup></sup></td>
+                    <td class="content">
+                        <select name="type" id="type">
+                            <option value="1">普通消息</option>
+                            <option value="2">供应商</option>
+                            <option value="3">活动</option>
+                        </select>
+                        <select name="obj_id" id="obj_id"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">简讯：<sup class="must">*</sup></td>
+                    <td class="content">
+                        <textarea name="content" id="content" cols="220" rows="5" required></textarea>
+                    </td>
+                </tr>
+                <tr id="link" style="display: none;">
+                    <td class="title">链接：</td>
+                    <td class="content">
+                        <input type="text" name="link_url" id="link_url" class="url" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title"></td>
+                    <td class="content">
+                        <label class="push">
+                            <input type="checkbox" class="label_checkbox" name="is_push" id="is_push" />push
+                            <input type="text" name="token" id="token" style="display: none;" />
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="opertionCon">
+                            <input type="submit" value="提交" class="button orange_btn" id="confirm" />
+                            <input type="button" value="取消" class="button grey_btn goBack" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+seajs.use('modules/message/editMessage', function(EditMessage) {
+    var editMessage = new EditMessage();
+    editMessage.init();
+});
+</script>

@@ -1,0 +1,127 @@
+<div class="dataContent supplierDetails">
+    <div class="search-container">
+        <table id="supplierDetails">
+        </table>
+    </div>
+</div>
+<script type="text/template" id="supplier_details_template">
+    <tr>
+        <td class="title">
+            <p>供应商名称：</p>
+        </td>
+        <td class="content">
+            <span id="provider_name">{{response.provider_name}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">供应商编码：</td>
+        <td class="content">
+            <span id="provider_code">{{response.provider_code}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">经营类别：</td>
+        <td class="content">
+            <span id="business_category">{{response.business_category_str}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">服务区域：</td>
+        <td class="content">
+            <ul id="service_region" class="clearfix">
+                <li></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">企业类型：</td>
+        <td class="content">
+            <span id="type">{{response.type_str}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">企业规模：</td>
+        <td class="content">
+            <span id="scale">{{response.scale_str}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">行业类别：</td>
+        <td class="content">
+            <span id="industry_category">{{response.industry_category_str}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">供应商联系人姓名：</td>
+        <td class="content">
+            <span id="contact_person">{{response.contact_person}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">供应商联系人电话：</td>
+        <td class="content">
+            <span id="contact_tel">{{response.contact_tel}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">职位：</td>
+        <td class="content">
+            <span id="contact_position">{{response.contact_position}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">业务员：</td>
+        <td class="content">
+            <span id="sailor">{{response.sailor}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">业务员电话：</td>
+        <td class="content">
+            <span id="sailor_tel">{{response.sailor_tel}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">所属公司：</td>
+        <td class="content">
+            <span id="belong_company">{{response.belong_company_str}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">营业证书：</td>
+        <td class="content">
+            <ul id="certificate_pic" class="img_list"></ul>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">供应商logo：</td>
+        <td class="content">
+            <ul id="logo_pic" class="img_list"></ul>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">宣传主页：</td>
+        <td class="content">
+            <ul id="main_pic" class="img_list"></ul>
+        </td>
+    </tr>
+    <tr>
+        <td class="title">详情：</td>
+        <td class="content">
+            <p id="corp_introduction" class="ueditor"></p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div class="opertionCon">
+                <input type="button" value="返回" class="button grey_btn goBack" />
+            </div>
+        </td>
+    </tr>
+</script>
+<script type="text/javascript">
+seajs.use('modules/supplier/supplierDetails', function(SupplierDetails) {
+    var supplierDetails = new SupplierDetails();
+    supplierDetails.init();
+});
+</script>
