@@ -205,18 +205,30 @@ define(function(require, exports, module) {
 
             $('.wrapper').off('click','.stateChange li').on('click','.stateChange li',function(){
                 var me = $(this);
-                var val = me.val();
+                var val = me.data('value');
                 me.addClass('active').siblings().removeClass('active');
                 me.siblings('input[type=hidden]').val(val);
                 me.parents('form').submit();
             });
 
-            $('.wrapper').off('click','.search-input').on('click','.search-input',function(){
+            var inputTimeoutId = null;
+            var formChangeHandle =  function(form){
+                clearInterval(inputTimeoutId);
+                inputTimeoutId = window.setTimeout(function(){
+                    form.submit();
+                },600);
+            };
+
+            //输入框内容改变即刻搜索
+            $('.wrapper').off('input propertychange','.search-input').on('input propertychange','.search-input',function(){
                 var me = $(this);
-                var val = me.val();
-                me.addClass('active').siblings().removeClass('active');
-                me.siblings('input[type=hidden]').val(val);
-                me.parents('form').submit();
+                formChangeHandle(me.parents('form'));
+            });
+
+            //下拉菜单改变后即刻搜索
+            $('.wrapper').off('change','.search-select').on('change','.search-select',function(){
+                var me = $(this);
+                formChangeHandle(me.parents('form'));
             });
         };
     }

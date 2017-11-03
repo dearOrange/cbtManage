@@ -503,8 +503,10 @@ define(function(require, exports, module) {
         };
 
         ajax.arrSend = function(settings) {
+            console.log(settings);
             $.ajax({
                 url: settings.url,
+                // url: 'http://rapapi.org/mockjsdata/28267' + settings.url,
                 method: settings.method,
                 dataType: settings.dataType,
                 contentType: settings.contentType,
@@ -766,8 +768,9 @@ define(function(require, exports, module) {
                 noData: '',
                 ident: '', //模块标识
                 data: {
-                    page: 1,
-                    pageSize: tammy.arguments.pageSize
+                    pageNum: 1,
+                    pageSize: tammy.arguments.pageSize,
+                    params:{}
                 },
                 data_container: $('.data_container'), //数据容器
                 page_container: $('.page_container'), //分页容器
@@ -808,7 +811,8 @@ define(function(require, exports, module) {
             if (jh.utils.objIsNull(options.data)) {
                 delete options.data;
             }
-            options.data = $.extend({}, m.settings.data, options.data);
+            m.settings.data.params = $.extend({}, m.settings.data.params, options.data);
+            options.data = m.settings.data;
             $.extend(m.settings, options);
         }
         Page.prototype.init = function() {
@@ -954,7 +958,7 @@ define(function(require, exports, module) {
                 s = m.settings;
             data_flag = {};
             data_flag[s.url] = pageNum;
-            s.data.page = pageNum;
+            s.data.pageNum = pageNum;
             tammy.utils.ajax.send({
                 url: s.url,
                 method: s.method,
@@ -1561,7 +1565,7 @@ define(function(require, exports, module) {
         }
         tammy.utils.init_publick = InitPublicKey;
     })();
-    tammy.utils.init_publick(); //初始化key
+    // tammy.utils.init_publick(); //初始化key
 
     // select默认选中
     (function() {

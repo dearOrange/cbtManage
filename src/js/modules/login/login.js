@@ -35,9 +35,9 @@ define(function(require, exports, module) {
                     var flag = datas.username + '_login_passError'; //本地存储flag
                     var errnum = localStorage[flag]; //错误次数
 
-                    var jsencrypt = new JSEncrypt();
-                    jsencrypt.setPublicKey(jh.arguments.public_key);
-                    datas.password = jsencrypt.encrypt(datas.password);
+                    // var jsencrypt = new JSEncrypt();
+                    // jsencrypt.setPublicKey(jh.arguments.public_key);
+                    // datas.password = jsencrypt.encrypt(datas.password);
 
                     // jh.utils.ajax.send({
                     //     url: '/admin/user/login',

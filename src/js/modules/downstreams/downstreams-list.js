@@ -1,8 +1,8 @@
 'use strict';
 define(function(require, exports, module) {
-    function InformantList() {
+    function ActiveList() {
         var _this = this;
-        _this.form = $('#informant-list-form');
+        _this.form = $('#active-list-form');
 
         this.init = function() {
             this.initContent();
@@ -16,16 +16,13 @@ define(function(require, exports, module) {
                     total: 65,
                     'list|10': [{
                         'id|+1': 1,
-                        'carNumber': /[浙川沪][A-Z][a-zA-Z0-9]{5}/,
-                        'carPhoto': Mock.Random.dataImage(),
-                        'city': Mock.Random.city(),
-                        'downstreamName': Mock.Random.cname(),
-                        'downstreamPhone': /1[34578]\d{9}/,
+                        'name': Mock.Random.cname(),
+                        'phone': /1[34578]\d{9}/,
                         'createAt': Mock.Random.now('yyyy-MM-dd HH:mm:ss'),
-                        'fingerprint': Mock.Random.county(true),
-                        'ipCity': Mock.Random.county(true),
-                        'lastUpdateAt': Mock.Random.now('yyyy-MM-dd HH:mm:ss'),
-                        'location': Mock.Random.city()
+                        'amount': /\d{3}\.\d{2}/,
+                        'alipay': /1[34578]\d{9}/,
+                        'bankName': /(中国银行|农业银行|招商银行)/,
+                        'bankCard': /\d{19}/
                     }]
                 }
             });
@@ -39,18 +36,18 @@ define(function(require, exports, module) {
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
-                    var contentHtml = jh.utils.template('informantList_content_template', data);
+                    var contentHtml = jh.utils.template('activeList_content_template', data);
                     return contentHtml;
                 }
             });
             page.init();
-            $('#area').select2();
+            _this.form.find('select').select2();
         };
         this.registerEvent = function() {
 
             // 搜索
             jh.utils.validator.init({
-                id: 'informant-list-form',
+                id: 'active-list-form',
                 submitHandler: function(form) {
                     _this.initContent(true);
                     return false;
@@ -101,5 +98,5 @@ define(function(require, exports, module) {
 
         };
     }
-    module.exports = InformantList;
+    module.exports = ActiveList;
 });

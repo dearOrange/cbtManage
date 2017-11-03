@@ -682,21 +682,34 @@ input, select, textarea {
 }
 
 /*线人列表*/
-#informant-list-form #informantState li{
+.search-container .stateChange li{
     cursor: pointer;
     float: left;
     border: 1px solid transparent;
     padding: 5px 10px;
+    position: relative;
 }
-#informant-list-form .label{
+.search-container .stateChange li sup{
+    position: absolute;
+    top: -10px;
+    right: -5px;
+    color: #fff;
+    height: 14px;
+    line-height: 14px;
+    background-color: red;
+    padding: 0 3px;
+    border-radius: 10px;
+}
+.search-container .label{
     line-height: 32px;
     font-weight: bold;
     vertical-align: middle;
 }
-#informant-list-form #informantState li:hover{
+.search-container .stateChange li:hover{
     color: #20a0ff;
     border:1px solid #20a0ff;
 }
-#informant-list-form #informantState li.active{
+.search-container .stateChange li.active{
     color: #20a0ff;
+    border: 1px solid #20a0ff;
 }

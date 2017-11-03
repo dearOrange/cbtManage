@@ -1,31 +1,29 @@
 'use strict';
 define(function(require, exports, module) {
-    function InformantList() {
+    function WithdrawList() {
         var _this = this;
-        _this.form = $('#informant-list-form');
+        _this.form = $('#withdraw-list-form');
 
         this.init = function() {
             this.initContent();
             this.registerEvent();
         };
         this.initContent = function(isSearch) {
-            Mock.mock('/trace/list',{
+            Mock.mock('/withdraw/list',{
                 code: 'SUCCESS',
                 msg: '请求成功',
                 data: {
                     total: 65,
                     'list|10': [{
                         'id|+1': 1,
-                        'carNumber': /[浙川沪][A-Z][a-zA-Z0-9]{5}/,
-                        'carPhoto': Mock.Random.dataImage(),
-                        'city': Mock.Random.city(),
-                        'downstreamName': Mock.Random.cname(),
-                        'downstreamPhone': /1[34578]\d{9}/,
+                        'name': Mock.Random.cname(),
+                        'phone': /1[34578]\d{9}/,
                         'createAt': Mock.Random.now('yyyy-MM-dd HH:mm:ss'),
-                        'fingerprint': Mock.Random.county(true),
-                        'ipCity': Mock.Random.county(true),
-                        'lastUpdateAt': Mock.Random.now('yyyy-MM-dd HH:mm:ss'),
-                        'location': Mock.Random.city()
+                        'amount': /\d{3}\.\d{2}/,
+                        'alipay': /1[34578]\d{9}/,
+                        'state': /(withdrawing|completed)/,
+                        'bankName': /(中国银行|农业银行|招商银行)/,
+                        'bankCard': /\d{19}/
                     }]
                 }
             });
@@ -35,11 +33,11 @@ define(function(require, exports, module) {
                 page_container: $('#page_container'),
                 method: 'post',
                 ident: 'news',
-                url: '/trace/list',
+                url: '/withdraw/list',
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
-                    var contentHtml = jh.utils.template('informantList_content_template', data);
+                    var contentHtml = jh.utils.template('withdrawList_content_template', data);
                     return contentHtml;
                 }
             });
@@ -50,7 +48,7 @@ define(function(require, exports, module) {
 
             // 搜索
             jh.utils.validator.init({
-                id: 'informant-list-form',
+                id: 'withdraw-list-form',
                 submitHandler: function(form) {
                     _this.initContent(true);
                     return false;
@@ -101,5 +99,5 @@ define(function(require, exports, module) {
 
         };
     }
-    module.exports = InformantList;
+    module.exports = WithdrawList;
 });

@@ -1,8 +1,8 @@
 'use strict';
 define(function(require, exports, module) {
-    function InformantList() {
+    function ActiveList() {
         var _this = this;
-        _this.form = $('#informant-list-form');
+        _this.form = $('#active-list-form');
 
         this.init = function() {
             this.initContent();
@@ -39,14 +39,14 @@ define(function(require, exports, module) {
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
-                    var contentHtml = jh.utils.template('informantList_content_template', data);
+                    var contentHtml = jh.utils.template('activeList_content_template', data);
                     return contentHtml;
                 }
             });
             page.init();
             $('#area').select2();
         };
-        this.registerEvent = function() {
+       this.registerEvent = function() {
 
             // 搜索
             jh.utils.validator.init({
@@ -101,5 +101,5 @@ define(function(require, exports, module) {
 
         };
     }
-    module.exports = InformantList;
+    module.exports = ActiveList;
 });

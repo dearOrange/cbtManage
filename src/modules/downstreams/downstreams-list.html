@@ -1,0 +1,73 @@
+<div class="dataContent">
+    <div class="search-container">
+        <form id="active-list-form">
+            <table class="common_query textLeft">
+                <tr>
+                    <td>
+                        <label for="tag" class="pull-left label">线人类别：</label>
+                        <ol id="activeState" class="stateChange pull-left">
+                            <li data-value="type_A" class="active">A类</li>
+                            <li data-value="type_B">B类</li>
+                            <li data-value="type_C">C类</li>
+                            <input type="hidden" name="role" id="role" value="3">
+                        </ol>
+                    </td>
+                    <td>
+                        <label class="label">选择省份：</label>
+                        <select id="province" name="province" class="search-select">
+                            <option value="">选择省份</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="label">选择城市：</label>
+                        <select id="city" name="city" class="search-select">
+                            <option value="">选择城市</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="label">线人名称：</label>
+                        <input type="text" class="search-input" name="name" placeholder="线人名称">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="data-container">
+        <table class="dataShow">
+            <thead>
+                <tr>
+                    <th width="8%">名字</th>
+                    <th width="10%">账号</th>
+                    <th width="10%">工作地点</th>
+                    <th width="20%">推荐码</th>
+                    <th width="13%">线人类型</th>
+                    <th width="16%">是否队长</th>
+                    <th width="16%">账户余额</th>
+                    <th width="13%">申请时间</th>
+                </tr>
+            </thead>
+            <tbody id="order_list_container"></tbody>
+        </table>
+        <div class="page-box pagination" id="page_container"></div>
+    </div>
+</div>
+<script type="text/template" id="activeList_content_template">
+    {{ each list item index }}
+    <tr class="trData">
+        <td>{{item.name}}</td>
+        <td>{{item.recommendCode}}</td>
+        <td>{{item.amount}}</td>
+        <td>{{item.createAt}}</td>
+        <td>{{item.createAt}}</td>
+        <td>{{item.flow}}</td>
+        <td>{{item.createAt}}</td>
+        <td>{{item.createAt}}</td>
+    </tr>
+    {{/each}}
+</script>
+<script type="text/javascript">
+seajs.use('modules/active/active-list', function(ActiveList) {
+    var activeList = new ActiveList();
+    activeList.init();
+});
+</script>

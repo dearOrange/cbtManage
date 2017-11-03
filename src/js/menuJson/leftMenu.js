@@ -28,59 +28,47 @@ define(function(require, exports, module) {
         }, {
             name: '提现管理',
             icon: 'icon-supplier',
-            module: '/src/modules/supplier',
+            module: '/src/modules/withdraw',
             childrens: [{
-                name: '待支付赏金',
+                name: '提现申请列表',
                 flag: 'category',
-                url: '/supplierClassifyList'
-            }, {
-                name: '已支付账单',
-                flag: 'supplier',
-                url: '/supplierList'
+                url: '/withdraw-list'
             }]
         }, {
-            name: '活动',
+            name: '活动管理',
             icon: 'icon-message',
-            module: '/src/modules/message',
+            module: '/src/modules/active',
             childrens: [{
-                name: '待审查',
+                name: '活动列表',
                 flag: 'message',
-                url: '/messageList'
-            },{
-                name: '已通过',
-                flag: 'message',
-                url: '/messageList1'
+                url: '/active-list'
             }]
         }, {
             name: '客户管理',
             icon: 'icon-config',
-            module: '/src/modules/platform',
+            module: '/src/modules/upstreams',
             childrens: [{
-                name: '待审查客户',
+                name: '客户列表',
                 flag: 'account',
-                url: '/accountSetList'
-            }, {
-                name: '已认证客户',
-                flag: 'role',
-                url: '/roleSetList'
+                url: '/upstreams-list'
             }]
         }, {
             name: '线人管理',
             icon: 'icon-config',
-            module: '/src/modules/platform',
+            module: '/src/modules/downstreams',
             childrens: [{
                 name: '线人列表',
                 flag: 'account',
-                url: '/accountSetList'
+                url: '/downstreams-list'
             }]
         }, {
             name: '发放账号',
             icon: 'icon-config',
-            module: '/src/modules/platform',
+            module: '/src/modules/downstreams',
             childrens: [{
                 name: '创建账号',
                 flag: 'account',
-                url: '/accountSetList'
+                url: '/downstreams-create'
             }]
         }]
     };

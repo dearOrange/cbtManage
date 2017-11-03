@@ -1,16 +1,13 @@
 <div class="dataContent">
     <div class="search-container">
-        <form id="informant-list-form">
+        <form id="active-list-form">
             <table class="common_query textLeft">
                 <tr>
                     <td>
-                        <label for="tag" class="pull-left label">情报状态：</label>
-                        <ol id="informantState" class="stateChange pull-left">
+                        <label for="tag" class="pull-left label">活动状态：</label>
+                        <ol id="activeState" class="stateChange pull-left">
                             <li data-value="new" class="active">待审查</li>
-                            <li data-value="located">有效情报</li>
-                            <li data-value="finished">已完成</li>
-                            <li data-value="stored">库存</li>
-                            <li data-value="">所有</li>
+                            <li data-value="located">已通过</li>
                             <input type="hidden" name="state" id="state" value="3">
                         </ol>
                     </td>
@@ -38,7 +35,7 @@
                     
                 </tr>
             </table>
-            <input type="hidden" name="isActivity" id="isActivity" value="0">
+            <input type="hidden" name="isActivity" id="isActivity" value="1">
         </form>
     </div>
     <div class="data-container">
@@ -61,7 +58,7 @@
         <div class="page-box pagination" id="page_container"></div>
     </div>
 </div>
-<script type="text/template" id="informantList_content_template">
+<script type="text/template" id="activeList_content_template">
     {{ each list item index }}
     <tr class="trData">
         <td>{{item.carNumber}}</td>
@@ -95,8 +92,8 @@
     {{/each}}
 </script>
 <script type="text/javascript">
-seajs.use('modules/informant/informant-list', function(InformantList) {
-    var informatnList = new InformantList();
-    informatnList.init();
+seajs.use('modules/active/active-list', function(ActiveList) {
+    var activeList = new ActiveList();
+    activeList.init();
 });
 </script>
