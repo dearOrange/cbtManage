@@ -25,7 +25,11 @@ define(function(require, exports, module) {
                     'list|10': [{
                         'id|+1': 1,
                         'carNumber': /[浙川沪][A-Z][a-zA-Z0-9]{5}/,
+                        'carPrice|1-3.1-2':1,
+                        'chuzhi|1-2.1-2':1,  
                         'carColor': /[白黑灰色*红]/,
+                        'carId': Mock.Random.word(),
+                        'engineId': Mock.Random.word(),
                         'carBrand': /(众泰|宝马|吉利汽车|奔驰|奥迪)/,
                         'carSeries': /(众泰SR7|奔驰S级|A4L|宝马X6)/,
                         'carModel': /(2016款 1.5T CVT魔方之门版 国IV|2010款 2.0L EX|2013款 Boxster 2.7L|2008款 S 600 L)/,
@@ -116,16 +120,16 @@ define(function(require, exports, module) {
             // jh.utils.ajax.send({
             //     url: '/upstreams/list',
             //     done: function(returnData) {
-                    var selectBox = $('#upstreamId');
-                    var optionStr = '<option value="">请选择债权人</option>';
-                    for (var i = 0;i<returnData.data.list.length;i++) {
-                        optionStr += '<option value="'+returnData.data.list[i].id+'">'+returnData.data.list[i].companyName+'</option>';
-                    }
-                    selectBox.html(optionStr);
-                    selectBox.select2({
-                        placeholder: '选择债权人',
-                        allowClear: true
-                    });
+            var selectBox = $('#upstreamId');
+            var optionStr = '<option value="">请选择债权人</option>';
+            for (var i = 0; i < returnData.data.list.length; i++) {
+                optionStr += '<option value="' + returnData.data.list[i].id + '">' + returnData.data.list[i].companyName + '</option>';
+            }
+            selectBox.html(optionStr);
+            selectBox.select2({
+                placeholder: '选择债权人',
+                allowClear: true
+            });
             //     }
             // });
         };
@@ -176,20 +180,46 @@ define(function(require, exports, module) {
             $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
                 var me = $(this);
                 var infos = me.data('infos');
-
-                jh.utils.ajax.send({
-                    url: '/trace/refuse',
-                    data: {
-                        traceId: id
-                    },
-                    done: function(data, status, xhr) {
-                        _this.initContent();
-                    }
-                });
-                var alertStr = jh.utils.template('task_detail_template',{});
+                // jh.utils.ajax.send({
+                //     url: '/trace/matchedTrace',
+                //     data: {
+                //         taskId: infos.id
+                //     },
+                //     done: function(data, status, xhr) {
+                var returnData = {
+                    "action": "测试内容6fff",
+                    "code": "SUCCESS",
+                    "data": [{
+                        "carNumber": "浙A4AF98",
+                        "carPhoto": "a7513bb487cf41a098f492b184347c5e.jpg",
+                        "city": "济南",
+                        "contactPhone": "15012295060",
+                        "createAt": '2017-01-02 15:22:11',
+                        "downstreamId": 195,
+                        "downstreamName": "欧阳雯君",
+                        "downstreamPhone": "测试内容lc75",
+                        "fingerprint": "117.1732,36.9712",
+                        "id": 2836,
+                        "ipCity": "天津",
+                        "isActivity": true,
+                        "isResult": true,
+                        "lastUpdateAt": 1501229542000,
+                        "location": "山东",
+                        "photoCity": "测试内容4g4n",
+                        "state": "located",
+                        "tag": "",
+                        "taskId": 12
+                    }],
+                    "msg": "请求成功"
+                };
+                infos.informantList = returnData.data;
+                var alertStr = jh.utils.template('task_detail_template', {item:infos});
                 jh.utils.alert({
                     content: alertStr,
                 });
+                //     }
+                // });
+
             });
 
             //拒绝
@@ -211,6 +241,27 @@ define(function(require, exports, module) {
                     },
                     cancel: function() {}
                 });
+            });
+
+            //采纳情报
+            $('body').off('click','#agreementTrace').on('click',function(){
+                var me = $(this);
+                var id = me.data('id');
+                // jh.utils.ajax.send({
+                //     url:'/trace/adopt',
+                //     type:'post',
+                //     data:{
+                //         traceId: id
+                //     },
+                //     done:function(returnData){
+                //         jh.utils.alert({
+                //             content:'采纳成功',
+                //             ok:function(){
+                //                 jh.utils.alert
+                //             }
+                //         });
+                //     }
+                // });
             });
 
         };

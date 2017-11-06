@@ -44,6 +44,7 @@ define(function(require, exports, module) {
 
         this.initPlugins = function() {
             window.jh = require('common'); //自定义对象
+            
             jh.utils.template = require('template'); //为自定义函数
             require('plugin/icheck/icheck.min'); //复选框
             require('plugin/select2/select2.min');

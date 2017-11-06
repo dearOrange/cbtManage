@@ -713,3 +713,16 @@ input, select, textarea {
     color: #20a0ff;
     border: 1px solid #20a0ff;
 }
+/**
+ * 任务列表-车辆详情
+ */
+.carDetail{
+    width: 660px;
+}
+.carDetail ul{
+    padding-top: 30px;
+}
+.carDetail ul li{
+    float: left;
+    padding: 10px 20px;
+}

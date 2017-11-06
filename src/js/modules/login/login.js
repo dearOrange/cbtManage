@@ -32,47 +32,51 @@ define(function(require, exports, module) {
                 id: 'form_login',
                 submitHandler: function(form) {
                     var datas = jh.utils.formToJson(form); //表单数据
-                    var flag = datas.username + '_login_passError'; //本地存储flag
-                    var errnum = localStorage[flag]; //错误次数
+                    // var flag = datas.username + '_login_passError'; //本地存储flag
+                    // var errnum = localStorage[flag]; //错误次数
 
                     // var jsencrypt = new JSEncrypt();
                     // jsencrypt.setPublicKey(jh.arguments.public_key);
                     // datas.password = jsencrypt.encrypt(datas.password);
 
-                    // jh.utils.ajax.send({
-                    //     url: '/admin/user/login',
-                    //     method: 'post',
-                    //     data: datas,
-                    //     done: function(returnData) {
-                    //         if (returnData.response.id) {
-                    //             if (errnum) {
-                    //                 localStorage[flag] = 0;
-                    //             }
+                    jh.utils.ajax.send({
+                        url: '/operator/login',
+                        method: 'post',
+                        data: datas,
+                        done: function(returnData) {
+                            if (returnData.code==='SUCCESS') {
+                                // if (errnum) {
+                                //     localStorage[flag] = 0;
+                                // }
+
+                                console.log(returnData.data.token);
+                                console.log(encodeURIComponent(returnData.data.token));
+                                jh.utils.cookie.set('X-Token',encodeURIComponent(returnData.data.token));
                                 jh.utils.cookie.set('username', datas.username);
                                 window.location.href = jh.arguments.pageIndex;
-                    //         }
-                    //     },
-                    //     fail: function(xhr) {
-                    //         refreshCode();
-                    //         if (xhr.result.code === 10007) {
-                    //             var num;
-                    //             if (errnum) {
-                    //                 num = parseInt(errnum) + 1;
-                    //             } else {
-                    //                 num = 1;
-                    //             }
-                    //             localStorage[flag] = num;
-                    //             var errstr = '用户名或密码错误！';
-                    //             if (num >= 3) {
-                    //                 errstr = '请联系管理员,找回密码！';
-                    //             }
-                    //             jh.utils.alert({
-                    //                 content: errstr,
-                    //                 ok: function() {}
-                    //             });
-                    //         }
-                    //     }
-                    // });
+                            }
+                        },
+                        fail: function(xhr) {
+                            refreshCode();
+                            // if (xhr.result.code === 10007) {
+                            //     var num;
+                            //     if (errnum) {
+                            //         num = parseInt(errnum) + 1;
+                            //     } else {
+                            //         num = 1;
+                            //     }
+                            //     localStorage[flag] = num;
+                            //     var errstr = '用户名或密码错误！';
+                            //     if (num >= 3) {
+                            //         errstr = '请联系管理员,找回密码！';
+                            //     }
+                            //     jh.utils.alert({
+                            //         content: errstr,
+                            //         ok: function() {}
+                            //     });
+                            // }
+                        }
+                    });
                     return false;
                 }
             });

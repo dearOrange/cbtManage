@@ -20,7 +20,9 @@ define(function(require, exports, module) {
     require('plugin/webuploader/webuploader.min'); //上传模块
     require('common/validator'); //表单验证扩展
     require('jsencrypt'); //js encrypt
+    window.domain = '192.168.2.181';
     var FINAL_OPTIONS = {
+        http: 'http://192.168.2.181:8080',
         rootUrl: rootUrl,
         basePath: basePath,
         public_key: '',
@@ -505,8 +507,7 @@ define(function(require, exports, module) {
         ajax.arrSend = function(settings) {
             console.log(settings);
             $.ajax({
-                url: settings.url,
-                // url: 'http://rapapi.org/mockjsdata/28267' + settings.url,
+                url: tammy.arguments.http + settings.url,
                 method: settings.method,
                 dataType: settings.dataType,
                 contentType: settings.contentType,
