@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @authors jiaguishan (jiaguishan@gmail.com)
  * @date    2017-04-18 11:39:52 测试版本回退
  * @version 1.0
@@ -20,18 +20,19 @@ define(function(require, exports, module) {
     require('plugin/webuploader/webuploader.min'); //上传模块
     require('common/validator'); //表单验证扩展
     require('jsencrypt'); //js encrypt
-    window.domain = '192.168.2.181';
     var FINAL_OPTIONS = {
-        http: 'http://192.168.2.181:8080',
+        http: 'http://test.cbt.com:8080/manager',
+        uploadToken : '',//上传token
         rootUrl: rootUrl,
         basePath: basePath,
         public_key: '',
-        viewImgRoot: 'http://static.9hds.com/',
+        viewImgRoot: 'http://oka19npup.bkt.clouddn.com/',
         pageSize: 10, //默认每页显示条数
         pageIndex: basePath + 'modules/index/index.html',
         pageLogin: basePath + 'modules/login/login.html', //登陆页面路径
         page500: basePath + 'modules/error/500.html', //数据请求异常页面
-        page404: basePath + 'modules/error/404.html' // 加载异常页面
+        page404: basePath + 'modules/error/404.html', // 加载异常页面
+        citylist:{"北京": ["北京"], "广东": ["广州", "深圳", "珠海", "汕头", "韶关", "佛山", "江门", "湛江", "茂名", "肇庆", "惠州", "梅州", "汕尾", "河源", "阳江", "清远", "东莞", "中山", "潮州", "揭阳", "云浮"], "上海": ["上海"], "天津": ["天津"], "重庆": ["重庆"], "辽宁": ["沈阳", "大连", "鞍山", "抚顺", "本溪", "丹东", "锦州", "营口", "阜新", "辽阳", "盘锦", "铁岭", "朝阳", "葫芦岛"], "江苏": ["南京", "苏州", "无锡", "常州", "镇江", "南通", "泰州", "扬州", "盐城", "连云港", "徐州", "淮安", "宿迁"], "湖北": ["武汉", "黄石", "十堰", "荆州", "宜昌", "襄樊", "鄂州", "荆门", "孝感", "黄冈", "咸宁", "随州", "恩施土家族苗族自治州", "仙桃", "天门", "潜江", "神农架林区"], "四川": ["成都", "自贡", "攀枝花", "泸州", "德阳", "绵阳", "广元", "遂宁", "内江", "乐山", "南充", "眉山", "宜宾", "广安", "达州", "雅安", "巴中", "资阳", "阿坝藏族羌族自治州", "甘孜藏族自治州", "凉山彝族自治州"], "陕西": ["西安", "铜川", "宝鸡", "咸阳", "渭南", "延安", "汉中", "榆林", "安康", "商洛"], "河北": ["石家庄", "唐山", "秦皇岛", "邯郸", "邢台", "保定", "张家口", "承德", "沧州", "廊坊", "衡水"], "山西": ["太原", "大同", "阳泉", "长治", "晋城", "朔州", "晋中", "运城", "忻州", "临汾", "吕梁"], "河南": ["郑州", "开封", "洛阳", "平顶山", "安阳", "鹤壁", "新乡", "焦作", "濮阳", "许昌", "漯河", "三门峡", "南阳", "商丘", "信阳", "周口", "驻马店"], "吉林": ["长春", "吉林", "四平", "辽源", "通化", "白山", "松原", "白城", "延边朝鲜族自治州"], "黑龙江": ["哈尔滨", "齐齐哈尔", "鹤岗", "双鸭山", "鸡西", "大庆", "伊春", "牡丹江", "佳木斯", "七台河", "黑河", "绥化", "大兴安岭地区"], "内蒙古": ["呼和浩特", "包头", "乌海", "赤峰", "通辽", "鄂尔多斯", "呼伦贝尔", "巴彦淖尔", "乌兰察布", "锡林郭勒盟", "兴安盟", "阿拉善盟"], "山东": ["济南", "青岛", "淄博", "枣庄", "东营", "烟台", "潍坊", "济宁", "泰安", "威海", "日照", "莱芜", "临沂", "德州", "聊城", "滨州", "菏泽"], "安徽": ["合肥", "芜湖", "蚌埠", "淮南", "马鞍山", "淮北", "铜陵", "安庆", "黄山", "滁州", "阜阳", "宿州", "巢湖", "六安", "亳州", "池州", "宣城"], "浙江": ["杭州", "宁波", "温州", "嘉兴", "湖州", "绍兴", "金华", "衢州", "舟山", "台州", "丽水"], "福建": ["福州", "厦门", "莆田", "三明", "泉州", "漳州", "南平", "龙岩", "宁德"], "湖南": ["长沙", "株洲", "湘潭", "衡阳", "邵阳", "岳阳", "常德", "张家界", "益阳", "郴州", "永州", "怀化", "娄底", "湘西土家族苗族自治州"], "广西": ["南宁", "柳州", "桂林", "梧州", "北海", "防城港", "钦州", "贵港", "玉林", "百色", "贺州", "河池", "来宾", "崇左"], "江西": ["南昌", "景德镇", "萍乡", "九江", "新余", "鹰潭", "赣州", "吉安", "宜春", "抚州", "上饶"], "贵州": ["贵阳", "六盘水", "遵义", "安顺", "铜仁地区", "毕节地区", "黔西南布依族苗族自治州", "黔东南苗族侗族自治州", "黔南布依族苗族自治州"], "云南": ["昆明", "曲靖", "玉溪", "保山", "昭通", "丽江", "普洱", "临沧", "德宏傣族景颇族自治州", "怒江傈僳族自治州", "迪庆藏族自治州", "大理白族自治州", "楚雄彝族自治州", "红河哈尼族彝族自治州", "文山壮族苗族自治州", "西双版纳傣族自治州"], "西藏": ["拉萨", "那曲地区", "昌都地区", "林芝地区", "山南地区", "日喀则地区", "阿里地区"], "海南": ["海口", "三亚", "五指山", "琼海", "儋州", "文昌", "万宁", "东方", "澄迈县", "定安县", "屯昌县", "临高县", "白沙黎族自治县", "昌江黎族自治县", "乐东黎族自治县", "陵水黎族自治县", "保亭黎族苗族自治县", "琼中黎族苗族自治县"], "甘肃": ["兰州", "嘉峪关", "金昌", "白银", "天水", "武威", "酒泉", "张掖", "庆阳", "平凉", "定西", "陇南", "临夏回族自治州", "甘南藏族自治州"], "宁夏": ["银川", "石嘴山", "吴忠", "固原", "中卫"], "青海": ["西宁", "海东地区", "海北藏族自治州", "海南藏族自治州", "黄南藏族自治州", "果洛藏族自治州", "玉树藏族自治州", "海西蒙古族藏族自治州"], "新疆": ["乌鲁木齐", "克拉玛依", "吐鲁番地区", "哈密地区", "和田地区", "阿克苏地区", "喀什地区", "克孜勒苏柯尔克孜自治州", "巴音郭楞蒙古自治州", "昌吉回族自治州", "博尔塔拉蒙古自治州", "石河子", "阿拉尔", "图木舒克", "五家渠", "伊犁哈萨克自治州"], "香港": ["香港"], "澳门": ["澳门"], "台湾": ["台北市", "高雄市", "台北县", "桃园县", "新竹县", "苗栗县", "台中县", "彰化县", "南投县", "云林县", "嘉义县", "台南县", "高雄县", "屏东县", "宜兰县", "花莲县", "台东县", "澎湖县", "基隆市", "新竹市", "台中市", "嘉义市", "台南市"] }
     };
     tammy.arguments = FINAL_OPTIONS;
     //数据类型判断
@@ -456,7 +457,7 @@ define(function(require, exports, module) {
             dataType: 'json',
             data: {},
             async: true,
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            contentType: 'application/json',
             done: function() {},
             fail: function() {},
             always: function() {},
@@ -469,7 +470,7 @@ define(function(require, exports, module) {
             that.dataType = data.hasOwnProperty('dataType') ? data.dataType : 'json';
             that.data = data.hasOwnProperty('data') ? data.data : {};
             that.async = data.hasOwnProperty('async') ? data.async : true;
-            that.contentType = data.hasOwnProperty('contentType') ? data.contentType : 'application/x-www-form-urlencoded; charset=UTF-8';
+            that.contentType = data.hasOwnProperty('contentType') ? data.contentType : 'application/json';
             that.fail = data.hasOwnProperty('fail') ? data.fail : function() {};
             that.done = data.hasOwnProperty('done') ? data.done : function() {};
             that.always = data.hasOwnProperty('always') ? data.always : function() {};
@@ -505,7 +506,18 @@ define(function(require, exports, module) {
         };
 
         ajax.arrSend = function(settings) {
-            console.log(settings);
+            var dataStr,flag = false;
+            for(var item in settings.data ){
+                flag = true;
+            }
+            // debugger
+            if(flag && settings.contentType == 'application/json'){
+                settings.data = JSON.stringify(settings.data);
+            }
+            // if(!flag && settings.url.indexOf('/operator/login') !== -1){
+            //     settings.data = JSON.parse(settings.data);
+            // }
+           
             $.ajax({
                 url: tammy.arguments.http + settings.url,
                 method: settings.method,
@@ -968,6 +980,8 @@ define(function(require, exports, module) {
                     var response = returnData.data;
                     //如果返回数据没有total数据总条数，则清空内容和分页容器 显示错误信息
                     if (!response.total) {
+                        var tdCol = s.data_container.siblings().find('th').length;
+                        s.noData = s.noData ? s.noData : '<tr><td colspan="'+tdCol+'">无记录</td></tr>';
                         s.data_container.html(s.noData);
                         s.page_container.empty();
                         return false;
@@ -1165,7 +1179,7 @@ define(function(require, exports, module) {
                     isAppend: true, //是否加入队列，false为覆盖
                     hiddenName: '',
                     swf: basePath + 'js/plugin/webuploader/Uploader.swf', //swf文件路径
-                    server: '/admin/file/upload-image', //后台server
+                    server: 'http://up.qiniu.com/', //后台server
                     pick: {
                         id: '#file',
                         multiple: false
@@ -1173,23 +1187,17 @@ define(function(require, exports, module) {
                     fileNumLimit: 10, //可上传数量
                     fileSingleSizeLimit: 5242880,
                     duplicate: true, //可重复上传同一张图片
-                    fileVal: 'upfile',
+                    fileVal: 'file',
                     formData: {
-                        size_type: 'all'
-
-                    }, //向后台发送的formData数据
-                    accept: {
-                        title: 'Images',
-                        extensions: 'jpg,jpeg,bmp,png',
-                        mimeTypes: 'image/jpg,image/jpeg,image/png,image/bmp'
-                    }
+                        token: jh.arguments.uploadToken
+                    } //向后台发送的formData数据
                 };
                 var opt = $.extend({}, options, opts); //合并参数
 
                 var uploader = WebUploader.create(opt); //创建上传对象
                 var pickId = uploader.options.pick.id.replace(/#/, '');
                 var queueList = $('#' + pickId).siblings('.upload-list');
-                $('#' + pickId + ' .webuploader-pick').text('+');
+                $('#' + pickId + ' .webuploader-pick').text($('#' + pickId).text());
 
                 //文件被添加进队列之前
                 uploader.on('beforeFileQueued', function() {
@@ -1239,6 +1247,8 @@ define(function(require, exports, module) {
 
                 //服务端响应事件
                 uploader.on('uploadAccept', function(file, returnData) {
+                    console.log(file);
+                    console.log(returnData);
                     var result = returnData.result;
                     var response = returnData.response;
 
@@ -1454,102 +1464,35 @@ define(function(require, exports, module) {
         }
         tammy.utils.ueditor = UEditorExtend;
     })();
-    // 地图三级联动
+    // 城市二级联动
     (function() {
         function mapSelect(name, callback) {
             name = name || {};
             var that = this;
-            that.status = 0;
 
-            jh.utils.ajax.send({
-                method: 'get',
-                url: '/admin/service-region/get-province',
-                done: function(data) {
-                    var htmls = '';
-                    $.each(data.response.list, function(index, val) {
-                        htmls += '<option value="' + val.code + '">' + val.area + '</option>';
-                    });
-                    $('#' + name + '_province').html(htmls);
-                    jh.utils.ajax.send({
-                        method: 'get',
-                        url: '/admin/service-region/get-city-by-province',
-                        data: {
-                            code: $('#' + name + '_province').val()
-                        },
-                        done: function(data) {
-                            var htmls = '';
-                            $.each(data.response.list, function(index, val) {
-                                htmls += '<option value="' + val.code + '">' + val.area + '</option>';
-                            });
-                            $('#' + name + '_city').html(htmls);
-                            jh.utils.ajax.send({
-                                method: 'get',
-                                url: '/admin/service-region/get-region',
-                                data: {
-                                    code: $('#' + name + '_city').val()
-                                },
-                                done: function(data) {
-                                    var htmls = '';
-                                    $.each(data.response.list, function(index, val) {
-                                        htmls += '<option value="' + val.code + '">' + val.area + '</option>';
-                                    });
-                                    $('#' + name + '_district').html(htmls);
-                                    if (callback) {
-                                        callback();
-                                    }
-                                }
-                            });
-                        }
-                    });
-                }
+            var provinceHtmls = '<option value="">请选择省</option>';
+            var cityHtml = '<option value="">请选择市</option>';
+            $.each(tammy.arguments.citylist, function(index, value) {
+                provinceHtmls += '<option value="' + index + '">' + index + '</option>';
+            });
+            $('#' + name + '_province').html(provinceHtmls);
+            $('#' + name + '_city').html(cityHtml);
+
+            $('#' + name + '_province').off('change').on('change',function(){
+                var me = $(this);
+                var val = me.val();
+                var subArr = tammy.arguments.citylist[val];
+                var str = '';
+                $.each(subArr,function(index,value){
+                    str += '<option value="' + value + '">' + value + '</option>';
+                });
+                $('#' + name + '_city').html(cityHtml + str).select2();;
+
             });
 
-            $('#mapSelect').on('change', '#' + name + '_province', function() {
-                jh.utils.ajax.send({
-                    method: 'get',
-                    url: '/admin/service-region/get-city-by-province',
-                    data: {
-                        code: $('#' + name + '_province').val(),
-                    },
-                    done: function(data) {
-                        var htmls = '';
-                        $.each(data.response.list, function(index, val) {
-                            htmls += '<option value="' + val.code + '">' + val.area + '</option>';
-                        });
-                        $('#' + name + '_city').html(htmls);
-                        jh.utils.ajax.send({
-                            method: 'get',
-                            url: '/admin/service-region/get-region',
-                            data: {
-                                code: $('#' + name + '_city').val(),
-                            },
-                            done: function(data) {
-                                var htmls = '';
-                                $.each(data.response.list, function(index, val) {
-                                    htmls += '<option value="' + val.code + '">' + val.area + '</option>';
-                                });
-                                $('#' + name + '_district').html(htmls);
-                            }
-                        });
-                    }
-                });
-            });
-            $('#mapSelect').on('change', '#' + name + '_city', function() {
-                jh.utils.ajax.send({
-                    method: 'get',
-                    url: '/admin/service-region/get-region',
-                    data: {
-                        code: $('#' + name + '_city').val(),
-                    },
-                    done: function(data) {
-                        var htmls = '';
-                        $.each(data.response.list, function(index, val) {
-                            htmls += '<option value="' + val.code + '">' + val.area + '</option>';
-                        });
-                        $('#' + name + '_district').html(htmls);
-                    }
-                });
-            });
+            if(typeof callback === 'function'){
+                callback();
+            }
         }
         tammy.utils.mapSelect = mapSelect;
     })();
@@ -1600,6 +1543,14 @@ define(function(require, exports, module) {
             return output;
         }
         tammy.utils.HTMLEncode = HTMLEncode;
+    })();
+    (function() {
+        function RoleToString(code,index) {
+            var arr = code.split('_');
+            index = index ? index : 0;
+            return arr[index];
+        }
+        tammy.utils.RoleToString = RoleToString;
     })();
     window.log = log;
     module.exports = tammy;

@@ -726,3 +726,49 @@ input, select, textarea {
     float: left;
     padding: 10px 20px;
 }
+
+/**
+ * 线人列表
+ */
+.blue_recommendCode{
+    color: #20a0ff !important;
+    text-decoration: underline;
+}
+
+/**
+ * 发放账号
+ */
+#downstreams-create-form{
+    width: 600px;
+    margin: 150px auto;
+}
+#downstreams-create-form input[type="text"],#downstreams-create-form input[type="password"]{
+    width: 71%;
+}
+#downstreams-create-form select#role{
+    width: 71%;
+}
+#downstreams-create-form input[type="submit"],#downstreams-create-form input[type="reset"]{
+    padding: 8px 15px;
+}
+#downstreams-create-form input[type="submit"]{
+    border: 0;
+    margin-left: 120px;
+    border-radius: 5px;
+    background-color: #4db3ff;
+    color: #fff;
+}
+
+#downstreams-create-form input[type="reset"]{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+#downstreams-create-form input[type="reset"]:hover{
+    border: 1px solid #4db3ff;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #4db3ff;
+}

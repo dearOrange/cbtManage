@@ -19,16 +19,22 @@ define(function(require, exports, module) {
         };
 
         this.checkLogin = function() {
-            jh.utils.ajax.send({
-                url: '/admin/user/is-login',
-                done: function(returnData) {
-                    window.location.href = jh.arguments.pageIndex;
-                    $.cookie('islogin', true);
-                },
-                fail: function(returnData) {
-                    window.location.href = jh.arguments.pageLogin;
-                }
-            });
+            var token = jh.utils.cookie.get('X-Token');
+            if(token){
+                window.location.href = jh.arguments.pageIndex;
+            }else{
+                window.location.href = jh.arguments.pageLogin;
+            }
+            // jh.utils.ajax.send({
+            //     url: '/admin/user/is-login',
+            //     done: function(returnData) {
+            //         window.location.href = jh.arguments.pageIndex;
+            //         $.cookie('islogin', true);
+            //     },
+            //     fail: function(returnData) {
+            //         window.location.href = jh.arguments.pageLogin;
+            //     }
+            // });
         };
     }
     module.exports = CheckLogin;

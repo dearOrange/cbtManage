@@ -9,25 +9,6 @@ define(function(require, exports, module) {
             this.registerEvent();
         };
         this.initContent = function(isSearch) {
-            Mock.mock('/withdraw/list',{
-                code: 'SUCCESS',
-                msg: '请求成功',
-                data: {
-                    total: 65,
-                    'list|10': [{
-                        'id|+1': 1,
-                        'name': Mock.Random.cname(),
-                        'phone': /1[34578]\d{9}/,
-                        'createAt': Mock.Random.now('yyyy-MM-dd HH:mm:ss'),
-                        'amount': /\d{3}\.\d{2}/,
-                        'alipay': /1[34578]\d{9}/,
-                        'state': /(withdrawing|completed)/,
-                        'bankName': /(中国银行|农业银行|招商银行)/,
-                        'bankCard': /\d{19}/
-                    }]
-                }
-            });
-
             var page = new jh.ui.page({
                 data_container: $('#order_list_container'),
                 page_container: $('#page_container'),

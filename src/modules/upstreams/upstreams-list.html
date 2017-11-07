@@ -6,9 +6,9 @@
                     <td>
                         <label for="tag" class="pull-left label">客户状态：</label>
                         <ol id="upstreamsState" class="stateChange pull-left">
-                            <li data-value="activeing" class="active">待审查客户</li>
-                            <li data-value="completed">已认证客户</li>
-                            <input type="hidden" name="state" id="state" value="3">
+                            <li data-value="new" class="active">待审查客户</li>
+                            <li data-value="available">已认证客户</li>
+                            <input type="hidden" name="state" id="state" value="new">
                         </ol>
                     </td>
                 </tr>
@@ -46,8 +46,9 @@
         <td>{{item.contactPhone}}</td>
         <td>{{item.email}}</td>
         <td>{{item.createAt}}</td>
-        <td><img src="{{item.businessLicense}}" width="210" height="150" /></td>
+        <td><img src="{{viewImgRoot}}{{item.businessLicense}}?imageView2/0/w/100" width="210" height="150" /></td>
         <td>
+            {{if item.state == "new" }}
             <ul class="operaitem">
                 <li>
                     <a data-id="{{item.id}}" class="agreement button blue_btn">通过</a>
@@ -56,6 +57,7 @@
                     <a data-id="{{item.id}}" class="pass button blue_btn">拒绝</a>
                 </li>
             </ul>
+            {{/if}}
         </td>
     </tr>
     {{/each}}

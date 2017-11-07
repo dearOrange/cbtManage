@@ -31,27 +31,26 @@ define(function(require, exports, module) {
             jh.utils.validator.init({
                 id: 'form_login',
                 submitHandler: function(form) {
+                    // window.domain = 'cbt.com';
                     var datas = jh.utils.formToJson(form); //表单数据
+                    datas.captchaCode = jh.utils.cookie.get('captchaCode');//验证码key
+
                     // var flag = datas.username + '_login_passError'; //本地存储flag
                     // var errnum = localStorage[flag]; //错误次数
 
                     // var jsencrypt = new JSEncrypt();
                     // jsencrypt.setPublicKey(jh.arguments.public_key);
                     // datas.password = jsencrypt.encrypt(datas.password);
-
+                    
                     jh.utils.ajax.send({
                         url: '/operator/login',
                         method: 'post',
                         data: datas,
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                         done: function(returnData) {
-                            if (returnData.code==='SUCCESS') {
-                                // if (errnum) {
-                                //     localStorage[flag] = 0;
-                                // }
-
-                                console.log(returnData.data.token);
-                                console.log(encodeURIComponent(returnData.data.token));
-                                jh.utils.cookie.set('X-Token',encodeURIComponent(returnData.data.token));
+                            if (returnData.code === 'SUCCESS') {
+                                // jh.utils.cookie.set('X-Token', encodeURIComponent(returnData.data.token));
+                                jh.utils.cookie.set('X-Token', returnData.data.token);
                                 jh.utils.cookie.set('username', datas.username);
                                 window.location.href = jh.arguments.pageIndex;
                             }

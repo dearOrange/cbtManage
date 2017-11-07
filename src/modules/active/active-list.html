@@ -8,12 +8,12 @@
                         <ol id="activeState" class="stateChange pull-left">
                             <li data-value="new" class="active">待审查</li>
                             <li data-value="located">已通过</li>
-                            <input type="hidden" name="state" id="state" value="3">
+                            <input type="hidden" name="state" id="state" value="new">
                         </ol>
                     </td>
                     <td>
                         <label class="label">线人类别：</label>
-                        <select id="area" name="area" class="search-select">
+                        <select id="role" name="role" class="search-select">
                             <option value="">全部</option>
                             <option value="0">A类</option>
                             <option value="1">B类</option>
@@ -30,7 +30,7 @@
                     </td>
                     <td>
                         <label class="label">线人名称：</label>
-                        <input type="text" class="search-input" name="downstreamName" placeholder="输入线人名称">
+                        <input type="text" class="search-input" name="name" placeholder="输入线人名称">
                     </td>
                     
                 </tr>
@@ -63,12 +63,12 @@
     <tr class="trData">
         <td>{{item.carNumber}}</td>
         <td>
-            <img src="{{item.carPhoto}}" alt="任务车图片" width="160" height="220" />
+            <img src="{{viewImgRoot}}{{item.carPhoto}}?imageView2/0/w/100" alt="任务车图片" width="160" height="220" />
         </td>
         <td>
-            <p>{{item.downstreamName}}</p>
+            <p>{{item.name}}</p>
             <p>{{item.city}}</p>
-            <p>{{item.downstreamPhone}}</p>
+            <p>{{item.phone}}</p>
         </td>
         <td>{{item.createAt}}</td>
         <td>{{item.fingerprint}}</td>

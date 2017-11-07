@@ -10,6 +10,14 @@ define(function(require, exports, module) {
         };
 
         this.registerEvent = function() {
+
+            jh.utils.ajax.send({
+                url: '/qiniu/getToken',
+                done:function(returnData){
+                    jh.arguments.uploadToken = returnData.data.uploadToken;
+                }
+            });
+
             /*菜单点击事件*/
             $('#leftMenu-box').on('click', 'li>a,li>ul>li>a', function() {
                 var m = $(this);
@@ -123,14 +131,25 @@ define(function(require, exports, module) {
                 m.parent().remove(); //删除整个容器
             });
 
+            $('body').off('click', '#exportFile').on('click', '#exportFile', function() {
+                var m = $(this);
+                var form = m.parents('form');
+                var datas = form.serialize();
+                var XToken = encodeURIComponent(jh.utils.cookie.get('X-Token'));
+                window.location.href =  '/manager' + '/task/export' + '?' + datas+ '&XToken='+XToken;
+            });
+
             $('#loginout').on('click', function() {
                 var me = $(this);
                 jh.utils.alert({
-                    content: '确定要注销吗？',
+                    content: '确定要安全退出吗？',
                     ok: function() {
                         jh.utils.ajax.send({
-                            url: '/admin/user/login-out',
+                            url: '/operator/loginout',
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                             done: function() {
+                                jh.utils.cookie.deleteCookie('username');
+                                jh.utils.cookie.deleteCookie('X-Token');
                                 window.location.href = jh.arguments.pageLogin;
                             },
                             fail: function() {
@@ -230,6 +249,7 @@ define(function(require, exports, module) {
                 var me = $(this);
                 formChangeHandle(me.parents('form'));
             });
+
         };
     }
     module.exports = RegisterJQueryEvent;

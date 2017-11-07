@@ -26,6 +26,11 @@
                             <option value=""></option>
                         </select>
                     </td>
+                    <td>
+
+                        <a href="javascript:;" id="importFile">导入Excel</a>
+                        <a href="javascript:;" id="exportFile">导出</a>
+                    </td>
                 </tr>
             </table>
         </form>
@@ -91,15 +96,22 @@
                 </tr>
             </thead>
             <tbody>
-                {{each item.informantList obj index}}
-                <tr>
-                    <td>{{obj.createAt}}</td>
-                    <td>{{obj.location}}</td>
-                    <td>{{obj.downstreamName}}</td>
-                    <td>{{obj.traceType}}</td>
-                    <td><a href="javascript:;" id="agreementTrace" class="button blue_btn" data-id="{{item.id}}">采纳</a></td>
-                </tr>
-                {{/each}}
+                {{ if item.informantList.length }}
+                    {{each item.informantList obj index}}
+                    <tr>
+                        <td>{{obj.createAt}}</td>
+                        <td>{{obj.location}}</td>
+                        <td>{{obj.downstreamName}}</td>
+                        <td>{{obj.traceType}}</td>
+                        <td><a href="javascript:;" id="agreementTrace" class="button blue_btn" data-id="{{obj.id}}">采纳</a></td>
+                    </tr>
+                    {{/each}}
+                {{ else }}
+                    <tr>
+                        <td colspan="5">暂无信息</td>
+                    </tr>
+
+                {{/if}}
             </tbody>
         </table>
         <ul>

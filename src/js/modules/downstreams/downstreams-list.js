@@ -1,42 +1,28 @@
 'use strict';
 define(function(require, exports, module) {
-    function ActiveList() {
+    function DownstreamsList() {
         var _this = this;
-        _this.form = $('#active-list-form');
+        _this.form = $('#downstreams-list-form');
 
         this.init = function() {
             this.initContent();
             this.registerEvent();
         };
         this.initContent = function(isSearch) {
-            Mock.mock('/trace/list',{
-                code: 'SUCCESS',
-                msg: '请求成功',
-                data: {
-                    total: 65,
-                    'list|10': [{
-                        'id|+1': 1,
-                        'name': Mock.Random.cname(),
-                        'phone': /1[34578]\d{9}/,
-                        'createAt': Mock.Random.now('yyyy-MM-dd HH:mm:ss'),
-                        'amount': /\d{3}\.\d{2}/,
-                        'alipay': /1[34578]\d{9}/,
-                        'bankName': /(中国银行|农业银行|招商银行)/,
-                        'bankCard': /\d{19}/
-                    }]
-                }
-            });
-
             var page = new jh.ui.page({
                 data_container: $('#order_list_container'),
                 page_container: $('#page_container'),
                 method: 'post',
                 ident: 'news',
-                url: '/trace/list',
+                url: '/downstreams/list',
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
-                    var contentHtml = jh.utils.template('activeList_content_template', data);
+                    data.RoleToString = jh.utils.RoleToString;
+                    data.isCaptain = function(code){
+                        return code ? '是' : '否';
+                    };
+                    var contentHtml = jh.utils.template('downStreamsList_content_template', data);
                     return contentHtml;
                 }
             });
@@ -47,7 +33,7 @@ define(function(require, exports, module) {
 
             // 搜索
             jh.utils.validator.init({
-                id: 'active-list-form',
+                id: 'downstreams-list-form',
                 submitHandler: function(form) {
                     _this.initContent(true);
                     return false;
@@ -96,7 +82,22 @@ define(function(require, exports, module) {
                 });
             });
 
+            //推荐人查询
+            $('.dataShow').off('click','.blue_recommendCode').on('click', '.blue_recommendCode', function() {
+                var me = $(this);
+                var id = me.data('id');
+                var name = me.data('name');
+                _this.form.find('[name=referrer]').val(id).siblings('input').val(name);
+                _this.initContent();
+            });
+
+            //推荐人查询
+            _this.form.off('click','#clearReferrer').on('click', '#clearReferrer', function() {
+                _this.form.find('[name=referrer]').val('').siblings('input').val('');
+                _this.initContent();
+            });
+
         };
     }
-    module.exports = ActiveList;
+    module.exports = DownstreamsList;
 });

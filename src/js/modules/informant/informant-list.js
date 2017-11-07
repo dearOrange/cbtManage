@@ -9,27 +9,6 @@ define(function(require, exports, module) {
             this.registerEvent();
         };
         this.initContent = function(isSearch) {
-            Mock.mock('/trace/list',{
-                code: 'SUCCESS',
-                msg: '请求成功',
-                data: {
-                    total: 65,
-                    'list|10': [{
-                        'id|+1': 1,
-                        'carNumber': /[浙川沪][A-Z][a-zA-Z0-9]{5}/,
-                        'carPhoto': Mock.Random.dataImage(),
-                        'city': Mock.Random.city(),
-                        'downstreamName': Mock.Random.cname(),
-                        'downstreamPhone': /1[34578]\d{9}/,
-                        'createAt': Mock.Random.now('yyyy-MM-dd HH:mm:ss'),
-                        'fingerprint': Mock.Random.county(true),
-                        'ipCity': Mock.Random.county(true),
-                        'lastUpdateAt': Mock.Random.now('yyyy-MM-dd HH:mm:ss'),
-                        'location': Mock.Random.city()
-                    }]
-                }
-            });
-
             var page = new jh.ui.page({
                 data_container: $('#order_list_container'),
                 page_container: $('#page_container'),
@@ -39,12 +18,13 @@ define(function(require, exports, module) {
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
+                    data.viewImgRoot = jh.arguments.viewImgRoot;
                     var contentHtml = jh.utils.template('informantList_content_template', data);
                     return contentHtml;
                 }
             });
             page.init();
-            $('#area').select2();
+            $('#role').select2();
         };
         this.registerEvent = function() {
 
@@ -69,6 +49,7 @@ define(function(require, exports, module) {
                             data: {
                                 traceId: id
                             },
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                             done: function(data, status, xhr) {
                                 _this.initContent();
                             }
@@ -90,6 +71,7 @@ define(function(require, exports, module) {
                             data: {
                                 traceId: id
                             },
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                             done: function(data, status, xhr) {
                                 _this.initContent();
                             }

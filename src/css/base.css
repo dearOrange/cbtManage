@@ -38,6 +38,11 @@ input, select, img {
 button[disabled], html input[disabled] {
     cursor: default;
 }
+input[readonly]{
+    background-color: #eef1f6;
+    color: #bbb;
+    cursor: not-allowed;
+}
 ol, ul {
     list-style: none;
 }
@@ -80,10 +85,18 @@ a:hover, a:active, a:focus {
     -moz-outline: none;
     outline: none;
 }
+input:-webkit-autofill {
+    -webkit-box-shadow : 0 0 0px 1000px white inset ;
+}
 
 /**
  * common style
  */
+.is-required:before{
+    content: "*";
+    color: #ff4949;
+    margin-right: 4px;
+}
 .fl {
     float: left;
 }
@@ -149,6 +162,18 @@ label.error {
     display: block;
 }
 
+/**
+ * 导入、导出按钮
+ */
+#exportFile{
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #20a0ff;
+    border: 1px solid #20a0ff;
+    border-radius: 5px;
+    color: #fff;
+}
+
 /*内外边距*/
 .mt5 {
     margin-top: 5px;
@@ -172,7 +197,8 @@ label.error {
     font-size: 14px;
     font-family: 'microsoft yahei';
     color: #fff;
-    padding: 10px 30px;
+    padding: 5px 25px;
+    vertical-align: middle;
 }
 .button.add_btn {
     background-color: #fbeae4;
@@ -487,17 +513,15 @@ label.error {
     position: relative;
 }
 .webuploader-container .webuploader-pick {
-    color: orange;
-    font-size: 40px;
+    color: #fff;
     text-align: center;
     border-radius: 3px;
     overflow: hidden;
-    width: 50px;
-    background-color: #ffffff;
-    height: 50px;
-    cursor: pointer;
-    line-height: 40px;
-    border: 1px solid #cecece;
+    min-width: 50px;
+    padding: 5px 10px;
+    background-color: #20a0ff;
+    border: 1px solid #20a0ff;
+    border-radius: 5px;
 }
 .webuploader-container .webuploader-element-invisible {
     position: absolute !important;
@@ -713,7 +737,7 @@ label.error {
 .search-container {
     overflow: hidden;
 }
-.search-container input[type=text] {
+.search-container input[type=text],.search-container input[type=password] {
     height: 20px;
     border: 1px solid #cecece;
     padding: 5px 0;

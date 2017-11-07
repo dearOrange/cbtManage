@@ -1,73 +1,76 @@
 <div class="dataContent">
     <div class="search-container">
-        <form id="active-list-form">
+        <form id="downstreams-create-form">
+            <input type="hidden" name="state" value="new">
+            <input type="hidden" name="isCaptain" id="isCaptain" value="1">
             <table class="common_query textLeft">
                 <tr>
                     <td>
-                        <label for="tag" class="pull-left label">申请状态：</label>
-                        <ol id="activeState" class="stateChange pull-left">
-                            <li data-value="activeing" class="active">待支付赏金</li>
-                            <li data-value="completed">已支付赏金</li>
-                            <input type="hidden" name="state" id="state" value="3">
-                        </ol>
+                        <label for="tag" class="pull-left label is-required">账号类型</label>
+                        
                     </td>
                     <td>
-                        <label class="label">申请人名称：</label>
-                        <input type="text" class="search-input" name="downstreamName" placeholder="申请人名称">
+                        <select id="role" name="role">
+                            <option value="type_A">省队长-A</option>
+                            <option value="type_B">合作方捕头-B</option>
+                            <option value="type_C">合作方线人-C</option>
+                        </select>
                     </td>
-                    
+                </tr>
+                <tr>
+                    <td>
+                        <label for="tag" class="pull-left label is-required">工作地点</label>
+                        
+                    </td>
+                    <td>
+                        <select id="downstreamsCreate_province" name="province">
+                            <option value="">请选择省</option>
+                        </select>-
+                        <select id="downstreamsCreate_city" name="city" class="required">
+                            <option value="">请选择市</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="tag" class="pull-left label is-required">姓名</label>
+                        
+                    </td>
+                    <td>
+                        <input type="text" name="name" placeholder="请填写姓名" maxlength="20" class="required">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="tag" class="pull-left label is-required">账户</label>
+                        
+                    </td>
+                    <td>
+                        <input type="text" name="phone" placeholder="请填写手机号或其他" maxlength="20"  class="required">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="tag" class="pull-left label is-required">密码</label>
+                        
+                    </td>
+                    <td>
+                        <input type="password" name="password" placeholder="请设置密码" maxlength="20"  class="required">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="创建账号">
+                        <input type="reset" value="重置">
+                    </td>
                 </tr>
             </table>
         </form>
     </div>
-    <div class="data-container">
-        <table class="dataShow">
-            <thead>
-                <tr>
-                    <th width="8%">申请人</th>
-                    <th width="10%">手机号</th>
-                    <th width="10%">金额</th>
-                    <th width="20%">收款方式</th>
-                    <th width="13%">时间</th>
-                    <th width="16%">订单号</th>
-                    <th width="13%">操作</th>
-                </tr>
-            </thead>
-            <tbody id="order_list_container">
-            </tbody>
-        </table>
-        <div class="page-box pagination" id="page_container"></div>
-    </div>
 </div>
-<script type="text/template" id="activeList_content_template">
-    {{ each list item index }}
-    <tr class="trData">
-        <td>{{item.name}}</td>
-        <td>{{item.phone}}</td>
-        <td>{{item.amount}}</td>
-        <td>
-            <p>支付宝：{{item.alipay}}</p>
-            <br />
-            <p>{{item.bankName}}：{{item.bankCard}}</p>
-        </td>
-        <td>{{item.createAt}}</td>
-        <td>{{item.flow}}</td>
-        <td>
-            <ul class="operaitem">
-                <li>
-                    <a data-id="{{item.id}}" class="agreement button blue_btn">确认已支付</a>
-                </li>
-                <li>
-                    <a data-id="{{item.id}}" class="pass button blue_btn">拒绝提现</a>
-                </li>
-            </ul>
-        </td>
-    </tr>
-    {{/each}}
-</script>
 <script type="text/javascript">
-seajs.use('modules/active/active-list', function(ActiveList) {
-    var activeList = new ActiveList();
-    activeList.init();
+seajs.use('modules/downstreams/downstreams-create', function(DownstreamsCreate) {
+    var downstreamsCreate = new DownstreamsCreate();
+    downstreamsCreate.init();
 });
 </script>
