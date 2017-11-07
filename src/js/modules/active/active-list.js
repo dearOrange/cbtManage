@@ -81,6 +81,36 @@ define(function(require, exports, module) {
                 });
             });
 
+            //开关活动
+            $('body').off('click','.active-switch').on('click', '.active-switch', function() {
+                var me = $(this);
+                var isOpen = me.data('isOpen');
+                var editOpen = isOpen === 'true' ? 'false' : 'true';
+                jh.utils.alert({
+                    title: '改变活动状态',
+                    content: '<div>请输入密码</div><div><input type="password" name="password" id="editActivePassword"/></div>',
+                    ok: function() {
+                        var pas = $('#editActivePassword');
+                        var val = $.trim(pas.val());
+                        if(val === ''){
+                            return false;
+                        }
+                        jh.utils.ajax.send({
+                            url: '/system/setActive',
+                            data: {
+                                isOpen: editOpen,
+                                password: val
+                            },
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                            done: function(data) {
+                                window.location.reload();
+                            }
+                        });
+                    },
+                    cancel: function() {}
+                });
+            });
+
         };
     }
     module.exports = ActiveList;

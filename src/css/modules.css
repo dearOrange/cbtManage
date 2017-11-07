@@ -772,3 +772,10 @@ input, select, textarea {
     cursor: pointer;
     color: #4db3ff;
 }
+
+/**
+ * 活动开关
+ */
+.active-switch{
+    color: #20a0ff!important;
+}

@@ -594,7 +594,7 @@ define(function(require, exports, module) {
             var docHeight = $(document).height();
             var menuEle = $('.left-side');
             var final_height = winHeight >= docHeight ? winHeight : docHeight;
-            menuEle.height(final_height - 50);
+            //menuEle.height(final_height - 50);
 
             var rigthCon = $('.right-side');
             var rcHeight = rigthCon.height();
@@ -622,7 +622,7 @@ define(function(require, exports, module) {
                 if (xhr.status === 404) {
                     tammy.utils.load(FINAL_OPTIONS.page404);
                 } else {
-                    //tammy.utils.updateMenuBoxHeight();
+                    tammy.utils.updateMenuBoxHeight();
                     var txt = '';
                     var breadCrumb = $('#breadCrumb'); //面包屑容器
                     var breadParnet = breadCrumb.parent();

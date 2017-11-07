@@ -653,7 +653,7 @@ label.error {
 .right-side {
     width: 98%;
     margin: 0 auto;
-    overflow: hidden;
+    overflow-y: auto;
 }
 .right-side .pull-right:after {
     clear: both;
