@@ -16,7 +16,10 @@ var versionDate = {
 };
 
 var ROOTURL = '/admin';/*项目根目录名称 谨慎修改*/
-var REQUESTROOT = 'http://test.cbt.com:8080/manager'; /*本地开发为host映射域名 部署代码后此项为空*/
+var REQUESTROOT = '/manager'; /*服务器默认为/manager 当本地开发时切换为域名映射*/
+if(window.location.hostname === 'local.cbt.com'){
+    REQUESTROOT = 'http://test.cbt.com:8080/manager';
+}
 
 seajs.config({
     base: '/admin/src/js/',
