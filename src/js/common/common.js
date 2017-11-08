@@ -12,8 +12,7 @@ define(function(require, exports, module) {
     tammy.utils = tammy.utils || {}; //公共函数
     tammy.ui = tammy.ui || {}; //公共UI函数及插件
 
-    var rootUrl = '/manage';
-    var basePath = rootUrl + '/src/'; //基础根路径
+    var basePath = ROOTURL + '/src/'; //基础根路径
 
     //加载插件
     require('jquery.validate'); //表单验证
@@ -21,10 +20,7 @@ define(function(require, exports, module) {
     require('common/validator'); //表单验证扩展
     require('jsencrypt'); //js encrypt
     var FINAL_OPTIONS = {
-        http: 'http://test.cbt.com:8080/manager',
         uploadToken : '',//上传token
-        rootUrl: rootUrl,
-        basePath: basePath,
         public_key: '',
         viewImgRoot: 'http://oka19npup.bkt.clouddn.com/',
         pageSize: 10, //默认每页显示条数
@@ -519,7 +515,7 @@ define(function(require, exports, module) {
             // }
            
             $.ajax({
-                url: tammy.arguments.http + settings.url,
+                url: REQUESTROOT + settings.url,
                 method: settings.method,
                 dataType: settings.dataType,
                 contentType: settings.contentType,
@@ -610,12 +606,12 @@ define(function(require, exports, module) {
      */
     (function() {
         var showHTML = function(targetURL) {
-            if (targetURL.indexOf(rootUrl + '/') === -1) {
+            if (targetURL.indexOf(ROOTURL + '/') === -1) {
                 var firstChart = targetURL.substring(0, 1);
                 if (firstChart === '/') {
-                    targetURL = rootUrl + targetURL;
+                    targetURL = ROOTURL + targetURL;
                 } else {
-                    targetURL = rootUrl + '/' + targetURL;
+                    targetURL = ROOTURL + '/' + targetURL;
                 }
             }
             $('#content-container').load(targetURL, function(response, status, xhr) {
@@ -663,7 +659,7 @@ define(function(require, exports, module) {
                 dataStr += ',' + temp + '=' + item;
             }
             dataStr = dataStr.substring(1);
-            window.location.href = tammy.utils.BASICURL + '#routeModule=' + targetURL + '#routeData=' + dataStr;
+            window.location.href = tammy.utils.BASEURL + '#routeModule=' + targetURL + '#routeData=' + dataStr;
         };
         tammy.utils.load = kyload;
     })();
@@ -707,7 +703,7 @@ define(function(require, exports, module) {
             var finalUrl = protocol + '//' + host + pathName; //完整目录
             return finalUrl;
         };
-        tammy.utils.BASICURL = dispathHost();
+        tammy.utils.BASEURL = dispathHost();
     })();
 
     /**
@@ -1500,7 +1496,7 @@ define(function(require, exports, module) {
     (function() {
         function InitPublicKey() {
             tammy.utils.ajax.send({
-                url: tammy.arguments.basePath + 'js/common/public_key.cer',
+                url: basePath + 'js/common/public_key.cer',
                 dataType: 'text',
                 done: function(data) {
                     tammy.arguments.public_key = data;

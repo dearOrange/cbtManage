@@ -10,6 +10,8 @@ define(function(require, exports, module) {
         this.init = function() {
             this.initPlugins();
 
+            $('#index_logo').attr( 'href', ROOTURL );
+
             this.checkLogin();
         };
         this.checkLogin = function() {
@@ -29,6 +31,7 @@ define(function(require, exports, module) {
                             /*加载时默认触发一次变化事件进行事件加载*/
                             $(window).trigger('hashchange');
                             var moduleInfo = jh.utils.getURLValue();
+
                             jh.utils.defaultPage(moduleInfo.module);
                             var username = jh.utils.cookie.get('username');
                             $('#usernameText').text(username);

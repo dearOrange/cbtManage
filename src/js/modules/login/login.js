@@ -11,8 +11,13 @@ define(function(require, exports, module) {
         var _this = this;
         _this.key = '';
         this.init = function() {
+            this.initCode();
             this.initPlugins();
             this.registerEvent();
+        };
+
+        this.initCode = function(){
+            $('#checkCode').attr( 'src', REQUESTROOT + '/operator/getAuthCode' );
         };
 
         this.initPlugins = function() {
