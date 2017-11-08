@@ -5,6 +5,9 @@ define(function(require, exports, module) {
         _this.form = $('#downstreams-list-form');
 
         this.init = function() {
+            jh.utils.mapSelect('downstreamsList', function() {
+                $('select').select2();
+            });
             this.initContent();
             this.registerEvent();
         };

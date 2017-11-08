@@ -36,7 +36,7 @@ define(function(require, exports, module) {
                 }
             });
 
-            //通过
+            //确认支付
             $('.dataShow').off('click','.agreement').on('click', '.agreement', function() {
                 var me = $(this);
                 var id = me.data('id');
@@ -44,9 +44,9 @@ define(function(require, exports, module) {
                     content: '是否确认通过？',
                     ok: function() {
                         jh.utils.ajax.send({
-                            url: '/trace/passed',
+                            url: '/withdraw/confirm',
                             data: {
-                                traceId: id
+                                drawId: id
                             },
                             done: function(data, status, xhr) {
                                 _this.initContent();
@@ -65,9 +65,9 @@ define(function(require, exports, module) {
                     content: '是否确认拒绝？',
                     ok: function() {
                         jh.utils.ajax.send({
-                            url: '/trace/refuse',
+                            url: '/withdraw/refuse',
                             data: {
-                                traceId: id
+                                drawId: id
                             },
                             done: function(data, status, xhr) {
                                 _this.initContent();

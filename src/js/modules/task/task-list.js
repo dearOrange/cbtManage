@@ -102,7 +102,7 @@ define(function(require, exports, module) {
                 }
             });
 
-            //通过
+            //查看任务详情
             $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
                 var me = $(this);
                 var infos = me.data('infos');
@@ -121,27 +121,6 @@ define(function(require, exports, module) {
                     }
                 });
 
-            });
-
-            //拒绝
-            $('.dataShow').off('click', '.pass').on('click', '.pass', function() {
-                var me = $(this);
-                var id = me.data('id');
-                jh.utils.alert({
-                    content: '是否确认拒绝？',
-                    ok: function() {
-                        jh.utils.ajax.send({
-                            url: '/trace/refuse',
-                            data: {
-                                traceId: id
-                            },
-                            done: function(data, status, xhr) {
-                                _this.initContent();
-                            }
-                        });
-                    },
-                    cancel: function() {}
-                });
             });
 
             //采纳情报
