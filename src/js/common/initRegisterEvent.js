@@ -139,6 +139,17 @@ define(function(require, exports, module) {
                 window.location.href =  '/manager' + '/task/export' + '?' + datas+ '&XToken='+XToken;
             });
 
+            $('body').off('click', '.img-preview img').on('click', '.img-preview img', function() {
+                var m = $(this);
+                var src = m.attr('src');
+                var title = m.data('tips') ? m.data('tips') : '查看大图';
+                src = src.replace(/imageView2\/0\/w\/100/,'imageslim');
+                jh.utils.alert({
+                    title: title,
+                    content: '<img src="'+src+'"/>'
+                });
+            });
+
             $('#loginout').on('click', function() {
                 var me = $(this);
                 jh.utils.alert({

@@ -19,15 +19,15 @@
         <table class="dataShow">
             <thead>
                 <tr>
-                    <th width="8%">公司全称</th>
-                    <th width="10%">办公地址</th>
+                    <th width="12%">公司全称</th>
+                    <th width="12%">办公地址</th>
                     <th width="10%">法人代表姓名</th>
-                    <th width="20%">联系人姓名</th>
-                    <th width="13%">手机号</th>
-                    <th width="16%">邮箱</th>
-                    <th width="16%">申请时间</th>
-                    <th width="16%">营业执照</th>
-                    <th width="13%">操作</th>
+                    <th width="10%">联系人姓名</th>
+                    <th width="10%">手机号</th>
+                    <th width="12%">邮箱</th>
+                    <th width="10%">申请时间</th>
+                    <th width="8%">营业执照</th>
+                    <th width="12%">操作</th>
                 </tr>
             </thead>
             <tbody id="order_list_container">
@@ -46,15 +46,17 @@
         <td>{{item.contactPhone}}</td>
         <td>{{item.email}}</td>
         <td>{{item.createAt}}</td>
-        <td><img src="{{viewImgRoot}}{{item.businessLicense}}?imageView2/0/w/100" width="210" height="150" /></td>
+        <td class="img-preview">
+            <img src="{{viewImgRoot}}{{item.businessLicense}}?imageView2/0/w/100"  data-tips="营业执照"/>
+        </td>
         <td>
             {{if item.state == "new" }}
             <ul class="operaitem">
                 <li>
-                    <a data-id="{{item.id}}" class="agreement button blue_btn">通过</a>
+                    <a data-id="{{item.id}}" class="agreement button">通过</a>
                 </li>
                 <li>
-                    <a data-id="{{item.id}}" class="pass button blue_btn">拒绝</a>
+                    <a data-id="{{item.id}}" class="pass button">拒绝</a>
                 </li>
             </ul>
             {{/if}}

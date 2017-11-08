@@ -46,14 +46,14 @@
             <thead>
                 <tr>
                     <th width="10%">车牌号</th>
-                    <th width="17%">照片</th>
-                    <th width="12%">线人信息</th>
-                    <th width="13%">上传时间</th>
+                    <th width="8%">照片</th>
+                    <th width="10%">线人信息</th>
+                    <th width="12%">上传时间</th>
                     <th width="12%">GPS定位</th>
-                    <th width="15%">照片拍摄地/时间</th>
-                    <th width="7%">描述地址</th>
+                    <th width="18%">照片拍摄地/时间</th>
+                    <th width="12%">描述地址</th>
                     <th width="16%">操作</th>
-                </tr>
+            </tr>
             </thead>
             <tbody id="order_list_container">
             </tbody>
@@ -65,8 +65,8 @@
     {{ each list item index }}
     <tr class="trData">
         <td>{{item.carNumber}}</td>
-        <td>
-            <img src="{{viewImgRoot}}{{item.carPhoto}}?imageView2/0/w/100" alt="任务车图片" width="160" height="220" />
+        <td class="img-preview">
+            <img src="{{viewImgRoot}}{{item.carPhoto}}?imageView2/0/w/100" data-tips="{{item.carNumber}}" alt="任务车图片"/>
         </td>
         <td>
             <p>{{item.name}}</p>
@@ -83,12 +83,19 @@
         <td>{{item.location}}</td>
         <td>
             <ul class="operaitem">
-                <li>
-                    <a data-id="{{item.id}}" class="agreement button blue_btn">通过</a>
-                </li>
-                <li>
-                    <a data-id="{{item.id}}" class="pass button blue_btn">拒绝</a>
-                </li>
+                {{if item.state == "new" || item.state == "located"}}
+                    <li>
+                        <a data-id="{{item.id}}" class="agreement button">通过</a>
+                    </li>
+                    <li>
+                        <a data-id="{{item.id}}" class="pass button">拒绝</a>
+                    </li>
+                {{/if}}
+                {{if item.state == "stored"}} 
+                    <li>
+                        <a data-id="{{item.id}}" class="throwAway button">扔到垃圾池</a>
+                    </li>
+                {{/if}}   
             </ul>
         </td>
     </tr>

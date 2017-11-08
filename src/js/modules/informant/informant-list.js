@@ -81,6 +81,28 @@ define(function(require, exports, module) {
                 });
             });
 
+            //垃圾池
+            $('.dataShow').off('click','.throwAway').on('click', '.throwAway', function() {
+                var me = $(this);
+                var id = me.data('id');
+                jh.utils.alert({
+                    content: '是否扔到垃圾池？',
+                    ok: function() {
+                        jh.utils.ajax.send({
+                            url: '/trace/drop',
+                            data: {
+                                traceId: id
+                            },
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                            done: function(data, status, xhr) {
+                                _this.initContent();
+                            }
+                        });
+                    },
+                    cancel: function() {}
+                });
+            });
+
         };
     }
     module.exports = InformantList;

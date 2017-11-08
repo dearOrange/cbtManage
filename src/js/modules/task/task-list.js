@@ -40,12 +40,12 @@ define(function(require, exports, module) {
             jh.utils.ajax.send({
                 url: '/upstreams/list',
                 method: 'post',
-                data:{
-                    pageNum:1,
-                    pageSize:300,
-                    params:{
+                data: {
+                    pageNum: 1,
+                    pageSize: 300,
+                    params: {
                         companyName: '',
-                        state:'available'
+                        state: 'available'
                     }
                 },
                 done: function(returnData) {
@@ -85,6 +85,11 @@ define(function(require, exports, module) {
                 hiddenName: 'test',
                 pick: {
                     id: '#importFile'
+                },
+                accept: {
+                    title: 'Applications',
+                    extensions: 'xls,xlsx',
+                    mimeTypes: 'application/xls,application/xlsx'
                 }
             });
 
@@ -140,7 +145,7 @@ define(function(require, exports, module) {
             });
 
             //采纳情报
-            $('body').off('click', '#agreementTrace').on('click','#agreementTrace', function() {
+            $('body').off('click', '#agreementTrace').on('click', '#agreementTrace', function() {
                 var me = $(this);
                 var id = me.data('id');
                 jh.utils.ajax.send({

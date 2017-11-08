@@ -97,6 +97,18 @@ input:-webkit-autofill {
     color: #ff4949;
     margin-right: 4px;
 }
+.img-preview img{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+.operaitem{
+    overflow: hidden;
+}
+.operaitem li{
+    float: left;
+}
+
 .fl {
     float: left;
 }
@@ -188,7 +200,7 @@ label.error {
 /*按钮*/
 .button, a.button {
     display: inline-block;
-    border: 0px;
+    border: 1px solid #3fa1f4;
     cursor: pointer;
     text-align: center;
     -webkit-border-radius: 3px;
@@ -196,9 +208,14 @@ label.error {
     border-radius: 3px;
     font-size: 14px;
     font-family: 'microsoft yahei';
-    color: #fff;
-    padding: 5px 25px;
+    color: #3fa1f4;
+    padding: 3px 8px;
     vertical-align: middle;
+    margin-right: 5px;
+}
+.button:hover, a.button:hover {
+    background-color: #3fa1f4;
+    color: #fff !important;
 }
 .button.add_btn {
     background-color: #fbeae4;
@@ -217,12 +234,6 @@ label.error {
 }
 .button.orange_btn:hover {
     background-color: #ff9730;
-}
-.button.blue_btn {
-    color: #3fa1f4 !important;
-}
-.button.blue_btn:hover {
-    color: #0587f6 !important;
 }
 .button.white_btn {
     background-color: #fafafa;
