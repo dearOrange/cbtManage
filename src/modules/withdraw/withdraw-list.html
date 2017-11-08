@@ -46,9 +46,13 @@
         <td>{{item.phone}}</td>
         <td>{{item.amount}}</td>
         <td>
+            {{if item.alipay != "null" && item.alipay != "" && item.alipay != null }}
             <p>支付宝：{{item.alipay}}</p>
+            {{/if}}
+            {{if item.bankName != "null" && item.bankName != "" && item.bankName != null }}
             <br />
             <p>{{item.bankName}}：{{item.bankCard}}</p>
+            {{/if}}
         </td>
         <td>{{item.createAt}}</td>
         <td>{{item.flow}}</td>

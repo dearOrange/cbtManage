@@ -136,7 +136,7 @@ define(function(require, exports, module) {
                 var form = m.parents('form');
                 var datas = form.serialize();
                 var XToken = encodeURIComponent(jh.utils.cookie.get('X-Token'));
-                window.location.href =  '/manager' + '/task/export' + '?' + datas+ '&XToken='+XToken;
+                window.location.href =  REQUESTROOT + '/task/export' + '?' + datas+ '&XToken='+XToken;
             });
 
             $('body').off('click', '.img-preview img').on('click', '.img-preview img', function() {

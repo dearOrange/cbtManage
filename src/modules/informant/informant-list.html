@@ -74,7 +74,11 @@
             <p>{{item.phone}}</p>
         </td>
         <td>{{item.createAt}}</td>
-        <td>{{item.fingerprint}}</td>
+        <td>
+            {{if item.fingerprint!="undefined,undefined" }}
+            {{item.fingerprint}}
+            {{/if}}
+        </td>
         <td>
             <p>{{item.ipCity}}</p>
             <hr />
