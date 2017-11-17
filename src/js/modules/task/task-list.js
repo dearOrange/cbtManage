@@ -114,6 +114,7 @@ define(function(require, exports, module) {
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     done: function(returnData, status, xhr) {
                         infos.informantList = returnData.data;
+                        infos.chuzhi = parseFloat(infos.carPrice*0.15).toFixed(2)
                         var alertStr = jh.utils.template('task_detail_template', { item: infos });
                         jh.utils.alert({
                             content: alertStr,
