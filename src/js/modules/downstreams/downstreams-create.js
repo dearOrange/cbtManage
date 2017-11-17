@@ -29,6 +29,7 @@ define(function(require, exports, module) {
                     var datas = jh.utils.formToJson(form);
                     jh.utils.ajax.send({
                         url: '/downstreams/create',
+                        method: 'post',
                         data: datas,
                         done: function(returnData) {
                             if (returnData.code === 'SUCCESS') {
