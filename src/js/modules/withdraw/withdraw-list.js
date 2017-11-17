@@ -48,6 +48,7 @@ define(function(require, exports, module) {
                             data: {
                                 drawId: id
                             },
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                             done: function(data, status, xhr) {
                                 _this.initContent();
                             }
@@ -69,6 +70,7 @@ define(function(require, exports, module) {
                             data: {
                                 drawId: id
                             },
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                             done: function(data, status, xhr) {
                                 _this.initContent();
                             }
