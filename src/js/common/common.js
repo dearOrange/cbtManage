@@ -1161,7 +1161,8 @@ define(function(require, exports, module) {
 
     (function() {
         var cookie = {};
-        cookie.set = function(key, value, expires) {
+        cookie.set = function(key, value, path, expires) {
+            path = path || '/';
             var date = new Date(),
                 s = '',
                 day = /^[1-9]([0-9]+)?d$/.test(expires),
@@ -1188,7 +1189,7 @@ define(function(require, exports, module) {
                 }
                 expires = "; expires=" + date.toGMTString();
             }
-            return (document.cookie = key + "=" + (!value ? "" : value.toString()) + expires + "; path=/", "; domain=." + document.domain + s);
+            return (document.cookie = key + "=" + (!value ? "" : value.toString()) + expires + "; path="+path, "; domain=." + document.domain + s);
         };
         cookie.get = function(key) {
             var value;
