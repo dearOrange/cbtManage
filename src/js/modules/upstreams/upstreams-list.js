@@ -44,9 +44,9 @@ define(function(require, exports, module) {
                     content: '是否确认通过？',
                     ok: function() {
                         jh.utils.ajax.send({
-                            url: '/trace/passed',
+                            url: '/upstreams/passed',
                             data: {
-                                traceId: id
+                                upstreamId: id
                             },
                             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                             done: function(data, status, xhr) {
@@ -66,9 +66,9 @@ define(function(require, exports, module) {
                     content: '是否确认拒绝？',
                     ok: function() {
                         jh.utils.ajax.send({
-                            url: '/trace/refuse',
+                            url: '/upstreams/refuse',
                             data: {
-                                traceId: id
+                                upstreamId: id
                             },
                             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                             done: function(data, status, xhr) {
