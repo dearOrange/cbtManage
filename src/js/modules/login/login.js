@@ -55,8 +55,8 @@ define(function(require, exports, module) {
                         done: function(returnData) {
                             if (returnData.code === 'SUCCESS') {
                                 // jh.utils.cookie.set('X-Token', encodeURIComponent(returnData.data.token));
-                                jh.utils.cookie.set('X-Token', returnData.data.token, '/admin');
-                                jh.utils.cookie.set('username', datas.username, '/admin');
+                                jh.utils.cookie.set('X-Token', returnData.data.token);
+                                jh.utils.cookie.set('username', datas.username);
                                 window.location.href = jh.arguments.pageIndex;
                             }
                         },
