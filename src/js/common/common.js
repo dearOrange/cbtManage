@@ -66,10 +66,9 @@ define(function(require, exports, module) {
 
         function GetImageInfo(response){
             var Longitude,Latitude;
-            debugger
             if (response && response.GPSLatitude) {
-                Longitude = transformTude(transformAli(response.GPSLongitude.join('')));
-                Latitude = transformTude(transformAli(response.GPSLatitude.join('')));
+                Longitude = transformAli(response.GPSLongitude);
+                Latitude = transformAli(response.GPSLatitude);
                 return {
                     success: true,
                     lnglatXY: [Longitude, Latitude],
@@ -86,8 +85,14 @@ define(function(require, exports, module) {
         }
 
         function transformAli (tude) {
-            var arr = /(\d+)deg\s(\d+)\'\s(\d+.\d+)\"/.exec(tude)
-            return arr[1] + ', ' + arr[2] + ', ' + arr[3]
+            var d = tude[0].numerator/tude[0].denominator;
+            var f = tude[1].numerator/tude[1].denominator;
+            var m = tude[2].numerator/tude[2].denominator;
+
+            var f = parseFloat(f) + parseFloat(m/60);
+            var du = parseFloat(f/60) + parseFloat(d);
+
+            return  du;
         }
 
         function transformTude (tude) {
@@ -1319,11 +1324,10 @@ define(function(require, exports, module) {
                 });
 
                 //服务端响应事件
-                uploader.on('uploadAccept', function(file, result) {
-//                  console.log(file);
-//                  console.log(result);
-                    var response = result.data;
-					
+                uploader.on('uploadAccept', function(file, returnData) {
+                    var result = returnData.result;
+                    var response = returnData.response;
+
                     uploader.reset(); //重置队列
 
                     //上传本身错误时，控制台打印错误信息，并阻止继续执行
