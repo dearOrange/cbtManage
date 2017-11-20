@@ -1217,7 +1217,7 @@ define(function(require, exports, module) {
                     isAppend: true, //是否加入队列，false为覆盖
                     hiddenName: '',
                     swf: basePath + 'js/plugin/webuploader/Uploader.swf', //swf文件路径
-                    server: 'http://up.qiniu.com/', //后台server
+                    server: opts.server || 'http://up.qiniu.com/', //后台server
                     pick: {
                         id: '#file',
                         multiple: false
@@ -1284,16 +1284,15 @@ define(function(require, exports, module) {
                 });
 
                 //服务端响应事件
-                uploader.on('uploadAccept', function(file, returnData) {
-                    console.log(file);
-                    console.log(returnData);
-                    var result = returnData.result;
-                    var response = returnData.response;
-
+                uploader.on('uploadAccept', function(file, result) {
+//                  console.log(file);
+//                  console.log(result);
+                    var response = result.data;
+					
                     uploader.reset(); //重置队列
 
                     //上传本身错误时，控制台打印错误信息，并阻止继续执行
-                    if (result.code !== 10000) {
+                    if (result.code !== "SUCCESS") {
                         tammy.utils.alert({
                             content: result.message
                         });

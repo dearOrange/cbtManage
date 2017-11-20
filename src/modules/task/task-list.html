@@ -27,7 +27,6 @@
                         </select>
                     </td>
                     <td>
-
                         <a href="javascript:;" id="importFile">导入Excel</a>
                         <a href="javascript:;" id="exportFile">导出</a>
                     </td>
@@ -104,8 +103,9 @@
                         <td>{{obj.downstreamName}}</td>
                         <td>{{obj.traceType}}</td>
                         <td>
-                            {{if obj.state === "located" }}
-                            <a href="javascript:;" id="agreementTrace" class="button" data-id="{{obj.id}}">采纳</a>
+                            {{ if item.state === "located"}}<a href="javascript:;" id="agreementTrace" class="button" data-id="{{obj.id}}">采纳</a>
+                            
+                       
                             {{/if}}
                         </td>
                     </tr>

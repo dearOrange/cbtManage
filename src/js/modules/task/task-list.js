@@ -83,6 +83,7 @@ define(function(require, exports, module) {
 
             jh.utils.uploader.init({
                 hiddenName: 'test',
+                server:'http://192.168.2.181:8080/adminServer/task/import',
                 pick: {
                     id: '#importFile'
                 },
@@ -91,6 +92,11 @@ define(function(require, exports, module) {
                     extensions: 'xls,xlsx',
                     mimeTypes: 'application/xls,application/xlsx'
                 }
+            },{
+            	uploadAccept:function(file, response){
+            		alert(response)
+            		
+            	}
             });
 
             // 搜索
