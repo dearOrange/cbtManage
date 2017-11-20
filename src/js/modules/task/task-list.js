@@ -95,7 +95,6 @@ define(function(require, exports, module) {
             },{
             	uploadAccept:function(file, response){
             		alert(response)
-            		
             	}
             });
 
