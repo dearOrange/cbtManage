@@ -13,8 +13,7 @@ define(function(require, exports, module) {
             AMap.service('AMap.Geocoder', function() { //回调函数
                 //实例化Geocoder
                 _this.geocoder = new AMap.Geocoder({
-                    radius: 1000,
-                    extensions: "all"
+                    city: "010"//城市，默认：“全国”
                 });
             })
         };
@@ -37,34 +36,32 @@ define(function(require, exports, module) {
                             if (this.status === 200) {
                                 var image = new Image();
                                 image.onload = function() {
+
                                     EXIF.getData(this, function() {
                                         var src = this.src;
                                         var lastPath = src.lastIndexOf('/');
                                         src = src.substring(lastPath + 1);
-                                        
+                                        var id;
+                                        if(src.indexOf('.')!=-1){
+                                            id = src.substring(0,src.indexOf('.'));
+                                        }else{
+                                            id = src;
+                                        }
                                         var jsons = jh.utils.getImageInfo(EXIF.getAllTags(this));
-                                        var imgObj = $('#' + src).parent().siblings('.photoGps');
+                                        var imgObj = $('[id^='+id+']').parent().siblings('.photoGps');
+                                        var gps = $.trim(imgObj.prev().text());
+                                        if(gps){
+                                            gps = gps.split(',');
+                                            _this.getAddressInfo(gps,imgObj.prev());
+                                        }
                                         if (jsons.success) {
                                             var arr = jsons.lnglatXY;
-                                            imgObj.find('.photoAddress').text(arr.join(','));
+                                            _this.getAddressInfo(arr,imgObj);
                                         } else {
                                             imgObj.find('.photoAddress').text(jsons.lnglatXY);
                                         }
+
                                         imgObj.find('.photoAddress').siblings('p').text(jsons.time);
-
-                                        _this.geocoder.getAddress(jsons.lnglatXY, function(status, result) {
-                                            if (status === 'complete' && result.info === 'OK') {
-                                                debugger
-                                                //获得了有效的地址信息:
-                                                //即，result.regeocode.formattedAddress
-                                            } else {
-                                                //获取地址失败
-                                            }
-                                        });
-                                        // var _dataTxt = EXIF.pretty(this);
-                                        // var _dataJson = JSON.stringify(EXIF.getAllTags(this));
-
-                                        // console.log(JSON.parse(jsons));
                                     });
                                 };
                                 image.src = jh.arguments.viewImgRoot + key;
@@ -78,6 +75,22 @@ define(function(require, exports, module) {
             });
             page.init();
             $('#role').select2();
+        };
+        this.getAddressInfo = function(arr,obj){
+            _this.geocoder.getAddress(arr, function(status, result) {
+                if(obj.find('.photoAddress').length===0){
+                    obj = obj;
+                }else{
+                    obj = obj.find('.photoAddress');
+                }
+                if (status === 'complete' && result.info === 'OK') {
+                    obj.text(result.regeocode.formattedAddress);
+                    //获得了有效的地址信息:
+                    //即，result.regeocode.formattedAddress
+                } else {
+                    obj.text('未获取成功');
+                }
+            });
         };
         this.registerEvent = function() {
 

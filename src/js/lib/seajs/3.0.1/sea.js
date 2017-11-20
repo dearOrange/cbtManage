@@ -17,6 +17,7 @@ var versionDate = {
 
 var ROOTURL = '/admin';/*项目根目录名称 谨慎修改*/
 var REQUESTROOT = '/adminServer'; /*服务器默认为/manager 当本地开发时切换为域名映射*/
+// var REQUESTROOT = 'http://qa.cbt.com:8080/adminServer';
 
 seajs.config({
     base: '/admin/src/js/',
