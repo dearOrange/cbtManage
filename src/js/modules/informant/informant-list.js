@@ -19,6 +19,27 @@ define(function(require, exports, module) {
                 isSearch: isSearch,
                 callback: function(data) {
                     data.viewImgRoot = jh.arguments.viewImgRoot;
+                    data.getImgInfo = function(key){
+                        var http = new XMLHttpRequest();
+                        debugger
+                        http.open("GET", jh.arguments.viewImgRoot + key + '?imageView2/0/w/100', true);
+                        http.responseType = "blob";
+                        http.onload = function(e) {
+                            if (this.status === 200) {
+                                var image = new Image();
+                                image.onload = function() {
+                                    EXIF.getData(this, function() {
+                                        var _dataTxt = EXIF.pretty(this);
+                                        var _dataJson = JSON.stringify(EXIF.getAllTags(this));
+
+                                        console.log(_dataTxt)
+                                    });
+                                };
+                                image.src = jh.arguments.viewImgRoot + key + '?imageView2/0/w/100';
+                            };
+                        };
+                        http.send();
+                    };
                     var contentHtml = jh.utils.template('informantList_content_template', data);
                     return contentHtml;
                 }

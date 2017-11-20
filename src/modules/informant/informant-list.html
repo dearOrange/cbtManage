@@ -65,7 +65,7 @@
     <tr class="trData">
         <td>{{item.carNumber}}</td>
         <td class="img-preview">
-            <img src="{{viewImgRoot}}{{item.carPhoto}}?imageView2/0/w/100" data-tips="{{item.carNumber}}" alt="任务车图片"/>
+            <img src="{{viewImgRoot}}{{item.carPhoto}}?imageView2/0/w/100" data-tips="{{item.carNumber}}" alt="任务车图片" onload="{{ item.carPhoto | getImgInfo }}" />
         </td>
         <td>
             <p>{{item.name}}</p>
