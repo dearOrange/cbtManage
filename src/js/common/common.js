@@ -62,6 +62,41 @@ define(function(require, exports, module) {
         }
     }
 
+    (function(){
+
+        function GetImageInfo(response){
+            var Longitude,Latitude;
+            debugger
+            if (response && response.GPSLatitude) {
+                Longitude = transformTude(transformAli(response.GPSLongitude.join('')));
+                Latitude = transformTude(transformAli(response.GPSLatitude.join('')));
+                return {
+                    success: true,
+                    lnglatXY: [Longitude, Latitude],
+                    time: (response.DateTime && response.DateTime.value) || '无法获取'
+                };
+            }
+            else {
+                return{
+                    success: false,
+                    lnglatXY: '未成功获取',
+                    time: (response.DateTime && response.DateTime.value) || '无法获取'
+                };
+            }
+        }
+
+        function transformAli (tude) {
+            var arr = /(\d+)deg\s(\d+)\'\s(\d+.\d+)\"/.exec(tude)
+            return arr[1] + ', ' + arr[2] + ', ' + arr[3]
+        }
+
+        function transformTude (tude) {
+            var rst = tude.split(', ').map(e => Number(e));
+            return (rst[0] + rst[1] / 60 + rst[2] / 3600).toFixed(6)
+        }
+        tammy.utils.getImageInfo = GetImageInfo;
+    })();
+
     (function() {
         function imgLoad(obj) {
             var winWidth = $(window).width(),
