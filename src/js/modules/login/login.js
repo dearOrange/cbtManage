@@ -54,9 +54,8 @@ define(function(require, exports, module) {
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                         done: function(returnData) {
                             if (returnData.code === 'SUCCESS') {
-                                // jh.utils.cookie.set('X-Token', encodeURIComponent(returnData.data.token));
-                                jh.utils.cookie.set('X-Token', returnData.data.token);
-                                jh.utils.cookie.set('username', datas.username);
+                                jh.utils.cookie.set('admin-X-Token', returnData.data.token);
+                                jh.utils.cookie.set('admin-username', datas.username);
                                 window.location.href = jh.arguments.pageIndex;
                             }
                         },

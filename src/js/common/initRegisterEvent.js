@@ -135,7 +135,7 @@ define(function(require, exports, module) {
                 var m = $(this);
                 var form = m.parents('form');
                 var datas = form.serialize();
-                var XToken = encodeURIComponent(jh.utils.cookie.get('X-Token'));
+                var XToken = encodeURIComponent(jh.utils.cookie.get('admin-X-Token'));
                 window.location.href =  REQUESTROOT + '/task/export' + '?' + datas+ '&XToken='+XToken;
             });
 
@@ -175,7 +175,7 @@ define(function(require, exports, module) {
             $('#editPass').on('click', function() {
                 var me = $(this);
                 me.attr('disabled', 'disabled');
-                var username = jh.utils.cookie.get('username');
+                var username = jh.utils.cookie.get('admin-username');
                 var str = jh.utils.template('modify_pass_template', {
                     username: username
                 });

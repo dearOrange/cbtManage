@@ -19,7 +19,7 @@ define(function(require, exports, module) {
         };
 
         this.checkLogin = function() {
-            var token = jh.utils.cookie.get('X-Token');
+            var token = jh.utils.cookie.get('admin-X-Token');
             if(token){
                 window.location.href = jh.arguments.pageIndex;
             }else{

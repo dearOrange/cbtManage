@@ -563,7 +563,7 @@ define(function(require, exports, module) {
                 async: settings.async,
                 beforeSend: function(xhr) {
                     (new tammy.ui.shadow()).init();
-                    var token = tammy.utils.cookie.get('X-Token');
+                    var token = tammy.utils.cookie.get('admin-X-Token');
                     xhr.setRequestHeader("X-Token", token);
                     settings.beforeSend.call(null, xhr);
                 }
@@ -614,6 +614,8 @@ define(function(require, exports, module) {
                 tammy.utils.ajax.send({
                     url: '/admin/user/login-out',
                     always: function() {
+                        tammy.utils.cookie.deleteCookie('admin-X-Token');
+                        tammy.utils.cookie.deleteCookie('admin-username');
                         window.location.href = jh.arguments.pageLogin;
                     }
                 });

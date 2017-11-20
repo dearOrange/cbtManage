@@ -33,7 +33,7 @@ define(function(require, exports, module) {
                             var moduleInfo = jh.utils.getURLValue();
 
                             jh.utils.defaultPage(moduleInfo.module);
-                            var username = jh.utils.cookie.get('username');
+                            var username = jh.utils.cookie.get('admin-username');
                             $('#usernameText').text(username);
             //             }
             //         });
@@ -60,7 +60,7 @@ define(function(require, exports, module) {
 
             var firstMenu = $('#leftMenu-box').children('li');
             var secondMenu = firstMenu.children('ul').children('li');
-            var username = jh.utils.cookie.get('username');
+            var username = jh.utils.cookie.get('admin-username');
 
             // $.each(secondMenu, function(index, item) {
             //     item = $(item);
