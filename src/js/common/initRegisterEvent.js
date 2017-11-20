@@ -159,8 +159,8 @@ define(function(require, exports, module) {
                             url: '/operator/loginout',
                             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                             done: function() {
-                                jh.utils.cookie.deleteCookie('username');
-                                jh.utils.cookie.deleteCookie('X-Token');
+                                jh.utils.cookie.deleteCookie('admin-username');
+                                jh.utils.cookie.deleteCookie('admin-X-Token');
                                 window.location.href = jh.arguments.pageLogin;
                             },
                             fail: function() {
