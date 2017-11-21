@@ -609,22 +609,16 @@ define(function(require, exports, module) {
                 }
             }).
             done(function(responseText, statusText, xhr) {
-                if (responseText && responseText.code === 60001) {
+                if (responseText && responseText.code === "TOKEN_FAIL") {
                     tammy.utils.alert({
-                        content: '您没有相应权限,点击确定重新登录！',
-                        ok: function() {
+                        content: '登陆失效，请重新登陆',
+                        ok:function(){
                             var sout = new tammy.utils.singout();
                             sout.init();
                         },
-                        cancel: false
+                        cancel:false
                     });
                     return false;
-                }
-                if (responseText && responseText.code === 10007) {
-                    if (settings.data.username) {
-                        settings.fail.call(null, responseText);
-                        return false;
-                    }
                 }
                 if (responseText && responseText.code !== 'SUCCESS' && settings.url.indexOf('public_key') === -1) {
                     //错误时提示信息
@@ -1203,8 +1197,7 @@ define(function(require, exports, module) {
 
     (function() {
         var cookie = {};
-        cookie.set = function(key, value, path, expires) {
-            path = path || '/';
+        cookie.set = function(key, value, expires) {
             var date = new Date(),
                 s = '',
                 day = /^[1-9]([0-9]+)?d$/.test(expires),
@@ -1231,7 +1224,7 @@ define(function(require, exports, module) {
                 }
                 expires = "; expires=" + date.toGMTString();
             }
-            return (document.cookie = key + "=" + (!value ? "" : value.toString()) + expires + "; path="+path, "; domain=." + document.domain + s);
+            return (document.cookie = key + "=" + (!value ? "" : value.toString()) + expires + "; path=/", "; domain=." + document.domain + s);
         };
         cookie.get = function(key) {
             var value;
