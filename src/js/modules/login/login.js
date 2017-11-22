@@ -33,60 +33,60 @@ define(function(require, exports, module) {
         };
 
         this.registerEvent = function() {
-            jh.utils.validator.init({
-                id: 'form_login',
-                submitHandler: function(form) {
-                    // window.domain = 'cbt.com';
-                    var datas = jh.utils.formToJson(form); //表单数据
-                    datas.captchaCode = jh.utils.cookie.get('captchaCode');//验证码key
-
-                    // var flag = datas.username + '_login_passError'; //本地存储flag
-                    // var errnum = localStorage[flag]; //错误次数
-
-                    // var jsencrypt = new JSEncrypt();
-                    // jsencrypt.setPublicKey(jh.arguments.public_key);
-                    // datas.password = jsencrypt.encrypt(datas.password);
-                    
-                    jh.utils.ajax.send({
-                        url: '/operator/login',
-                        method: 'post',
-                        data: datas,
-                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                        done: function(returnData) {
-                            if (returnData.code === 'SUCCESS') {
-                                jh.utils.cookie.set('admin-X-Token', returnData.data.token);
-                                jh.utils.cookie.set('admin-username', datas.username);
+//          jh.utils.validator.init({
+//              id: 'form_login',
+//              submitHandler: function(form) {
+//                  // window.domain = 'cbt.com';
+//                  var datas = jh.utils.formToJson(form); //表单数据
+//                  datas.captchaCode = jh.utils.cookie.get('captchaCode');//验证码key
+//
+//                  // var flag = datas.username + '_login_passError'; //本地存储flag
+//                  // var errnum = localStorage[flag]; //错误次数
+//
+//                  // var jsencrypt = new JSEncrypt();
+//                  // jsencrypt.setPublicKey(jh.arguments.public_key);
+//                  // datas.password = jsencrypt.encrypt(datas.password);
+//                  
+//                  jh.utils.ajax.send({
+//                      url: '/operator/login',
+//                      method: 'post',
+//                      data: datas,
+//                      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+//                      done: function(returnData) {
+//                          if (returnData.code === 'SUCCESS') {
+//                              jh.utils.cookie.set('admin-X-Token', returnData.data.token);
+                                jh.utils.cookie.set('admin-username', 'admin');
                                 window.location.href = jh.arguments.pageIndex;
-                            }
-                        },
-                        fail: function(xhr) {
-                            refreshCode();
-                            // if (xhr.result.code === 10007) {
-                            //     var num;
-                            //     if (errnum) {
-                            //         num = parseInt(errnum) + 1;
-                            //     } else {
-                            //         num = 1;
-                            //     }
-                            //     localStorage[flag] = num;
-                            //     var errstr = '用户名或密码错误！';
-                            //     if (num >= 3) {
-                            //         errstr = '请联系管理员,找回密码！';
-                            //     }
-                            //     jh.utils.alert({
-                            //         content: errstr,
-                            //         ok: function() {}
-                            //     });
-                            // }
-                        }
-                    });
-                    return false;
-                }
-            });
-
-            $('#checkCode').on('click', function() {
-                refreshCode();
-            });
+//                          }
+//                      },
+//                      fail: function(xhr) {
+//                          refreshCode();
+//                          // if (xhr.result.code === 10007) {
+//                          //     var num;
+//                          //     if (errnum) {
+//                          //         num = parseInt(errnum) + 1;
+//                          //     } else {
+//                          //         num = 1;
+//                          //     }
+//                          //     localStorage[flag] = num;
+//                          //     var errstr = '用户名或密码错误！';
+//                          //     if (num >= 3) {
+//                          //         errstr = '请联系管理员,找回密码！';
+//                          //     }
+//                          //     jh.utils.alert({
+//                          //         content: errstr,
+//                          //         ok: function() {}
+//                          //     });
+//                          // }
+//                      }
+//                  });
+//                  return false;
+//              }
+//          });
+//
+//          $('#checkCode').on('click', function() {
+//              refreshCode();
+//          });
         };
     }
     module.exports = Login;

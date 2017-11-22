@@ -11,12 +11,12 @@ define(function(require, exports, module) {
 
         this.registerEvent = function() {
 
-            jh.utils.ajax.send({
-                url: '/qiniu/getToken',
-                done:function(returnData){
-                    jh.arguments.uploadToken = returnData.data.uploadToken;
-                }
-            });
+//          jh.utils.ajax.send({
+//              url: '/qiniu/getToken',
+//              done:function(returnData){
+//                  jh.arguments.uploadToken = returnData.data.uploadToken;
+//              }
+//          });
 
             /*菜单点击事件*/
             $('#leftMenu-box').on('click', 'li>a,li>ul>li>a', function() {

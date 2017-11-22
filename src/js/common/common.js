@@ -577,7 +577,8 @@ define(function(require, exports, module) {
             // if(!flag && settings.url.indexOf('/operator/login') !== -1){
             //     settings.data = JSON.parse(settings.data);
             // }
-
+			settings.done();
+			return false;
             $.ajax({
                 url: REQUESTROOT + settings.url,
                 method: settings.method,
