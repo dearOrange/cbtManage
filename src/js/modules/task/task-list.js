@@ -83,7 +83,7 @@ define(function(require, exports, module) {
 
             jh.utils.uploader.init({
                 hiddenName: 'test',
-                server:'/task/import',
+                server:'/adminServer/task/import',
                 pick: {
                     id: '#importFile'
                 },
