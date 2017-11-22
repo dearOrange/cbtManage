@@ -810,7 +810,7 @@ define(function(require, exports, module) {
                     }
                 }
             } else {
-                jh.utils.load('src/modules/welcome/welcome.html');
+                jh.utils.load('/src/modules/welcome/welcome.html');
             }
         };
         tammy.utils.defaultPage = defaultContent;
