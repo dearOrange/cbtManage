@@ -563,21 +563,6 @@ define(function(require, exports, module) {
                 var opts = arr.shift();
                 ajax.arrSend(opts);
             }
-            if (window.location.host === 'local.product.com') {
-                return false;
-            }
-            if (window.location.hash || window.location.pathname == tammy.arguments.pageIndex) {
-                singoutTimer = window.setTimeout(function() {
-                    jh.utils.alert({
-                        content: '长时间未操作,点击确定重新登录！',
-                        ok: function() {
-                            var sout = new tammy.utils.singout();
-                            sout.init();
-                        },
-                        cancel: false
-                    });
-                }, 1000 * 60 * 30);
-            }
         };
 
         ajax.arrSend = function(settings) {
