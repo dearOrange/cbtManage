@@ -11,11 +11,14 @@ define(function(require, exports, module) {
             name: '任务管理',
             icon: 'icon-region',
             module: '/src/modules/task',
-            childrens: [{
-                name: '任务列表',
-                flag: 'region',
-                url: '/task-list'
-            }]
+            url: '/task-list',
+            childrens: []
+        }, {
+            name: '任务审核',
+            icon: 'icon-region',
+            module: '/src/modules/task',
+            url: '/task-audit',
+            childrens: []
         }, {
             name: '线人情报管理',
             icon: 'icon-operate',
