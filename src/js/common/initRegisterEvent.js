@@ -18,39 +18,21 @@ define(function(require, exports, module) {
 //              }
 //          });
 
-            /*菜单点击事件*/
-            $('#leftMenu-box').on('click', 'li>a,li>ul>li>a', function() {
+            /**
+             * 菜单点击事件
+             */
+            $('#leftMenu-box').on('click', '.first-menu-item', function() {
                 var m = $(this);
-                if (m.siblings('ul').length > 0) {
-                    /**
-                     * 第一层点击处理
-                     */
-                    var subMenu = m.siblings('ul');
-                    var isActive = m.parent().hasClass('active');
-                    m.parent().siblings().removeClass('active').children('ul').slideUp('normal');
-                    var icon = m.find('i.fr');
-                    m.parent().siblings().find('i.icon-top-arrow').removeClass('icon-top-arrow').addClass('icon-bottom-arrow');
-                    if (isActive) {
-                        m.parent().removeClass('active');
-                        subMenu.slideUp('normal').addClass('hide');
-                        icon.removeClass('icon-top-arrow');
-                        icon.addClass('icon-bottom-arrow');
-                    } else {
-                        m.parent().addClass('active');
-                        subMenu.removeClass('hide').slideDown('normal');
-                        icon.removeClass('icon-bottom-arrow');
-                        icon.addClass('icon-top-arrow');
-                    }
+                var isActive = m.parent().hasClass('active');
+                m.parent().siblings().removeClass('active');
+                var icon = m.find('i.fr');
+                if (isActive) {
+                    m.parent().removeClass('active');
                 } else {
-                    /**
-                     * 第二层点击处理
-                     */
-                    m.parents('.sidebar-menu').find('li ul li').removeClass('active');
                     m.parent().addClass('active');
-                    var currentUrl = m.data('url');
-                    var moduleFlag = m.parents('ul').siblings('a').data('url');
-                    jh.utils.load(moduleFlag + currentUrl);
                 }
+                var currentUrl = m.data('url');
+                jh.utils.load(currentUrl);
             });
 
             /*地址栏变化事件*/
