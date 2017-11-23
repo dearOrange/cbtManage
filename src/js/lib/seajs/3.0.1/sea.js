@@ -21,9 +21,9 @@ var REQUESTROOT = '/adminServer'; /*服务器默认为/manager 当本地开发�
 if(window.location.host.indexOf('.cbt.com')!==-1){
     REQUESTROOT = 'http://qa.cbt.com:8080' + REQUESTROOT;
 }
-if(window.location.host.indexOf('192.168.2.181')){
+if(window.location.host.indexOf('192.168.2.181')!==-1){
     ROOTURL = '/admin';
-    BaseUrl = '/admin' + BaseUrl;
+    BaseUrl = ROOTURL + BaseUrl;
 }
 seajs.config({
     base: BaseUrl,
