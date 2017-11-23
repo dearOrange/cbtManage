@@ -13,7 +13,7 @@ define(function(require, exports, module) {
 
             jh.utils.ajax.send({
                 url: '/qiniu/getToken',
-                done:function(returnData){
+                done: function(returnData) {
                     jh.arguments.uploadToken = returnData.data.uploadToken;
                 }
             });
@@ -50,6 +50,26 @@ define(function(require, exports, module) {
                     var currentUrl = m.data('url');
                     var moduleFlag = m.parents('ul').siblings('a').data('url');
                     jh.utils.load(moduleFlag + currentUrl);
+                }
+            });
+
+            $('#toggleMenu').click(function() {
+                var me = $(this);
+                var con = $('header').children('.navbar');
+                var hea = $('article.wrapper');
+                var menu = $('#menusBar');
+                if (me.hasClass('closeMenu')) {
+                    con.css('margin-left', '210px');
+                    hea.css('margin-left', '210px');
+                    menu.show();
+                    me.text('<-关闭菜单');
+                    me.removeClass('closeMenu');
+                } else {
+                    con.css('margin-left', '0px');
+                    hea.css('margin-left', '0px');
+                    menu.hide();
+                    me.text('<-打开菜单');
+                    me.addClass('closeMenu');
                 }
             });
 
@@ -136,17 +156,17 @@ define(function(require, exports, module) {
                 var form = m.parents('form');
                 var datas = form.serialize();
                 var XToken = encodeURIComponent(jh.utils.cookie.get('admin-X-Token'));
-                window.location.href =  REQUESTROOT + '/task/export' + '?' + datas+ '&XToken='+XToken;
+                window.location.href = REQUESTROOT + '/task/export' + '?' + datas + '&XToken=' + XToken;
             });
 
             $('body').off('click', '.img-preview img').on('click', '.img-preview img', function() {
                 var m = $(this);
                 var src = m.attr('src');
                 var title = m.data('tips') ? m.data('tips') : '查看大图';
-                src = src.replace(/imageView2\/0\/w\/100/,'imageslim');
+                src = src.replace(/imageView2\/0\/w\/100/, 'imageslim');
                 jh.utils.alert({
                     title: title,
-                    content: '<img src="'+src+'"/>'
+                    content: '<img src="' + src + '"/>'
                 });
             });
 
@@ -218,10 +238,10 @@ define(function(require, exports, module) {
                             done: function() {
                                 jh.utils.alert({
                                     content: '密码修改成功,需要重新进行登录操作',
-                                    ok:function(){
+                                    ok: function() {
                                         window.location.href = jh.arguments.pageLogin;
                                     },
-                                    cancel:false
+                                    cancel: false
                                 });
                             }
                         });
@@ -233,7 +253,7 @@ define(function(require, exports, module) {
                 $(this).parents('form').validate().element($(this));
             });
 
-            $('.wrapper').off('click','.stateChange li').on('click','.stateChange li',function(){
+            $('.wrapper').off('click', '.stateChange li').on('click', '.stateChange li', function() {
                 var me = $(this);
                 var val = me.data('value');
                 me.addClass('active').siblings().removeClass('active');
@@ -242,21 +262,21 @@ define(function(require, exports, module) {
             });
 
             var inputTimeoutId = null;
-            var formChangeHandle =  function(form){
+            var formChangeHandle = function(form) {
                 clearInterval(inputTimeoutId);
-                inputTimeoutId = window.setTimeout(function(){
+                inputTimeoutId = window.setTimeout(function() {
                     form.submit();
-                },600);
+                }, 600);
             };
 
             //输入框内容改变即刻搜索
-            $('.wrapper').off('input propertychange','.search-input').on('input propertychange','.search-input',function(){
+            $('.wrapper').off('input propertychange', '.search-input').on('input propertychange', '.search-input', function() {
                 var me = $(this);
                 formChangeHandle(me.parents('form'));
             });
 
             //下拉菜单改变后即刻搜索
-            $('.wrapper').off('change','.search-select').on('change','.search-select',function(){
+            $('.wrapper').off('change', '.search-select').on('change', '.search-select', function() {
                 var me = $(this);
                 formChangeHandle(me.parents('form'));
             });

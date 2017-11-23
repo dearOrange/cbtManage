@@ -82,8 +82,8 @@ define(function(require, exports, module) {
         this.registerEvent = function() {
 
             jh.utils.uploader.init({
-                hiddenName: 'test',
-                server:'/adminServer/task/import',
+                hiddenName: 'importFile',
+                server: '/adminServer/task/import',
                 pick: {
                     id: '#importFile'
                 },
@@ -92,10 +92,10 @@ define(function(require, exports, module) {
                     extensions: 'xls,xlsx',
                     mimeTypes: 'application/xls,application/xlsx'
                 }
-            },{
-            	uploadAccept:function(file, response){
-            		alert(response)
-            	}
+            }, {
+                uploadAccept: function(file, response) {
+                    alert(response);
+                }
             });
 
             // 搜索
@@ -119,10 +119,10 @@ define(function(require, exports, module) {
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     done: function(returnData, status, xhr) {
                         infos.informantList = returnData.data;
-                        infos.chuzhi = parseFloat(infos.carPrice*0.15).toFixed(2)
+                        infos.chuzhi = parseFloat(infos.carPrice * 0.15).toFixed(2)
                         var alertStr = jh.utils.template('task_detail_template', { item: infos });
                         jh.utils.alert({
-                            content: alertStr,
+                            content: alertStr
                         });
                     }
                 });
@@ -142,13 +142,38 @@ define(function(require, exports, module) {
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     done: function(returnData) {
                         jh.utils.alert({
-                            content: '采纳成功',
-                            ok: function() {
-                                jh.utils.alert
-                            }
+                            content: '采纳成功'
                         });
                     }
                 });
+            });
+
+            //删除任务
+            $('body').off('click', '.delete').on('click', '.delete', function() {
+                var me = $(this);
+                var id = me.data('id');
+                jh.utils.alert({
+                    content: '确定删除任务吗？',
+                    ok: function() {
+                        jh.utils.ajax.send({
+                            url: '/task/delTask',
+                            data: {
+                                taskId: id
+                            },
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                            done: function(returnData) {
+                                jh.utils.alert({
+                                    content: '任务删除成功！',
+                                    ok: function() {
+                                        me.parents('tr').remove();
+                                    }
+                                });
+                            }
+                        });
+                    },
+                    cancel:true
+                });
+
             });
 
         };

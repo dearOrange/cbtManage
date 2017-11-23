@@ -69,6 +69,11 @@
                 <li>
                     <a data-id="{{item.id}}" class="detail button" data-infos="{{item}}">详情</a>
                 </li>
+                {{if item.state=="closed" }}
+                <li>
+                    <a data-id="{{item.id}}" class="delete button">删除</a>
+                </li>
+                {{/if}}
             </ul>
         </td>
     </tr>
