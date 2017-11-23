@@ -16,12 +16,17 @@ var versionDate = {
 };
 
 var ROOTURL = '';/*项目根目录名称 谨慎修改*/
+var BaseUrl = '/src/js/';
 var REQUESTROOT = '/adminServer'; /*服务器默认为/manager 当本地开发时切换为域名映射*/
 if(window.location.host.indexOf('.cbt.com')!==-1){
     REQUESTROOT = 'http://qa.cbt.com:8080' + REQUESTROOT;
 }
+if(window.location.host.indexOf('192.168.2.181')){
+    ROOTURL = '/admin';
+    BaseUrl = '/admin' + BaseUrl;
+}
 seajs.config({
-    base: '/src/js/',
+    base: BaseUrl,
     charset: 'utf-8',
     alias: {
         'jquery': 'lib/jQuery/3.2.1/jquery-3.2.1.min',
