@@ -1,11 +1,11 @@
 <div class="dataContent">
     <div class="data-container">
-        <table class="dataShow">
+        <table class="dataShow dataAudit">
             <thead>
                 <tr>
                     <th width="3%">&nbsp;</th>
                     <th width="4%"><input type="checkbox" /></th>
-                    <th width="10%">任务号</th>
+                    <th width="8%">任务号</th>
                     <th width="10%">任务类型</th>
                     <th width="15%">债权方</th>
                     <th width="10%">车牌号</th>
@@ -14,7 +14,7 @@
                     <th width="6%">颜色</th>
                     <th width="10%">审核状态</th>
                     <th width="15%">任务发布时间</th>
-                    <th width="6%">操作</th>
+                    <th width="8%">操作</th>
                 </tr>
                 <tr>
                 	<td>1</td>
@@ -83,19 +83,36 @@
             <li>车辆发动机号：jkyfghetg</li>
         </ul>
         <div class="remark">备注信息：着放大镜功能国家设立方式</div>
-        <div class="imgRecord">
+        <div class="imgRecord" style="border: 0;">
         	<span><i>2014年催收记录</i><img src="" alt="图片" /></span>
         	<span><i>2015年催收记录</i><img src="" alt="图片" /></span>
         	<span><i>2016年催收记录</i><img src="" alt="图片" /></span>
         </div>
         <div class="buttonAnt">
-        	<a class="pull-right button">审核</a>
+        	<a class="pull-right button audit">审核</a>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="task_audit_template">
+	<div class="divied-width ">
+        <p class="pull-left">
+            任务审核
+        </p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <div class="divied-type">
+        	<input type="radio" name="" />审核通过
+        	<input type="radio" name="" />审核不通过
+        </div>
+        <div class="buttonAnt">
+        	<a class="pull-right button divied-no">取消</a>
+        	<a class="pull-right button divied-sure">确定</a>
         </div>
     </div>
 </script>
 <script type="text/javascript">
-seajs.use('modules/task/task-list', function(TaskList) {
-    var taskList = new TaskList();
-    taskList.init();
+seajs.use('modules/task/task-audit', function(TaskAudit) {
+    var TaskAudit = new TaskAudit();
+    TaskAudit.init();
 });
 </script>

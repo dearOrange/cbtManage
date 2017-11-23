@@ -6,7 +6,7 @@
  */
 'use strict';
 define(function(require, exports, module) {
-    function TaskList() {
+    function EvidenceAudit() {
         var _this = this;
         _this.form = $('#task-list-form');
 
@@ -129,8 +129,8 @@ define(function(require, exports, module) {
 
             });
             
-            //分配捕头
-            $('body').off('click', '.divied').on('click', '.divied', function() {
+            //凭证审核
+            $('body').off('click', '.audit').on('click', '.audit', function() {
                 var me = $(this);
 //              var infos = me.data('infos');
 //              jh.utils.ajax.send({
@@ -142,9 +142,9 @@ define(function(require, exports, module) {
 //                  done: function(returnData, status, xhr) {
 //                      infos.informantList = returnData.data;
 //                      infos.chuzhi = parseFloat(infos.carPrice*0.15).toFixed(2)
-                        var alertDivied = jh.utils.template('task_divied_template', { });
+                        var alertAudit = jh.utils.template('task_audit_template', { });
                         jh.utils.alert({
-                            content: alertDivied,
+                            content: alertAudit,
                         });
 //                  }
 //              });
@@ -176,5 +176,5 @@ define(function(require, exports, module) {
 
         };
     }
-    module.exports = TaskList;
+    module.exports = EvidenceAudit;
 });

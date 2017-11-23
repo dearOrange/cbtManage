@@ -15,25 +15,25 @@ define(function(require, exports, module) {
             childrens: []
         }, {
             name: '任务审核',
-            icon: 'icon-region',
+            icon: 'icon-operate',
             module: '/src/modules/task',
             url: '/task-audit',
             childrens: []
         }, {
             name: '线索审核',
-            icon: 'icon-region',
+            icon: 'icon-supplier',
             module: '/src/modules/clueaudit',
             url: '/clue-audit',
             childrens: []
         }, {
             name: '线索反馈',
-            icon: 'icon-region',
+            icon: 'icon-message',
             module: '/src/modules/clueaudit',
             url: '/clue-back',
             childrens: []
         }, {
             name: '债权方已确定订单',
-            icon: 'icon-region',
+            icon: 'icon-config',
             module: '/src/modules/creditororder',
             url: '/creditor-order',
             childrens: []
@@ -50,59 +50,11 @@ define(function(require, exports, module) {
             url: '/officer-manage',
             childrens: []
         }, {
-            name: '线人情报管理',
-            icon: 'icon-operate',
-            module: '/src/modules/informant',
-            childrens: [{
-                name: '线人情报列表',
-                flag: 'news',
-                url: '/informant-list'
-            }]
-        }, {
-            name: '提现管理',
+            name: '凭证审核',
             icon: 'icon-supplier',
-            module: '/src/modules/withdraw',
-            childrens: [{
-                name: '提现申请列表',
-                flag: 'category',
-                url: '/withdraw-list'
-            }]
-        }, {
-            name: '活动管理',
-            icon: 'icon-message',
-            module: '/src/modules/active',
-            childrens: [{
-                name: '活动列表',
-                flag: 'message',
-                url: '/active-list'
-            }]
-        }, {
-            name: '客户管理',
-            icon: 'icon-config',
-            module: '/src/modules/upstreams',
-            childrens: [{
-                name: '客户列表',
-                flag: 'account',
-                url: '/upstreams-list'
-            }]
-        }, {
-            name: '线人管理',
-            icon: 'icon-config',
-            module: '/src/modules/downstreams',
-            childrens: [{
-                name: '线人列表',
-                flag: 'account',
-                url: '/downstreams-list'
-            }]
-        }, {
-            name: '发放账号',
-            icon: 'icon-config',
-            module: '/src/modules/downstreams',
-            childrens: [{
-                name: '创建账号',
-                flag: 'account',
-                url: '/downstreams-create'
-            }]
+            module: '/src/modules/evidence',
+            url: '/evidence-audit',
+            childrens: []
         }]
     };
     module.exports = FINAL_MENU_DATA_JSON;

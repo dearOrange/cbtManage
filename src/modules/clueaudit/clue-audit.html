@@ -61,9 +61,9 @@
 <script type="text/template" id="task_detail_template">
     <div class="dialog-width">
         <p class="pull-left">
-            任务详情
+            线索详情
         </p>
-        <p class="pull-right">渠道经理未分配</p>
+        <p class="pull-right">线索未审核</p>
         <div class="clearfix"></div>
         <hr /><br />
         <p>基本信息</p><br />
@@ -106,32 +106,49 @@
         		</tr>
         	</table>
         </div>
-        <div class="upmainfile" style="border-top:1px dashed #ccc;">
+        <div class="upmainfile">
         	<span style="margin:20px 0;">线索提供：二号捕头</span>
         	<span>2017.05.24  12:23:22</span>
         	<div class="upimg">
         		<dl>
-        			<dt><img src="" alt="" /></dt>
+        			<dt><img src="../../img/nopic.png" alt="车牌特写照" /></dt>
         			<dd>车牌特写照</dd>
         		</dl>
         		<dl>
-        			<dt><img src="" alt="" /></dt>
+        			<dt><img src="../../img/nopic.png" alt="全车背景照" /></dt>
         			<dd>全车背景照</dd>
         		</dl>
         	</div>
         	<div class="buttonAnt">
-	        	<a class="pull-right button">线索审核</a>
+	        	<a class="pull-right button audit">线索审核</a>
 	        </div>
         </div>
         <div class="hopeprice">
-        	<label>意愿价格</label>
-        	<input type="text" name="" />
+        	<label style="width:60px;">意愿价格:</label>
+        	<span>30000.00</span>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="task_audit_template">
+	<div class="divied-width ">
+        <p class="pull-left">
+            线索审核
+        </p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <div class="divied-type">
+        	<input type="radio" name="" />审核通过
+        	<input type="radio" name="" />审核不通过
+        </div>
+        <div class="buttonAnt">
+        	<a class="pull-right button divied-no">取消</a>
+        	<a class="pull-right button divied-sure">确定</a>
         </div>
     </div>
 </script>
 <script type="text/javascript">
-seajs.use('modules/task/task-list', function(TaskList) {
-    var taskList = new TaskList();
-    taskList.init();
+seajs.use('modules/clueaudit/clue-audit', function(ClueAudit) {
+    var ClueAudit = new ClueAudit();
+    ClueAudit.init();
 });
 </script>

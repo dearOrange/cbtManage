@@ -83,6 +83,7 @@ body.login {
     color: #fff;
 }
 
+
 /*infomationList.html*/
 #selectOk {
     margin-left: 10px;
@@ -791,13 +792,23 @@ input, select, textarea {
 }
 .upimg{
 	margin:30px 0;
+	overflow: hidden;
 }
+.upimg dl{
+	float:left;
+	margin-right:30px;
+}
+.upimg dl dt img{
+	width:150px;
+	height:120px;
+	margin-bottom:12px;
+} 
 .buttonAnt{
 	margin:30px 0;
 }
 .imgRecord{
 	width:100%;
-	height:100px;
+	height:60px;
 	margin-top:30px;
 	border-bottom:1px dashed #ccc;
 }
@@ -807,16 +818,115 @@ input, select, textarea {
 .imgRecord span img{
 	margin-left:10px;
 }
-.upmainfile{
+.upmainfile, .mainfile{
 	margin: 20px 0;
+	overflow: hidden;
+}
+.upmainfile ol{
+	width:300px;
+	float:right;
+	margin:10px 0;
+}
+.upmainfile ol li{
+	width:46%;
+	float:right;
+	height:30px;
+	text-align: center;
+	line-height: 30px;
+	border:1px solid #ccc;
+	margin-right:4px;
 }
 .upmainfile table{
 	margin-top: 20px;
+}
+.instruction div{
+	margin-top:20px;
+	overflow: hidden;
+}
+.instruction div label{
+	float:left;
+	width:100px;
+	height:70px;
+	line-height: 70px;
+	font-weight: 900;
+}
+.instruction div span{
+	float:left;
+	width:60%;
+	height:70px;
+	border:1px solid #000;
 }
 .butouchange{
 	width:80%;
 	height:56px;
 	border:1px solid #000;
+}
+.hopeprice p{
+	padding:20px 0 10px 0;
+	font-weight: 900;
+}
+.hopeprice div{
+	overflow: hidden;
+}
+.hopeprice label{
+	width:90px;
+	height:40px;
+	float:left;
+	margin-top:6px;
+}
+.hopeprice span{
+	float:left;
+	width:90px;
+	height:30px;
+	line-height: 30px;
+	text-align: center;
+}
+.dialog-width p, .upmainfile p, .mainfile p{
+	font-weight: 900;
+	margin-top:20px;
+}
+.mainfile dl{
+	width:160px;
+	height:200px;
+	border:1px solid #ccc;
+	text-align: center;
+	margin:15px 20px 10px 0;
+}
+.mainfile dl dt{
+	height:160px;
+	border-bottom:1px solid #ccc;
+}
+.mainfile dl dt img{
+	width:150px;
+	height:158px;
+}
+.mainfile dl dd{
+	line-height: 40px;
+}
+
+/*分配*/
+.divied-width{
+	width:310px
+}
+.divied-width .divied-type div{
+	margin:10px 0;
+}
+
+/*捕头详情*/
+.officer-width{
+	min-width: 800px;
+}
+.officer-width ul{
+	border-bottom: 1px dashed #ccc;
+}
+.officer-width ul li{
+	width:50%;
+	padding:10px 0;
+}
+.officer-width ul li label{
+	font-weight: 900;
+	display:inline-block;
+	width:100px;
 }
 
 /**

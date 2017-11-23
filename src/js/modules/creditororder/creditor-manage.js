@@ -6,7 +6,7 @@
  */
 'use strict';
 define(function(require, exports, module) {
-    function TaskList() {
+    function CreditorManage() {
         var _this = this;
         _this.form = $('#task-list-form');
 
@@ -176,5 +176,5 @@ define(function(require, exports, module) {
 
         };
     }
-    module.exports = TaskList;
+    module.exports = CreditorManage;
 });

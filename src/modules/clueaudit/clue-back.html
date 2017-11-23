@@ -87,36 +87,36 @@
         	<span><i>2015年催收记录</i><img src="" alt="图片" /></span>
         	<span><i>2016年催收记录</i><img src="" alt="图片" /></span>
         </div>
-        <div class="upmainfile" style="border-top:1px dashed #ccc;">
+        <div class="upmainfile">
         	<span style="margin:20px 0;">线索提供：二号捕头</span>
         	<span>2017.05.24  12:23:22</span>
         	<div class="upimg">
         		<dl>
-        			<dt><img src="" alt="" /></dt>
+        			<dt><img src="../../img/nopic.png" alt="车牌特写照" /></dt>
         			<dd>车牌特写照</dd>
         		</dl>
         		<dl>
-        			<dt><img src="" alt="" /></dt>
+        			<dt><img src="../../img/nopic.png" alt="全车背景照" /></dt>
         			<dd>全车背景照</dd>
         		</dl>
         	</div>
         </div>
-        <div class="hopeprice">
+        <div class="hopeprice" style="border-top:1px dashed #ccc;">
         	<p>预估价格</p>
         	<div>
-        		<label>车辆残值估算</label>
-        		<input type="text" name="" />
+        		<label>意愿价格:</label>
+        		<span>30000.00</span>
         	</div>
         	<div>
-        		<label>处置费用预估</label>
-        		<input type="text" name="" />
+        		<label>处置费用预估:</label>
+        		<span>30000.00</span>
         	</div>
         </div>
     </div>
 </script>
 <script type="text/javascript">
-seajs.use('modules/task/task-list', function(TaskList) {
-    var taskList = new TaskList();
-    taskList.init();
+seajs.use('modules/clueaudit/clue-back', function(ClueBack) {
+    var ClueBack = new ClueBack();
+    ClueBack.init();
 });
 </script>

@@ -753,7 +753,7 @@ label.error {
     border: 1px solid #cecece;
     padding: 5px 0;
     text-indent: 10px;
-    width: 100px;
+    width: 200px;
 }
 .search-container select {
     color: #666;
@@ -788,8 +788,9 @@ label.error {
 .search-container table td, .dataContent>.search-container table th {
     border: 0;
 }
-.search-container .opertionCon {
-    float: right;
+.search-container .searchInfo {
+	width:160px;
+	height:32px;
     margin-bottom: 20px;
 }
 
