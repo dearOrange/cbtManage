@@ -60,11 +60,14 @@
 <script type="text/template" id="main_leftMenu_template">
     {{ each menus item index }}
     <li>
-        <a href="javascript:void(0);" data-url="{{item.module}}">
+        <a href="javascript:void(0);" class="first-menu-item" data-url="{{item.module}}{{item.url}}">
             <i class="icon {{item.icon}}"></i>
             <span>{{item.name}}</span>
+            {{if item.childrens.length>0 }}
             <i class="icon icon-bottom-arrow fr mt25"></i>
-        </a> {{if item.childrens.length>0 }}
+            {{/if}}
+        </a> 
+        {{if item.childrens.length>0 }}
         <ul class="hide">
             {{each item.childrens sub n}}
             <li>

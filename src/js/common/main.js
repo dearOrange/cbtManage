@@ -63,23 +63,6 @@ define(function(require, exports, module) {
             var firstMenu = $('#leftMenu-box').children('li');
             var secondMenu = firstMenu.children('ul').children('li');
             var username = jh.utils.cookie.get('admin-username');
-
-            // $.each(secondMenu, function(index, item) {
-            //     item = $(item);
-            //     var menuItem = item.children('a');
-            //     var flag = menuItem.data('flag');
-            //     if (username !== 'admin' && !flag) {
-            //         item.remove();
-            //     } else if (username !== 'admin' && flag && !res[flag]) {
-            //         item.remove();
-            //     }
-            // });
-            $.each(firstMenu, function(index, item) {
-                item = $(item);
-                if (item.children('ul').children('li').length === 0) {
-                    item.remove();
-                }
-            });
         };
 
         this.registerEvent = function() {
