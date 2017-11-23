@@ -20,6 +20,36 @@ define(function(require, exports, module) {
             url: '/task-audit',
             childrens: []
         }, {
+            name: '线索审核',
+            icon: 'icon-region',
+            module: '/src/modules/clueaudit',
+            url: '/clue-audit',
+            childrens: []
+        }, {
+            name: '线索反馈',
+            icon: 'icon-region',
+            module: '/src/modules/clueaudit',
+            url: '/clue-back',
+            childrens: []
+        }, {
+            name: '债权方已确定订单',
+            icon: 'icon-region',
+            module: '/src/modules/creditororder',
+            url: '/creditor-order',
+            childrens: []
+        }, {
+            name: '债权方管理',
+            icon: 'icon-region',
+            module: '/src/modules/creditororder',
+            url: '/creditor-manage',
+            childrens: []
+        }, {
+            name: '捕头管理',
+            icon: 'icon-region',
+            module: '/src/modules/officermanage',
+            url: '/officer-manage',
+            childrens: []
+        }, {
             name: '线人情报管理',
             icon: 'icon-operate',
             module: '/src/modules/informant',
