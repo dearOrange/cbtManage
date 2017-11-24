@@ -55,6 +55,30 @@ define(function(require, exports, module) {
             module: '/src/modules/evidence',
             url: '/evidence-audit',
             childrens: []
+        }, {
+            name: '查账管理',
+            icon: 'icon-supplier',
+            module: '/src/modules/finance',
+            url: '/finance-list',
+            childrens: []
+        }, {
+            name: '发放提现申请',
+            icon: 'icon-supplier',
+            module: '/src/modules/sendMoney',
+            url: '/sendMoney-list',
+            childrens: []
+        }, {
+            name: '任务分配',
+            icon: 'icon-supplier',
+            module: '/src/modules/distribution',
+            url: '/distribution-list',
+            childrens: []
+        }, {
+            name: '信息修复',
+            icon: 'icon-supplier',
+            module: '/src/modules/restoration',
+            url: '/restoration-list',
+            childrens: []
         }]
     };
     module.exports = FINAL_MENU_DATA_JSON;
