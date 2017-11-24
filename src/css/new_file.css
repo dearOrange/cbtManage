@@ -991,13 +991,6 @@ input, select, textarea {
     cursor: pointer;
     color: #4db3ff;
 }
-.dialog-width .grey-tab li {
-    background-color: #999999;
-    cursor: pointer;
-}    color: #fff;
-.dialog-width .grey-tab li.active {
-    background-color: #6d6d6d;
-}
 
 /**
  * 活动开关
