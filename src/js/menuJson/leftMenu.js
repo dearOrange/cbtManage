@@ -66,6 +66,28 @@ define(function(require, exports, module) {
             icon: 'icon-supplier',
             module: '/src/modules/estimatedprice',
             url: '/estimated-price',
+            name: '查账管理',
+            icon: 'icon-supplier',
+            module: '/src/modules/finance',
+            url: '/finance-list',
+            childrens: []
+        }, {
+            name: '发放提现申请',
+            icon: 'icon-supplier',
+            module: '/src/modules/sendMoney',
+            url: '/sendMoney-list',
+            childrens: []
+        }, {
+            name: '任务分配',
+            icon: 'icon-supplier',
+            module: '/src/modules/distribution',
+            url: '/distribution-list',
+            childrens: []
+        }, {
+            name: '信息修复',
+            icon: 'icon-supplier',
+            module: '/src/modules/restoration',
+            url: '/restoration-list',
             childrens: []
         }]
     };
