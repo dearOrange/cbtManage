@@ -40,7 +40,9 @@ seajs.config({
     },
     preload: ['jquery','mock'],
     map: [
-        ['.js', '.js?v='+versionDate.year+versionDate.month+versionDate.day],
-        ['.html', '.html?v='+versionDate.year+versionDate.month+versionDate.day]
+//      ['.js', '.js?v='+versionDate.year+versionDate.month+versionDate.day],
+//      ['.html', '.html?v='+versionDate.year+versionDate.month+versionDate.day]
+        ['.js', '.js?v='+Math.random()],
+        ['.html', '.html?v='+Math.random()]
     ]
 });

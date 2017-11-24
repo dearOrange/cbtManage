@@ -82,6 +82,14 @@ body.login {
 .color-white{
     color: #fff;
 }
+.allot span{
+	width:100px;
+	height:20px;
+	border:1px solid #ccc;
+	border-radius:5px;
+	text-align: center;
+	line-height: 20px;
+}
 
 
 /*infomationList.html*/

@@ -44,6 +44,12 @@ define(function(require, exports, module) {
             url: '/creditor-manage',
             childrens: []
         }, {
+            name: '债权方认证',
+            icon: 'icon-region',
+            module: '/src/modules/creditororder',
+            url: '/creditor-identify',
+            childrens: []
+        }, {
             name: '捕头管理',
             icon: 'icon-region',
             module: '/src/modules/officermanage',
@@ -54,6 +60,12 @@ define(function(require, exports, module) {
             icon: 'icon-supplier',
             module: '/src/modules/evidence',
             url: '/evidence-audit',
+            childrens: []
+        }, {
+            name: '预估价格',
+            icon: 'icon-supplier',
+            module: '/src/modules/estimatedprice',
+            url: '/estimated-price',
             childrens: []
         }]
     };
