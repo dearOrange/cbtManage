@@ -62,10 +62,10 @@ define(function(require, exports, module) {
         }
     }
 
-    (function(){
+    (function() {
 
-        function GetImageInfo(response){
-            var Longitude,Latitude;
+        function GetImageInfo(response) {
+            var Longitude, Latitude;
             if (response && response.GPSLatitude) {
                 Longitude = transformAli(response.GPSLongitude);
                 Latitude = transformAli(response.GPSLatitude);
@@ -74,9 +74,8 @@ define(function(require, exports, module) {
                     lnglatXY: [Longitude, Latitude],
                     time: (response.DateTime && response.DateTime.value) || '无法获取'
                 };
-            }
-            else {
-                return{
+            } else {
+                return {
                     success: false,
                     lnglatXY: '未成功获取',
                     time: (response.DateTime && response.DateTime.value) || '无法获取'
@@ -84,18 +83,18 @@ define(function(require, exports, module) {
             }
         }
 
-        function transformAli (tude) {
-            var d = tude[0].numerator/tude[0].denominator;
-            var f = tude[1].numerator/tude[1].denominator;
-            var m = tude[2].numerator/tude[2].denominator;
+        function transformAli(tude) {
+            var d = tude[0].numerator / tude[0].denominator;
+            var f = tude[1].numerator / tude[1].denominator;
+            var m = tude[2].numerator / tude[2].denominator;
 
-            var f = parseFloat(f) + parseFloat(m/60);
-            var du = parseFloat(f/60) + parseFloat(d);
+            var f = parseFloat(f) + parseFloat(m / 60);
+            var du = parseFloat(f / 60) + parseFloat(d);
 
-            return  du;
+            return du;
         }
 
-        function transformTude (tude) {
+        function transformTude(tude) {
             var rst = tude.split(', ').map(e => Number(e));
             return (rst[0] + rst[1] / 60 + rst[2] / 3600).toFixed(6)
         }
@@ -548,6 +547,7 @@ define(function(require, exports, module) {
             that.contentType = data.hasOwnProperty('contentType') ? data.contentType : 'application/json';
             that.fail = data.hasOwnProperty('fail') ? data.fail : function() {};
             that.done = data.hasOwnProperty('done') ? data.done : function() {};
+            that.isShadow = data.hasOwnProperty('isShadow') ? data.isShadow : true;
             that.always = data.hasOwnProperty('always') ? data.always : function() {};
             that.beforeSend = data.hasOwnProperty('beforeSend') ? data.beforeSend : function() {};
 
@@ -587,7 +587,9 @@ define(function(require, exports, module) {
                 cache: false,
                 async: settings.async,
                 beforeSend: function(xhr) {
-                    (new tammy.ui.shadow()).init();
+                    if (settings.isShadow) {
+                        (new tammy.ui.shadow()).init();
+                    }
                     var token = tammy.utils.cookie.get('admin-X-Token');
                     xhr.setRequestHeader("X-Token", token);
                     settings.beforeSend.call(null, xhr);
@@ -597,11 +599,11 @@ define(function(require, exports, module) {
                 if (responseText && responseText.code === "TOKEN_FAIL") {
                     tammy.utils.alert({
                         content: '登陆失效，请重新登陆',
-                        ok:function(){
+                        ok: function() {
                             var sout = new tammy.utils.singout();
                             sout.init();
                         },
-                        cancel:false
+                        cancel: false
                     });
                     return false;
                 }
@@ -620,7 +622,9 @@ define(function(require, exports, module) {
             }).
             always(function(response, text) {
                 settings.always.call(null, response, text);
-                (new tammy.ui.shadow()).close();
+                if (settings.isShadow) {
+                    (new tammy.ui.shadow()).close();
+                }
             });
             $('body').dequeue();
         };

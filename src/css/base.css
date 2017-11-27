@@ -143,6 +143,10 @@ input:-webkit-autofill {
     float: right
 }
 
+.hand {
+    cursor: pointer;
+}
+
 .hide {
     display: none !important
 }
