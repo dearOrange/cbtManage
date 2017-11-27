@@ -57,6 +57,45 @@ define(function(require, exports, module) {
         tammy.utils.objIsNull = objIsNull; //对象是否为空
     })();
 
+    (function(){
+        function GetImageInfo(key){
+            $.ajax({
+                url: tammy.config.viewImgRoot + key + '?imageInfo'
+            }).done(function(data){
+                console.log(data);
+            }).fail(function(data){
+
+            });
+        }
+        tammy.utils.newGetImageInfo = GetImageInfo;
+    })();
+
+    (function(){
+        function GetImageAddress(key){
+            $.ajax({
+                url: tammy.config.viewImgRoot + key + '?exif'
+            }).done(function(data){
+                if(data.GPSLatitude && data.GPSLongitude){
+                    var lon = transformTude(data.GPSLongitude);//经度
+                    var lat = transformTude(data.GPSLatitude);//纬度
+                    
+                    console.log(lon + ',' + lat);
+                }else{
+                    console.log('未成功获取');
+                }
+            }).fail(function(data){
+
+            });
+        }
+
+        function transformTude(tude) {
+            var rst = tude.split(', ').map(e => Number(e));
+            return (rst[0] + rst[1] / 60 + rst[2] / 3600).toFixed(6)
+        }
+
+        tammy.utils.newGetImageAddress = GetImageAddress;
+    })();
+
     (function() {
         function GetImageInfo(response) {
             var Longitude, Latitude;

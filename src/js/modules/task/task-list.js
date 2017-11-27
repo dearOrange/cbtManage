@@ -15,6 +15,7 @@ define(function(require, exports, module) {
         };
 
         this.registerEvent = function() {
+            jh.utils.newGetImageAddress('Ft769iUzXOW5itB6BfhF4tfMrImc');
             //          jh.utils.uploader.init({
             //              hiddenName: 'test',
             //              server:'/adminServer/task/import',
