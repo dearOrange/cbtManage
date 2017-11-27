@@ -19,6 +19,10 @@ define(function(require, exports, module) {
     require('common/validator'); //表单验证扩展
     require('plugin/webuploader/webuploader.min'); //上传模块
 
+    require('plugin/icheck/icheck.min'); //复选框
+    require('plugin/select2/select2.min');
+    require('lib/cookie/jquery.cookie');
+
     var FINAL_OPTIONS = {
         uploadToken: '', //上传token
         viewImgRoot: 'http://oka19npup.bkt.clouddn.com/',
@@ -571,8 +575,8 @@ define(function(require, exports, module) {
                 tammy.utils.ajax.send({
                     url: '/admin/user/login-out',
                     always: function() {
-                        $.cookie('admin-X-Token',null);
-                        $.cookie('admin-username',null);
+                        $.cookie('admin-X-Token', null);
+                        $.cookie('admin-username', null);
                         window.location.href = jh.config.pageLogin;
                     }
                 });
