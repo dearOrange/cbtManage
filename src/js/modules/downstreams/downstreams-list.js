@@ -80,7 +80,11 @@ define(function(require, exports, module) {
                     isShadow:false,
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                     done: function(data, status, xhr) {
-                        me.attr('title','该线人上级：' + data.data.name);
+                        if(data && data.data && data.data.name){
+                            me.attr('title','该线人上级：' + data.data.name);
+                        }else{
+                            me.attr('title','该线人无上级');
+                        }
                     }
                 });
             });
