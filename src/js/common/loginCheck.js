@@ -19,20 +19,20 @@ define(function(require, exports, module) {
         };
 
         this.checkLogin = function() {
-            var token = jh.utils.cookie.get('admin-X-Token');
+            var token = $.cookie('admin-X-Token');
             if(token){
-                window.location.href = jh.arguments.pageIndex;
+                window.location.href = jh.config.pageIndex;
             }else{
-                window.location.href = jh.arguments.pageLogin;
+                window.location.href = jh.config.pageLogin;
             }
             // jh.utils.ajax.send({
             //     url: '/admin/user/is-login',
             //     done: function(returnData) {
-            //         window.location.href = jh.arguments.pageIndex;
+            //         window.location.href = jh.config.pageIndex;
             //         $.cookie('islogin', true);
             //     },
             //     fail: function(returnData) {
-            //         window.location.href = jh.arguments.pageLogin;
+            //         window.location.href = jh.config.pageLogin;
             //     }
             // });
         };

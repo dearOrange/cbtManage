@@ -16,12 +16,11 @@ define(function(require, exports, module) {
 
     //加载插件
     require('jquery.validate'); //表单验证
-    require('plugin/webuploader/webuploader.min'); //上传模块
     require('common/validator'); //表单验证扩展
-    require('jsencrypt'); //js encrypt
+    require('plugin/webuploader/webuploader.min'); //上传模块
+
     var FINAL_OPTIONS = {
         uploadToken: '', //上传token
-        public_key: '',
         viewImgRoot: 'http://oka19npup.bkt.clouddn.com/',
         pageSize: 10, //默认每页显示条数
         pageIndex: basePath + 'modules/index/index.html',
@@ -30,9 +29,9 @@ define(function(require, exports, module) {
         page404: basePath + 'modules/error/404.html', // 加载异常页面
         citylist: { "北京": ["北京"], "广东": ["广州", "深圳", "珠海", "汕头", "韶关", "佛山", "江门", "湛江", "茂名", "肇庆", "惠州", "梅州", "汕尾", "河源", "阳江", "清远", "东莞", "中山", "潮州", "揭阳", "云浮"], "上海": ["上海"], "天津": ["天津"], "重庆": ["重庆"], "辽宁": ["沈阳", "大连", "鞍山", "抚顺", "本溪", "丹东", "锦州", "营口", "阜新", "辽阳", "盘锦", "铁岭", "朝阳", "葫芦岛"], "江苏": ["南京", "苏州", "无锡", "常州", "镇江", "南通", "泰州", "扬州", "盐城", "连云港", "徐州", "淮安", "宿迁"], "湖北": ["武汉", "黄石", "十堰", "荆州", "宜昌", "襄樊", "鄂州", "荆门", "孝感", "黄冈", "咸宁", "随州", "恩施土家族苗族自治州", "仙桃", "天门", "潜江", "神农架林区"], "四川": ["成都", "自贡", "攀枝花", "泸州", "德阳", "绵阳", "广元", "遂宁", "内江", "乐山", "南充", "眉山", "宜宾", "广安", "达州", "雅安", "巴中", "资阳", "阿坝藏族羌族自治州", "甘孜藏族自治州", "凉山彝族自治州"], "陕西": ["西安", "铜川", "宝鸡", "咸阳", "渭南", "延安", "汉中", "榆林", "安康", "商洛"], "河北": ["石家庄", "唐山", "秦皇岛", "邯郸", "邢台", "保定", "张家口", "承德", "沧州", "廊坊", "衡水"], "山西": ["太原", "大同", "阳泉", "长治", "晋城", "朔州", "晋中", "运城", "忻州", "临汾", "吕梁"], "河南": ["郑州", "开封", "洛阳", "平顶山", "安阳", "鹤壁", "新乡", "焦作", "濮阳", "许昌", "漯河", "三门峡", "南阳", "商丘", "信阳", "周口", "驻马店"], "吉林": ["长春", "吉林", "四平", "辽源", "通化", "白山", "松原", "白城", "延边朝鲜族自治州"], "黑龙江": ["哈尔滨", "齐齐哈尔", "鹤岗", "双鸭山", "鸡西", "大庆", "伊春", "牡丹江", "佳木斯", "七台河", "黑河", "绥化", "大兴安岭地区"], "内蒙古": ["呼和浩特", "包头", "乌海", "赤峰", "通辽", "鄂尔多斯", "呼伦贝尔", "巴彦淖尔", "乌兰察布", "锡林郭勒盟", "兴安盟", "阿拉善盟"], "山东": ["济南", "青岛", "淄博", "枣庄", "东营", "烟台", "潍坊", "济宁", "泰安", "威海", "日照", "莱芜", "临沂", "德州", "聊城", "滨州", "菏泽"], "安徽": ["合肥", "芜湖", "蚌埠", "淮南", "马鞍山", "淮北", "铜陵", "安庆", "黄山", "滁州", "阜阳", "宿州", "巢湖", "六安", "亳州", "池州", "宣城"], "浙江": ["杭州", "宁波", "温州", "嘉兴", "湖州", "绍兴", "金华", "衢州", "舟山", "台州", "丽水"], "福建": ["福州", "厦门", "莆田", "三明", "泉州", "漳州", "南平", "龙岩", "宁德"], "湖南": ["长沙", "株洲", "湘潭", "衡阳", "邵阳", "岳阳", "常德", "张家界", "益阳", "郴州", "永州", "怀化", "娄底", "湘西土家族苗族自治州"], "广西": ["南宁", "柳州", "桂林", "梧州", "北海", "防城港", "钦州", "贵港", "玉林", "百色", "贺州", "河池", "来宾", "崇左"], "江西": ["南昌", "景德镇", "萍乡", "九江", "新余", "鹰潭", "赣州", "吉安", "宜春", "抚州", "上饶"], "贵州": ["贵阳", "六盘水", "遵义", "安顺", "铜仁地区", "毕节地区", "黔西南布依族苗族自治州", "黔东南苗族侗族自治州", "黔南布依族苗族自治州"], "云南": ["昆明", "曲靖", "玉溪", "保山", "昭通", "丽江", "普洱", "临沧", "德宏傣族景颇族自治州", "怒江傈僳族自治州", "迪庆藏族自治州", "大理白族自治州", "楚雄彝族自治州", "红河哈尼族彝族自治州", "文山壮族苗族自治州", "西双版纳傣族自治州"], "西藏": ["拉萨", "那曲地区", "昌都地区", "林芝地区", "山南地区", "日喀则地区", "阿里地区"], "海南": ["海口", "三亚", "五指山", "琼海", "儋州", "文昌", "万宁", "东方", "澄迈县", "定安县", "屯昌县", "临高县", "白沙黎族自治县", "昌江黎族自治县", "乐东黎族自治县", "陵水黎族自治县", "保亭黎族苗族自治县", "琼中黎族苗族自治县"], "甘肃": ["兰州", "嘉峪关", "金昌", "白银", "天水", "武威", "酒泉", "张掖", "庆阳", "平凉", "定西", "陇南", "临夏回族自治州", "甘南藏族自治州"], "宁夏": ["银川", "石嘴山", "吴忠", "固原", "中卫"], "青海": ["西宁", "海东地区", "海北藏族自治州", "海南藏族自治州", "黄南藏族自治州", "果洛藏族自治州", "玉树藏族自治州", "海西蒙古族藏族自治州"], "新疆": ["乌鲁木齐", "克拉玛依", "吐鲁番地区", "哈密地区", "和田地区", "阿克苏地区", "喀什地区", "克孜勒苏柯尔克孜自治州", "巴音郭楞蒙古自治州", "昌吉回族自治州", "博尔塔拉蒙古自治州", "石河子", "阿拉尔", "图木舒克", "五家渠", "伊犁哈萨克自治州"], "香港": ["香港"], "澳门": ["澳门"], "台湾": ["台北市", "高雄市", "台北县", "桃园县", "新竹县", "苗栗县", "台中县", "彰化县", "南投县", "云林县", "嘉义县", "台南县", "高雄县", "屏东县", "宜兰县", "花莲县", "台东县", "澎湖县", "基隆市", "新竹市", "台中市", "嘉义市", "台南市"] }
     };
-    tammy.arguments = FINAL_OPTIONS;
+    tammy.config = FINAL_OPTIONS;
+
     //数据类型判断
-    //select验证
     (function() {
         function isType(type) {
             return function(obj) {
@@ -53,19 +52,10 @@ define(function(require, exports, module) {
         tammy.utils.isNumber = isType('Number'); //是否为数字
         tammy.utils.objIsNull = objIsNull; //对象是否为空
     })();
-    /**
-     * log 控制台输出方法
-     */
-    function log(msg) {
-        if (window.console) {
-            window.console.log(msg);
-        }
-    }
 
-    (function(){
-
-        function GetImageInfo(response){
-            var Longitude,Latitude;
+    (function() {
+        function GetImageInfo(response) {
+            var Longitude, Latitude;
             if (response && response.GPSLatitude) {
                 Longitude = transformAli(response.GPSLongitude);
                 Latitude = transformAli(response.GPSLatitude);
@@ -74,9 +64,8 @@ define(function(require, exports, module) {
                     lnglatXY: [Longitude, Latitude],
                     time: (response.DateTime && response.DateTime.value) || '无法获取'
                 };
-            }
-            else {
-                return{
+            } else {
+                return {
                     success: false,
                     lnglatXY: '未成功获取',
                     time: (response.DateTime && response.DateTime.value) || '无法获取'
@@ -84,18 +73,18 @@ define(function(require, exports, module) {
             }
         }
 
-        function transformAli (tude) {
-            var d = tude[0].numerator/tude[0].denominator;
-            var f = tude[1].numerator/tude[1].denominator;
-            var m = tude[2].numerator/tude[2].denominator;
+        function transformAli(tude) {
+            var d = tude[0].numerator / tude[0].denominator;
+            var f = tude[1].numerator / tude[1].denominator;
+            var m = tude[2].numerator / tude[2].denominator;
 
-            var f = parseFloat(f) + parseFloat(m/60);
-            var du = parseFloat(f/60) + parseFloat(d);
+            var f = parseFloat(f) + parseFloat(m / 60);
+            var du = parseFloat(f / 60) + parseFloat(d);
 
-            return  du;
+            return du;
         }
 
-        function transformTude (tude) {
+        function transformTude(tude) {
             var rst = tude.split(', ').map(e => Number(e));
             return (rst[0] + rst[1] / 60 + rst[2] / 3600).toFixed(6)
         }
@@ -295,38 +284,6 @@ define(function(require, exports, module) {
     (function() {
         function _String() {}
         /**
-         * 去掉两边空格
-         * @param s
-         * @return Boolean
-         */
-        _String.trim = function(s) {
-            return s.replace(/(^\s*)|(\s*$)/g, '');
-        };
-        /**
-         * 去掉中间空格
-         * @param s
-         * @return Boolean
-         */
-        _String.trimmoddle = function(s) {
-            return s.replace(/\s/g, '');
-        };
-        /**
-         * 去掉左边空格
-         * @param s
-         * @return Boolean
-         */
-        _String.trimLeft = function(s) {
-            return s.replace(/^\s*/, '');
-        };
-        /**
-         * 去掉右边空格
-         * @param s
-         * @return Boolean
-         */
-        _String.trimRight = function(s) {
-            return s.replace(/\s*$/, '');
-        };
-        /**
          * 格式化金额
          * @param string, separator
          * @return string
@@ -525,37 +482,24 @@ define(function(require, exports, module) {
     /**ajax*/
     (function() {
         var ajax = {};
-        var singoutTimer = null;
-        ajax.settings = {
-            url: '',
-            method: 'GET',
-            dataType: 'json',
-            data: {},
-            async: true,
-            contentType: 'application/json',
-            done: function() {},
-            fail: function() {},
-            always: function() {},
-            beforeSend: function() {}
-        };
-        ajax.setting = function(data) {
-            var that = this;
-            that.url = data.hasOwnProperty('url') ? data.url : '';
-            that.method = data.hasOwnProperty('method') ? data.method : 'GET';
-            that.dataType = data.hasOwnProperty('dataType') ? data.dataType : 'json';
-            that.data = data.hasOwnProperty('data') ? data.data : {};
-            that.async = data.hasOwnProperty('async') ? data.async : true;
-            that.contentType = data.hasOwnProperty('contentType') ? data.contentType : 'application/json';
-            that.fail = data.hasOwnProperty('fail') ? data.fail : function() {};
-            that.done = data.hasOwnProperty('done') ? data.done : function() {};
-            that.always = data.hasOwnProperty('always') ? data.always : function() {};
-            that.beforeSend = data.hasOwnProperty('beforeSend') ? data.beforeSend : function() {};
-
-            return that;
-        };
         ajax.array = [];
+        ajax.setting = function(data) {
+            var _this = this;
+            _this.url = data.hasOwnProperty('url') ? data.url : '';
+            _this.method = data.hasOwnProperty('method') ? data.method : 'GET';
+            _this.dataType = data.hasOwnProperty('dataType') ? data.dataType : 'json';
+            _this.data = data.hasOwnProperty('data') ? data.data : {};
+            _this.async = data.hasOwnProperty('async') ? data.async : true;
+            _this.contentType = data.hasOwnProperty('contentType') ? data.contentType : 'application/x-www-form-urlencoded; charset=UTF-8';
+            _this.fail = data.hasOwnProperty('fail') ? data.fail : function() {};
+            _this.done = data.hasOwnProperty('done') ? data.done : function() {};
+            _this.always = data.hasOwnProperty('always') ? data.always : function() {};
+            _this.isAlert = data.hasOwnProperty('isAlert') ? data.isAlert : true;
+            _this.beforeSend = data.hasOwnProperty('beforeSend') ? data.beforeSend : function() {};
+
+            return _this;
+        };
         ajax.send = function(opt) {
-            clearTimeout(singoutTimer);
             var arr = ajax.array;
             var setting = new ajax.setting(opt);
             arr.push(setting);
@@ -566,19 +510,11 @@ define(function(require, exports, module) {
         };
 
         ajax.arrSend = function(settings) {
-            var dataStr, flag = false;
-            for (var item in settings.data) {
-                flag = true;
-            }
-            // debugger
-            if (flag && settings.contentType == 'application/json') {
+            if (!tammy.utils.objIsNull(settings.data) && settings.contentType == 'application/json') {
                 settings.data = JSON.stringify(settings.data);
             }
-            // if(!flag && settings.url.indexOf('/operator/login') !== -1){
-            //     settings.data = JSON.parse(settings.data);
-            // }
-			settings.done();
-			return false;
+            settings.done();
+            return false;
             $.ajax({
                 url: REQUESTROOT + settings.url,
                 method: settings.method,
@@ -588,8 +524,7 @@ define(function(require, exports, module) {
                 cache: false,
                 async: settings.async,
                 beforeSend: function(xhr) {
-                    (new tammy.ui.shadow()).init();
-                    var token = tammy.utils.cookie.get('admin-X-Token');
+                    var token = $.cookie('admin-X-Token');
                     xhr.setRequestHeader("X-Token", token);
                     settings.beforeSend.call(null, xhr);
                 }
@@ -598,19 +533,22 @@ define(function(require, exports, module) {
                 if (responseText && responseText.code === "TOKEN_FAIL") {
                     tammy.utils.alert({
                         content: '登陆失效，请重新登陆',
-                        ok:function(){
+                        ok: function() {
                             var sout = new tammy.utils.singout();
                             sout.init();
                         },
-                        cancel:false
+                        cancel: false
                     });
                     return false;
                 }
-                if (responseText && responseText.code !== 'SUCCESS' && settings.url.indexOf('public_key') === -1) {
+                if (responseText && responseText.code !== 'SUCCESS') {
                     //错误时提示信息
-                    tammy.utils.alert({
-                        content: responseText.msg
-                    });
+                    if (settings.isAlert) {
+                        //错误时提示信息
+                        cbt.utils.alert({
+                            content: responseText.msg
+                        });
+                    }
                     settings.fail.call(null, responseText);
                     return false;
                 }
@@ -621,7 +559,6 @@ define(function(require, exports, module) {
             }).
             always(function(response, text) {
                 settings.always.call(null, response, text);
-                (new tammy.ui.shadow()).close();
             });
             $('body').dequeue();
         };
@@ -634,9 +571,9 @@ define(function(require, exports, module) {
                 tammy.utils.ajax.send({
                     url: '/admin/user/login-out',
                     always: function() {
-                        tammy.utils.cookie.deleteCookie('admin-X-Token');
-                        tammy.utils.cookie.deleteCookie('admin-username');
-                        window.location.href = jh.arguments.pageLogin;
+                        $.cookie('admin-X-Token',null);
+                        $.cookie('admin-username',null);
+                        window.location.href = jh.config.pageLogin;
                     }
                 });
             };
@@ -686,10 +623,6 @@ define(function(require, exports, module) {
                     var moduleCon = $('#leftMenu-box').children('li.active'); //一级菜单
                     var activeFirst = moduleCon.children('a'); //一级选中的文字
                     var submoduleCon = moduleCon.find('ul li.active');
-                    if (submoduleCon.children('a').data('flag') == 'protocol') {
-                        var page = new tammy.ui.page({});
-                        page.init();
-                    }
                     txt += activeFirst.text();
                     if (submoduleCon) {
                         var activeSecond = submoduleCon.children('a');
@@ -826,8 +759,6 @@ define(function(require, exports, module) {
     })();
 
     (function() {
-        var data_flag = {};
-
         function Page(options) {
             var m = this;
             m.settings = {
@@ -839,7 +770,7 @@ define(function(require, exports, module) {
                 ident: '', //模块标识
                 data: {
                     pageNum: 1,
-                    pageSize: tammy.arguments.pageSize,
+                    pageSize: tammy.config.pageSize,
                     params: {}
                 },
                 data_container: $('.data_container'), //数据容器
@@ -852,31 +783,7 @@ define(function(require, exports, module) {
                 callback: function() {},
                 btnClickCallBack: function() {},
                 beforRender: function() {},
-                onload: function() {},
-                flag: function() {
-                    // let liActive = $('#leftMenu-box').find('.active').get(1);
-                    // // let flag = options.ident;
-                    // let flag = $('body').data('flag');
-                    // let aFlag = $(liActive).children('a').data('flag');
-                    // $.each($('.moduleFlag').children(), function(index, val) {
-                    //     var btnArr = $(val).attr('class').split(' ');
-                    //     if (btnArr[0] !== 'button') {
-                    //         var x = $.inArray(btnArr[0], flag[aFlag]);
-                    //         if (x == -1) {
-                    //             $(val).remove();
-                    //         }
-                    //     }
-                    // });
-                    // $.each($('.dataShow').children('tbody').children('tr'), function(index, val) {
-                    //     $.each($(val).children('td:last-child').children('ul').children('li'), function(index, item) {
-                    //         var btnArr = $(item).children('a').attr('class').split(' ');
-                    //         var x = $.inArray(btnArr[0], flag[aFlag]);
-                    //         if (x == -1) {
-                    //             $(item).remove();
-                    //         }
-                    //     });
-                    // });
-                }
+                onload: function() {}
             };
             if (jh.utils.objIsNull(options.data)) {
                 delete options.data;
@@ -888,13 +795,6 @@ define(function(require, exports, module) {
         Page.prototype.init = function() {
             var m = this;
             m.settings.page_container.addClass('pagination');
-            //第一版本按照默认回到第一页进行处理，第二版本再进行优化
-            // var s = m.settings;
-            // if (data_flag[s.url] == undefined || s.isSearch) {
-            //     m.render(1);
-            // } else {
-            //     m.render(data_flag[s.url]);
-            // }
             m.render(1);
             m.regEvent();
         };
@@ -1026,8 +926,6 @@ define(function(require, exports, module) {
         Page.prototype.render = function(pageNum) {
             var m = this,
                 s = m.settings;
-            data_flag = {};
-            data_flag[s.url] = pageNum;
             s.data.pageNum = pageNum;
             tammy.utils.ajax.send({
                 url: s.url,
@@ -1174,56 +1072,10 @@ define(function(require, exports, module) {
                 s = m.settings;
             $(document).ready(function() {
                 s.onload();
-                s.flag();
             });
 
         };
         tammy.ui.page = Page;
-    })();
-
-    (function() {
-        var cookie = {};
-        cookie.set = function(key, value, expires) {
-            var date = new Date(),
-                s = '',
-                day = /^[1-9]([0-9]+)?d$/.test(expires),
-                hour = /^[1-9]([0-9]+)?h$/.test(expires),
-                minute = /^[1-9]([0-9]+)?m$/.test(expires),
-                second = /^[1-9]([0-9]+)?s$/.test(expires);
-            if (!expires || !(day || hour || second || minute)) {
-                if (expires < 0) {
-                    date.setDate(date.getDate() + expires);
-                    expires = "; expires=" + date.toGMTString();
-                } else {
-                    expires = '';
-                }
-            } else {
-                expires = parseInt(expires.substr(0, expires.length - 1), 10);
-                if (day) {
-                    date.setDate(date.getDate() + expires);
-                } else if (hour) {
-                    date.setHours(date.getHours() + expires);
-                } else if (minute) {
-                    date.setMinutes(date.getMinutes() + expires);
-                } else if (second) {
-                    date.setSeconds(date.getSeconds() + expires);
-                }
-                expires = "; expires=" + date.toGMTString();
-            }
-            return (document.cookie = key + "=" + (!value ? "" : value.toString()) + expires + "; path=/", "; domain=." + document.domain + s);
-        };
-        cookie.get = function(key) {
-            var value;
-            return (value = new RegExp("(?:^|; )" + key + "=([^;]*)").exec(document.cookie)) ? value[1] : null;
-        };
-        cookie.deleteCookie = function(key) {
-            if (!key) {
-                return false;
-            }
-            var val = cookie.get(key);
-            if (val != null) cookie.set(key, val, -1);
-        };
-        tammy.utils.cookie = cookie;
     })();
 
     (function() {
@@ -1338,7 +1190,7 @@ define(function(require, exports, module) {
                         });
                         img.attr({
                             'data-id': response.url,
-                            'src': tammy.arguments.viewImgRoot + response.url
+                            'src': tammy.config.viewImgRoot + response.url
                         });
                         var inputName = uploader.options.hiddenName === '' ? pickId : uploader.options.hiddenName;
                         input.attr({
@@ -1527,7 +1379,7 @@ define(function(require, exports, module) {
 
             var provinceHtmls = '<option value="">请选择省</option>';
             var cityHtml = '<option value="">请选择市</option>';
-            $.each(tammy.arguments.citylist, function(index, value) {
+            $.each(tammy.config.citylist, function(index, value) {
                 provinceHtmls += '<option value="' + index + '">' + index + '</option>';
             });
             $('#' + name + '_province').html(provinceHtmls);
@@ -1536,7 +1388,7 @@ define(function(require, exports, module) {
             $('#' + name + '_province').off('change').on('change', function() {
                 var me = $(this);
                 var val = me.val();
-                var subArr = tammy.arguments.citylist[val];
+                var subArr = tammy.config.citylist[val];
                 var str = '';
                 $.each(subArr, function(index, value) {
                     str += '<option value="' + value + '">' + value + '</option>';
@@ -1551,20 +1403,6 @@ define(function(require, exports, module) {
         }
         tammy.utils.mapSelect = mapSelect;
     })();
-
-    (function() {
-        function InitPublicKey() {
-            tammy.utils.ajax.send({
-                url: basePath + 'js/common/public_key.cer',
-                dataType: 'text',
-                done: function(data) {
-                    tammy.arguments.public_key = data;
-                }
-            });
-        }
-        tammy.utils.init_publick = InitPublicKey;
-    })();
-    // tammy.utils.init_publick(); //初始化key
 
     // select默认选中
     (function() {
@@ -1607,6 +1445,5 @@ define(function(require, exports, module) {
         }
         tammy.utils.RoleToString = RoleToString;
     })();
-    window.log = log;
     module.exports = tammy;
 });

@@ -34,7 +34,6 @@ seajs.config({
         'art-dialog': 'plugin/artDialog/dialog',
         'template': 'lib/template/4.0.0/template-web',
         'common': 'common/common',
-        'jsencrypt': 'common/jsencrypt.min',
         'mock': 'lib/Mock/mock',
         'main': 'common/main'
     },

@@ -38,15 +38,11 @@ define(function(require, exports, module) {
 //              submitHandler: function(form) {
 //                  // window.domain = 'cbt.com';
 //                  var datas = jh.utils.formToJson(form); //表单数据
-//                  datas.captchaCode = jh.utils.cookie.get('captchaCode');//验证码key
+//                  datas.captchaCode = $.cookie('captchaCode');//验证码key
 //
 //                  // var flag = datas.username + '_login_passError'; //本地存储flag
 //                  // var errnum = localStorage[flag]; //错误次数
 //
-//                  // var jsencrypt = new JSEncrypt();
-//                  // jsencrypt.setPublicKey(jh.arguments.public_key);
-//                  // datas.password = jsencrypt.encrypt(datas.password);
-//                  
 //                  jh.utils.ajax.send({
 //                      url: '/operator/login',
 //                      method: 'post',
@@ -54,9 +50,9 @@ define(function(require, exports, module) {
 //                      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 //                      done: function(returnData) {
 //                          if (returnData.code === 'SUCCESS') {
-//                              jh.utils.cookie.set('admin-X-Token', returnData.data.token);
-                                jh.utils.cookie.set('admin-username', 'admin');
-                                window.location.href = jh.arguments.pageIndex;
+//                              $.cookie('admin-X-Token', returnData.data.token);
+                                $.cookie('admin-username', 'admin');
+                                window.location.href = jh.config.pageIndex;
 //                          }
 //                      },
 //                      fail: function(xhr) {

@@ -27,10 +27,10 @@ define(function(require, exports, module) {
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
-                    data.viewImgRoot = jh.arguments.viewImgRoot;
+                    data.viewImgRoot = jh.config.viewImgRoot;
                     data.getImgInfo = function(key) {
                         var http = new XMLHttpRequest();
-                        http.open("GET", jh.arguments.viewImgRoot + key, true);
+                        http.open("GET", jh.config.viewImgRoot + key, true);
                         http.responseType = "blob";
                         http.onload = function(e) {
                             if (this.status === 200) {
@@ -64,7 +64,7 @@ define(function(require, exports, module) {
                                         imgObj.find('.photoAddress').siblings('p').text(jsons.time);
                                     });
                                 };
-                                image.src = jh.arguments.viewImgRoot + key;
+                                image.src = jh.config.viewImgRoot + key;
                             };
                         };
                         http.send();

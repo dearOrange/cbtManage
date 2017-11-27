@@ -13,7 +13,7 @@ define(function(require, exports, module) {
             //          jh.utils.ajax.send({
             //              url: '/qiniu/getToken',
             //              done:function(returnData){
-            //                  jh.arguments.uploadToken = returnData.data.uploadToken;
+            //                  jh.config.uploadToken = returnData.data.uploadToken;
             //              }
             //          });
 
@@ -136,7 +136,7 @@ define(function(require, exports, module) {
                 var m = $(this);
                 var form = m.parents('form');
                 var datas = form.serialize();
-                var XToken = encodeURIComponent(jh.utils.cookie.get('admin-X-Token'));
+                var XToken = encodeURIComponent($.cookie('admin-X-Token'));
                 window.location.href = REQUESTROOT + '/task/export' + '?' + datas + '&XToken=' + XToken;
             });
 
@@ -160,9 +160,9 @@ define(function(require, exports, module) {
                             url: '/operator/loginout',
                             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                             done: function() {
-                                jh.utils.cookie.deleteCookie('admin-username');
-                                jh.utils.cookie.deleteCookie('admin-X-Token');
-                                window.location.href = jh.arguments.pageLogin;
+                                $.cookie('admin-username',null);
+                                $.cookie('admin-X-Token',null);
+                                window.location.href = jh.config.pageLogin;
                             },
                             fail: function() {
                                 me.prop('disabled', false);
@@ -176,7 +176,7 @@ define(function(require, exports, module) {
             $('#editPass').on('click', function() {
                 var me = $(this);
                 me.attr('disabled', 'disabled');
-                var username = jh.utils.cookie.get('admin-username');
+                var username = $.cookie('admin-username');
                 var str = jh.utils.template('modify_pass_template', {
                     username: username
                 });
@@ -199,15 +199,6 @@ define(function(require, exports, module) {
                     submitHandler: function() {
                         var oldPass = $.trim($('#old_passwd').val());
                         var newPass = $.trim($('#new_passwd').val());
-                        var key = jh.arguments.public_key;
-
-                        var jsencrypt = new JSEncrypt();
-                        jsencrypt.setPublicKey(key);
-                        oldPass = jsencrypt.encrypt(oldPass);
-
-                        var jsencrypt1 = new JSEncrypt();
-                        jsencrypt1.setPublicKey(key);
-                        newPass = jsencrypt1.encrypt(newPass);
 
                         jh.utils.ajax.send({
                             url: '/admin/user/update-passwd',
@@ -220,7 +211,7 @@ define(function(require, exports, module) {
                                 jh.utils.alert({
                                     content: '密码修改成功,需要重新进行登录操作',
                                     ok: function() {
-                                        window.location.href = jh.arguments.pageLogin;
+                                        window.location.href = jh.config.pageLogin;
                                     },
                                     cancel: false
                                 });

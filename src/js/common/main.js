@@ -33,14 +33,14 @@ define(function(require, exports, module) {
                             var moduleInfo = jh.utils.getURLValue();
 
                             jh.utils.defaultPage(moduleInfo.module);
-                            var username = jh.utils.cookie.get('admin-username');
+                            var username = $.cookie('admin-username');
                             $('#usernameText').text(username);
             //             }
             //         });
             //     },
             //     fail: function() {
-            //         jh.utils.cookie.deleteCookie('username');
-            //         window.location.href = jh.arguments.pageLogin;
+            //         $.cookie('username',null);
+            //         window.location.href = jh.config.pageLogin;
             //     }
             // });
         };
@@ -51,7 +51,7 @@ define(function(require, exports, module) {
             jh.utils.template = require('template'); //为自定义函数
             require('plugin/icheck/icheck.min'); //复选框
             require('plugin/select2/select2.min');
-            require('lib/exif/exif.js');
+            require('lib/cookie/jquery.cookie');
 
         };
 
@@ -62,7 +62,7 @@ define(function(require, exports, module) {
 
             var firstMenu = $('#leftMenu-box').children('li');
             var secondMenu = firstMenu.children('ul').children('li');
-            var username = jh.utils.cookie.get('admin-username');
+            var username = $.cookie('admin-username');
         };
 
         this.registerEvent = function() {
