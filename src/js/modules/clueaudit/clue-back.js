@@ -81,22 +81,22 @@ define(function(require, exports, module) {
 //      };
         this.registerEvent = function() {
 
-//          jh.utils.uploader.init({
-//              hiddenName: 'test',
-//              server:'/adminServer/task/import',
-//              pick: {
-//                  id: '#importFile'
-//              },
-//              accept: {
-//                  title: 'Applications',
-//                  extensions: 'xls,xlsx',
-//                  mimeTypes: 'application/xls,application/xlsx'
-//              }
-//          },{
-//          	uploadAccept:function(file, response){
-//          		alert(response)
-//          	}
-//          });
+         jh.utils.uploader.init({
+             hiddenName: 'test',
+             server:'/adminServer/task/import',
+             pick: {
+                 id: '#importFile'
+             },
+             accept: {
+                 title: 'Applications',
+                 extensions: 'xls,xlsx',
+                 mimeTypes: 'application/xls,application/xlsx'
+             }
+         },{
+         	uploadAccept:function(file, response){
+         		alert(response)
+         	}
+         });
 //
 //          // 搜索
 //          jh.utils.validator.init({

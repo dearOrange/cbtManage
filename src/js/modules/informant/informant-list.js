@@ -129,6 +129,7 @@ define(function(require, exports, module) {
             $('.dataShow').off('click', '.pass').on('click', '.pass', function() {
                 var me = $(this);
                 var id = me.data('id');
+                var adats = jh.utils.formToJson();
                 jh.utils.alert({
                     content: '是否确认拒绝？',
                     ok: function() {
