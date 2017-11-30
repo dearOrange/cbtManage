@@ -1733,3 +1733,39 @@ label.label_check, label.label_radio {
     background-position: center;
     background-repeat: no-repeat
 }
+
+/**
+ * 错误提示
+ */
+.self-arrow-b {
+    position: absolute;
+    display: none;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    _color: #ff3fff;
+    _filter: chroma(color=#FF3FFF);
+    border: 8px dashed transparent;
+    display: block;
+    right: -17px;
+    top: 11px;
+    border-left: 8px solid #ff9a9a;
+}
+
+.self-errMsg-container {
+    background-color: #fff;
+    border: 1px solid #ff9d9d;
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .1);
+    position: fixed;
+    z-index: 999999;
+}
+
+.self-errMsg-container .self-errMsg-main {
+    position: relative;
+}
+
+.self-errMsg-container .self-errMsg-text {
+    padding: 8px 16px;
+    color: #ff8080;
+}

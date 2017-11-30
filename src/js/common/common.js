@@ -22,6 +22,7 @@ define(function(require, exports, module) {
     require('plugin/icheck/icheck.min'); //复选框
     require('plugin/select2/select2.min');
     require('lib/cookie/jquery.cookie');
+    require('plugin/scrollbar/scrollbar'); //scrollbar
 
     var FINAL_OPTIONS = {
         uploadToken: '', //上传token
@@ -214,6 +215,15 @@ define(function(require, exports, module) {
 
                 var dg = dialog(defaults);
                 dg.showModal();
+
+                var dgh = $('.ui-dialog-grid').height();
+                var h = $(window).height();
+                if (dgh > h - 200) {
+                    $(".ui-dialog-content").mCustomScrollbar({
+                        setHeight: h - 240,
+                        theme: "minimal-dark"
+                    });
+                }
 
                 if ($('.aui_state_lock').height() > $(window).height()) {
                     $('.aui_state_lock').css('height', $(window).height());
@@ -989,6 +999,7 @@ define(function(require, exports, module) {
                     m.page_last_second = m.page_total - 1; //倒数第二页
 
                     try {
+                        response.menuState = tammy.utils.menuState;
                         var viewStr = s.callback.call(null, response); //获取拼接后的展示数据，增加容错处理
                         s.data_container.html(viewStr); //插入数据
                         m.onload();
@@ -1327,27 +1338,63 @@ define(function(require, exports, module) {
                     var el = $(element); //当前元素
                     var errMsg = $(error).text(); //错误信息
                     var isRight = errMsg ? false : true; //是否正确
+                    var tId = el.attr('name') + '-error';
                     el.siblings('label.error').remove();
                     if (!isRight) {
-                        var errStr = '<label class="error">' + errMsg + '</label>';
-                        if (el.hasClass('code')) {
-                            el.parent().append(errStr);
-                        } else {
-                            if ($(el).is('select')) {
-                                var targetTmp = el.next('span.select2').length > 0 ? el.next('span.select2') : el;
-                                $(errStr).insertAfter(targetTmp);
-                            } else {
-                                $(errStr).insertAfter(el);
-                            }
+                        var left = el.offset().left;
+                        var top = el.offset().top;
+                        var h = $(window).scrollTop();
+                        if (h) {
+                            top -= h;
                         }
+                        var str = '';
+
+                        str += '<div class="self-errMsg-container" data-origin="' + top + '" style="left:' + left + 'px;top:' + top + 'px;" id="' + tId + '">';
+                        str += '    <div class="self-errMsg-main">';
+                        str += '        <div class="self-arrow-b"></div>';
+                        str += '        <div class="self-errMsg-text">' + errMsg + '</div>';
+                        str += '    </div>';
+                        str += '</div>';
+
+                        $('#' + tId).remove();
+                        $('body').append(str);
+
+                        var tar = $('#' + tId);
+                        var width = tar.width();
+                        tar.css('left', left - width - 15);
+                        return false;
+                    } else {
+                        $('#' + tId).remove();
                     }
                 },
                 success: function(error, element) {
-                    var ele = $(element);
-                    ele.siblings('label.error').remove();
+                    $('#' + element.attr('name') + '-error').remove();
                 },
                 submitHandler: function() {}
             };
+            var beforScrollTop = $(window).scrollTop();
+            $(window).off('scroll resize').on('scroll resize', function(event) {
+                window.setTimeout(function() {
+                    var afterScrollTop = $(window).scrollTop();
+                    var delta = afterScrollTop - beforScrollTop;
+
+                    var list = $('.self-errMsg-container');
+                    var h = $(window).scrollTop();
+                    $.each(list, function(index, item) {
+                        item = $(item);
+                        var name = item.attr('id');
+                        name = name.replace(/-error/, '');
+                        var tar = $('[name=' + name + ']');
+                        var top = tar.offset().top;
+                        if (delta > 0) {
+                            top -= h;
+                        } else {
+                            top += h;
+                        }
+                        item.css('top', top);
+                    });
+                }, 0);
+            });
             $.extend(m.settings, options);
             var sets = m.settings;
             $.validator.setDefaults({
@@ -1383,6 +1430,60 @@ define(function(require, exports, module) {
         };
 
         tammy.utils.validator = validator;
+    })();
+
+    (function() {
+        var SmsCountDown = {};
+        SmsCountDown.init = function(targetId, type) {
+            var _this = SmsCountDown;
+            _this.targetId = targetId;
+            _this.targetStr = targetId;
+            _this.showText = '';
+            _this.localNumber = localStorage.getItem(targetId);
+
+            if ($('#' + targetId).hasClass('disabled')) {
+                return false;
+            }
+            $('#' + _this.targetId).addClass('disabled').prop('disabled', true);
+            if (type === 'click') {
+                _this.localNumber = 10;
+            } else {
+                if (!_this.localNumber) {
+                    _this.localNumber = 10;
+                    localStorage.setItem(targetStr, _this.localNumber);
+                } else {
+                    _this.localNumber = parseInt(_this.localNumber, 10);
+                }
+            }
+
+            if (_this.localNumber <= 0) {
+                _this.showText = '获取验证码';
+                localStorage.setItem(targetStr, 10);
+                $('#' + _this.targetId).prop('disabled', false).removeClass('disabled').text(_this.showText);
+                return false;
+            } else {
+                _this.showText = '重新发送(' + _this.localNumber + ')';
+            }
+            localStorage.setItem(_this.targetStr, _this.localNumber);
+            $('#' + _this.targetId).text(_this.showText);
+
+            _this.targetStrIntervalId = window.setInterval('jh.utils.smsCountDown.countDown()', 1000);
+
+        };
+        SmsCountDown.countDown = function() {
+            var _this = SmsCountDown;
+            var localNumber = parseInt(localStorage.getItem(_this.targetStr), 10);
+            localNumber--;
+            if (localNumber <= 0) {
+                window.clearInterval(_this.targetStrIntervalId);
+                localStorage.removeItem(_this.targetStr);
+                $('#' + _this.targetId).prop('disabled', false).removeClass('disabled').text('获取验证码');
+            } else {
+                localStorage.setItem(_this.targetStr, localNumber);
+                $('#' + _this.targetId).text('重新发送(' + localNumber + ')');
+            }
+        }
+        tammy.utils.smsCountDown = SmsCountDown;
     })();
 
     (function() {
@@ -1446,19 +1547,6 @@ define(function(require, exports, module) {
         }
         tammy.utils.mapSelect = mapSelect;
     })();
-
-    // select默认选中
-    (function() {
-        function setSelectValue(selectId, value) {
-            $.each($('#' + selectId).find('option'), function(index, val) {
-                if (val.innerText === value || val.value === value) {
-                    $('#' + selectId).val(val.value);
-                    return true;
-                }
-            });
-        }
-        tammy.utils.setSelectValue = setSelectValue;
-    })();
     //html转码与解码
     (function() {
         function HTMLDecode(text) {
@@ -1481,12 +1569,84 @@ define(function(require, exports, module) {
         tammy.utils.HTMLEncode = HTMLEncode;
     })();
     (function() {
-        function RoleToString(code, index) {
-            var arr = code.split('_');
-            index = index ? index : 0;
-            return arr[index];
+        var menuState = function(state) {
+            switch (state) {
+                case "new":
+                    state = "待审核";
+                    break;
+                case "invalid":
+                    state = "审核未通过";
+                    break;
+                case "undistributed":
+                    state = "信息员未分配";
+                    break;
+                case "unarrange":
+                    state = "渠道经理未分配";
+                    break;
+                case "tracing":
+                    state = "线索未提交";
+                    break;
+                case "clueChecking":
+                    state = "线索审核中";
+                    break;
+                case "unvaluation":
+                    state = "待估价";
+                    break;
+                case "unconfirmed":
+                    state = "待确认";
+                    break;
+                case "voucherChecking":
+                    state = "凭证审核中";
+                    break;
+                case "voucherInvalid":
+                    state = "凭证审核未通过";
+                    break;
+                case "hunterUnreceive":
+                    state = "捕头未接受";
+                    break;
+                case "hunterReceive":
+                    state = "捕头已接受";
+                    break;
+                case "platReceive":
+                    state = "平台已收车";
+                    break;
+                case "upstreamReceive":
+                    state = "债权方已收车";
+                    break;
+                case "all":
+                    state = "无定位需找车并拖车";
+                    break;
+                case "trace":
+                    state = "无定位只需找车";
+                    break;
+                case "recycle":
+                    state = "有定位只需拖车";
+                    break;
+                case "unavailable":
+                    state = "认证不通过";
+                    break;
+                case "available":
+                    state = "已认证";
+                    break;
+                case "new":
+                    state = "未提交认证";
+                    break;
+                case "wait":
+                    state = "待认证";
+                    break;
+                case 0:
+                    state = "关闭";
+                    break;
+                case 'closed':
+                    state = "已关闭";
+                    break;
+                case 1:
+                    state = "开启";
+                    break;
+            }
+            return state;
         }
-        tammy.utils.RoleToString = RoleToString;
+        tammy.utils.menuState = menuState;
     })();
     module.exports = tammy;
 });
