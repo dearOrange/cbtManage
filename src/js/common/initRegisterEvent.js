@@ -10,12 +10,12 @@ define(function(require, exports, module) {
         };
 
         this.registerEvent = function() {
-            //          jh.utils.ajax.send({
-            //              url: '/qiniu/getToken',
-            //              done:function(returnData){
-            //                  jh.config.uploadToken = returnData.data.uploadToken;
-            //              }
-            //          });
+            jh.utils.ajax.send({
+                url: '/qiniu/getToken',
+                done: function(returnData) {
+                    jh.config.uploadToken = returnData.data.uploadToken;
+                }
+            });
 
             /**
              * 菜单点击事件
@@ -67,18 +67,6 @@ define(function(require, exports, module) {
                 jh.utils.showHTML(moduleInfo.module);
             });
 
-            $('.sidebar-toggle').on('click', function() {
-                var leftBox = $('.left-side');
-                var rightBox = $('.left-side').next();
-                if (rightBox.hasClass('right-side')) {
-                    rightBox.removeClass('right-side');
-                    leftBox.css('left', '-220px');
-                } else {
-                    rightBox.addClass('right-side');
-                    leftBox.css('left', '0px');
-                }
-            });
-
             /*只能输入数字，并且小数点只能输入一个*/
             $('#content-container').on('keyup change', '.OnlyPrice', function() {
                 this.value = this.value.replace(/[^\d.]/, ''); /*禁止输入非数字和小数点以外字符*/
@@ -86,12 +74,6 @@ define(function(require, exports, module) {
                 this.value = this.value.replace(/[\u4e00-\u9fa5]/ig, ''); /*禁止输入汉字*/
                 this.value = this.value.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.'); /*不允许两个及以上小数点*/
                 this.value = this.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
-            });
-
-            /*高级查询切换*/
-            $('#content-container').on('click', '.advanced_query_btn,.common_query_btn', function() {
-                var m = $(this);
-                m.parents('form').addClass('hide').siblings().removeClass('hide');
             });
 
             /*为密码框绑定事件，禁止复制，剪贴，粘贴，输入空格*/
@@ -159,8 +141,8 @@ define(function(require, exports, module) {
                         jh.utils.ajax.send({
                             url: '/operator/loginout',
                             done: function() {
-                                $.cookie('admin-username',null);
-                                $.cookie('admin-X-Token',null);
+                                $.cookie('admin-username', null);
+                                $.cookie('admin-X-Token', null);
                                 window.location.href = jh.config.pageLogin;
                             },
                             fail: function() {
@@ -171,7 +153,7 @@ define(function(require, exports, module) {
                     cancel: function() {}
                 });
             });
-            
+
             $('body').on('change', 'select', function() {
                 $(this).parents('form').validate().element($(this));
             });
@@ -180,10 +162,10 @@ define(function(require, exports, module) {
                 var me = $(this);
                 var state = me.is(':checked');
                 var checkboxs = me.parents('table').find('input[type=checkbox]');
-                if(state){
-                    checkboxs.prop('checked',true);
-                }else{
-                    checkboxs.prop('checked',false);
+                if (state) {
+                    checkboxs.prop('checked', true);
+                } else {
+                    checkboxs.prop('checked', false);
                 }
             });
 

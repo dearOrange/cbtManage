@@ -18,8 +18,11 @@ var versionDate = {
 var ROOTURL = '';/*项目根目录名称 谨慎修改*/
 var BaseUrl = '/src/js/';
 var REQUESTROOT = '/adminServer'; /*服务器默认为/manager 当本地开发时切换为域名映射*/
+var serverHost = '';
+
 if(window.location.host.indexOf('.cbt.com')!==-1){
     REQUESTROOT = 'http://qa.cbt.com:8080' + REQUESTROOT;
+    serverHost = 'http://qa.cbt.com:8080';
 }
 if(window.location.host.indexOf('192.168.2.181')!==-1){
     ROOTURL = '/admin';
