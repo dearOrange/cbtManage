@@ -820,6 +820,7 @@ define(function(require, exports, module) {
                 url: '',
                 method: 'GET',
                 show_page_number: 5,
+                contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
                 jump: true,
                 noData: '',
                 ident: '', //模块标识
@@ -985,6 +986,7 @@ define(function(require, exports, module) {
             tammy.utils.ajax.send({
                 url: s.url,
                 method: s.method,
+                contentType: s.contentType,
                 data: s.data,
                 done: function(returnData) {
                     var response = returnData.data;
