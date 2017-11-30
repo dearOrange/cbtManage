@@ -10,12 +10,15 @@ body.login {
     width: 100%;
     height: 100%;
 }
+
 .login-logo {
     margin: 30px;
 }
+
 .login-logo img {
     margin-left: 20px;
 }
+
 .login-form {
     position: relative;
     margin: 0 auto;
@@ -24,53 +27,64 @@ body.login {
     height: 730px;
     border-radius: 5px;
 }
+
 .loginForm {
     width: 502px;
     margin: 160px 0px 0px 30px;
 }
+
 .loginForm input {
     color: #eee;
     height: 40px;
     line-height: 40px;
     border: 0;
 }
+
 .loginForm .inputGroup {
     width: 66%;
     margin: 0px auto 10px;
 }
+
 .loginForm .inputGroup .txt {
     width: 100%;
     text-indent: 40px;
     margin-bottom: 25px;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 5px;
 }
+
 .loginForm .inputGroup #username {
     background: url(../img/login/login_user.png) no-repeat 10px center;
 }
+
 .loginForm .inputGroup #password {
     background: url(../img/login/login_pass.png) no-repeat 10px center;
 }
+
 .loginForm .inputGroup .code {
     width: 150px;
     text-indent: 40px;
 }
+
 .loginForm .inputGroup .checkCode {
     width: 100px;
     height: 40px;
     margin: -23px 0px 0px 60px;
     cursor: pointer;
 }
-.loginForm > h1{
+
+.loginForm > h1 {
     width: 66%;
     font-size: 26px;
     margin: 0 auto;
     text-align: center;
     padding-bottom: 50px;
 }
+
 .loginForm img {
     margin: 0px 10px;
 }
+
 .loginForm input[type="submit"] {
     width: 100%;
     border: 1px solid #1d90e6;
@@ -79,47 +93,55 @@ body.login {
     color: #fff;
 }
 
-.color-white{
+.color-white {
     color: #fff;
 }
-.allot span{
-	width:100px;
-	height:20px;
-	border:1px solid #ccc;
-	border-radius:5px;
-	text-align: center;
-	line-height: 20px;
-}
 
+.allot span {
+    width: 100px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 20px;
+}
 
 /*infomationList.html*/
 #selectOk {
     margin-left: 10px;
 }
+
 .operaList .titleTip {
     color: red;
     display: none;
 }
+
 .operaList .showTitalTip {
     display: inline-block;
 }
+
 .highLightTR {
     background-color: #fff3f4 !important;
 }
+
 #infolistForm table .evenInfo {
     width: 600px;
     padding-left: 6% !important;
 }
+
 #infolistForm table input[type="submit"] {
     margin-top: 8px;
     margin-left: 150px;
 }
+
 #infolistForm .infoSearch {
     text-align: left;
 }
+
 .tar #addArticle {
     margin-top: 20px;
 }
+
 .textLeft td {
     text-align: left;
 }
@@ -132,20 +154,24 @@ body.login {
     border: 1px solid #f8f8f8;
     background-color: #f8f8f8;
 }
+
 .lookUpContent dl {
     margin: 60px 60px;
 }
+
 .lookUpContent dl dt {
     float: left;
     width: 60px;
     text-align: right;
 }
+
 .lookUpContent dl dd {
     margin-left: 80px;
     margin-bottom: 20px;
     min-height: 30px;
     word-break: break-all;
 }
+
 .infoGoback {
     text-align: center;
     width: 355px;
@@ -156,36 +182,46 @@ body.login {
 .must {
     color: red;
 }
+
 .addInfoContent form input[type="text"] {
     width: 93%;
     height: 30px;
 }
+
 .addInfoContent table tr td {
     text-align: left;
 }
+
 .addInfoContent .title {
     white-space: nowrap;
 }
+
 .addInfoContent .btnCenter {
     text-align: center;
 }
+
 .addInfoContent input[name="reset"], #addAdShow input[name="reset"] {
     margin-left: 30px;
 }
+
 .addInfoContent #imgFile {
     display: none;
 }
+
 .addInfoContent .imgUpLoad, .editor {
     position: relative;
 }
+
 .addInfoContent .imgTip {
     position: absolute;
     top: 80px;
     left: 120px;
 }
+
 .tips {
     color: #c9c9c9;
 }
+
 .uploadHeight {
     min-height: 60px;
 }
@@ -196,27 +232,34 @@ adList.html
 #addAdShow table tr td {
     text-align: left;
 }
+
 #addAdShow form input[type="text"] {
     width: 200px;
     height: 24px;
 }
+
 .lookUpContent img {
     max-width: 20%;
     margin: 5px;
 }
+
 .imgPreview {
     width: 100px;
 }
+
 #addAdShow .title {
     width: 200px;
     text-align: right;
 }
+
 #addAdShow table input[type="submit"] {
     margin-left: 200px;
 }
+
 #addAdShow table input[type="submit"], #addAdShow table input[type="reset"] {
     margin-top: 40px;
 }
+
 #adlistForm {
     float: right;
     margin-top: 10px;
@@ -227,39 +270,48 @@ adList.html
 .btnUnBorder {
     border: 0 !important;
 }
+
 .underOrange {
     border-bottom: 2px solid #ff8812 !important;
 }
+
 .agreementTitle li {
     float: left;
 }
+
 .protocol {
     margin: 10px;
     text-align: left;
     min-height: 500px;
 }
+
 .rules {
     width: 1200px;
     margin: 50px auto 100px;
     line-height: 30px;
 }
+
 .main-title {
     text-align: center;
     font-size: 30px;
     margin-bottom: 50px;
 }
+
 .sub-title {
     font-size: 20px;
     margin-top: 50px;
 }
+
 .p-title {
     font-size: 16px;
     margin-top: 20px;
     margin-bottom: 10px;
 }
+
 .text-begin {
     text-indent: 2em;
 }
+
 .text-del {
     display: block;
     text-indent: 2em;
@@ -272,58 +324,72 @@ adList.html
     margin-top: 20px;
     float: left;
 }
+
 #batchDelete {
     padding: 5px 10px;
     margin-left: 20px;
 }
+
 .addRole, .editRole {
     background-color: #f8f8f8;
 }
+
 .addRole .icheckbox_flat-orange, .editRole .icheckbox_flat-orange {
     margin-right: 5px;
 }
+
 .addRole .roleName, .editRole .roleName, .addRole .roleDetails, .editRole .roleDetails {
     margin-bottom: 30px;
     margin-top: 50px;
 }
+
 .addRole .roleName dl, .editRole .roleName dl, .addRole .roleDetails dl, .editRole .roleDetails dl {
     display: block;
 }
+
 .addRole .roleName dt, .editRole .roleName dt, .addRole .roleDetails dt, .editRole .roleDetails dt {
     display: block;
     width: 10%;
     float: left;
     text-align: center;
 }
+
 .addRole .roleName dd, .editRole .roleName dd, .addRole .roleDetails dd, .editRole .roleDetails dd {
     float: left;
     width: 90%;
 }
+
 .addRole .roleName input[name=name] {
     width: 50%;
     padding: 8px;
     border: solid 1px #cecece;
     border-radius: 3px;
 }
+
 .addRole .checkboxGroup, .editRole .checkboxGroup {
     border-bottom: solid 1px #fff;
     padding: 15px 0;
 }
+
 .addRole .label_checkbox, .editRole .label_checkbox {
     margin-right: 10px;
 }
+
 .addRole .manage, .editRole .manage {
     text-align: center;
     margin: 30px 0;
     width: 100%;
 }
+
 .addRole .manage input, .editRole .manage input {
     width: 100px;
 }
+
 .addRole .secondary, .editRole .secondary {
     margin-left: 30px;
     margin-top: 10px;
 }
+
 .addRole .subkey, .editRole .subkey {
     display: inline-block;
     margin-bottom: 10px;
@@ -334,14 +400,17 @@ adList.html
 .messageList .warn {
     color: #f00;
 }
+
 .addMessage .title p, .editMessage .title p {
     width: 100px;
     text-align: right;
 }
+
 .addMessage .content input[type=text], .editMessage .content input[type=text] {
     width: 90%;
     height: 35px !important;
 }
+
 .addMessage .content textarea, .editMessage .content textarea {
     width: 91%;
     padding: 6px;
@@ -349,14 +418,17 @@ adList.html
     border: 1px solid #cecece;
     resize: none;
 }
+
 .addMessage .content select, .editMessage .content select {
     border: 1px solid #cecece !important;
     border-radius: 3px !important;
 }
+
 .addMessage .must, .editMessage .must {
     font-style: normal;
     color: #f00;
 }
+
 .addMessage .opertionCon, .editMessage .opertionCon {
     float: none;
     text-align: center;
@@ -368,14 +440,17 @@ adList.html
     float: left;
     margin-left: 237px;
 }
+
 .supplierList input[type=text] {
     border-radius: 4px;
     height: 26px;
     border-color: #ddd;
 }
+
 .supplierList .tar {
     margin-top: 20px;
 }
+
 .supplierList .service_city {
     width: 280px;
     height: 17px;
@@ -383,19 +458,24 @@ adList.html
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
 .supplierList .select2-container--default {
     width: 197px !important;
 }
+
 .addSupplier .title, .editSupplier .title {
     text-align: right;
 }
+
 .addSupplier .content, .editSupplier .content {
     text-align: left;
 }
+
 .addSupplier .must, .editSupplier .must {
     font-style: normal;
     color: #f00;
 }
+
 .addSupplier input[type=text], .editSupplier input[type=text] {
     width: 100%;
     height: 35px;
@@ -405,19 +485,23 @@ adList.html
     background-color: #fff;
     box-sizing: border-box;
 }
+
 .addSupplier .select2-container--default, .editSupplier .select2-container--default {
     width: 100% !important;
 }
+
 .addSupplier .opertionCon, .editSupplier .opertionCon {
     float: none;
     width: 204px;
     margin: 0 auto;
 }
+
 .addSupplier #citySelect, .editSupplier #citySelect {
     float: left;
     position: relative;
     margin-right: 10px;
 }
+
 .addSupplier #inputCity, .editSupplier #inputCity {
     width: 200px;
     height: 35px;
@@ -426,6 +510,7 @@ adList.html
     background-color: #fff;
     display: inline-block;
 }
+
 .addSupplier #cityList, .editSupplier #cityList {
     width: 198px;
     max-height: 300px;
@@ -437,20 +522,24 @@ adList.html
     overflow: auto;
     display: none;
 }
+
 .addSupplier #cityList li, .editSupplier #cityList li {
     height: 26px;
     line-height: 26px;
     padding: 0 10px;
     cursor: pointer;
 }
+
 .addSupplier #cityList li:hover, .editSupplier #cityList li:hover {
     background-color: #eee;
 }
+
 .addSupplier #service_region, .editSupplier #service_region {
     float: left;
     margin-top: 4px;
     width: 80%;
 }
+
 .addSupplier #service_region li, .editSupplier #service_region li {
     float: left;
     margin-right: 10px;
@@ -461,6 +550,7 @@ adList.html
     background-color: #eee;
     border-radius: 3px;
 }
+
 .addSupplier #service_region .close, .editSupplier #service_region .close {
     position: absolute;
     width: 14px;
@@ -474,9 +564,11 @@ adList.html
     cursor: pointer;
     color: #fff;
 }
+
 .addSupplier #confirm, .editSupplier #confirm, .addSupplier .goBack, .editSupplier .goBack {
     width: 100px;
 }
+
 .img_list li {
     width: 48px;
     height: 48px;
@@ -484,33 +576,41 @@ adList.html
     float: left;
     margin-right: 20px;
 }
+
 .img_list li img {
     width: 100%;
     height: 100%;
 }
+
 .supplierDetails #service_region li {
     float: left;
     margin-right: 5px;
 }
+
 .supplierDetails .title, .activityDetails .title {
     width: 120px;
     text-align: right;
 }
+
 .supplierDetails .content, .activityDetails .content {
     text-align: left;
 }
+
 .supplierDetails .opertionCon, .activityDetails .opertionCon {
     float: left;
     margin-left: 130px;
 }
+
 .supplierDetails .goBack {
     width: 100px;
 }
+
 .supplierDetails #corp_introduction p {
     width: 90%;
     word-wrap: break-word;
     word-break: break-all;
 }
+
 .ueditor img {
     margin: 5px 0;
 }
@@ -519,113 +619,145 @@ adList.html
 .search-container .align_right {
     text-align: right;
 }
+
 .search-container .align_left {
     text-align: left;
 }
+
 input, select, textarea {
     background-color: transparent;
 }
+
 #beginTime, #endTime {
     height: 25px;
     padding-left: 2px;
     display: inline-block
 }
+
 .pubTime {
     width: 480px
 }
+
 .activityDetail .must {
     color: red
 }
+
 .activityDetail form input {
     width: 200px;
     height: 24px
 }
+
 .activityDetail input[name=submit], .activityDetail input[name=reset] {
     width: 90px
 }
+
 .activityDetail input[name=submit] {
     margin-left: 110px
 }
+
 .activityDetail input[name=reset] {
     margin-left: 30px
 }
+
 .activityDetail .mainImg {
     border: 1px solid red;
     width: 100px;
     height: 100px;
     cursor: pointer
 }
+
 .activityDetail #imgFile {
     display: none
 }
+
 .activityDetail .imgUpLoad, .editor {
     position: relative
 }
+
 .activityDetail .imgTip {
     position: absolute;
     top: 80px;
     left: 120px
 }
+
 .activityDetail .titleTip, .fileTip, .imgTip {
     color: red;
     display: none
 }
+
 .activityDetail .showTitleTip, .showFileTip, .showImgTip {
     display: block
 }
+
 .activityDetail table tr td {
     border: 0
 }
+
 .activityDetail table tr .time {
     width: 100%
 }
+
 .activityDetail table tr select {
     width: 100%
 }
+
 .dataContent {
+
     /*overflow: hidden*/
 }
+
 .moduleFlag {
     padding-top: 10px;
     padding-bottom: 10px;
     float: right
 }
+
 .search_form table tr .title {
     width: 10%;
     white-space: nowrap;
     text-align: right;
 }
+
 .search_form table tr {
     width: 100%;
 }
+
 .search_form table tr td:last-child {
     text-align: left
 }
+
 .search_form table tr #mapSelect {
     width: 1000px
 }
+
 .search_form table tr #mapSelect select {
     width: 200px
 }
+
 .search_form table tr #mapSelect input {
     max-width: 333px;
     float: left
 }
+
 .select2_parent span {
     float: left;
     width: 100%;
     margin-right: 10px
 }
+
 .search_input td {
     float: left;
     margin-left: 60px
 }
+
 .common_query input {
     border-radius: 4px
 }
+
 .select_time {
     text-align: left
 }
+
 .select_time .endTime, .select_time .startTime {
     width: 200px;
     height: 36px;
@@ -633,72 +765,71 @@ input, select, textarea {
     padding-bottom: 1px;
     padding-left: 3px
 }
+
 .btn_input {
     text-align: center
 }
+
 .btn_input input {
     width: 100px
 }
+
 .selectOption {
     width: 300px;
     float: left
 }
+
 .list-container {
     padding-left: 100px
 }
+
 .list-container table tbody tr {
     overflow: hidden
 }
+
 .list-container table tbody tr td {
     text-align: left
 }
+
 .addContent form input[type=text] {
     height: 30px;
     border-radius: 4px
 }
+
 .addContent form input[type=password] {
     height: 30px;
     border-radius: 4px;
     border: 1px solid #cecece;
     padding: 5px 16px 5px 10px
 }
+
 .max-width {
     width: 90%;
 }
+
 .long_select .select2-container--default {
     width: 434px !important
 }
+
 .select2-container--default .select2-selection--single {
     border-radius: 4px !important
 }
+
 .manages {
     padding-top: 20px;
     float: left;
 }
 
-/*addInfomation*/
-#addInfoForm #areaItem + span {
-    width: 95% !important;
-}
-#areaItem + span {
-    width: 95% !important;
-}
-#editPassForm {
-    width: 500px;
-}
-#editPassForm input[type=password] {
-    width: 360px;
-}
-
 /*线人列表*/
-.search-container .stateChange li{
+.search-container .stateChange li {
     cursor: pointer;
     float: left;
     border: 1px solid transparent;
     padding: 5px 10px;
     position: relative;
 }
-.search-container .stateChange li sup{
+
+.search-container .stateChange li sup {
     position: absolute;
     top: -10px;
     right: -5px;
@@ -709,247 +840,295 @@ input, select, textarea {
     padding: 0 3px;
     border-radius: 10px;
 }
-.search-container .label{
+
+.search-container .label {
     line-height: 32px;
     font-weight: bold;
     vertical-align: middle;
 }
-.search-container .stateChange li:hover{
-    color: #20a0ff;
-    border:1px solid #20a0ff;
-}
-.search-container .stateChange li.active{
+
+.search-container .stateChange li:hover {
     color: #20a0ff;
     border: 1px solid #20a0ff;
 }
+
+.search-container .stateChange li.active {
+    color: #20a0ff;
+    border: 1px solid #20a0ff;
+}
+
 /**
  * 任务列表-车辆详情
  */
-.carDetail{
+.carDetail {
     width: 660px;
 }
-.carDetail ul{
+
+.carDetail ul {
     padding-top: 30px;
 }
-.carDetail ul li{
+
+.carDetail ul li {
     float: left;
     padding: 10px 20px;
 }
 
 /*任务详情*/
-.dialog-width,.increated{
+.dialog-width, .increated {
     min-width: 800px;
 }
-.dialog-width .pull-right{
-	width:100px;
-	height:34px;
-	background:dodgerblue;
-	color:white;
-	text-align: center;
-	line-height: 34px;
+
+.dialog-width .pull-right {
+    width: 100px;
+    height: 34px;
+    background: dodgerblue;
+    color: white;
+    text-align: center;
+    line-height: 34px;
 }
-.dialog-width ul{
-	width:800px;
-    padding:0 0 20px 0;
+
+.dialog-width ul {
+    width: 800px;
+    padding: 0 0 20px 0;
     overflow: hidden;
 }
-.dialog-width ul li{
+
+.dialog-width ul li {
     float: left;
     padding: 10px 20px;
 }
-.taskpull{
-	overflow: hidden;
+
+.taskpull {
+    overflow: hidden;
 }
-.taskpull p:last-of-type input{
-	height:20px;
-	border:1px solid #000;
-	margin:6px 0;
-	padding:6px 0;
+
+.taskpull p:last-of-type input {
+    height: 20px;
+    border: 1px solid #000;
+    margin: 6px 0;
+    padding: 6px 0;
 }
-.taskpull p label{
-	font-size:16px;
-	font-weight: 900;
-	display:inline-block;
-	width:170px;
+
+.taskpull p label {
+    font-size: 16px;
+    font-weight: 900;
+    display: inline-block;
+    width: 170px;
 }
-.remark{
-	width:800px;
-	height:80px;
-	border:1px solid #000;
-	line-height: 24px;
-	overflow-y: auto;
+
+.remark {
+    width: 800px;
+    height: 80px;
+    border: 1px solid #000;
+    line-height: 24px;
+    overflow-y: auto;
 }
-.remark input{
-	width:800px;
-	border: 0;
-	outline: 0;
+
+.remark input {
+    width: 800px;
+    border: 0;
+    outline: 0;
 }
-.increateNewInfo{
-	margin-top:60px;
+
+.increateNewInfo {
+    margin-top: 60px;
 }
-.increateNewInfo div{
-	padding:20px 0;
+
+.increateNewInfo div {
+    padding: 20px 0;
 }
-.increateNewInfo div input{
-	outline: none;
-	height:26px;
-	border:1px solid #000;
+
+.increateNewInfo div input {
+    outline: none;
+    height: 26px;
+    border: 1px solid #000;
 }
-.increateNewInfo div #carAdress{
-	width:48px;
+
+.increateNewInfo div #carAdress {
+    width: 48px;
 }
-.upimg{
-	margin:30px 0;
-	overflow: hidden;
+
+.upimg {
+    margin: 30px 0;
+    overflow: hidden;
 }
-.upimg dl{
-	float:left;
-	margin-right:30px;
+
+.upimg dl {
+    float: left;
+    margin-right: 30px;
 }
-.upimg dl dt img{
-	width:150px;
-	height:120px;
-	margin-bottom:12px;
-} 
-.buttonAnt{
-	margin:30px 0;
+
+.upimg dl dt img {
+    width: 150px;
+    height: 120px;
+    margin-bottom: 12px;
 }
-.imgRecord{
-	width:100%;
-	height:60px;
-	margin-top:30px;
-	border-bottom:1px dashed #ccc;
+
+.buttonAnt {
+    margin: 30px 0;
 }
-.imgRecord span{
-	margin:0 20px;
+
+.imgRecord {
+    width: 100%;
+    height: 60px;
+    margin-top: 30px;
+    border-bottom: 1px dashed #ccc;
 }
-.imgRecord span img{
-	margin-left:10px;
+
+.imgRecord span {
+    margin: 0 20px;
 }
-.upmainfile, .mainfile{
-	margin: 20px 0;
-	overflow: hidden;
+
+.imgRecord span img {
+    margin-left: 10px;
 }
-.upmainfile ol{
-	width:300px;
-	float:right;
-	margin:10px 0;
+
+.upmainfile, .mainfile {
+    margin: 20px 0;
+    overflow: hidden;
 }
-.upmainfile ol li{
-	width:46%;
-	float:right;
-	height:30px;
-	text-align: center;
-	line-height: 30px;
-	border:1px solid #ccc;
-	margin-right:4px;
+
+.upmainfile ol {
+    width: 300px;
+    float: right;
+    margin: 10px 0;
 }
-.upmainfile table{
-	margin-top: 20px;
+
+.upmainfile ol li {
+    width: 46%;
+    float: right;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid #ccc;
+    margin-right: 4px;
 }
-.instruction div{
-	margin-top:20px;
-	overflow: hidden;
+
+.upmainfile table {
+    margin-top: 20px;
 }
-.instruction div label{
-	float:left;
-	width:100px;
-	height:70px;
-	line-height: 70px;
-	font-weight: 900;
+
+.instruction div {
+    margin-top: 20px;
+    overflow: hidden;
 }
-.instruction div span{
-	float:left;
-	width:60%;
-	height:70px;
-	border:1px solid #000;
+
+.instruction div label {
+    float: left;
+    width: 100px;
+    height: 70px;
+    line-height: 70px;
+    font-weight: 900;
 }
-.butouchange{
-	width:80%;
-	height:56px;
-	border:1px solid #000;
+
+.instruction div span {
+    float: left;
+    width: 60%;
+    height: 70px;
+    border: 1px solid #000;
 }
-.hopeprice p{
-	padding:20px 0 10px 0;
-	font-weight: 900;
+
+.butouchange {
+    width: 80%;
+    height: 56px;
+    border: 1px solid #000;
 }
-.hopeprice div{
-	overflow: hidden;
+
+.hopeprice p {
+    padding: 20px 0 10px 0;
+    font-weight: 900;
 }
-.hopeprice label{
-	width:90px;
-	height:40px;
-	float:left;
-	margin-top:6px;
+
+.hopeprice div {
+    overflow: hidden;
 }
-.hopeprice span{
-	float:left;
-	width:90px;
-	height:30px;
-	line-height: 30px;
-	text-align: center;
+
+.hopeprice label {
+    width: 90px;
+    height: 40px;
+    float: left;
+    margin-top: 6px;
 }
-.evaluePrice label{
-	width:180px;
+
+.hopeprice span {
+    float: left;
+    width: 90px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
 }
-.evaluePrice input{
+
+.evaluePrice label {
+    width: 180px;
+}
+
+.evaluePrice input {
     height: 22px;
     line-height: 22px;
     border: 0;
-    border-bottom:1px solid #000;
+    border-bottom: 1px solid #000;
 }
-.dialog-width p, .upmainfile p, .mainfile p{
-	font-weight: 900;
-	margin-top:20px;
+
+.dialog-width p, .upmainfile p, .mainfile p {
+    font-weight: 900;
+    margin-top: 20px;
 }
-.mainfile dl{
-	width:160px;
-	height:200px;
-	border:1px solid #ccc;
-	text-align: center;
-	margin:15px 20px 10px 0;
+
+.mainfile dl {
+    width: 160px;
+    height: 200px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin: 15px 20px 10px 0;
 }
-.mainfile dl dt{
-	height:160px;
-	border-bottom:1px solid #ccc;
+
+.mainfile dl dt {
+    height: 160px;
+    border-bottom: 1px solid #ccc;
 }
-.mainfile dl dt img{
-	width:150px;
-	height:158px;
+
+.mainfile dl dt img {
+    width: 150px;
+    height: 158px;
 }
-.mainfile dl dd{
-	line-height: 40px;
+
+.mainfile dl dd {
+    line-height: 40px;
 }
 
 /*分配*/
-.divied-width{
-	width:310px
+.divied-width {
+    width: 310px
 }
-.divied-width .divied-type div{
-	margin:10px 0;
+
+.divied-width .divied-type div {
+    margin: 10px 0;
 }
 
 /*捕头详情*/
-.officer-width{
-	min-width: 800px;
+.officer-width {
+    min-width: 800px;
 }
-.officer-width ul{
-	border-bottom: 1px dashed #ccc;
+
+.officer-width ul {
+    border-bottom: 1px dashed #ccc;
 }
-.officer-width ul li{
-	width:50%;
-	padding:10px 0;
+
+.officer-width ul li {
+    width: 50%;
+    padding: 10px 0;
 }
-.officer-width ul li label{
-	font-weight: 900;
-	display:inline-block;
-	width:100px;
+
+.officer-width ul li label {
+    font-weight: 900;
+    display: inline-block;
+    width: 100px;
 }
 
 /**
  * 线人列表
  */
-.blue_recommendCode{
+.blue_recommendCode {
     color: #20a0ff !important;
     text-decoration: underline;
 }
@@ -957,20 +1136,24 @@ input, select, textarea {
 /**
  * 发放账号
  */
-#downstreams-create-form{
+#downstreams-create-form {
     width: 600px;
     margin: 150px auto;
 }
-#downstreams-create-form input[type="text"],#downstreams-create-form input[type="password"]{
+
+#downstreams-create-form input[type="text"], #downstreams-create-form input[type="password"] {
     width: 71%;
 }
-#downstreams-create-form select#role{
+
+#downstreams-create-form select#role {
     width: 71%;
 }
-#downstreams-create-form input[type="submit"],#downstreams-create-form input[type="reset"]{
+
+#downstreams-create-form input[type="submit"], #downstreams-create-form input[type="reset"] {
     padding: 8px 15px;
 }
-#downstreams-create-form input[type="submit"]{
+
+#downstreams-create-form input[type="submit"] {
     border: 0;
     margin-left: 120px;
     border-radius: 5px;
@@ -978,23 +1161,27 @@ input, select, textarea {
     color: #fff;
 }
 
-#downstreams-create-form input[type="reset"]{
+#downstreams-create-form input[type="reset"] {
     border: 1px solid #ddd;
     border-radius: 5px;
     cursor: pointer;
     background-color: #fff;
 }
 
-#downstreams-create-form input[type="reset"]:hover{
+#downstreams-create-form input[type="reset"]:hover {
     border: 1px solid #4db3ff;
     border-radius: 5px;
     cursor: pointer;
     color: #4db3ff;
 }
+
 .dialog-width .grey-tab li {
     background-color: #999999;
     cursor: pointer;
-}    color: #fff;
+}
+
+color: #fff;
+
 .dialog-width .grey-tab li.active {
     background-color: #6d6d6d;
 }
@@ -1002,6 +1189,6 @@ input, select, textarea {
 /**
  * 活动开关
  */
-.active-switch{
-    color: #20a0ff!important;
+.active-switch {
+    color: #20a0ff !important;
 }

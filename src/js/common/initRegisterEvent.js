@@ -158,7 +158,6 @@ define(function(require, exports, module) {
                     ok: function() {
                         jh.utils.ajax.send({
                             url: '/operator/loginout',
-                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                             done: function() {
                                 $.cookie('admin-username',null);
                                 $.cookie('admin-X-Token',null);
@@ -172,85 +171,9 @@ define(function(require, exports, module) {
                     cancel: function() {}
                 });
             });
-
-            $('#editPass').on('click', function() {
-                var me = $(this);
-                me.attr('disabled', 'disabled');
-                var username = $.cookie('admin-username');
-                var str = jh.utils.template('modify_pass_template', {
-                    username: username
-                });
-                jh.utils.alert({
-                    title: '修改密码',
-                    content: str,
-                    ok: function() {
-                        $('#editPassForm').submit();
-                        return false;
-                    },
-                    close: function() {
-                        me.removeAttr('disabled');
-                    },
-                    cancel: function() {
-                        me.removeAttr('disabled');
-                    }
-                });
-                jh.utils.validator.init({
-                    id: 'editPassForm',
-                    submitHandler: function() {
-                        var oldPass = $.trim($('#old_passwd').val());
-                        var newPass = $.trim($('#new_passwd').val());
-
-                        jh.utils.ajax.send({
-                            url: '/admin/user/update-passwd',
-                            method: 'post',
-                            data: {
-                                old_passwd: oldPass,
-                                new_passwd: newPass
-                            },
-                            done: function() {
-                                jh.utils.alert({
-                                    content: '密码修改成功,需要重新进行登录操作',
-                                    ok: function() {
-                                        window.location.href = jh.config.pageLogin;
-                                    },
-                                    cancel: false
-                                });
-                            }
-                        });
-                    }
-                });
-            });
-
+            
             $('body').on('change', 'select', function() {
                 $(this).parents('form').validate().element($(this));
-            });
-
-            $('.wrapper').off('click', '.stateChange li').on('click', '.stateChange li', function() {
-                var me = $(this);
-                var val = me.data('value');
-                me.addClass('active').siblings().removeClass('active');
-                me.siblings('input[type=hidden]').val(val);
-                me.parents('form').submit();
-            });
-
-            var inputTimeoutId = null;
-            var formChangeHandle = function(form) {
-                clearInterval(inputTimeoutId);
-                inputTimeoutId = window.setTimeout(function() {
-                    form.submit();
-                }, 600);
-            };
-
-            //输入框内容改变即刻搜索
-            $('.wrapper').off('input propertychange', '.search-input').on('input propertychange', '.search-input', function() {
-                var me = $(this);
-                formChangeHandle(me.parents('form'));
-            });
-
-            //下拉菜单改变后即刻搜索
-            $('.wrapper').off('change', '.search-select').on('change', '.search-select', function() {
-                var me = $(this);
-                formChangeHandle(me.parents('form'));
             });
 
             $('body').off('change', '#checkAll').on('click', '#checkAll', function() {

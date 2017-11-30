@@ -42,10 +42,6 @@
                                 <i class="icon icon-out"></i>
                                 <span>账号注销</span>
                             </li>
-<!--                             <li class="editPass">
-                                <i class="icon icon-pass"></i>
-                                <span id="editPass">修改密码</span>
-                            </li> -->
                         </ol>
                     </li>
                 </ul>
@@ -82,34 +78,6 @@
         {{/if}}
     </li>
     {{/each}}
-</script>
-<script type="text/template" id="modify_pass_template">
-    <form id="editPassForm">
-        <table class="noboder">
-            <tr>
-                <td>用户名：</td>
-                <td>{{username}}</td>
-            </tr>
-            <tr>
-                <td>原密码：</td>
-                <td>
-                    <input class="required" type="password" name="old_passwd" id="old_passwd" />
-                </td>
-            </tr>
-            <tr>
-                <td>新密码：</td>
-                <td>
-                    <input class="required checkPassword passwordRepeat" type="password" name="new_passwd" id="new_passwd" />
-                </td>
-            </tr>
-            <tr>
-                <td>再次输入密码：</td>
-                <td>
-                    <input class="required" equalTo="#new_passwd" type="password" name="repeat_passwd" id="repeat_passwd" />
-                </td>
-            </tr>
-        </table>
-    </form>
 </script>
 <script type="text/javascript" src="../../js/lib/seajs/3.0.1/sea.js?version=20170721"></script>
 <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.0&key=4710f3db882029c3838ac9eaf1ecda5c"></script> 
