@@ -139,10 +139,10 @@ define(function(require, exports, module) {
                     content: '确定要安全退出吗？',
                     ok: function() {
                         jh.utils.ajax.send({
-                            url: '/operator/loginout',
+                            url: '/operator/logout',
                             done: function() {
-                                $.cookie('admin-username', null);
-                                $.cookie('admin-X-Token', null);
+//                              $.cookie('admin-username', null);
+//                              $.cookie('admin-X-Token', null);
                                 window.location.href = jh.config.pageLogin;
                             },
                             fail: function() {

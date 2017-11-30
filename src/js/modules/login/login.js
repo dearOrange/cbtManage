@@ -33,28 +33,23 @@ define(function(require, exports, module) {
         };
 
         this.registerEvent = function() {
-//          jh.utils.validator.init({
-//              id: 'form_login',
-//              submitHandler: function(form) {
-//                  // window.domain = 'cbt.com';
-//                  var datas = jh.utils.formToJson(form); //表单数据
-//                  datas.captchaCode = $.cookie('captchaCode');//验证码key
-//
-//                  // var flag = datas.username + '_login_passError'; //本地存储flag
-//                  // var errnum = localStorage[flag]; //错误次数
-//
-//                  jh.utils.ajax.send({
-//                      url: '/operator/login',
-//                      method: 'post',
-//                      data: datas,
-//                      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-//                      done: function(returnData) {
-//                          if (returnData.code === 'SUCCESS') {
-//                              $.cookie('admin-X-Token', returnData.data.token);
-                                $.cookie('admin-username', 'admin');
+            jh.utils.validator.init({
+                id: 'form_login',
+                submitHandler: function(form) {
+                    var datas = jh.utils.formToJson(form); //表单数据
+                    datas.captchaCode = $.cookie('captchaCode');//验证码key
+                    jh.utils.ajax.send({
+                        url: '/operator/login',
+                        method: 'post',
+                        data: datas,
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        done: function(returnData) {
+                            if (returnData.code === 'SUCCESS') {
+                                sessionStorage.setItem('admin-X-Token', returnData.data.token);
+                                sessionStorage.setItem('admin-username', $("#username").val());
                                 window.location.href = jh.config.pageIndex;
-//                          }
-//                      },
+                            }
+                        },
 //                      fail: function(xhr) {
 //                          refreshCode();
 //                          // if (xhr.result.code === 10007) {
@@ -75,14 +70,14 @@ define(function(require, exports, module) {
 //                          //     });
 //                          // }
 //                      }
-//                  });
-//                  return false;
-//              }
-//          });
-//
-//          $('#checkCode').on('click', function() {
-//              refreshCode();
-//          });
+                    });
+                    return false;
+                }
+            });
+
+            $('#checkCode').on('click', function() {
+                refreshCode();
+            });
         };
     }
     module.exports = Login;

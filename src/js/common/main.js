@@ -33,7 +33,7 @@ define(function(require, exports, module) {
                             var moduleInfo = jh.utils.getURLValue();
 
                             jh.utils.defaultPage(moduleInfo.module);
-                            var username = $.cookie('admin-username');
+                            var username = sessionStorage.getItem('admin-username');
                             $('#usernameText').text(username);
             //             }
             //         });
@@ -57,7 +57,7 @@ define(function(require, exports, module) {
 
             var firstMenu = $('#leftMenu-box').children('li');
             var secondMenu = firstMenu.children('ul').children('li');
-            var username = $.cookie('admin-username');
+            var username = sessionStorage.getItem('admin-username');
         };
 
         this.registerEvent = function() {
