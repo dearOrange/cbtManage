@@ -566,8 +566,6 @@ define(function(require, exports, module) {
             if (!tammy.utils.objIsNull(settings.data) && settings.contentType == 'application/json') {
                 settings.data = JSON.stringify(settings.data);
             }
-            settings.done();
-            return false;
             $.ajax({
                 url: REQUESTROOT + settings.url,
                 method: settings.method,

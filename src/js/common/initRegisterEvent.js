@@ -253,6 +253,17 @@ define(function(require, exports, module) {
                 formChangeHandle(me.parents('form'));
             });
 
+            $('body').off('change', '#checkAll').on('click', '#checkAll', function() {
+                var me = $(this);
+                var state = me.is(':checked');
+                var checkboxs = me.parents('table').find('input[type=checkbox]');
+                if(state){
+                    checkboxs.prop('checked',true);
+                }else{
+                    checkboxs.prop('checked',false);
+                }
+            });
+
         };
     }
     module.exports = RegisterJQueryEvent;
