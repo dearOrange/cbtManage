@@ -1647,6 +1647,30 @@ define(function(require, exports, module) {
                 case 1:
                     state = "开启";
                     break;
+                case "UPSTREAM_INSURANCE":
+                    state = "保险公司";
+                    break;
+                case "UPSTREAM_BANK":
+                    state = "银行";
+                    break;
+                case "UPSTREAM_FACTORY":
+                    state = "厂家金融";
+                    break;
+                case "UPSTREAM_LEASE":
+                    state = "融资租赁";
+                    break;
+                case "UPSTREAM_P2P":
+                    state = "P2P平台";
+                    break;
+                case "UPSTREAM_LAWFIRM":
+                    state = "律师事务所";
+                    break;
+                case "UPSTREAM_PERSONAL":
+                    state = "个人";
+                    break;
+                case "UPSTREAM_OTHER":
+                    state = "其他";
+                    break;
             }
             return state;
         }
