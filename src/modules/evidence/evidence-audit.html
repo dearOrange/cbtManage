@@ -1,152 +1,71 @@
 <div class="dataContent">
+    <div class="search-container">
+        <form id="admin-evidenceAuditList-form">
+            <table class="common_query textLeft search-content">
+                <tr>
+                    <td>
+                        <label class="label">车牌号：</label>
+                        <input type="text" class="search-input" name="carNumber" maxlength="7">
+                    </td>
+                    <td>
+                        <label class="label">债权方名称：</label>
+                        <input type="text" class="search-input" name="companyName" maxlength="30">
+                    </td>
+                    <td>
+                        <label class="label">委托类型：</label>
+                        <select name="entrust">
+                            <option value="all">无定位需找车并拖车</option>
+                            <option value="trace">无定位只需找车</option>
+                            <option value="recycle">有定位只需拖车</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="submit" value="查询" class="button search-button">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
     <div class="data-container">
         <table class="dataShow">
             <thead>
                 <tr>
                     <th width="3%">&nbsp;</th>
-                    <th width="4%"><input type="checkbox" /></th>
-                    <th width="10%">任务号</th>
-                    <th width="10%">任务类型</th>
-                    <th width="15%">债权方</th>
                     <th width="10%">车牌号</th>
                     <th width="8%">品牌</th>
                     <th width="6%">车系</th>
-                    <th width="6%">颜色</th>
-                    <th width="10%">凭证审核状态</th>
-                    <th width="15%">任务发布时间</th>
+                    <th width="10%">任务类型</th>
+                    <th width="15%">债权方</th>
+                    <th width="15%">提交凭证时间</th>
                     <th width="6%">操作</th>
                 </tr>
-                <tr>
-                	<td>1</td>
-                	<td><input type="checkbox" /></td>
-                	<td>RW1154122145</td>
-                	<td>无定位需找+拖</td>
-                	<td>浙江亿众担保有限公司</td>
-                	<td>浙A·8GD8K</td>
-                	<td>大众</td>
-                	<td>途观</td>
-                	<td>黑色</td>
-                	<td>凭证审核中</td>
-                	<td>2017.05.24   12:23:22</td>
-                	<td><a data-id="1" class="detail button" data-infos="1">详情</a></td>
-                </tr>
             </thead>
-            <tbody id="order_list_container">
+            <tbody id="admin-evidenceAuditList-container">
             </tbody>
         </table>
         <div class="page-box pagination" id="page_container"></div>
     </div>
 </div>
 
-<script type="text/template" id="taskList_content_template">
-    <!--{{ each list item index }}
+<script type="text/template" id="admin-evidenceAuditList-template">
+    {{ each list item index }}
     <tr class="trData">
-        <td>1</td>
-        <td>{{item.carColor}}</td>
+        <td>{{index+1}}</td>
+        <td>{{item.carNumber}}</td>
         <td>{{item.carBrand}}</td>
         <td>{{item.carSeries}}</td>
-        <td>{{item.carModel}}</td>
-        <td>{{item.companyName}}</td>
-        <td>{{item.contactPhone}}</td>
+        <td>{{menuState(item.entrust)}}</td>
+        <td>{{item.upstreamName}}</td>
+        <td>{{item.voucherUploadAt}}</td>
         <td>
             <ul class="operaitem">
                 <li>
-                    <a data-id="{{item.id}}" class="detail button" data-infos="{{item}}">详情</a>
+                    <a data-id="{{item.id}}" class="detail button">详情</a>
                 </li>
             </ul>
         </td>
     </tr>
-    {{/each}}-->
-</script>
-<script type="text/template" id="task_detail_template">
-    <div class="dialog-width">
-        <p class="pull-left">
-            任务详情
-        </p>
-        <p class="pull-right">凭证审核中</p>
-        <div class="clearfix"></div>
-        <hr /><br />
-        <p>基本信息</p><br />
-        
-        <ul>
-            <li>任务号：bghbfbf</li>
-            <li>任务类型：dgeg</li>
-            <li>任务发布时间：ehehe</li>
-           	<li>捕头：一号捕头</li>
-            <li>车牌号：hhefhfb</li>
-            <li>品牌：getdvghrg</li>
-            <li>车系：kykmgthbf</li>
-            <li>车型：tegvdfgr</li>
-            <li>颜色：tgdfggrgg</li>
-            <li>定位地区：浙江</li>
-            <li>车辆识别号：gegdgrgrb</li>
-            <li>车辆发动机号：jkyfghetg</li>
-        </ul>
-        <div class="remark">备注信息：着放大镜功能国家设立方式</div>
-        <div class="imgRecord">
-        	<span><i>2014年催收记录</i><img src="" alt="图片" /></span>
-        	<span><i>2015年催收记录</i><img src="" alt="图片" /></span>
-        	<span><i>2016年催收记录</i><img src="" alt="图片" /></span>
-        </div>
-        <div class="hopeprice" style="border-top:1px dashed #ccc;">
-        	<p>费用估值</p>
-        	<div>
-        		<label>车辆残值估算:</label>
-        		<span>300000.00</span>
-        	</div>
-        	<div>
-        		<label style="width:168px;">车辆处置费（查找+清收）:</label>
-        		<span>30000.00</span>
-        	</div>
-        </div>
-        <div class="mainfile">
-        	<p>关键资料</p>
-        	<dl class="pull-left">
-        		<dt><img src="../../img/nopic.png" alt="图片" /></dt>
-        		<dd>公证书</dd>
-        	</dl>
-        	<dl class="pull-left">
-        		<dt><img src="../../img/nopic.png" alt="图片" /></dt>
-        		<dd>按揭服务协议</dd>
-        	</dl>
-        	<dl class="pull-left">
-        		<dt><img src="../../img/nopic.png" alt="图片" /></dt>
-        		<dd>抵押合同</dd>
-        	</dl>
-        	<dl class="pull-left">
-        		<dt><img src="../../img/nopic.png" alt="图片" /></dt>
-        		<dd>垫付款凭证</dd>
-        	</dl>
-        	<dl class="pull-left">
-        		<dt><img src="../../img/nopic.png" alt="图片" /></dt>
-        		<dd>还款确认书</dd>
-        	</dl>
-        	<dl class="pull-left">
-        		<dt><img src="../../img/nopic.png" alt="图片" /></dt>
-        		<dd>法院判决书</dd>
-        	</dl>
-        </div>
-        <div class="buttonAnt">
-        	<a class="pull-right button audit">审核</a>
-        </div>
-    </div>
-</script>
-<script type="text/template" id="task_audit_template">
-	<div class="divied-width ">
-        <p class="pull-left">
-            凭证审核
-        </p>
-        <div class="clearfix"></div>
-        <hr /><br />
-        <div class="divied-type">
-        	<input type="radio" name="audit" />审核通过
-        	<input type="radio" name="audit" />审核不通过
-        </div>
-        <div class="buttonAnt">
-        	<a class="pull-right button divied-no">取消</a>
-        	<a class="pull-right button divied-sure">确定</a>
-        </div>
-    </div>
+    {{/each}}
 </script>
 <script type="text/javascript">
 seajs.use('modules/evidence/evidence-audit', function(EvidenceAudit) {
