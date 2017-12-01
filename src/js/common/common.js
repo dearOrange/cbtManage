@@ -223,11 +223,6 @@ define(function(require, exports, module) {
                         theme: "minimal-dark"
                     });
                 }
-
-                if ($('.aui_state_lock').height() > $(window).height()) {
-                    $('.aui_state_lock').css('height', $(window).height());
-                    $('.aui_state_lock').css('overflow', 'auto');
-                }
                 return dg;
             },
             confirm: function(opt) {
