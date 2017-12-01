@@ -13,6 +13,7 @@ define(function(require, exports, module) {
         this.init = function() {
             this.initContent();
             this.registerEvent();
+            $('select').select2();
         };
         this.initContent = function(isSearch) {
             var page = new jh.ui.page({
@@ -28,30 +29,8 @@ define(function(require, exports, module) {
                 }
             });
             page.init();
-            $('#upstreamId').select2({
-                placeholder: '债权人选择',
-                allowClear: true
-            });
         };
         this.registerEvent = function() {
-
-//          jh.utils.uploader.init({
-//              hiddenName: 'test',
-//              server:'/adminServer/task/import',
-//              pick: {
-//                  id: '#importFile'
-//              },
-//              accept: {
-//                  title: 'Applications',
-//                  extensions: 'xls,xlsx',
-//                  mimeTypes: 'application/xls,application/xlsx'
-//              }
-//          },{
-//          	uploadAccept:function(file, response){
-//          		alert(response)
-//          	}
-//          });
-
             // 搜索
             jh.utils.validator.init({
                 id: 'creditor-manage-form',
@@ -62,47 +41,22 @@ define(function(require, exports, module) {
             });
 
             //查看任务详情
-            $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
-                var me = $(this);
-                var id = me.data('id');
-//              jh.utils.ajax.send({
-//                  url: '/trace/matchedTrace',
-//                  data: {
-//                      taskId: id
-//                  },
-//                  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-//                  done: function(returnData, status, xhr) {
-                        var alertStr = jh.utils.template('creditor_detail_template', { });
-                        jh.utils.alert({
-                            content: alertStr,
-                        });
-//                  }
-//              });
-
+            $('.dataShow').off('click', '.admin-detail').on('click', '.admin-detail', function() {
+            	var id = $(this).data('id');
+                jh.utils.load("/src/modules/creditororder/creditor_manage_detail",{
+                	id:id
+                })
             });
             
-            //分配捕头
-//          $('body').off('click', '.divied').on('click', '.divied', function() {
-//              var me = $(this);
-//              var infos = me.data('infos');
-//              jh.utils.ajax.send({
-//                  url: '/trace/matchedTrace',
-//                  data: {
-//                      taskId: infos.id
-//                  },
-//                  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-//                  done: function(returnData, status, xhr) {
-//                      infos.informantList = returnData.data;
-//                      infos.chuzhi = parseFloat(infos.carPrice*0.15).toFixed(2)
-//                      var alertDivied = jh.utils.template('task_divied_template', { });
-//                      jh.utils.alert({
-//                          content: alertDivied,
-//                      });
-//                  }
-//              });
-
-//          });
-                
+//          添加小计
+			$('body').off('click', '.addSubtotal').on('click', '.addSubtotal', function() {
+				var addStr = jh.utils.template('creditor_addSubtotal_template', {});
+                jh.utils.alert({
+                    content: addStr,
+                    ok: true
+                });
+			})
+			
         };
     }
     module.exports = CreditorManage;

@@ -948,22 +948,6 @@ input, select, textarea {
     width: 48px;
 }
 
-.upimg {
-    margin: 30px 0;
-    overflow: hidden;
-}
-
-.upimg dl {
-    float: left;
-    margin-right: 30px;
-}
-
-.upimg dl dt img {
-    width: 150px;
-    height: 120px;
-    margin-bottom: 12px;
-}
-
 .buttonAnt {
     margin: 30px 0;
 }
@@ -988,20 +972,14 @@ input, select, textarea {
     overflow: hidden;
 }
 
-.upmainfile ol {
-    width: 300px;
-    float: right;
-    margin: 10px 0;
-}
-
 .upmainfile ol li {
-    width: 46%;
+    width: 16%;
     float: right;
     height: 30px;
     text-align: center;
     line-height: 30px;
     border: 1px solid #ccc;
-    margin-right: 4px;
+    margin:20px 4px;
 }
 
 .upmainfile table {
@@ -1074,27 +1052,6 @@ input, select, textarea {
     margin-top: 20px;
 }
 
-.mainfile dl {
-    width: 160px;
-    height: 200px;
-    border: 1px solid #ccc;
-    text-align: center;
-    margin: 15px 20px 10px 0;
-}
-
-.mainfile dl dt {
-    height: 160px;
-    border-bottom: 1px solid #ccc;
-}
-
-.mainfile dl dt img {
-    width: 150px;
-    height: 158px;
-}
-
-.mainfile dl dd {
-    line-height: 40px;
-}
 
 /*分配*/
 .divied-width {
@@ -1191,4 +1148,27 @@ color: #fff;
  */
 .active-switch {
     color: #20a0ff !important;
+}
+
+/*客户标签*/
+.customerType div{
+	overflow: hidden;
+	margin:20px;
+}
+.customerType label{
+	float:left;
+	font-weight: 900;
+}
+.customerType input{
+	float:left;
+	width:300px;
+	height:30px;
+	border:1px solid #ccc;
+	margin-left:10px;
+}
+.customerType textarea{
+	width:590px;
+	height:50px;
+	resize: none;
+	margin:0 0 20px 10px;
 }
