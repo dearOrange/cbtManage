@@ -12,10 +12,6 @@ define(function(require, exports, module) {
 
 		this.init = function() {
 			this.registerEvent();
-			this.initContent();
-		};
-		this.initContent = function() {
-			
 		};
 		this.registerEvent = function() {
 			var data = jh.utils.getURLValue();
@@ -57,15 +53,15 @@ define(function(require, exports, module) {
 						var addStr = jh.utils.template('creditor_addSubtotal_template', {});
 						jh.utils.alert({
 							content: addStr,
-							ok: function(){
+							ok: function() {
 								jh.utils.ajax.send({
 									url: '/record/addContact',
 									data: {
-									content: $('#subContent').val(),
-									contacts: $('#subPerson').val(),
-									contactPhone: $('#subStyle').val(),
-									upstreamId: data.args.id
-								},
+										content: $('#subContent').val(),
+										contacts: $('#subPerson').val(),
+										contactPhone: $('#subStyle').val(),
+										upstreamId: data.args.id
+									},
 									done: function(returnData) {
 										console.log(datas)
 									}
@@ -73,10 +69,10 @@ define(function(require, exports, module) {
 							}
 						});
 					})
-					
+
 					//客户标签
 					$('body').off('click', '.addstorage').on('click', '.addstorage', function() {
-						
+
 						jh.utils.ajax.send({
 							url: '/upstreams/updateTag',
 							data: {
@@ -90,32 +86,6 @@ define(function(require, exports, module) {
 					})
 				}
 			});
-			
-
-//			//          添加小计
-//			$('body').off('click', '.addSubtotal').on('click', '.addSubtotal', function() {
-//				var dataAdd = jh.utils.getURLValue();
-//				var addStr = jh.utils.template('creditor_addSubtotal_template', {});
-//				var datas = {
-//					content: $('#subContent').val(),
-//					contacts: $('#subPerson').val(),
-//					contactPhone: $('#subStyle').val(),
-//					upstreamId: dataAdd.args.id
-//				};
-//				jh.utils.alert({
-//					content: addStr,
-//					ok: function(){
-//						jh.utils.ajax.send({
-//							url: '/record/addContact',
-//							contentType: 'application/json',
-//							data: datas,
-//							done: function(returnData) {
-//								console.log(datas)
-//							}
-//						});
-//					}
-//				});
-//			})
 
 		};
 	}

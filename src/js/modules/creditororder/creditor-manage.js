@@ -48,15 +48,6 @@ define(function(require, exports, module) {
                 })
             });
             
-//          添加小计
-			$('body').off('click', '.addSubtotal').on('click', '.addSubtotal', function() {
-				var addStr = jh.utils.template('creditor_addSubtotal_template', {});
-                jh.utils.alert({
-                    content: addStr,
-                    ok: true
-                });
-			})
-			
         };
     }
     module.exports = CreditorManage;

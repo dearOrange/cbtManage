@@ -1151,11 +1151,12 @@ color: #fff;
 }
 
 /*客户标签*/
-.customerType div{
+/*预估价格*/
+.customerType div, .hopeprice div{
 	overflow: hidden;
 	margin:20px;
 }
-.customerType label{
+.customerType label, .hopeprice label{
 	float:left;
 	font-weight: 900;
 }
@@ -1172,3 +1173,11 @@ color: #fff;
 	resize: none;
 	margin:0 0 20px 10px;
 }
+
+.hopeprice input{
+	width:300px;
+	height:30px;
+	border:1px solid #ccc;
+	margin-left:10px;
+}
+

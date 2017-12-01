@@ -6,114 +6,76 @@
  */
 'use strict';
 define(function(require, exports, module) {
-    function TaskList() {
+    function RestorationList() {
         var _this = this;
-        _this.form = $('#task-list-form');
+        _this.form = $('#restoration-list-form');
 
         this.init = function() {
+        	this.initContent();
+        	this.searchSelect();
             this.registerEvent();
+            $('select').select2();
         };
-
+		this.initContent = function(isSearch) {
+            var page = new jh.ui.page({
+                data_container: $('#restoration_list_container'),
+                page_container: $('#page_container'),
+                method: 'post',
+                url: '/task/offerList',
+                contentType: 'application/json',
+                data: jh.utils.formToJson(_this.form),
+                isSearch: isSearch,
+                callback: function(data) {
+                    return jh.utils.template('restoration-list-template', data);
+                }
+            });
+            page.init();
+        };
+        this.searchSelect = function(){
+        	jh.utils.ajax.send({
+                url: '/operator/getAllBusiness',
+                done: function(returnData){
+                	var operateData = returnData.data;
+                	var operateStr = "";
+                	for(var i=0;i<operateData.length;i++){
+                		operateStr += '<option value="'+operateData[i].id+'">'+operateData[i].name+'</option>';
+                	}
+                	$('#operateManage').append(operateStr);
+                }
+          	});
+        	jh.utils.ajax.send({
+                url: '/operator/getAllChannel',
+                done: function(returnData){
+                	var channelData = returnData.data;
+                	var channelStr = "";
+                	for(var i=0;i<channelData.length;i++){
+                		channelStr += '<option value="'+channelData[i].id+'">'+channelData[i].name+'</option>';
+                	}
+                	$('#channelManage').append(channelStr);
+                }
+          	})
+        };
         this.registerEvent = function() {
-            //          jh.utils.uploader.init({
-            //              hiddenName: 'test',
-            //              server:'/adminServer/task/import',
-            //              pick: {
-            //                  id: '#importFile'
-            //              },
-            //              accept: {
-            //                  title: 'Applications',
-            //                  extensions: 'xls,xlsx',
-            //                  mimeTypes: 'application/xls,application/xlsx'
-            //              }
-            //          },{
-            //              uploadAccept:function(file, response){
-            //                  alert(response)
-            //              }
-            //          });
-            //
-            //          // 搜索
-            //          jh.utils.validator.init({
-            //              id: 'task-list-form',
-            //              submitHandler: function(form) {
-            //                  _this.initContent(true);
-            //                  return false;
-            //              }
-            //          });
+            
+            // 搜索
+            jh.utils.validator.init({
+                id: 'restoration-list-form',
+                submitHandler: function(form) {
+                    _this.initContent(true);
+                    return false;
+                }
+            });
 
             //查看任务详情
-            $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
-                var me = $(this);
-                var infos = me.data('infos');
-                //              jh.utils.ajax.send({
-                //                  url: '/trace/matchedTrace',
-                //                  data: {
-                //                      taskId: infos.id
-                //                  },
-                //                  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                //                  done: function(returnData, status, xhr) {
-                //                      infos.informantList = returnData.data;
-                //                      infos.chuzhi = parseFloat(infos.carPrice*0.15).toFixed(2)
-                var alertStr = jh.utils.template('task_detail_template', {});
-                jh.utils.alert({
-                    content: alertStr
-                });
-                //                  }
-                //              });
-
+            $('.dataShow').off('click', '.admin-detail').on('click', '.admin-detail', function() {
+            	var id = $(this).data('id');
+                jh.utils.load("/src/modules/restoration/restoration-detail",{
+                	id:id
+                })
             });
 
-            //分配捕头
-            $('body').off('click', '.divied').on('click', '.divied', function() {
-                var me = $(this);
-                //              var infos = me.data('infos');
-                //              jh.utils.ajax.send({
-                //                  url: '/trace/matchedTrace',
-                //                  data: {
-                //                      taskId: infos.id
-                //                  },
-                //                  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                //                  done: function(returnData, status, xhr) {
-                //                      infos.informantList = returnData.data;
-                //                      infos.chuzhi = parseFloat(infos.carPrice*0.15).toFixed(2)
-                var alertDivied = jh.utils.template('task_divied_template', {});
-                jh.utils.alert({
-                    content: alertDivied,
-                });
-                //                  }
-                //              });
-
-            });
-
-            //删除任务
-            $('body').off('click', '.delete').on('click', '.delete', function() {
-                var me = $(this);
-                var id = me.data('id');
-                jh.utils.alert({
-                    content: '确定删除任务吗？',
-                    ok: function() {
-                        jh.utils.ajax.send({
-                            url: '/task/delTask',
-                            data: {
-                                taskId: id
-                            },
-                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                            done: function(returnData) {
-                                jh.utils.alert({
-                                    content: '任务删除成功！',
-                                    ok: function() {
-                                        me.parents('tr').remove();
-                                    }
-                                });
-                            }
-                        });
-                    },
-                    cancel: true
-                });
-
-            });
 
         };
     }
-    module.exports = TaskList;
+    module.exports = RestorationList;
 });
