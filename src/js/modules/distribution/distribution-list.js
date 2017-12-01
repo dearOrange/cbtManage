@@ -8,81 +8,63 @@
 define(function(require, exports, module) {
     function DistributionList() {
         var _this = this;
-        _this.form = $('#distribution-list-form');
 
         this.init = function() {
+            this.initContent();
             this.registerEvent();
         };
 
-        this.registerEvent = function() {
-            //          jh.utils.uploader.init({
-            //              hiddenName: 'test',
-            //              server:'/adminServer/task/import',
-            //              pick: {
-            //                  id: '#importFile'
-            //              },
-            //              accept: {
-            //                  title: 'Applications',
-            //                  extensions: 'xls,xlsx',
-            //                  mimeTypes: 'application/xls,application/xlsx'
-            //              }
-            //          },{
-            //              uploadAccept:function(file, response){
-            //                  alert(response)
-            //              }
-            //          });
-            //
-            //          // 搜索
-            //          jh.utils.validator.init({
-            //              id: 'task-list-form',
-            //              submitHandler: function(form) {
-            //                  _this.initContent(true);
-            //                  return false;
-            //              }
-            //          });
+        this.initContent = function(isSearch) {
+            var page = new jh.ui.page({
+                data_container: $('#admin-distributionList-container'),
+                page_container: $('#page_container'),
+                method: 'post',
+                url: '/task/distributeList',
+                contentType: 'application/json',
+                data: {},
+                isSearch: isSearch,
+                callback: function(data) {
+                    return jh.utils.template('admin-distributionList-template', data);
+                }
+            });
+            page.init();
+        };
 
+        this.registerEvent = function() {
             //查看任务详情
             $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
                 var me = $(this);
-                var infos = me.data('infos');
-                //              jh.utils.ajax.send({
-                //                  url: '/trace/matchedTrace',
-                //                  data: {
-                //                      taskId: infos.id
-                //                  },
-                //                  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                //                  done: function(returnData, status, xhr) {
-                //                      infos.informantList = returnData.data;
-                //                      infos.chuzhi = parseFloat(infos.carPrice*0.15).toFixed(2)
-                var alertStr = jh.utils.template('task_detail_template', {});
-                jh.utils.alert({
-                    content: alertStr
+                var id = me.data('id');
+                jh.utils.load('/src/modules/distribution/distribution-detail', {
+                    id: id
                 });
-                //                  }
-                //              });
-
             });
 
-            //分配捕头
-            $('body').off('click', '.divied').on('click', '.divied', function() {
+            //批量分配
+            $('body').off('click', '#distributeTask').on('click', '#distributeTask', function() {
                 var me = $(this);
-                //              var infos = me.data('infos');
-                //              jh.utils.ajax.send({
-                //                  url: '/trace/matchedTrace',
-                //                  data: {
-                //                      taskId: infos.id
-                //                  },
-                //                  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                //                  done: function(returnData, status, xhr) {
-                //                      infos.informantList = returnData.data;
-                //                      infos.chuzhi = parseFloat(infos.carPrice*0.15).toFixed(2)
-                var alertDivied = jh.utils.template('task_divied_template', {});
-                jh.utils.alert({
-                    content: alertDivied,
+                var list = $('#admin-distributionList-container').find(':checked');
+                var ids = [];
+                $.each(list, function(index, item) {
+                    var id = $(item).data('id');
+                    ids.push(id);
                 });
-                //                  }
-                //              });
-
+                ids = ids.join(',');
+                var opt = {
+                    url: '/task/distributeTask',
+                    data: {
+                        taskIds: ids
+                    },
+                    done: function(returnData) {
+                        jh.utils.alert({
+                            content: '任务分配成功！',
+                            ok: true,
+                            cancel: false
+                        });
+                    }
+                };
+                return false;
+                jh.utils.ajax.send(opt);
             });
 
             //删除任务
