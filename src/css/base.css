@@ -1808,3 +1808,11 @@ label.label_check, label.label_radio {
     padding: 8px 16px;
     color: #ff8080;
 }
+
+/*返回上一级*/
+.gobackPage{
+	float:left;
+	width:100px;
+	height:30px;
+	margin:10px 0 0 20px;
+}
