@@ -554,15 +554,31 @@ label.error {
     margin: -16px -16px 0px 0px
 }
 
+/**
+ * webupload
+ */
 .upload-list {
     display: inline-block;
-    vertical-align: middle
+    vertical-align: middle;
+}
+
+.upload-pa {
+    position: relative;
+    z-index: 1;
+}
+
+.upload-pa .upload-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background-color: #fff;
+    border: 1px solid #bee3ff;
 }
 
 .upload-list .upfile-item {
     position: relative;
     float: left;
-    margin-right: 10px
 }
 
 .upload-list .upfile-item .delete-img {
@@ -573,39 +589,55 @@ label.error {
     vertical-align: middle;
     width: 14px;
     height: 15px;
-    background: url(../img/imgclose.png) no-repeat
+    z-index: 3;
+    cursor: pointer;
+    background: url(../img/imgclose.png) no-repeat;
 }
 
 .upload-list .upfile-item img {
-    width: 50px;
-    height: 50px
+    width: 100px;
+    height: 100px;
 }
 
 .webuploader-container {
     display: inline-block;
     vertical-align: middle;
-    position: relative
+    position: relative;
 }
 
 .webuploader-container .webuploader-pick {
     color: #fff;
     text-align: center;
-    border-radius: 3px;
     overflow: hidden;
     min-width: 50px;
-    padding: 5px 10px;
-    background-color: #20a0ff;
-    border: 1px solid #20a0ff;
-    border-radius: 5px
+    border: 1px solid #bee3ff;
+    border-radius: 5px;
+    width: 100px;
+    height: 100px;
+    background: url(../js/plugin/webuploader/upload.png) center center;
+    background-size: cover;
+}
+
+.ordinary .webuploader-container .webuploader-pick {
+    text-align: center;
+    overflow: hidden;
+    min-width: 50px;
+    border: 1px solid #3fa1f4;
+    border-radius: 3px;
+    background: none;
+    height: auto;
+    width: auto;
+    color: #3fa1f4;
+    padding: 3px 8px;
 }
 
 .webuploader-container .webuploader-element-invisible {
     position: absolute !important;
-    clip: rect(1px, 1px, 1px, 1px)
+    clip: rect(1px, 1px, 1px, 1px);
 }
 
 .upload:after {
-    clear: both
+    clear: both;
 }
 
 .startTime, .endTime {

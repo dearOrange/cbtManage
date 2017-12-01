@@ -84,7 +84,7 @@ define(function(require, exports, module) {
             url: '/distribution-list',
             childrens: []
         }, {
-            name: '信息修复',
+            name: '出具价格',
             icon: 'icon-supplier',
             module: '/src/modules/restoration',
             url: '/restoration-list',
