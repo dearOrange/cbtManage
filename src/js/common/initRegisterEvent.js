@@ -13,7 +13,7 @@ define(function(require, exports, module) {
             jh.utils.ajax.send({
                 url: '/qiniu/getToken',
                 done: function(returnData) {
-                    jh.config.uploadToken = returnData.data.uploadToken;
+                    sessionStorage.setItem('admin-uploadToken',returnData.data.uploadToken);
                 }
             });
 

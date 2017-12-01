@@ -25,7 +25,6 @@ define(function(require, exports, module) {
     require('plugin/scrollbar/scrollbar'); //scrollbar
 
     var FINAL_OPTIONS = {
-        uploadToken: '', //上传token
         viewImgRoot: 'http://oka19npup.bkt.clouddn.com/',
         pageSize: 10, //默认每页显示条数
         pageIndex: basePath + 'modules/index/index.html',
@@ -1156,11 +1155,11 @@ define(function(require, exports, module) {
                     duplicate: true, //可重复上传同一张图片
                     fileVal: 'file',
                     formData: {
-                        token: jh.arguments.uploadToken
+                        token: ''
                     } //向后台发送的formData数据
                 };
                 var opt = $.extend({}, options, opts); //合并参数
-
+                opt.formData.token = sessionStorage.getItem('admin-uploadToken');
                 var uploader = WebUploader.create(opt); //创建上传对象
                 var pickId = uploader.options.pick.id.replace(/#/, '');
                 var queueList = $('#' + pickId).siblings('.upload-list');
