@@ -579,7 +579,7 @@ define(function(require, exports, module) {
                 cache: false,
                 async: settings.async,
                 beforeSend: function(xhr) {
-                    var token = $.cookie('admin-X-Token');
+                    var token = sessionStorage.getItem('admin-X-Token');
                     xhr.setRequestHeader("X-Token", token);
                     settings.beforeSend.call(null, xhr);
                 }
@@ -600,7 +600,7 @@ define(function(require, exports, module) {
                     //错误时提示信息
                     if (settings.isAlert) {
                         //错误时提示信息
-                        cbt.utils.alert({
+                        tammy.utils.alert({
                             content: responseText.msg
                         });
                     }
@@ -626,8 +626,8 @@ define(function(require, exports, module) {
                 tammy.utils.ajax.send({
                     url: '/admin/user/login-out',
                     always: function() {
-                        $.cookie('admin-X-Token', null);
-                        $.cookie('admin-username', null);
+//                      $.cookie('admin-X-Token', null);
+//                      $.cookie('admin-username', null);
                         window.location.href = jh.config.pageLogin;
                     }
                 });
