@@ -35,22 +35,23 @@ define(function(require, exports, module) {
 							}
 						});
 					}
-
 					
-					//客户标签
-//					$('body').off('click', '.addstorage').on('click', '.addstorage', function() {
-//						
-//						jh.utils.ajax.send({
-//							url: '/upstreams/updateTag',
-//							data: {
-//								tag: $('.customerStyle').val(),
-//								upstreamId: data.args.id
-//							},
-//							done: function(returnData) {
-//								console.log(returnData)
-//							}
-//						});
-//					})
+					//预估价格
+					$('body').off('click', '.priceStorage').on('click', '.priceStorage', function() {
+						
+						jh.utils.ajax.send({
+							url: '/task/estimate',
+							data: {
+								carPrice: $('#salvage').val(),
+								estimatedMinPrice: $('#minMoney').val(),
+								estimatedMaxPrice: $('#maxMoney').val(),
+								taskId: data.args.id
+							},
+							done: function(returnData) {
+								console.log(returnData)
+							}
+						});
+					})
 				}
 			});
 			

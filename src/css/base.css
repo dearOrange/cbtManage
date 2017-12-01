@@ -557,6 +557,13 @@ label.error {
 /**
  * webupload
  */
+.upimg{
+	overflow: hidden;
+}
+.upimg dl{
+	float:left;
+	margin:10px 10px 0 10px;
+}
 .upload-list {
     display: inline-block;
     vertical-align: middle;
