@@ -44,7 +44,7 @@ define(function(require, exports, module) {
             url: '/creditor-manage',
             childrens: []
         }, {
-            name: '债权方认证',
+            name: 'xx债权方认证',
             icon: 'icon-region',
             module: '/src/modules/creditororder',
             url: '/creditor-identify',
