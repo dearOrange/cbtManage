@@ -1,6 +1,6 @@
 <div class="dataContent">
 	<div class="search-container">
-        <form id="task-list-form">
+        <form id="task-audit-form">
             <table class="common_query textLeft search-content">
                 <tr>
                     <td>
@@ -9,20 +9,26 @@
                     </td>
                     <td>
                         <label class="label">任务类型</label>
-                        <select name="" id="">
-                            <option value="">有定位只需拖车</option>
+                        <select name="entrust">
+                            <option value="all">无定位需找车并拖车</option>
+                            <option value="trace">无定位只需找车</option>
+                            <option value="recycle">有定位只需拖车</option>
                         </select>
                     </td>
                     <td>
                         <label class="label">债权方</label>
-                        <input type="text" class="search-input" name="zhaiquanfang">
+                        <input type="text" class="search-input" name="companyName">
                     </td>
                     <td>
-                        <button class="searchInfo">查找</button>
+                        <input type="submit" value="查询" class="button search-button">
                     </td>
                 </tr>
                 <tr>
-                	<input type="button" class="button" value="批量分配">
+                	<td>
+                		<input type="button" class="button allIdentify" value="批量审核">
+                		
+                	</td>
+                	
                 </tr>
             </table>
         </form>
@@ -32,105 +38,65 @@
             <thead>
                 <tr>
                     <th width="3%">&nbsp;</th>
-                    <th width="4%"><input type="checkbox" /></th>
+                    <th width="4%"><input type="checkbox" id="checkAll" /></th>
                     <th width="10%">车牌号</th>
                     <th width="8%">品牌</th>
                     <th width="6%">车系</th>
-                    <th width="10%">任务类型</th>
+                    <th width="15%">任务类型</th>
                     <th width="15%">债权方</th>
                     <th width="15%">任务发布时间</th>
-                    <th width="8%">操作</th>
+                    <th width="6%">操作</th>
                     <th width="6%">审核</th>
                 </tr>
-                <tr>
-                	<td>1</td>
-                	<td><input type="checkbox" /></td>
-                	<td>浙A·8GD8K</td>
-                	<td>大众</td>
-                	<td>途观</td>
-                	<td>无定位需找+拖</td>
-                	<td>浙江亿众担保有限公司</td>
-                	<td>2017.05.24   12:23:22</td>
-                	<td><a data-id="1" class="detail button" data-infos="1">详情</a></td>
-                	<td><a data-id="1" class="audit button" data-infos="1">审核</a></td>
-                </tr>
             </thead>
-            <tbody id="order_list_container">
+            <tbody id="task_audit_container">
             </tbody>
         </table>
         <div class="page-box pagination" id="page_container"></div>
     </div>
 </div>
 
-<script type="text/template" id="taskList_content_template">
-    <!--{{ each list item index }}
+<script type="text/template" id="taskAudit_content_template">
+    {{ each list item index }}
     <tr class="trData">
-        <td>1</td>
-        <td>{{item.carColor}}</td>
+        <td>{{index}}</td>
+        <td><input type="checkbox" value="{{item.id}}" name="taskIds" /></td>
+        <td>{{item.carNumber}}</td>
         <td>{{item.carBrand}}</td>
         <td>{{item.carSeries}}</td>
-        <td>{{item.carModel}}</td>
-        <td>{{item.companyName}}</td>
-        <td>{{item.contactPhone}}</td>
+        <td>{{menuState(item.entrust)}}</td>
+        <td>{{item.upstreamName}}</td>
+        <td>{{item.createAt}}</td>
         <td>
             <ul class="operaitem">
                 <li>
-                    <a data-id="{{item.id}}" class="detail button" data-infos="{{item}}">详情</a>
+                    <a data-id="{{item.id}}" class="detail button">详情</a>
+                </li>
+            </ul>
+        </td>
+        <td>
+            <ul class="operaitem">
+                <li>
+                    <a data-id="{{item.id}}" class="onlyIdentify button">审核</a>
                 </li>
             </ul>
         </td>
     </tr>
-    {{/each}}-->
+    {{/each}}
 </script>
-<script type="text/template" id="task_detail_template">
-    <div class="dialog-width">
-        <p class="pull-left">
-            任务详情
-        </p>
-        <p class="pull-right">任务待审核</p>
-        <div class="clearfix"></div>
-        <hr /><br />
-        <p>基本信息</p><br />
-        
-        <ul>
-            <li>任务号：bghbfbf</li>
-            <li>任务类型：dgeg</li>
-            <li>任务发起：浙江亿众担保有限公司</li>
-            <li>任务发布时间：ehehe</li>
-            <li>车牌号：hhefhfb</li>
-            <li>品牌：getdvghrg</li>
-            <li>车系：kykmgthbf</li>
-            <li>车型：tegvdfgr</li>
-            <li>颜色：tgdfggrgg</li>
-            <li>定位地区：浙江</li>
-            <li>车辆识别号：gegdgrgrb</li>
-            <li>车辆发动机号：jkyfghetg</li>
-        </ul>
-        <div class="remark">备注信息：着放大镜功能国家设立方式</div>
-        <div class="imgRecord" style="border: 0;">
-        	<span><i>2014年催收记录</i><img src="" alt="图片" /></span>
-        	<span><i>2015年催收记录</i><img src="" alt="图片" /></span>
-        	<span><i>2016年催收记录</i><img src="" alt="图片" /></span>
-        </div>
-        <div class="buttonAnt">
-        	<a class="pull-right button audit">审核</a>
-        </div>
-    </div>
-</script>
-<script type="text/template" id="task_audit_template">
+<script type="text/template" id="taskonly_identify_template">
 	<div class="divied-width ">
         <p class="pull-left">
-            任务审核
+            确定审核选中的任务吗？
         </p>
         <div class="clearfix"></div>
         <hr /><br />
         <div class="divied-type">
-        	<input type="radio" name="audit" />审核通过
-        	<input type="radio" name="audit" />审核不通过
+        	<input type="radio" name="validState" value="1" class="onlythrough" />审核通过
+        	<input type="radio" name="validState" value="2" class="onlythrough" />审核不通过
         </div>
-        <div class="buttonAnt">
-        	<a class="pull-right button divied-no">取消</a>
-        	<a class="pull-right button divied-sure">确定</a>
+        <div class="divied-content">
+        	<textarea name="reason" maxlength="40" id="identifyContents"></textarea>
         </div>
     </div>
 </script>

@@ -35,11 +35,23 @@ define(function(require, exports, module) {
 					//认证
 					$('body').off('click', '.identify').on('click', '.identify', function() {
 						var IdentifyStr = jh.utils.template('admin_creditorIdentify_template', returnData);
+						
 						jh.utils.alert({
 							content:IdentifyStr,
 							ok:function(){
-								
-							}
+								var throughState = $('.through').filter(':checked').val();
+								jh.utils.ajax.send({
+									url: '/upstreams/verify',
+									data: {
+										validState: throughState,
+										upstreamId: data.args.id
+									},
+									done: function(returnData) {
+										console.log(returnData)
+									}
+								});
+							},
+							cancel:true
 						})
 						
 					})

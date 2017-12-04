@@ -14,7 +14,7 @@ define(function(require, exports, module) {
             url: '/task-list',
             childrens: []
         }, {
-            name: '任务审核',
+            name: '运营任务待审核',
             icon: 'icon-operate',
             module: '/src/modules/task',
             url: '/task-audit',
@@ -26,7 +26,7 @@ define(function(require, exports, module) {
             url: '/clue-audit',
             childrens: []
         }, {
-            name: '线索反馈',
+            name: '运营线索反馈',
             icon: 'icon-message',
             module: '/src/modules/clueaudit',
             url: '/clue-back',
@@ -38,13 +38,13 @@ define(function(require, exports, module) {
             url: '/creditor-order',
             childrens: []
         }, {
-            name: 'yy债权方管理',
+            name: '运营债权方管理',
             icon: 'icon-region',
             module: '/src/modules/creditororder',
             url: '/creditor-manage',
             childrens: []
         }, {
-            name: 'xx债权方认证',
+            name: '信息债权方认证',
             icon: 'icon-region',
             module: '/src/modules/creditororder',
             url: '/creditor-identify',
@@ -56,7 +56,7 @@ define(function(require, exports, module) {
             url: '/officer-manage',
             childrens: []
         }, {
-            name: 'xx凭证审核',
+            name: '信息凭证审核',
             icon: 'icon-supplier',
             module: '/src/modules/evidence',
             url: '/evidence-audit',
@@ -90,7 +90,7 @@ define(function(require, exports, module) {
             url: '/qd-distribution-list',
             childrens: []
         }, {
-            name: 'xx出具价格',
+            name: '信息出具价格',
             icon: 'icon-supplier',
             module: '/src/modules/restoration',
             url: '/restoration-list',

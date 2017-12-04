@@ -1,6 +1,6 @@
 <div class="dataContent">
 	<div class="search-container">
-        <form id="task-list-form">
+        <form id="clue-back-form">
             <table class="common_query textLeft search-content">
                 <tr>
                     <td>
@@ -9,16 +9,18 @@
                     </td>
                     <td>
                         <label class="label">任务类型</label>
-                        <select name="" id="">
-                            <option value="">有定位只需拖车</option>
+                        <select name="entrust">
+                            <option value="all">无定位需找车并拖车</option>
+                            <option value="trace">无定位只需找车</option>
+                            <option value="recycle">有定位只需拖车</option>
                         </select>
                     </td>
                     <td>
                         <label class="label">债权方</label>
-                        <input type="text" class="search-input" name="zhaiquanfang">
+                        <input type="text" class="search-input" name="companyName">
                     </td>
                     <td>
-                        <button class="searchInfo">查找</button>
+                        <input type="submit" value="查询" class="button search-button">
                     </td>
                 </tr>
             </table>
@@ -29,7 +31,6 @@
             <thead>
                 <tr>
                     <th width="3%">&nbsp;</th>
-                    <th width="4%"><input type="checkbox" /></th>
                     <th width="10%">车牌号</th>
                     <th width="8%">品牌</th>
                     <th width="6%">车系</th>
@@ -38,18 +39,7 @@
                     <th width="10%">任务状态</th>
                     <th width="15%">任务发布时间</th>
                     <th width="6%">操作</th>
-                </tr>
-                <tr>
-                	<td>1</td>
-                	<td><input type="checkbox" /></td>
-                	<td>浙A·8GD8K</td>
-                	<td>大众</td>
-                	<td>途观</td>
-                	<td>无定位需找+拖</td>
-                	<td>一号捕头</td>
-                	<td>带债权方确认</td>
-                	<td>2017.05.24   12:23:22</td>
-                	<td><a data-id="1" class="detail button" data-infos="1">详情</a></td>
+                    <th width="8%">添加议价小计</th>
                 </tr>
             </thead>
             <tbody id="order_list_container">
@@ -60,9 +50,9 @@
 </div>
 
 <script type="text/template" id="taskList_content_template">
-    <!--{{ each list item index }}
+    {{ each list item index }}
     <tr class="trData">
-        <td>1</td>
+        <td>{{index+1}}</td>
         <td>{{item.carColor}}</td>
         <td>{{item.carBrand}}</td>
         <td>{{item.carSeries}}</td>
@@ -77,7 +67,7 @@
             </ul>
         </td>
     </tr>
-    {{/each}}-->
+    {{/each}}
 </script>
 <script type="text/template" id="task_detail_template">
     <div class="dialog-width">
