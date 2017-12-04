@@ -1,6 +1,6 @@
 <div class="dataContent">
     <div class="search-container">
-        <form id="active-list-form">
+        <form id="qd-distributionList-form">
             <table class="common_query textLeft">
                 <tr>
                     <td>
@@ -8,17 +8,13 @@
                         <input type="text" name="carNumber" class="search-input" placeholder="输入车牌号">
                     </td>
                     <td>
-                        <label class="label">活动开关：</label>
-                        <a href="javascript:;" class="active-switch" id="active-switch" data-isOpen="true">已开启</a>
+                        <label class="label">捕头：</label>
+                        <select name="downstreamId" id="qd-distributionList-downstreamId" class="search-select">
+                            <option value="">全部</option>
+                        </select>
                     </td>
                     <td>
-                        <label class="label">线人类别：</label>
-                        <select id="role" name="role" class="search-select">
-                            <option value="">全部</option>
-                            <option value="type_A">A类</option>
-                            <option value="type_B">B类</option>
-                            <option value="type_C">C类</option>
-                        </select>
+                        <input type="submit" value="查询" class="button submit">
                     </td>
                 </tr>
             </table>

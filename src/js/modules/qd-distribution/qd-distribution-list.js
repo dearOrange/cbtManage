@@ -11,6 +11,7 @@ define(function(require, exports, module) {
 
         this.init = function() {
             this.initContent();
+            this.initAllButou();
             this.registerEvent();
         };
 
@@ -21,7 +22,7 @@ define(function(require, exports, module) {
                 method: 'post',
                 url: '/task/channelTaskList',
                 contentType: 'application/json',
-                data: {},
+                data: jh.utils.formToJson('#qd-distributionList-form'),
                 isSearch: isSearch,
                 callback: function(data) {
                     return jh.utils.template('admin-qDDistributionList-template', data);
@@ -30,7 +31,31 @@ define(function(require, exports, module) {
             page.init();
         };
 
+        this.initAllButou = function() {
+            var opt = {
+                url: '/task/downStreamListByChannel',
+                done: function(returnData) {
+                    var str = '<option value="">全部</option>';
+                    $.each(returnData.data, function(index, item) {
+                        str += '<option value="' + item.id + '">' + item.name + '</option>';
+                    });
+                    $('#qd-distributionList-downstreamId').html(str);
+                }
+            };
+            jh.utils.ajax.send(opt);
+        };
+
         this.registerEvent = function() {
+
+            //查询
+            jh.utils.validator.init({
+                id: 'qd-distributionList-form',
+                submitHandler: function(form) {
+                    _this.initContent(true);
+                    return false;
+                }
+            });
+
             //查看任务详情
             $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
                 var me = $(this);
@@ -43,7 +68,7 @@ define(function(require, exports, module) {
             //批量分配
             $('body').off('click', '#distributeTask').on('click', '#distributeTask', function() {
                 var me = $(this);
-                var list = $('#admin-distributionList-container').find(':checked');
+                var list = $('#admin-qDDistributionList-container').find(':checked');
                 var ids = [];
                 $.each(list, function(index, item) {
                     var id = $(item).data('id');
@@ -66,35 +91,6 @@ define(function(require, exports, module) {
                 return false;
                 jh.utils.ajax.send(opt);
             });
-
-            //删除任务
-            $('body').off('click', '.delete').on('click', '.delete', function() {
-                var me = $(this);
-                var id = me.data('id');
-                jh.utils.alert({
-                    content: '确定删除任务吗？',
-                    ok: function() {
-                        jh.utils.ajax.send({
-                            url: '/task/delTask',
-                            data: {
-                                taskId: id
-                            },
-                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                            done: function(returnData) {
-                                jh.utils.alert({
-                                    content: '任务删除成功！',
-                                    ok: function() {
-                                        me.parents('tr').remove();
-                                    }
-                                });
-                            }
-                        });
-                    },
-                    cancel: true
-                });
-
-            });
-
         };
     }
     module.exports = QDDistributionList;

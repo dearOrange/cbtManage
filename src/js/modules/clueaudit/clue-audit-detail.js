@@ -6,7 +6,7 @@
  */
 'use strict';
 define(function(require, exports, module) {
-    function XXDistributionDetail() {
+    function ClueAuditDetail() {
         var _this = this;
         var args = jh.utils.getURLValue().args;
 
@@ -27,12 +27,12 @@ define(function(require, exports, module) {
                     returnData.taskId = args.id;
                     var html = jh.utils.template('admin-xXDistributionDetail-template', returnData);
                     $('#admin-xXDistributionDetail-container').html(html);
-                    _this.searchIllegalInfo(); //查询违章信息
+                    _this.searchIllegalInfo();//查询违章信息
                 }
             });
         };
 
-        this.searchIllegalInfo = function() {
+        this.searchIllegalInfo = function(){
             var page = new jh.ui.page({
                 data_container: $('#distribution-illegalList-container'),
                 page_container: $('#page_container'),
@@ -51,10 +51,10 @@ define(function(require, exports, module) {
 
         this.registerEvent = function() {
             //信息修复
-            $('body').off('click', '#distribution-illegalList').on('click', '#distribution-illegalList', function() {
+            $('body').off('click','#distribution-illegalList').on('click','#distribution-illegalList',function(){
                 _this.searchIllegalInfo();
             });
         };
     }
-    module.exports = XXDistributionDetail;
+    module.exports = ClueAuditDetail;
 });

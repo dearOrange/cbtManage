@@ -17,7 +17,7 @@ define(function(require, exports, module) {
 
         this.initDetail = function(isSearch) {
             jh.utils.ajax.send({
-                url: '/task/info/detail',
+                url: '/task/channel/detail',
                 data: {
                     taskId: args.id
                 },
