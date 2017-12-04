@@ -38,7 +38,7 @@ define(function(require, exports, module) {
             url: '/creditor-order',
             childrens: []
         }, {
-            name: '债权方管理',
+            name: 'yy债权方管理',
             icon: 'icon-region',
             module: '/src/modules/creditororder',
             url: '/creditor-manage',
@@ -56,7 +56,7 @@ define(function(require, exports, module) {
             url: '/officer-manage',
             childrens: []
         }, {
-            name: '凭证审核',
+            name: 'xx凭证审核',
             icon: 'icon-supplier',
             module: '/src/modules/evidence',
             url: '/evidence-audit',
@@ -78,13 +78,13 @@ define(function(require, exports, module) {
             url: '/sendMoney-list',
             childrens: []
         }, {
-            name: '任务分配',
+            name: 'xx任务分配',
             icon: 'icon-supplier',
             module: '/src/modules/distribution',
             url: '/distribution-list',
             childrens: []
         }, {
-            name: '出具价格',
+            name: 'xx出具价格',
             icon: 'icon-supplier',
             module: '/src/modules/restoration',
             url: '/restoration-list',
