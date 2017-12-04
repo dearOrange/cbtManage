@@ -6,7 +6,7 @@
  */
 'use strict';
 define(function(require, exports, module) {
-    function DistributionList() {
+    function QDDistributionList() {
         var _this = this;
 
         this.init = function() {
@@ -16,15 +16,15 @@ define(function(require, exports, module) {
 
         this.initContent = function(isSearch) {
             var page = new jh.ui.page({
-                data_container: $('#admin-distributionList-container'),
+                data_container: $('#admin-qDDistributionList-container'),
                 page_container: $('#page_container'),
                 method: 'post',
-                url: '/task/distributeList',
+                url: '/task/channelTaskList',
                 contentType: 'application/json',
                 data: {},
                 isSearch: isSearch,
                 callback: function(data) {
-                    return jh.utils.template('admin-distributionList-template', data);
+                    return jh.utils.template('admin-qDDistributionList-template', data);
                 }
             });
             page.init();
@@ -35,7 +35,7 @@ define(function(require, exports, module) {
             $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
                 var me = $(this);
                 var id = me.data('id');
-                jh.utils.load('/src/modules/distribution/distribution-detail', {
+                jh.utils.load('/src/modules/qd-distribution/qd-distribution-detail', {
                     id: id
                 });
             });
@@ -97,5 +97,5 @@ define(function(require, exports, module) {
 
         };
     }
-    module.exports = DistributionList;
+    module.exports = QDDistributionList;
 });

@@ -78,10 +78,16 @@ define(function(require, exports, module) {
             url: '/sendMoney-list',
             childrens: []
         }, {
-            name: '任务分配',
+            name: '信息任务分配',
             icon: 'icon-supplier',
-            module: '/src/modules/distribution',
-            url: '/distribution-list',
+            module: '/src/modules/xx-distribution',
+            url: '/xx-distribution-list',
+            childrens: []
+        }, {
+            name: '渠道任务分配',
+            icon: 'icon-supplier',
+            module: '/src/modules/qd-distribution',
+            url: '/qd-distribution-list',
             childrens: []
         }, {
             name: '出具价格',

@@ -1,0 +1,71 @@
+<div class="dataContent">
+    <div class="search-container">
+        <form id="active-list-form">
+            <table class="common_query textLeft">
+                <tr>
+                    <td>
+                        <label class="pull-left label">车牌号：</label>
+                        <input type="text" name="carNumber" class="search-input" placeholder="输入车牌号">
+                    </td>
+                    <td>
+                        <label class="label">活动开关：</label>
+                        <a href="javascript:;" class="active-switch" id="active-switch" data-isOpen="true">已开启</a>
+                    </td>
+                    <td>
+                        <label class="label">线人类别：</label>
+                        <select id="role" name="role" class="search-select">
+                            <option value="">全部</option>
+                            <option value="type_A">A类</option>
+                            <option value="type_B">B类</option>
+                            <option value="type_C">C类</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <input type="button" class="button" id="distributeTask" value="批量分配">
+    <div class="data-container">
+        <table class="dataShow">
+            <thead>
+                <tr>
+                    <th width="3%">&nbsp;</th>
+                    <th width="3%"><input type="checkbox" id="checkAll"/></th>
+                    <th width="8%">车牌号</th>
+                    <th width="10%">品牌</th>
+                    <th width="10%">任务类型</th>
+                    <th width="10%">发布任务时间</th>
+                    <th width="10%">任务状态</th>
+                    <th width="18%">操作</th>
+                </tr>
+            </thead>
+            <tbody id="admin-qDDistributionList-container"></tbody>
+        </table>
+        <div class="page-box pagination" id="page_container"></div>
+    </div>
+</div>
+<script type="text/template" id="admin-qDDistributionList-template">
+    {{ each list item index }}
+    <tr>
+        <td>{{index+1}}</td>
+        <td>
+            <input type="checkbox" data-businessManagerId="{{item.businessManagerId}}" data-businessManager="{{item.businessManager}}" data-id="item.id"/>
+        </td>
+        <td>{{item.carNumber}}</td>
+        <td>{{item.carBrand}}</td>
+        <td>{{menuState(item.entrust)}}</td>
+        <td>{{item.createAt}}</td>
+        <td>{{item.businessManager}}</td>
+        <td>
+            <a data-id="{{item.id}}" class="detail button" data-infos="1">详情</a>
+            <a data-id="{{item.id}}" class="detail button" data-infos="1">分配</a>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+<script type="text/javascript">
+seajs.use('modules/qd-distribution/qd-distribution-list', function(QDDistributionList) {
+    var qDDistributionList = new QDDistributionList();
+    qDDistributionList.init();
+});
+</script>

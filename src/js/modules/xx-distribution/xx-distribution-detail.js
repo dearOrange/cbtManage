@@ -6,7 +6,7 @@
  */
 'use strict';
 define(function(require, exports, module) {
-    function DistributionDetail() {
+    function XXDistributionDetail() {
         var _this = this;
         var args = jh.utils.getURLValue().args;
 
@@ -25,8 +25,8 @@ define(function(require, exports, module) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewRoot = jh.config.viewImgRoot;
                     returnData.taskId = args.id;
-                    var html = jh.utils.template('admin-distributionDetail-template', returnData);
-                    $('#admin-distributionDetail-container').html(html);
+                    var html = jh.utils.template('admin-xXDistributionDetail-template', returnData);
+                    $('#admin-xXDistributionDetail-container').html(html);
                     _this.searchIllegalInfo();//查询违章信息
                 }
             });
@@ -56,5 +56,5 @@ define(function(require, exports, module) {
             });
         };
     }
-    module.exports = DistributionDetail;
+    module.exports = XXDistributionDetail;
 });
