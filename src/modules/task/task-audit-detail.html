@@ -24,10 +24,15 @@
             <li>任务发布时间：{{data.createAt}}</li>
         </ul>
         <div class="remark">{{data.remark}}</div>
-        <div class="imgRecord" style="border: 0;">
-        	<span><i>2014年催收记录</i><img src="" alt="图片" /></span>
-        	<span><i>2015年催收记录</i><img src="" alt="图片" /></span>
-        	<span><i>2016年催收记录</i><img src="" alt="图片" /></span>
+        <div class="imgRecord" style="border:0;">
+        	<p>法院判决书</p>
+            {{each attachmentVoList item index}}
+            <img src="{{viewRoot}}{{item.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            {{/each}}
+            <p>催收记录资料</p>
+            {{each attachmentVoList item index}}
+            <img src="{{viewRoot}}{{item.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            {{/each}}
         </div>
         <div class="buttonAnt">
         	<a class="pull-right button taskIdentify">审核</a>
