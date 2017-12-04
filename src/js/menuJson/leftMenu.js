@@ -38,13 +38,13 @@ define(function(require, exports, module) {
             url: '/creditor-order',
             childrens: []
         }, {
-            name: '债权方管理',
+            name: 'yy债权方管理',
             icon: 'icon-region',
             module: '/src/modules/creditororder',
             url: '/creditor-manage',
             childrens: []
         }, {
-            name: '债权方认证',
+            name: 'xx债权方认证',
             icon: 'icon-region',
             module: '/src/modules/creditororder',
             url: '/creditor-identify',
@@ -56,7 +56,7 @@ define(function(require, exports, module) {
             url: '/officer-manage',
             childrens: []
         }, {
-            name: '凭证审核',
+            name: 'xx凭证审核',
             icon: 'icon-supplier',
             module: '/src/modules/evidence',
             url: '/evidence-audit',
@@ -90,7 +90,7 @@ define(function(require, exports, module) {
             url: '/qd-distribution-list',
             childrens: []
         }, {
-            name: '出具价格',
+            name: 'xx出具价格',
             icon: 'icon-supplier',
             module: '/src/modules/restoration',
             url: '/restoration-list',

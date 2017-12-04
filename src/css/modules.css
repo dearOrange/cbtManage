@@ -1061,6 +1061,14 @@ input, select, textarea {
 .divied-width .divied-type div {
     margin: 10px 0;
 }
+.divied-width div{
+	margin:10px;
+}
+.divied-width div.divied-content textarea {
+	width:200px;
+	height:40px;
+	resize: none;
+}
 
 /*捕头详情*/
 .officer-width {

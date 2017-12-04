@@ -20,7 +20,7 @@ define(function(require, exports, module) {
                 data_container: $('#creditor_manage_container'),
                 page_container: $('#page_container'),
                 method: 'post',
-                url: '/upstreams/infoList',
+                url: '/upstreams/operateList',
                 contentType: 'application/json',
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,

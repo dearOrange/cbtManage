@@ -1,166 +1,79 @@
 <div class="dataContent">
-	<!--<div class="search-container">
-        <form id="task-list-form">
+	<div class="search-container">
+        <form id="creditor-identify-form">
             <table class="common_query textLeft search-content">
                 <tr>
                     <td>
-                        <label class="label">ID 号：</label>
-                        <input type="text" class="search-input" name="IDNumber">
+                        <label class="label">负责人：</label>
+                        <input type="text" class="search-input" name="linkman">
                     </td>
                     <td>
-                        <label class="label">公司全称：</label>
-                        <input type="text" class="search-input" name="componyName">
+                        <label class="label">主体类型：</label>
+                        <select name="type">
+                        	<option value="">全部</option>
+                            <option value="UPSTREAM_INSURANCE">保险公司</option>
+			       			<option value="UPSTREAM_BANK">银行</option>
+			       			<option value="UPSTREAM_FACTORY">厂家金融</option>
+			       			<option value="UPSTREAM_LEASE">融资租赁</option>
+			       			<option value="UPSTREAM_P2P">P2P平台</option>
+			       			<option value="UPSTREAM_LAWFIRM">律师事务所</option>
+			       			<option value="UPSTREAM_PERSONAL">个人</option>
+			       			<option value="UPSTREAM_OTHER">其他</option>
+                        </select>
                     </td>
                     <td>
-                    	<button class="searchInfo">查找</button>
+                        <label class="label">债权方：</label>
+                        <input type="text" class="search-input" name="companyName">
+                    </td>
+                    <td>
+                    	<input type="submit" value="查询" class="button search-button">
                     </td>
                 </tr>
             </table>
         </form>
-    </div>-->
+    </div>
     <div class="data-container">
         <table class="dataShow">
             <thead>
                 <tr>
                     <th width="3%">&nbsp;</th>
                     <th width="4%"><input type="checkbox" /></th>
-                    <th width="15%">公司全称</th>
-                    <th width="8%">法人代表</th>
-                    <th width="18%">办公地址</th>
-                    <th width="8%">联系人</th>
-                    <th width="10%">联系方式</th>
-                    <th width="8%">状态</th>
-                    <th width="10%">注册时间</th>
+                    <th width="15%">债权方</th>
+                    <th width="10%">主体类型</th>
+                    <th width="8%">法人</th>
+                    <th width="8%">负责人</th>
+                    <th width="8%">联系电话</th>
+                    <th width="15%">通过认证时间</th>
                     <th width="6%">操作</th>
                 </tr>
-                <tr>
-                	<td>1</td>
-                	<td><input type="checkbox" /></td>
-                	<td>浙江亿众担保有限公司</td>
-                	<td>张三</td>
-                	<td>大众</td>
-                	<td>赵经理</td>
-                	<td>12345678901</td>
-                	<td>已审核</td>
-                	<td>2017.05.24 12:23:25</td>
-                	<td><a data-id="1" class="detail button" data-infos="1">详情</a></td>
-                </tr>
             </thead>
-            <tbody id="order_list_container">
+            <tbody id="creditor_identify_container">
             </tbody>
         </table>
         <div class="page-box pagination" id="page_container"></div>
     </div>
 </div>
 
-<script type="text/template" id="taskList_content_template">
-    <!--{{ each list item index }}
+<script type="text/template" id="creditorIdentify_content_template">
+    {{ each list item index }}
     <tr class="trData">
-        <td>1</td>
-        <td>{{item.carColor}}</td>
-        <td>{{item.carBrand}}</td>
-        <td>{{item.carSeries}}</td>
-        <td>{{item.carModel}}</td>
+        <td>{{index}}</td>
+        <td><input type="checkbox" value="{{item.id}}"></td>
         <td>{{item.companyName}}</td>
+        <td>{{menuState(item.type)}}</td>
+        <td>{{item.legalPerson}}</td>
+        <td>{{item.linkman}}</td>
         <td>{{item.contactPhone}}</td>
+        <td>{{item.passAt}}</td>
         <td>
             <ul class="operaitem">
                 <li>
-                    <a data-id="{{item.id}}" class="detail button" data-infos="{{item}}">详情</a>
+                    <a data-id="{{item.id}}" class="admin-detail button">详情</a>
                 </li>
             </ul>
         </td>
     </tr>
-    {{/each}}-->
-</script>
-<script type="text/template" id="task_detail_template">
-    <div class="dialog-width officer-width">
-        <ul>
-            <li>
-            	<label>主体名称：</label>
-            	<span>浙江亿众担保有限公司</span>
-            </li>
-            <li><label>法人代表：</label>
-            	<span>刘晓东</span>
-            </li>
-            <li>
-            	<label>详细地址：</label>
-            	<span>bndbbmh</span>
-            </li>
-           	<li>
-           		<label>主体类型：</label>
-           		<span>担保公司</span>
-           	</li>
-        </ul>
-        <ul>
-            <li>
-            	<label>负责人：</label>
-            	<span>赵经理</span>
-            </li>
-            <li>
-            	<label>联系电话：</label>
-            	<span>12345678901</span>
-            </li>
-            <li>
-            	<label>微信账号：</label>
-            	<span>ehehe</span>
-            </li>
-            <li>
-            	<label>邮箱：</label>
-            	<span>1564645544</span>
-            </li>
-        </ul>
-        <div class="upmainfile">
-        	<p>资质上传</p>
-        	<div class="upimg">
-        		<dl>
-        			<dt><img src="../../img/nopic.png" alt="" /></dt>
-        			<dd>营业执照</dd>
-        		</dl>
-        		<dl>
-        			<dt><img src="../../img/nopic.png" alt="" /></dt>
-        			<dd>上传法人身份证照片</dd>
-        		</dl>
-        		<dl>
-        			<dt><img src="../../img/nopic.png" alt="" /></dt>
-        			<dd>法人手持身份证正面照片</dd>
-        		</dl>
-        		<dl>
-        			<dt><img src="../../img/nopic.png" alt="" /></dt>
-        			<dd>负责人身份证照片</dd>
-        		</dl>
-        		<dl>
-        			<dt><img src="../../img/nopic.png" alt="" /></dt>
-        			<dd>负责人手持身份证正面照片</dd>
-        		</dl>
-        	</div>
-        </div>
-        <div class="allot">
-        	<p class="pull-left" style="font-weight: 900;margin:0 20px 0 0;">运营经理</p>
-	        <span class="pull-left person">分配</span>
-        </div>
-    </div>
-</script>
-<script type="text/template" id="task_person_template">
-	<div class="allot">
-        <p class="pull-left">
-            分配运营经理
-        </p>
-        <div class="clearfix"></div>
-        <hr /><br />
-        <div class="divied-type">
-        	<p class="pull-left" style="margin-top:20px;">运营经理</p>
-        	<select id="officerStar" name="officerStar" class="search-select pull-left" style="margin:10px 20px;">
-                <option value="">李晓晓</option>
-                <option value="">二星</option>
-                <option value="">三星</option>
-            </select>
-        </div>
-        <div class="buttonAnt">
-        	<a class="pull-right button divied-no">取消</a>
-        	<a class="pull-right button divied-sure">确定</a>
-        </div>
-    </div>
+    {{/each}}
 </script>
 <script type="text/javascript">
 seajs.use('modules/creditororder/creditor-identify', function(CreditorIdentify) {
