@@ -1,0 +1,63 @@
+<div class="task-detail-content">
+
+</div>
+<script type="text/template" id="task_detail_template">
+    <div class="dialog-width">
+        <p class="pull-left">
+            任务详情
+        </p>
+        <input type="submit" value="返回" class="button search-button gobackPage goBack">
+        <p class="pull-right">{{menuState(data.state)}}</p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <p>基本信息</p><br />
+        
+        <ul>
+            <li>任务号：{{data.taskNo}}</li>
+            <li>任务类型：{{menuState(data.entrust)}}</li>
+            <li>任务发起：{{data.upstreamName}}</li>
+            <li>车牌号：{{data.carNumber}}</li>
+            <li>车型：{{data.carSeries}}</li>
+            <li>颜色：{{data.carColor}}</li>
+            <li>车辆识别号：{{data.carId}}</li>
+            <li>车辆发动机号：{{data.engineId}}</li>
+            <li>任务发布时间：{{data.createAt}}</li>
+        </ul>
+        <div class="remark">{{data.remark}}</div>
+        <div class="imgRecord" style="border:0;">
+        	<p>法院判决书</p>
+            {{each attachmentVoList item index}}
+            <img src="{{viewRoot}}{{item.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            {{/each}}
+            <p>催收记录资料</p>
+            {{each attachmentVoList item index}}
+            <img src="{{viewRoot}}{{item.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            {{/each}}
+        </div>
+        <div class="buttonAnt">
+        	<a class="pull-right button taskIdentify">审核</a>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="task_identify_template">
+	<div class="divied-width ">
+        <p class="pull-left">
+            任务审核
+        </p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <div class="divied-type">
+        	<input type="radio" name="identify" value="1" class="through" />审核通过
+        	<input type="radio" name="identify" value="2" class="through" />审核不通过
+        </div>
+        <div class="divied-content">
+        	<textarea name="identifyContent" maxlength="40" id="identifyContent"></textarea>
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+seajs.use('modules/yunying/task/task-audit-detail', function(TaskAuditDetail) {
+    var TaskAuditDetail = new TaskAuditDetail();
+    TaskAuditDetail.init();
+});
+</script>
