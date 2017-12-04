@@ -557,13 +557,20 @@ label.error {
 /**
  * webupload
  */
-.upimg{
-	overflow: hidden;
+.upimg {
+    overflow: hidden;
 }
-.upimg dl{
-	float:left;
-	margin:10px 10px 0 10px;
+
+.upimg dl {
+    float: left;
+    margin: 10px 10px 0 10px;
 }
+
+.upimg img {
+    width: 100px;
+    height: 100px;
+}
+
 .upload-list {
     display: inline-block;
     vertical-align: middle;
@@ -1810,9 +1817,9 @@ label.label_check, label.label_radio {
 }
 
 /*返回上一级*/
-.gobackPage{
-	float:left;
-	width:100px;
-	height:30px;
-	margin:10px 0 0 20px;
+.gobackPage {
+    float: left;
+    width: 100px;
+    height: 30px;
+    margin: 10px 0 0 20px;
 }
