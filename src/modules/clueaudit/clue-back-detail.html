@@ -1,0 +1,144 @@
+<div class="clueBack-detail">
+	
+</div>
+<script type="text/template" id="clueBack_detail_template">
+    <div class="dialog-width">
+        <p class="pull-left">
+            线索详情
+        </p>
+        <input type="submit" value="返回" class="button search-button gobackPage goBack">
+        <p class="pull-right">{{menuState(data.state)}}</p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <p>基本信息</p><br />
+        
+        <ul>
+            <li>任务号：{{data.taskNo}}</li>
+            <li>任务类型：{{menuState(data.entrust)}}</li>
+            <li>任务发起：{{data.upstreamName}}</li>
+            <li>车牌号：{{data.carNumber}}</li>
+            <li>车型：{{data.carSeries}}</li>
+            <li>颜色：{{data.carColor}}</li>
+            <li>车辆识别号：{{data.carId}}</li>
+            <li>车辆发动机号：{{data.engineId}}</li>
+            <li>任务发布时间：{{data.createAt}}</li>
+        </ul>
+        <div class="remark">{{data.remark}}</div>
+        <div class="imgRecord">
+            {{each attachmentVoList item index}}
+            <img src="{{viewRoot}}{{item.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            {{/each}}
+        </div>
+        <div class="mainfile">
+        	<p>线索信息</p>
+        	<div class="upimg">
+        		<dl>
+					<dt class="upload-pa">
+		    				<div id="carNumberPhoto"></div>
+							<div class="upload-list">
+								<div class="upfile-item">
+									{{if data.carNumberPhoto}}
+									<img data-id="{{data.carNumberPhoto}}" src="http://oka19npup.bkt.clouddn.com/{{data.carNumberPhoto}}">
+									<span class="delete-img" data-domid="carNumberPhoto" data-fileid="WU_FILE_0"></span>
+									<input type="hidden" name="carNumberPhoto" value="{{data.carNumberPhoto}}">
+									{{else}}
+									<img data-id="{{data.carNumberPhoto}}" src="../../img/nopic.png">	
+									{{/if}}
+								</div>
+							</div>
+		    			</dt>
+					<dd>车牌特写照</dd>
+				</dl>
+        		<dl>
+					<dt class="upload-pa">
+		    				<div id="carPhoto"></div>
+							<div class="upload-list">
+								<div class="upfile-item">
+									{{if data.carPhoto}}
+									<img data-id="{{data.carPhoto}}" src="http://oka19npup.bkt.clouddn.com/{{data.carPhoto}}">
+									<span class="delete-img" data-domid="carPhoto" data-fileid="WU_FILE_0"></span>
+									<input type="hidden" name="carPhoto" value="{{data.carPhoto}}">
+									{{else}}
+									<img data-id="{{data.carPhoto}}" src="../../img/nopic.png">	
+									{{/if}}
+								</div>
+							</div>
+		    			</dt>
+					<dd>全车背景照</dd>
+				</dl>
+        	</div>
+        	<div style="margin:10px 0;">线索上传时间：{{data.traceVoList.createAt}}</div>
+        </div>
+        {{if data.state == "unconfirmed"}}
+        <div class="hopeprice">
+        	<p>预估费用</p>
+        	<div>
+        		<label>处置费用预估:</label>
+        		<span>{{data.estimatedPrice}}</span>
+        	</div>
+        </div>
+        <div class="clearfix"></div>
+		<p>联系小计</p><br />
+		<div class="upmainfile onlineSubtotal">
+			<ol>
+				<li class="addMoneytotal">+添加议价小计</li>
+			</ol>
+			<table>
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>议价内容</th>
+						<th>联系对象</th>
+						<th>联系方式</th>
+						<th>联系时间</th>
+					</tr>
+				</thead>
+				<tbody id="moneytotal_container">
+					
+				</tbody>
+			</table>
+			<div class="page-box pagination" id="page_container"></div>
+		</div>
+        {{/if}}
+    </div>
+</script>
+<script type="text/template" id="addMoneytotal_template">
+	{{ each list item index }}
+    <tr class="trData">
+        <td>{{index}}</td>
+        <td>{{item.content}}</td>
+        <td>{{item.contacts}}</td>
+        <td>{{item.contactPhone}}</td>
+        <td>{{item.createAt}}</td>
+    </tr>
+    {{/each}}
+</script>
+<script type="text/template" id="clue_addSubtotal_template">
+	<div class="dialog-width officer-width">
+		<p class="pull-left">
+			添加议价小计
+		</p>
+		<div class="clearfix"></div>
+		<hr /><br />
+		<div class="addContent customerType">
+			<div>
+				<label>联系对象</label>
+				<input type="text" maxlength="11" placeholder="请输入联系对象" id="subPerson" />
+			</div>
+			<div>
+				<label>联系方式</label>
+				<input type="text" maxlength="11" placeholder="请输入联系方式" id="subStyle" />
+			</div>
+			<div>
+				<label>联系内容</label>
+				<textarea name="" maxlength="40" placeholder="请输入联系内容" id="subContent"></textarea>
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/javascript">
+seajs.use('modules/clueaudit/clue-back-detail', function(ClueBackDetail) {
+    var ClueBackDetail = new ClueBackDetail();
+    ClueBackDetail.init();
+});
+</script>
