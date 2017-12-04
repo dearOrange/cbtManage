@@ -16,7 +16,7 @@ define(function(require, exports, module) {
         }, {
             name: '运营任务待审核',
             icon: 'icon-operate',
-            module: '/src/modules/task',
+            module: '/src/modules/yunying/task',
             url: '/task-audit',
             childrens: []
         }, {
@@ -28,7 +28,7 @@ define(function(require, exports, module) {
         }, {
             name: '运营线索反馈',
             icon: 'icon-message',
-            module: '/src/modules/clueaudit',
+            module: '/src/modules/yunying/clue',
             url: '/clue-back',
             childrens: []
         }, {
@@ -40,13 +40,13 @@ define(function(require, exports, module) {
         }, {
             name: '运营债权方管理',
             icon: 'icon-region',
-            module: '/src/modules/creditororder',
+            module: '/src/modules/yunying/creditor',
             url: '/creditor-manage',
             childrens: []
         }, {
             name: '信息债权方认证',
             icon: 'icon-region',
-            module: '/src/modules/creditororder',
+            module: '/src/modules/xinxiyuan/creditor',
             url: '/creditor-identify',
             childrens: []
         }, {
@@ -58,7 +58,7 @@ define(function(require, exports, module) {
         }, {
             name: '信息凭证审核',
             icon: 'icon-supplier',
-            module: '/src/modules/evidence',
+            module: '/src/modules/xinxiyuan/evidence',
             url: '/evidence-audit',
             childrens: []
         }, {
@@ -80,19 +80,19 @@ define(function(require, exports, module) {
         }, {
             name: '信息任务分配',
             icon: 'icon-supplier',
-            module: '/src/modules/xx-distribution',
+            module: '/src/modules/xinxiyuan/xx-distribution',
             url: '/xx-distribution-list',
             childrens: []
         }, {
             name: '渠道任务分配',
             icon: 'icon-supplier',
-            module: '/src/modules/qd-distribution',
+            module: '/src/modules/qudao/qd-distribution',
             url: '/qd-distribution-list',
             childrens: []
         }, {
             name: '信息出具价格',
             icon: 'icon-supplier',
-            module: '/src/modules/restoration',
+            module: '/src/modules/xinxiyuan/restoration',
             url: '/restoration-list',
             childrens: []
         }]

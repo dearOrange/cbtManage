@@ -57,33 +57,33 @@ define(function(require, exports, module) {
         tammy.utils.objIsNull = objIsNull; //对象是否为空
     })();
 
-    (function(){
-        function GetImageInfo(key){
+    (function() {
+        function GetImageInfo(key) {
             $.ajax({
                 url: tammy.config.viewImgRoot + key + '?imageInfo'
-            }).done(function(data){
+            }).done(function(data) {
                 console.log(data);
-            }).fail(function(data){
+            }).fail(function(data) {
 
             });
         }
         tammy.utils.newGetImageInfo = GetImageInfo;
     })();
 
-    (function(){
-        function GetImageAddress(key){
+    (function() {
+        function GetImageAddress(key) {
             $.ajax({
                 url: tammy.config.viewImgRoot + key + '?exif'
-            }).done(function(data){
-                if(data.GPSLatitude && data.GPSLongitude){
-                    var lon = transformTude(data.GPSLongitude);//经度
-                    var lat = transformTude(data.GPSLatitude);//纬度
-                    
+            }).done(function(data) {
+                if (data.GPSLatitude && data.GPSLongitude) {
+                    var lon = transformTude(data.GPSLongitude); //经度
+                    var lat = transformTude(data.GPSLatitude); //纬度
+
                     console.log(lon + ',' + lat);
-                }else{
+                } else {
                     console.log('未成功获取');
                 }
-            }).fail(function(data){
+            }).fail(function(data) {
 
             });
         }
@@ -620,8 +620,8 @@ define(function(require, exports, module) {
                 tammy.utils.ajax.send({
                     url: '/admin/user/login-out',
                     always: function() {
-//                      $.cookie('admin-X-Token', null);
-//                      $.cookie('admin-username', null);
+                        //                      $.cookie('admin-X-Token', null);
+                        //                      $.cookie('admin-username', null);
                         window.location.href = jh.config.pageLogin;
                     }
                 });
@@ -1566,6 +1566,23 @@ define(function(require, exports, module) {
         }
         tammy.utils.HTMLEncode = HTMLEncode;
     })();
+    (function() {
+        function getCheckboxValueById(id, type) {
+            var list = $('#' + id).find(':checked');
+            var ids = [];
+            $.each(list, function(index, item) {
+                if (type && type === 'value') {
+                    ids.push($(item).val());
+                } else {
+                    ids.push($(item).data('id'));
+                }
+            });
+            ids = ids.join(',');
+            return ids;
+        }
+        tammy.utils.getCheckboxValue = getCheckboxValueById;
+    })();
+
     (function() {
         var menuState = function(state) {
             switch (state) {

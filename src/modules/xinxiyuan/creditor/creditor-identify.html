@@ -1,0 +1,83 @@
+<div class="dataContent">
+	<div class="search-container">
+        <form id="creditor-identify-form">
+            <table class="common_query textLeft search-content">
+                <tr>
+                    <td>
+                        <label class="label">负责人：</label>
+                        <input type="text" class="search-input" name="linkman">
+                    </td>
+                    <td>
+                        <label class="label">主体类型：</label>
+                        <select name="type">
+                        	<option value="">全部</option>
+                            <option value="UPSTREAM_INSURANCE">保险公司</option>
+			       			<option value="UPSTREAM_BANK">银行</option>
+			       			<option value="UPSTREAM_FACTORY">厂家金融</option>
+			       			<option value="UPSTREAM_LEASE">融资租赁</option>
+			       			<option value="UPSTREAM_P2P">P2P平台</option>
+			       			<option value="UPSTREAM_LAWFIRM">律师事务所</option>
+			       			<option value="UPSTREAM_PERSONAL">个人</option>
+			       			<option value="UPSTREAM_OTHER">其他</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="label">债权方：</label>
+                        <input type="text" class="search-input" name="companyName">
+                    </td>
+                    <td>
+                    	<input type="submit" value="查询" class="button search-button">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="data-container">
+        <table class="dataShow">
+            <thead>
+                <tr>
+                    <th width="3%">&nbsp;</th>
+                    <th width="4%"><input type="checkbox" /></th>
+                    <th width="15%">债权方</th>
+                    <th width="10%">主体类型</th>
+                    <th width="8%">法人</th>
+                    <th width="8%">负责人</th>
+                    <th width="8%">联系电话</th>
+                    <th width="15%">通过认证时间</th>
+                    <th width="6%">操作</th>
+                </tr>
+            </thead>
+            <tbody id="creditor_identify_container">
+            </tbody>
+        </table>
+        <div class="page-box pagination" id="page_container"></div>
+    </div>
+</div>
+
+<script type="text/template" id="creditorIdentify_content_template">
+    {{ each list item index }}
+    <tr class="trData">
+        <td>{{index}}</td>
+        <td><input type="checkbox" value="{{item.id}}"></td>
+        <td>{{item.companyName}}</td>
+        <td>{{menuState(item.type)}}</td>
+        <td>{{item.legalPerson}}</td>
+        <td>{{item.linkman}}</td>
+        <td>{{item.contactPhone}}</td>
+        <td>{{item.passAt}}</td>
+        <td>
+            <ul class="operaitem">
+                <li>
+                    <a data-id="{{item.id}}" class="admin-detail button">详情</a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+<script type="text/javascript">
+seajs.use('modules/xinxiyuan/creditor/creditor-identify', function(CreditorIdentify) {
+    var CreditorIdentify = new CreditorIdentify();
+    CreditorIdentify.init();
+});
+</script>

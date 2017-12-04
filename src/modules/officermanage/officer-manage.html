@@ -1,4 +1,33 @@
 <div class="dataContent">
+    <div class="search-container">
+        <form id="admin-offcerManager-form">
+            <table class="common_query textLeft search-content">
+                <tr>
+                    <td>
+                        <label class="label">业务类型：</label>
+                        <select name="entrust">
+                            <option value="all">可拖车可找车</option>
+                            <option value="trace">只找车</option>
+                            <option value="recycle">只拖车</option>
+                            <option value="tracerecycle">拖车找车一体</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="label">车牌号：</label>
+                        <input type="text" class="search-input" name="carNumber" maxlength="7">
+                    </td>
+                    <td>
+                        <label class="label">债权方名称：</label>
+                        <input type="text" class="search-input" name="companyName" maxlength="30">
+                    </td>
+                    
+                    <td>
+                        <input type="submit" value="查询" class="button search-button">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
     <div class="data-container">
         <table class="dataShow">
             <thead>
