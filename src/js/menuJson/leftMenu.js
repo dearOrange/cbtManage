@@ -95,6 +95,12 @@ define(function(require, exports, module) {
             module: '/src/modules/xinxiyuan/restoration',
             url: '/restoration-list',
             childrens: []
+        }, {
+            name: '信息线索管理',
+            icon: 'icon-supplier',
+            module: '/src/modules/xinxiyuan/clue',
+            url: '/clue-manage',
+            childrens: []
         }]
     };
     module.exports = FINAL_MENU_DATA_JSON;

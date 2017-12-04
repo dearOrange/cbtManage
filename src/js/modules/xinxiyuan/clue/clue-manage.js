@@ -6,9 +6,9 @@
  */
 'use strict';
 define(function(require, exports, module) {
-    function CreditorIdentify() {
+    function ClueManage() {
         var _this = this;
-        _this.form = $('#creditor-identify-form');
+        _this.form = $('#clue-manage-form');
 
         this.init = function() {
             this.initContent();
@@ -17,15 +17,15 @@ define(function(require, exports, module) {
         };
         this.initContent = function(isSearch) {
             var page = new jh.ui.page({
-                data_container: $('#creditor_identify_container'),
+                data_container: $('#clue_manage_container'),
                 page_container: $('#page_container'),
                 method: 'post',
-                url: '/upstreams/infoList',
+                url: '/trace/traceList',
                 contentType: 'application/json',
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
-                    return jh.utils.template('creditorIdentify_content_template', data);
+                    return jh.utils.template('clue-manage-template', data);
                 }
             });
             page.init();
@@ -33,7 +33,7 @@ define(function(require, exports, module) {
         this.registerEvent = function() {
             // 搜索
             jh.utils.validator.init({
-                id: 'creditor-identify-form',
+                id: 'clue-manage-form',
                 submitHandler: function(form) {
                     _this.initContent(true);
                     return false;
@@ -41,14 +41,14 @@ define(function(require, exports, module) {
             });
 
             //查看任务详情
-            $('.dataShow').off('click', '.creditor-detail').on('click', '.creditor-detail', function() {
+            $('.dataShow').off('click', '.clueManage-detail').on('click', '.clueManage-detail', function() {
             	var id = $(this).data('id');
-                jh.utils.load("/src/modules/xinxiyuan/creditor/creditor-identify-detail",{
+                jh.utils.load("/src/modules/xinxiyuan/clue/clue-manage-detail",{
                 	id:id
                 })
             });
             
         };
     }
-    module.exports = CreditorIdentify;
+    module.exports = ClueManage;
 });
