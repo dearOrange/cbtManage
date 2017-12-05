@@ -763,18 +763,12 @@ define(function(require, exports, module) {
                 for (var i = 0, len = allMenu.length; i < len; ++i) {
                     var item = allMenu.eq(i);
                     var itemModule = item.children('a').data('url');
-                    var subMenu = item.find('li a');
-                    for (var j = 0, jLen = subMenu.length; j < jLen; ++j) {
-                        var subItem = subMenu.eq(j);
-                        var subMenuName = subItem.data('url');
-                        var resultUrl = itemModule + subMenuName;
-                        if (args === resultUrl + '.html') {
-                            if (typeof fn === 'function') {
-                                fn(item, subItem);
-                            } else {
-                                allMenu.removeClass('active').find('li').removeClass('active');
-                                subItem.parent().addClass('active').parent().removeClass('hide').parent().addClass('active');
-                            }
+                    if(args === itemModule + '.html'){
+                        if (typeof fn === 'function') {
+                            fn(item);
+                        } else {
+                            allMenu.removeClass('active');
+                            item.addClass('active');
                         }
                     }
                 }
