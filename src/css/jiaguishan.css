@@ -5,3 +5,9 @@
 .search-container .submit {
 	padding: 10px 40px;
 }
+
+.pagination select, .pagination .select2-container {
+	margin: 0;
+	width: 80px;
+	text-align: left;
+}

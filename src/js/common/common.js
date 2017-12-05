@@ -59,80 +59,69 @@ define(function(require, exports, module) {
     })();
 
     (function() {
-        function GetImageInfo(key) {
-            $.ajax({
-                url: tammy.config.viewImgRoot + key + '?imageInfo'
-            }).done(function(data) {
-                console.log(data);
-            }).fail(function(data) {
-
+        function initGeocoder() {
+            AMap.service('AMap.Geocoder', function() { //回调函数
+                //实例化Geocoder
+                tammy.utils.geocoder = new AMap.Geocoder({
+                    city: "010"//城市，默认：“全国”
+                });
             });
         }
-        tammy.utils.newGetImageInfo = GetImageInfo;
-    })();
+        tammy.utils.initGeocoder = initGeocoder;
+    })();    
+    tammy.utils.initGeocoder();//初始化地图函数
 
     (function() {
-        function GetImageAddress(key) {
+        function GetPositionByImage(key,fn) {
             $.ajax({
                 url: tammy.config.viewImgRoot + key + '?exif'
             }).done(function(data) {
-                if (data.GPSLatitude && data.GPSLongitude) {
-                    var lon = transformTude(data.GPSLongitude); //经度
-                    var lat = transformTude(data.GPSLatitude); //纬度
-
-                    console.log(lon + ',' + lat);
-                } else {
-                    console.log('未成功获取');
+                console.log(data);
+                var id = key;
+                if( key.indexOf('.') !== -1 ){
+                    id = key.substring(0,key.indexOf('.'));
                 }
-            }).fail(function(data) {
+                var targetEle = $('[id^='+id+']');
+                if(data.GPSLongitude && data.GPSLatitude){
+                    var lon = transformTude(data.GPSLongitude.val); //经度
+                    var lat = transformTude(data.GPSLatitude.val); //纬度
+                    tammy.utils.getAddressByPosition([lon,lat],targetEle);
+                }else{
+                    targetEle.text('未获取成功');
+                }
 
+                if(fn&& typeof fn === "function"){
+                    fn(data);
+                }
+
+                function transformTude(tude) {
+                    var rst = tude.split(', ').map(e => Number(e));
+                    return (rst[0] + rst[1] / 60 + rst[2] / 3600).toFixed(6);
+                }
             });
         }
-
-        function transformTude(tude) {
-            var rst = tude.split(', ').map(e => Number(e));
-            return (rst[0] + rst[1] / 60 + rst[2] / 3600).toFixed(6)
-        }
-
-        tammy.utils.newGetImageAddress = GetImageAddress;
+        tammy.utils.getPositionByImage = GetPositionByImage;
     })();
 
     (function() {
-        function GetImageInfo(response) {
-            var Longitude, Latitude;
-            if (response && response.GPSLatitude) {
-                Longitude = transformAli(response.GPSLongitude);
-                Latitude = transformAli(response.GPSLatitude);
-                return {
-                    success: true,
-                    lnglatXY: [Longitude, Latitude],
-                    time: (response.DateTime && response.DateTime.value) || '无法获取'
-                };
-            } else {
-                return {
-                    success: false,
-                    lnglatXY: '未成功获取',
-                    time: (response.DateTime && response.DateTime.value) || '无法获取'
-                };
-            }
+        function GetAddressByPosition(position,targetEle) {
+            tammy.utils.geocoder.getAddress(position, function(status, result) {
+                if(tammy.utils.isString(targetEle)){
+                    targetEle = $('[id^='+targetEle+']');
+                }
+                if(targetEle.find('.photoAddress').length===0){
+                    targetEle = targetEle;
+                }else{
+                    targetEle = targetEle.find('.photoAddress');
+                }
+                if (status === 'complete' && result.info === 'OK') {
+                    targetEle.text(result.regeocode.formattedAddress);
+                } else {
+                    targetEle.text('未获取成功');
+                }
+            });
         }
-
-        function transformAli(tude) {
-            var d = tude[0].numerator / tude[0].denominator;
-            var f = tude[1].numerator / tude[1].denominator;
-            var m = tude[2].numerator / tude[2].denominator;
-
-            var f = parseFloat(f) + parseFloat(m / 60);
-            var du = parseFloat(f / 60) + parseFloat(d);
-
-            return du;
-        }
-
-        function transformTude(tude) {
-            var rst = tude.split(', ').map(e => Number(e));
-            return (rst[0] + rst[1] / 60 + rst[2] / 3600).toFixed(6)
-        }
-        tammy.utils.getImageInfo = GetImageInfo;
+        tammy.utils.getAddressByPosition = GetAddressByPosition;
     })();
 
     (function() {
@@ -1109,7 +1098,7 @@ define(function(require, exports, module) {
                 event.preventDefault();
                 var el = $(this);
                 var size = parseInt(el.find('option:selected').text());
-                tammy.config.pageSize = size;
+                s.data.pageSize = size;
                 var cur = m.current();
                 s.beforRender(cur);
                 m.render(cur);
