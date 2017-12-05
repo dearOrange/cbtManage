@@ -34,7 +34,7 @@ define(function(require, exports, module) {
         }, {
             name: '债权方已确定订单',
             icon: 'icon-config',
-            module: '/src/modules/creditororder',
+            module: '/src/modules/xinxiyuan/creditor',
             url: '/creditor-order',
             childrens: []
         }, {
