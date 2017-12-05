@@ -1,7 +1,7 @@
-<div class="restorationContent">
+<div class="taskListContent">
 	
 </div>
-<script type="text/template" id="restoration_detail_template">
+<script type="text/template" id="task_detail_template">
     <div class="dialog-width">
         <p class="pull-left">
             任务详情
@@ -25,8 +25,8 @@
         </ul>
         <div class="remark">{{data.remark}}</div>
         <div class="imgRecord">
-            {{each data.attachmentVoList item index}}
-            <img src="{{viewImgRoot}}{{item.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            {{each data.attachmentVoList data index}}
+            <img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}"/>
             {{/each}}
         </div>
         <div class="mainfile">
@@ -50,26 +50,29 @@
 					<dd>全车背景照</dd>
 				</dl>
         	</div>
-        	<div style="margin:10px 0;">线索上传时间：{{data.createAt}}</div>
+        	<div style="margin:10px 0;">
+        		<p>{{data.id}}</p>
+        		<p>线索上传时间：{{data.createAt}}</p>
+        	</div>
         	{{/each}}
         </div>
         <div class="hopeprice">
         	<p>预估费用</p>
         	<div>
         		<label>车辆残值估算:</label>
-        		<input type="text" maxlength="11" class="OnlyPrice" id="salvage" />
+        		<input type="text" class="OnlyPrice" maxlength="11" id="salvage" />
         	</div>
         	<div>
         		<label>处置费用估算:</label>
         		<input type="text" maxlength="11" class="OnlyPrice" id="minMoney" />至<input type="text" class="OnlyPrice" maxlength="11" id="maxMoney" />
         	</div>
-        	<input type="button" value="保存" class="button search-button priceStorage" style="margin-bottom:40px;width:150px;height:30px;">
+        	<a class="button search-button priceStorage" href="javascript:;">保存</a>
         </div>
     </div>
 </script>
 <script type="text/javascript">
-seajs.use('modules/xinxiyuan/restoration/restoration-detail', function(RestorationDetail) {
-    var RestorationDetail = new RestorationDetail();
-    RestorationDetail.init();
+seajs.use('modules/xinxiyuan/task/task-list-detail', function(TaskListDetail) {
+    var TaskListDetail = new TaskListDetail();
+    TaskListDetail.init();
 });
 </script>

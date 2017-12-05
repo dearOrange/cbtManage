@@ -13,7 +13,6 @@ define(function(require, exports, module) {
         this.init = function() {
             this.initContent();
             this.registerEvent();
-//          var dataValue = $(this).data('value');
             $('select').select2();
         };
         this.initContent = function(isSearch) {
@@ -90,8 +89,8 @@ define(function(require, exports, module) {
                 	id:id
                 })
             });
-            
-            $('.taskState').click(function(){
+            //切换状态
+            $('body').off('click', '.taskState').on('click', '.taskState', function() {
             	$(this).addClass("active").siblings().removeClass("active");
             	_this.form[0].reset();
             	$('select').select2();

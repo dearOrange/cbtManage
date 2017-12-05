@@ -22,7 +22,7 @@ define(function(require, exports, module) {
 				},
 				done: function(returnData) {
 					returnData.menuState = jh.utils.menuState;
-                    returnData.viewRoot = jh.config.viewImgRoot;
+                    returnData.viewImgRoot = jh.config.viewImgRoot;
                     returnData.taskId = data.args.id;
 					var creditorStr = jh.utils.template('restoration_detail_template', returnData);
 					$('.restorationContent').html(creditorStr);

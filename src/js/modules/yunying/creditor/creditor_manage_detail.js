@@ -48,6 +48,21 @@ define(function(require, exports, module) {
 						}
 					});
 					page.init();
+					
+//					var pageTask = new jh.ui.page({
+//						data_container: $('#subTask_container'),
+//						page_container: $('#page_task_container'),
+//						method: 'post',
+//						url: '/record/contactList',
+//						contentType: 'application/json',
+//						data: {
+//							upstreamId: data.args.id
+//						},
+//						callback: function(data) {
+//							return jh.utils.template('taskSubtotal_template', data);
+//						}
+//					});
+//					pageTask.init();
 					//          添加小计
 					$('body').off('click', '.addSubtotal').on('click', '.addSubtotal', function() {
 						var addStr = jh.utils.template('creditor_addSubtotal_template', {});
@@ -83,6 +98,42 @@ define(function(require, exports, module) {
 								console.log(returnData)
 							}
 						});
+					})
+					//批量导入
+//					jh.utils.uploader.init({
+//		                hiddenName: 'test',
+//		                server:'/task/import',
+//		                pick: {
+//		                    id: '#importFile'
+//		                },
+//		                accept: {
+//		                    title: 'Applications',
+//		                    extensions: 'xls,xlsx',
+//		                    mimeTypes: 'application/xls,application/xlsx'
+//		                }
+//		            },{
+//		            	uploadAccept:function(file, response){
+//		            		alert(response)
+//		            	}
+//		            });
+		            //删除
+		            $('body').off('click', '#removeFile').on('click', '#removeFile', function() {
+		            	var removeId = jh.utils.getCheckboxValue('subTask_container',"value");
+		            	jh.utils.alert({
+		                    content: '确定删除吗？',
+		                    ok:function(){
+								jh.utils.ajax.send({
+									url: '/task/helpDel',
+									data: {
+										taskIds: removeId
+									},
+									done: function(returnData) {
+										
+									}
+								});
+							},
+							cancel:true
+						})
 					})
 				}
 			});

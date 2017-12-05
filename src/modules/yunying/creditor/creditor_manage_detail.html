@@ -157,32 +157,29 @@
 		<hr /><br />
 		<div class="upmainfile ">
 			<ol>
-				<li>+协助删除任务</li>
-				<li>+协助批量导入任务</li>
+				<li><a href="javascript:;" id="removeFile">+协助删除任务</a></li>
+				<li><a href="javascript:;" id="importFile">+协助批量导入任务</a></li>
 				<li>+协助任务发布</li>
 			</ol>
 			<table>
-				<tr>
-					<th>&nbsp;</th>
-					<th>任务号</th>
-					<th>车牌号</th>
-					<th>品牌</th>
-					<th>车型</th>
-					<th>颜色</th>
-					<th>任务状态</th>
-					<th>任务发布时间</th>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>RW1154122145</td>
-					<td>浙A·8GD8K</td>
-					<td>大众</td>
-					<td>途观</td>
-					<td>黑色</td>
-					<td>未完成</td>
-					<td>2017-11-09 08:45:13</td>
-				</tr>
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th width="4%"><input type="checkbox" id="checkAll" /></th>
+						<th>任务号</th>
+						<th>车牌号</th>
+						<th>品牌</th>
+						<th>车型</th>
+						<th>颜色</th>
+						<th>任务状态</th>
+						<th>任务发布时间</th>
+					</tr>
+				</thead>
+				<tbody id="subTask_container">
+					
+				</tbody>
 			</table>
+			<div class="page-box pagination" id="page_task_container"></div>
 		</div>
 		<div class="clearfix"></div>
 		<p>联系小计</p>
@@ -208,6 +205,18 @@
 			<div class="page-box pagination" id="page_container"></div>
 		</div>
 	</div>
+</script>
+<script type="text/template" id="taskSubtotal_template">
+	{{ each list item index }}
+    <tr class="trData">
+        <td>{{index}}</td>
+        <td><input type="checkbox" value="{{item.id}}" name="taskIds" /></td>
+        <td>{{item.content}}</td>
+        <td>{{item.contacts}}</td>
+        <td>{{item.contactPhone}}</td>
+        <td>{{item.createAt}}</td>
+    </tr>
+    {{/each}}
 </script>
 <script type="text/template" id="addSubtotal_template">
 	{{ each list item index }}

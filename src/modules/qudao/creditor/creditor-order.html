@@ -5,9 +5,7 @@
                 <tr>
                     <td>
                         <label class="label">捕头：</label>
-                        <select name="entrust" class="search-select">
-                            <option value="">选择捕头</option>
-                        </select>
+                        <input type="text" name="downstreamId" />
                     </td>
                     <td>
                         <input type="submit" value="查询" class="button search-button submit">
@@ -44,14 +42,14 @@
         <td>{{item.carNumber}}</td>
         <td>{{item.carBrand}}</td>
         <td>{{item.carSeries}}</td>
-        <td>{{item.state}}</td>
-        <td>{{item.butou}}</td>
-        <td>{{item.status}}</td>
+        <td>{{menuState(item.state)}}</td>
+        <td>{{item.downstream}}</td>
+        <td>{{menuState(item.taskState)}}</td>
         <td>{{item.createAt}}</td>
         <td>
             <ul class="operaitem">
                 <li>
-                    <a data-id="{{item.id}}" class="detail button">详情</a>
+                    <a data-id="{{item.id}}" class="orderDetail button">详情</a>
                 </li>
             </ul>
         </td>
@@ -60,7 +58,7 @@
 </script>
 
 <script type="text/javascript">
-seajs.use('modules/xinxiyuan/creditor/creditor-order', function(CreditorOrder) {
+seajs.use('modules/qudao/creditor/creditor-order', function(CreditorOrder) {
     var CreditorOrder = new CreditorOrder();
     CreditorOrder.init();
 });

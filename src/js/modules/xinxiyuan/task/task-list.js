@@ -9,110 +9,93 @@ define(function(require, exports, module) {
     function TaskList() {
         var _this = this;
         _this.form = $('#task-list-form');
+        $('select').select2();
 
         this.init = function() {
+        	this.initContent();
+        	this.initTaskTotalCount();
             this.registerEvent();
         };
+		this.initContent = function(isSearch) {
+            var page = new jh.ui.page({
+                data_container: $('#task_list_container'),
+                page_container: $('#page_container'),
+                method: 'post',
+                url: '/task/taskList',
+                contentType: 'application/json',
+                data: jh.utils.formToJson(_this.form),
+                isSearch: isSearch,
+                callback: function(data) {
+                	data.passState = $('#state').val();
+                    return jh.utils.template('taskList_content_template', data);
+                }
+            });
+            page.init();
+        };
+        this.initTaskTotalCount = function() {
+            jh.utils.ajax.send({
+                url: '/task/count',
+                done: function(returnData) {
+                    var olBox = $('#taskState');
 
+                    for (var item in returnData.data) {
+                        var sup = $('<sup></sup>');
+                        sup.text(returnData.data[item]);
+                        olBox.find('[data-value="' + item + '"]').append(sup);
+                    }
+                    var sup = $('<sup></sup>');
+                    sup.text(returnData.data.all);
+                    olBox.find('li').last().append(sup);
+                }
+            });
+        };
         this.registerEvent = function() {
-            jh.utils.newGetImageAddress('Ft769iUzXOW5itB6BfhF4tfMrImc');
-            //          jh.utils.uploader.init({
-            //              hiddenName: 'test',
-            //              server:'/adminServer/task/import',
-            //              pick: {
-            //                  id: '#importFile'
-            //              },
-            //              accept: {
-            //                  title: 'Applications',
-            //                  extensions: 'xls,xlsx',
-            //                  mimeTypes: 'application/xls,application/xlsx'
-            //              }
-            //          },{
-            //              uploadAccept:function(file, response){
-            //                  alert(response)
-            //              }
-            //          });
-            //
-            //          // 搜索
-            //          jh.utils.validator.init({
-            //              id: 'task-list-form',
-            //              submitHandler: function(form) {
-            //                  _this.initContent(true);
-            //                  return false;
-            //              }
-            //          });
+            // 搜索
+            jh.utils.validator.init({
+                id: 'task-list-form',
+                submitHandler: function(form) {
+                    _this.initContent(true);
+                    return false;
+                }
+            });
 
             //查看任务详情
-            $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
-                var me = $(this);
-                var infos = me.data('infos');
-                //              jh.utils.ajax.send({
-                //                  url: '/trace/matchedTrace',
-                //                  data: {
-                //                      taskId: infos.id
-                //                  },
-                //                  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                //                  done: function(returnData, status, xhr) {
-                //                      infos.informantList = returnData.data;
-                //                      infos.chuzhi = parseFloat(infos.carPrice*0.15).toFixed(2)
-                var alertStr = jh.utils.template('task_detail_template', {});
-                jh.utils.alert({
-                    content: alertStr
-                });
-                //                  }
-                //              });
-
+            $('.dataShow').off('click', '.taskList-detail').on('click', '.taskList-detail', function() {
+            	var id = $(this).data('id');
+                jh.utils.load("/src/modules/xinxiyuan/task/task-list-detail",{
+                	id:id
+                })
             });
-
-            //分配捕头
-            $('body').off('click', '.divied').on('click', '.divied', function() {
-                var me = $(this);
-                //              var infos = me.data('infos');
-                //              jh.utils.ajax.send({
-                //                  url: '/trace/matchedTrace',
-                //                  data: {
-                //                      taskId: infos.id
-                //                  },
-                //                  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                //                  done: function(returnData, status, xhr) {
-                //                      infos.informantList = returnData.data;
-                //                      infos.chuzhi = parseFloat(infos.carPrice*0.15).toFixed(2)
-                var alertDivied = jh.utils.template('task_divied_template', {});
+            
+            //切换状态
+            $('body').off('click', '.taskState').on('click', '.taskState', function() {
+            	$(this).addClass("active").siblings().removeClass("active");
+            	_this.form[0].reset();
+            	$('select').select2();
+            	_this.initContent();
+            	$('#state').val($(this).data('value'))
+            })
+			
+			
+			//一键修复
+            $('body').off('click', '.allrepair').on('click', '.allrepair', function() {
+            	var checkId = jh.utils.getCheckboxValue('task_list_container',"value");
                 jh.utils.alert({
-                    content: alertDivied,
-                });
-                //                  }
-                //              });
-
-            });
-
-            //删除任务
-            $('body').off('click', '.delete').on('click', '.delete', function() {
-                var me = $(this);
-                var id = me.data('id');
-                jh.utils.alert({
-                    content: '确定删除任务吗？',
-                    ok: function() {
-                        jh.utils.ajax.send({
-                            url: '/task/delTask',
-                            data: {
-                                taskId: id
-                            },
-                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                            done: function(returnData) {
-                                jh.utils.alert({
-                                    content: '任务删除成功！',
-                                    ok: function() {
-                                        me.parents('tr').remove();
-                                    }
-                                });
-                            }
-                        });
+                    content: "确定修复吗",
+                    ok:function(){
+                    	jh.utils.ajax.send({
+                    		url: '/clue/bondRepair',
+                    		data: {
+                    			taskIds: checkId
+                    		},
+                    		done: function(data){
+                    			console.log(data)
+                    		}
+                    	})
                     },
-                    cancel: true
+                    cancel:true
                 });
-
-            });
+            })
 
         };
     }
