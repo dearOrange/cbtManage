@@ -10,7 +10,7 @@ define(function(require, exports, module) {
         menus: [{
             name: '任务管理',
             icon: 'icon-region',
-            module: '/src/modules/task',
+            module: '/src/modules/xinxiyuan/task',
             url: '/task-list',
             childrens: []
         }, {

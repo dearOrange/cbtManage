@@ -1,11 +1,55 @@
 <div class="dataContent">
-    <!--<div class="search-container">
-        <form id="task-list-form">
-            <table class="common_query textLeft">
-                
-            </table>
-        </form>
-    </div>-->
+    <div class="search-container">
+		<form id="task-list-form">
+			<table class="common_query textLeft search-content">
+				<tr>
+					<td colspan="6">
+						<label for="tag" class="pull-left label">线索状态：</label>
+						<ol id="taskState" class="stateChange pull-left">
+							<li data-value="1" class="taskState active">已匹配成功线索</li>
+							<li data-value="0" class="taskState">未匹配成功线索</li>
+							<input type="hidden" name="isMatch" id="state" value="1">
+						</ol>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="label">车牌号：</label>
+						<input type="text" class="search-input" name="carNumber">
+					</td>
+					<td>
+						<label class="label">捕头：</label>
+						<input type="text" class="search-input" name="name">
+					</td>
+					<td>
+						<label class="label">捕头类型：</label>
+						<select name="type">
+                        	<option value="">全部</option>
+                        	<option value="all">可找可拖</option>
+                        	<option value="trace">只找</option>
+                        	<option value="recycle">只拖</option>
+                        	<option value="tracerecycle">找加拖一体</option>
+                        </select>
+					</td>
+					<td>
+						<label class="label">线索类型：</label>
+						<select name="state">
+                        	<option value="new">待认证</option>
+                        	<option value="passed">认证通过</option>
+                        	<option value="rejected">认证不通过</option>
+                        </select>
+					</td>
+					<td>
+						<label class="label">城市：</label>
+						<input type="text" class="search-input" name="city">
+					</td>
+					<td>
+						<input type="submit" value="查询" class="button search-button">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
     <div class="data-container">
         <table class="dataShow">
             <thead>
@@ -149,7 +193,7 @@
     </div>
 </script>
 <script type="text/javascript">
-seajs.use('modules/task/task-list', function(TaskList) {
+seajs.use('modules/xinxiyuan/task/task-list', function(TaskList) {
     var taskList = new TaskList();
     taskList.init();
 });

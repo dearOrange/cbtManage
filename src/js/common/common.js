@@ -571,7 +571,7 @@ define(function(require, exports, module) {
                 dataType: settings.dataType,
                 contentType: settings.contentType,
                 data: settings.data,
-                cache: false,
+                //cache: false,
                 async: settings.async,
                 beforeSend: function(xhr) {
                     var token = sessionStorage.getItem('admin-X-Token');
