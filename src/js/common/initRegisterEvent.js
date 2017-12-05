@@ -90,13 +90,6 @@ define(function(require, exports, module) {
                 window.history.go(-1);
             });
 
-            $('.label_checkbox,.label_radio').iCheck({
-                checkboxClass: 'icheckbox_flat-orange',
-                radioClass: 'iradio_flat-orange',
-                increaseArea: '20%'
-            });
-
-
             $('.user-menu').on('click', function() {
                 var me = $(this);
                 me.find('ol').toggleClass('hide');
@@ -141,8 +134,9 @@ define(function(require, exports, module) {
                         jh.utils.ajax.send({
                             url: '/operator/logout',
                             done: function() {
-//                              $.cookie('admin-username', null);
-//                              $.cookie('admin-X-Token', null);
+                                sessionStorage.removeItem('admin-X-Token');
+                                sessionStorage.removeItem('admin-uploadToken');
+                                sessionStorage.removeItem('admin-username');
                                 window.location.href = jh.config.pageLogin;
                             },
                             fail: function() {
@@ -152,10 +146,6 @@ define(function(require, exports, module) {
                     },
                     cancel: function() {}
                 });
-            });
-
-            $('body').on('change', 'select', function() {
-                $(this).parents('form').validate().element($(this));
             });
 
             $('body').off('change', '#checkAll').on('click', '#checkAll', function() {

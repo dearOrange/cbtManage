@@ -69,13 +69,11 @@
         </td>
         <td>
             <ul class="operaitem">
+                {{if item.state == "unconfirmed"}}
                 <li>
-                    {{if item.state == "unconfirmed"}}
                     <a data-id="{{item.id}}" class="addSub button">添加</a>
-                    {{else}}
-                    ——  ——
-                    {{/if}}
                 </li>
+                {{/if}}
             </ul>
         </td>
     </tr>

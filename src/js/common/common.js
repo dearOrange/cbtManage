@@ -27,6 +27,7 @@ define(function(require, exports, module) {
     var FINAL_OPTIONS = {
         viewImgRoot: 'http://oka19npup.bkt.clouddn.com/',
         pageSize: 10, //默认每页显示条数
+        defaultPageSize: 10,
         pageIndex: basePath + 'modules/index/index.html',
         pageLogin: basePath + 'modules/login/login.html', //登陆页面路径
         page500: basePath + 'modules/error/500.html', //数据请求异常页面
@@ -844,6 +845,7 @@ define(function(require, exports, module) {
         }
         Page.prototype.init = function() {
             var m = this;
+            // m.settings.pageSize = tammy.config.defaultPageSize;
             m.settings.page_container.addClass('pagination');
             m.render(1);
             m.regEvent();
@@ -946,7 +948,18 @@ define(function(require, exports, module) {
             var m = this,
                 s = m.settings,
                 arr = [];
-            arr.push('<div class="jh_pages">');
+            arr.push('<div class="pull-left">');
+            arr.push('  <span>每页显示</span>');
+            arr.push('  <select class="jh_page_pageSize">');
+            arr.push('      <option>10</option>');
+            arr.push('      <option>20</option>');
+            arr.push('      <option>30</option>');
+            arr.push('      <option>40</option>');
+            arr.push('      <option>50</option>');
+            arr.push('  <select>');
+            arr.push('  <span>每页显示</span>');
+            arr.push('</div>');
+            arr.push('<div class="pull-right jh_pages">');
             //pre容器
             arr.push('<div class="jh_page_pre">');
             // arr.push('<span class="jh_first_page">' + s.firstText + '</span>'); //首页 不可点击状态
@@ -1096,6 +1109,17 @@ define(function(require, exports, module) {
                 s.beforRender(m.page_total);
                 m.render(m.page_total);
                 s.btnClickCallBack();
+            });
+            //条数切换
+            s.page_container.off('change', '.jh_page_pageSize').on('change', '.jh_page_pageSize', function(event) {
+                event.preventDefault();
+                var el = $(this);
+                var size = parseInt(el.find('option:selected').text());
+                tammy.config.pageSize = size;
+                var cur = m.current();
+                s.beforRender(cur);
+                m.render(cur);
+                s.btnClickCallBack(cur);
             });
             //跳转
             if (s.jump) {
