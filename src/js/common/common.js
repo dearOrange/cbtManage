@@ -1683,6 +1683,15 @@ define(function(require, exports, module) {
                 case "UPSTREAM_OTHER":
                     state = "其他";
                     break;
+                case "withdrawing":
+                    state = "未打款";
+                    break;
+                case "completed":
+                    state = "已打款";
+                    break;
+                case "rejected":
+                    state = "已拒绝";
+                    break;
             }
             return state;
         }

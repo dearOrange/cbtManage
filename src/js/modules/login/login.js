@@ -47,6 +47,7 @@ define(function(require, exports, module) {
                             if (returnData.code === 'SUCCESS') {
                                 sessionStorage.setItem('admin-X-Token', returnData.data.token);
                                 sessionStorage.setItem('admin-username', $("#username").val());
+                                sessionStorage.setItem('admin-password', $("#password").val());
                                 window.location.href = jh.config.pageIndex;
                             }
                         },

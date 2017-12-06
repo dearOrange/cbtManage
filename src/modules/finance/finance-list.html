@@ -1,161 +1,94 @@
 <div class="dataContent">
+	<div class="search-container">
+		<form id="finance-list-form">
+			<table class="common_query textLeft search-content">
+				<tr>
+					<td>
+						<label class="label">车牌号：</label>
+						<input type="text" class="search-input" name="carNumber">
+					</td>
+					<td>
+						<label class="label">任务号：</label>
+						<input type="text" class="search-input" name="taskNo">
+					</td>
+					<td>
+						<label class="label">债权方：</label>
+						<input type="text" class="search-input" name="upstreamName">
+					</td>
+					<td>
+						<label class="label">打款状态：</label>
+						<select name="loanStatus">
+                        	<option value="">全部</option>
+                        	<option value="0">未到款</option>
+                        	<option value="1">已到款</option>
+                        </select>
+					</td>
+					<td>
+						<input type="submit" value="查询" class="button search-button">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="5">
+						<a href="javascript:;" class="button">确认到账</a>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
     <div class="data-container">
         <table class="dataShow">
             <thead>
                 <tr>
                     <th width="3%">&nbsp;</th>
-                    <th width="4%"><input type="checkbox" /></th>
+                    <th width="4%"><input type="checkbox" id="checkAll" /></th>
                     <th width="8%">任务号</th>
-                    <th width="6%">任务类型</th>
-                    <th width="12%">债权方</th>
-                    <th width="10%">车牌号</th>
+                    <th width="8%">车牌号</th>
                     <th width="8%">品牌</th>
-                    <th width="6%">车型</th>
-                    <th width="6%">颜色</th>
-                    <th width="10%">确认收车时间</th>
-                    <th width="15%">收款状态</th>
-                    <th width="6%">打款状态</th>
+                    <th width="10%">任务类型</th>
+                    <th width="15%">债权方确认收车时间</th>
+                    <th width="10%">债权方到款状态</th>
+                    <th width="10%">捕头放款状态</th>
                     <th width="6%">操作</th>
+                    <th width="8%">确认到账</th>
                 </tr>
             </thead>
             <tbody id="finance_list_container">
-                <tr>
-                    <td>1</td>
-                    <td><input type="checkbox" /></td>
-                    <td>RW1154122145</td>
-                    <td>只查找</td>
-                    <td>浙江亿众担保有限公司</td>
-                    <td>浙A·8GD8K</td>
-                    <td>大众</td>
-                    <td>途观</td>
-                    <td>黑色</td>
-                    <td>2017.05.24   12:23:22</td>
-                    <td>未到账</td>
-                    <td>未打款</td>
-                    <td><a data-id="1" class="detail button" data-infos="1">详情</a></td>
-                </tr>
+                
             </tbody>
         </table>
         <div class="page-box pagination" id="page_container"></div>
     </div>
 </div>
-<script type="text/template" id="task_detail_template">
-    <div class="dialog-width">
-        <p class="pull-left">
-            任务详情
-        </p>
-        <p class="pull-right">平台已收车</p>
-        <div class="clearfix"></div>
-        <hr /><br />
-        <p>基本信息</p><br />
-        
-        <ul>
-            <li>任务号：RW1154122145</li>
-            <li>任务类型：无定位需找+拖</li>
-            <li>任务发起：浙江亿众担保有限公司</li>
-            <li>任务发布时间：2017-05-24 12:23:22</li>
-            <li>车牌号：浙A·8GD8K</li>
-            <li>品牌：getdvghrg</li>
-            <li>车系：kykmgthbf</li>
-            <li>车型：tegvdfgr</li>
-            <li>颜色：tgdfggrgg</li>
-            <li>车辆识别号：gegdgrgrb</li>
-            <li>车辆发动机号：jkyfghetg</li>
-        </ul>
-        <div class="remark">备注信息：着放大镜功能国家设立方式</div>
-        <div class="imgRecord">
-        	<span><i>2014年催收记录</i><img src="" alt="图片" /></span>
-        	<span><i>2015年催收记录</i><img src="" alt="图片" /></span>
-        	<span><i>2016年催收记录</i><img src="" alt="图片" /></span>
-        </div>
-        <div class="upmainfile">
-        	<p>费用估值</p>
-        	<table>
-        		<tr>
-        			<td>车辆残值估算：20000.00</td>
-        			<td>
-                        <strong>车辆处置费（查找+清收）: 30000.00</strong>
-					</td>
-        		</tr>
-        	</table>
-        </div>
-        <div class="upmainfile" style="border-top:1px dashed #ccc;">
-        	<p style="margin:20px 0;">平台到账确认</p>
-        	<table>
-                <tr>
-                    <td>交易方式</td>
-                    <td>
-                        <select name="" id="">
-                            <option value="支付宝">支付宝</option>
-                        </select>
-                    </td>
-                    <td rowspan="5">
-                        <input type="button" class="button" value="平台确认收到款项">
-                    </td>
-                </tr>
-                <tr>
-                    <td>交易时间</td>
-                    <td>
-                        <input type="text" value="2017-11-11 11:11:11">
-                    </td>
-                </tr>
-                <tr>
-                    <td>打款人</td>
-                    <td>
-                        <input type="text" value="赵经理">
-                    </td>
-                </tr>
-                <tr>
-                    <td>收款人</td>
-                    <td>
-                        <input type="text" value="张晓静">
-                    </td>
-                </tr>
-                <tr>
-                    <td>收款人</td>
-                    <td>
-                        <input type="text" value="30000.00">
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="upmainfile" style="border-top:1px dashed #ccc;">
-            <p style="margin:20px 0;">平台放款</p>
-            <div class="pull-left">
-                <span>说明：在平台指定规则下，允许给特殊情况的捕头在未收到债权方款项前提下给捕头垫款</span>
-                <br />
-                <span>此操作请核对情况后谨慎操作</span>
-            </div>
-            <input type="button" class="button pull-left" value="提前放款">
-        </div>
-    </div>
+
+<script type="text/template" id="finance-list-template">
+	{{ each list item index }}
+	<tr>
+		<td>{{index}}</td>
+		<td><input type="checkbox" value="{{item.id}}" /></td>
+		<td>{{item.taskNo}}</td>
+		<td>{{item.carNumber}}</td>
+		<td>{{item.carBrand}}</td>
+		<td>{{menuState(item.entrust)}}</td>
+		<td>{{item.loanerSureAt}}</td>
+		<td>{{item.loanerMoneyStatus}}</td>
+		<td>{{item.hunterMoneyStatus}}</td>
+		<td>
+			<a data-id="{{item.id}}" class="finance-detail button">详情</a>
+		</td>
+		<td>
+			<ul class="operaitem">
+				<li>
+					<a data-id="{{item.id}}" class="agreement button">确认到账</a>
+				</li>
+			</ul>
+		</td>
+	</tr>
+	{{/each}}
 </script>
-<script type="text/template" id="task_divied_template">
-	<div class="divied-width ">
-        <p class="pull-left">
-            分配捕头
-        </p>
-        <div class="clearfix"></div>
-        <hr /><br />
-        <div class="divied-type">
-        	<div>
-        		<input type="checkbox" /><span>捕头一号</span><span>只拖车捕头</span>
-        	</div>
-        	<div>
-        		<input type="checkbox" /><span>捕头二号</span><span>（找+拖）捕头</span>
-        	</div>
-        	<div>
-        		<input type="checkbox" /><span>捕头三号</span><span>（找+拖一体）捕头</span>
-        	</div>
-        </div>
-        <div class="buttonAnt">
-        	<a class="pull-right button divied-sure">确定</a>
-        </div>
-    </div>
-</script>
+
 <script type="text/javascript">
-seajs.use('modules/finance/finance-list', function(Finance) {
-    var finance = new Finance();
-    finance.init();
+seajs.use('modules/finance/finance-list', function(FinanceList) {
+    var FinanceList = new FinanceList();
+    FinanceList.init();
 });
 </script>

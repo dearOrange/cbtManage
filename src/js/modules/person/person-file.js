@@ -1,0 +1,60 @@
+/**
+ * OpenList
+ * @authors Your Name (you@example.org)
+ * @date    2017-05-24 14:32:26
+ * @version 1.0
+ */
+'use strict';
+define(function(require, exports, module) {
+    function PersonFile() {
+        var _this = this;
+        _this.key = '';
+        this.init = function() {
+            this.initContent();
+            this.registerEvent();
+        };
+        this.initContent = function() {
+            
+        };
+        this.registerEvent = function() {
+            jh.utils.ajax.send({
+                url: '/operator/info',
+                done: function(returnData) {
+                	returnData.password = sessionStorage.getItem("admin-password");
+                    var getStr = jh.utils.template('task_getAuditInfo_template', returnData);
+                    $('.modelData').html(getStr);
+ 
+                    //修改密码
+		            $('body').off('click', '.changePassword').on('click', '.changePassword', function() {
+		                var alertStr = jh.utils.template('task_changePassword_template', returnData);
+		                jh.utils.alert({
+		                    content: alertStr,
+		                	ok:function(){
+		                		var datachange = {
+			                    	password: $.trim($('.find-oldpwd').val()),
+			                    	newPassword: $.trim($('.find-newpwd').val())
+			                   	};
+		                		jh.utils.ajax.send({
+				                    url: '/operator/updatePassword',
+				                    method: 'post',
+				                    data: datachange,
+				                    done: function(returnData){
+				                    	jh.utils.load("/src/modules/login/login");
+				                    }
+				                });
+		                	},
+		                	cancel: true
+		                });
+		                
+		    		});
+                }
+            });
+            
+            //重新编辑
+            $('body').off('click', '.editFile').on('click', '.editFile', function() {
+                jh.utils.load("/src/modules/person/person-center");
+            })
+        };
+    }
+    module.exports = PersonFile;
+});

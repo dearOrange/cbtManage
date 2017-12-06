@@ -12,3 +12,79 @@
 	width:100px;
 	height:60px;
 }
+/*个人中心*/
+.personContent .center-site {
+    width: 900px;
+    margin: 4px 0 0 96px;
+}
+
+.personContent ul, .personContent ol {
+    padding: 10px 0 20px 0;
+    overflow: hidden;
+    border-bottom: 1px dashed #ccc;
+}
+
+.personContent ul li {
+    width: 50%;
+    float: left;
+    padding: 10px 0;
+}
+
+.personContent .center-site ul.person-option li {
+    width: 8%;
+    background: #F1F1F1;
+    border-radius: 2px;
+    margin-left: 20px;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.personContent ul li label {
+    display: inline-block;
+    width: 72px;
+}
+
+.personContent ul li textarea {
+    width: 370px;
+    height: 30px;
+    resize: none;
+    margin-left: 70px;
+}
+
+.personContent ul li input[type="text"], .personContent ul li select {
+    width: 250px;
+}
+
+.personContent ul li select.useraddress {
+    width: 100px;
+}
+
+.personContent ol li {
+    width: 30%;
+    float: left;
+    padding: 10px 0;
+}
+.change-width p {
+    width: 660px;
+    font-weight: 900;
+}
+.change-width .changeForm .inputGroup{
+	margin:10px 0;
+}
+.change-width .changeForm .inputGroup label {
+    width: 100px;
+    display: inline-block;
+}
+
+.change-width .changeForm .inputGroup input {
+	width:200px;
+    height: 30px;
+    border:1px solid #ccc;
+}
+
+.dialog-width form table input{
+	width:200px;
+	height:30px;
+	border:1px solid #ccc;
+}

@@ -1,0 +1,110 @@
+<div class="sendMoneyDetail">
+	
+</div>
+
+<script type="text/template" id="sendMoney_detail_template">
+    <div class="dialog-width">
+    	<p class="pull-left">
+            提现申请人基本信息
+        </p>
+        <input type="submit" value="返回" class="button search-button gobackPage goBack">
+        <p class="pull-right">{{menuState(data.state)}}</p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        {{each data.downStreamVo item index}}
+        <div>账号：{{item.phone}}</div>
+        <div>主体名称：{{item.company}}</div>
+        <ul>
+        	<li>负责人：{{item.linkman}}</li>
+        	<li>联系电话：{{item.contactPhone}}</li>
+        	<li>微信账号：{{item.wechat}}</li>
+        </ul>
+        <p>提现单号：{{data.flow}}</p>
+        <p>提现申请人收款信息</p>
+        <div>提现金额：{{data.amount}}元</div>
+        <div>收款账号：</div>
+        <div>一  支付宝   账号：{{item.alipay}}</div>
+        <div>
+        	<span>二  银行卡   卡号：{{item.bankCard}}</span>
+        	<span style="margin:10px;">开户行：{{item.bankName}}</span>
+        	<span>收款人姓名：{{item.payeeName}}</span>
+        </div>
+        {{/each}}
+        <a href="javascript:;" class="button playMoney">打款</a>
+        <a href="javascript:;" class="button rejectMoney">拒绝提现申请</a>
+    </div>
+</script>
+<script type="text/template" id="rejectMoney_template">
+	<div class="dialog-width">
+    	<p class="pull-left">
+            拒绝提现申请
+        </p>
+        <div class="clearfix"></div>
+        <hr /> <br />
+        <textarea class="rejectReason" placeholder="请填写原因" style="width:300px;height:40px;resize:none;"></textarea>
+    </div>
+</script>
+<script type="text/template" id="sendMoney_sure_template">
+    <div class="dialog-width">
+    	<form id="play-money-form">
+	        <table>
+	            <tbody>
+	                <tr>
+	                    <td>申请人</td>
+	                    <td colspan="3">
+	                        <span>张三</span>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>发放类型</td>
+	                    <td colspan="3">
+	                        <select name="payWay">
+	                            <option value="1">支付宝</option>
+	                            <option value="2">银行卡</option>
+	                        </select>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>支付宝账号</td>
+	                    <td>
+	                        <input type="text" value="111111@qq.com" />
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>银行卡账号</td>
+	                    <td>
+	                        <input type="text" value="22222222222222" />
+	                    </td>
+	                    <td>开户支行</td>
+	                    <td>
+	                        <input type="text" value="中国工商银行下沙支行"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>申请提现金额</td>
+	                    <td>
+	                        <input type="text" value="300.00" />
+	                    </td>
+	                    <td>实际发放金额</td>
+	                    <td>
+	                        <input type="text" name="actualAmount" value="300.00"/>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>上传打款凭证</td>
+	                    <td colspan="3">
+	                        <input type="file" />
+	                    </td>
+	                </tr>
+	            </tbody>
+	        </table>
+    	</form>
+    </div>
+</script>
+
+<script type="text/javascript">
+seajs.use('modules/sendMoney/sendMoney-detail', function(SendMoneyDetail) {
+    var SendMoneyDetail = new SendMoneyDetail();
+    SendMoneyDetail.init();
+});
+</script>

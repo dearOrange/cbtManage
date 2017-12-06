@@ -1,47 +1,86 @@
 <div class="dataContent">
+	<div class="search-container">
+		<form id="sendMoney-list-form">
+			<table class="common_query textLeft search-content">
+				<tr>
+					<td>
+						<label class="label">提现人：</label>
+						<input type="text" class="search-input" name="carNumber">
+					</td>
+					<td>
+						<label class="label">主体：</label>
+						<input type="text" class="search-input" name="company">
+					</td>
+					<td>
+						<label class="label">打款状态：</label>
+						<select name="state">
+                        	<option value="withdrawing ">未打款</option>
+                        	<option value="completed">已打款</option>
+                        	<option value="rejected">已拒绝</option>
+                        </select>
+					</td>
+					<td>
+						<input type="submit" value="查询" class="button search-button">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
     <div class="data-container">
         <table class="dataShow">
             <thead>
                 <tr>
                     <th width="3%">&nbsp;</th>
                     <th width="4%"><input type="checkbox" /></th>
-                    <th width="8%">提现单号</th>
-                    <th width="6%">申请人</th>
-                    <th width="10%">联系方式</th>
-                    <th width="10%">申请提现金额</th>
-                    <th width="8%">实际发放金额</th>
-                    <th width="6%">发放方式</th>
-                    <th width="6%">凭证照片</th>
-                    <th width="10%">申请提现时间</th>
-                    <th width="15%">打款时间</th>
-                    <th width="6%">状态</th>
-                    <th width="8%">操作</th>
+                    <th width="8%">提现申请人</th>
+                    <th width="15%">主体名称</th>
+                    <th width="12%">提现金额</th>
+                    <th width="10%">实发金额</th>
+                    <th width="8%">发放形式</th>
+                    <th width="6%">打款状态</th>
+                    <th width="15%">提现申请时间</th>
+                    <th width="6%">操作</th>
+                    <th width="6%">打款</th>
                 </tr>
             </thead>
-            <tbody id="finance_list_container">
-                <tr>
-                    <td>1</td>
-                    <td><input type="checkbox" /></td>
-                    <td>TX99387893030</td>
-                    <td>赵四</td>
-                    <td>13754745541</td>
-                    <td>100</td>
-                    <td>100</td>
-                    <td>--</td>
-                    <td>--</td>
-                    <td>2017.05.24   12:23:22</td>
-                    <td>2017.05.24   12:23:22</td>
-                    <td>未打款</td>
-                    <td>
-                        <a data-id="1" class="sendMoney button" data-infos="1">发款</a>
-                        <a data-id="1" class="refuse button" data-infos="1">拒绝</a>
-                    </td>
-                </tr>
+            <tbody id="sendMoney_list_container">
+                
             </tbody>
         </table>
         <div class="page-box pagination" id="page_container"></div>
     </div>
 </div>
+
+<script type="text/template" id="sendMoney-list-template">
+	{{ each list item index }}
+	<tr>
+		<td>{{index}}</td>
+		<td><input type="checkbox" value="{{item.id}}" /></td>
+		<td>{{item.name}}</td>
+		<td>
+			{{item.company}}
+		</td>
+		<td>
+			{{item.amount}}
+		</td>
+		<td>{{item.actualAmount}}</td>
+		<td>{{item.payWay}}</td>
+		<td>{{menuState(item.state)}}</td>
+		<td>{{item.createAt}}</td>
+		<td>
+			<a data-id="{{item.id}}" class="sendMoney-detail button">详情</a>
+		</td>
+		<td>
+			<ul class="operaitem">
+				<li>
+					<a data-id="{{item.id}}" class="sendMoney button">打款</a>
+				</li>
+			</ul>
+		</td>
+	</tr>
+	{{/each}}
+</script>
+
 <script type="text/template" id="sendMoney_template">
     <div class="dialog-width">
         <table>
@@ -97,8 +136,8 @@
     </div>
 </script>
 <script type="text/javascript">
-seajs.use('modules/sendMoney/sendMoney-list', function(SendMoney) {
-    var sendMoney = new SendMoney();
-    sendMoney.init();
+seajs.use('modules/sendMoney/sendMoney-list', function(SendMoneyList) {
+    var SendMoneyList = new SendMoneyList();
+    SendMoneyList.init();
 });
 </script>

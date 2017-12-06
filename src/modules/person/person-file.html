@@ -1,0 +1,76 @@
+<div class="dataContent personContent modelData">
+    
+</div>
+<script type="text/template" id="task_getAuditInfo_template">
+    <div class="search-container center-site">
+    	<ul class="person-option">
+    		<li class="changePassword">修改密码</li>
+    		<li class="editFile">编辑资料</li>
+    	</ul>
+        <form id="task-list-form">
+        	<ul>
+	    		<li>
+	    			<label>用户名：</label>
+		        	<span>{{data.userName}}</span>
+	    		</li>
+	    		<li>
+	    			<label>密码：</label>
+		        	<span>{{password}}</span>
+	    		</li>
+	    	</ul>
+		    <ul>
+		        <li>
+		        	<label>真实姓名：</label>
+		        	<span>{{data.name}}</span>
+		        </li>
+		        <li>
+		        	<label>联系电话：</label>
+		        	<span>{{data.mobile}}</span>
+		        </li>
+		        <li>
+		        	<label>微信账号：</label>
+		        	<span>{{data.wechat}}</span>
+		        </li>
+		        <li>
+		        	<label>邮箱：</label>
+		        	<span>{{data.email}}</span>
+		        </li>
+		        <li>
+		        	<label>负责区域：</label>
+		        	{{each data.operatorProvinceVoList data index}}
+		        	<span>{{data.provinceName}}</span>
+		        	{{/each}}
+		        </li>
+		    </ul>
+        </form>
+    </div>
+</script>
+<script type="text/template" id="task_changePassword_template">
+	<div class="change-width">
+        <p class="pull-left">
+            修改密码
+        </p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <form class="changeForm" id="form_change">
+			<div class="inputGroup">
+            	<label>原密码   </label>
+                <input class="txt required find-oldpwd" type="password" maxlength="40" name="code" placeholder="请输入原密码" id="oldpwd"/>        
+            </div>
+			<div class="inputGroup">
+				<label>新密码   </label>
+                <input class="txt required find-newpwd" type="password" maxlength="40" name="password" placeholder="请输入新密码" id="newpwd">
+            </div>
+            <div class="inputGroup">
+            	<label>再次输入新密码   </label>
+                <input class="txt required find-repnewpwd" type="password" maxlength="40" name="confirm-password" placeholder="请再次输入新密码" id="repnewpwd"/>        
+            </div>
+        </form>
+    </div>
+</script>
+<script type="text/javascript">
+seajs.use('modules/person/person-file', function(PersonFile) {
+    var PersonFile = new PersonFile();
+    PersonFile.init();
+});
+</script>

@@ -100,8 +100,8 @@ define(function(require, exports, module) {
         }, {
             name: '用户中心',
             icon: 'icon-supplier',
-            module: '/src/modules/xinxiyuan/clue',
-            url: '/clue-manage',
+            module: '/src/modules/person',
+            url: '/person-file',
             childrens: []
         }]
     };
