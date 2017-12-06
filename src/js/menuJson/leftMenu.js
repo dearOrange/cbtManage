@@ -62,10 +62,16 @@ define(function(require, exports, module) {
             url: '/creditor-manage',
             childrens: []
         }, {
-            name: '渠道任务分配',
+            name: '渠道-任务分配',
             icon: 'icon-supplier',
             module: '/src/modules/qudao/qd-distribution',
             url: '/qd-distribution-list',
+            childrens: []
+        }, {
+            name: '渠道-拖车单分配',
+            icon: 'icon-supplier',
+            module: '/src/modules/qudao/qd-trailer',
+            url: '/qd-trailer-list',
             childrens: []
         }, {
             name: '渠道-线索审核',
