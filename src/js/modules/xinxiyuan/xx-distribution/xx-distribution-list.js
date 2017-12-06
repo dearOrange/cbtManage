@@ -67,33 +67,7 @@ define(function(require, exports, module) {
                 jh.utils.ajax.send(opt);
             });
 
-            //删除任务
-            $('body').off('click', '.delete').on('click', '.delete', function() {
-                var me = $(this);
-                var id = me.data('id');
-                jh.utils.alert({
-                    content: '确定删除任务吗？',
-                    ok: function() {
-                        jh.utils.ajax.send({
-                            url: '/task/delTask',
-                            data: {
-                                taskId: id
-                            },
-                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                            done: function(returnData) {
-                                jh.utils.alert({
-                                    content: '任务删除成功！',
-                                    ok: function() {
-                                        me.parents('tr').remove();
-                                    }
-                                });
-                            }
-                        });
-                    },
-                    cancel: true
-                });
-
-            });
+           
 
         };
     }

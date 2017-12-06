@@ -29,9 +29,152 @@
             {{/each}}
         </div>
         <div class="upmainfile">
-            
+           <p>线索信息</p>
+        	{{each data.traceVoList data index}}
+        	<div class="upimg">
+        		<dl>
+					<dt>
+						<div class="upfile-item">
+							<img data-id="{{data.carNumberPhoto}}" src="{{viewImgRoot}}{{data.carNumberPhoto}}">
+						</div>
+		    		</dt>
+					<dd>车牌特写照</dd>
+				</dl>
+        		<dl>
+					<dt>
+						<div class="upfile-item">
+							<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}">
+						</div>
+	    			</dt>
+					<dd>全车背景照</dd>
+				</dl>
+        	</div>
+        	<div style="margin:10px 0;">
+        		<p>线索上传时间：{{data.createAt}}</p>
+        	</div>
+        	{{/each}} 
         </div>
-
+		<div class="hopeprice">
+        	<p>预估费用</p>
+        	<div>
+        		<label>处置费用预估:</label>
+        		<span>{{data.estimatedPrice}}</span>
+        	</div>
+        	<div>
+        		<label>最终确认费用:</label>
+        		<span>{{data.finalPrice}}</span>
+        	</div>
+        	{{if data.state == 'hunterReceive'}}
+        	<a class="button search-button isSure" href="javascript:;">保存</a>
+        	{{/if}}
+        </div>
+        <div class="mainfile">
+			<p>凭证审核</p>
+			<div class="upimg">
+				<dl>
+					<dt class="upload-pa">
+		    				<div id="businessLicense"></div>
+							<div class="upload-list">
+								<div class="upfile-item">
+									{{if data.businessLicense}}
+									<img data-id="{{data.businessLicense}}" src="http://oka19npup.bkt.clouddn.com/{{data.businessLicense}}">
+									<span class="delete-img" data-domid="businessLicense" data-fileid="WU_FILE_0"></span>
+									<input type="hidden" name="businessLicense" value="{{data.businessLicense}}">
+									{{else}}
+									<img data-id="{{data.businessLicense}}" src="../../img/nopic.png">	
+									{{/if}}
+								</div>
+							</div>
+		    			</dt>
+					<dd>公证书</dd>
+				</dl>
+				<dl>
+					<dt class="upload-pa">
+		    				<div id="legalPersonIdImg"></div>
+							<div class="upload-list">
+								<div class="upfile-item">
+									{{if data.legalPersonIdImg}}
+									<img data-id="{{data.legalPersonIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.legalPersonIdImg}}">
+									<span class="delete-img" data-domid="legalPersonIdImg" data-fileid="WU_FILE_0"></span>
+									<input type="hidden" name="legalPersonIdImg" value="{{data.legalPersonIdImg}}">
+									{{else}}
+									<img data-id="{{data.legalPersonIdImg}}" src="../../img/nopic.png">	
+									{{/if}}
+								</div>
+							</div>
+		    			</dt>
+					<dd>按揭服务协议</dd>
+				</dl>
+				<dl>
+					<dt class="upload-pa">
+		    				<div id="legalPersonHandIdImg"></div>
+							<div class="upload-list">
+								<div class="upfile-item">
+									{{if data.legalPersonHandIdImg}}
+									<img data-id="{{data.legalPersonHandIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.legalPersonHandIdImg}}">
+									<span class="delete-img" data-domid="legalPersonHandIdImg" data-fileid="WU_FILE_0"></span>
+									<input type="hidden" name="legalPersonHandIdImg" value="{{data.legalPersonHandIdImg}}">
+									{{else}}
+									<img data-id="{{data.legalPersonHandIdImg}}" src="../../img/nopic.png">	
+									{{/if}}
+								</div>
+							</div>
+		    			</dt>
+					<dd>抵押合同</dd>
+				</dl>
+				<dl>
+					<dt class="upload-pa">
+		    				<div id="linkmanIdImg"></div>
+							<div class="upload-list">
+								<div class="upfile-item">
+									{{if data.linkmanIdImg}}
+									<img data-id="{{data.linkmanIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.linkmanIdImg}}">
+									<span class="delete-img" data-domid="linkmanIdImg" data-fileid="WU_FILE_0"></span>
+									<input type="hidden" name="linkmanIdImg" value="{{data.linkmanIdImg}}">
+								</div>
+									{{else}}
+									<img data-id="{{data.linkmanIdImg}}" src="../../img/nopic.png">	
+									{{/if}}
+							</div>
+		    			</dt>
+					<dd>垫付款凭证</dd>
+				</dl>
+				<dl>
+					<dt class="upload-pa">
+		    				<div id="linkmanHandIdImg"></div>
+							<div class="upload-list">
+								<div class="upfile-item">
+									{{if data.linkmanHandIdImg}}
+									<img data-id="{{data.linkmanHandIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.linkmanHandIdImg}}">
+									<span class="delete-img" data-domid="linkmanHandIdImg" data-fileid="WU_FILE_0"></span>
+									<input type="hidden" name="linkmanHandIdImg" value="{{data.linkmanHandIdImg}}">
+									{{else}}
+									<img data-id="{{data.linkmanHandIdImg}}" src="../../img/nopic.png">	
+									{{/if}}
+								</div>
+							</div>
+		    			</dt>
+					<dd>还款确认书</dd>
+				</dl>
+				<dl>
+					<dt class="upload-pa">
+		    				<div id="linkmanHandIdImg"></div>
+							<div class="upload-list">
+								<div class="upfile-item">
+									{{if data.linkmanHandIdImg}}
+									<img data-id="{{data.linkmanHandIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.linkmanHandIdImg}}">
+									<span class="delete-img" data-domid="linkmanHandIdImg" data-fileid="WU_FILE_0"></span>
+									<input type="hidden" name="linkmanHandIdImg" value="{{data.linkmanHandIdImg}}">
+									{{else}}
+									<img data-id="{{data.linkmanHandIdImg}}" src="../../img/nopic.png">	
+									{{/if}}
+								</div>
+							</div>
+		    			</dt>
+					<dd>法院判决书</dd>
+				</dl>
+			</div>
+		</div>
         <div>
             <a href="javascript:;" class="button grey_btn goBack">返回</a>
         </div>
