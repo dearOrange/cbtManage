@@ -47,6 +47,7 @@
         </div>
         <div class="mainfile">
         	<p>线索信息</p>
+        	{{each data.traceVoList data index}}
         	<div class="upimg">
         		<dl>
 					<dt>
@@ -67,16 +68,19 @@
         	</div>
         	<div style="margin:10px 0;">
         		<p>线索上传时间：{{data.clueUploadAt}}</p>
-        		<p>车架号后6位：{{data.id}}</p>
-        		<p>定位：{{data.id}}</p>
+        		<p>车架号后6位：{{data.carId}}</p>
+        		<p>定位：{{data.location}}</p>
         	</div>
+        	{{/each}}
         </div>
         <div class="hopeprice">
         	<p>预估费用</p>
+        	{{each data.traceVoList data index}}
         	<div>
         		<label>意愿处置费用:</label>
-        		<span>{{data.finalPrice}}</span>
+        		<span>{{data.estimatedCost}}</span>
         	</div>
+        	{{/each}}
         	<div>
         		<label>处置费用预估:</label>
         		<span>{{data.estimatedPrice}}</span>

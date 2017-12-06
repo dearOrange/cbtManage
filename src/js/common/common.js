@@ -664,14 +664,7 @@ define(function(require, exports, module) {
                     var activeFirst = moduleCon.children('a'); //一级选中的文字
                     var submoduleCon = moduleCon.find('ul li.active');
                     txt += activeFirst.text();
-                    if (submoduleCon) {
-                        var activeSecond = submoduleCon.children('a');
-                        txt += ' > ' + activeSecond.text();
-                    }
-                    if (txt === ' > ') {
-                        breadParnet.addClass('hide');
-                        return false;
-                    }
+                    txt = '首页 > ' + txt;
                     breadCrumb.text(txt);
                     if (!breadParnet.is(':visible')) {
                         breadParnet.show();
