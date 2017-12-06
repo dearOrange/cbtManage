@@ -978,7 +978,7 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     var response = returnData.data;
                     //如果返回数据没有total数据总条数，则清空内容和分页容器 显示错误信息
-                    if (!response.total) {
+                    if (typeof response.total === 'undefined' || !response.total) {
                         var tdCol = s.data_container.siblings().find('th').length;
                         s.noData = s.noData ? s.noData : '<tr><td colspan="' + tdCol + '">无记录</td></tr>';
                         s.data_container.html(s.noData);

@@ -30,6 +30,57 @@ define(function(require, exports, module) {
             page.init();
         };
 
+        this.initSheriff = function(type) {
+            Mock.mock(REQUESTROOT + '/task/downStreamListByChannel', {
+                'code': 'SUCCESS',
+                'data|10': [{
+                    'id|+1': 1,
+                    'name': Mock.Random.cname(),
+                    'type': /(all)|(trace)|(tracerecycle)|(recycle)/
+                }]
+            });
+            jh.utils.ajax.send({
+                url: '/task/downStreamListByChannel',
+                done: function(returnData) {
+                    var str = _this.distributionSheriff(returnData.data);
+                    if (type === 'detail') {
+                        
+                    } else {
+                        jh.utils.alert({
+                            content: str,
+                            ok: _this.distribution,
+                            cancel: true
+                        });
+                    }
+                }
+            });
+        };
+
+        this.distributionSheriff = function(arr) {
+            var source = require('/src/templates/sheriff-distribution.tpl');
+            var render = jh.utils.template.compile(source);
+            var str = render({ list: arr, stateToString: jh.utils.menuState });
+            return str;
+        };
+
+        this.distribution = function(ids) {
+            var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
+            var opt = {
+                url: '/task/distributeTask',
+                data: {
+                    taskIds: ids
+                },
+                done: function(returnData) {
+                    jh.utils.alert({
+                        content: '任务分配成功！',
+                        ok: true,
+                        cancel: false
+                    });
+                }
+            };
+            jh.utils.ajax.send(opt);
+        };
+
         this.registerEvent = function() {
             //查看任务详情
             $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
@@ -40,26 +91,18 @@ define(function(require, exports, module) {
                 });
             });
 
+            //分配
+            $('body').off('click', '.distribution').on('click', '.distribution', function() {
+                var me = $(this);
+                var ids = me.data('id');
+                _this.initSheriff(ids);
+            });
+
             //批量分配
             $('body').off('click', '#qd-qdTrailerList-distributeTask').on('click', '#qd-qdTrailerList-distributeTask', function() {
                 var me = $(this);
                 var ids = jh.utils.getCheckboxValue('admin-qdTrailerList-container');
-                
-                var opt = {
-                    url: '/task/distributeTask',
-                    data: {
-                        taskIds: ids
-                    },
-                    done: function(returnData) {
-                        jh.utils.alert({
-                            content: '任务分配成功！',
-                            ok: true,
-                            cancel: false
-                        });
-                    }
-                };
-                return false;
-                jh.utils.ajax.send(opt);
+                _this.initSheriff(ids);
             });
         };
     }
