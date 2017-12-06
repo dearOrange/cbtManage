@@ -30,6 +30,56 @@ define(function(require, exports, module) {
             page.init();
         };
 
+        this.initSheriff = function(type) {
+            Mock.mock(REQUESTROOT + '/task/downStreamListByChannel', {
+                'code': 'SUCCESS',
+                'data|10': [{
+                    'id|+1': 1,
+                    'name': Mock.Random.cname(),
+                    'operatorProvinceVoList|1-10':[{
+                        'provinceCode': 0,
+                        'provinceName': Mock.Random.province()
+                    }]
+                }]
+            });
+            jh.utils.ajax.send({
+                url: '/operator/getAllChannel',
+                done: function(returnData) {
+                    var str = _this.distributionSheriff(returnData.data);
+                    jh.utils.alert({
+                        content: str,
+                        ok: _this.distribution,
+                        cancel: true
+                    });
+                }
+            });
+        };
+
+        this.distributionSheriff = function(arr) {
+            var source = require('/src/templates/channel-distribution.tpl');
+            var render = jh.utils.template.compile(source);
+            var str = render({list:arr});
+            return str;
+        };
+
+        this.distribution = function(ids) {
+            var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
+            var opt = {
+                url: '/task/distributeTask',
+                data: {
+                    taskIds: ids
+                },
+                done: function(returnData) {
+                    jh.utils.alert({
+                        content: '任务分配成功！',
+                        ok: true,
+                        cancel: false
+                    });
+                }
+            };
+            jh.utils.ajax.send(opt);
+        };
+
         this.registerEvent = function() {
             //查看任务详情
             $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
@@ -43,32 +93,25 @@ define(function(require, exports, module) {
             //批量分配
             $('body').off('click', '#distributeTask').on('click', '#distributeTask', function() {
                 var me = $(this);
-                var list = $('#admin-distributionList-container').find(':checked');
-                var ids = [];
-                $.each(list, function(index, item) {
-                    var id = $(item).data('id');
-                    ids.push(id);
-                });
-                ids = ids.join(',');
-                var opt = {
-                    url: '/task/distributeTask',
-                    data: {
-                        taskIds: ids
-                    },
-                    done: function(returnData) {
-                        jh.utils.alert({
-                            content: '任务分配成功！',
-                            ok: true,
-                            cancel: false
-                        });
-                    }
-                };
-                return false;
-                jh.utils.ajax.send(opt);
+                var ids = jh.utils.getCheckboxValue('admin-xXDistributionList-container');
+                _this.initSheriff(ids);
             });
 
-           
+            //批量分配
+            $('body').off('click', '.distribution').on('click', '.distribution', function() {
+                var me = $(this);
+                var ids = me.data('id');
+                _this.initSheriff(ids);
+            });
 
+            //批量分配
+            $('body').off('click', '.qd-distribution-tab li').on('click', '.qd-distribution-tab li', function() {
+                var me = $(this);
+                me.addClass('active').siblings().removeClass('active');
+                var ind = me.index();
+                $('#qd-distribution-tab'+ind).removeClass('hide').siblings().addClass('hide');
+            });
+            
         };
     }
     module.exports = XXDistributionList;

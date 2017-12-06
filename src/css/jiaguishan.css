@@ -11,3 +11,20 @@
 	width: 80px;
 	text-align: left;
 }
+
+.qd-distribution-tab {
+}
+
+.qd-distribution-tab li {
+	float: left;
+	text-align: center;
+	line-height: 36px;
+	padding: 5px 20px;
+	cursor: pointer;
+	border: 1px solid #3fa1f4;
+}
+
+.qd-distribution-tab li.active {
+	background-color: #3fa1f4;
+	color: #fff;
+}

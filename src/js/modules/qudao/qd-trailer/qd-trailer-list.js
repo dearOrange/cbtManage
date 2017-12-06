@@ -43,15 +43,12 @@ define(function(require, exports, module) {
                 url: '/task/downStreamListByChannel',
                 done: function(returnData) {
                     var str = _this.distributionSheriff(returnData.data);
-                    if (type === 'detail') {
-                        
-                    } else {
-                        jh.utils.alert({
-                            content: str,
-                            ok: _this.distribution,
-                            cancel: true
-                        });
-                    }
+
+                    jh.utils.alert({
+                        content: str,
+                        ok: _this.distribution,
+                        cancel: true
+                    });
                 }
             });
         };
