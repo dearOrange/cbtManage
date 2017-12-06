@@ -41,11 +41,9 @@ define(function(require, exports, module) {
                     for (var item in returnData.data) {
                         var sup = $('<sup></sup>');
                         sup.text(returnData.data[item]);
-                        olBox.find('[data-value="' + item + '"]').append(sup);
+                        olBox.find('[data-state="' + item + '"]').append(sup);
                     }
                     var sup = $('<sup></sup>');
-                    sup.text(returnData.data.all);
-                    olBox.find('li').last().append(sup);
                 }
             });
         };
@@ -89,7 +87,10 @@ define(function(require, exports, module) {
                     			taskIds: checkId
                     		},
                     		done: function(data){
-                    			console.log(data)
+                    			jh.utils.alert({
+                    				content: "信息已修复",
+                    				ok: true
+                    			})
                     		}
                     	})
                     },
