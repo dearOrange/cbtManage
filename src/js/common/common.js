@@ -17,6 +17,7 @@ define(function(require, exports, module) {
     //加载插件
     require('jquery.validate'); //表单验证
     require('common/validator'); //表单验证扩展
+    require('plugin/datePicker/WdatePicker');//时间插件
     require('plugin/webuploader/webuploader.min'); //上传模块
 
     require('plugin/icheck/icheck.min'); //复选框

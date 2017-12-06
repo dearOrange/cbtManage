@@ -9,40 +9,17 @@ define(function(require, exports, module) {
         var _this = this;
         this.init = function() {
             this.initPlugins();
+            _this.initMenu();
+            _this.registerEvent();
 
-            $('#index_logo').attr( 'href', ROOTURL );
+            /*加载时默认触发一次变化事件进行事件加载*/
+            $(window).trigger('hashchange');
+            var moduleInfo = jh.utils.getURLValue();
+            jh.utils.defaultPage(moduleInfo.module);
 
-            this.checkLogin();
-        };
-        this.checkLogin = function() {
-            // jh.utils.ajax.send({
-            //     url: '/admin/user/is-login',
-            //     done: function() {
-            //         jh.utils.ajax.send({
-            //             url: '/admin/user/get-auth',
-            //             done: function(returnData) {
-            //                 var res = returnData.response;
-            //                 $('body').data('flag', res);
-            
-                            //需要获取token存储在cookie X-Token
-                            _this.initMenu();
-                            _this.registerEvent();
-                            require('plugin/datePicker/WdatePicker');
-                            /*加载时默认触发一次变化事件进行事件加载*/
-                            $(window).trigger('hashchange');
-                            var moduleInfo = jh.utils.getURLValue();
-
-                            jh.utils.defaultPage(moduleInfo.module);
-                            var username = sessionStorage.getItem('admin-username');
-                            $('#usernameText').text(username);
-            //             }
-            //         });
-            //     },
-            //     fail: function() {
-            //         $.cookie('username',null);
-            //         window.location.href = jh.config.pageLogin;
-            //     }
-            // });
+            var username = sessionStorage.getItem('admin-username');
+            $('#usernameText').text(username);
+            $('#index_logo').attr('href', ROOTURL);
         };
 
         this.initPlugins = function() {
@@ -55,9 +32,12 @@ define(function(require, exports, module) {
             var menuHtml = jh.utils.template('main_leftMenu_template', menuData);
             $('#leftMenu-box').html(menuHtml);
 
-            var firstMenu = $('#leftMenu-box').children('li');
-            var secondMenu = firstMenu.children('ul').children('li');
-            var username = sessionStorage.getItem('admin-username');
+            var h = $(window).height();
+            $("#leftMenu-box").mCustomScrollbar({
+                setHeight: h - 60,
+                theme: "light"
+            });
+
         };
 
         this.registerEvent = function() {
