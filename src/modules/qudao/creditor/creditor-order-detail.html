@@ -28,19 +28,22 @@
             <img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}"/>
             {{/each}}
         </div>
-        <div>
-        	<p>违章信息修复</p>
-        	<table>
-				<thead>
-					<tr>
-						<th>内容</th>
-						<th>信息修复时间</th>
-					</tr>
-				</thead>
-				<tbody>
-					
-				</tbody>
-			</table>
+        <div class="upmainfile">
+            <div>
+                <a href="javascript:;" class="button" id="distribution-illegalList" data-id="{{taskId}}">违章信息修复</a>
+            </div>
+            <div>
+                <table class="pull-left" style="width: 90%;">
+                    <thead>
+                        <th></th>
+                        <th>车牌号</th>
+                        <th>信息描述</th>
+                        <th>发生时间</th>
+                    </thead>
+                    <tbody id="distribution-illegalList-container"></tbody>
+                </table>
+                <div class="page-box pagination" id="page_container"></div>
+            </div>
         </div>
         <div class="mainfile">
         	<p>线索信息</p>
@@ -82,10 +85,24 @@
         		<label>最终确认费用:</label>
         		<span>{{data.finalPrice}}</span>
         	</div>
+        	{{if data.state == 'hunterReceive'}}
         	<a class="button search-button isSure" href="javascript:;">保存</a>
+        	{{/if}}
         </div>
     </div>
 </script>
+
+<script type="text/template" id="distribution-illegalList-template">
+    {{each list item index}}
+    <tr>
+        <td>{{index+1}}</td>
+        <td>{{item.carNumber}}</td>
+        <td>{{item.desc}}</td>
+        <td>{{item.occurAt}}</td>
+    </tr>
+    {{/each}}
+</script>
+
 <script type="text/javascript">
 seajs.use('modules/qudao/creditor/creditor-order-detail', function(CreditorOrderDetail) {
     var CreditorOrderDetail = new CreditorOrderDetail();

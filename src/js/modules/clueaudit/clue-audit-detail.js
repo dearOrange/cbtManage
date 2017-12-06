@@ -52,7 +52,15 @@ define(function(require, exports, module) {
         this.registerEvent = function() {
             //信息修复
             $('body').off('click','#distribution-illegalList').on('click','#distribution-illegalList',function(){
-                _this.searchIllegalInfo();
+                jh.utils.ajax.send({
+					url: '/clue/bondRepair',
+					data: {
+						taskIds: args.id
+					},
+					done: function(returnData){
+						_this.searchIllegalInfo();
+					}
+				})
             });
         };
     }

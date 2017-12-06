@@ -56,7 +56,17 @@ define(function(require, exports, module) {
             page.init();
         };
         this.registerEvent = function() {
-        	
+        	jh.utils.ajax.send({
+        		url: '/task/downStreamListByChannel',
+        		done: function(returnData){
+        			var data = returnData.data;
+        			var optionStr = '';
+        			for(var i=0;i<data.length;i++){
+        				optionStr += '<option value="'+data[i].id+'">'+data[i].name+'</option>'
+        			}
+        			$('#creditorOrder-butou').append(optionStr);
+        		}
+        	})
         	// 搜索
             jh.utils.validator.init({
                 id: 'admin-creditorOrderList-form',
