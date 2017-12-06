@@ -778,7 +778,8 @@ label.error {
 }
 
 .sidebar {
-    color: #555
+    color: #555;
+    overflow-y: auto;
 }
 
 .left-side {
@@ -792,7 +793,6 @@ label.error {
     box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.07);
     min-height: 100%;
     top: 0px;
-    overflow: auto
 }
 
 .right-side {

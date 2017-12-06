@@ -17,6 +17,7 @@ define(function(require, exports, module) {
     //加载插件
     require('jquery.validate'); //表单验证
     require('common/validator'); //表单验证扩展
+    require('plugin/datePicker/WdatePicker');//时间插件
     require('plugin/webuploader/webuploader.min'); //上传模块
 
     require('plugin/icheck/icheck.min'); //复选框
@@ -660,7 +661,7 @@ define(function(require, exports, module) {
                     var txt = '';
                     var breadCrumb = $('#breadCrumb'); //面包屑容器
                     var breadParnet = breadCrumb.parent();
-                    var moduleCon = $('#leftMenu-box').children('li.active'); //一级菜单
+                    var moduleCon = $('#leftMenu-box').find('li.active'); //一级菜单
                     var activeFirst = moduleCon.children('a'); //一级选中的文字
                     var submoduleCon = moduleCon.find('ul li.active');
                     txt += activeFirst.text();
@@ -742,11 +743,13 @@ define(function(require, exports, module) {
             var currURL = window.location;
             if (currURL.hash) {
                 var args = targetURL ? targetURL : (tammy.utils.getURLValue()).module;
-                var allMenu = $('#leftMenu-box').children('li');
+                var allMenu = $('#leftMenu-box').find('li');
                 for (var i = 0, len = allMenu.length; i < len; ++i) {
                     var item = allMenu.eq(i);
                     var itemModule = item.children('a').data('url');
+
                     if(args === itemModule + '.html'){
+
                         if (typeof fn === 'function') {
                             fn(item);
                         } else {
