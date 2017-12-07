@@ -27,13 +27,39 @@ define(function(require, exports, module) {
                     returnData.taskId = args.id;
                     var html = jh.utils.template('admin-evidenceAuditDetail-template', returnData);
                     $('#admin-evidenceAuditDetail-container').html(html);
+                    
+                    //凭证审核
+		            $('body').off('click','.isSure').on('click','.isSure',function(){
+		                var contentTemplate = jh.utils.template('evidence_audit_template', {});
+		                jh.utils.alert({
+		                	content: contentTemplate,
+		                	ok:function(){
+		                		var throughState = $('.auditThrough').filter(":checked").val();
+		                		jh.utils.ajax.send({
+		                			url: 'task/checkingVoucher',
+		                			data: {
+		                				taskId: args.id,
+		                				reason: $('.reason').val(),
+		                				checkingState: throughState
+		                			},
+		                			done: function(data){
+		                				jh.utils.alert({
+		                					content: '已审核',
+		                					ok: true
+		                				})
+		                			}
+		                		})
+		                	},
+		                	cancel:true
+		                })
+		            });
                 }
             });
         };
 
         this.registerEvent = function() {
             //信息修复
-            $('body').off('click','#distribution-illegalList').on('click','#distribution-illegalList',function(){
+            $('body').off('click','.isSure').on('click','.isSure',function(){
                 _this.searchIllegalInfo();
             });
         };

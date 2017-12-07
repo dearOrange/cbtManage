@@ -6,9 +6,7 @@
         <p class="pull-left">
             任务详情
         </p>
-        <div>
-            <a href="javascript:;" class="button grey_btn goBack">返回</a>
-        </div>
+        <a href="javascript:;" class="button gobackPage goBack">返回</a>
         <p class="pull-right">{{menuState(data.state)}}</p>
         <div class="clearfix"></div>
         <hr /><br />
@@ -67,116 +65,48 @@
         		<label>最终确认费用:</label>
         		<span>{{data.finalPrice}}</span>
         	</div>
-        	{{if data.state == 'hunterReceive'}}
-        	<a class="button search-button isSure" href="javascript:;">保存</a>
-        	{{/if}}
         </div>
         <div class="mainfile">
 			<p>凭证审核</p>
 			<div class="upimg">
 				<dl>
-					<dt class="upload-pa">
-		    				<div id="businessLicense"></div>
-							<div class="upload-list">
-								<div class="upfile-item">
-									{{if data.businessLicense}}
-									<img data-id="{{data.businessLicense}}" src="http://oka19npup.bkt.clouddn.com/{{data.businessLicense}}">
-									<span class="delete-img" data-domid="businessLicense" data-fileid="WU_FILE_0"></span>
-									<input type="hidden" name="businessLicense" value="{{data.businessLicense}}">
-									{{else}}
-									<img data-id="{{data.businessLicense}}" src="../../img/nopic.png">	
-									{{/if}}
-								</div>
-							</div>
-		    			</dt>
+					<dt>
+						<img data-id="{{data.businessLicense}}" src="{{viewImgRoot}}{{data.businessLicense}}">
+		    		</dt>
 					<dd>公证书</dd>
 				</dl>
 				<dl>
-					<dt class="upload-pa">
-		    				<div id="legalPersonIdImg"></div>
-							<div class="upload-list">
-								<div class="upfile-item">
-									{{if data.legalPersonIdImg}}
-									<img data-id="{{data.legalPersonIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.legalPersonIdImg}}">
-									<span class="delete-img" data-domid="legalPersonIdImg" data-fileid="WU_FILE_0"></span>
-									<input type="hidden" name="legalPersonIdImg" value="{{data.legalPersonIdImg}}">
-									{{else}}
-									<img data-id="{{data.legalPersonIdImg}}" src="../../img/nopic.png">	
-									{{/if}}
-								</div>
-							</div>
-		    			</dt>
+					<dt>
+						<img data-id="{{data.legalPersonIdImg}}" src="{{viewImgRoot}}{{data.legalPersonIdImg}}">
+		    		</dt>
 					<dd>按揭服务协议</dd>
 				</dl>
 				<dl>
-					<dt class="upload-pa">
-		    				<div id="legalPersonHandIdImg"></div>
-							<div class="upload-list">
-								<div class="upfile-item">
-									{{if data.legalPersonHandIdImg}}
-									<img data-id="{{data.legalPersonHandIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.legalPersonHandIdImg}}">
-									<span class="delete-img" data-domid="legalPersonHandIdImg" data-fileid="WU_FILE_0"></span>
-									<input type="hidden" name="legalPersonHandIdImg" value="{{data.legalPersonHandIdImg}}">
-									{{else}}
-									<img data-id="{{data.legalPersonHandIdImg}}" src="../../img/nopic.png">	
-									{{/if}}
-								</div>
-							</div>
-		    			</dt>
+					<dt>
+						<img data-id="{{data.legalPersonHandIdImg}}" src="{{viewImgRoot}}{{data.legalPersonHandIdImg}}">
+		    		</dt>
 					<dd>抵押合同</dd>
 				</dl>
 				<dl>
-					<dt class="upload-pa">
-		    				<div id="linkmanIdImg"></div>
-							<div class="upload-list">
-								<div class="upfile-item">
-									{{if data.linkmanIdImg}}
-									<img data-id="{{data.linkmanIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.linkmanIdImg}}">
-									<span class="delete-img" data-domid="linkmanIdImg" data-fileid="WU_FILE_0"></span>
-									<input type="hidden" name="linkmanIdImg" value="{{data.linkmanIdImg}}">
-								</div>
-									{{else}}
-									<img data-id="{{data.linkmanIdImg}}" src="../../img/nopic.png">	
-									{{/if}}
-							</div>
-		    			</dt>
+					<dt>
+						<img data-id="{{data.linkmanIdImg}}" src="{{viewImgRoot}}{{data.linkmanIdImg}}">
+		    		</dt>
 					<dd>垫付款凭证</dd>
 				</dl>
 				<dl>
-					<dt class="upload-pa">
-		    				<div id="linkmanHandIdImg"></div>
-							<div class="upload-list">
-								<div class="upfile-item">
-									{{if data.linkmanHandIdImg}}
-									<img data-id="{{data.linkmanHandIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.linkmanHandIdImg}}">
-									<span class="delete-img" data-domid="linkmanHandIdImg" data-fileid="WU_FILE_0"></span>
-									<input type="hidden" name="linkmanHandIdImg" value="{{data.linkmanHandIdImg}}">
-									{{else}}
-									<img data-id="{{data.linkmanHandIdImg}}" src="../../img/nopic.png">	
-									{{/if}}
-								</div>
-							</div>
-		    			</dt>
+					<dt>
+						<img data-id="{{data.linkmanHandIdImg}}" src="{{viewImgRoot}}{{data.linkmanHandIdImg}}">
+		    		</dt>
 					<dd>还款确认书</dd>
 				</dl>
 				<dl>
-					<dt class="upload-pa">
-		    				<div id="linkmanHandIdImg"></div>
-							<div class="upload-list">
-								<div class="upfile-item">
-									{{if data.linkmanHandIdImg}}
-									<img data-id="{{data.linkmanHandIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.linkmanHandIdImg}}">
-									<span class="delete-img" data-domid="linkmanHandIdImg" data-fileid="WU_FILE_0"></span>
-									<input type="hidden" name="linkmanHandIdImg" value="{{data.linkmanHandIdImg}}">
-									{{else}}
-									<img data-id="{{data.linkmanHandIdImg}}" src="../../img/nopic.png">	
-									{{/if}}
-								</div>
-							</div>
-		    			</dt>
+					<dt>
+						<img data-id="{{data.linkmanHandIdImg}}" src="{{viewImgRoot}}{{data.linkmanHandIdImg}}">
+		    		</dt>
 					<dd>法院判决书</dd>
 				</dl>
 			</div>
+			<a class="button search-button isSure" href="javascript:;">凭证审核</a>
 		</div>
     </div>
 </script>
@@ -188,12 +118,11 @@
         <div class="clearfix"></div>
         <hr /><br />
         <div class="divied-type">
-        	<input type="radio" name="audit" />审核通过
-        	<input type="radio" name="audit" />审核不通过
+        	<input type="radio" name="audit" value="1" class="auditThrough" />审核通过
+        	<input type="radio" name="audit" value="2" class="auditThrough" />审核不通过
         </div>
-        <div class="buttonAnt">
-        	<a class="pull-right button divied-no">取消</a>
-        	<a class="pull-right button divied-sure">确定</a>
+        <div class="divied-content">
+        	<textarea class="reason" placeholder="请填写原因"></textarea>
         </div>
     </div>
 </script>

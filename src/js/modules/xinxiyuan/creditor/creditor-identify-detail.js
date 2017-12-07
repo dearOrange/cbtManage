@@ -46,7 +46,10 @@ define(function(require, exports, module) {
 										upstreamId: data.args.id
 									},
 									done: function(returnData) {
-										console.log(returnData)
+										jh.utils.alert({
+											content: '已认证',
+											ok: true
+										})
 									}
 								});
 							},
