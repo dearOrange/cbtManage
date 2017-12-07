@@ -8,14 +8,14 @@
             <table>
                 <tr>
                     <td>
-                        <!-- <label style="float: right;">
+                        <label style="float: right;">
                             全选
                             <input type="checkbox" id="checkAll">
                         </label>
                         <div class="clearfix"></div>
-                        <hr /> -->
+                        <hr />
                         <form id="distribution_public_form">
-                            <div id="qd-distribution-tab0" class="divied-type" style="height: 300px;overflow-y: auto;text-align: left;">
+                            <div id="qd-distribution-tab0" class="divied-type" style="max-height: 300px;overflow-y: auto;text-align: left;">
                                 {{each list item index}}
                                 <div>
                                     <input type="checkbox" value="{{item.id}}" class="hand" />

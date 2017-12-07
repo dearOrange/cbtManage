@@ -57,7 +57,7 @@ define(function(require, exports, module) {
 					})
 					
 					//确认价格
-					$('body').off('click', '.surePrice').on('click', '.surePrice', function() 
+					$('body').off('click', '.surePrice').on('click', '.surePrice', function() {
 						jh.utils.ajax.send({
 							url: '/task/fixPrice',
 							data: {
@@ -73,7 +73,7 @@ define(function(require, exports, module) {
 								})
 							}
 						});
-					})
+					});
 				}
 			});
 			

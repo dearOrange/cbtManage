@@ -88,6 +88,7 @@ define(function(require, exports, module) {
             /*返回事件*/
             $('#content-container').on('click', '.goBack', function() {
                 window.history.go(-1);
+                jh.utils.defaultPage();
             });
 
             $('.user-menu').on('click', function() {
@@ -157,6 +158,14 @@ define(function(require, exports, module) {
                 } else {
                     checkboxs.prop('checked', false);
                 }
+            });
+
+            //批量分配
+            $('body').off('click', '.qd-distribution-tab li').on('click', '.qd-distribution-tab li', function() {
+                var me = $(this);
+                me.addClass('active').siblings().removeClass('active');
+                var ind = me.index();
+                $('#qd-distribution-tab'+ind).removeClass('hide').siblings().addClass('hide');
             });
 
         };

@@ -4,7 +4,7 @@
 <script type="text/template" id="admin-xXDistributionDetail-template">
     <div class="dialog-width">
         <p class="pull-left">
-            任务详情
+            任务详情<a href="javascript:;" class="button goBack ml10">返回</a>    
         </p>
         <p class="pull-right">{{menuState(data.state)}}</p>
         <div class="clearfix"></div>
@@ -45,7 +45,7 @@
                 <div class="page-box pagination" id="page_container"></div>
             </div>
         </div>
-        <div class="upmainfile">
+        <div class="upmainfile" id="xx_task_distribution">
             <p style="margin:20px 0;">任务分配</p>
             <div>
                 <ul class="grey-tab">
@@ -69,9 +69,7 @@
                 </ul>
             </div>
         </div>
-        <div>
-            <a href="javascript:;" class="button grey_btn goBack">返回</a>
-        </div>
+        <a href="javascript:;" class="button">确定</a>
     </div>
 </script>
 
@@ -86,30 +84,6 @@
     {{/each}}
 </script>
 
-
-<script type="text/template" id="task_divied_template">
-	<div class="divied-width ">
-        <p class="pull-left">
-            分配捕头
-        </p>
-        <div class="clearfix"></div>
-        <hr /><br />
-        <div class="divied-type">
-        	<div>
-        		<input type="checkbox" /><span>捕头一号</span><span>只拖车捕头</span>
-        	</div>
-        	<div>
-        		<input type="checkbox" /><span>捕头二号</span><span>（找+拖）捕头</span>
-        	</div>
-        	<div>
-        		<input type="checkbox" /><span>捕头三号</span><span>（找+拖一体）捕头</span>
-        	</div>
-        </div>
-        <div class="buttonAnt">
-        	<a class="pull-right button divied-sure">确定</a>
-        </div>
-    </div>
-</script>
 <script type="text/javascript">
 seajs.use('modules/xinxiyuan/xx-distribution/xx-distribution-detail', function(XXDistributionDetail) {
     var xXDistributionDetail = new XXDistributionDetail();

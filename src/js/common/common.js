@@ -980,6 +980,7 @@ define(function(require, exports, module) {
                         s.noData = s.noData ? s.noData : '<tr><td colspan="' + tdCol + '">无记录</td></tr>';
                         s.data_container.html(s.noData);
                         s.page_container.empty();
+                        m.onload(returnData);
                         return false;
                     }
 
@@ -990,7 +991,7 @@ define(function(require, exports, module) {
                         response.menuState = tammy.utils.menuState;
                         var viewStr = s.callback.call(null, response); //获取拼接后的展示数据，增加容错处理
                         s.data_container.html(viewStr); //插入数据
-                        m.onload();
+                        m.onload(returnData);
                     } catch (e) {
                         log('模板拼接错误，请检查模板！');
                         log(e);

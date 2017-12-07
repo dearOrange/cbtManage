@@ -103,15 +103,6 @@ define(function(require, exports, module) {
                 var ids = me.data('id');
                 _this.initSheriff(ids);
             });
-
-            //批量分配
-            $('body').off('click', '.qd-distribution-tab li').on('click', '.qd-distribution-tab li', function() {
-                var me = $(this);
-                me.addClass('active').siblings().removeClass('active');
-                var ind = me.index();
-                $('#qd-distribution-tab'+ind).removeClass('hide').siblings().addClass('hide');
-            });
-            
         };
     }
     module.exports = XXDistributionList;

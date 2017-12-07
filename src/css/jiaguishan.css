@@ -28,3 +28,11 @@
 	background-color: #3fa1f4;
 	color: #fff;
 }
+
+body .goBack {
+	padding: 5px 30px;
+}
+
+.ml10 {
+	margin-left: 10px;
+}
