@@ -63,7 +63,7 @@ define(function(require, exports, module) {
         };
 
         this.registerEvent = function() {
-            //信息修复
+            //审核
             $('body').off('click','.auditClue').on('click','.auditClue',function(){
             	jh.utils.alert({
                 	content:'确定审核吗？',
@@ -71,7 +71,10 @@ define(function(require, exports, module) {
                 		jh.utils.ajax.send({
 			                url: '/trace/adopt',
 			                done: function(returnData) {
-			                    
+			                    jh.utils.alert({
+				                	content:'已审核',
+				                	ok:true
+				                })
 			                }
                 
             			});

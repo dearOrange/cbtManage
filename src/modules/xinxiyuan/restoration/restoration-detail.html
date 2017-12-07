@@ -31,12 +31,12 @@
         </div>
         <div class="mainfile">
         	<p>线索信息</p>
-        	{{ each data.traceVoList data index }}
+        	{{ each data.traceVoList item index }}
         	<div class="upimg">
         		<dl>
 					<dt>
 						<div class="upfile-item">
-							<img data-id="{{data.carNumberPhoto}}" src="{{viewImgRoot}}{{data.carNumberPhoto}}">
+							<img data-id="{{item.carNumberPhoto}}" src="{{viewImgRoot}}{{item.carNumberPhoto}}">
 						</div>
 		    		</dt>
 					<dd>车牌特写照</dd>
@@ -44,16 +44,17 @@
         		<dl>
 					<dt>
 						<div class="upfile-item">
-							<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}">
+							<img data-id="{{item.carPhoto}}" src="{{viewImgRoot}}{{item.carPhoto}}">
 						</div>
 	    			</dt>
 					<dd>全车背景照</dd>
 				</dl>
         	</div>
-        	<div style="margin:10px 0;">线索上传时间：{{data.createAt}}</div>
+        	<div style="margin:10px 0;">线索上传时间：{{item.createAt}}</div>
         	{{/each}}
         </div>
         <div class="hopeprice">
+        	{{if data.state !== 'unconfirmed'}}
         	<p>预估费用</p>
         	<div>
         		<label>车辆残值估算:</label>
@@ -63,11 +64,39 @@
         		<label>处置费用估算:</label>
         		<input type="text" maxlength="11" class="OnlyPrice" id="minMoney" />至<input type="text" class="OnlyPrice" maxlength="11" id="maxMoney" />
         	</div>
+        	{{/if}}
+        	{{if data.state == 'unconfirmed'}}
+        	<p>预估费用</p>
+        	<div>
+        		<label>车辆残值估算:</label>
+        		<span>{{data.carPrice}}</span>
+        	</div>
+        	<div>
+        		<label>处置费用估算:</label>
+        		<span>{{data.estimatedMinPrice}}</span>至<span>{{data.estimatedMaxPrice}}</span>
+        	</div>
+        	<div>
+        		<label>最终处置费用:</label>
+        		<input type="text" maxlength="11" class="OnlyPrice" id="finalPrice" />
+        	</div>
         	<div>
         		<label>其中受托人费用:</label>
-        		<input type="text" maxlength="11" class="OnlyPrice" id="minMoney" />
+        		<input type="text" maxlength="11" class="OnlyPrice" id="baileePrice" />
         	</div>
+        	<div>
+        		<label>资产查找费:</label>
+        		<input type="text" maxlength="11" class="OnlyPrice" id="assetPrice" />
+        	</div>
+        	<div>
+        		<label>第三方处置清收费:</label>
+        		<input type="text" maxlength="11" class="OnlyPrice" id="thirdpartyPrice" />
+        	</div>
+        	{{/if}}
+        	{{if data.state == 'unconfirmed'}}
+        	<input type="button" value="保存" class="button search-button surePrice" style="margin-bottom:40px;width:150px;height:30px;">
+        	{{else}}
         	<input type="button" value="保存" class="button search-button priceStorage" style="margin-bottom:40px;width:150px;height:30px;">
+        	{{/if}}
         </div>
     </div>
 </script>

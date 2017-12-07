@@ -48,7 +48,30 @@ define(function(require, exports, module) {
 								taskId: data.args.id
 							},
 							done: function(returnData) {
-								console.log(returnData)
+								jh.utils.alert({
+									content: '价格预估完毕',
+									ok: true
+								})
+							}
+						});
+					})
+					
+					//确认价格
+					$('body').off('click', '.surePrice').on('click', '.surePrice', function() {
+						
+						jh.utils.ajax.send({
+							url: '/task/fixPrice',
+							data: {
+								finalPrice: $('#finalPrice').val(),
+								assetPrice: $('#assetPrice').val(),
+								thirdpartyPrice: $('#thirdpartyPrice').val(),
+								baileePrice: $('#baileePrice').val()
+							},
+							done: function(returnData) {
+								jh.utils.alert({
+									content: '价格确认完毕',
+									ok: true
+								})
 							}
 						});
 					})
