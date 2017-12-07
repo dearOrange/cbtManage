@@ -34,7 +34,7 @@
 					<td>
 						<label class="label">线索类型：</label>
 						<select name="state">
-                        	<option value="new">待认证</option>
+                        	<option value="new">未认证</option>
                         	<option value="passed">认证通过</option>
                         	<option value="rejected">认证不通过</option>
                         </select>
@@ -78,7 +78,7 @@
 
 <script type="text/template" id="clue-manage-template">
 	{{ each list item index }}
-	<tr>
+	<tr class="{{if item.isRead == 0}}bgc_blue{{/if}}">
 		<td>{{index}}</td>
 		<td><input type="checkbox" value="{{item.id}}" /></td>
 		<td>{{item.carNumber}}</td>
@@ -92,11 +92,17 @@
 		<td>{{item.company}}</td>
 		{{if passState == 1}}
 		<td>{{item.taskNo}}</td>
-		<td>{{item.isArrange}}</td>
+		<td>
+			{{if item.isArrange == 0}}
+			公开任务库
+			{{else}}
+			已分配
+			{{/if}}
+		</td>
 		{{/if}}
 		<td>{{item.createAt}}</td>
 		<td>
-			<a data-id="{{item.id}}" class="clueManage-detail button">详情</a>
+			<a data-id="{{item.id}}" data-state="{{passState}}" class="clueManage-detail button">详情</a>
 		</td>
 		<td>
 			<ul class="operaitem">

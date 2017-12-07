@@ -12,7 +12,7 @@
         <div>
         	<p>上传捕头</p>
         	<span>{{data.name}}</span>
-        	{{if data.taskNo}}
+        	{{if passState == "1"}}
         	<p class="pull-right">已成功匹配任务{{data.taskNo}}</p>
         	{{else}}
         	<p class="pull-right">未成功匹配任务</p>
@@ -29,7 +29,7 @@
         <div>
         	<p>线索车辆信息</p>
         	<span>车牌号：{{data.carNumber}}</span>
-        	<span style="margin-left:20px;">车架号后6位：{{data.company}}</span>
+        	<span style="margin-left:20px;">车架号后6位：{{data.carId}}</span>
         </div>
         <div class="mainfile">
         	<p>线索照片</p>
@@ -78,13 +78,15 @@
         	</div>
         	<div>
         		<label>上传地址</label>
-        		<span>{{data.ipCity}}</span>
+        		<span>
+        			{{data.ipCity}}
+        		</span>
         	</div>
         	<div>
-        		<label>IPd地址</label>
+        		<label>IP地址</label>
         		<span>{{data.ipCity}}</span>
         	</div>
-        	{{if data.taskNo}}
+        	{{if passState == "1"}}
         	<input type="button" value="审核" class="button search-button auditClue" style="margin-bottom:40px;width:150px;height:30px;">
         	{{/if}}
         </div>

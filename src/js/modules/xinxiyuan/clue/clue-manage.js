@@ -26,24 +26,14 @@ define(function(require, exports, module) {
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
-                	var dataList = data.list;
                 	data.passState = $('#state').val();
                 	if(data.passState == 0){
 	            		$('.clueMatch').css("display","none");
 	            	}else{
 	            		$('.clueMatch').css("display","");
 	            	}
-	            	if(data.list.isArrange == 0){
-	            		data.list.isArrange == "公开任务库";
-	            	}else if(data.list.isArrange == 1){
-	            		data.list.isArrange == "已分配";
-	            	}
-	            	if(data.isRead == 0){
-	            		
-	            	}else if(data.isRead == 1){
-	            		
-	            	}
                     return jh.utils.template('clue-manage-template', data);
+                    
                 }
             });
             page.init();
@@ -52,7 +42,6 @@ define(function(require, exports, module) {
             jh.utils.ajax.send({
                 url: '/trace/count',
                 done: function(returnData) {
-                	console.log(returnData)
                     var olBox = $('#taskState');
                     for (var item in returnData.data) {
                         var sup = $('<sup></sup>');
@@ -76,8 +65,10 @@ define(function(require, exports, module) {
             //查看任务详情
             $('.dataShow').off('click', '.clueManage-detail').on('click', '.clueManage-detail', function() {
             	var id = $(this).data('id');
+            	var state = $(this).data('state');
                 jh.utils.load("/src/modules/xinxiyuan/clue/clue-manage-detail",{
-                	id:id
+                	id:id,
+                	state:state
                 })
             });
             //切换状态
@@ -85,8 +76,8 @@ define(function(require, exports, module) {
             	$(this).addClass("active").siblings().removeClass("active");
             	_this.form[0].reset();
             	$('select').select2();
-            	_this.initContent();
             	$('#state').val($(this).data('value'))
+            	_this.initContent();
             })
             
             //通过
