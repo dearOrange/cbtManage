@@ -552,12 +552,9 @@ define(function(require, exports, module) {
             if (!tammy.utils.objIsNull(settings.data) && settings.contentType == 'application/json') {
                 settings.data = JSON.stringify(settings.data);
             }
-            var temp = REQUESTROOT + settings.url;
-            if (settings.url.indexOf('/qiniu/getToken') !== -1) {
-                temp = serverHost + '/adminServer' + settings.url;
-            }
+
             $.ajax({
-                url: temp,
+                url: REQUESTROOT + settings.url,
                 method: settings.method,
                 dataType: settings.dataType,
                 contentType: settings.contentType,
