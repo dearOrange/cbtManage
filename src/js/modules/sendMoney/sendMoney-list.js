@@ -77,7 +77,14 @@ define(function(require, exports, module) {
                 	id:id
                 })
             });
-
+			
+			//打款
+            $('.dataShow').off('click', '.sendMoney').on('click', '.sendMoney', function() {
+                var id = $(this).data('id');
+                jh.utils.load("/src/modules/sendMoney/sendMoney-detail",{
+                	id:id
+                })
+            });
 
         };
     }

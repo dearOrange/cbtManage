@@ -20,6 +20,7 @@ define(function(require, exports, module) {
 				},
 				done: function(returnData) {
 					returnData.menuState = jh.utils.menuState;
+                    returnData.viewImgRoot = jh.config.viewImgRoot;
 					var clueStr = jh.utils.template('clueBack_detail_template', returnData);
 					$('.clueBack-detail').html(clueStr);
 					var picArr = ['carPhoto', 'carNumberPhoto'];

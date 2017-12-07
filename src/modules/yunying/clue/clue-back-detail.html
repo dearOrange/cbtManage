@@ -25,12 +25,13 @@
         </ul>
         <div class="remark">{{data.remark}}</div>
         <div class="imgRecord">
-            {{each attachmentVoList item index}}
-            <img src="{{viewRoot}}{{item.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            {{each data.attachmentVoList item index}}
+            <img src="{{viewImgRoot}}{{item.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
             {{/each}}
         </div>
         <div class="mainfile">
         	<p>线索信息</p>
+        	{{each data.traceVoList data index}}
         	<div class="upimg">
         		<dl>
 					<dt class="upload-pa">
@@ -38,7 +39,7 @@
 							<div class="upload-list">
 								<div class="upfile-item">
 									{{if data.carNumberPhoto}}
-									<img data-id="{{data.carNumberPhoto}}" src="http://oka19npup.bkt.clouddn.com/{{data.carNumberPhoto}}">
+									<img data-id="{{data.carNumberPhoto}}" src="{{viewImgRoot}}{{data.carNumberPhoto}}">
 									<span class="delete-img" data-domid="carNumberPhoto" data-fileid="WU_FILE_0"></span>
 									<input type="hidden" name="carNumberPhoto" value="{{data.carNumberPhoto}}">
 									{{else}}
@@ -55,7 +56,7 @@
 							<div class="upload-list">
 								<div class="upfile-item">
 									{{if data.carPhoto}}
-									<img data-id="{{data.carPhoto}}" src="http://oka19npup.bkt.clouddn.com/{{data.carPhoto}}">
+									<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}">
 									<span class="delete-img" data-domid="carPhoto" data-fileid="WU_FILE_0"></span>
 									<input type="hidden" name="carPhoto" value="{{data.carPhoto}}">
 									{{else}}
@@ -67,7 +68,8 @@
 					<dd>全车背景照</dd>
 				</dl>
         	</div>
-        	<div style="margin:10px 0;">线索上传时间：{{data.traceVoList.createAt}}</div>
+        	<div style="margin:10px 0;">线索上传时间：{{data.createAt}}</div>
+        	{{/each}}
         </div>
         {{if data.state == "unconfirmed"}}
         <div class="hopeprice">

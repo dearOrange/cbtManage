@@ -28,6 +28,7 @@ define(function(require, exports, module) {
                     var html = jh.utils.template('admin-qDDistributionDetail-template', returnData);
                     $('#admin-qDDistributionDetail-container').html(html);
                     _this.searchIllegalInfo();//查询违章信息
+                    _this.initSheriff();//分配捕头
                 }
             });
         };
@@ -48,7 +49,48 @@ define(function(require, exports, module) {
             });
             page.init();
         };
+		this.distributionSheriff = function(arr) {
+            var source = require('/src/templates/sheriff-distribution.tpl');
+            var render = jh.utils.template.compile(source);
+            var str = render({ list: arr, stateToString: jh.utils.menuState });
+            return str;
+        };
 
+        this.initSheriff = function() {
+            Mock.mock(REQUESTROOT + '/task/downStreamListByChannel', {
+                'code': 'SUCCESS',
+                'data|10': [{
+                    'id|+1': 1,
+                    'name': Mock.Random.cname(),
+                    'type': /(all)|(trace)|(tracerecycle)|(recycle)/
+                }]
+            });
+            jh.utils.ajax.send({
+                url: '/task/downStreamListByChannel',
+                done: function(returnData) {
+                    var str = _this.distributionSheriff(returnData.data);
+                    $('#fpSheriffList').html(str);
+
+                }
+            });
+        };
+        $('body').off('click','.sureAudit').on('click','.sureAudit',function(){
+        	var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
+            var opt = {
+                url: '/task/distributeTask',
+                data: {
+                    taskIds: ids
+                },
+                done: function(returnData) {
+                    jh.utils.alert({
+                        content: '任务分配成功！',
+                        ok: true,
+                        cancel: false
+                    });
+                }
+            };
+            jh.utils.ajax.send(opt);
+        });
         this.registerEvent = function() {
             //信息修复
             $('body').off('click','#distribution-illegalList').on('click','#distribution-illegalList',function(){

@@ -55,17 +55,16 @@
 			<thead>
 				<tr>
 					<th width="3%">&nbsp;</th>
-					<th width="4%"><input type="checkbox" /></th>
-					<th width="10%">车牌号</th>
+					<th width="8%">车牌号</th>
 					<th width="10%">车牌特写照片</th>
 					<th width="10%">全车背景照</th>
 					<th width="6%">捕头</th>
-					<th width="15%">所属公司</th>
-					<th class="clueMatch" width="10%">匹配任务号</th>
+					<th width="10%">所属公司</th>
+					<th class="clueMatch" width="8%">匹配任务号</th>
 					<th class="clueMatch" width="8%">任务所在位置</th>
-					<th width="15%">上传时间</th>
+					<th width="13%">上传时间</th>
 					<th width="6%">操作</th>
-					<th width="6%">操作</th>
+					<th width="10%">操作</th>
 				</tr>
 			</thead>
 			<tbody id="clue_manage_container">
@@ -80,13 +79,12 @@
 	{{ each list item index }}
 	<tr class="{{if item.isRead == 0}}bgc_blue{{/if}}">
 		<td>{{index}}</td>
-		<td><input type="checkbox" value="{{item.id}}" /></td>
 		<td>{{item.carNumber}}</td>
-		<td>
-			{{item.carNumberPhoto}}
+		<td class="imgWidth">
+			<img src="{{viewImgRoot}}{{item.carNumberPhoto}}"/>
 		</td>
-		<td>
-			{{item.carPhoto}}
+		<td class="imgWidth">
+			<img src="{{viewImgRoot}}{{item.carPhoto}}"/>
 		</td>
 		<td>{{item.name}}</td>
 		<td>{{item.company}}</td>

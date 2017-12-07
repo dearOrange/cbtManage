@@ -45,33 +45,8 @@
                 <div class="page-box pagination" id="page_container"></div>
             </div>
         </div>
-        <div class="upmainfile">
-            <p style="margin:20px 0;">任务分配</p>
-            <div>
-                <ul class="grey-tab">
-                    <li class="active">分配渠道经理</li>
-                    <li>公开任务</li>
-                </ul>
-                <ul>
-                    <li>
-                        <div>
-                            <select name="" id="">
-                                <option value="">渠道经理一号</option>
-                            </select>
-                        </div>
-                        <input type="button" value="确定">
-                    </li>
-                    <li class="hide">
-                        <p>确定将该任务进行公开吗？</p>
-                        <p>公开后的任务将所有在职捕头可见</p>
-                        <input type="button" value="确定">
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div>
-            <a href="javascript:;" class="button grey_btn goBack">返回</a>
-        </div>
+        <div id="fpSheriffList"></div>
+        <a href="javascript:;" class="button sureAudit">确定</a>
     </div>
 </script>
 
@@ -86,30 +61,6 @@
     {{/each}}
 </script>
 
-
-<script type="text/template" id="task_divied_template">
-	<div class="divied-width ">
-        <p class="pull-left">
-            分配捕头
-        </p>
-        <div class="clearfix"></div>
-        <hr /><br />
-        <div class="divied-type">
-        	<div>
-        		<input type="checkbox" /><span>捕头一号</span><span>只拖车捕头</span>
-        	</div>
-        	<div>
-        		<input type="checkbox" /><span>捕头二号</span><span>（找+拖）捕头</span>
-        	</div>
-        	<div>
-        		<input type="checkbox" /><span>捕头三号</span><span>（找+拖一体）捕头</span>
-        	</div>
-        </div>
-        <div class="buttonAnt">
-        	<a class="pull-right button divied-sure">确定</a>
-        </div>
-    </div>
-</script>
 <script type="text/javascript">
 seajs.use('modules/qudao/qd-distribution/qd-distribution-detail', function(QDDistributionDetail) {
     var qDDistributionDetail = new QDDistributionDetail();

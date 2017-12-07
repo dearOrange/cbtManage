@@ -44,7 +44,52 @@ define(function(require, exports, module) {
             };
             jh.utils.ajax.send(opt);
         };
+		this.initSheriff = function(type) {
+            Mock.mock(REQUESTROOT + '/task/downStreamListByChannel', {
+                'code': 'SUCCESS',
+                'data|10': [{
+                    'id|+1': 1,
+                    'name': Mock.Random.cname(),
+                    'type': /(all)|(trace)|(tracerecycle)|(recycle)/
+                }]
+            });
+            jh.utils.ajax.send({
+                url: '/task/downStreamListByChannel',
+                done: function(returnData) {
+                    var str = _this.distributionSheriff(returnData.data);
 
+                    jh.utils.alert({
+                        content: str,
+                        ok: _this.distribution,
+                        cancel: true
+                    });
+                }
+            });
+        };
+        this.distributionSheriff = function(arr) {
+            var source = require('/src/templates/sheriff-distribution.tpl');
+            var render = jh.utils.template.compile(source);
+            var str = render({ list: arr, stateToString: jh.utils.menuState });
+            return str;
+        };
+
+        this.distribution = function(ids) {
+            var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
+            var opt = {
+                url: '/task/distributeTask',
+                data: {
+                    taskIds: ids
+                },
+                done: function(returnData) {
+                    jh.utils.alert({
+                        content: '任务分配成功！',
+                        ok: true,
+                        cancel: false
+                    });
+                }
+            };
+            jh.utils.ajax.send(opt);
+        };
         this.registerEvent = function() {
 
             //查询
@@ -64,32 +109,18 @@ define(function(require, exports, module) {
                     id: id
                 });
             });
+			//分配
+            $('body').off('click', '.distribution').on('click', '.distribution', function() {
+                var me = $(this);
+                var ids = me.data('id');
+                _this.initSheriff(ids);
+            });
 
             //批量分配
             $('body').off('click', '#distributeTask').on('click', '#distributeTask', function() {
                 var me = $(this);
-                var list = $('#admin-qDDistributionList-container').find(':checked');
-                var ids = [];
-                $.each(list, function(index, item) {
-                    var id = $(item).data('id');
-                    ids.push(id);
-                });
-                ids = ids.join(',');
-                var opt = {
-                    url: '/task/distributeTask',
-                    data: {
-                        taskIds: ids
-                    },
-                    done: function(returnData) {
-                        jh.utils.alert({
-                            content: '任务分配成功！',
-                            ok: true,
-                            cancel: false
-                        });
-                    }
-                };
-                return false;
-                jh.utils.ajax.send(opt);
+                var ids = jh.utils.getCheckboxValue('admin-qDDistributionList-container');
+                _this.initSheriff(ids);
             });
         };
     }

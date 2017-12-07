@@ -79,6 +79,29 @@
     </tr>
     {{/each}}
 </script>
+<script type="text/template" id="clue_addSubtotal_template">
+	<div class="dialog-width officer-width">
+		<p class="pull-left">
+			添加议价小计
+		</p>
+		<div class="clearfix"></div>
+		<hr /><br />
+		<div class="addContent customerType">
+			<div>
+				<label>联系对象</label>
+				<input type="text" maxlength="11" placeholder="请输入联系对象" id="subPerson" />
+			</div>
+			<div>
+				<label>联系方式</label>
+				<input type="text" maxlength="11" placeholder="请输入联系方式" id="subStyle" />
+			</div>
+			<div>
+				<label>联系内容</label>
+				<textarea name="" maxlength="40" placeholder="请输入联系内容" id="subContent"></textarea>
+			</div>
+		</div>
+	</div>
+</script>
 <script type="text/javascript">
 seajs.use('modules/yunying/clue/clue-back', function(ClueBack) {
     var ClueBack = new ClueBack();

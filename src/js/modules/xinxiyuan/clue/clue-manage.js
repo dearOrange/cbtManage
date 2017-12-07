@@ -27,6 +27,7 @@ define(function(require, exports, module) {
                 isSearch: isSearch,
                 callback: function(data) {
                 	data.passState = $('#state').val();
+                	data.viewImgRoot = jh.config.viewImgRoot;
                 	if(data.passState == 0){
 	            		$('.clueMatch').css("display","none");
 	            	}else{

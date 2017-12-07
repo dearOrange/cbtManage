@@ -55,6 +55,23 @@ define(function(require, exports, module) {
                 }
             });
         };
+        $('body').off('click','.sureAudit').on('click','.sureAudit',function(){
+        	var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
+            var opt = {
+                url: '/task/distributeTask',
+                data: {
+                    taskIds: ids
+                },
+                done: function(returnData) {
+                    jh.utils.alert({
+                        content: '任务分配成功！',
+                        ok: true,
+                        cancel: false
+                    });
+                }
+            };
+            jh.utils.ajax.send(opt);
+        });
 
     }
     module.exports = QDTailerDetail;
