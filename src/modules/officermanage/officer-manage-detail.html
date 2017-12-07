@@ -1,0 +1,135 @@
+<div class="officer-detail">
+	
+</div>
+<script type="text/template" id="officer_detail_template">
+    <div class="dialog-width officer-width">
+        <p class="pull-left">
+            捕头详情
+        </p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <ul>
+        	<li>
+        		<label>账号：</label>
+            	<span>{{data.phone}}</span>
+        	</li>
+        </ul>
+        <ul>
+            <li>
+            	<label>姓名：</label>
+            	<span>{{data.name}}</span>
+            </li>
+            <li><label>联系电话：</label>
+            	<span>{{data.contactPhone}}</span>
+            </li>
+            <li>
+            	<label>微信账号：</label>
+            	<span>{{data.wechat}}</span>
+            </li>
+           	<li>
+           		<label>邮箱：</label>
+           		<span>{{data.email}}</span>
+           	</li>
+        </ul>
+        <ul>
+            <li>
+            	<label>所属公司：</label>
+            	<span>{{data.company}}</span>
+            </li>
+            <li>
+				<label>法人代表：</label>
+           		<span>{{data.legalPerson}}</span>
+            </li>
+            <li>
+            	<label>业务类型：</label>
+           		<span>{{data.type}}</span>
+            </li>
+            <li>
+            	<label>申请区域：</label>
+            	<span>
+            	{{each data.area item index}}
+            		{{item.cityName}}
+            	{{/each}}
+            	</span>
+            </li>
+            <li>
+            	<label>团队规模：</label>
+            	<span>{{data.teamSize}}</span>
+            </li>
+            <li>
+            	<label>详细地址：</label>
+            	<span>{{data.address}}</span>
+            </li>
+        </ul>
+        <div class="mainfile">
+			<p>资质</p>
+			<div class="upimg">
+				<dl>
+					<dt>
+						<img data-id="{{data.businessLicense}}" src="{{viewImgRoot}}{{data.businessLicense}}">
+		    		</dt>
+					<dd>营业执照</dd>
+				</dl>
+				<dl>
+					<dt>
+						<img data-id="{{data.legalPersonIdImg}}" src="{{viewImgRoot}}{{data.legalPersonIdImg}}">
+		    		</dt>
+					<dd>法人身份证照片</dd>
+				</dl>
+				<dl>
+					<dt>
+						<img data-id="{{data.legalPersonHandIdImg}}" src="{{viewImgRoot}}{{data.legalPersonHandIdImg}}">
+		    		</dt>
+					<dd>法人手持身份证正面照片</dd>
+				</dl>
+				<dl>
+					<dt>
+						<img data-id="{{data.linkmanIdImg}}" src="{{viewImgRoot}}{{data.linkmanIdImg}}">
+		    		</dt>
+					<dd>负责人身份证照片</dd>
+				</dl>
+				<dl>
+					<dt>
+						<img data-id="{{data.linkmanHandIdImg}}" src="{{viewImgRoot}}{{data.linkmanHandIdImg}}">
+		    		</dt>
+					<dd>负责人手持身份证正面照片</dd>
+				</dl>
+			</div>
+		</div>
+        <div class="instruction">
+        	<div class="advantage">
+        		<label>优势说明</label>
+        		<span>{{data.introduce}}</span>
+        	</div>
+        	<div class="otherstate">
+        		<label>其他情况说明</label>
+        		<span>{{data.situation}}</span>
+        	</div>
+        </div>
+    	<div class="buttonAnt">
+        	<a class="button officerAudit">认证</a>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="officer_audit_template">
+	<div class="divied-width ">
+        <p class="pull-left">
+            捕头认证
+        </p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <div class="divied-type">
+        	<input type="radio" name="audit" value="1" class="through" />认证通过
+        	<input type="radio" name="audit" value="2" class="through" />认证不通过
+        </div>
+        <div class="divied-content">
+        	<textarea placeholder="请填写原因"></textarea>
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+seajs.use('modules/officermanage/officer-manage-detail', function(OfficerManageDetail) {
+    var OfficerManageDetail = new OfficerManageDetail();
+    OfficerManageDetail.init();
+});
+</script>

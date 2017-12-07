@@ -6,7 +6,7 @@
  */
 'use strict';
 define(function(require, exports, module) {
-    function FinanceDetail() {
+    function OfficerManageDetail() {
         var _this = this;
         var args = jh.utils.getURLValue().args;
         this.init = function() {
@@ -14,7 +14,7 @@ define(function(require, exports, module) {
         };
 
         this.initDetail = function() {
-        	Mock.mock(REQUESTROOT+'/task/finance/detail?taskId='+args.id, {
+        	Mock.mock(REQUESTROOT+'/downstreams/channel/detail?downstreamId='+args.id, {
                 code: 'SUCCESS',
                 msg: '请求成功',
                 data: {
@@ -38,43 +38,44 @@ define(function(require, exports, module) {
                 }
             });
             jh.utils.ajax.send({
-                url: '/task/finance/detail',
+                url: '/downstreams/channel/detail',
                 data: {
-                    taskId: args.id
+                    downstreamId: args.id
                 },
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
-                    var html = jh.utils.template('finance_detail_template', returnData);
-                    $('.financeDetailContent').html(html);
-                    $("select").select2();
-                    //平台确定收到款
-                   	$('body').off('click','.platSure').on('click','.platSure',function(){
+                    var html = jh.utils.template('officer_detail_template', returnData);
+                    $('.officer-detail').html(html);
+                    var picArr = ['businessLicense', 'legalPersonIdImg', 'legalPersonHandIdImg', 'linkmanIdImg', 'linkmanHandIdImg'];
+					for (var i = 0; i < 5; i++) {
+						jh.utils.uploader.init({
+							isAppend: false,
+							pick: {
+								id: '#' + picArr[i]
+							}
+						});
+					}
+                    
+		            //认证
+                   	$('body').off('click','.officerAudit').on('click','.officerAudit',function(){
+                   		var rejectCon = jh.utils.template('officer_audit_template', {});
 		            	jh.utils.alert({
-		                	content:'确定已经收到对方款项了吗？',
+		                	content: rejectCon,
 		                	ok:function(){
-		                		var datas = jh.utils.formToJson($('#plat-sure-money'));
+		                		var throughState = $('.through').filter(':checked').val();
 		                		jh.utils.ajax.send({
-					                url: '/finance/loanerMoneySure',
-					                data: datas,
-					                done: function(returnData){
-					                	
-					                }
-					            });
-		                	},
-		                	cancel:true
-		                })
-		            });
-		            
-		            //提前放款
-                   	$('body').off('click','.advanceLoan').on('click','.advanceLoan',function(){
-		            	jh.utils.alert({
-		                	content:'确定给捕头提前放款吗？',
-		                	ok:function(){
-		                		jh.utils.ajax.send({
-					                url: '/finance/hunterMoneySure',
+		                			method:'post',
+					                url: '/downstreams/channel/approve',
+					                data: {
+					                	downstreamId: args.id,
+					                	approveStatus: throughState
+					                },
 					                done: function(returnData) {
-					                    
+					                    jh.utils.alert({
+						                	content: '操作成功',
+						                	ok:true
+						                })
 					                }
 		                
 		            			});
@@ -87,5 +88,5 @@ define(function(require, exports, module) {
         };
 
     }
-    module.exports = FinanceDetail;
+    module.exports = OfficerManageDetail;
 });

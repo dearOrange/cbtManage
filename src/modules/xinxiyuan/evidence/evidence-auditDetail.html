@@ -6,6 +6,9 @@
         <p class="pull-left">
             任务详情
         </p>
+        <div>
+            <a href="javascript:;" class="button grey_btn goBack">返回</a>
+        </div>
         <p class="pull-right">{{menuState(data.state)}}</p>
         <div class="clearfix"></div>
         <hr /><br />
@@ -24,8 +27,8 @@
         </ul>
         <div class="remark">备注信息：{{data.remark}}</div>
         <div class="imgRecord">
-            {{each attachmentVoList item index}}
-            <img src="{{viewRoot}}{{item.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            {{each data.attachmentVoList item index}}
+            <img src="{{viewImgRoot}}{{item.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
             {{/each}}
         </div>
         <div class="upmainfile">
@@ -58,7 +61,7 @@
         	<p>预估费用</p>
         	<div>
         		<label>处置费用预估:</label>
-        		<span>{{data.estimatedPrice}}</span>
+        		<span>{{data.estimatedMaxPrice}}</span>
         	</div>
         	<div>
         		<label>最终确认费用:</label>
@@ -175,12 +178,9 @@
 				</dl>
 			</div>
 		</div>
-        <div>
-            <a href="javascript:;" class="button grey_btn goBack">返回</a>
-        </div>
     </div>
 </script>
-<script type="text/template" id="task_audit_template">
+<script type="text/template" id="evidence_audit_template">
 	<div class="divied-width ">
         <p class="pull-left">
             凭证审核
