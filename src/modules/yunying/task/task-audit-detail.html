@@ -27,11 +27,11 @@
         <div class="imgRecord" style="border:0;">
         	<p>法院判决书</p>
             {{each attachmentVoList item index}}
-            <img src="{{viewRoot}}{{item.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            <img src="{{viewRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
             {{/each}}
             <p>催收记录资料</p>
             {{each attachmentVoList item index}}
-            <img src="{{viewRoot}}{{item.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            <img src="{{viewRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
             {{/each}}
         </div>
         <div class="buttonAnt">

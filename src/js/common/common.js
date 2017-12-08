@@ -29,6 +29,7 @@ define(function(require, exports, module) {
 
     var FINAL_OPTIONS = {
         viewImgRoot: 'http://oka19npup.bkt.clouddn.com/',
+        imageScale: '?imageMogr2/auto-orient/thumbnail/100x100',
         pageSize: 10, //默认每页显示条数
         defaultPageSize: 10,
         pageIndex: basePath + 'modules/index/index.html',
@@ -1246,7 +1247,7 @@ define(function(require, exports, module) {
                         });
                         img.attr({
                             'data-id': response.url,
-                            'src': tammy.config.viewImgRoot + response.url
+                            'src': tammy.config.viewImgRoot + response.url + tammy.config.imageScale
                         });
                         var inputName = uploader.options.hiddenName === '' ? pickId : uploader.options.hiddenName;
                         input.attr({

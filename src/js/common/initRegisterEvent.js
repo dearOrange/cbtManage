@@ -120,7 +120,7 @@ define(function(require, exports, module) {
                 var m = $(this);
                 var src = m.attr('src');
                 var title = m.data('tips') ? m.data('tips') : '查看大图';
-                src = src.replace(/imageView2\/0\/w\/100/, '');
+                src = src.replace(/\?imageMogr2\/auto-orient\/thumbnail\/100x100/, '');
                 jh.utils.alert({
                     title: title,
                     content: '<img src="' + src + '"/>'

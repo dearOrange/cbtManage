@@ -25,7 +25,7 @@
         <div class="remark">{{data.remark}}</div>
         <div class="imgRecord">
             {{each data.attachmentVoList data index}}
-            <img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}"/>
+            <img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}"/>
             {{/each}}
         </div>
         <div class="upmainfile">
@@ -50,7 +50,7 @@
         		<dl>
 					<dt>
 						<div class="upfile-item">
-							<img data-id="{{data.carNumberPhoto}}" src="{{viewImgRoot}}{{data.carNumberPhoto}}">
+							<img data-id="{{data.carNumberPhoto}}" src="{{viewImgRoot}}{{data.carNumberPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
 						</div>
 		    		</dt>
 					<dd>车牌特写照</dd>
@@ -58,7 +58,7 @@
         		<dl>
 					<dt>
 						<div class="upfile-item">
-							<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}">
+							<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
 						</div>
 	    			</dt>
 					<dd>全车背景照</dd>

@@ -26,7 +26,7 @@
         <div class="remark">{{data.remark}}</div>
         <div class="imgRecord">
             {{each data.attachmentVoList item index}}
-            <img src="{{viewImgRoot}}{{item.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
             {{/each}}
         </div>
         <div class="mainfile">
@@ -39,7 +39,7 @@
 							<div class="upload-list">
 								<div class="upfile-item">
 									{{if data.carNumberPhoto}}
-									<img data-id="{{data.carNumberPhoto}}" src="{{viewImgRoot}}{{data.carNumberPhoto}}">
+									<img data-id="{{data.carNumberPhoto}}" src="{{viewImgRoot}}{{data.carNumberPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
 									<span class="delete-img" data-domid="carNumberPhoto" data-fileid="WU_FILE_0"></span>
 									<input type="hidden" name="carNumberPhoto" value="{{data.carNumberPhoto}}">
 									{{else}}
@@ -56,7 +56,7 @@
 							<div class="upload-list">
 								<div class="upfile-item">
 									{{if data.carPhoto}}
-									<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}">
+									<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
 									<span class="delete-img" data-domid="carPhoto" data-fileid="WU_FILE_0"></span>
 									<input type="hidden" name="carPhoto" value="{{data.carPhoto}}">
 									{{else}}
