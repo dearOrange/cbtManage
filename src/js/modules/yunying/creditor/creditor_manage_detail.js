@@ -48,7 +48,7 @@ define(function(require, exports, module) {
 						}
 					});
 					page.init();
-					
+
 					var pageTask = new jh.ui.page({
 						data_container: $('#subTask_container'),
 						page_container: $('#page_task_container'),
@@ -63,8 +63,7 @@ define(function(require, exports, module) {
 						}
 					});
 					pageTask.init();
-					
-					
+
 					//          添加小计
 					$('body').off('click', '.addSubtotal').on('click', '.addSubtotal', function() {
 						var addStr = jh.utils.template('creditor_addSubtotal_template', {});
@@ -101,29 +100,86 @@ define(function(require, exports, module) {
 							}
 						});
 					})
+
+					//协助任务发布
+					$('body').off('click', '.helpTask').on('click', '.helpTask', function() {
+						var me = $(this);
+						var alertInfo = jh.utils.template('customer-addTask-template', {});
+						jh.utils.alert({
+							content: alertInfo,
+							ok: function() {
+								$('#customer-addTask-form').submit();
+								return false;
+							},
+							cancel: true
+						});
+
+						jh.utils.validator.init({
+							id: 'customer-addTask-form',
+							submitHandler: function(form) {
+								var datas = jh.utils.formToJson(form);
+								datas.carNumber = datas.carNumber_province + datas.add_carNumber;
+								datas.attachment = jh.utils.isArray(datas.attachment) ? datas.attachment : [datas.attachment];
+								delete datas.carNumber_province;
+								delete datas.add_carNumber;
+								jh.utils.ajax.send({
+									url: '/task/helpIssue',
+									method: 'post',
+									contentType: 'application/json',
+									data: datas,
+									done: function() {
+										jh.utils.alert({
+											content: '任务发布成功！',
+											ok: true,
+											cancel: false
+										});
+									}
+								});
+								return false;
+							}
+						});
+
+						jh.utils.uploader.init({
+							pick: {
+								id: '#attachment'
+							}
+						});
+
+						jh.utils.ajax.send({
+							url: '/car/brand',
+							done: function(result) {
+								var str = '<option value="">请选择品牌</option>';
+								$.each(result.data, function(index, item) {
+									str += '<option value="' + item.id + '">' + item.name + '</option>';
+								});
+								$('#customer-addTask-carBrand').html(str);
+							}
+						});
+					})
+
 					//批量导入
 					jh.utils.uploader.init({
-		                hiddenName: 'test',
-		                server:'/task/import',
-		                pick: {
-		                    id: '#importFile'
-		                },
-		                accept: {
-		                    title: 'Applications',
-		                    extensions: 'xls,xlsx',
-		                    mimeTypes: 'application/xls,application/xlsx'
-		                }
-		            },{
-		            	uploadAccept:function(file, response){
-		            		alert(response)
-		            	}
-		            });
-		            //删除
-		            $('body').off('click', '#removeFile').on('click', '#removeFile', function() {
-		            	var removeId = jh.utils.getCheckboxValue('subTask_container',"value");
-		            	jh.utils.alert({
-		                    content: '确定删除吗？',
-		                    ok:function(){
+						hiddenName: 'test',
+						server: '/task/import',
+						pick: {
+							id: '#importFile'
+						},
+						accept: {
+							title: 'Applications',
+							extensions: 'xls,xlsx',
+							mimeTypes: 'application/xls,application/xlsx'
+						}
+					}, {
+						uploadAccept: function(file, response) {
+							alert(response)
+						}
+					});
+					//删除
+					$('body').off('click', '#removeFile').on('click', '#removeFile', function() {
+						var removeId = jh.utils.getCheckboxValue('subTask_container', "value");
+						jh.utils.alert({
+							content: '确定删除吗？',
+							ok: function() {
 								jh.utils.ajax.send({
 									url: '/task/helpDel',
 									data: {
@@ -137,7 +193,7 @@ define(function(require, exports, module) {
 									}
 								});
 							},
-							cancel:true
+							cancel: true
 						})
 					})
 				}

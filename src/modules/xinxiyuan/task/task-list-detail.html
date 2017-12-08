@@ -31,8 +31,10 @@
         </div>
         <div class="mainfile">
         	<p>线索信息</p>
+        	<p><input type="checkbox" data-id="{{data.id}}"class="checkAll" /></p>
         	{{ each data.traceVoList data index }}
-        	<div class="upimg">
+        	<div class="upimg pull-left">
+        		<input type="checkbox" data-id="{{data.id}}" value="" />
         		<dl>
 					<dt>
 						<div class="upfile-item">
@@ -50,9 +52,11 @@
 					<dd>全车背景照</dd>
 				</dl>
         	</div>
-        	<div style="margin:10px 0;">
-        		<p>{{data.id}}</p>
+        	<div style="margin:10px 0;" class="pull-left">
+        		<p>{{data.name}}----{{menuState(data.downstreamType)}}</p>
         		<p>线索上传时间：{{data.createAt}}</p>
+        		<p>gprs信息：{{data.fingerprint}}</p>
+        		<p>定位：{{data.location}}</p>
         	</div>
         	{{/each}}
         </div>

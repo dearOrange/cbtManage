@@ -23,7 +23,6 @@ define(function(require, exports, module) {
 				data: jh.utils.formToJson(_this.form),
 				isSearch: isSearch,
 				callback: function(data) {
-					console.log(data)
 					return jh.utils.template('sendMoney-list-template', data);
 				}
 			});
