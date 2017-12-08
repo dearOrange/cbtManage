@@ -5,7 +5,7 @@
 				<tr>
 					<td>
 						<label class="label">提现人：</label>
-						<input type="text" class="search-input" name="carNumber">
+						<input type="text" class="search-input" name="downstream">
 					</td>
 					<td>
 						<label class="label">主体：</label>
@@ -26,45 +26,43 @@
 			</table>
 		</form>
 	</div>
-    <div class="data-container">
-        <table class="dataShow">
-            <thead>
-                <tr>
-                    <th width="3%">&nbsp;</th>
-                    <th width="4%"><input type="checkbox" /></th>
-                    <th width="8%">提现申请人</th>
-                    <th width="15%">主体名称</th>
-                    <th width="12%">提现金额</th>
-                    <th width="10%">实发金额</th>
-                    <th width="8%">发放形式</th>
-                    <th width="6%">打款状态</th>
-                    <th width="15%">提现申请时间</th>
-                    <th width="6%">操作</th>
-                    <th width="6%">打款</th>
-                </tr>
-            </thead>
-            <tbody id="sendMoney_list_container">
-                
-            </tbody>
-        </table>
-        <div class="page-box pagination" id="page_container"></div>
-    </div>
+	<div class="data-container">
+		<table class="dataShow">
+			<thead>
+				<tr>
+					<th width="3%">&nbsp;</th>
+					<th width="4%"><input type="checkbox" /></th>
+					<th width="8%">提现申请人</th>
+					<th width="15%">主体名称</th>
+					<th width="12%">提现金额</th>
+					<th width="10%">实发金额</th>
+					<th width="8%">发放形式</th>
+					<th width="6%">打款状态</th>
+					<th width="15%">提现申请时间</th>
+					<th width="6%">操作</th>
+					<th width="6%">打款</th>
+				</tr>
+			</thead>
+			<tbody id="sendMoney_list_container">
+
+			</tbody>
+		</table>
+		<div class="page-box pagination" id="page_container"></div>
+	</div>
 </div>
 
 <script type="text/template" id="sendMoney-list-template">
 	{{ each list item index }}
-	<tr>
-		<td>{{index}}</td>
+	<tr class="{{if item.isRead == " 0 "}}bgc_blue{{/if}}">
+		<td>{{index+1}}</td>
 		<td><input type="checkbox" value="{{item.id}}" /></td>
 		<td>{{item.name}}</td>
-		<td>
-			{{item.company}}
-		</td>
-		<td>
-			{{item.amount}}
-		</td>
+		<td>{{item.company}}</td>
+		<td>{{item.amount}}</td>
 		<td>{{item.actualAmount}}</td>
-		<td>{{item.payWay}}</td>
+		<td>
+			{{if item.payWay == "2"}} 银行卡 {{else}} 支付宝 {{/if}}
+		</td>
 		<td>{{menuState(item.state)}}</td>
 		<td>{{item.createAt}}</td>
 		<td>
@@ -73,7 +71,8 @@
 		<td>
 			<ul class="operaitem">
 				<li>
-					<a data-id="{{item.id}}" class="sendMoney button">打款</a>
+					{{if item.state == "withdrawing"}}
+					<a data-id="{{item.id}}" class="sendMoney button">打款</a> {{else}} — — {{/if}}
 				</li>
 			</ul>
 		</td>
@@ -81,63 +80,66 @@
 	{{/each}}
 </script>
 
-<script type="text/template" id="sendMoney_template">
-    <div class="dialog-width">
-        <table>
-            <tbody>
-                <tr>
-                    <td>申请人</td>
-                    <td colspan="3">
-                        <span>张三</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>发放类型</td>
-                    <td colspan="3">
-                        <select name="" id="">
-                            <option value="支付宝">支付宝</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>支付宝账号</td>
-                    <td>
-                        <input type="text" value="111111@qq.com" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>银行卡账号</td>
-                    <td>
-                        <input type="text" value="22222222222222" />
-                    </td>
-                    <td>开户支行</td>
-                    <td>
-                        <input type="text" value="中国工商银行下沙支行"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>申请提现金额</td>
-                    <td>
-                        <input type="text" value="300.00" />
-                    </td>
-                    <td>实际发放金额</td>
-                    <td>
-                        <input type="text" value="300.00"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>上传打款凭证</td>
-                    <td colspan="3">
-                        <input type="file" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<script type="text/template" id="sendMoney_sure_template">
+	<div class="dialog-width">
+		<form id="play-money-form">
+			<table>
+				<tbody>
+					<tr>
+						<td>申请人</td>
+						<td colspan="3">
+							<span>张三</span>
+						</td>
+					</tr>
+					<tr>
+						<td>发放类型</td>
+						<td colspan="3">
+							<select name="payWay" id="selectPay">
+	                            <option value="1">支付宝</option>
+	                            <option value="2">银行卡</option>
+	                        </select>
+						</td>
+					</tr>
+					<tr class="changePaystyle" id="payStyle">
+						<td>支付宝账号</td>
+						<td colspan="3">
+							<input type="text" value="111111@qq.com" />
+						</td>
+					</tr>
+					<tr class="changePaystyle">
+						<td>银行卡账号</td>
+						<td>
+							<input type="text" value="22222222222222" />
+						</td>
+						<td>开户支行</td>
+						<td>
+							<input type="text" value="中国工商银行下沙支行" />
+						</td>
+					</tr>
+					<tr>
+						<td>申请提现金额</td>
+						<td>
+							<input type="text" value="300.00" />
+						</td>
+						<td>实际发放金额</td>
+						<td>
+							<input type="text" name="actualAmount" value="300.00" />
+						</td>
+					</tr>
+					<tr>
+						<td>上传打款凭证</td>
+						<td colspan="3">
+							<input type="file" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
 </script>
 <script type="text/javascript">
-seajs.use('modules/sendMoney/sendMoney-list', function(SendMoneyList) {
-    var SendMoneyList = new SendMoneyList();
-    SendMoneyList.init();
-});
+	seajs.use('modules/sendMoney/sendMoney-list', function(SendMoneyList) {
+		var SendMoneyList = new SendMoneyList();
+		SendMoneyList.init();
+	});
 </script>

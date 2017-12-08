@@ -107,9 +107,11 @@
         		<span>{{data.situation}}</span>
         	</div>
         </div>
-    	<div class="buttonAnt">
+    	{{if data.state == "wait"}}
         	<a class="button officerAudit">认证</a>
-        </div>
+        	{{else}}
+        	<span>{{menuState(data.state)}}</span>
+        {{/if}}
     </div>
 </script>
 <script type="text/template" id="officer_audit_template">
@@ -124,7 +126,7 @@
         	<input type="radio" name="audit" value="2" class="through" />认证不通过
         </div>
         <div class="divied-content">
-        	<textarea placeholder="请填写原因"></textarea>
+        	<textarea placeholder="请填写原因" maxlength="40" class="butouReason"></textarea>
         </div>
     </div>
 </script>

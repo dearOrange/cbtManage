@@ -24,40 +24,43 @@
                         </select>
 					</td>
 					<td>
-						<input type="submit" value="查询" class="button search-button">
+						<label class="label">放款状态：</label>
+						<select name="hunterStatus">
+                        	<option value="">全部</option>
+                        	<option value="0">未放款</option>
+                        	<option value="1">已放款</option>
+                        	<option value="1">只放线索费</option>
+                        </select>
 					</td>
-				</tr>
-				<tr>
-					<td colspan="5">
-						<a href="javascript:;" class="button">确认到账</a>
+					<td>
+						<input type="submit" value="查询" class="button search-button">
 					</td>
 				</tr>
 			</table>
 		</form>
 	</div>
-    <div class="data-container">
-        <table class="dataShow">
-            <thead>
-                <tr>
-                    <th width="3%">&nbsp;</th>
-                    <th width="4%"><input type="checkbox" id="checkAll" /></th>
-                    <th width="8%">任务号</th>
-                    <th width="8%">车牌号</th>
-                    <th width="8%">品牌</th>
-                    <th width="10%">任务类型</th>
-                    <th width="15%">债权方确认收车时间</th>
-                    <th width="10%">债权方到款状态</th>
-                    <th width="10%">捕头放款状态</th>
-                    <th width="6%">操作</th>
-                    <th width="8%">确认到账</th>
-                </tr>
-            </thead>
-            <tbody id="finance_list_container">
-                
-            </tbody>
-        </table>
-        <div class="page-box pagination" id="page_container"></div>
-    </div>
+	<div class="data-container">
+		<table class="dataShow">
+			<thead>
+				<tr>
+					<th width="3%">&nbsp;</th>
+					<th width="4%"><input type="checkbox" id="checkAll" /></th>
+					<th width="8%">任务号</th>
+					<th width="8%">车牌号</th>
+					<th width="8%">品牌</th>
+					<th width="10%">任务类型</th>
+					<th width="15%">债权方确认收车时间</th>
+					<th width="10%">债权方到款状态</th>
+					<th width="10%">捕头放款状态</th>
+					<th width="6%">操作</th>
+				</tr>
+			</thead>
+			<tbody id="finance_list_container">
+
+			</tbody>
+		</table>
+		<div class="page-box pagination" id="page_container"></div>
+	</div>
 </div>
 
 <script type="text/template" id="finance-list-template">
@@ -70,25 +73,22 @@
 		<td>{{item.carBrand}}</td>
 		<td>{{menuState(item.entrust)}}</td>
 		<td>{{item.loanerSureAt}}</td>
-		<td>{{item.loanerMoneyStatus}}</td>
-		<td>{{item.hunterMoneyStatus}}</td>
 		<td>
-			<a data-id="{{item.id}}" class="finance-detail button">详情</a>
+			{{if item.loanerMoneyStatus == "0"}} 未收款 {{else}} 已收款 {{/if}}
 		</td>
 		<td>
-			<ul class="operaitem">
-				<li>
-					<a data-id="{{item.id}}" class="agreement button">确认到账</a>
-				</li>
-			</ul>
+			{{if item.hunterMoneyStatus == "0"}} 未放款 {{else}} 已放款 {{/if}}
+		</td>
+		<td>
+			<a data-id="{{item.id}}" class="finance-detail button">详情</a>
 		</td>
 	</tr>
 	{{/each}}
 </script>
 
 <script type="text/javascript">
-seajs.use('modules/finance/finance-list', function(FinanceList) {
-    var FinanceList = new FinanceList();
-    FinanceList.init();
-});
+	seajs.use('modules/finance/finance-list', function(FinanceList) {
+		var FinanceList = new FinanceList();
+		FinanceList.init();
+	});
 </script>

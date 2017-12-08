@@ -616,7 +616,10 @@ label.error {
     width: 100px;
     height: 100px;
 }
-
+.showImg img {
+    width: 100px;
+    height: 100px;
+}
 .webuploader-container {
     display: inline-block;
     vertical-align: middle;

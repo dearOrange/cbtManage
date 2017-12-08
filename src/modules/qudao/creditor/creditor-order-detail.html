@@ -35,8 +35,6 @@
             <div>
                 <table class="pull-left" style="width: 90%;">
                     <thead>
-                        <th></th>
-                        <th>车牌号</th>
                         <th>信息描述</th>
                         <th>发生时间</th>
                     </thead>
@@ -90,7 +88,7 @@
         		<span>{{data.finalPrice}}</span>
         	</div>
         	{{if data.state == 'hunterReceive'}}
-        	<a class="button search-button isSure" href="javascript:;">保存</a>
+        	<a class="button search-button isSure" href="javascript:;">平台收车</a>
         	{{/if}}
         </div>
     </div>
@@ -99,8 +97,6 @@
 <script type="text/template" id="distribution-illegalList-template">
     {{each list item index}}
     <tr>
-        <td>{{index+1}}</td>
-        <td>{{item.carNumber}}</td>
         <td>{{item.desc}}</td>
         <td>{{item.occurAt}}</td>
     </tr>

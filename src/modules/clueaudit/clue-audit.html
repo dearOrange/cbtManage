@@ -16,9 +16,9 @@
                     <td>
                         <label class="label">任务状态：</label>
                         <select name="state">
-                            <option value="clueChecking">线索审核中</option>
+                            <option value="clueChecking">线索未审核</option>
                             <option value="unvaluation">待估价</option>
-                            <option value="unconfirmed">带债权方确认</option>
+                            <option value="unconfirmed">待债权方确认</option>
                         </select>
                     </td>
                     <td>
@@ -56,15 +56,14 @@
         <td>{{item.carNumber}}</td>
         <td>{{item.carBrand}}</td>
         <td>{{item.carSeries}}</td>
-        <td>{{item.carModel}}</td>
         <td>{{item.carColor}}</td>
         <td>{{item.downstream}}</td>
-        <td>{{item.downstream}}</td>
+        <td>{{menuState(item.state)}}</td>
         <td>{{item.createAt}}</td>
         <td>
             <ul class="operaitem">
                 <li>
-                    <a data-id="{{item.id}}" class="detail button">详情</a>
+                    <a data-id="{{item.id}}" class="clue-audit-detail button">详情</a>
                 </li>
             </ul>
         </td>

@@ -46,13 +46,17 @@
 	                        </select>
 	                    </td>
 	                    <td rowspan="5">
+	                    	{{if data.loanerMoneyStatus == "0"}}
+	                        <span>已收款</span>
+	                        {{else}}
 	                        <a class="button platSure">平台确认收到款项</a>
+	                        {{/if}}
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <td>交易时间</td>
 	                    <td>
-	                        <input type="text" name="dealTime" value="2017-11-11 11:11:11">
+	                        <input type="text" name="dealTime" value="">
 	                    </td>
 	                </tr>
 	                <tr>
@@ -79,10 +83,35 @@
         <div class="upmainfile" style="border-top:1px dashed #ccc;">
         	<table>
                 <tr>
-                    <td>捕头最终确认费用: fjknhdjkdnh</td>
-                    <td>
+                    <td>总处置费: {{finalilmoney}}</td>
+                    <td>查找费
+                    	{{if data.infoMoneyStatus == "1"}}
+                    	(已发)
+                    	{{else}}
+                    	(未发)
+                    	{{/if}}
+                    	:{{data.assetPrice}}</td>
+                    <td>清收费{{if data.hunterMoneyStatus == "1"}}
+                    	(已发)
+                    	{{else}}
+                    	(未发)
+                    	{{/if}}
+                    	: {{data.thirdpartyPrice}}</td>
+                    <td rowspan="3">
+                    	{{if data.hunterMoneyStatus == "1" && data.infoMoneyStatus == "1"}}
+                        <span>已放款</span>
+                        {{else}}
                         <a class="button advanceLoan">提前放款</a>
+                        {{/if}}
                     </td>
+                </tr>
+                <tr>
+                	<td>发放费用：{{finalsendmoney}}</td>
+                	<td colspan="2"></td>
+                </tr>
+                <tr>
+                	<td><a class="button">查看债权委托书</a></td>
+                	<td colspan="2"><a class="button">查看捕头委托书</a></td>
                 </tr>
             </table>
         </div>

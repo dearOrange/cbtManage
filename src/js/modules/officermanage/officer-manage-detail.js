@@ -69,7 +69,8 @@ define(function(require, exports, module) {
 					                url: '/downstreams/channel/approve',
 					                data: {
 					                	downstreamId: args.id,
-					                	approveStatus: throughState
+					                	approveStatus: throughState,
+					                	reason: $('.butouReason').val()
 					                },
 					                done: function(returnData) {
 					                    jh.utils.alert({
