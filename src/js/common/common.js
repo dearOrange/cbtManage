@@ -15,6 +15,7 @@ define(function(require, exports, module) {
     var basePath = ROOTURL + '/src/'; //基础根路径
 
     //加载插件
+    require('plugin/imageZoom/imageZoom'); //图片放大镜
     require('jquery.validate'); //表单验证
     require('common/validator'); //表单验证扩展
     require('plugin/datePicker/WdatePicker');//时间插件
@@ -177,7 +178,7 @@ define(function(require, exports, module) {
                 if (beforeFour === '<img') {
                     (new tammy.ui.shadow()).init();
                     var conText = defaults.content;
-                    var imgSrc = conText.substring(conText.indexOf('src=') + 5, conText.indexOf('/>'));
+                    var imgSrc = conText.substring(conText.indexOf('src=') + 5, conText.indexOf('"/>'));
                     var imgObj = new Image();
                     imgObj.onload = function() {
                         var positions = tammy.utils.imgLoad(imgObj);
@@ -185,11 +186,12 @@ define(function(require, exports, module) {
                         defaults.height = positions.height;
                         defaults.left = positions.left;
                         defaults.top = positions.top;
-                        var imgHtml = '<img src="' + imgSrc + '" width="' + defaults.width + '" height="' + defaults.height + '"/>';
+                        var imgHtml = '<span class="zoom img-blowup"><img src="' + imgSrc + '" width="' + defaults.width + '" height="' + defaults.height + '"/></span>';
                         defaults.content = imgHtml;
                         (new tammy.ui.shadow()).close();
                         var dg = dialog(defaults);
                         dg.showModal();
+                        $('.img-blowup').zoom({ on:'click' });
                     };
                     imgObj.onerror = function() {
                         var imgHtml = '<img src="/images/no-pic.jpg" width="400" height="300"/>';

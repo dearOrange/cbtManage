@@ -116,11 +116,11 @@ define(function(require, exports, module) {
                 window.location.href = REQUESTROOT + '/task/export' + '?' + datas + '&XToken=' + XToken;
             });
 
-            $('body').off('click', '.img-preview img').on('click', '.img-preview img', function() {
+            $('body').off('click', '.preview-img').on('click', '.preview-img', function() {
                 var m = $(this);
                 var src = m.attr('src');
                 var title = m.data('tips') ? m.data('tips') : '查看大图';
-                src = src.replace(/imageView2\/0\/w\/100/, 'imageslim');
+                src = src.replace(/imageView2\/0\/w\/100/, '');
                 jh.utils.alert({
                     title: title,
                     content: '<img src="' + src + '"/>'
