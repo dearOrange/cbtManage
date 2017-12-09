@@ -38,6 +38,12 @@ define(function(require, exports, module) {
             url: '/clue-manage',
             childrens: []
         }, {
+            name: '信息-委托验真',
+            icon: 'icon-supplier',
+            module: '/src/modules/xinxiyuan/xx-entrustment',
+            url: '/xx-entrustment-list',
+            childrens: []
+        }, {
             name: '信息-债权方认证',
             icon: 'icon-region',
             module: '/src/modules/xinxiyuan/creditor',

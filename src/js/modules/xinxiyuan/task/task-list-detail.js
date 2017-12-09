@@ -8,6 +8,7 @@
 define(function(require, exports, module) {
     function TaskListDetail() {
         var _this = this;
+        _this.form = $("#task_adopt_form");
         var args = jh.utils.getURLValue().args;
         this.init = function() {
             this.initDetail();
@@ -25,26 +26,22 @@ define(function(require, exports, module) {
                     returnData.viewImgRoot = jh.config.viewImgRoot;
                     var html = jh.utils.template('task_detail_template', returnData);
                     $('.taskListContent').html(html);
+                    _this.initSheriff();
 					
-					//预估价格
-					$('body').off('click', '.priceStorage').on('click', '.priceStorage', function() {
-						jh.utils.ajax.send({
-							url: '/task/estimate',
-							data: {
-								carPrice: $('#salvage').val(),
-								estimatedMinPrice: $('#minMoney').val(),
-								estimatedMaxPrice: $('#maxMoney').val(),
-								taskId: args.id
-							},
-							done: function(returnData) {
-								console.log(returnData)
-							}
-						});
-					})
+				
                 }
             });
         };
-
+		this.initSheriff = function() {
+            jh.utils.ajax.send({
+                url: '/operator/getAllChannel',
+                done: function(returnData) {
+                    var strTemplate = jh.utils.template('xx_task_list', returnData);
+                    $('.task-content').html(strTemplate);
+                }
+            });
+        };
+        
         this.registerEvent = function() {
             //信息修复
             $('body').off('click','.auditClue').on('click','.auditClue',function(){
@@ -54,7 +51,63 @@ define(function(require, exports, module) {
                 		jh.utils.ajax.send({
 			                url: '/trace/adopt',
 			                done: function(returnData) {
-			                    
+			                    jh.utils.alert({
+									content: '已审核！',
+									ok: true
+								})
+			                }
+                
+            			});
+                	},
+                	cancel:true
+                })
+            });
+            
+            //情报全部拒绝
+            $('body').off('click','.rejectClue').on('click','.rejectClue',function(){
+            	jh.utils.alert({
+                	content:'确定全部不通过吗？',
+                	ok:function(){
+                		jh.utils.ajax.send({
+			                url: '/task/refuseAll',
+			                data: {
+			                	taskId: args.id
+			                },
+			                done: function(returnData) {
+			                    jh.utils.alert({
+									content: '已全部拒绝！',
+									ok: true
+								})
+			                }
+                
+            			});
+                	},
+                	cancel:true
+                })
+            });
+            
+            //采纳情报
+            $('body').off('click','.adopteInfo').on('click','.adopteInfo',function(){
+            	jh.utils.alert({
+                	content:'确定采纳吗？',
+                	ok:function(){
+                		var adoptData = jh.utils.formToJson(_this.form);
+                		console.log(adoptData)
+                		adoptData.taskId = args.id;
+//              		adoptData.traceId = 
+                		adoptData.carPrice = $("#salvage").val();
+                		adoptData.estimatedMinPrice = $("#minMoney").val();
+                		adoptData.estimatedMaxPrice = $("#maxMoney").val();
+//              		console.log(adoptData);
+                		return false;
+                		jh.utils.ajax.send({
+			                url: '/task/refuseAll',
+			                data: adoptData,
+			                done: function(returnData) {
+			                    jh.utils.alert({
+									content: '已采纳！',
+									ok: true
+								})
 			                }
                 
             			});
