@@ -1,0 +1,63 @@
+<div class="entrustmentListContent">
+
+</div>
+<script type="text/template" id="entrustment_detail_template">
+	<div class="dialog-width">
+		{{if data.state == "unverified"}}
+		<p class="pull-right">{{menuState(data.state)}}</p>
+		{{else}}
+		<p class="pull-right">
+			{{if data.isIssue == "0"}} 委托不存在 {{else}} 委托存在 {{/if}}
+		</p><br /><br /><br />
+		<p class="pull-right" style="background-color:red;">
+			{{if data.isValid == "0"}} 本委托虚假委托 {{else}} 本委托真实委托 {{/if}}
+		</p>
+		{{/if}}
+		<p class="pull-left">
+			验真委托详情
+		</p>
+		<a href="javascript:;" class="button gobackPage goBack">返回</a>
+
+		<div class="clearfix"></div>
+		<hr /><br />
+		<p>基本信息</p><br />
+		<div>
+			<span>上传捕头：{{data.name}}</span>
+		</div>
+		<div>
+			<span>所属公司：{{data.company}}</span>
+		</div>
+		<div>
+			<span>上传时间：{{data.createAt}}</span>
+		</div>
+		<div class="mainfile">
+			<p>委托信息</p>
+			<div class="upimg">
+				<img data-id="{{data.pic1}}" src="{{viewImgRoot}}{{data.pic1}}?imageMogr2/auto-orient/thumbnail/100x100">
+				<img data-id="{{data.pic2}}" src="{{viewImgRoot}}{{data.pic2}}?imageMogr2/auto-orient/thumbnail/100x100">
+				<img data-id="{{data.pic3}}" src="{{viewImgRoot}}{{data.pic3}}?imageMogr2/auto-orient/thumbnail/100x100">
+			</div>
+		</div>
+		{{if data.state == "unverified"}}
+		<div>
+			<p>委托验证</p>
+			<div>
+				<label>债权方是否出具该委托:</label>
+				<input type="radio" value="1" name="isIssue" class="isIssue" />是
+				<input type="radio" value="0" name="isIssue" class="isIssue" />否
+			</div>
+			<div>
+				<label>本委托是否真实有效:</label>
+				<input type="radio" value="1" name="isValid" class="isValid" />是
+				<input type="radio" value="0" name="isValid" class="isValid" />否
+			</div>
+		</div>
+		<a class="button search-button priceStorage" href="javascript:;">确认</a> {{/if}}
+	</div>
+</script>
+<script type="text/javascript">
+	seajs.use('modules/xinxiyuan/xx-entrustment/xx-entrustment-detail', function(EntrustmentListDetail) {
+		var EntrustmentListDetail = new EntrustmentListDetail();
+		EntrustmentListDetail.init();
+	});
+</script>

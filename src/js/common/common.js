@@ -1694,8 +1694,14 @@ define(function(require, exports, module) {
                 case "completed":
                     state = "已打款";
                     break;
-                case "rejected":
+                case "rejected": 
                     state = "已拒绝";
+                    break;
+                case "verified":
+                    state = "已验";
+                    break;
+                case "unverified":
+                    state = "未验";
                     break;
             }
             return state;
