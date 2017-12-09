@@ -67,7 +67,6 @@
 								<div class="upfile-item">
 									{{if data.businessLicense}}
 									<img data-id="{{data.businessLicense}}" src="http://oka19npup.bkt.clouddn.com/{{data.businessLicense}}?imageMogr2/auto-orient/thumbnail/100x100">
-									<span class="delete-img" data-domid="businessLicense" data-fileid="WU_FILE_0"></span>
 									<input type="hidden" name="businessLicense" value="{{data.businessLicense}}">
 									{{else}}
 									<img data-id="{{data.businessLicense}}" src="../../img/nopic.png">	
@@ -84,7 +83,6 @@
 								<div class="upfile-item">
 									{{if data.legalPersonIdImg}}
 									<img data-id="{{data.legalPersonIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.legalPersonIdImg}}?imageMogr2/auto-orient/thumbnail/100x100">
-									<span class="delete-img" data-domid="legalPersonIdImg" data-fileid="WU_FILE_0"></span>
 									<input type="hidden" name="legalPersonIdImg" value="{{data.legalPersonIdImg}}">
 									{{else}}
 									<img data-id="{{data.legalPersonIdImg}}" src="../../img/nopic.png">	
@@ -101,7 +99,6 @@
 								<div class="upfile-item">
 									{{if data.legalPersonHandIdImg}}
 									<img data-id="{{data.legalPersonHandIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.legalPersonHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100">
-									<span class="delete-img" data-domid="legalPersonHandIdImg" data-fileid="WU_FILE_0"></span>
 									<input type="hidden" name="legalPersonHandIdImg" value="{{data.legalPersonHandIdImg}}">
 									{{else}}
 									<img data-id="{{data.legalPersonHandIdImg}}" src="../../img/nopic.png">	
@@ -118,7 +115,6 @@
 								<div class="upfile-item">
 									{{if data.linkmanIdImg}}
 									<img data-id="{{data.linkmanIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.linkmanIdImg}}?imageMogr2/auto-orient/thumbnail/100x100">
-									<span class="delete-img" data-domid="linkmanIdImg" data-fileid="WU_FILE_0"></span>
 									<input type="hidden" name="linkmanIdImg" value="{{data.linkmanIdImg}}">
 									{{else}}
 									<img data-id="{{data.linkmanIdImg}}" src="../../img/nopic.png">	
@@ -135,7 +131,6 @@
 								<div class="upfile-item">
 									{{if data.linkmanHandIdImg}}
 									<img data-id="{{data.linkmanHandIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.linkmanHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100">
-									<span class="delete-img" data-domid="linkmanHandIdImg" data-fileid="WU_FILE_0"></span>
 									<input type="hidden" name="linkmanHandIdImg" value="{{data.linkmanHandIdImg}}">
 									{{else}}
 									<img data-id="{{data.linkmanHandIdImg}}" src="../../img/nopic.png">	
@@ -147,12 +142,12 @@
 				</dl>
 			</div>
 		</div>
-		{{if data.state == "wait"}}
-		<input type="submit" value="认证" class="button search-button identify" style="width:100px;height:30px;margin:30px;">
-		{{else}}
-		<span>{{menuState(data.state)}}</span>
-		{{/if}}
 	</div>
+	{{if data.state == "wait"}}
+	<input type="submit" value="认证" class="button search-button identify" style="width:100px;height:30px;margin:30px;">
+	{{else}}
+	<span class="pull-right button disabled_btn">{{menuState(data.state)}}</span>
+	{{/if}}
 </script>
 <script type="text/template" id="admin_creditorIdentify_template">
 	<div class="divied-width ">

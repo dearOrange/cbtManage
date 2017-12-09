@@ -169,6 +169,7 @@ define(function(require, exports, module) {
                 var defaults = {
                     title: '温馨提示',
                     okValue: '确定',
+                    fixed: true,
                     cancelValue: '取消'
                 };
 
