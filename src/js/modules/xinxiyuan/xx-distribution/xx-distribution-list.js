@@ -108,6 +108,7 @@ define(function(require, exports, module) {
                         ok: true,
                         cancel: false
                     });
+                    return false;
                 }
                 _this.initSheriff(taskIds);
             });
