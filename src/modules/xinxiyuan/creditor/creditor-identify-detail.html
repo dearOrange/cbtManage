@@ -1,4 +1,4 @@
-<div class="detail-content">
+<div class="dataContent detail-content">
 
 </div>
 <script type="text/template" id="admin_creditorDetail_template">
@@ -142,28 +142,26 @@
 				</dl>
 			</div>
 		</div>
+		{{if data.state == "wait"}}
+		<input type="submit" value="认证" class="button search-button identify" style="width:100px;height:30px;margin:30px;"> {{else}}
+		<span class="pull-right button disabled_btn">{{menuState(data.state)}}</span> {{/if}}
 	</div>
-	{{if data.state == "wait"}}
-	<input type="submit" value="认证" class="button search-button identify" style="width:100px;height:30px;margin:30px;">
-	{{else}}
-	<span class="pull-right button disabled_btn">{{menuState(data.state)}}</span>
-	{{/if}}
 </script>
 <script type="text/template" id="admin_creditorIdentify_template">
 	<div class="divied-width ">
-        <p class="pull-left">
-            债权方认证
-        </p>
-        <div class="clearfix"></div>
-        <hr /><br />
-        <div class="divied-type">
-        	<input type="radio" name="identify" value="1" id="through" class="through" />认证通过
-        	<input type="radio" name="identify" value="2" id="nothrough" class="through" />认证不通过
-        </div>
-        <div class="divied-content">
-        	<textarea name="identifyContent" maxlength="40" id="identifyContent"></textarea>
-        </div>
-    </div>
+		<p class="pull-left">
+			债权方认证
+		</p>
+		<div class="clearfix"></div>
+		<hr /><br />
+		<div class="divied-type">
+			<input type="radio" name="identify" value="1" id="through" class="through" />认证通过
+			<input type="radio" name="identify" value="2" id="nothrough" class="through" />认证不通过
+		</div>
+		<div class="divied-content">
+			<textarea name="identifyContent" maxlength="40" id="identifyContent"></textarea>
+		</div>
+	</div>
 </script>
 <script type="text/javascript">
 	seajs.use('modules/xinxiyuan/creditor/creditor-identify-detail', function(CreditorIdentifyDetail) {

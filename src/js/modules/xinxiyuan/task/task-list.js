@@ -110,15 +110,15 @@ define(function(require, exports, module) {
 	    		},{
 	    			val: 'platReceive',
 	    			name:"平台已收车",
-	    			flag:'trcaing'
+	    			flag:''
 	    		},{
 	    			val: 'upstreamReceive',
 	    			name:"债权方已收车",
-	    			flag:'trcaing'
+	    			flag:''
 	    		},{
 	    			val: 'closed',
 	    			name:"已失效",
-	    			flag:'trcaing'
+	    			flag:''
 	    		}];
 	    		
 	    		var optionArr = [];

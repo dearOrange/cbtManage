@@ -1,4 +1,4 @@
-<div class="sendMoneyDetail">
+<div class="dataContent sendMoneyDetail">
 
 </div>
 
@@ -59,18 +59,9 @@
 		<a href="javascript:;" class="button rejectMoney">拒绝提现申请</a> {{/if}}
 	</div>
 </script>
-<script type="text/template" id="rejectMoney_template">
-	<div class="dialog-width">
-		<p class="pull-left">
-			拒绝提现申请
-		</p>
-		<div class="clearfix"></div>
-		<hr /> <br />
-		<textarea class="rejectReason" placeholder="请填写原因" style="width:300px;height:40px;resize:none;"></textarea>
-	</div>
-</script>
+
 <script type="text/template" id="sendMoney_sure_template">
-	<div class="dialog-width">
+	<div class="officer-width">
 		<form id="play-money-form">
 			<table>
 				<tbody>
@@ -89,9 +80,9 @@
 	                        </select>
 						</td>
 					</tr>
-					<tr>
+					<tr class="changePaystyle" id="payStyle">
 						<td>支付宝账号</td>
-						<td class="changePaystyle" id="payStyle">
+						<td colspan="3">
 							<input type="text" value="111111@qq.com" />
 						</td>
 					</tr>
@@ -124,6 +115,17 @@
 				</tbody>
 			</table>
 		</form>
+	</div>
+</script>
+
+<script type="text/template" id="rejectMoney_template">
+	<div class="officer-width">
+		<p class="pull-left">
+			拒绝提现申请
+		</p>
+		<div class="clearfix"></div>
+		<hr /> <br />
+		<textarea class="rejectReason" placeholder="请填写原因" style="width:90%;height:40px;resize:none;"></textarea>
 	</div>
 </script>
 

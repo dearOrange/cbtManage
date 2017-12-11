@@ -1,4 +1,4 @@
-<div class="clueManageContent">
+<div class="dataContent clueManageContent">
 	
 </div>
 <script type="text/template" id="clueManage_detail_template">
@@ -8,15 +8,16 @@
         </p>
         <a href="javascript:;" class="button gobackPage goBack">返回</a>
         <div class="clearfix"></div>
-        <hr /><br />
-        <div>
-        	<p>上传捕头</p>
-        	<span>{{data.name}}</span>
+        <hr />
+        <div style="overflow: hidden;">
+        	<p class="pull-left">上传捕头</p>
         	{{if passState == "1"}}
         	<p class="pull-right">已成功匹配任务{{data.taskNo}}</p>
         	{{else}}
         	<p class="pull-right">未成功匹配任务</p>
         	{{/if}}
+        	<span>{{data.name}}</span>
+        	
         </div>
         <div>
         	<p>捕头所属公司</p>

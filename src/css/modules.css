@@ -4,1188 +4,1295 @@
  * @date    2017-06-08 10:29:43
  * @version 1.0
  */
+
 body.login {
-    background-color: #2d3a4b;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
+	background-color: #2d3a4b;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
 }
 
 .login-logo {
-    margin: 30px;
+	margin: 30px;
 }
 
 .login-logo img {
-    margin-left: 20px;
+	margin-left: 20px;
 }
 
 .login-form {
-    position: relative;
-    margin: 0 auto;
-    padding: 20px;
-    width: 580px;
-    height: 730px;
-    border-radius: 5px;
+	position: relative;
+	margin: 0 auto;
+	padding: 20px;
+	width: 580px;
+	height: 730px;
+	border-radius: 5px;
 }
 
 .loginForm {
-    width: 502px;
-    margin: 160px 0px 0px 30px;
+	width: 502px;
+	margin: 160px 0px 0px 30px;
 }
 
 .loginForm input {
-    color: #eee;
-    height: 40px;
-    line-height: 40px;
-    border: 0;
+	color: #eee;
+	height: 40px;
+	line-height: 40px;
+	border: 0;
 }
 
 .loginForm .inputGroup {
-    width: 66%;
-    margin: 0px auto 10px;
+	width: 66%;
+	margin: 0px auto 10px;
 }
 
 .loginForm .inputGroup .txt {
-    width: 100%;
-    text-indent: 40px;
-    margin-bottom: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
+	width: 100%;
+	text-indent: 40px;
+	margin-bottom: 25px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 5px;
 }
 
 .loginForm .inputGroup #username {
-    background: url(../img/login/login_user.png) no-repeat 10px center;
+	background: url(../img/login/login_user.png) no-repeat 10px center;
 }
 
 .loginForm .inputGroup #password {
-    background: url(../img/login/login_pass.png) no-repeat 10px center;
+	background: url(../img/login/login_pass.png) no-repeat 10px center;
 }
 
 .loginForm .inputGroup .code {
-    width: 150px;
-    text-indent: 40px;
+	width: 150px;
+	text-indent: 40px;
 }
 
 .loginForm .inputGroup .checkCode {
-    width: 100px;
-    height: 40px;
-    margin: -23px 0px 0px 60px;
-    cursor: pointer;
+	width: 100px;
+	height: 40px;
+	margin: -23px 0px 0px 60px;
+	cursor: pointer;
 }
 
 .loginForm > h1 {
-    width: 66%;
-    font-size: 26px;
-    margin: 0 auto;
-    text-align: center;
-    padding-bottom: 50px;
+	width: 66%;
+	font-size: 26px;
+	margin: 0 auto;
+	text-align: center;
+	padding-bottom: 50px;
 }
 
 .loginForm img {
-    margin: 0px 10px;
+	margin: 0px 10px;
 }
 
 .loginForm input[type="submit"] {
-    width: 100%;
-    border: 1px solid #1d90e6;
-    border-radius: 5px;
-    background-color: #1d90e6;
-    color: #fff;
+	width: 100%;
+	border: 1px solid #1d90e6;
+	border-radius: 5px;
+	background-color: #1d90e6;
+	color: #fff;
 }
 
 .color-white {
-    color: #fff;
+	color: #fff;
 }
 
 .allot span {
-    width: 100px;
-    height: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
-    line-height: 20px;
+	width: 100px;
+	height: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	text-align: center;
+	line-height: 20px;
 }
 
+
 /*infomationList.html*/
+
 #selectOk {
-    margin-left: 10px;
+	margin-left: 10px;
 }
 
 .operaList .titleTip {
-    color: red;
-    display: none;
+	color: red;
+	display: none;
 }
 
 .operaList .showTitalTip {
-    display: inline-block;
+	display: inline-block;
 }
 
 .highLightTR {
-    background-color: #fff3f4 !important;
+	background-color: #fff3f4 !important;
 }
 
 #infolistForm table .evenInfo {
-    width: 600px;
-    padding-left: 6% !important;
+	width: 600px;
+	padding-left: 6% !important;
 }
 
 #infolistForm table input[type="submit"] {
-    margin-top: 8px;
-    margin-left: 150px;
+	margin-top: 8px;
+	margin-left: 150px;
 }
 
 #infolistForm .infoSearch {
-    text-align: left;
+	text-align: left;
 }
 
 .tar #addArticle {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .textLeft td {
-    text-align: left;
+	text-align: left;
 }
+
 
 /*
 查看资讯
  */
+
 .lookUpContent {
-    margin: 20px 20px;
-    border: 1px solid #f8f8f8;
-    background-color: #f8f8f8;
+	margin: 20px 20px;
+	border: 1px solid #f8f8f8;
+	background-color: #f8f8f8;
 }
 
 .lookUpContent dl {
-    margin: 60px 60px;
+	margin: 60px 60px;
 }
 
 .lookUpContent dl dt {
-    float: left;
-    width: 60px;
-    text-align: right;
+	float: left;
+	width: 60px;
+	text-align: right;
 }
 
 .lookUpContent dl dd {
-    margin-left: 80px;
-    margin-bottom: 20px;
-    min-height: 30px;
-    word-break: break-all;
+	margin-left: 80px;
+	margin-bottom: 20px;
+	min-height: 30px;
+	word-break: break-all;
 }
 
 .infoGoback {
-    text-align: center;
-    width: 355px;
-    margin-bottom: 20px;
+	text-align: center;
+	width: 355px;
+	margin-bottom: 20px;
 }
 
+
 /*addInfomation.html*/
+
 .must {
-    color: red;
+	color: red;
 }
 
 .addInfoContent form input[type="text"] {
-    width: 93%;
-    height: 30px;
+	width: 93%;
+	height: 30px;
 }
 
 .addInfoContent table tr td {
-    text-align: left;
+	text-align: left;
 }
 
 .addInfoContent .title {
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 .addInfoContent .btnCenter {
-    text-align: center;
+	text-align: center;
 }
 
-.addInfoContent input[name="reset"], #addAdShow input[name="reset"] {
-    margin-left: 30px;
+.addInfoContent input[name="reset"],
+#addAdShow input[name="reset"] {
+	margin-left: 30px;
 }
 
 .addInfoContent #imgFile {
-    display: none;
+	display: none;
 }
 
-.addInfoContent .imgUpLoad, .editor {
-    position: relative;
+.addInfoContent .imgUpLoad,
+.editor {
+	position: relative;
 }
 
 .addInfoContent .imgTip {
-    position: absolute;
-    top: 80px;
-    left: 120px;
+	position: absolute;
+	top: 80px;
+	left: 120px;
 }
 
 .tips {
-    color: #c9c9c9;
+	color: #c9c9c9;
 }
 
 .uploadHeight {
-    min-height: 60px;
+	min-height: 60px;
 }
+
 
 /*
 adList.html
  */
+
 #addAdShow table tr td {
-    text-align: left;
+	text-align: left;
 }
 
 #addAdShow form input[type="text"] {
-    width: 200px;
-    height: 24px;
+	width: 200px;
+	height: 24px;
 }
 
 .lookUpContent img {
-    max-width: 20%;
-    margin: 5px;
+	max-width: 20%;
+	margin: 5px;
 }
 
 .imgPreview {
-    width: 100px;
+	width: 100px;
 }
 
 #addAdShow .title {
-    width: 200px;
-    text-align: right;
+	width: 200px;
+	text-align: right;
 }
 
 #addAdShow table input[type="submit"] {
-    margin-left: 200px;
+	margin-left: 200px;
 }
 
-#addAdShow table input[type="submit"], #addAdShow table input[type="reset"] {
-    margin-top: 40px;
+#addAdShow table input[type="submit"],
+#addAdShow table input[type="reset"] {
+	margin-top: 40px;
 }
 
 #adlistForm {
-    float: right;
-    margin-top: 10px;
-    margin-right: 10px;
+	float: right;
+	margin-top: 10px;
+	margin-right: 10px;
 }
 
+
 /*agreementList.html*/
+
 .btnUnBorder {
-    border: 0 !important;
+	border: 0 !important;
 }
 
 .underOrange {
-    border-bottom: 2px solid #ff8812 !important;
+	border-bottom: 2px solid #ff8812 !important;
 }
 
 .agreementTitle li {
-    float: left;
+	float: left;
 }
 
 .protocol {
-    margin: 10px;
-    text-align: left;
-    min-height: 500px;
+	margin: 10px;
+	text-align: left;
+	min-height: 500px;
 }
 
 .rules {
-    width: 1200px;
-    margin: 50px auto 100px;
-    line-height: 30px;
+	width: 1200px;
+	margin: 50px auto 100px;
+	line-height: 30px;
 }
 
 .main-title {
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 50px;
+	text-align: center;
+	font-size: 30px;
+	margin-bottom: 50px;
 }
 
 .sub-title {
-    font-size: 20px;
-    margin-top: 50px;
+	font-size: 20px;
+	margin-top: 50px;
 }
 
 .p-title {
-    font-size: 16px;
-    margin-top: 20px;
-    margin-bottom: 10px;
+	font-size: 16px;
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
 
 .text-begin {
-    text-indent: 2em;
+	text-indent: 2em;
 }
 
 .text-del {
-    display: block;
-    text-indent: 2em;
-    line-height: 28px;
-    margin-top: 10px;
+	display: block;
+	text-indent: 2em;
+	line-height: 28px;
+	margin-top: 10px;
 }
 
+
 /* 角色设置 */
+
 .roleSetList .manage {
-    margin-top: 20px;
-    float: left;
+	margin-top: 20px;
+	float: left;
 }
 
 #batchDelete {
-    padding: 5px 10px;
-    margin-left: 20px;
+	padding: 5px 10px;
+	margin-left: 20px;
 }
 
-.addRole, .editRole {
-    background-color: #f8f8f8;
+.addRole,
+.editRole {
+	background-color: #f8f8f8;
 }
 
-.addRole .icheckbox_flat-orange, .editRole .icheckbox_flat-orange {
-    margin-right: 5px;
+.addRole .icheckbox_flat-orange,
+.editRole .icheckbox_flat-orange {
+	margin-right: 5px;
 }
 
-.addRole .roleName, .editRole .roleName, .addRole .roleDetails, .editRole .roleDetails {
-    margin-bottom: 30px;
-    margin-top: 50px;
+.addRole .roleName,
+.editRole .roleName,
+.addRole .roleDetails,
+.editRole .roleDetails {
+	margin-bottom: 30px;
+	margin-top: 50px;
 }
 
-.addRole .roleName dl, .editRole .roleName dl, .addRole .roleDetails dl, .editRole .roleDetails dl {
-    display: block;
+.addRole .roleName dl,
+.editRole .roleName dl,
+.addRole .roleDetails dl,
+.editRole .roleDetails dl {
+	display: block;
 }
 
-.addRole .roleName dt, .editRole .roleName dt, .addRole .roleDetails dt, .editRole .roleDetails dt {
-    display: block;
-    width: 10%;
-    float: left;
-    text-align: center;
+.addRole .roleName dt,
+.editRole .roleName dt,
+.addRole .roleDetails dt,
+.editRole .roleDetails dt {
+	display: block;
+	width: 10%;
+	float: left;
+	text-align: center;
 }
 
-.addRole .roleName dd, .editRole .roleName dd, .addRole .roleDetails dd, .editRole .roleDetails dd {
-    float: left;
-    width: 90%;
+.addRole .roleName dd,
+.editRole .roleName dd,
+.addRole .roleDetails dd,
+.editRole .roleDetails dd {
+	float: left;
+	width: 90%;
 }
 
 .addRole .roleName input[name=name] {
-    width: 50%;
-    padding: 8px;
-    border: solid 1px #cecece;
-    border-radius: 3px;
+	width: 50%;
+	padding: 8px;
+	border: solid 1px #cecece;
+	border-radius: 3px;
 }
 
-.addRole .checkboxGroup, .editRole .checkboxGroup {
-    border-bottom: solid 1px #fff;
-    padding: 15px 0;
+.addRole .checkboxGroup,
+.editRole .checkboxGroup {
+	border-bottom: solid 1px #fff;
+	padding: 15px 0;
 }
 
-.addRole .label_checkbox, .editRole .label_checkbox {
-    margin-right: 10px;
+.addRole .label_checkbox,
+.editRole .label_checkbox {
+	margin-right: 10px;
 }
 
-.addRole .manage, .editRole .manage {
-    text-align: center;
-    margin: 30px 0;
-    width: 100%;
+.addRole .manage,
+.editRole .manage {
+	text-align: center;
+	margin: 30px 0;
+	width: 100%;
 }
 
-.addRole .manage input, .editRole .manage input {
-    width: 100px;
+.addRole .manage input,
+.editRole .manage input {
+	width: 100px;
 }
 
-.addRole .secondary, .editRole .secondary {
-    margin-left: 30px;
-    margin-top: 10px;
+.addRole .secondary,
+.editRole .secondary {
+	margin-left: 30px;
+	margin-top: 10px;
 }
 
-.addRole .subkey, .editRole .subkey {
-    display: inline-block;
-    margin-bottom: 10px;
-    margin-right: 20px;
+.addRole .subkey,
+.editRole .subkey {
+	display: inline-block;
+	margin-bottom: 10px;
+	margin-right: 20px;
 }
+
 
 /* 消息列表 */
+
 .messageList .warn {
-    color: #f00;
+	color: #f00;
 }
 
-.addMessage .title p, .editMessage .title p {
-    width: 100px;
-    text-align: right;
+.addMessage .title p,
+.editMessage .title p {
+	width: 100px;
+	text-align: right;
 }
 
-.addMessage .content input[type=text], .editMessage .content input[type=text] {
-    width: 90%;
-    height: 35px !important;
+.addMessage .content input[type=text],
+.editMessage .content input[type=text] {
+	width: 90%;
+	height: 35px !important;
 }
 
-.addMessage .content textarea, .editMessage .content textarea {
-    width: 91%;
-    padding: 6px;
-    line-height: 20px;
-    border: 1px solid #cecece;
-    resize: none;
+.addMessage .content textarea,
+.editMessage .content textarea {
+	width: 91%;
+	padding: 6px;
+	line-height: 20px;
+	border: 1px solid #cecece;
+	resize: none;
 }
 
-.addMessage .content select, .editMessage .content select {
-    border: 1px solid #cecece !important;
-    border-radius: 3px !important;
+.addMessage .content select,
+.editMessage .content select {
+	border: 1px solid #cecece !important;
+	border-radius: 3px !important;
 }
 
-.addMessage .must, .editMessage .must {
-    font-style: normal;
-    color: #f00;
+.addMessage .must,
+.editMessage .must {
+	font-style: normal;
+	color: #f00;
 }
 
-.addMessage .opertionCon, .editMessage .opertionCon {
-    float: none;
-    text-align: center;
-    margin-bottom: 20px;
+.addMessage .opertionCon,
+.editMessage .opertionCon {
+	float: none;
+	text-align: center;
+	margin-bottom: 20px;
 }
+
 
 /* 供应商列表管理 */
+
 .supplierList .opertionCon {
-    float: left;
-    margin-left: 237px;
+	float: left;
+	margin-left: 237px;
 }
 
 .supplierList input[type=text] {
-    border-radius: 4px;
-    height: 26px;
-    border-color: #ddd;
+	border-radius: 4px;
+	height: 26px;
+	border-color: #ddd;
 }
 
 .supplierList .tar {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .supplierList .service_city {
-    width: 280px;
-    height: 17px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	width: 280px;
+	height: 17px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .supplierList .select2-container--default {
-    width: 197px !important;
+	width: 197px !important;
 }
 
-.addSupplier .title, .editSupplier .title {
-    text-align: right;
+.addSupplier .title,
+.editSupplier .title {
+	text-align: right;
 }
 
-.addSupplier .content, .editSupplier .content {
-    text-align: left;
+.addSupplier .content,
+.editSupplier .content {
+	text-align: left;
 }
 
-.addSupplier .must, .editSupplier .must {
-    font-style: normal;
-    color: #f00;
+.addSupplier .must,
+.editSupplier .must {
+	font-style: normal;
+	color: #f00;
 }
 
-.addSupplier input[type=text], .editSupplier input[type=text] {
-    width: 100%;
-    height: 35px;
-    border: none;
-    border: 1px solid #d1d1d1;
-    border-radius: 3px;
-    background-color: #fff;
-    box-sizing: border-box;
+.addSupplier input[type=text],
+.editSupplier input[type=text] {
+	width: 100%;
+	height: 35px;
+	border: none;
+	border: 1px solid #d1d1d1;
+	border-radius: 3px;
+	background-color: #fff;
+	box-sizing: border-box;
 }
 
-.addSupplier .select2-container--default, .editSupplier .select2-container--default {
-    width: 100% !important;
+.addSupplier .select2-container--default,
+.editSupplier .select2-container--default {
+	width: 100% !important;
 }
 
-.addSupplier .opertionCon, .editSupplier .opertionCon {
-    float: none;
-    width: 204px;
-    margin: 0 auto;
+.addSupplier .opertionCon,
+.editSupplier .opertionCon {
+	float: none;
+	width: 204px;
+	margin: 0 auto;
 }
 
-.addSupplier #citySelect, .editSupplier #citySelect {
-    float: left;
-    position: relative;
-    margin-right: 10px;
+.addSupplier #citySelect,
+.editSupplier #citySelect {
+	float: left;
+	position: relative;
+	margin-right: 10px;
 }
 
-.addSupplier #inputCity, .editSupplier #inputCity {
-    width: 200px;
-    height: 35px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    background-color: #fff;
-    display: inline-block;
+.addSupplier #inputCity,
+.editSupplier #inputCity {
+	width: 200px;
+	height: 35px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	background-color: #fff;
+	display: inline-block;
 }
 
-.addSupplier #cityList, .editSupplier #cityList {
-    width: 198px;
-    max-height: 300px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    position: absolute;
-    top: 30px;
-    z-index: 1;
-    overflow: auto;
-    display: none;
+.addSupplier #cityList,
+.editSupplier #cityList {
+	width: 198px;
+	max-height: 300px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	position: absolute;
+	top: 30px;
+	z-index: 1;
+	overflow: auto;
+	display: none;
 }
 
-.addSupplier #cityList li, .editSupplier #cityList li {
-    height: 26px;
-    line-height: 26px;
-    padding: 0 10px;
-    cursor: pointer;
+.addSupplier #cityList li,
+.editSupplier #cityList li {
+	height: 26px;
+	line-height: 26px;
+	padding: 0 10px;
+	cursor: pointer;
 }
 
-.addSupplier #cityList li:hover, .editSupplier #cityList li:hover {
-    background-color: #eee;
+.addSupplier #cityList li:hover,
+.editSupplier #cityList li:hover {
+	background-color: #eee;
 }
 
-.addSupplier #service_region, .editSupplier #service_region {
-    float: left;
-    margin-top: 4px;
-    width: 80%;
+.addSupplier #service_region,
+.editSupplier #service_region {
+	float: left;
+	margin-top: 4px;
+	width: 80%;
 }
 
-.addSupplier #service_region li, .editSupplier #service_region li {
-    float: left;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    position: relative;
-    border: 1px solid #ccc;
-    padding: 3px 5px;
-    background-color: #eee;
-    border-radius: 3px;
+.addSupplier #service_region li,
+.editSupplier #service_region li {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	position: relative;
+	border: 1px solid #ccc;
+	padding: 3px 5px;
+	background-color: #eee;
+	border-radius: 3px;
 }
 
-.addSupplier #service_region .close, .editSupplier #service_region .close {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    line-height: 14px;
-    text-align: center;
-    border-radius: 50%;
-    top: -7px;
-    right: -10px;
-    background-color: #999;
-    cursor: pointer;
-    color: #fff;
+.addSupplier #service_region .close,
+.editSupplier #service_region .close {
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	line-height: 14px;
+	text-align: center;
+	border-radius: 50%;
+	top: -7px;
+	right: -10px;
+	background-color: #999;
+	cursor: pointer;
+	color: #fff;
 }
 
-.addSupplier #confirm, .editSupplier #confirm, .addSupplier .goBack, .editSupplier .goBack {
-    width: 100px;
+.addSupplier #confirm,
+.editSupplier #confirm,
+.addSupplier .goBack,
+.editSupplier .goBack {
+	width: 100px;
 }
 
 .img_list li {
-    width: 48px;
-    height: 48px;
-    border: 1px solid #ddd;
-    float: left;
-    margin-right: 20px;
+	width: 48px;
+	height: 48px;
+	border: 1px solid #ddd;
+	float: left;
+	margin-right: 20px;
 }
 
 .img_list li img {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .supplierDetails #service_region li {
-    float: left;
-    margin-right: 5px;
+	float: left;
+	margin-right: 5px;
 }
 
-.supplierDetails .title, .activityDetails .title {
-    width: 120px;
-    text-align: right;
+.supplierDetails .title,
+.activityDetails .title {
+	width: 120px;
+	text-align: right;
 }
 
-.supplierDetails .content, .activityDetails .content {
-    text-align: left;
+.supplierDetails .content,
+.activityDetails .content {
+	text-align: left;
 }
 
-.supplierDetails .opertionCon, .activityDetails .opertionCon {
-    float: left;
-    margin-left: 130px;
+.supplierDetails .opertionCon,
+.activityDetails .opertionCon {
+	float: left;
+	margin-left: 130px;
 }
 
 .supplierDetails .goBack {
-    width: 100px;
+	width: 100px;
 }
 
 .supplierDetails #corp_introduction p {
-    width: 90%;
-    word-wrap: break-word;
-    word-break: break-all;
+	width: 90%;
+	word-wrap: break-word;
+	word-break: break-all;
 }
 
 .ueditor img {
-    margin: 5px 0;
+	margin: 5px 0;
 }
 
+
 /* 公共样式调整 */
+
 .search-container .align_right {
-    text-align: right;
+	text-align: right;
 }
 
 .search-container .align_left {
-    text-align: left;
+	text-align: left;
 }
 
-input, select, textarea {
-    background-color: transparent;
+input,
+select,
+textarea {
+	background-color: transparent;
 }
 
-#beginTime, #endTime {
-    height: 25px;
-    padding-left: 2px;
-    display: inline-block
+#beginTime,
+#endTime {
+	height: 25px;
+	padding-left: 2px;
+	display: inline-block
 }
 
 .pubTime {
-    width: 480px
+	width: 480px
 }
 
 .activityDetail .must {
-    color: red
+	color: red
 }
 
 .activityDetail form input {
-    width: 200px;
-    height: 24px
+	width: 200px;
+	height: 24px
 }
 
-.activityDetail input[name=submit], .activityDetail input[name=reset] {
-    width: 90px
+.activityDetail input[name=submit],
+.activityDetail input[name=reset] {
+	width: 90px
 }
 
 .activityDetail input[name=submit] {
-    margin-left: 110px
+	margin-left: 110px
 }
 
 .activityDetail input[name=reset] {
-    margin-left: 30px
+	margin-left: 30px
 }
 
 .activityDetail .mainImg {
-    border: 1px solid red;
-    width: 100px;
-    height: 100px;
-    cursor: pointer
+	border: 1px solid red;
+	width: 100px;
+	height: 100px;
+	cursor: pointer
 }
 
 .activityDetail #imgFile {
-    display: none
+	display: none
 }
 
-.activityDetail .imgUpLoad, .editor {
-    position: relative
+.activityDetail .imgUpLoad,
+.editor {
+	position: relative
 }
 
 .activityDetail .imgTip {
-    position: absolute;
-    top: 80px;
-    left: 120px
+	position: absolute;
+	top: 80px;
+	left: 120px
 }
 
-.activityDetail .titleTip, .fileTip, .imgTip {
-    color: red;
-    display: none
+.activityDetail .titleTip,
+.fileTip,
+.imgTip {
+	color: red;
+	display: none
 }
 
-.activityDetail .showTitleTip, .showFileTip, .showImgTip {
-    display: block
+.activityDetail .showTitleTip,
+.showFileTip,
+.showImgTip {
+	display: block
 }
 
 .activityDetail table tr td {
-    border: 0
+	border: 0
 }
 
 .activityDetail table tr .time {
-    width: 100%
+	width: 100%
 }
 
 .activityDetail table tr select {
-    width: 100%
+	width: 100%
 }
 
 .dataContent {
-
-    /*overflow: hidden*/
+	/*overflow: hidden*/
 }
 
 .moduleFlag {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    float: right
+	padding-top: 10px;
+	padding-bottom: 10px;
+	float: right
 }
 
 .search_form table tr .title {
-    width: 10%;
-    white-space: nowrap;
-    text-align: right;
+	width: 10%;
+	white-space: nowrap;
+	text-align: right;
 }
 
 .search_form table tr {
-    width: 100%;
+	width: 100%;
 }
 
 .search_form table tr td:last-child {
-    text-align: left
+	text-align: left
 }
 
 .search_form table tr #mapSelect {
-    width: 1000px
+	width: 1000px
 }
 
 .search_form table tr #mapSelect select {
-    width: 200px
+	width: 200px
 }
 
 .search_form table tr #mapSelect input {
-    max-width: 333px;
-    float: left
+	max-width: 333px;
+	float: left
 }
 
 .select2_parent span {
-    float: left;
-    width: 100%;
-    margin-right: 10px
+	float: left;
+	width: 100%;
+	margin-right: 10px
 }
 
 .search_input td {
-    float: left;
-    margin-left: 60px
+	float: left;
+	margin-left: 60px
 }
 
 .common_query input {
-    border-radius: 4px
+	border-radius: 4px
 }
 
 .select_time {
-    text-align: left
+	text-align: left
 }
 
-.select_time .endTime, .select_time .startTime {
-    width: 200px;
-    height: 36px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: 3px
+.select_time .endTime,
+.select_time .startTime {
+	width: 200px;
+	height: 36px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 3px
 }
 
 .btn_input {
-    text-align: center
+	text-align: center
 }
 
 .btn_input input {
-    width: 100px
+	width: 100px
 }
 
 .selectOption {
-    width: 300px;
-    float: left
+	width: 300px;
+	float: left
 }
 
 .list-container {
-    padding-left: 100px
+	padding-left: 100px
 }
 
 .list-container table tbody tr {
-    overflow: hidden
+	overflow: hidden
 }
 
 .list-container table tbody tr td {
-    text-align: left
+	text-align: left
 }
 
 .addContent form input[type=text] {
-    height: 30px;
-    border-radius: 4px
+	height: 30px;
+	border-radius: 4px
 }
 
 .addContent form input[type=password] {
-    height: 30px;
-    border-radius: 4px;
-    border: 1px solid #cecece;
-    padding: 5px 16px 5px 10px
+	height: 30px;
+	border-radius: 4px;
+	border: 1px solid #cecece;
+	padding: 5px 16px 5px 10px
 }
 
 .max-width {
-    width: 90%;
+	width: 90%;
 }
 
 .long_select .select2-container--default {
-    width: 434px !important
+	width: 434px !important
 }
 
 .select2-container--default .select2-selection--single {
-    border-radius: 4px !important
+	border-radius: 4px !important
 }
 
 .manages {
-    padding-top: 20px;
-    float: left;
+	padding-top: 20px;
+	float: left;
 }
 
+
 /*线人列表*/
+
 .search-container .stateChange li {
-    cursor: pointer;
-    float: left;
-    border: 1px solid transparent;
-    padding: 5px 10px;
-    position: relative;
+	cursor: pointer;
+	float: left;
+	border: 1px solid transparent;
+	padding: 5px 10px;
+	position: relative;
 }
 
 .search-container .stateChange li sup {
-    position: absolute;
-    top: -10px;
-    right: -5px;
-    color: #fff;
-    height: 14px;
-    line-height: 14px;
-    background-color: red;
-    padding: 0 3px;
-    border-radius: 10px;
+	position: absolute;
+	top: -10px;
+	right: -5px;
+	color: #fff;
+	height: 14px;
+	line-height: 14px;
+	background-color: red;
+	padding: 0 3px;
+	border-radius: 10px;
 }
 
 .search-container .label {
-    line-height: 32px;
-    font-weight: bold;
-    vertical-align: middle;
+	line-height: 32px;
+	font-weight: bold;
+	vertical-align: middle;
 }
 
 .search-container .stateChange li:hover {
-    color: #20a0ff;
-    border: 1px solid #20a0ff;
+	color: #20a0ff;
+	border: 1px solid #20a0ff;
 }
 
 .search-container .stateChange li.active {
-    color: #20a0ff;
-    border: 1px solid #20a0ff;
+	color: #20a0ff;
+	border: 1px solid #20a0ff;
 }
+
 
 /**
  * 任务列表-车辆详情
  */
+
 .carDetail {
-    width: 660px;
+	width: 660px;
 }
 
 .carDetail ul {
-    padding-top: 30px;
+	padding-top: 30px;
 }
 
 .carDetail ul li {
-    float: left;
-    padding: 10px 20px;
+	float: left;
+	padding: 10px 20px;
 }
 
+
 /*任务详情*/
-.dialog-width, .increated {
-    min-width: 800px;
+
+.dialog-width {
+	width: 90%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
 }
 
 .dialog-width .pull-right {
-    width: 100px;
-    height: 34px;
-    background: dodgerblue;
-    color: white;
-    text-align: center;
-    line-height: 34px;
+	width: 100px;
+	height: 34px;
+	background: dodgerblue;
+	color: white;
+	text-align: center;
+	line-height: 34px;
 }
 
 .dialog-width ul {
-    width: 800px;
-    padding: 0 0 20px 0;
-    overflow: hidden;
+	width: 100%;
+	overflow: hidden;
 }
 
 .dialog-width ul li {
-    float: left;
-    padding: 10px 20px;
+	width: 30%;
+	float: left;
+	padding: 10px;
 }
 
 .taskpull {
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .taskpull p:last-of-type input {
-    height: 20px;
-    border: 1px solid #000;
-    margin: 6px 0;
-    padding: 6px 0;
+	height: 20px;
+	border: 1px solid #000;
+	margin: 6px 0;
+	padding: 6px 0;
 }
 
 .taskpull p label {
-    font-size: 16px;
-    font-weight: 900;
-    display: inline-block;
-    width: 170px;
+	font-size: 16px;
+	font-weight: 900;
+	display: inline-block;
+	width: 170px;
 }
 
 .remark {
-    width: 800px;
-    height: 80px;
-    border: 1px solid #000;
-    line-height: 24px;
-    overflow-y: auto;
+	width: 800px;
+	height: 80px;
+	border: 1px solid #000;
+	line-height: 24px;
+	overflow-y: auto;
 }
 
 .remark input {
-    width: 800px;
-    border: 0;
-    outline: 0;
+	width: 800px;
+	border: 0;
+	outline: 0;
 }
 
 .increateNewInfo {
-    margin-top: 60px;
+	margin-top: 60px;
 }
 
 .increateNewInfo div {
-    padding: 20px 0;
+	padding: 20px 0;
 }
 
 .increateNewInfo div input {
-    outline: none;
-    height: 26px;
-    border: 1px solid #000;
+	outline: none;
+	height: 26px;
+	border: 1px solid #000;
 }
 
 .increateNewInfo div #carAdress {
-    width: 48px;
+	width: 48px;
 }
 
 .buttonAnt {
-    margin: 30px 0;
+	margin: 30px 0;
 }
 
 .imgRecord {
-    width: 100%;
-    height: 60px;
-    margin-top: 30px;
-    border-bottom: 1px dashed #ccc;
+	height: 100px;
+	border-bottom: 1px dashed #ccc;
 }
 
 .imgRecord span {
-    margin: 0 20px;
+	margin: 0 20px;
 }
 
 .imgRecord span img {
-    margin-left: 10px;
+	margin-left: 10px;
 }
 
-.upmainfile, .mainfile {
-    margin: 20px 0;
-    overflow: hidden;
+.upmainfile,
+.mainfile {
+	margin: 20px 0;
+	overflow: hidden;
 }
 
 .upmainfile ol li {
-    width: 16%;
-    float: right;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-    border: 1px solid #ccc;
-    margin:20px 4px;
+	width: 16%;
+	float: right;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	border: 1px solid #ccc;
+	margin: 20px 4px;
 }
 
 .upmainfile table {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .instruction div {
-    margin-top: 20px;
-    overflow: hidden;
+	margin-top: 20px;
+	overflow: hidden;
 }
 
 .instruction div label {
-    float: left;
-    width: 100px;
-    height: 70px;
-    line-height: 70px;
-    font-weight: 900;
+	float: left;
+	width: 100px;
+	height: 70px;
+	line-height: 70px;
+	font-weight: 900;
 }
 
 .instruction div span {
-    float: left;
-    width: 60%;
-    height: 70px;
-    border: 1px solid #000;
+	float: left;
+	width: 60%;
+	height: 70px;
+	border: 1px solid #000;
 }
 
 .butouchange {
-    width: 80%;
-    height: 56px;
-    border: 1px solid #000;
+	width: 80%;
+	height: 56px;
+	border: 1px solid #000;
 }
 
 .hopeprice p {
-    padding: 20px 0 10px 0;
-    font-weight: 900;
+	padding: 20px 0 10px 0;
+	font-weight: 900;
 }
 
 .hopeprice div {
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .hopeprice label {
-    width: 90px;
-    height: 40px;
-    float: left;
-    margin-top: 6px;
+	width: 12%;
+	height: 40px;
+	float: left;
+	margin-top: 6px;
 }
 
 .hopeprice span {
-    float: left;
-    width: 90px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
+	float: left;
+	width: 90px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
 }
 
 .evaluePrice label {
-    width: 180px;
+	width: 180px;
 }
 
 .evaluePrice input {
-    height: 22px;
-    line-height: 22px;
-    border: 0;
-    border-bottom: 1px solid #000;
+	height: 22px;
+	line-height: 22px;
+	border: 0;
+	border-bottom: 1px solid #000;
 }
 
-.dialog-width p, .upmainfile p, .mainfile p {
-    font-weight: 900;
-    margin-top: 20px;
+.dialog-width p,
+.upmainfile p,
+.mainfile p {
+	font-weight: 900;
+	margin-top: 20px;
 }
 
 
 /*分配*/
+
 .divied-width {
-    width: 310px
+	width: 310px
 }
 
 .divied-width .divied-type div {
-    margin: 10px 0;
+	margin: 10px 0;
 }
-.divied-width div{
-	margin:10px;
+
+.divied-width div {
+	margin: 10px;
 }
+
 .divied-width div.divied-content textarea {
-	width:200px;
-	height:40px;
+	width: 200px;
+	height: 40px;
 	resize: none;
 }
 
+
 /*捕头详情*/
+
 .officer-width {
-    min-width: 800px;
+	min-width: 800px;
 }
 
 .officer-width ul {
-    border-bottom: 1px dashed #ccc;
+	border-bottom: 1px dashed #ccc;
 }
 
 .officer-width ul li {
-    width: 50%;
-    padding: 10px 0;
+	width: 50%;
+	padding: 10px 0;
 }
 
 .officer-width ul li label {
-    font-weight: 900;
-    display: inline-block;
-    width: 100px;
+	font-weight: 900;
+	display: inline-block;
+	width: 100px;
 }
+
 
 /**
  * 线人列表
  */
+
 .blue_recommendCode {
-    color: #20a0ff !important;
-    text-decoration: underline;
+	color: #20a0ff !important;
+	text-decoration: underline;
 }
+
 
 /**
  * 发放账号
  */
+
 #downstreams-create-form {
-    width: 600px;
-    margin: 150px auto;
+	width: 600px;
+	margin: 150px auto;
 }
 
-#downstreams-create-form input[type="text"], #downstreams-create-form input[type="password"] {
-    width: 71%;
+#downstreams-create-form input[type="text"],
+#downstreams-create-form input[type="password"] {
+	width: 71%;
 }
 
 #downstreams-create-form select#role {
-    width: 71%;
+	width: 71%;
 }
 
-#downstreams-create-form input[type="submit"], #downstreams-create-form input[type="reset"] {
-    padding: 8px 15px;
+#downstreams-create-form input[type="submit"],
+#downstreams-create-form input[type="reset"] {
+	padding: 8px 15px;
 }
 
 #downstreams-create-form input[type="submit"] {
-    border: 0;
-    margin-left: 120px;
-    border-radius: 5px;
-    background-color: #4db3ff;
-    color: #fff;
+	border: 0;
+	margin-left: 120px;
+	border-radius: 5px;
+	background-color: #4db3ff;
+	color: #fff;
 }
 
 #downstreams-create-form input[type="reset"] {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: #fff;
 }
 
 #downstreams-create-form input[type="reset"]:hover {
-    border: 1px solid #4db3ff;
-    border-radius: 5px;
-    cursor: pointer;
-    color: #4db3ff;
+	border: 1px solid #4db3ff;
+	border-radius: 5px;
+	cursor: pointer;
+	color: #4db3ff;
 }
 
 .dialog-width .grey-tab li {
-    background-color: #999999;
-    cursor: pointer;
+	background-color: #999999;
+	cursor: pointer;
 }
 
 color: #fff;
-
 .dialog-width .grey-tab li.active {
-    background-color: #6d6d6d;
+	background-color: #6d6d6d;
 }
+
 
 /**
  * 活动开关
  */
+
 .active-switch {
-    color: #20a0ff !important;
+	color: #20a0ff !important;
 }
+
 
 /*客户标签*/
+
+
 /*预估价格*/
-.customerType div, .hopeprice div{
+
+.customerType div,
+.hopeprice div {
 	overflow: hidden;
-	margin:20px;
+	margin: 20px;
 }
-.customerType label, .hopeprice label{
-	float:left;
+
+.customerType label {
+	float: left;
 	font-weight: 900;
 }
-.customerType input{
-	float:left;
-	width:300px;
-	height:30px;
-	border:1px solid #ccc;
-	margin-left:10px;
+
+.customerType input {
+	float: left;
+	width: 300px;
+	height: 30px;
+	border: 1px solid #ccc;
+	margin-left: 10px;
 }
-.customerType textarea{
-	width:590px;
-	height:50px;
+
+.customerType textarea {
+	width: 74%;
+	height: 50px;
 	resize: none;
-	margin:0 0 20px 10px;
+	margin: 0 0 20px 10px;
 }
 
-.hopeprice input{
-	width:300px;
-	height:30px;
-	border:1px solid #ccc;
-	margin-left:10px;
+.hopeprice input {
+	width: 300px;
+	height: 30px;
+	border: 1px solid #ccc;
+	margin-left: 10px;
 }
-

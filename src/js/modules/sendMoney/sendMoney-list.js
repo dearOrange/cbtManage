@@ -49,7 +49,7 @@ define(function(require, exports, module) {
 
 			//打款
 			$('body').off('click', '.sendMoney').on('click', '.sendMoney', function() {
-				var alertContent = jh.utils.template('sendMoney_sure_template', {});
+				var alertContent = jh.utils.template('sendMoneyList_sure_template', {});
 				var id = $(this).data('id');
 				jh.utils.alert({
 					content: alertContent,

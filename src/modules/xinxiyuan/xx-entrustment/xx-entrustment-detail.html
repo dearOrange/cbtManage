@@ -1,8 +1,17 @@
-<div class="entrustmentListContent">
+<div class="dataContent entrustmentListContent">
 
 </div>
 <script type="text/template" id="entrustment_detail_template">
 	<div class="dialog-width">
+
+		<p class="pull-left">
+			验真委托详情
+		</p>
+		<a href="javascript:;" class="button gobackPage goBack">返回</a>
+
+		<div class="clearfix"></div>
+		<hr /><br />
+		<p class="pull-left">基本信息</p>
 		{{if data.state == "unverified"}}
 		<p class="pull-right">{{menuState(data.state)}}</p>
 		{{else}}
@@ -13,14 +22,6 @@
 			{{if data.isValid == "0"}} 本委托虚假委托 {{else}} 本委托真实委托 {{/if}}
 		</p>
 		{{/if}}
-		<p class="pull-left">
-			验真委托详情
-		</p>
-		<a href="javascript:;" class="button gobackPage goBack">返回</a>
-
-		<div class="clearfix"></div>
-		<hr /><br />
-		<p>基本信息</p><br />
 		<div>
 			<span>上传捕头：{{data.name}}</span>
 		</div>
