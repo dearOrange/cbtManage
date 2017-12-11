@@ -8,17 +8,11 @@
             <table>
                 <tr>
                     <td>
-                        <label style="float: right;">
-                            全选
-                            <input type="checkbox" id="checkAll">
-                        </label>
-                        <div class="clearfix"></div>
-                        <hr />
                         <form id="distribution_public_form">
-                            <div id="qd-distribution-tab0" class="divied-type" style="max-height: 300px;overflow-y: auto;text-align: left;">
+                            <div id="qd-distribution-tab0" class="divied-type" style="height:300px;overflow-y:auto;text-align:left;">
                                 {{each list item index}}
                                 <div>
-                                    <input type="checkbox" value="{{item.id}}" class="hand" />
+                                    <input type="radio" name="channel-list" value="{{item.id}}" data-name="{{item.name}}" class="hand" />
                                     <span>{{item.name}} - </span>
                                     <span>
                                     {{each item.operatorProvinceVoList temp i}}

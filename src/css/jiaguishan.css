@@ -33,6 +33,10 @@ body .goBack {
 	padding: 5px 30px;
 }
 
+.hand {
+	cursor: pointer !important;
+}
+
 .ml10 {
 	margin-left: 10px;
 }

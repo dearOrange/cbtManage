@@ -30,25 +30,35 @@ define(function(require, exports, module) {
             page.init();
         };
 
-        this.initSheriff = function(type) {
-            Mock.mock(REQUESTROOT + '/task/downStreamListByChannel', {
-                'code': 'SUCCESS',
-                'data|10': [{
-                    'id|+1': 1,
-                    'name': Mock.Random.cname(),
-                    'operatorProvinceVoList|1-10':[{
-                        'provinceCode': 0,
-                        'provinceName': Mock.Random.province()
-                    }]
-                }]
-            });
+        this.initSheriff = function(taskIds) {
             jh.utils.ajax.send({
                 url: '/operator/getAllChannel',
                 done: function(returnData) {
                     var str = _this.distributionSheriff(returnData.data);
                     jh.utils.alert({
                         content: str,
-                        ok: _this.distribution,
+                        ok: function() {
+                            var tab = $('.qd-distribution-tab li.active').index(),
+                                taskObj = {};
+                            if (!tab) {
+                                var radio = $('#qd-distribution-tab0').find(':checked');
+                                if (radio.length === 0) {
+                                    jh.utils.alert({
+                                        content: '请选择渠道经理！',
+                                        ok: true,
+                                        cancel: false
+                                    });
+                                    return false;
+                                }
+                                taskObj.type = 1;
+                                taskObj.channelManagerId = radio.val();
+                                taskObj.channelManagerName = radio.data('name');
+                            } else {
+                                taskObj.type = 2;
+                            }
+                            taskObj.taskIds = taskIds;
+                            _this.distribution(taskObj);
+                        },
                         cancel: true
                     });
                 }
@@ -58,26 +68,24 @@ define(function(require, exports, module) {
         this.distributionSheriff = function(arr) {
             var source = require('/src/templates/channel-distribution.tpl');
             var render = jh.utils.template.compile(source);
-            var str = render({list:arr});
+            var str = render({ list: arr });
             return str;
         };
 
-        this.distribution = function(ids) {
-            var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
-            var opt = {
+        this.distribution = function(taskObj) {
+            jh.utils.ajax.send({
                 url: '/task/distributeTask',
-                data: {
-                    taskIds: ids
-                },
+                data: taskObj,
                 done: function(returnData) {
                     jh.utils.alert({
                         content: '任务分配成功！',
-                        ok: true,
+                        ok: function() {
+                            _this.initContent();
+                        },
                         cancel: false
                     });
                 }
-            };
-            jh.utils.ajax.send(opt);
+            });
         };
 
         this.registerEvent = function() {
@@ -93,15 +101,22 @@ define(function(require, exports, module) {
             //批量分配
             $('body').off('click', '#distributeTask').on('click', '#distributeTask', function() {
                 var me = $(this);
-                var ids = jh.utils.getCheckboxValue('admin-xXDistributionList-container');
-                _this.initSheriff(ids);
+                var taskIds = jh.utils.getCheckboxValue('admin-xXDistributionList-container');
+                if (!taskIds) {
+                    jh.utils.alert({
+                        content: '请选择任务！',
+                        ok: true,
+                        cancel: false
+                    });
+                }
+                _this.initSheriff(taskIds);
             });
 
-            //批量分配
+            //分配
             $('body').off('click', '.distribution').on('click', '.distribution', function() {
                 var me = $(this);
-                var ids = me.data('id');
-                _this.initSheriff(ids);
+                var taskIds = me.data('id');
+                _this.initSheriff(taskIds);
             });
         };
     }

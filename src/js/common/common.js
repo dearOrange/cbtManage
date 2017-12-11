@@ -97,9 +97,11 @@ define(function(require, exports, module) {
                 if(fn&& typeof fn === "function"){
                     fn(data);
                 }
-
                 function transformTude(tude) {
-                    var rst = tude.split(', ').map(e => Number(e));
+                    var rst = tude.split(', ');
+                    $.each(rst,function(index,item){
+                        rst[index] = Number(item);
+                    });
                     return (rst[0] + rst[1] / 60 + rst[2] / 3600).toFixed(6);
                 }
             });
@@ -1584,6 +1586,7 @@ define(function(require, exports, module) {
                 }
             });
             ids = ids.join(',');
+
             return ids;
         }
         tammy.utils.getCheckboxValue = getCheckboxValueById;
