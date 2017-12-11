@@ -49,7 +49,9 @@ define(function(require, exports, module) {
 
 			//打款
 			$('body').off('click', '.sendMoney').on('click', '.sendMoney', function() {
-				var alertContent = jh.utils.template('sendMoneyList_sure_template', {});
+				var me = $(this);
+				var data = me.data('infos');
+				var alertContent = jh.utils.template('sendMoneyList_sure_template', data);
 				var id = $(this).data('id');
 				jh.utils.alert({
 					content: alertContent,
@@ -68,7 +70,16 @@ define(function(require, exports, module) {
 						});
 					},
 					cancel: true
-				})
+				});
+				var picArr = ['voucher1', 'voucher2', 'voucher3'];
+				for (var i = 0; i < 3; i++) {
+					jh.utils.uploader.init({
+						isAppend: false,
+						pick: {
+							id: '#' + picArr[i]
+						}
+					});
+				};
 			});
 			$('body').off('click', '#selectPay').on('click', '#selectPay', function() {
 				var selectVal = $("#selectPay").val();

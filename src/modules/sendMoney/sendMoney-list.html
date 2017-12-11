@@ -72,7 +72,7 @@
 			<ul class="operaitem">
 				<li>
 					{{if item.state == "withdrawing"}}
-					<a data-id="{{item.id}}" class="sendMoney button">打款</a> {{else}} — — {{/if}}
+					<a data-id="{{item.id}}" data-infos="{{item}}" class="sendMoney button">打款</a> {{else}} — — {{/if}}
 				</li>
 			</ul>
 		</td>
@@ -103,33 +103,80 @@
 					<tr class="changePaystyle" id="payStyle">
 						<td>支付宝账号</td>
 						<td colspan="3">
-							<input type="text" value="111111@qq.com" />
+							<input type="text" value="{{alipay}}" />
 						</td>
 					</tr>
 					<tr class="changePaystyle">
 						<td>银行卡账号</td>
 						<td>
-							<input type="text" value="22222222222222" />
+							<input type="text" value="{{bankCard}}" />
 						</td>
 						<td>开户支行</td>
 						<td>
-							<input type="text" value="中国工商银行下沙支行" />
+							<input type="text" value="{{bankName}}" />
 						</td>
 					</tr>
 					<tr>
 						<td>申请提现金额</td>
 						<td>
-							<input type="text" value="300.00" />
+							<input type="text" value="{{amount}}" />
 						</td>
 						<td>实际发放金额</td>
 						<td>
-							<input type="text" name="actualAmount" value="300.00" />
+							<input type="text" name="actualAmount" value="{{actualAmount}}" />
 						</td>
 					</tr>
 					<tr>
 						<td>上传打款凭证</td>
 						<td colspan="3">
-							<input type="file" />
+							<div class="upimg" style="height:120px;width:116px;float:left;">
+								<dl>
+									<dt class="upload-pa">
+					    				<div id="voucher1"></div>
+										<div class="upload-list">
+											<div class="upfile-item">
+												{{if voucher1}}
+												<img data-id="{{voucher1}}" src="http://oka19npup.bkt.clouddn.com/{{voucher1}}?imageMogr2/auto-orient/thumbnail/100x100">
+												<span class="delete-img" data-domid="voucher1" data-fileid="WU_FILE_0"></span>
+												<input type="hidden" name="voucher1" value="{{voucher1}}">
+												{{/if}}
+											</div>	
+										</div>
+					    			</dt>
+								</dl>
+							</div>
+							<div class="upimg" style="height:120px;width:116px;float:left;">
+								<dl>
+									<dt class="upload-pa">
+					    				<div id="voucher2"></div>
+										<div class="upload-list">
+											<div class="upfile-item">
+												{{if voucher2}}
+												<img data-id="{{voucher2}}" src="http://oka19npup.bkt.clouddn.com/{{voucher2}}?imageMogr2/auto-orient/thumbnail/100x100">
+												<span class="delete-img" data-domid="voucher2" data-fileid="WU_FILE_0"></span>
+												<input type="hidden" name="voucher2" value="{{voucher2}}">
+												{{/if}}
+											</div>
+										</div>
+					    			</dt>
+								</dl>
+							</div>
+							<div class="upimg" style="height:120px;width:116px;float:left;">
+								<dl>
+									<dt class="upload-pa">
+					    				<div id="voucher3"></div>
+										<div class="upload-list">
+											<div class="upfile-item">
+												{{if voucher3}}
+												<img data-id="{{voucher3}}" src="http://oka19npup.bkt.clouddn.com/{{voucher3}}?imageMogr2/auto-orient/thumbnail/100x100">
+												<span class="delete-img" data-domid="voucher3" data-fileid="WU_FILE_0"></span>
+												<input type="hidden" name="voucher3" value="{{voucher3}}">
+												{{/if}}
+											</div>
+										</div>
+					    			</dt>
+								</dl>
+							</div>
 						</td>
 					</tr>
 				</tbody>

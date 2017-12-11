@@ -40,19 +40,13 @@
 				<span style="margin:10px;">开户行：{{data.downStreamVo.bankName}}</span>
 				<span>收款人姓名：{{data.downStreamVo.payeeName}}</span> {{/if}}
 			</div>
-			<div class="showImg">实际打款凭证:
-				{{if data.voucher1}}
-				<img class="preview-img" src="{{viewImgRoot}}{{data.voucher1}}?imageMogr2/auto-orient/thumbnail/100x100"/>
-				{{/if}}
-				{{if data.voucher2}}
-				<img class="preview-img" src="{{viewImgRoot}}{{data.voucher2}}?imageMogr2/auto-orient/thumbnail/100x100"/>
-				{{/if}}
-				{{if data.voucher3}}
-				<img class="preview-img" src="{{viewImgRoot}}{{data.voucher3}}?imageMogr2/auto-orient/thumbnail/100x100"/>
-				{{/if}}
-				<img class="preview-img" src="{{viewImgRoot}}e9fad1abd3b843798cd39c8073522ad0.jpg?imageMogr2/auto-orient/thumbnail/100x100"/>
+			<div class="showImg">实际打款凭证: {{if data.voucher1}}
+				<img class="preview-img" src="{{viewImgRoot}}{{data.voucher1}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}} {{if data.voucher2}}
+				<img class="preview-img" src="{{viewImgRoot}}{{data.voucher2}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}} {{if data.voucher3}}
+				<img class="preview-img" src="{{viewImgRoot}}{{data.voucher3}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}}
+				<img class="preview-img" src="{{viewImgRoot}}e9fad1abd3b843798cd39c8073522ad0.jpg?imageMogr2/auto-orient/thumbnail/100x100" />
 			</div>
-			
+
 		</div>
 		{{/if}} {{if data.state == "withdrawing"}}
 		<a href="javascript:;" class="button playMoney">打款</a>
@@ -103,13 +97,60 @@
 						</td>
 						<td>实际发放金额</td>
 						<td>
-							<input type="text" class="OnlyPrice" name="actualAmount" value="" />
+							<input type="text" class="OnlyPrice" name="actualAmount" value="{{data.actualAmount}}" />
 						</td>
 					</tr>
 					<tr>
 						<td>上传打款凭证</td>
 						<td colspan="3">
-							<input type="file" />
+							<div class="upimg" style="height:120px;width:116px;float:left;">
+								<dl>
+									<dt class="upload-pa">
+					    				<div id="voucher1"></div>
+										<div class="upload-list">
+											<div class="upfile-item">
+												{{if data.voucher1}}
+												<img data-id="{{data.voucher1}}" src="http://oka19npup.bkt.clouddn.com/{{data.voucher1}}?imageMogr2/auto-orient/thumbnail/100x100">
+												<span class="delete-img" data-domid="voucher1" data-fileid="WU_FILE_0"></span>
+												<input type="hidden" name="voucher1" value="{{data.voucher1}}">
+												{{/if}}
+											</div>	
+										</div>
+					    			</dt>
+								</dl>
+							</div>
+							<div class="upimg" style="height:120px;width:116px;float:left;">
+								<dl>
+									<dt class="upload-pa">
+					    				<div id="voucher2"></div>
+										<div class="upload-list">
+											<div class="upfile-item">
+												{{if data.voucher2}}
+												<img data-id="{{data.voucher2}}" src="http://oka19npup.bkt.clouddn.com/{{data.voucher2}}?imageMogr2/auto-orient/thumbnail/100x100">
+												<span class="delete-img" data-domid="voucher2" data-fileid="WU_FILE_0"></span>
+												<input type="hidden" name="voucher2" value="{{data.voucher2}}">
+												{{/if}}
+											</div>
+										</div>
+					    			</dt>
+								</dl>
+							</div>
+							<div class="upimg" style="height:120px;width:116px;float:left;">
+								<dl>
+									<dt class="upload-pa">
+					    				<div id="voucher3"></div>
+										<div class="upload-list">
+											<div class="upfile-item">
+												{{if data.voucher3}}
+												<img data-id="{{data.voucher3}}" src="http://oka19npup.bkt.clouddn.com/{{data.voucher3}}?imageMogr2/auto-orient/thumbnail/100x100">
+												<span class="delete-img" data-domid="voucher3" data-fileid="WU_FILE_0"></span>
+												<input type="hidden" name="voucher3" value="{{data.voucher3}}">
+												{{/if}}
+											</div>
+										</div>
+					    			</dt>
+								</dl>
+							</div>
 						</td>
 					</tr>
 				</tbody>
