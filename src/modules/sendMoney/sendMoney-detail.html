@@ -22,7 +22,7 @@
 		<p>提现申请人收款信息</p>
 		<div>提现金额：{{data.amount}}元</div>
 		<div>收款账号：
-			<div>一 支付宝 账号：{{data.downStreamVo.alipay}}</div>
+			<div style="margin: 10px 0;">一 支付宝 账号：{{data.downStreamVo.alipay}}</div>
 			<div>
 				<span>二  银行卡   卡号：{{data.downStreamVo.bankCard}}</span>
 				<span style="margin:10px;">开户行：{{data.downStreamVo.bankName}}</span>
@@ -83,27 +83,27 @@
 					<tr class="changePaystyle" id="payStyle">
 						<td>支付宝账号</td>
 						<td colspan="3">
-							<input type="text" value="111111@qq.com" />
+							<input type="text" value="{{data.downStreamVo.alipay}}" />
 						</td>
 					</tr>
 					<tr class="changePaystyle">
 						<td>银行卡账号</td>
 						<td>
-							<input type="text" value="22222222222222" />
+							<input type="text" value="{{data.downStreamVo.bankCard}}" />
 						</td>
 						<td>开户支行</td>
 						<td>
-							<input type="text" value="中国工商银行下沙支行" />
+							<input type="text" value="{{data.downStreamVo.bankName}}" />
 						</td>
 					</tr>
 					<tr>
 						<td>申请提现金额</td>
 						<td>
-							<input type="text" value="300.00" />
+							<input type="text" class="OnlyPrice" value="{{data.amount}}" />
 						</td>
 						<td>实际发放金额</td>
 						<td>
-							<input type="text" name="actualAmount" value="300.00" />
+							<input type="text" class="OnlyPrice" name="actualAmount" value="" />
 						</td>
 					</tr>
 					<tr>

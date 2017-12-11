@@ -28,7 +28,7 @@ define(function(require, exports, module) {
 
 					//打款
 					$('body').off('click', '.playMoney').on('click', '.playMoney', function() {
-						var alertContent = jh.utils.template('sendMoney_sure_template', {});
+						var alertContent = jh.utils.template('sendMoney_sure_template', returnData);
 						jh.utils.alert({
 							content: alertContent,
 							ok: function() {

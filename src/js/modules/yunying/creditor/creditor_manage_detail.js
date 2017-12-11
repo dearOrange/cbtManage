@@ -177,13 +177,13 @@ define(function(require, exports, module) {
 					//删除
 					$('body').off('click', '#removeFile').on('click', '#removeFile', function() {
 						var removeId = jh.utils.getCheckboxValue('subTask_container', "value");
-						if(removeId == ""){
+						if (removeId == "") {
 							jh.utils.alert({
-		                        content: '请选择需要删除的任务！',
-		                        ok: true,
-		                        cancel: false
-		                    });
-		                    return false;
+								content: '请选择需要删除的任务！',
+								ok: true,
+								cancel: false
+							});
+							return false;
 						}
 						jh.utils.alert({
 							content: '确定删除吗？',
