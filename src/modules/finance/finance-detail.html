@@ -2,7 +2,7 @@
 	
 </div>
 <script type="text/template" id="finance_detail_template">
-    <div class="dialog-width">
+    <div class="dialog-width officer-width">
         <p class="pull-left">
             任务详情
         </p>
@@ -46,7 +46,7 @@
 	                        </select>
 	                    </td>
 	                    <td rowspan="5">
-	                    	{{if data.loanerMoneyStatus == "0"}}
+	                    	{{if data.loanerMoneyStatus == "1"}}
 	                        <span>已收款</span>
 	                        {{else}}
 	                        <a class="button platSure">平台确认收到款项</a>

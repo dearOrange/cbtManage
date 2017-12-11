@@ -58,11 +58,11 @@
         	<p>预估费用</p>
         	<div>
         		<label>车辆残值估算:</label>
-        		<input type="text" maxlength="11" class="OnlyPrice" id="salvage" />
+        		<input type="text" maxlength="11" class="OnlyPrice" id="salvage" value="{{data.carPrice}}" />
         	</div>
         	<div>
         		<label>处置费用估算:</label>
-        		<input type="text" maxlength="11" class="OnlyPrice" id="minMoney" />至<input type="text" class="OnlyPrice" maxlength="11" id="maxMoney" />
+        		<input type="text" maxlength="11" class="OnlyPrice" id="minMoney" value="{{data.estimatedMinPrice}}" />至<input type="text" class="OnlyPrice" maxlength="11" id="maxMoney" value="{{data.estimatedMaxPrice}}" />
         	</div>
         	{{/if}}
         	{{if data.state == 'unconfirmed'}}
@@ -73,7 +73,7 @@
         	</div>
         	<div>
         		<label>处置费用估算:</label>
-        		<span>{{data.estimatedMinPrice}}</span>至<span>{{data.estimatedMaxPrice}}</span>
+        		<span>{{data.estimatedMinPrice}}至</span><span>{{data.estimatedMaxPrice}}</span>
         	</div>
         	<div>
         		<label>最终处置费用:</label>
@@ -85,11 +85,11 @@
         	</div>
         	<div>
         		<label>资产查找费:</label>
-        		<input type="text require" maxlength="11" class="OnlyPrice" id="assetPrice" />
+        		<input type="text require" maxlength="11" class="OnlyPrice" id="assetPrice" value="{{data.assetPrice}}" />
         	</div>
         	<div>
         		<label>第三方处置清收费:</label>
-        		<input type="text require" maxlength="11" class="OnlyPrice" id="thirdpartyPrice" />
+        		<input type="text require" maxlength="11" class="OnlyPrice" id="thirdpartyPrice" value="{{data.thirdpartyPrice}}" />
         	</div>
         	{{/if}}
         	{{if data.state == 'unconfirmed'}}
