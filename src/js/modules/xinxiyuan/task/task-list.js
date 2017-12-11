@@ -67,10 +67,81 @@ define(function(require, exports, module) {
             
             //切换状态
             $('body').off('click', '.taskState').on('click', '.taskState', function() {
+            	var mine = $(this);
+            	var state = mine.data('state');
             	$(this).addClass("active").siblings().removeClass("active");
             	_this.form[0].reset();
+            	var arr = [{
+	    			val: 'unarrange',
+	    			name:"渠道经理未分配",
+	    			flag:'trcaing'
+	    		},{
+	    			val: 'tracing',
+	    			name:"线索未提交",
+	    			flag:'open,trcaing'
+	    		},{
+	    			val: 'clueChecking',
+	    			name:"线索审核中",
+	    			flag:'open,trcaing'
+	    		},{
+	    			val: 'unvaluation',
+	    			name:"待估价",
+	    			flag:'trcaing'
+	    		},{
+	    			val: 'unconfirmed',
+	    			name:"待债权方确认",
+	    			flag:'trcaing'
+	    		},{
+	    			val: 'voucherChecking',
+	    			name:"凭证审核中",
+	    			flag:'trcaing'
+	    		},{
+	    			val: 'voucherInvalid',
+	    			name:"凭证审核未通过",
+	    			flag:'trcaing'
+	    		},{
+	    			val: 'hunterUnreceive',
+	    			name:"捕头未接受",
+	    			flag:'trcaing'
+	    		},{
+	    			val: 'hunterReceive',
+	    			name:"捕头已接受",
+	    			flag:'trcaing'
+	    		},{
+	    			val: 'platReceive',
+	    			name:"平台已收车",
+	    			flag:'trcaing'
+	    		},{
+	    			val: 'upstreamReceive',
+	    			name:"债权方已收车",
+	    			flag:'trcaing'
+	    		},{
+	    			val: 'closed',
+	    			name:"已失效",
+	    			flag:'trcaing'
+	    		}];
+	    		
+	    		var optionArr = [];
+	    		for(var i=0;i<arr.length;i++){
+	    			var item = arr[i];
+            		if(state === 'all'){
+            			optionArr.push(item);
+            			continue;
+            		}
+            		if( item.flag.indexOf(state) !== -1){
+            			optionArr.push(item);
+            		}
+            	}
+	    		var str='';
+	    		for(var j=0;j<optionArr.length;j++){
+	    			var temp = optionArr[j];
+	    			str += '<option value="'+temp.val+'">'+temp.name+'</option>';
+	    		}
+	    		$("#selectCheck").html(str);
+	    		
+            	
             	$('select').select2();
-            	$('#state').val($(this).data('value'))
+            	$('#state').val(mine.data('value'))
             	_this.initContent();
             })
 			
@@ -99,6 +170,10 @@ define(function(require, exports, module) {
             })
 
         };
+       
+	    	
+	    		
+	    	
     }
     module.exports = TaskList;
 });

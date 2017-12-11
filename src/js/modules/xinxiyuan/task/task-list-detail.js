@@ -38,6 +38,10 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     var strTemplate = jh.utils.template('xx_task_list', returnData);
                     $('.task-content').html(strTemplate);
+                    $('body').off('click','.checkId').on('click','.checkId',function(){
+                    	var checks = jh.utils.getURLValue().args;
+                    })
+                    
                 }
             });
         };
@@ -86,19 +90,24 @@ define(function(require, exports, module) {
                 })
             });
             
+          
             //采纳情报
             $('body').off('click','.adopteInfo').on('click','.adopteInfo',function(){
             	jh.utils.alert({
                 	content:'确定采纳吗？',
                 	ok:function(){
-                		var adoptData = jh.utils.formToJson(_this.form);
-                		console.log(adoptData)
-                		adoptData.taskId = args.id;
-//              		adoptData.traceId = 
-                		adoptData.carPrice = $("#salvage").val();
-                		adoptData.estimatedMinPrice = $("#minMoney").val();
-                		adoptData.estimatedMaxPrice = $("#maxMoney").val();
-//              		console.log(adoptData);
+                		var managerId = $(".managerId").filter(":checked").val();
+                		var checkId = $(".checkId").filter(":checked").val();
+                		var adoptData = {
+                			taskId: args.id,
+                			traceId:checkId,
+                			carPrice:$("#salvage").val(),
+                			estimatedMinPrice: $("#minMoney").val(),
+                			estimatedMaxPrice: $("#maxMoney").val(),
+                			channelManagerId: managerId,
+                			channelManagerName:$(".managerName").html()
+                		};
+                		console.log(adoptData);
                 		return false;
                 		jh.utils.ajax.send({
 			                url: '/task/refuseAll',
