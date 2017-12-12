@@ -12,7 +12,6 @@ define(function(require, exports, module) {
 
         this.init = function() {
             this.initDetail();
-            this.registerEvent();
         };
 
         this.initDetail = function(isSearch) {
@@ -57,12 +56,6 @@ define(function(require, exports, module) {
             });
         };
 
-        this.registerEvent = function() {
-            //信息修复
-            $('body').off('click','.isSure').on('click','.isSure',function(){
-                _this.searchIllegalInfo();
-            });
-        };
     }
     module.exports = EvidenceAuditDetail;
 });

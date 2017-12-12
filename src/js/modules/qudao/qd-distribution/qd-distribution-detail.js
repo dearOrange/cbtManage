@@ -69,9 +69,11 @@ define(function(require, exports, module) {
         $('body').off('click','.sureAudit').on('click','.sureAudit',function(){
         	var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
             var opt = {
-                url: '/task/distributeTask',
+            	method: 'post',
+                url: '/task/allotDownStream',
                 data: {
-                    taskIds: ids
+                    taskId: args.id,
+                    downstreamlist: ids
                 },
                 done: function(returnData) {
                     jh.utils.alert({
