@@ -57,14 +57,6 @@ define(function(require, exports, module) {
         };
 
         this.initSheriff = function() {
-            Mock.mock(REQUESTROOT + '/task/downStreamListByChannel', {
-                'code': 'SUCCESS',
-                'data|10': [{
-                    'id|+1': 1,
-                    'name': Mock.Random.cname(),
-                    'type': /(all)|(trace)|(tracerecycle)|(recycle)/
-                }]
-            });
             jh.utils.ajax.send({
                 url: '/task/downStreamListByChannel',
                 done: function(returnData) {
