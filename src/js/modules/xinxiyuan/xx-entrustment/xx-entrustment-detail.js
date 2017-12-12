@@ -26,15 +26,13 @@ define(function(require, exports, module) {
                     $('.entrustmentListContent').html(html);
 
                     //确认
-                    $('body').off('click', '.priceStorage').on('click', '.priceStorage', function() {
+                    $('body').off('click', '.isRight').on('click', '.isRight', function() {
                         var isIssueState = $('.isIssue').filter(":checked").val();
-                        var isValidState = $('.isValid').filter(":checked").val();
                         jh.utils.ajax.send({
-                            url: '/task/estimate',
+                            url: '/verify/result',
                             data: {
                                 verifyId: args.id,
-                                isIssue: isIssueState,
-                                isValid: isValidState
+                                isIssue: isIssueState
                             },
                             done: function(returnData) {
                                 jh.utils.alert({
