@@ -96,7 +96,7 @@ define(function(require, exports, module) {
             	jh.utils.alert({
                 	content:'确定采纳吗？',
                 	ok:function(){
-                		var managerId = $(".managerId").filter(":checked").val();
+                		var managerId = $(".managerId").filter(":checked");
                 		var checkId = $(".checkId").filter(":checked").val();
                 		var adoptData = {
                 			taskId: args.id,
@@ -104,11 +104,9 @@ define(function(require, exports, module) {
                 			carPrice:$("#salvage").val(),
                 			estimatedMinPrice: $("#minMoney").val(),
                 			estimatedMaxPrice: $("#maxMoney").val(),
-                			channelManagerId: managerId,
-                			channelManagerName:$(".managerName").html()
+                			channelManagerId: managerId.val(),
+                			channelManagerName:managerId.data('name')
                 		};
-                		console.log(adoptData);
-                		return false;
                 		jh.utils.ajax.send({
 			                url: '/task/refuseAll',
 			                data: adoptData,
