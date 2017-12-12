@@ -23,16 +23,16 @@ define(function(require, exports, module) {
 				done: function(returnData) {
 					returnData.menuState = jh.utils.menuState;
 					returnData.viewImgRoot = jh.config.viewImgRoot;
-					if (returnData.hunterMoneyStatus == "0" && returnData.infoMoneyStatus == "0") {
-						returnData.finalsendmoney = returnData.assetPrice - 0 + returnData.thirdpartyPrice;
-					} else if (returnData.hunterMoneyStatus == "0" && returnData.infoMoneyStatus == "1") {
-						returnData.finalsendmoney = returnData.thirdpartyPrice;
-					} else if (returnData.hunterMoneyStatus == "1" && returnData.infoMoneyStatus == "0") {
-						returnData.finalsendmoney = returnData.assetPrice;
+					if (returnData.data.hunterMoneyStatus == 0 && returnData.data.infoMoneyStatus == 0) {
+						returnData.finalsendmoney = returnData.data.assetPrice + returnData.data.thirdpartyPrice;
+					} else if (returnData.data.hunterMoneyStatus == 0 && returnData.data.infoMoneyStatus == 1) {
+						returnData.finalsendmoney = returnData.data.thirdpartyPrice;
+					} else if (returnData.data.hunterMoneyStatus == 1 && returnData.data.infoMoneyStatus == 0) {
+						returnData.finalsendmoney = returnData.data.assetPrice;
 					} else {
-						returnData.finalsendmoney = returnData.assetPrice - 0 + returnData.thirdpartyPrice;
+						returnData.finalsendmoney = returnData.data.assetPrice + returnData.data.thirdpartyPrice;
 					}
-					returnData.finalilmoney = returnData.assetPrice - 0 + returnData.thirdpartyPrice;
+					returnData.finalilmoney = returnData.data.assetPrice + returnData.data.thirdpartyPrice;
 					var html = jh.utils.template('finance_detail_template', returnData);
 					$('.financeDetailContent').html(html);
 					$("select").select2();

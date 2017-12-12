@@ -21,7 +21,8 @@
 		<p>提现单号：{{data.flow}}</p>
 		<p>提现申请人收款信息</p>
 		<div>提现金额：{{data.amount}}元</div>
-		<div>收款账号：
+		<div>
+			<p>收款账号：</p>
 			<div style="margin: 10px 0;">一 支付宝 账号：{{data.downStreamVo.alipay}}</div>
 			<div>
 				<span>二  银行卡   卡号：{{data.downStreamVo.bankCard}}</span>
@@ -33,6 +34,7 @@
 		<div>
 			<p>打款信息</p>
 			<div>实际打款金额：{{data.amount}}元</div>
+			<div>打款时间：{{data.payTime}}</div>
 			<div>
 				{{if data.payWay == "1"}}
 				<span>支付宝 账号：{{data.downStreamVo.alipay}}</span> {{else}}
@@ -59,12 +61,6 @@
 		<form id="play-money-form">
 			<table>
 				<tbody>
-					<tr>
-						<td>申请人</td>
-						<td colspan="3">
-							<span>张三</span>
-						</td>
-					</tr>
 					<tr>
 						<td>发放类型</td>
 						<td colspan="3">
@@ -93,11 +89,11 @@
 					<tr>
 						<td>申请提现金额</td>
 						<td>
-							<input type="text" class="OnlyPrice" value="{{data.amount}}" />
+							<sapn>{{data.amount}}</sapn>
 						</td>
 						<td>实际发放金额</td>
 						<td>
-							<input type="text" class="OnlyPrice" name="actualAmount" value="{{data.actualAmount}}" />
+							<input type="text" class="OnlyPrice" name="actualAmount" value="" />
 						</td>
 					</tr>
 					<tr>

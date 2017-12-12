@@ -66,7 +66,7 @@
 <script type="text/template" id="finance-list-template">
 	{{ each list item index }}
 	<tr>
-		<td>{{index}}</td>
+		<td>{{index+1}}</td>
 		<td><input type="checkbox" value="{{item.id}}" /></td>
 		<td>{{item.taskNo}}</td>
 		<td>{{item.carNumber}}</td>
@@ -74,10 +74,12 @@
 		<td>{{menuState(item.entrust)}}</td>
 		<td>{{item.loanerSureAt}}</td>
 		<td>
-			{{if item.loanerMoneyStatus == "0"}} 未收款 {{else}} 已收款 {{/if}}
+			{{if item.loanerMoneyStatus == 0}} 未收款 {{else}} 已收款 {{/if}}
 		</td>
 		<td>
-			{{if item.hunterMoneyStatus == "0"}} 未放款 {{else}} 已放款 {{/if}}
+			{{if item.hunterMoneyStatus == 0}} 未放款 {{/if}}
+			{{if item.hunterMoneyStatus == 1}} 已放款 {{/if}}
+			{{if item.hunterMoneyStatus == 2}} 只放线索费 {{/if}}
 		</td>
 		<td>
 			<a data-id="{{item.id}}" class="finance-detail button">详情</a>
