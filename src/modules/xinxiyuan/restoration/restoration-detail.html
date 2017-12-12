@@ -54,7 +54,7 @@
         	{{/each}}
         </div>
         <div class="hopeprice">
-        	{{if data.state !== 'unconfirmed'}}
+        	{{if data.state == 'unvaluation'}}
         	<p>预估费用</p>
         	<div>
         		<label>车辆残值估算:</label>
@@ -64,6 +64,25 @@
         		<label>处置费用估算:</label>
         		<input type="text" maxlength="11" class="OnlyPrice" id="minMoney" value="{{data.estimatedMinPrice}}" />至<input type="text" class="OnlyPrice" maxlength="11" id="maxMoney" value="{{data.estimatedMaxPrice}}" />
         	</div>
+        	{{if data.estimatedMinPrice !== ""}}
+        	<p>确认费用</p>
+        	<div>
+        		<label>最终处置费用:</label>
+        		<input type="text require" maxlength="11" class="OnlyPrice" id="finalPrice" value="{{data.finalPrice}}" />
+        	</div>
+        	<div>
+        		<label>其中受托人费用:</label>
+        		<input type="text require" maxlength="11" class="OnlyPrice" id="baileePrice" value="{{data.baileePrice}}" />
+        	</div>
+        	<div>
+        		<label>资产查找费:</label>
+        		<input type="text require" maxlength="11" class="OnlyPrice" id="assetPrice" value="{{data.assetPrice}}" />
+        	</div>
+        	<div>
+        		<label>第三方处置清收费:</label>
+        		<input type="text require" maxlength="11" class="OnlyPrice" id="thirdpartyPrice" value="{{data.thirdpartyPrice}}" />
+        	</div>
+        	{{/if}}
         	{{/if}}
         	{{if data.state == 'unconfirmed'}}
         	<p>预估费用</p>
@@ -77,11 +96,11 @@
         	</div>
         	<div>
         		<label>最终处置费用:</label>
-        		<span id="finalPrice">{{data.finalPrice}}</span>
+        		<input type="text require" maxlength="11" class="OnlyPrice" id="finalPrice" value="{{data.finalPrice}}" />
         	</div>
         	<div>
         		<label>其中受托人费用:</label>
-        		<sapn id="baileePrice">{{data.baileePrice}}</sapn>
+        		<input type="text require" maxlength="11" class="OnlyPrice" id="baileePrice" value="{{data.baileePrice}}" />
         	</div>
         	<div>
         		<label>资产查找费:</label>
@@ -92,10 +111,14 @@
         		<input type="text require" maxlength="11" class="OnlyPrice" id="thirdpartyPrice" value="{{data.thirdpartyPrice}}" />
         	</div>
         	{{/if}}
-        	{{if data.state == 'unconfirmed'}}
-        	<input type="button" value="保存" class="button search-button surePrice" style="margin-bottom:40px;width:150px;height:30px;">
+        	{{if data.state == 'unvaluation'}}
+        	{{if data.estimatedMinPrice == ""}}
+        	<input type="button" value="预估" class="button search-button priceStorage" style="margin-bottom:40px;width:150px;height:30px;">
         	{{else}}
-        	<input type="button" value="保存" class="button search-button priceStorage" style="margin-bottom:40px;width:150px;height:30px;">
+        	<input type="button" value="确认" class="button search-button surePrice" style="margin-bottom:40px;width:150px;height:30px;">
+        	{{/if}}
+        	{{else}}
+        	<input type="button" value="确认" class="button search-button surePrice" style="margin-bottom:40px;width:150px;height:30px;">
         	{{/if}}
         </div>
     </div>

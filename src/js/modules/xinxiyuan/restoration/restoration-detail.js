@@ -14,16 +14,16 @@ define(function(require, exports, module) {
 			this.registerEvent();
 		};
 		this.registerEvent = function() {
-			var data = jh.utils.getURLValue();
+			var args = jh.utils.getURLValue().args;
 			jh.utils.ajax.send({
 				url: '/task/info/detail',
 				data: {
-					taskId: data.args.id
+					taskId: args.id
 				},
 				done: function(returnData) {
 					returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
-                    returnData.taskId = data.args.id;
+                    returnData.taskId = args.id;
 					var creditorStr = jh.utils.template('restoration_detail_template', returnData);
 					$('.restorationContent').html(creditorStr);
 					var picArr = ['carPhoto', 'carNumberPhoto'];
@@ -45,7 +45,7 @@ define(function(require, exports, module) {
 								carPrice: $('#salvage').val(),
 								estimatedMinPrice: $('#minMoney').val(),
 								estimatedMaxPrice: $('#maxMoney').val(),
-								taskId: data.args.id
+								taskId: args.id
 							},
 							done: function(returnData) {
 								jh.utils.alert({
@@ -61,10 +61,11 @@ define(function(require, exports, module) {
 						jh.utils.ajax.send({
 							url: '/task/fixPrice',
 							data: {
-								finalPrice: $('#finalPrice').html(),
+								finalPrice: $('#finalPrice').val(),
 								assetPrice: $('#assetPrice').val(),
 								thirdpartyPrice: $('#thirdpartyPrice').val(),
-								baileePrice: $('#baileePrice').html()
+								baileePrice: $('#baileePrice').val(),
+								taskId: args.id
 							},
 							done: function(returnData) {
 								jh.utils.alert({

@@ -36,7 +36,7 @@ define(function(require, exports, module) {
 		                	ok:function(){
 		                		var throughState = $('.auditThrough').filter(":checked").val();
 		                		jh.utils.ajax.send({
-		                			url: 'task/checkingVoucher',
+		                			url: '/task/checkingVoucher',
 		                			data: {
 		                				taskId: args.id,
 		                				reason: $('.reason').val(),

@@ -21,18 +21,19 @@ define(function(require, exports, module) {
 					taskId: args.id
 				},
 				done: function(returnData) {
+					var mineData = returnData.data;
 					returnData.menuState = jh.utils.menuState;
 					returnData.viewImgRoot = jh.config.viewImgRoot;
-					if (returnData.data.hunterMoneyStatus == 0 && returnData.data.infoMoneyStatus == 0) {
-						returnData.finalsendmoney = returnData.data.assetPrice + returnData.data.thirdpartyPrice;
-					} else if (returnData.data.hunterMoneyStatus == 0 && returnData.data.infoMoneyStatus == 1) {
-						returnData.finalsendmoney = returnData.data.thirdpartyPrice;
-					} else if (returnData.data.hunterMoneyStatus == 1 && returnData.data.infoMoneyStatus == 0) {
-						returnData.finalsendmoney = returnData.data.assetPrice;
+					if (mineData.hunterMoneyStatus == 0 && mineData.infoMoneyStatus == 0) {
+						returnData.finalsendmoney = mineData.assetPrice + mineData.thirdpartyPrice;
+					} else if (mineData.hunterMoneyStatus == 0 && mineData.infoMoneyStatus == 1) {
+						returnData.finalsendmoney = mineData.thirdpartyPrice;
+					} else if (mineData.hunterMoneyStatus == 1 && mineData.infoMoneyStatus == 0) {
+						returnData.finalsendmoney = mineData.assetPrice;
 					} else {
-						returnData.finalsendmoney = returnData.data.assetPrice + returnData.data.thirdpartyPrice;
+						returnData.finalsendmoney = mineData.assetPrice + mineData.thirdpartyPrice;
 					}
-					returnData.finalilmoney = returnData.data.assetPrice + returnData.data.thirdpartyPrice;
+					returnData.finalilmoney = mineData.assetPrice + mineData.thirdpartyPrice;
 					var html = jh.utils.template('finance_detail_template', returnData);
 					$('.financeDetailContent').html(html);
 					$("select").select2();
@@ -45,6 +46,7 @@ define(function(require, exports, module) {
 								var datas = jh.utils.formToJson($('#plat-sure-money'));
 								datas.taskId = args.id;
 								jh.utils.ajax.send({
+									method: 'post',
 									url: '/finance/loanerMoneySure',
 									data: datas,
 									done: function(returnData) {
