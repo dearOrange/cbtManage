@@ -94,7 +94,7 @@ define(function(require, exports, module) {
 			                	validState: 1
 			                },
 			                done: function(returnData) {
-			                    
+			                     _this.initContent();
 			                }
                 
             			});
@@ -115,7 +115,7 @@ define(function(require, exports, module) {
 			                	validState: 2
 			                },
 			                done: function(returnData) {
-			                    
+			                    _this.initContent();
 			                }
                 
             			});

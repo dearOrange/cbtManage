@@ -30,7 +30,10 @@
 		</div>
 		<div class="mainfile">
 			<p>线索信息</p>
-			<a href="javascript:;" class="button rejectClue">全部审核不通过</a> {{ each data.traceVoList data index }}
+			{{if data.traceVoList&&data.traceVoList.length>0}}
+			<a href="javascript:;" class="button rejectClue">全部审核不通过</a> 
+			{{/if}}
+			{{ each data.traceVoList data index }}
 			<div class="upimg pull-left">
 				<input type="radio" value="{{data.id}}" name="traceId" class="pull-left checkId" style="margin:60px 0;" />
 				<dl>

@@ -40,13 +40,7 @@
 		    				<div id="carNumberPhoto"></div>
 							<div class="upload-list">
 								<div class="upfile-item">
-									{{if data.carNumberPhoto}}
-									<img data-id="{{data.carNumberPhoto}}" src="http://oka19npup.bkt.clouddn.com/{{data.carNumberPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
-									<span class="delete-img" data-domid="carNumberPhoto" data-fileid="WU_FILE_0"></span>
-									<input type="hidden" name="carNumberPhoto" value="{{data.carNumberPhoto}}">
-									{{else}}
-									<img data-id="{{data.carNumberPhoto}}" src="../../img/nopic.png">	
-									{{/if}}
+									<img class="preview-img" src="http://oka19npup.bkt.clouddn.com/{{data.carNumberPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
 								</div>
 							</div>
 		    			</dt>
@@ -57,13 +51,7 @@
 		    				<div id="carPhoto"></div>
 							<div class="upload-list">
 								<div class="upfile-item">
-									{{if data.carPhoto}}
-									<img data-id="{{data.carPhoto}}" src="http://oka19npup.bkt.clouddn.com/{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
-									<span class="delete-img" data-domid="carPhoto" data-fileid="WU_FILE_0"></span>
-									<input type="hidden" name="carPhoto" value="{{data.carPhoto}}">
-									{{else}}
-									<img data-id="{{data.carPhoto}}" src="../../img/nopic.png">	
-									{{/if}}
+									<img class="preview-img" src="http://oka19npup.bkt.clouddn.com/{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
 								</div>
 							</div>
 		    			</dt>
@@ -75,13 +63,11 @@
         	<p>定位信息</p>
         	<div>
         		<label>GPRS</label>
-        		<span>{{data.fingerprint}}</span>
+        		<span id="GPRS-Fingerprint">{{data.fingerprint}}</span>
         	</div>
         	<div>
         		<label>上传地址</label>
-        		<span>
-        			{{data.ipCity}}
-        		</span>
+        		<span id="uploadAddress"></span>
         	</div>
         	<div>
         		<label>IP地址</label>
