@@ -44,15 +44,31 @@ define(function(require, exports, module) {
             };
             jh.utils.ajax.send(opt);
         };
-        this.initSheriff = function(type) {
+        this.initSheriff = function(taskId) {
             jh.utils.ajax.send({
-                url: '/task/downStreamListByChannel',
+                url: '/task/downstreamByTaskChannel',
+                data: {
+                    taskId: taskId
+                },
                 done: function(returnData) {
-                    var str = _this.distributionSheriff(returnData.data);
-
+                    var str = _this.distributionSheriff(returnData.data.alldownstream);
                     jh.utils.alert({
                         content: str,
-                        ok: _this.distribution,
+                        ok: function() {
+                            var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value'),
+                                obj = {};
+                            if (!ids) {
+                                jh.utils.alert({
+                                    content: '请选择捕头！',
+                                    ok: true,
+                                    cancel: false
+                                });
+                                return false;
+                            }
+                            obj.downstreamlist = ids;
+                            obj.taskId = taskId;
+                            _this.distribution(obj);
+                        },
                         cancel: true
                     });
                 }
@@ -61,21 +77,37 @@ define(function(require, exports, module) {
         this.distributionSheriff = function(arr) {
             var source = require('/src/templates/sheriff-distribution.tpl');
             var render = jh.utils.template.compile(source);
-            var str = render({ list: arr, stateToString: jh.utils.menuState });
+            var menuState = function(state) {
+                switch (state) {
+                    case "all":
+                        state = "可找车可拖车";
+                        break;
+                    case "trace":
+                        state = "只找车";
+                        break;
+                    case "recycle":
+                        state = "只拖车";
+                        break;
+                    case "tracerecycle":
+                        state = "找车+拖车一体";
+                        break;
+                }
+                return state;
+            }
+            var str = render({ list: arr, stateToString: menuState });
             return str;
         };
 
-        this.distribution = function(ids) {
-            var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
+        this.distribution = function(obj) {
             var opt = {
-                url: '/task/distributeTask',
-                data: {
-                    taskIds: ids
-                },
+                url: '/task/allotDownStream',
+                data:obj,
                 done: function(returnData) {
                     jh.utils.alert({
                         content: '任务分配成功！',
-                        ok: true,
+                        ok: function(){
+                            _this.initContent();
+                        },
                         cancel: false
                     });
                 }
@@ -83,7 +115,6 @@ define(function(require, exports, module) {
             jh.utils.ajax.send(opt);
         };
         this.registerEvent = function() {
-
             //查询
             jh.utils.validator.init({
                 id: 'qd-distributionList-form',
@@ -104,15 +135,8 @@ define(function(require, exports, module) {
             //分配
             $('body').off('click', '.distribution').on('click', '.distribution', function() {
                 var me = $(this);
-                var ids = me.data('id');
-                _this.initSheriff(ids);
-            });
-
-            //批量分配
-            $('body').off('click', '#distributeTask').on('click', '#distributeTask', function() {
-                var me = $(this);
-                var ids = jh.utils.getCheckboxValue('admin-qDDistributionList-container');
-                _this.initSheriff(ids);
+                var taskId = me.data('id');
+                _this.initSheriff(taskId);
             });
         };
     }

@@ -17,6 +17,7 @@
                                 <input type="checkbox" value="{{item.id}}" class="hand"/>
                                 <span>{{item.name}} - </span>
                                 <span>{{stateToString(item.type)}}</span>
+                                <span>{{if item.isRefuse}}-拒绝{{/if}}</span>
                             </div>
                             {{/each}}
                         </div>
