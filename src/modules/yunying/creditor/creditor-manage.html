@@ -57,7 +57,7 @@
 <script type="text/template" id="creditorManage_content_template">
     {{ each list item index }}
     <tr class="trData">
-        <td>{{index}}</td>
+        <td>{{index+1}}</td>
         <td><input type="checkbox" value="{{item.id}}"></td>
         <td>{{item.companyName}}</td>
         <td>{{menuState(item.type)}}</td>

@@ -93,8 +93,7 @@ define(function(require, exports, module) {
 
             $('.user-menu').on('click', function() {
                 var me = $(this);
-                me.find('ol').toggleClass('hide');
-                me.find('.icon-black-top').toggleClass('hide');
+                jh.utils.load('/src/modules/person/person-file');
             });
 
             $('.user-menu ol').on('mouseleave', function() {
