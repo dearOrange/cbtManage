@@ -198,7 +198,7 @@ define(function(require, exports, module) {
                         $('.img-blowup').zoom({ on:'click' });
                     };
                     imgObj.onerror = function() {
-                        var imgHtml = '<img src="/images/no-pic.jpg" width="400" height="300"/>';
+                        var imgHtml = '<img src="/src/img/nopic.png" width="400" height="300"/>';
                         defaults.content = imgHtml;
                         (new tammy.ui.shadow()).close();
                         defaults.width = 400;
