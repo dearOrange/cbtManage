@@ -1159,7 +1159,12 @@ define(function(require, exports, module) {
                     fileVal: 'file',
                     formData: {
                         token: ''
-                    } //向后台发送的formData数据
+                    }, //向后台发送的formData数据
+                    accept: {
+                        title: 'Images',
+                        extensions: 'jpg,jpeg,png',
+                        mimeTypes: 'image/*'
+                    }
                 };
                 var opt = $.extend({}, options, opts); //合并参数
                 opt.formData.token = sessionStorage.getItem('admin-uploadToken');
@@ -1216,27 +1221,26 @@ define(function(require, exports, module) {
 
                 //服务端响应事件
                 uploader.on('uploadAccept', function(file, returnData) {
-                    var result = returnData.result;
-                    var response = returnData.response;
 
                     uploader.reset(); //重置队列
-
-                    //上传本身错误时，控制台打印错误信息，并阻止继续执行
-                    if (result.code !== "SUCCESS") {
-                        tammy.utils.alert({
-                            content: result.message
-                        });
+                    if (typeof returnData.code !== 'undefined') {
+                        if (returnData.code !== "SUCCESS") {
+                            tammy.utils.alert({
+                                content: result.msg
+                            });
+                            return false;
+                        }
+                        if (typeof callbackObj !== 'undefined' && !tammy.utils.objIsNull(callbackObj)) {
+                            returnData.uploader = uploader;
+                            callbackObj.uploadAccept(file, returnData);
+                        }
                         return false;
                     }
 
-                    //图片展示,如若传入回调函数，则直接已回调函数执行，传递文件本身和服务器返回
-                    if (typeof callbackObj !== 'undefined' && !tammy.utils.objIsNull(callbackObj)) {
-                        response.uploader = uploader;
-                        callbackObj.uploadAccept(file, response);
-                    } else {
+                    if (typeof returnData.key !== 'undefined') {
                         var item = $(
                             '<div class="upfile-item">' +
-                            '<img />' +
+                            '<img class="preview-img" />' +
                             '<span class="delete-img"></span>' +
                             '<input type="hidden" />' +
                             '</div>'
@@ -1249,13 +1253,13 @@ define(function(require, exports, module) {
                             'data-fileId': file.file.id
                         });
                         img.attr({
-                            'data-id': response.url,
-                            'src': tammy.config.viewImgRoot + response.url + tammy.config.imageScale
+                            'data-id': returnData.key,
+                            'src': tammy.config.viewImgRoot + returnData.key
                         });
                         var inputName = uploader.options.hiddenName === '' ? pickId : uploader.options.hiddenName;
                         input.attr({
                             name: inputName,
-                            value: response.url
+                            value: returnData.key
                         });
                         if (uploader.options.isAppend) {
                             queueList.append(item); //加入展示容器
