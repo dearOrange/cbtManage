@@ -20,13 +20,11 @@
             </table>
         </form>
     </div>
-    <input type="button" class="button" id="distributeTask" value="批量分配">
     <div class="data-container">
         <table class="dataShow">
             <thead>
                 <tr>
                     <th width="3%">&nbsp;</th>
-                    <th width="3%"><input type="checkbox" id="checkAll"/></th>
                     <th width="8%">车牌号</th>
                     <th width="10%">品牌</th>
                     <th width="10%">任务类型</th>
@@ -44,9 +42,6 @@
     {{ each list item index }}
     <tr>
         <td>{{index+1}}</td>
-        <td>
-            <input type="checkbox" data-id="{{item.id}}"/>
-        </td>
         <td>{{item.carNumber}}</td>
         <td>{{item.carBrand}}</td>
         <td>{{menuState(item.entrust)}}</td>
@@ -59,34 +54,7 @@
     </tr>
     {{/each}}
 </script>
-<script type="text/template" id="task_divied_template">
-    <div id="distribution_public_template">
-        <div class="divied-width ">
-            <table>
-                <tr>
-                    <td>
-                        <p class="pull-left">分配捕头</p>
-                        <label class="pull-right">
-                            全选<input type="checkbox" id="checkAll">
-                        </label>
-                        <div class="clearfix"></div>
-                        <hr />
-                        <form>
-                            <div class="divied-type" style="height: 300px;overflow-y: auto;text-align: left;">
-                                <div>
-                                    <input type="checkbox" /><span>捕头一号</span><span>只拖车捕头</span>
-                                </div>
-                            </div>
-                        </form>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div>
-            
-        </div>
-    </div>
-</script>
+
 <script type="text/javascript">
 seajs.use('modules/qudao/qd-distribution/qd-distribution-list', function(QDDistributionList) {
     var qDDistributionList = new QDDistributionList();
