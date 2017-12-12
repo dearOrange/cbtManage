@@ -44,15 +44,7 @@ define(function(require, exports, module) {
             };
             jh.utils.ajax.send(opt);
         };
-		this.initSheriff = function(type) {
-            Mock.mock(REQUESTROOT + '/task/downStreamListByChannel', {
-                'code': 'SUCCESS',
-                'data|10': [{
-                    'id|+1': 1,
-                    'name': Mock.Random.cname(),
-                    'type': /(all)|(trace)|(tracerecycle)|(recycle)/
-                }]
-            });
+        this.initSheriff = function(type) {
             jh.utils.ajax.send({
                 url: '/task/downStreamListByChannel',
                 done: function(returnData) {
@@ -109,7 +101,7 @@ define(function(require, exports, module) {
                     id: id
                 });
             });
-			//分配
+            //分配
             $('body').off('click', '.distribution').on('click', '.distribution', function() {
                 var me = $(this);
                 var ids = me.data('id');

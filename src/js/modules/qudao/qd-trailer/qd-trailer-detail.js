@@ -39,14 +39,6 @@ define(function(require, exports, module) {
         };
 
         this.initSheriff = function() {
-            Mock.mock(REQUESTROOT + '/task/downStreamListByChannel', {
-                'code': 'SUCCESS',
-                'data|10': [{
-                    'id|+1': 1,
-                    'name': Mock.Random.cname(),
-                    'type': /(all)|(trace)|(tracerecycle)|(recycle)/
-                }]
-            });
             jh.utils.ajax.send({
                 url: '/task/downStreamListByChannel',
                 done: function(returnData) {
@@ -55,8 +47,8 @@ define(function(require, exports, module) {
                 }
             });
         };
-        $('body').off('click','.sureAudit').on('click','.sureAudit',function(){
-        	var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
+        $('body').off('click', '.sureAudit').on('click', '.sureAudit', function() {
+            var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
             var opt = {
                 url: '/task/distributeTask',
                 data: {

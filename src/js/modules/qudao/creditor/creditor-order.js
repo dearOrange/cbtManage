@@ -15,7 +15,7 @@ define(function(require, exports, module) {
             this.registerEvent();
         };
         this.initContent = function(isSearch) {
-        	
+
             var page = new jh.ui.page({
                 data_container: $('#admin-creditorOrderList-container'),
                 page_container: $('#page_container'),
@@ -31,18 +31,18 @@ define(function(require, exports, module) {
             page.init();
         };
         this.registerEvent = function() {
-        	jh.utils.ajax.send({
-        		url: '/task/downStreamListByChannel',
-        		done: function(returnData){
-        			var data = returnData.data;
-        			var optionStr = '';
-        			for(var i=0;i<data.length;i++){
-        				optionStr += '<option value="'+data[i].id+'">'+data[i].name+'</option>'
-        			}
-        			$('#creditorOrder-butou').append(optionStr);
-        		}
-        	})
-        	// 搜索
+            jh.utils.ajax.send({
+                url: '/task/downStreamListByChannel',
+                done: function(returnData) {
+                    var data = returnData.data;
+                    var optionStr = '';
+                    for (var i = 0; i < data.length; i++) {
+                        optionStr += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+                    }
+                    $('#creditorOrder-butou').append(optionStr);
+                }
+            })
+            // 搜索
             jh.utils.validator.init({
                 id: 'admin-creditorOrderList-form',
                 submitHandler: function(form) {
@@ -50,13 +50,13 @@ define(function(require, exports, module) {
                     return false;
                 }
             });
-            
-            
+
+
             //查看任务详情
             $('.dataShow').off('click', '.orderDetail').on('click', '.orderDetail', function() {
-            	var id = $(this).data('id');
-                jh.utils.load('/src/modules/qudao/creditor/creditor-order-detail',{
-                	id: id
+                var id = $(this).data('id');
+                jh.utils.load('/src/modules/qudao/creditor/creditor-order-detail', {
+                    id: id
                 });
             });
         };
