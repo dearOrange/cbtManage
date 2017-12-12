@@ -33,7 +33,7 @@ define(function(require, exports, module) {
 							content: '确认收到车了吗？',
 							ok: function() {
 								jh.utils.ajax.send({
-									url: 'task/platReceive',
+									url: '/task/platReceive',
 									data: {
 										taskId: args.id
 									},
