@@ -17,10 +17,8 @@
 		{{else}}
 		<p class="pull-right">
 			{{if data.isIssue == "0"}} 委托不存在 {{else}} 委托存在 {{/if}}
-		</p><br /><br /><br />
-		<p class="pull-right" style="background-color:red;">
-			{{if data.isValid == "0"}} 本委托虚假委托 {{else}} 本委托真实委托 {{/if}}
 		</p>
+		
 		{{/if}}
 		<div>
 			<span>上传捕头：{{data.name}}</span>
