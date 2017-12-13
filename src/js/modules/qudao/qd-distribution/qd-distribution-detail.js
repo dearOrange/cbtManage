@@ -52,7 +52,24 @@ define(function(require, exports, module) {
 		this.distributionSheriff = function(arr) {
             var source = require('/src/templates/sheriff-distribution.tpl');
             var render = jh.utils.template.compile(source);
-            var str = render({ list: arr, stateToString: jh.utils.menuState });
+            var menuState = function(state) {
+                switch (state) {
+                    case "all":
+                        state = "可找车可拖车";
+                        break;
+                    case "trace":
+                        state = "只找车";
+                        break;
+                    case "recycle":
+                        state = "只拖车";
+                        break;
+                    case "tracerecycle":
+                        state = "找车+拖车一体";
+                        break;
+                }
+                return state;
+            }
+            var str = render({ list: arr, stateToString: menuState });
             return str;
         };
 

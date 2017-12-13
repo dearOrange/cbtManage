@@ -212,8 +212,11 @@ define(function(require, exports, module) {
 
                 var dg = dialog(defaults);
                 dg.showModal();
-
+                var dgo = $('.ui-dialog-grid');
                 var dgh = $('.ui-dialog-grid').height();
+                if (dgo.length > 1) {
+                    dgh = dgo.eq(dgo.length - 1).height();
+                }
                 var h = $(window).height();
                 if (dgh > h - 200) {
                     $(".ui-dialog-content").mCustomScrollbar({
@@ -255,11 +258,18 @@ define(function(require, exports, module) {
                 };
                 var dg = dialog(defaults);
                 dg.show(opt.target);
+            },
+            closeArt:function(){
+                var list = dialog.list;
+                for (var i in list) {
+                    list[i].close();
+                }
             }
         };
         tammy.utils.alert = poup.showModal;
         tammy.utils.confirm = poup.confirm;
         tammy.utils.alertTime = poup.alertTime;
+        tammy.utils.closeArt = poup.closeArt;
         tammy.utils.tips = poup.tips;
     })();
 

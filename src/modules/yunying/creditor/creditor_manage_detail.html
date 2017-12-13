@@ -12,8 +12,8 @@
 		<div class="creditor_detail">
 			<div class="customerType" style="overflow: hidden;">
 				<label>客户标签</label>
-				<textarea class="pull-left customerStyle" name="" maxlength="40"></textarea>
-				<input type="submit" value="保存" class="button search-button addstorage" style="width:100px;height:50px;">
+				<textarea class="pull-left customerStyle" name="" maxlength="40" id="creditor-managerDetail-label">{{data.tag}}</textarea>
+				<a href="javascript:;" class="button search-button addstorage" style="width:100px;height:48px;line-height: 48px;margin-left: 5px;">保存</a>
 			</div>
 			<div>
 				<ul>
@@ -69,87 +69,32 @@
 			<div class="upimg">
 				<dl>
 					<dt class="upload-pa">
-		    				<div id="businessLicense"></div>
-							<div class="upload-list">
-								<div class="upfile-item">
-									{{if data.businessLicense}}
-									<img data-id="{{data.businessLicense}}" src="http://oka19npup.bkt.clouddn.com/{{data.businessLicense}}?imageMogr2/auto-orient/thumbnail/100x100">
-									<span class="delete-img" data-domid="businessLicense" data-fileid="WU_FILE_0"></span>
-									<input type="hidden" name="businessLicense" value="{{data.businessLicense}}">
-									{{else}}
-									<img data-id="{{data.businessLicense}}" src="../../img/nopic.png">	
-									{{/if}}
-								</div>
-							</div>
-		    			</dt>
+		    			<img class="preview-img" src="{{viewImgRoot}}{{data.businessLicense}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
+		    		</dt>
 					<dd>营业执照</dd>
 				</dl>
 				<dl>
 					<dt class="upload-pa">
-		    				<div id="legalPersonIdImg"></div>
-							<div class="upload-list">
-								<div class="upfile-item">
-									{{if data.legalPersonIdImg}}
-									<img data-id="{{data.legalPersonIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.legalPersonIdImg}}?imageMogr2/auto-orient/thumbnail/100x100">
-									<span class="delete-img" data-domid="legalPersonIdImg" data-fileid="WU_FILE_0"></span>
-									<input type="hidden" name="legalPersonIdImg" value="{{data.legalPersonIdImg}}">
-									{{else}}
-									<img data-id="{{data.legalPersonIdImg}}" src="../../img/nopic.png">	
-									{{/if}}
-								</div>
-							</div>
-		    			</dt>
+		    			<img class="preview-img" src="{{viewImgRoot}}{{data.legalPersonIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
+		    		</dt>
 					<dd>法人身份证照片</dd>
 				</dl>
 				<dl>
 					<dt class="upload-pa">
-		    				<div id="legalPersonHandIdImg"></div>
-							<div class="upload-list">
-								<div class="upfile-item">
-									{{if data.legalPersonHandIdImg}}
-									<img data-id="{{data.legalPersonHandIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.legalPersonHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100">
-									<span class="delete-img" data-domid="legalPersonHandIdImg" data-fileid="WU_FILE_0"></span>
-									<input type="hidden" name="legalPersonHandIdImg" value="{{data.legalPersonHandIdImg}}">
-									{{else}}
-									<img data-id="{{data.legalPersonHandIdImg}}" src="../../img/nopic.png">	
-									{{/if}}
-								</div>
-							</div>
-		    			</dt>
+		    			<img class="preview-img" src="{{viewImgRoot}}{{data.legalPersonHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
+		    		</dt>
 					<dd>法人手持身份证正面照片</dd>
 				</dl>
 				<dl>
 					<dt class="upload-pa">
-		    				<div id="linkmanIdImg"></div>
-							<div class="upload-list">
-								<div class="upfile-item">
-									{{if data.linkmanIdImg}}
-									<img data-id="{{data.linkmanIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.linkmanIdImg}}?imageMogr2/auto-orient/thumbnail/100x100">
-									<span class="delete-img" data-domid="linkmanIdImg" data-fileid="WU_FILE_0"></span>
-									<input type="hidden" name="linkmanIdImg" value="{{data.linkmanIdImg}}">
-								</div>
-									{{else}}
-									<img data-id="{{data.linkmanIdImg}}" src="../../img/nopic.png">	
-									{{/if}}
-							</div>
-		    			</dt>
+		    			<img class="preview-img" src="{{viewImgRoot}}{{data.linkmanIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
+		    		</dt>
 					<dd>负责人身份证照片</dd>
 				</dl>
 				<dl>
 					<dt class="upload-pa">
-		    				<div id="linkmanHandIdImg"></div>
-							<div class="upload-list">
-								<div class="upfile-item">
-									{{if data.linkmanHandIdImg}}
-									<img data-id="{{data.linkmanHandIdImg}}" src="http://oka19npup.bkt.clouddn.com/{{data.linkmanHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100">
-									<span class="delete-img" data-domid="linkmanHandIdImg" data-fileid="WU_FILE_0"></span>
-									<input type="hidden" name="linkmanHandIdImg" value="{{data.linkmanHandIdImg}}">
-									{{else}}
-									<img data-id="{{data.linkmanHandIdImg}}" src="../../img/nopic.png">	
-									{{/if}}
-								</div>
-							</div>
-		    			</dt>
+		    			<img class="preview-img" src="{{viewImgRoot}}{{data.linkmanHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
+		    		</dt>
 					<dd>负责人手持身份证正面照片</dd>
 				</dl>
 			</div>
@@ -159,8 +104,8 @@
 		<hr /><br />
 		<div class="upmainfile ">
 			<ol class="ordinary">
-				<li><a href="javascript:;" id="removeFile">+协助删除任务</a></li>
-				<li class="helpTask">+协助任务发布</li>
+				<li class="hand" id="removeFile">+协助删除任务</li>
+				<li class="helpTask hand">+协助任务发布</li>
 				<div style="float:right;margin-top:22px;" id="importFile">+协助批量导入任务</div>
 			</ol>
 			<table>
@@ -188,7 +133,7 @@
 		<hr /><br />
 		<div class="upmainfile onlineSubtotal">
 			<ol>
-				<li class="addSubtotal">+添加联系小计</li>
+				<li class="addSubtotal hand">+添加联系小计</li>
 			</ol>
 			<table>
 				<thead>
@@ -257,36 +202,35 @@
 		</div>
 	</div>
 </script>
-
-<script type="text/template" id="customer-addTask-template">
-	<div class="increated">
-		<form id="customer-addTask-form">
-			<p class="pull-left">
-				协助任务发布
-			</p>
-			<div class="clearfix"></div>
-			<hr /><br />
-			<div class="taskpull">
-				<p class="pull-left" style="border-right:1px dashed #ccc;padding-right:10px;width: 40%;padding-left: 5%;">
-					<label class="big-label">任务类型</label><br /><br />
-					<select name="entrust" class="search-select">
+<script type="text/template" id="creditor-xzPublishTask-template">
+    <div class="increated">
+        <form id="creditor-xzPublishTask-form">
+            <p class="pull-left">
+                协助发布任务
+            </p>
+            <div class="clearfix"></div>
+            <hr /><br />
+            <div class="taskpull">
+            	<p class="pull-left" style="border-right:1px dashed #ccc;padding-right:50px;width: 40%;padding-left: 5%;">
+    	            <label class="big-label">任务类型</label><br /><br />
+                    <select name="entrust" class="search-select">
                         <option value="all">无定位需找+拖</option>
                         <option value="trace">无定位只需找车</option>
                         <option value="recycle">有定位只需拖车</option>
                     </select>
-				</p>
-				<p class="pull-left" style="padding-left:40px;">
-					<label class="big-label">债务人(车主)姓名</label>
-					<input type="text" class="search-input" name="debtor" required="" maxlength="10" placeholder="请输入债务人姓名"><br />
-					<label class="big-label">债务人(车主)身份证号</label>
-					<input type="text" class="search-input required" name="debtorIdNumber" maxlength="18" placeholder="请输入债务人身份证号">
-				</p>
-			</div>
-			<div class="increateNewInfo">
-				<h2 class="carsInfo">车辆信息</h2>
-				<div>
-					<label class="newlabel">车 牌 号：</label>
-					<select name="carNumber_province" class="search-select carSelect">
+    		    </p>
+    		    <p class="pull-left" style="padding-left:50px;">
+    	            <label class="big-label">债务人(车主)姓名</label>
+    	            <input type="text" class="search-input" name="debtor" required="" maxlength="10" placeholder="请输入债务人姓名"><br />
+    	            <label class="big-label">债务人(车主)身份证号</label>
+    	            <input type="text" class="search-input required" name="debtorIdNumber" maxlength="18" placeholder="请输入债务人身份证号">
+    		    </p>
+            </div>
+            <div class="increateNewInfo">
+            	<h2 class="carsInfo">车辆信息</h2>
+            	<div>
+            		<label class="newlabel">车 牌 号：</label>
+                    <select name="carNumber_province" class="search-select carSelect">
                         <option value="京">京</option>
                         <option value="粤">粤</option>
                         <option value="皖">皖</option>
@@ -323,25 +267,28 @@
                         <option value="澳">澳</option>
                         <option value="台">台</option>
                     </select>
-					<input type="text" class="search-input required" name="add_carNumber" maxlength="6" placeholder="输入五位车牌号">
-				</div>
-				<div>
-					<label class="newlabel">车辆信息：</label>
-					<select name="carBrand" class="search-select" id="customer-addTask-carBrand">
-    		            <option value="">请选择品牌</option>
+    		        <input type="text" class="search-input required" name="add_carNumber" maxlength="6" placeholder="输入车牌号">
+            	</div>
+    	        <div>
+    	        	<label class="newlabel">车辆信息：</label>
+    		        <select name="carBrand" class="search-select" id="customer-addTask-carBrand">
+    		            <option value="" data-id="">请选择品牌</option>
     		        </select>
-					<select name="carSeries" class="search-select" id="customer-addTask-carSeries">
-    		            <option value="">请选择车系</option>
+                    <input type="hidden" name="carBrandId" id="carBrandId">
+    		        <select name="carSeries" class="search-select" id="customer-addTask-carSeries">
+    		            <option value="" data-id="">请选择车系</option>
     		        </select>
-					<select name="carModel" class="search-select" id="customer-addTask-carModel">
-    		            <option value="">请选择车型</option>
+                    <input type="hidden" name="carSeriesId" id="carSeriesId">
+    		        <select name="carModel" class="search-select" id="customer-addTask-carModel">
+    		            <option value="" data-id="">请选择车型</option>
     		        </select>
-				</div>
-				<div>
-					<label class="newlabel">车身颜色：</label>
-					<input type="text" class="search-input" name="carColor" maxlength="10" placeholder="请输入车辆颜色">
-					<label class="newlabel" style="margin-left:20px;">定位区域：</label>
-					<select name="location" class="search-select carSelect">
+                    <input type="hidden" name="carModelId" id="carModelId">
+    	        </div>
+    	        <div>
+    	        	<label class="newlabel">车身颜色：</label>
+    	        	<input type="text" class="search-input" name="carColor" maxlength="10" placeholder="请输入车辆颜色">
+    	        	<label class="newlabel" style="margin-left:20px;">定位区域：</label>
+                    <select name="location" class="search-select carSelect">
                         <option value="京">京</option>
                         <option value="粤">粤</option>
                         <option value="皖">皖</option>
@@ -378,24 +325,25 @@
                         <option value="澳">澳</option>
                         <option value="台">台</option>
                     </select>
-				</div>
-				<div>
-					<label class="newlabel">车辆识别号：</label>
-					<input type="text" class="search-input" name="carId" maxlength="17" placeholder="请输入车辆识别号">
-				</div>
-
-				<div>
-					<label class="newlabel">车辆发动机号：</label>
-					<input type="text" class="search-input" name="engineId" maxlength="10" placeholder="请输入发动机号">
-				</div>
-				<textarea name="remark" style="width:800px;height:80px;resize:none;" placeholder="备注" maxlength="50"></textarea>
-			</div>
-			<div class="upimg ordinary">
-				<div id="attachment">上传文件</div>
-				<div class="upload-list"></div>
-			</div>
-		</form>
-	</div>
+    	        </div>
+    	        <div>
+    	        	<label class="newlabel">车辆识别号：</label>
+    	        	<input type="text" class="search-input" name="carId" maxlength="17" placeholder="请输入车辆识别号">
+    	        </div>
+    	        
+    	        <div>
+    	        	<label class="newlabel">车辆发动机号：</label>
+    	        	<input type="text" class="search-input" name="engineId" maxlength="10" placeholder="请输入发动机号">
+    	        </div>
+    	        <textarea name="remark" style="width:800px;height:80px;resize:none;" placeholder="此处填写该车已经掌握的线索及历史催收记录，有利于我们制定更合理的催收策略，提成催收成功率" maxlength="50"></textarea>
+            </div>
+            <div class="upimg ordinary">
+                <div id="attachment">上传催收记录资料</div>
+                <br><br>
+                <div class="upload-list"></div>
+            </div>
+        </form>
+    </div>
 </script>
 <script type="text/javascript">
 	seajs.use('modules/yunying/creditor/creditor_manage_detail', function(CreditorManageDetail) {

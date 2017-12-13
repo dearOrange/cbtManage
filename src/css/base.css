@@ -803,8 +803,8 @@ label.error {
 }
 
 .right-side {
-    width: 98%;
-    margin: 0 auto;
+    width: 99%;
+    margin: 0 0 0 1%;
     overflow-y: auto
 }
 
@@ -883,7 +883,6 @@ label.error {
 }
 
 .dataContent table {
-    margin: 10px auto 0px
 }
 
 .advanced_query {
