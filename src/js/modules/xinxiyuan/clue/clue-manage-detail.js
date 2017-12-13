@@ -25,14 +25,6 @@ define(function(require, exports, module) {
                     returnData.passState = args.state;
                     var html = jh.utils.template('clueManage_detail_template', returnData);
                     $('.clueManageContent').html(html);
-                    var arr;
-                    if(returnData.data.fingerprint&&returnData.data.fingerprint.indexOf(',')!==-1){
-                        arr = returnData.data.fingerprint.split(',');
-                    }else{
-                        arr=[];
-                    }
-                    jh.utils.getAddressByPosition(arr,'GPRS-Fingerprint');
-
                     var picArr = ['carPhoto', 'carNumberPhoto'];
                     for (var i = 0; i < 2; i++) {
                         jh.utils.uploader.init({

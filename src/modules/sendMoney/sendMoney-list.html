@@ -31,7 +31,6 @@
 			<thead>
 				<tr>
 					<th width="3%">&nbsp;</th>
-					<th width="4%"><input type="checkbox" /></th>
 					<th width="8%">提现申请人</th>
 					<th width="15%">主体名称</th>
 					<th width="12%">提现金额</th>
@@ -55,7 +54,6 @@
 	{{ each list item index }}
 	<tr class="{{if item.isRead == " 0 "}}bgc_blue{{/if}}">
 		<td>{{index+1}}</td>
-		<td><input type="checkbox" value="{{item.id}}" /></td>
 		<td>{{item.name}}</td>
 		<td>{{item.company}}</td>
 		<td>{{item.amount}}</td>
@@ -83,7 +81,7 @@
 <script type="text/template" id="sendMoneyList_sure_template">
 	<div class="officer-width">
 		<form id="play-money-form">
-			<table>
+			<table class="noboder">
 				<tbody>
 					<tr>
 						<td>发放类型</td>

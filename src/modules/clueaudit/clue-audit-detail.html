@@ -30,7 +30,7 @@
         </div>
         <div class="upmainfile">
             <div>
-                <a href="javascript:;" class="button" id="distribution-illegalList" data-id="{{taskId}}">违章信息修复</a>
+                <span>违章信息修复</span>
             </div>
             <div>
                 <table class="pull-left" style="width: 90%;">
@@ -50,7 +50,7 @@
         		<dl>
 					<dt>
 						<div class="upfile-item">
-							<img data-id="{{data.carNumberPhoto}}" src="{{viewImgRoot}}{{data.carNumberPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
+							<img class="preview-img" src="{{viewImgRoot}}{{data.carNumberPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
 						</div>
 		    		</dt>
 					<dd>车牌特写照</dd>
@@ -58,7 +58,7 @@
         		<dl>
 					<dt>
 						<div class="upfile-item">
-							<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
+							<img class="preview-img" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
 						</div>
 	    			</dt>
 					<dd>全车背景照</dd>
@@ -99,9 +99,7 @@
 						<th>联系时间</th>
 					</tr>
 				</thead>
-				<tbody id="moneytotal_container">
-					
-				</tbody>
+				<tbody id="moneytotal_container"></tbody>
 			</table>
 			<div class="page-box pagination" id="page_container"></div>
 		</div>
