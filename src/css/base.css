@@ -4,9 +4,11 @@ a, address, b, td, th, body, code, dd, del, div, dl, dt, em, fieldset, form, h1,
     color: #666;
     outline: none
 }
-input[type=text], input[type=password],textarea {
-	text-indent: 16px;
+
+input[type=text], input[type=password], textarea {
+    text-indent: 16px;
 }
+
 body {
     background: #fff;
     width: 100%;
@@ -99,6 +101,10 @@ a:hover, a:active, a:focus {
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset
+}
+
+.red-border {
+    border: 1px solid red !important;
 }
 
 .is-required:before {
