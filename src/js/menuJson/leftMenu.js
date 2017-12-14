@@ -109,6 +109,18 @@ define(function(require, exports, module) {
             module: '/src/modules/sendMoney',
             url: '/sendMoney-list',
             childrens: []
+        }, {
+            name: '平台-用户管理',
+            icon: 'icon-supplier',
+            module: '/src/modules/user',
+            url: '/user-manage',
+            childrens: []
+        }, {
+            name: '平台-角色管理',
+            icon: 'icon-supplier',
+            module: '/src/modules/user',
+            url: '/role-manage',
+            childrens: []
         }]
     };
     module.exports = FINAL_MENU_DATA_JSON;

@@ -4,7 +4,9 @@ a, address, b, td, th, body, code, dd, del, div, dl, dt, em, fieldset, form, h1,
     color: #666;
     outline: none
 }
-
+input[type=text], input[type=password],textarea {
+	text-indent: 16px;
+}
 body {
     background: #fff;
     width: 100%;
@@ -72,7 +74,7 @@ td {
 }
 
 th {
-    background: #eef1f6;
+    background: #ddeefe;
     border: 0
 }
 
@@ -380,9 +382,8 @@ label.error {
 }
 
 .icon.icon-user {
-    background-position: -1px 0px;
-    width: 17px;
-    height: 17px
+    background-position: -24px -48px;
+    width: 22px;
 }
 
 .icon.icon-bottom-arrow {
@@ -673,11 +674,11 @@ label.error {
 }
 
 .index_logo {
-    width: 202px;
+    width: 300px;
     height: 50px;
     display: inline-block;
     background: url(../img/index/logo.png) no-repeat center center;
-    background-size: 82%
+    background-size: 82%;
 }
 
 .header {
@@ -692,8 +693,8 @@ label.error {
 .header .navbar {
     height: 50px;
     line-height: 50px;
-    background-color: #eef1f6;
-    margin-left: 210px
+    background-color: #f7faff;
+    margin-left: 300px;
 }
 
 .header .navbar-nav {
@@ -732,7 +733,7 @@ label.error {
 }
 
 .header .navbar-nav>li>a .icon-user {
-    height: 20px
+    height: 22px;
 }
 
 .user-menu span {
@@ -781,7 +782,7 @@ label.error {
 }
 
 .wrapper {
-    margin-left: 210px
+    margin-left: 300px
 }
 
 .sidebar {
@@ -790,7 +791,7 @@ label.error {
 }
 
 .left-side {
-    width: 210px;
+    width: 300px;
     height: 100%;
     position: fixed;
     left: 0px;
@@ -819,7 +820,7 @@ label.error {
 }
 
 .sidebar-menu li>a {
-    padding: 0px 20px;
+    padding: 0px 58px;
     height: 56px;
     display: block;
     line-height: 56px
@@ -834,7 +835,7 @@ label.error {
 }
 
 .sidebar-menu li>a>.icon {
-    margin-right: 5px
+    margin-right: 20px;
 }
 
 .sidebar-menu li>a .pull-right:after {
@@ -950,7 +951,7 @@ label.error {
 }
 
 .dataShow tbody>tr:hover {
-    background-color: #eef1f6
+    background-color: #f7faff;
 }
 
 .dataShow .operaList {

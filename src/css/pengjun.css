@@ -18,32 +18,45 @@
     width: 900px;
     margin: 4px 0 0 96px;
 }
-
-.personContent ul, .personContent ol {
-    padding: 10px 0 20px 0;
+.personContent .center-site ul {
     overflow: hidden;
-    border-bottom: 1px dashed #ccc;
 }
-
-.personContent ul li {
-    width: 50%;
+.personContent .center-site ul.person-option{
+	margin:80px 0 22px 0;
+}
+.personContent .center-site ul li {
+    width: 48%;
     float: left;
-    padding: 10px 0;
+	border:1px solid #cecece;
 }
 
 .personContent .center-site ul.person-option li {
-    width: 8%;
-    background: #F1F1F1;
-    border-radius: 2px;
-    margin-left: 20px;
+    width: 14%;
+    border-radius: 6px;
+    margin-right: 20px;
     text-align: center;
-    line-height: 20px;
+    line-height: 36px;
     cursor: pointer;
 }
-
-.personContent ul li label {
+.personContent .center-site ul.person-option li.changePassword{
+	background: #206aa0;
+}
+.personContent .center-site ul.person-option li.editFile {
+	background: #15a735;
+}
+.personContent .center-site ul.person-option li span {
+	color:#fff;
+}
+.personContent .center-site ul.username-ul {
+	margin-bottom: 30px;
+}
+.personContent .center-site ul li label {
     display: inline-block;
-    width: 72px;
+    width: 120px;
+    text-align: center;
+    padding: 10px 0;
+    border-right:1px solid #cecece;
+    background-color:aliceblue;
 }
 
 .personContent ul li textarea {
@@ -61,11 +74,6 @@
     width: 100px;
 }
 
-.personContent ol li {
-    width: 30%;
-    float: left;
-    padding: 10px 0;
-}
 .change-width p {
     width: 660px;
     font-weight: 900;
@@ -79,7 +87,7 @@
 }
 
 .change-width .changeForm .inputGroup input {
-	width:200px;
+	width:80%;
     height: 30px;
     border:1px solid #ccc;
 }
@@ -102,3 +110,40 @@
 #payStyle{
 	display:table-row;
 }
+
+/*用户管理*/
+.user-width {
+	width:600px;
+}
+.user-width ul {
+	
+}
+.user-width ul li {
+	width:50%;
+	float: left;
+	margin-bottom: 10px;
+}
+.user-width ul li label {
+	display: block;
+	width: 100px;
+}
+.user-width ul li input {
+	border:1px solid #ccc;
+	height: 40px;
+}
+.icons {
+	display:inline-block;
+	width:20px;
+	height:20px;
+	margin-right:5px;
+	vertical-align: middle;
+}
+.icons.icons-edit {
+	background: url(../img/edit.png) no-repeat center;
+	background-size: cover;
+}
+.icons.icons-username {
+	background: url(../img/changepwd.png) no-repeat center;
+	background-size: cover;
+}
+
