@@ -12,11 +12,6 @@ define(function(require, exports, module) {
             _this.initMenu();
             _this.registerEvent();
 
-            /*加载时默认触发一次变化事件进行事件加载*/
-            $(window).trigger('hashchange');
-            var moduleInfo = jh.utils.getURLValue();
-            jh.utils.defaultPage(moduleInfo.module);
-
             var username = sessionStorage.getItem('admin-username');
             $('#usernameText').text(username);
             $('#index_logo').attr('href', ROOTURL);
@@ -28,16 +23,24 @@ define(function(require, exports, module) {
         };
 
         this.initMenu = function(res) {
-            var menuData = require('menuJson/leftMenu');
-            var menuHtml = jh.utils.template('main_leftMenu_template', menuData);
-            $('#leftMenu-box').html(menuHtml);
+            jh.utils.ajax.send({
+                url: '/operator/getUserPermission',
+                done: function(returnData) {
+                    var menuHtml = jh.utils.template('main_leftMenu_template', { list: returnData.data });
+                    $('#leftMenu-box').html(menuHtml);
 
-            var h = $(window).height();
-            $("#leftMenu-box").mCustomScrollbar({
-                setHeight: h - 60,
-                theme: "light"
+                    var h = $(window).height();
+                    $("#leftMenu-box").mCustomScrollbar({
+                        setHeight: h - 60,
+                        theme: "light"
+                    });
+
+                    /*加载时默认触发一次变化事件进行事件加载*/
+                    $(window).trigger('hashchange');
+                    var moduleInfo = jh.utils.getURLValue();
+                    jh.utils.defaultPage(moduleInfo.module);
+                }
             });
-
         };
 
         this.registerEvent = function() {
