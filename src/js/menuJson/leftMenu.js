@@ -67,6 +67,13 @@ define(function(require, exports, module) {
             module: '/src/modules/yunying/creditor',
             url: '/creditor-manage',
             childrens: []
+        }
+        , {
+            name: '运营总监-债权方管理',
+            icon: 'icon-region',
+            module: '/src/modules/yunying/creditorManager',
+            url: '/creditor-manage-list',
+            childrens: []
         }, {
             name: '渠道-任务分配',
             icon: 'icon-supplier',
@@ -114,12 +121,6 @@ define(function(require, exports, module) {
             icon: 'icon-supplier',
             module: '/src/modules/user',
             url: '/user-manage',
-            childrens: []
-        }, {
-            name: '平台-角色管理',
-            icon: 'icon-supplier',
-            module: '/src/modules/user',
-            url: '/role-manage',
             childrens: []
         }]
     };
