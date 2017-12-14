@@ -109,12 +109,6 @@ define(function(require, exports, module) {
             module: '/src/modules/sendMoney',
             url: '/sendMoney-list',
             childrens: []
-        }, {
-            name: '用户中心',
-            icon: 'icon-supplier',
-            module: '/src/modules/person',
-            url: '/person-file',
-            childrens: []
         }]
     };
     module.exports = FINAL_MENU_DATA_JSON;

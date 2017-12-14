@@ -1352,69 +1352,22 @@ define(function(require, exports, module) {
             var m = this;
             m.settings = {
                 id: 'formValidator',
-                returnFlag: false,
                 debug: false,
                 errorPlacement: function(error, element) {
                     var el = $(element); //当前元素
                     var errMsg = $(error).text(); //错误信息
                     var isRight = errMsg ? false : true; //是否正确
-                    var tId = el.attr('name') + '-error';
-                    el.siblings('label.error').remove();
                     if (!isRight) {
-                        var left = el.offset().left;
-                        var top = el.offset().top;
-                        var h = $(window).scrollTop();
-                        if (h) {
-                            top -= h;
-                        }
-                        var str = '';
-
-                        str += '<div class="self-errMsg-container" data-origin="' + top + '" style="left:' + left + 'px;top:' + top + 'px;" id="' + tId + '">';
-                        str += '    <div class="self-errMsg-main">';
-                        str += '        <div class="self-arrow-b"></div>';
-                        str += '        <div class="self-errMsg-text">' + errMsg + '</div>';
-                        str += '    </div>';
-                        str += '</div>';
-
-                        $('#' + tId).remove();
-                        $('body').append(str);
-
-                        var tar = $('#' + tId);
-                        var width = tar.width();
-                        tar.css('left', left - width - 15);
-                        return false;
+                        el.addClass('red-border');
                     } else {
-                        $('#' + tId).remove();
+                        el.removeClass('red-border');
                     }
                 },
                 success: function(error, element) {
-                    $('#' + element.attr('name') + '-error').remove();
+                    $(element).removeClass('red-border');
                 },
                 submitHandler: function() {}
             };
-            var beforScrollTop = $(window).scrollTop();
-            $(window).off('scroll resize').on('scroll resize', function(event) {
-                window.setTimeout(function() {
-                    var afterScrollTop = $(window).scrollTop();
-                    var delta = afterScrollTop - beforScrollTop;
-
-                    var list = $('.self-errMsg-container');
-                    var h = $(window).scrollTop();
-                    $.each(list, function(index, item) {
-                        item = $(item);
-                        var name = item.attr('id');
-                        name = name.replace(/-error/, '');
-                        var tar = $('[name=' + name + ']');
-                        var top = tar.offset().top;
-                        if (delta > 0) {
-                            top -= h;
-                        } else {
-                            top += h;
-                        }
-                        item.css('top', top);
-                    });
-                }, 0);
-            });
             $.extend(m.settings, options);
             var sets = m.settings;
             $.validator.setDefaults({

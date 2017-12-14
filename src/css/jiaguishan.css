@@ -33,6 +33,10 @@ body .goBack {
 	padding: 5px 30px;
 }
 
+.red-border {
+	border: 1px solid red !important;
+}
+
 .hand {
 	cursor: pointer !important;
 }
