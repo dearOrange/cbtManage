@@ -44,7 +44,6 @@
 			<thead>
 				<tr>
 					<th width="3%">&nbsp;</th>
-					<th width="4%"><input type="checkbox" id="checkAll" /></th>
 					<th width="8%">任务号</th>
 					<th width="8%">车牌号</th>
 					<th width="8%">品牌</th>
@@ -67,7 +66,6 @@
 	{{ each list item index }}
 	<tr>
 		<td>{{index+1}}</td>
-		<td><input type="checkbox" value="{{item.id}}" /></td>
 		<td>{{item.taskNo}}</td>
 		<td>{{item.carNumber}}</td>
 		<td>{{item.carBrand}}</td>

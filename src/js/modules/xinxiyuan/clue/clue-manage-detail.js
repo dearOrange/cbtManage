@@ -25,12 +25,6 @@ define(function(require, exports, module) {
                     returnData.passState = args.state;
                     var html = jh.utils.template('clueManage_detail_template', returnData);
                     $('.clueManageContent').html(html);
-
-                    jh.utils.GetAddressByPosition(returnData.fingerprint);
-
-
-
-
                     var picArr = ['carPhoto', 'carNumberPhoto'];
                     for (var i = 0; i < 2; i++) {
                         jh.utils.uploader.init({
@@ -40,6 +34,9 @@ define(function(require, exports, module) {
                             }
                         });
                     }
+
+                    jh.utils.getPositionByImage(returnData.data.carPhoto);
+
                 }
             });
         };

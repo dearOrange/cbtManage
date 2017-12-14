@@ -25,16 +25,18 @@
         </ul>
         <div class="remark publicStyle">{{data.remark}}</div>
         <div class="imgRecord publicStyle" style="border:0;">
-        	<p>法院判决书</p>
-            {{each attachmentVoList item index}}
-            <img src="{{viewRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
-            {{/each}}
             <p>催收记录资料</p>
             {{each attachmentVoList item index}}
             <img src="{{viewRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
             {{/each}}
+            <p>凭证资料</p>
+            {{each voucherVoList item index}}
+            <img src="{{viewRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            {{/each}}
         </div>
+        {{if data.state === "new"}}
         <a class="pull-right button taskIdentify">审核</a>
+        {{/if}}
     </div>
 </script>
 <script type="text/template" id="task_identify_template">
