@@ -105,7 +105,9 @@
 		</div>
 		{{/if}}
 		{{if data.state == "clueChecking"}}
-		<a href="javascript:;" class="button clueaudit">审核线索</a>
+		{{each data.traceVoList data index}}
+		<a href="javascript:;" data-id="{{data.id}}" class="button clueaudit">审核线索</a>
+		{{/each}}
 		{{/if}}
 		
     </div>

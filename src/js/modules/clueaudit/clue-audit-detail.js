@@ -71,6 +71,7 @@ define(function(require, exports, module) {
         this.registerEvent = function() {
             //线索审核
             $('body').off('click', '.clueaudit').on('click', '.clueaudit', function() {
+            	var traceId = $(this).data("id");
                 var rejectCon = jh.utils.template('clue_audit_template', {});
                 jh.utils.alert({
                     content: rejectCon,
@@ -80,7 +81,7 @@ define(function(require, exports, module) {
                             method: 'post',
                             url: '/trace/channel/check',
                             data: {
-                                traceId: args.id,
+                                traceId: traceId,
                                 verifyStatus: throughState
                             },
                             done: function(returnData) {
