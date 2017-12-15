@@ -7,6 +7,9 @@
 define(function(require, exports, module) {
     function Main() {
         var _this = this;
+        _this.roleType = sessionStorage.getItem('admin-roleType');
+        _this.requestDate = 60 * 1000;
+        _this.requestInterId = null;
         this.init = function() {
             this.initPlugins();
             _this.initMenu();
@@ -15,6 +18,8 @@ define(function(require, exports, module) {
             var username = sessionStorage.getItem('admin-username');
             $('#usernameText').text(username);
             $('#index_logo').attr('href', ROOTURL);
+
+            _this.initUnReadMessage();
         };
 
         this.initPlugins = function() {
@@ -39,6 +44,30 @@ define(function(require, exports, module) {
                     $(window).trigger('hashchange');
                     var moduleInfo = jh.utils.getURLValue();
                     jh.utils.defaultPage(moduleInfo.module);
+                }
+            });
+        };
+
+        this.initUnReadMessage = function() {
+            if (_this.roleType === "finance") {
+                _this.requestDate *= 30;
+            }
+            if (_this.roleType === 'information' || _this.roleType === 'finance') {
+                _this.requestInterId = window.setInterval(function() {
+                    _this.requestUnReadMessage();
+                }, _this.requestDate);
+            }
+        };
+
+        this.requestUnReadMessage = function() {
+            jh.utils.ajax.send({
+                url: '/message/unread',
+                done: function(returnData) {
+                    var result = returnData.data;
+                    if (result.length > 0) {
+                        var str = jh.utils.template('newMessage_template', { message: result[0].content });
+                        $('body').append(str);
+                    }
                 }
             });
         };

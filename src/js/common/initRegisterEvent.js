@@ -5,6 +5,9 @@
  */
 define(function(require, exports, module) {
     function RegisterJQueryEvent() {
+        var _this = this;
+        _this.roleType = sessionStorage.getItem('admin-roleType');
+
         this.init = function() {
             this.registerEvent();
         };
@@ -123,6 +126,24 @@ define(function(require, exports, module) {
                 jh.utils.alert({
                     title: title,
                     content: '<img src="' + src + '"/>'
+                });
+            });
+
+            $('body').off('click', '.seaMessageDetail').on('click', '.seaMessageDetail', function() {
+                var m = $(this);
+                if(_this.roleType === 'information'){
+                    jh.utils.load('/src/modules/xinxiyuan/clue/clue-manage');
+                }else if(_this.roleType === 'finance'){
+                    jh.utils.load('/src/modules/sendMoney/sendMoney-list');
+                }else{
+                    m.parents('.new-message').remove();
+                }
+            });
+
+            $('body').off('click', '.newMessage_close').on('click', '.newMessage_close', function() {
+                var m = $(this);
+                m.parents('.new-message').animate({bottom:'-193px'},'slow','swing',function(){
+                    $(this).remove();
                 });
             });
 

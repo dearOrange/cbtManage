@@ -625,8 +625,11 @@ define(function(require, exports, module) {
                 tammy.utils.ajax.send({
                     url: '/admin/user/login-out',
                     always: function() {
-                        //                      $.cookie('admin-X-Token', null);
-                        //                      $.cookie('admin-username', null);
+                        sessionStorage.removeItem('admin-X-Token');
+                        sessionStorage.removeItem('admin-username');
+                        sessionStorage.removeItem('admin-isPass');
+                        sessionStorage.removeItem('admin-uploadToken');
+                        sessionStorage.removeItem('admin-roleType');
                         window.location.href = jh.config.pageLogin;
                     }
                 });

@@ -1,9 +1,11 @@
 .sidebar-menu li.active {
 	background-color: #ddeefe;
 }
+
 .sidebar-menu li.active>a>span {
-	color:#20a0ff;
+	color: #20a0ff;
 }
+
 .search-container .submit {
 	padding: 10px 40px;
 }
@@ -68,4 +70,24 @@ body .goBack {
 
 .zoom img::selection {
 	background-color: transparent;
+}
+
+.new-message {
+	position: fixed;
+	right: 5px;
+	bottom: 5px;
+	border: 1px solid #ddd;
+}
+
+.new-message .title {
+	height: 40px;
+	line-height: 40px;
+	padding: 0 10px 0 10px;
+	border-bottom: 1px solid #ddd;
+}
+
+.new-message .content {
+	width: 280px;
+	height: 100px;
+	text-align: center;
 }
