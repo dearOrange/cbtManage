@@ -20,7 +20,7 @@ define(function(require, exports, module) {
                 	returnData.password = sessionStorage.getItem("admin-password");
                     $(".personUser").html(returnData.data.userName);
                     $(".personPhone").html(returnData.password);
-                    $(".personArea").html(returnData.data.mobile);
+                    
                     //修改密码
                     $('body').off('click', '.changePassword').on('click', '.changePassword', function() {
 	                    var alertStr = jh.utils.template('task_changePassword_template', returnData);
