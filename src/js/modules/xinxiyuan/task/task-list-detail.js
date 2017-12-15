@@ -108,7 +108,7 @@ define(function(require, exports, module) {
                 			channelManagerName:managerId.data('name')
                 		};
                 		jh.utils.ajax.send({
-			                url: '/task/refuseAll',
+			                url: '/task/adopt',
 			                data: adoptData,
 			                done: function(returnData) {
 			                    jh.utils.alert({
