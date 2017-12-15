@@ -60,25 +60,21 @@
                 <p>预估费用</p>
                 <div>
                     <label>车辆残值估算:</label>
+                    {{if data.estimatedMaxPrice && data.estimatedMinPrice}}
+                    <span>{{data.carPrice}}</span>
+                    {{else}}
                     <input type="text" name="carPrice" maxlength="11" class="OnlyPrice" required="" id="salvage"/>
+                    {{/if}}
                 </div>
                 <div>
                     <label>处置费用估算:</label>
+                    {{if data.estimatedMaxPrice && data.estimatedMinPrice}}
+                    <span>{{data.estimatedMinPrice}}至</span><span>{{data.estimatedMaxPrice}}</span>
+                    {{else}}
                     <input type="text" maxlength="11" class="OnlyPrice" name="estimatedMinPrice" required="" id="minMoney" value="" />至<input type="text" name="estimatedMaxPrice" required="" class="OnlyPrice" maxlength="11" id="maxMoney" value=""/>
+                    {{/if}}
                 </div>
-                <input type="submit" value="预估" class="button search-button priceStorage" style="margin-bottom:40px;width:150px;height:30px;">
-                {{/if}}
-
-                {{if data.state == 'unconfirmed'}}
-                <p>预估费用</p>
-                <div>
-                    <label>车辆残值估算:</label>
-                    <input type="text" maxlength="11" readonly="readonly" class="OnlyPrice" id="salvage" value="{{data.carPrice}}" />
-                </div>
-                <div>
-                    <label>处置费用估算:</label>
-                    <input type="text" maxlength="11" readonly="readonly" class="OnlyPrice" id="minMoney" value="{{data.estimatedMinPrice}}" />至<input type="text" class="OnlyPrice" readonly="readonly" maxlength="11" id="maxMoney" value="{{data.estimatedMaxPrice}}" />
-                </div>
+                {{if data.estimatedMaxPrice && data.estimatedMinPrice}}
                 <p>确认费用</p>
                 <div>
                     <label>最终处置费用:</label>
@@ -95,6 +91,39 @@
                 <div>
                     <label>第三方处置清收费:</label>
                     <input type="text require" name="thirdpartyPrice" maxlength="11" class="OnlyPrice" id="thirdpartyPrice" value="" required="" />
+                </div>
+                <input type="submit" value="确认" class="button search-button surePrice" style="margin-bottom:40px;width:150px;height:30px;">
+                {{else}}
+                <input type="submit" value="预估" class="button search-button priceStorage" style="margin-bottom:40px;width:150px;height:30px;">
+                {{/if}}
+                {{/if}}
+
+                {{if data.state == 'unconfirmed'}}
+                <p>预估费用</p>
+                <div>
+                    <label>车辆残值估算:</label>
+                    <span>{{data.finalPrice}}</span>
+                </div>
+                <div>
+                    <label>处置费用估算:</label>
+                    <span>{{data.estimatedMinPrice}}至</span><span>{{data.estimatedMaxPrice}}</span>
+                </div>
+                <p>确认费用</p>
+                <div>
+                    <label>最终处置费用:</label>
+                    <input type="text require" name="finalPrice" maxlength="11" class="OnlyPrice" id="finalPrice" value="{{data.finalPrice}}" required="" />
+                </div>
+                <div>
+                    <label>其中受托人费用:</label>
+                    <input type="text require" name="baileePrice" maxlength="11" class="OnlyPrice" id="baileePrice" value="{{data.baileePrice}}" required="" />
+                </div>
+                <div>
+                    <label>资产查找费:</label>
+                    <input type="text require" name="assetPrice" maxlength="11" class="OnlyPrice" id="assetPrice" value="{{data.assetPrice}}" required="" />
+                </div>
+                <div>
+                    <label>第三方处置清收费:</label>
+                    <input type="text require" name="thirdpartyPrice" maxlength="11" class="OnlyPrice" id="thirdpartyPrice" value="{{data.thirdpartyPrice}}" required="" />
                 </div>
                 <input type="submit" value="确认" class="button search-button surePrice" style="margin-bottom:40px;width:150px;height:30px;">
                 {{/if}}

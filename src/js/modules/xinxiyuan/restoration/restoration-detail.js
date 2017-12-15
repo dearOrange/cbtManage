@@ -31,6 +31,7 @@ define(function(require, exports, module) {
                                     content: '价格预估完毕',
                                     ok: true
                                 });
+                                window.location.reload();
                             }
                         });
                     } else {
@@ -42,6 +43,7 @@ define(function(require, exports, module) {
                                     content: '价格确认完毕',
                                     ok: true
                                 });
+                                window.location.reload();
                             }
                         });
                     }
