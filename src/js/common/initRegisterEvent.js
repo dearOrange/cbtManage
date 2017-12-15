@@ -91,7 +91,7 @@ define(function(require, exports, module) {
                 jh.utils.defaultPage();
             });
 
-            $('.user-menu').on('click', function() {
+            $('#userCenterLink').on('click', function() {
                 var me = $(this);
                 jh.utils.load('/src/modules/person/person-file');
             });
@@ -126,7 +126,7 @@ define(function(require, exports, module) {
                 });
             });
 
-            $('#loginout').on('click', function() {
+            $('#logoutLink').on('click', function() {
                 var me = $(this);
                 jh.utils.alert({
                     content: '确定要安全退出吗？',
