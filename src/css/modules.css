@@ -995,7 +995,7 @@ textarea {
 
 .taskpull p:last-of-type input {
 	height: 20px;
-	border: 1px solid #000;
+	border: 1px solid #ccc;
 	margin: 6px 0;
 	padding: 6px 0;
 }
@@ -1032,7 +1032,7 @@ textarea {
 .increateNewInfo div input {
 	outline: none;
 	height: 26px;
-	border: 1px solid #000;
+	border: 1px solid #ccc;
 }
 
 .increateNewInfo div #carAdress {
