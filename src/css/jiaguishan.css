@@ -1,7 +1,9 @@
 .sidebar-menu li.active {
-	background-color: #5a707d;
+	background-color: #eee;
 }
-
+.sidebar-menu li.active>a>span {
+	color:#20a0ff;
+}
 .search-container .submit {
 	padding: 10px 40px;
 }

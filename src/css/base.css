@@ -76,7 +76,7 @@ td {
 }
 
 th {
-    background: #ddeefe;
+    background: #eee;
     border: 0
 }
 
@@ -699,7 +699,7 @@ label.error {
 .header .navbar {
     height: 50px;
     line-height: 50px;
-    background-color: #f7faff;
+    background-color: rgba(0, 0, 0, 0.01);
     margin-left: 210px;
 }
 
@@ -801,7 +801,7 @@ label.error {
     height: 100%;
     position: fixed;
     left: 0px;
-    background: #324157;
+    background: #fff;
     -webkit-box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.1);
     box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.07);
@@ -833,11 +833,11 @@ label.error {
 }
 
 .sidebar-menu li>a:hover {
-    background-color: #48576a
+    background-color: #ccc;
 }
 
 .sidebar-menu li>a>span {
-    color: #bfcbd9
+    /*color: #000;*/
 }
 
 .sidebar-menu li>a>.icon {
@@ -957,7 +957,7 @@ label.error {
 }
 
 .dataShow tbody>tr:hover {
-    background-color: #f7faff;
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
 .dataShow .operaList {
