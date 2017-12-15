@@ -28,7 +28,7 @@ define(function(require, exports, module) {
     require('http://webapi.amap.com/maps?v=1.4.0&key=4710f3db882029c3838ac9eaf1ecda5c');
 
     var FINAL_OPTIONS = {
-        viewImgRoot: 'http://oka19npup.bkt.clouddn.com/',
+        viewImgRoot: viewImageRoot,
         imageScale: '?imageMogr2/auto-orient/thumbnail/100x100',
         pageSize: 10, //默认每页显示条数
         defaultPageSize: 10,

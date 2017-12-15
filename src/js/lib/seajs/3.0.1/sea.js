@@ -19,15 +19,19 @@ var ROOTURL = '';/*项目根目录名称 谨慎修改*/
 var BaseUrl = '/src/js/';
 var REQUESTROOT = '/adminServer'; /*服务器默认为/manager 当本地开发时切换为域名映射*/
 var serverHost = '';
+var viewImageRoot = 'http://oka19npup.bkt.clouddn.com/';
 
 if(window.location.host.indexOf('.cbt.com')!==-1){
     REQUESTROOT = 'http://qa.cbt.com:8080' + REQUESTROOT;
     serverHost = 'http://qa.cbt.com:8080';
+    viewImageRoot = 'http://p0znn0pti.bkt.clouddn.com/';
 }
 if(window.location.host.indexOf('192.168.2.181')!==-1){
     ROOTURL = '/admin';
     BaseUrl = ROOTURL + BaseUrl;
+    viewImageRoot = 'http://p0znn0pti.bkt.clouddn.com/';
 }
+
 seajs.config({
     base: BaseUrl,
     charset: 'utf-8',
