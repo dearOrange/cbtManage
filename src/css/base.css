@@ -76,7 +76,7 @@ td {
 }
 
 th {
-    background: #eee;
+    background: #ddeefe;
     border: 0
 }
 
@@ -693,14 +693,14 @@ label.error {
 .header .navbar #toggleMenu {
     margin-left: 5px;
     cursor: pointer;
-    color: #20a0ff
+    color: #fff;
 }
 
 .header .navbar {
     height: 50px;
     line-height: 50px;
-    background-color: rgba(0, 0, 0, 0.01);
-    margin-left: 210px;
+    background-color: #3b9ff3;
+    /*margin-left: 210px;*/
 }
 
 .header .navbar-nav {
@@ -743,7 +743,7 @@ label.error {
 }
 
 .user-menu span {
-    color: #000;
+    color: #fff;
     margin: 0px 10px
 }
 
@@ -806,7 +806,7 @@ label.error {
     -moz-box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.1);
     box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.07);
     min-height: 100%;
-    top: 0px;
+    top: 50px;
 }
 
 .right-side {
@@ -833,7 +833,7 @@ label.error {
 }
 
 .sidebar-menu li>a:hover {
-    background-color: #ccc;
+    background-color: #20a0ff7a;
 }
 
 .sidebar-menu li>a>span {
@@ -870,6 +870,10 @@ label.error {
     height: 50px;
     line-height: 50px;
     float: left
+}
+
+.content-header span {
+	color:#fff;
 }
 
 .content-header h1 {
@@ -957,7 +961,7 @@ label.error {
 }
 
 .dataShow tbody>tr:hover {
-    background-color: rgba(0, 0, 0, 0.03);
+    background-color: #f7faff;
 }
 
 .dataShow .operaList {

@@ -40,7 +40,7 @@ define(function(require, exports, module) {
                 var hea = $('article.wrapper');
                 var menu = $('#menusBar');
                 if (me.hasClass('closeMenu')) {
-                    con.css('margin-left', '210px');
+                    con.css('margin-left', '0px');
                     hea.css('margin-left', '210px');
                     menu.show();
                     me.text('<-关闭菜单');
