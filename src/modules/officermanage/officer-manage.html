@@ -57,7 +57,7 @@
         <td>{{item.star}}</td>
         <td>{{item.contactPhone}}</td>
         <td>{{item.passAt}}</td>
-        <td>{{item.isCertified}}</td>
+        <td>{{if item.isCertified === 0}}未认证{{else}}认证{{/if}}</td>
         <td>
             <ul class="operaitem">
                 <li>
