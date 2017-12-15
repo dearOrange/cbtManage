@@ -51,6 +51,7 @@ define(function(require, exports, module) {
 			$('body').off('click', '.sendMoney').on('click', '.sendMoney', function() {
 				var me = $(this);
 				var data = me.data('infos');
+				data.viewImgRoot = jh.config.viewImgRoot;
 				var alertContent = jh.utils.template('sendMoneyList_sure_template', data);
 				var id = $(this).data('id');
 				jh.utils.alert({

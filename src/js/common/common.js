@@ -1258,14 +1258,8 @@ define(function(require, exports, module) {
                         var img = item.find('img'); //预览图对象
                         var span = item.find('span'); //删除按钮
                         var input = item.find('input'); //隐藏域
-                        span.attr({
-                            'data-domId': pickId,
-                            'data-fileId': file.file.id
-                        });
-                        img.attr({
-                            'data-id': returnData.key,
-                            'src': tammy.config.viewImgRoot + returnData.key
-                        });
+
+                        img.attr('src',tammy.config.viewImgRoot + returnData.key + tammy.config.imageScale);
                         var inputName = uploader.options.hiddenName === '' ? pickId : uploader.options.hiddenName;
                         input.attr({
                             name: inputName,
@@ -1412,6 +1406,7 @@ define(function(require, exports, module) {
             _this.targetId = targetId;
             _this.targetStr = targetId;
             _this.showText = '';
+            var num = 10;
             _this.localNumber = localStorage.getItem(targetId);
 
             if ($('#' + targetId).hasClass('disabled')) {
@@ -1419,10 +1414,10 @@ define(function(require, exports, module) {
             }
             $('#' + _this.targetId).addClass('disabled').prop('disabled', true);
             if (type === 'click') {
-                _this.localNumber = 10;
+                _this.localNumber = num;
             } else {
                 if (!_this.localNumber) {
-                    _this.localNumber = 10;
+                    _this.localNumber = num;
                     localStorage.setItem(targetStr, _this.localNumber);
                 } else {
                     _this.localNumber = parseInt(_this.localNumber, 10);
@@ -1431,7 +1426,7 @@ define(function(require, exports, module) {
 
             if (_this.localNumber <= 0) {
                 _this.showText = '获取验证码';
-                localStorage.setItem(targetStr, 10);
+                localStorage.setItem(targetStr, num);
                 $('#' + _this.targetId).prop('disabled', false).removeClass('disabled').text(_this.showText);
                 return false;
             } else {

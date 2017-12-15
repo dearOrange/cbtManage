@@ -22,6 +22,7 @@ define(function(require, exports, module) {
                 },
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
+                    returnData.viewImgRoot = jh.config.viewImgRoot;
                     var creditorStr = jh.utils.template('admin_creditorDetail_template', returnData);
                     $('.detail-content').html(creditorStr);
                     var picArr = ['businessLicense', 'legalPersonIdImg', 'legalPersonHandIdImg', 'linkmanIdImg', 'linkmanHandIdImg'];

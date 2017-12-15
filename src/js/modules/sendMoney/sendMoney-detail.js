@@ -47,6 +47,7 @@ define(function(require, exports, module) {
             });
             //打款
             $('body').off('click', '.playMoney').on('click', '.playMoney', function() {
+                _this.data.viewImgRoot = jh.config.viewImgRoot;
                 var alertContent = jh.utils.template('sendMoney_sure_template', _this.data);
                 jh.utils.alert({
                     content: alertContent,

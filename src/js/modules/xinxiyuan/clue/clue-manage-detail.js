@@ -23,6 +23,7 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.passState = args.state;
+                    returnData.viewImgRoot = jh.config.viewImgRoot;
                     var html = jh.utils.template('clueManage_detail_template', returnData);
                     $('.clueManageContent').html(html);
                     var picArr = ['carPhoto', 'carNumberPhoto'];

@@ -50,7 +50,7 @@ define(function(require, exports, module) {
             page.init();
         };
 		this.distributionSheriff = function(arr) {
-            var source = require('/src/templates/sheriff-distribution.tpl');
+            var source = require(ROOTURL + '/src/templates/sheriff-distribution.tpl');
             var render = jh.utils.template.compile(source);
             var menuState = function(state) {
                 switch (state) {
