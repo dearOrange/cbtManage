@@ -75,7 +75,6 @@ define(function(require, exports, module) {
             });
         };
         this.distributionSheriff = function(arr) {
-        	debugger
             var source = require(ROOTURL + '/src/templates/sheriff-distribution.tpl');
             var render = jh.utils.template.compile(source);
             var menuState = function(state) {
