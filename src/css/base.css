@@ -789,13 +789,6 @@ label.error {
     cursor: pointer
 }
 
-.index_logo {
-    width: 210px;
-    height: 50px;
-    display: inline-block;
-    background: url(../img/index/logo.png) no-repeat center center;
-    background-size: 82%;
-}
 
 .header {
 }
@@ -810,6 +803,19 @@ label.error {
     height: 50px;
     line-height: 50px;
     background-color: #434554;
+}
+
+.header .navbar .index_logo {
+    width: 210px;
+    height: 50px;
+    float:left;
+    display: inline-block;
+    background: url(../img/index/logo.png) no-repeat center center;
+    background-size: 82%;
+}
+
+.header .navbar p {
+	float:left;
 }
 
 .header .navbar-nav {
