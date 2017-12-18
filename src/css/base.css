@@ -800,8 +800,8 @@ label.error {
 }
 
 .header .navbar {
-    height: 50px;
-    line-height: 50px;
+    height: 70px;
+    line-height: 70px;
     background-color: #434554;
 }
 
@@ -809,6 +809,7 @@ label.error {
     width: 210px;
     height: 50px;
     float:left;
+    margin:7px 0 0 80px;
     display: inline-block;
     background: url(../img/index/logo.png) no-repeat center center;
     background-size: 82%;
@@ -816,6 +817,7 @@ label.error {
 
 .header .navbar p {
 	float:left;
+	color: #f6f6f6;
 }
 
 .header .navbar-nav {
@@ -921,7 +923,7 @@ label.error {
     -moz-box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.1);
     box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.07);
     min-height: 100%;
-    top: 50px;
+    top: 70px;
 }
 
 .right-side {
@@ -957,7 +959,7 @@ label.error {
 }
 
 .sidebar-menu li>a>span {
-    font-size: 18px;
+    font-size: 16px;
     color: #c5c5c5;
 }
 
