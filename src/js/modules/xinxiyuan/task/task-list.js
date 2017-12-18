@@ -132,7 +132,7 @@ define(function(require, exports, module) {
             			optionArr.push(item);
             		}
             	}
-	    		var str='';
+	    		var str='<option value="">全部</option>';
 	    		for(var j=0;j<optionArr.length;j++){
 	    			var temp = optionArr[j];
 	    			str += '<option value="'+temp.val+'">'+temp.name+'</option>';
