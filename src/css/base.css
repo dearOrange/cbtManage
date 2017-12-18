@@ -323,100 +323,100 @@ label.error {
     vertical-align: middle
 }
 
-.icon-cw_czgl {
-    background: url('css_sprites.png') -114px -10px;
+.icon.icon-cw_czgl {
+    background-position: -114px -10px;
 }
 
-.icon-cw_fftx {
-    background: url('css_sprites.png') -154px -90px;
+.icon.icon-cw_fftx {
+    background-position: -154px -90px;
 }
 
-.icon-icon_closeMenu {
+.icon.icon-icon_closeMenu {
     width: 32px;
     height: 30px;
-    background: url('css_sprites.png') -62px -10px;
+    background-position: -62px -10px;
 }
 
-.icon-icon_nopass {
-    background: url('css_sprites.png') -154px -10px;
+.icon.icon-icon_nopass {
+    background-position: -154px -10px;
 }
 
-.icon-icon_openMenu {
+.icon.icon-icon_openMenu {
     width: 32px;
     height: 30px;
-    background: url('css_sprites.png') -10px -62px;
+    background-position: -10px -62px;
 }
 
-.icon-icon_pass {
-    background: url('css_sprites.png') -114px -50px;
+.icon.icon-icon_pass {
+    background-position: -114px -50px;
 }
 
-.icon-icon_userCenter {
-    background: url('css_sprites.png') -10px -112px;
+.icon.icon-icon_userCenter {
+    background-position: -10px -112px;
 }
 
-.icon-qd_btgl {
-    background: url('css_sprites.png') -50px -112px;
+.icon.icon-qd_btgl {
+    background-position: -50px -112px;
 }
 
-.icon-qd_rwfp {
-    background: url('css_sprites.png') -90px -112px;
+.icon.icon-qd_rwfp {
+    background-position: -90px -112px;
 }
 
-.icon-qd_tcdfp {
+.icon.icon-qd_tcdfp {
     width: 32px;
     height: 32px;
-    background: url('css_sprites.png') -10px -10px;
+    background-position: -10px -10px;
 }
 
-.icon-qd_xssh {
-    background: url('css_sprites.png') -154px -50px;
+.icon.icon-qd_xssh {
+    background-position: -154px -50px;
 }
 
-.icon-qd_zqfqr {
-    background: url('css_sprites.png') -62px -62px;
+.icon.icon-qd_zqfqr {
+    background-position: -62px -62px;
 }
 
-.icon-xx_cjjg {
-    background: url('css_sprites.png') -10px -152px;
+.icon.icon-xx_cjjg {
+    background-position: -10px -152px;
 }
 
-.icon-xx_pzsh {
-    background: url('css_sprites.png') -50px -152px;
+.icon.icon-xx_pzsh {
+    background-position: -50px -152px;
 }
 
-.icon-xx_rwfp {
-    background: url('css_sprites.png') -90px -152px;
+.icon.icon-xx_rwfp {
+    background-position: -90px -152px;
 }
 
-.icon-xx_rwgl {
-    background: url('css_sprites.png') -130px -152px;
+.icon.icon-xx_rwgl {
+    background-position: -130px -152px;
 }
 
-.icon-xx_wtyz {
-    background: url('css_sprites.png') -194px -10px;
+.icon.icon-xx_wtyz {
+    background-position: -194px -10px;
 }
 
-.icon-xx_xsgl {
-    background: url('css_sprites.png') -194px -50px;
+.icon.icon-xx_xsgl {
+    background-position: -194px -50px;
 }
 
-.icon-xx_zqfrz {
-    background: url('css_sprites.png') -194px -90px;
+.icon.icon-xx_zqfrz {
+    background-position: -194px -90px;
 }
 
-.icon-yy_dshrw {
-    background: url('css_sprites.png') -194px -130px;
+.icon.icon-yy_dshrw {
+    background-position: -194px -130px;
 }
 
-.icon-yy_xsfk {
+.icon.icon-yy_xsfk {
     width: 20px;
     height: 15px;
-    background: url('css_sprites.png') -50px -192px;
+    background-position: -50px -192px;
 }
 
-.icon-yy_zqfgl {
-    background: url('css_sprites.png') -10px -192px;
+.icon.icon-yy_zqfgl {
+    background-position: -10px -192px;
 }
 
 .icon.icon-out {
