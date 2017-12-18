@@ -12,9 +12,8 @@ input[type=text], input[type=password], textarea {
 body {
     background: #fff;
     width: 100%;
-    height: 100%;
-    min-width: 1000px;
-    font: 14px/150% Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif
+    height: 100%;    /*min-width: 1000px;*/
+    font: 14px/150% Microsoft YaHei, Helvetica, PingFang SC, Arial
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
@@ -316,9 +315,108 @@ label.error {
 }
 
 .icon {
+    width: 20px;
+    height: 20px;
     display: inline-block;
-    background: url(../img/icon.png) no-repeat;
+    background-image: url(../img/css_sprites.png);
+    background-repeat: no-repeat;
     vertical-align: middle
+}
+
+.icon-cw_czgl {
+    background: url('css_sprites.png') -114px -10px;
+}
+
+.icon-cw_fftx {
+    background: url('css_sprites.png') -154px -90px;
+}
+
+.icon-icon_closeMenu {
+    width: 32px;
+    height: 30px;
+    background: url('css_sprites.png') -62px -10px;
+}
+
+.icon-icon_nopass {
+    background: url('css_sprites.png') -154px -10px;
+}
+
+.icon-icon_openMenu {
+    width: 32px;
+    height: 30px;
+    background: url('css_sprites.png') -10px -62px;
+}
+
+.icon-icon_pass {
+    background: url('css_sprites.png') -114px -50px;
+}
+
+.icon-icon_userCenter {
+    background: url('css_sprites.png') -10px -112px;
+}
+
+.icon-qd_btgl {
+    background: url('css_sprites.png') -50px -112px;
+}
+
+.icon-qd_rwfp {
+    background: url('css_sprites.png') -90px -112px;
+}
+
+.icon-qd_tcdfp {
+    width: 32px;
+    height: 32px;
+    background: url('css_sprites.png') -10px -10px;
+}
+
+.icon-qd_xssh {
+    background: url('css_sprites.png') -154px -50px;
+}
+
+.icon-qd_zqfqr {
+    background: url('css_sprites.png') -62px -62px;
+}
+
+.icon-xx_cjjg {
+    background: url('css_sprites.png') -10px -152px;
+}
+
+.icon-xx_pzsh {
+    background: url('css_sprites.png') -50px -152px;
+}
+
+.icon-xx_rwfp {
+    background: url('css_sprites.png') -90px -152px;
+}
+
+.icon-xx_rwgl {
+    background: url('css_sprites.png') -130px -152px;
+}
+
+.icon-xx_wtyz {
+    background: url('css_sprites.png') -194px -10px;
+}
+
+.icon-xx_xsgl {
+    background: url('css_sprites.png') -194px -50px;
+}
+
+.icon-xx_zqfrz {
+    background: url('css_sprites.png') -194px -90px;
+}
+
+.icon-yy_dshrw {
+    background: url('css_sprites.png') -194px -130px;
+}
+
+.icon-yy_xsfk {
+    width: 20px;
+    height: 15px;
+    background: url('css_sprites.png') -50px -192px;
+}
+
+.icon-yy_zqfgl {
+    background: url('css_sprites.png') -10px -192px;
 }
 
 .icon.icon-out {
@@ -408,6 +506,18 @@ label.error {
     border-right-color: transparent;
     border-left-color: transparent;
     background: none
+}
+
+.icon.icon-cw1 {
+    width: 20px;
+    height: 20px;
+    background-image: url(../img/cw1.png);
+}
+
+.icon.icon-cw2 {
+    width: 20px;
+    height: 20px;
+    background-image: url(../img/cw2.png);
 }
 
 .pagination {
@@ -699,8 +809,7 @@ label.error {
 .header .navbar {
     height: 50px;
     line-height: 50px;
-    background-color: #3b9ff3;
-    /*margin-left: 210px;*/
+    background-color: #434554;
 }
 
 .header .navbar-nav {
@@ -788,7 +897,7 @@ label.error {
 }
 
 .wrapper {
-    margin-left: 210px
+    margin-left: 250px
 }
 
 .sidebar {
@@ -797,11 +906,11 @@ label.error {
 }
 
 .left-side {
-    width: 210px;
+    width: 250px;
     height: 100%;
     position: fixed;
     left: 0px;
-    background: #fff;
+    background: #363845;
     -webkit-box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.1);
     box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.07);
@@ -823,6 +932,7 @@ label.error {
 }
 
 .sidebar-menu li {
+    border-bottom: 1px solid #474a5e;
 }
 
 .sidebar-menu li>a {
@@ -833,15 +943,20 @@ label.error {
 }
 
 .sidebar-menu li>a:hover {
-    background-color: #20a0ff7a;
+    background-color: #2e303c;
+    transition: background-color .6s;
+    -moz-transition: background-color .6s; /* Firefox 4 */
+    -webkit-transition: background-color .6s; /* Safari 和 Chrome */
+    -o-transition: background-color .6s; /* Opera */
 }
 
 .sidebar-menu li>a>span {
-    /*color: #000;*/
+    font-size: 18px;
+    color: #c5c5c5;
 }
 
 .sidebar-menu li>a>.icon {
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .sidebar-menu li>a .pull-right:after {
@@ -873,7 +988,7 @@ label.error {
 }
 
 .content-header span {
-	color:#fff;
+    color: #fff;
 }
 
 .content-header h1 {

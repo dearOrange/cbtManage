@@ -37,7 +37,7 @@ define(function(require, exports, module) {
                     var h = $(window).height();
                     $("#leftMenu-box").mCustomScrollbar({
                         setHeight: h - 140,
-                        theme: "minimal-dark"
+                        theme: "light"
                     });
 
                     /*加载时默认触发一次变化事件进行事件加载*/

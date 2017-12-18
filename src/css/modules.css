@@ -5,8 +5,9 @@
  * @version 1.0
  */
 html {
-	height:100%;
+	height: 100%;
 }
+
 body.login {
 	background: url(../img/loginbg.png) no-repeat center;
 	background-size: cover;
@@ -34,8 +35,8 @@ body.login {
 .loginForm {
 	width: 502px;
 	margin: 160px 0px 0px 30px;
-	background-color: rgba(0,0,0,0.5);
-	padding:36px 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 36px 0;
 }
 
 .loginForm input {
@@ -111,9 +112,7 @@ body.login {
 	line-height: 20px;
 }
 
-
 /*infomationList.html*/
-
 #selectOk {
 	margin-left: 10px;
 }
@@ -153,11 +152,9 @@ body.login {
 	text-align: left;
 }
 
-
 /*
 查看资讯
  */
-
 .lookUpContent {
 	margin: 20px 20px;
 	border: 1px solid #f8f8f8;
@@ -187,9 +184,7 @@ body.login {
 	margin-bottom: 20px;
 }
 
-
 /*addInfomation.html*/
-
 .must {
 	color: red;
 }
@@ -211,8 +206,7 @@ body.login {
 	text-align: center;
 }
 
-.addInfoContent input[name="reset"],
-#addAdShow input[name="reset"] {
+.addInfoContent input[name="reset"], #addAdShow input[name="reset"] {
 	margin-left: 30px;
 }
 
@@ -220,8 +214,7 @@ body.login {
 	display: none;
 }
 
-.addInfoContent .imgUpLoad,
-.editor {
+.addInfoContent .imgUpLoad, .editor {
 	position: relative;
 }
 
@@ -239,11 +232,9 @@ body.login {
 	min-height: 60px;
 }
 
-
 /*
 adList.html
  */
-
 #addAdShow table tr td {
 	text-align: left;
 }
@@ -271,8 +262,7 @@ adList.html
 	margin-left: 200px;
 }
 
-#addAdShow table input[type="submit"],
-#addAdShow table input[type="reset"] {
+#addAdShow table input[type="submit"], #addAdShow table input[type="reset"] {
 	margin-top: 40px;
 }
 
@@ -282,9 +272,7 @@ adList.html
 	margin-right: 10px;
 }
 
-
 /*agreementList.html*/
-
 .btnUnBorder {
 	border: 0 !important;
 }
@@ -337,9 +325,7 @@ adList.html
 	margin-top: 10px;
 }
 
-
 /* 角色设置 */
-
 .roleSetList .manage {
 	margin-top: 20px;
 	float: left;
@@ -350,45 +336,31 @@ adList.html
 	margin-left: 20px;
 }
 
-.addRole,
-.editRole {
+.addRole, .editRole {
 	background-color: #f8f8f8;
 }
 
-.addRole .icheckbox_flat-orange,
-.editRole .icheckbox_flat-orange {
+.addRole .icheckbox_flat-orange, .editRole .icheckbox_flat-orange {
 	margin-right: 5px;
 }
 
-.addRole .roleName,
-.editRole .roleName,
-.addRole .roleDetails,
-.editRole .roleDetails {
+.addRole .roleName, .editRole .roleName, .addRole .roleDetails, .editRole .roleDetails {
 	margin-bottom: 30px;
 	margin-top: 50px;
 }
 
-.addRole .roleName dl,
-.editRole .roleName dl,
-.addRole .roleDetails dl,
-.editRole .roleDetails dl {
+.addRole .roleName dl, .editRole .roleName dl, .addRole .roleDetails dl, .editRole .roleDetails dl {
 	display: block;
 }
 
-.addRole .roleName dt,
-.editRole .roleName dt,
-.addRole .roleDetails dt,
-.editRole .roleDetails dt {
+.addRole .roleName dt, .editRole .roleName dt, .addRole .roleDetails dt, .editRole .roleDetails dt {
 	display: block;
 	width: 10%;
 	float: left;
 	text-align: center;
 }
 
-.addRole .roleName dd,
-.editRole .roleName dd,
-.addRole .roleDetails dd,
-.editRole .roleDetails dd {
+.addRole .roleName dd, .editRole .roleName dd, .addRole .roleDetails dd, .editRole .roleDetails dd {
 	float: left;
 	width: 90%;
 }
@@ -400,63 +372,52 @@ adList.html
 	border-radius: 3px;
 }
 
-.addRole .checkboxGroup,
-.editRole .checkboxGroup {
+.addRole .checkboxGroup, .editRole .checkboxGroup {
 	border-bottom: solid 1px #fff;
 	padding: 15px 0;
 }
 
-.addRole .label_checkbox,
-.editRole .label_checkbox {
+.addRole .label_checkbox, .editRole .label_checkbox {
 	margin-right: 10px;
 }
 
-.addRole .manage,
-.editRole .manage {
+.addRole .manage, .editRole .manage {
 	text-align: center;
 	margin: 30px 0;
 	width: 100%;
 }
 
-.addRole .manage input,
-.editRole .manage input {
+.addRole .manage input, .editRole .manage input {
 	width: 100px;
 }
 
-.addRole .secondary,
-.editRole .secondary {
+.addRole .secondary, .editRole .secondary {
 	margin-left: 30px;
 	margin-top: 10px;
 }
 
-.addRole .subkey,
-.editRole .subkey {
+.addRole .subkey, .editRole .subkey {
 	display: inline-block;
 	margin-bottom: 10px;
 	margin-right: 20px;
 }
 
-
 /* 消息列表 */
-
 .messageList .warn {
 	color: #f00;
 }
 
-.addMessage .title p,
-.editMessage .title p {
+.addMessage .title p, .editMessage .title p {
 	width: 100px;
 	text-align: right;
 }
 
-.addMessage .content input[type=text],
-.editMessage .content input[type=text] {
+.addMessage .content input[type=text], .editMessage .content input[type=text] {
 	width: 90%;
 	height: 35px !important;
 }
 
-.addMessage .content textarea,
-.editMessage .content textarea {
+.addMessage .content textarea, .editMessage .content textarea {
 	width: 91%;
 	padding: 6px;
 	line-height: 20px;
@@ -464,28 +425,23 @@ adList.html
 	resize: none;
 }
 
-.addMessage .content select,
-.editMessage .content select {
+.addMessage .content select, .editMessage .content select {
 	border: 1px solid #cecece !important;
 	border-radius: 3px !important;
 }
 
-.addMessage .must,
-.editMessage .must {
+.addMessage .must, .editMessage .must {
 	font-style: normal;
 	color: #f00;
 }
 
-.addMessage .opertionCon,
-.editMessage .opertionCon {
+.addMessage .opertionCon, .editMessage .opertionCon {
 	float: none;
 	text-align: center;
 	margin-bottom: 20px;
 }
 
-
 /* 供应商列表管理 */
-
 .supplierList .opertionCon {
 	float: left;
 	margin-left: 237px;
@@ -513,24 +469,20 @@ adList.html
 	width: 197px !important;
 }
 
-.addSupplier .title,
-.editSupplier .title {
+.addSupplier .title, .editSupplier .title {
 	text-align: right;
 }
 
-.addSupplier .content,
-.editSupplier .content {
+.addSupplier .content, .editSupplier .content {
 	text-align: left;
 }
 
-.addSupplier .must,
-.editSupplier .must {
+.addSupplier .must, .editSupplier .must {
 	font-style: normal;
 	color: #f00;
 }
 
-.addSupplier input[type=text],
-.editSupplier input[type=text] {
+.addSupplier input[type=text], .editSupplier input[type=text] {
 	width: 100%;
 	height: 35px;
 	border: none;
@@ -540,27 +492,23 @@ adList.html
 	box-sizing: border-box;
 }
 
-.addSupplier .select2-container--default,
-.editSupplier .select2-container--default {
+.addSupplier .select2-container--default, .editSupplier .select2-container--default {
 	width: 100% !important;
 }
 
-.addSupplier .opertionCon,
-.editSupplier .opertionCon {
+.addSupplier .opertionCon, .editSupplier .opertionCon {
 	float: none;
 	width: 204px;
 	margin: 0 auto;
 }
 
-.addSupplier #citySelect,
-.editSupplier #citySelect {
+.addSupplier #citySelect, .editSupplier #citySelect {
 	float: left;
 	position: relative;
 	margin-right: 10px;
 }
 
-.addSupplier #inputCity,
-.editSupplier #inputCity {
+.addSupplier #inputCity, .editSupplier #inputCity {
 	width: 200px;
 	height: 35px;
 	border: 1px solid #ccc;
@@ -569,8 +517,7 @@ adList.html
 	display: inline-block;
 }
 
-.addSupplier #cityList,
-.editSupplier #cityList {
+.addSupplier #cityList, .editSupplier #cityList {
 	width: 198px;
 	max-height: 300px;
 	border: 1px solid #ccc;
@@ -582,28 +529,24 @@ adList.html
 	display: none;
 }
 
-.addSupplier #cityList li,
-.editSupplier #cityList li {
+.addSupplier #cityList li, .editSupplier #cityList li {
 	height: 26px;
 	line-height: 26px;
 	padding: 0 10px;
 	cursor: pointer;
 }
 
-.addSupplier #cityList li:hover,
-.editSupplier #cityList li:hover {
+.addSupplier #cityList li:hover, .editSupplier #cityList li:hover {
 	background-color: #eee;
 }
 
-.addSupplier #service_region,
-.editSupplier #service_region {
+.addSupplier #service_region, .editSupplier #service_region {
 	float: left;
 	margin-top: 4px;
 	width: 80%;
 }
 
-.addSupplier #service_region li,
-.editSupplier #service_region li {
+.addSupplier #service_region li, .editSupplier #service_region li {
 	float: left;
 	margin-right: 10px;
 	margin-bottom: 10px;
@@ -614,8 +557,7 @@ adList.html
 	border-radius: 3px;
 }
 
-.addSupplier #service_region .close,
-.editSupplier #service_region .close {
+.addSupplier #service_region .close, .editSupplier #service_region .close {
 	position: absolute;
 	width: 14px;
 	height: 14px;
@@ -629,10 +571,7 @@ adList.html
 	color: #fff;
 }
 
-.addSupplier #confirm,
-.editSupplier #confirm,
-.addSupplier .goBack,
-.editSupplier .goBack {
+.addSupplier #confirm, .editSupplier #confirm, .addSupplier .goBack, .editSupplier .goBack {
 	width: 100px;
 }
 
@@ -654,19 +593,16 @@ adList.html
 	margin-right: 5px;
 }
 
-.supplierDetails .title,
-.activityDetails .title {
+.supplierDetails .title, .activityDetails .title {
 	width: 120px;
 	text-align: right;
 }
 
-.supplierDetails .content,
-.activityDetails .content {
+.supplierDetails .content, .activityDetails .content {
 	text-align: left;
 }
 
-.supplierDetails .opertionCon,
-.activityDetails .opertionCon {
+.supplierDetails .opertionCon, .activityDetails .opertionCon {
 	float: left;
 	margin-left: 130px;
 }
@@ -685,9 +621,7 @@ adList.html
 	margin: 5px 0;
 }
 
-
 /* 公共样式调整 */
-
 .search-container .align_right {
 	text-align: right;
 }
@@ -696,14 +630,11 @@ adList.html
 	text-align: left;
 }
 
-input,
-select,
-textarea {
+input, select, textarea {
 	background-color: transparent;
 }
 
-#beginTime,
-#endTime {
+#beginTime, #endTime {
 	height: 25px;
 	padding-left: 2px;
 	display: inline-block
@@ -722,8 +653,7 @@ textarea {
 	height: 24px
 }
 
-.activityDetail input[name=submit],
-.activityDetail input[name=reset] {
+.activityDetail input[name=submit], .activityDetail input[name=reset] {
 	width: 90px
 }
 
@@ -746,8 +676,7 @@ textarea {
 	display: none
 }
 
-.activityDetail .imgUpLoad,
-.editor {
+.activityDetail .imgUpLoad, .editor {
 	position: relative
 }
 
@@ -757,16 +686,12 @@ textarea {
 	left: 120px
 }
 
-.activityDetail .titleTip,
-.fileTip,
-.imgTip {
+.activityDetail .titleTip, .fileTip, .imgTip {
 	color: red;
 	display: none
 }
 
-.activityDetail .showTitleTip,
-.showFileTip,
-.showImgTip {
+.activityDetail .showTitleTip, .showFileTip, .showImgTip {
 	display: block
 }
 
@@ -783,6 +708,7 @@ textarea {
 }
 
 .dataContent {
+
 	/*overflow: hidden*/
 }
 
@@ -838,8 +764,7 @@ textarea {
 	text-align: left
 }
 
-.select_time .endTime,
-.select_time .startTime {
+.select_time .endTime, .select_time .startTime {
 	width: 200px;
 	height: 36px;
 	padding-top: 1px;
@@ -901,9 +826,7 @@ textarea {
 	float: left;
 }
 
-
 /*线人列表*/
-
 .search-container .stateChange li {
 	cursor: pointer;
 	float: left;
@@ -940,11 +863,9 @@ textarea {
 	border: 1px solid #20a0ff;
 }
 
-
 /**
  * 任务列表-车辆详情
  */
-
 .carDetail {
 	width: 660px;
 }
@@ -958,14 +879,9 @@ textarea {
 	padding: 10px 20px;
 }
 
-
 /*任务详情*/
-
 .dialog-width {
-	width: 90%;
-	position: absolute;
-	left: 0;
-	right: 0;
+	width: 98%;
 	margin: 0 auto;
 }
 
@@ -982,6 +898,7 @@ textarea {
 	width: 100%;
 	overflow: hidden;
 }
+
 .dialog-width .creditor_detail ul {
 	margin-bottom: 36px;
 }
@@ -990,7 +907,6 @@ textarea {
 	width: 30%;
 	float: left;
 }
-
 
 .taskpull {
 	overflow: hidden;
@@ -1059,8 +975,7 @@ textarea {
 	margin-left: 10px;
 }
 
-.upmainfile,
-.mainfile {
+.upmainfile, .mainfile {
 	margin: 20px 0;
 	overflow: hidden;
 }
@@ -1136,16 +1051,12 @@ textarea {
 	border-bottom: 1px solid #000;
 }
 
-.dialog-width p,
-.upmainfile p,
-.mainfile p {
+.dialog-width p, .upmainfile p, .mainfile p {
 	font-weight: 900;
 	margin-top: 20px;
 }
 
-
 /*分配*/
-
 .divied-width {
 	width: 310px
 }
@@ -1164,54 +1075,46 @@ textarea {
 	resize: none;
 }
 
-
 /*捕头详情*/
-
 .officer-width {
 	min-width: 800px;
 }
 
 /*.officer-width ul {
-	border-bottom: 1px dashed #ccc;
+border-bottom: 1px dashed #ccc;
 }*/
-
 .officer-width ul li {
 	width: 48%;
-	border:1px solid #eee;
+	border: 1px solid #eee;
 }
 
 .officer-width ul li label {
 	font-weight: 900;
 	display: inline-block;
 	width: 80px;
-	border-right:1px solid #eee;
+	border-right: 1px solid #eee;
 	text-align: center;
-	padding:10px;
-	background-color:aliceblue;
+	padding: 10px;
+	background-color: aliceblue;
 }
-
 
 /**
  * 线人列表
  */
-
 .blue_recommendCode {
 	color: #20a0ff !important;
 	text-decoration: underline;
 }
 
-
 /**
  * 发放账号
  */
-
 #downstreams-create-form {
 	width: 600px;
 	margin: 150px auto;
 }
 
-#downstreams-create-form input[type="text"],
-#downstreams-create-form input[type="password"] {
+#downstreams-create-form input[type="text"], #downstreams-create-form input[type="password"] {
 	width: 71%;
 }
 
@@ -1219,8 +1122,7 @@ textarea {
 	width: 71%;
 }
 
-#downstreams-create-form input[type="submit"],
-#downstreams-create-form input[type="reset"] {
+#downstreams-create-form input[type="submit"], #downstreams-create-form input[type="reset"] {
 	padding: 8px 15px;
 }
 
@@ -1252,27 +1154,23 @@ textarea {
 }
 
 color: #fff;
+
 .dialog-width .grey-tab li.active {
 	background-color: #6d6d6d;
 }
 
-
 /**
  * 活动开关
  */
-
 .active-switch {
 	color: #20a0ff !important;
 }
 
-
 /*客户标签*/
-
 
 /*预估价格*/
 
-.customerType div,
-.hopeprice div {
+.customerType div, .hopeprice div {
 	overflow: hidden;
 	margin: 20px;
 }

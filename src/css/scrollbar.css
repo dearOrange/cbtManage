@@ -14,8 +14,12 @@
 	height: 100%;
 	max-width: 100%;
 	outline: 0;
-	margin-right: 10px;
+	margin-right: 15px;
 	direction: ltr
+}
+
+.left-side .mCustomScrollBox {
+	margin-right: 0px;
 }
 
 .mCSB_container {
@@ -25,7 +29,7 @@
 }
 
 .mCSB_inside>.mCSB_container {
-	margin-right: 15px
+	margin-right: 10px
 }
 
 .mCSB_container.mCS_no_scrollbar_y.mCS_y_hidden {
