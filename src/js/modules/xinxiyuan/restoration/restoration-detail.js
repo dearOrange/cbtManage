@@ -29,9 +29,10 @@ define(function(require, exports, module) {
                             done: function(returnData) {
                                 jh.utils.alert({
                                     content: '价格预估完毕',
-                                    ok: true
+                                    ok: function(){
+                                        window.location.reload();
+                                    }
                                 });
-                                window.location.reload();
                             }
                         });
                     } else {
@@ -41,9 +42,10 @@ define(function(require, exports, module) {
                             done: function(returnData) {
                                 jh.utils.alert({
                                     content: '价格确认完毕',
-                                    ok: true
+                                    ok: function(){
+                                        window.location.reload();
+                                    }
                                 });
-                                window.location.reload();
                             }
                         });
                     }
