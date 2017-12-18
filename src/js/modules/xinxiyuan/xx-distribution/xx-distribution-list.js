@@ -66,7 +66,7 @@ define(function(require, exports, module) {
         };
 
         this.distributionSheriff = function(arr) {
-            var source = require(ROOTURL + '/src/templates/channel-distribution.tpl');
+            var source = jh.utils.getChannelHtml();
             var render = jh.utils.template.compile(source);
             var str = render({ list: arr });
             return str;

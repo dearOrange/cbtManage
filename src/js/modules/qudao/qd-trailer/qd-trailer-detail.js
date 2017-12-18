@@ -32,7 +32,7 @@ define(function(require, exports, module) {
         };
 
         this.distributionSheriff = function(arr) {
-            var source = require(ROOTURL + '/src/templates/sheriff-distribution.tpl');
+            var source = jh.utils.getSheriffHtml();
             var render = jh.utils.template.compile(source);
             var str = render({ list: arr, stateToString: jh.utils.menuState });
             return str;

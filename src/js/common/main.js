@@ -20,6 +20,13 @@ define(function(require, exports, module) {
             $('#index_logo').attr('href', ROOTURL);
 
             _this.initUnReadMessage();
+debugger
+            $.ajax({
+                url: ROOTURL + '/src/templates/channel-distribution.tpl'
+            }).
+            done(function(data){
+                console.log(data);
+            });
         };
 
         this.initPlugins = function() {
