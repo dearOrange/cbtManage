@@ -147,3 +147,8 @@
 	background-size: cover;
 }
 
+/*任务详情*/
+.public_css ul li {
+	height:50px;
+	margin-left:20px;
+}

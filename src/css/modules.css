@@ -982,12 +982,15 @@ textarea {
 	width: 100%;
 	overflow: hidden;
 }
+.dialog-width .creditor_detail ul {
+	margin-bottom: 36px;
+}
 
 .dialog-width ul li {
 	width: 30%;
 	float: left;
-	padding: 10px;
 }
+
 
 .taskpull {
 	overflow: hidden;
@@ -1168,19 +1171,23 @@ textarea {
 	min-width: 800px;
 }
 
-.officer-width ul {
+/*.officer-width ul {
 	border-bottom: 1px dashed #ccc;
-}
+}*/
 
 .officer-width ul li {
-	width: 50%;
-	padding: 10px 0;
+	width: 48%;
+	border:1px solid #eee;
 }
 
 .officer-width ul li label {
 	font-weight: 900;
 	display: inline-block;
-	width: 100px;
+	width: 80px;
+	border-right:1px solid #eee;
+	text-align: center;
+	padding:10px;
+	background-color:aliceblue;
 }
 
 
