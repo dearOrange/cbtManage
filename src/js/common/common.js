@@ -1414,7 +1414,7 @@ define(function(require, exports, module) {
             _this.targetId = targetId;
             _this.targetStr = targetId;
             _this.showText = '';
-            var num = 10;
+            var num = 60;
             _this.localNumber = localStorage.getItem(targetId);
 
             if ($('#' + targetId).hasClass('disabled')) {
