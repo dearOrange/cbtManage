@@ -18,7 +18,7 @@ define(function(require, exports, module) {
     require('plugin/imageZoom/imageZoom'); //图片放大镜
     require('jquery.validate'); //表单验证
     require('common/validator'); //表单验证扩展
-    require('plugin/datePicker/WdatePicker');//时间插件
+    require('plugin/datePicker/WdatePicker'); //时间插件
     require('plugin/webuploader/webuploader.min'); //上传模块
 
     require('plugin/icheck/icheck.min'); //复选框
@@ -67,39 +67,40 @@ define(function(require, exports, module) {
             AMap.service('AMap.Geocoder', function() { //回调函数
                 //实例化Geocoder
                 tammy.utils.geocoder = new AMap.Geocoder({
-                    city: "010"//城市，默认：“全国”
+                    city: "010" //城市，默认：“全国”
                 });
             });
         }
         tammy.utils.initGeocoder = initGeocoder;
-    })();    
-    tammy.utils.initGeocoder();//初始化地图函数
+    })();
+    tammy.utils.initGeocoder(); //初始化地图函数
 
     (function() {
-        function GetPositionByImage(key,fn) {
+        function GetPositionByImage(key, fn) {
             $.ajax({
                 url: tammy.config.viewImgRoot + key + '?exif'
             }).done(function(data) {
                 console.log(data);
                 var id = key;
-                if( key.indexOf('.') !== -1 ){
-                    id = key.substring(0,key.indexOf('.'));
+                if (key.indexOf('.') !== -1) {
+                    id = key.substring(0, key.indexOf('.'));
                 }
-                var targetEle = $('[id^='+id+']');
-                if(data.GPSLongitude && data.GPSLatitude){
+                var targetEle = $('[id^=' + id + ']');
+                if (data.GPSLongitude && data.GPSLatitude) {
                     var lon = transformTude(data.GPSLongitude.val); //经度
                     var lat = transformTude(data.GPSLatitude.val); //纬度
-                    tammy.utils.getAddressByPosition([lon,lat],targetEle);
-                }else{
+                    tammy.utils.getAddressByPosition([lon, lat], targetEle);
+                } else {
                     targetEle.text('未获取成功');
                 }
 
-                if(fn&& typeof fn === "function"){
+                if (fn && typeof fn === "function") {
                     fn(data);
                 }
+
                 function transformTude(tude) {
                     var rst = tude.split(', ');
-                    $.each(rst,function(index,item){
+                    $.each(rst, function(index, item) {
                         rst[index] = Number(item);
                     });
                     return (rst[0] + rst[1] / 60 + rst[2] / 3600).toFixed(6);
@@ -110,14 +111,14 @@ define(function(require, exports, module) {
     })();
 
     (function() {
-        function GetAddressByPosition(position,targetEle) {
+        function GetAddressByPosition(position, targetEle) {
             tammy.utils.geocoder.getAddress(position, function(status, result) {
-                if(tammy.utils.isString(targetEle)){
-                    targetEle = $('[id^='+targetEle+']');
+                if (tammy.utils.isString(targetEle)) {
+                    targetEle = $('[id^=' + targetEle + ']');
                 }
-                if(targetEle.find('.photoAddress').length===0){
+                if (targetEle.find('.photoAddress').length === 0) {
                     targetEle = targetEle;
-                }else{
+                } else {
                     targetEle = targetEle.find('.photoAddress');
                 }
                 if (status === 'complete' && result.info === 'OK') {
@@ -195,7 +196,7 @@ define(function(require, exports, module) {
                         (new tammy.ui.shadow()).close();
                         var dg = dialog(defaults);
                         dg.showModal();
-                        $('.img-blowup').zoom({ on:'click' });
+                        $('.img-blowup').zoom({ on: 'click' });
                     };
                     imgObj.onerror = function() {
                         var imgHtml = '<img src="/src/img/nopic.png" width="400" height="300"/>';
@@ -259,7 +260,7 @@ define(function(require, exports, module) {
                 var dg = dialog(defaults);
                 dg.show(opt.target);
             },
-            closeArt:function(){
+            closeArt: function() {
                 var list = dialog.list;
                 for (var i in list) {
                     list[i].close();
@@ -649,8 +650,12 @@ define(function(require, exports, module) {
 
             var rigthCon = $('.right-side');
             var rcHeight = rigthCon.height();
-            if (rcHeight < final_height - 50) {
-                rigthCon.height(final_height - 50);
+            if (rcHeight < final_height - 80) {
+                rigthCon.height(final_height - 80);
+                rigthCon.mCustomScrollbar({
+                    setHeight: final_height - 80,
+                    theme: "minimal-dark"
+                });
             }
         };
         tammy.utils.updateMenuBoxHeight = updateMenuBoxHeight;
@@ -764,7 +769,7 @@ define(function(require, exports, module) {
                     var item = allMenu.eq(i);
                     var itemModule = item.children('a').data('url');
 
-                    if(args === itemModule + '.html'){
+                    if (args === itemModule + '.html') {
 
                         if (typeof fn === 'function') {
                             fn(item);
@@ -1262,7 +1267,7 @@ define(function(require, exports, module) {
                         var span = item.find('span'); //删除按钮
                         var input = item.find('input'); //隐藏域
 
-                        img.attr('src',tammy.config.viewImgRoot + returnData.key + tammy.config.imageScale);
+                        img.attr('src', tammy.config.viewImgRoot + returnData.key + tammy.config.imageScale);
                         var inputName = uploader.options.hiddenName === '' ? pickId : uploader.options.hiddenName;
                         input.attr({
                             name: inputName,
@@ -1662,7 +1667,7 @@ define(function(require, exports, module) {
                 case "completed":
                     state = "已打款";
                     break;
-                case "rejected": 
+                case "rejected":
                     state = "已拒绝";
                     break;
                 case "verified":

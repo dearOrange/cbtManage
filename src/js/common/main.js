@@ -36,7 +36,7 @@ define(function(require, exports, module) {
 
                     var h = $(window).height();
                     $("#leftMenu-box").mCustomScrollbar({
-                        setHeight: h - 60,
+                        setHeight: h - 140,
                         theme: "minimal-dark"
                     });
 

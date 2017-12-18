@@ -16,7 +16,7 @@ define(function(require, exports, module) {
             jh.utils.ajax.send({
                 url: '/qiniu/getToken',
                 done: function(returnData) {
-                    sessionStorage.setItem('admin-uploadToken',returnData.data.uploadToken);
+                    sessionStorage.setItem('admin-uploadToken', returnData.data.uploadToken);
                 }
             });
 
@@ -131,18 +131,18 @@ define(function(require, exports, module) {
 
             $('body').off('click', '.seaMessageDetail').on('click', '.seaMessageDetail', function() {
                 var m = $(this);
-                if(_this.roleType === 'information'){
+                if (_this.roleType === 'information') {
                     jh.utils.load('/src/modules/xinxiyuan/clue/clue-manage');
-                }else if(_this.roleType === 'finance'){
+                } else if (_this.roleType === 'finance') {
                     jh.utils.load('/src/modules/sendMoney/sendMoney-list');
-                }else{
+                } else {
                     m.parents('.new-message').remove();
                 }
             });
 
             $('body').off('click', '.newMessage_close').on('click', '.newMessage_close', function() {
                 var m = $(this);
-                m.parents('.new-message').animate({bottom:'-193px'},'slow','swing',function(){
+                m.parents('.new-message').animate({ bottom: '-193px' }, 'slow', 'swing', function() {
                     $(this).remove();
                 });
             });
@@ -185,7 +185,17 @@ define(function(require, exports, module) {
                 var me = $(this);
                 me.addClass('active').siblings().removeClass('active');
                 var ind = me.index();
-                $('#qd-distribution-tab'+ind).removeClass('hide').siblings().addClass('hide');
+                $('#qd-distribution-tab' + ind).removeClass('hide').siblings().addClass('hide');
+            });
+
+            $(window).on('resize', function() {
+                jh.utils.updateMenuBoxHeight();
+
+                var h = $(window).height();
+                $("#leftMenu-box").mCustomScrollbar({
+                    setHeight: h,
+                    theme: "minimal-dark"
+                });
             });
 
         };
