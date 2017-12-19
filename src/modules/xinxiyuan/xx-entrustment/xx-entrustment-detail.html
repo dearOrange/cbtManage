@@ -13,9 +13,9 @@
 		<hr /><br />
 		<p class="pull-left">基本信息</p>
 		{{if data.state == "unverified"}}
-		<p class="pull-right">{{menuState(data.state)}}</p>
+		<p class="showTaskState pull-right">{{menuState(data.state)}}</p>
 		{{else}}
-		<p class="pull-right">
+		<p class="showTaskState pull-right">
 			{{if data.isIssue == "0"}} 委托不存在 {{else}} 委托存在 {{/if}}
 		</p>
 		
