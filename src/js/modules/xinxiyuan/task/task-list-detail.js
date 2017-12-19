@@ -57,7 +57,9 @@ define(function(require, exports, module) {
 			                done: function(returnData) {
 			                    jh.utils.alert({
 									content: '已审核！',
-									ok: true
+									ok: function(){
+                                    	window.location.reload();
+                                    }
 								})
 			                }
                 
@@ -80,7 +82,9 @@ define(function(require, exports, module) {
 			                done: function(returnData) {
 			                    jh.utils.alert({
 									content: '已全部拒绝！',
-									ok: true
+									ok: function(){
+                                    	window.location.reload();
+                                    }
 								})
 			                }
                 
@@ -113,7 +117,9 @@ define(function(require, exports, module) {
 			                done: function(returnData) {
 			                    jh.utils.alert({
 									content: '已采纳！',
-									ok: true
+									ok: function(){
+                                    	window.location.reload();
+                                    }
 								})
 			                }
                 

@@ -36,7 +36,9 @@ define(function(require, exports, module) {
 					returnData.finalilmoney = mineData.assetPrice + mineData.thirdpartyPrice;
 					var html = jh.utils.template('finance_detail_template', returnData);
 					$('.financeDetailContent').html(html);
-					$("select").select2();
+					$("select").select2({
+						minimumResultsForSearch:Infinity
+					});
 
 					//平台确定收到款
 					$('body').off('click', '.platSure').on('click', '.platSure', function() {
@@ -52,7 +54,9 @@ define(function(require, exports, module) {
 									done: function(returnData) {
 										jh.utils.alert({
 											content: '已确认',
-											ok: true
+											ok: function(){
+                                            	window.location.reload();
+                                            }
 										})
 									}
 								});

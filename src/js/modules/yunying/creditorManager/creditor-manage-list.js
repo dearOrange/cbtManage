@@ -79,7 +79,9 @@ define(function(require, exports, module) {
                                     done: function() {
                                         jh.utils.alert({
                                             content: '运营经理分配成功！',
-                                            ok: true,
+                                            ok: function(){
+                                            	window.location.reload();
+                                            },
                                             cancel: false
                                         });
                                     }

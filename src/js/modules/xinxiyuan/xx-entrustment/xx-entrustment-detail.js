@@ -37,7 +37,9 @@ define(function(require, exports, module) {
                             done: function(returnData) {
                                 jh.utils.alert({
                                     content: '验证成功！',
-                                    ok: true
+                                    ok: function(){
+                                    	window.location.reload();
+                                    }
                                 })
                             }
                         });
