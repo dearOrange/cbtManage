@@ -76,6 +76,9 @@ define(function(require, exports, module) {
         this.initSheriff = function() {
             jh.utils.ajax.send({
                 url: '/task/downStreamListByChannel',
+                data: {
+                    taskId: args.id
+                },
                 done: function(returnData) {
                     var str = _this.distributionSheriff(returnData.data);
                     $('#fpSheriffList').html(str);

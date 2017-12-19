@@ -15,7 +15,7 @@
     	</ul>
         <form id="task-list-form" style="overflow: hidden;">
         	<ul class="username-ul">
-	    		<li>
+	    		<li style="border-right:0;">
 	    			<label>用户名</label>
 		        	<span>{{data.userName}}</span>
 	    		</li>
@@ -25,23 +25,23 @@
 	    		</li>
 	    	</ul>
 		    <ul>
-		        <li>
+		        <li style="border-right:0;border-bottom:0;">
 		        	<label>真实姓名</label>
 		        	<span>{{data.name}}</span>
 		        </li>
-		        <li>
+		        <li style="border-bottom:0;">
 		        	<label>联系电话</label>
 		        	<span>{{data.mobile}}</span>
 		        </li>
-		        <li>
+		        <li style="border-right:0;border-bottom:0;">
 		        	<label>微信账号</label>
 		        	<span>{{data.wechat}}</span>
 		        </li>
-		        <li>
+		        <li style="border-bottom:0;">
 		        	<label>邮箱</label>
 		        	<span>{{data.email}}</span>
 		        </li>
-		        <li style="width: 96.2%;">
+		        <li style="width: 96.1%;">
 		        	<label>负责区域</label>
 		        	{{each data.operatorProvinceVoList data index}}
 		        	<span>{{data.provinceName}}</span>

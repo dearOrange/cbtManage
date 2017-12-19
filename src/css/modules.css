@@ -885,7 +885,7 @@ input, select, textarea {
 	margin: 0 auto;
 }
 
-.dialog-width .pull-right {
+.dialog-width .showTaskState {
 	width: 100px;
 	height: 34px;
 	background: dodgerblue;
