@@ -44,7 +44,9 @@ define(function(require, exports, module) {
 		                			done: function(data){
 		                				jh.utils.alert({
 		                					content: '已审核',
-		                					ok: true
+		                					ok: function(){
+		                						window.location.reload();
+		                					}
 		                				})
 		                			}
 		                		})

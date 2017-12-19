@@ -50,10 +50,15 @@ define(function(require, exports, module) {
                     ok: function() {
                         jh.utils.ajax.send({
                             url: '/trace/adopt',
+                            data:{
+                                traceId: args.id
+                            },
                             done: function(returnData) {
                                 jh.utils.alert({
                                     content: '已审核',
-                                    ok: true
+                                    ok: function(){
+                                        window.location.reload();
+                                    }
                                 })
                             }
 
