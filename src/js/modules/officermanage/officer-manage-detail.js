@@ -22,6 +22,24 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
+                    var menuState = function(state) {
+                        switch (state) {
+                            case "all":
+                                state = "可找车可拖车";
+                                break;
+                            case "trace":
+                                state = "只找车";
+                                break;
+                            case "recycle":
+                                state = "只拖车";
+                                break;
+                            case "tracerecycle":
+                                state = "找车+拖车一体";
+                                break;
+                        }
+                        return state;
+                    }
+                    returnData.stateToString = menuState;
                     var html = jh.utils.template('officer_detail_template', returnData);
                     $('.officer-detail').html(html);
                     var picArr = ['businessLicense', 'legalPersonIdImg', 'legalPersonHandIdImg', 'linkmanIdImg', 'linkmanHandIdImg'];
@@ -52,7 +70,7 @@ define(function(require, exports, module) {
                                     done: function(returnData) {
                                         jh.utils.alert({
                                             content: '操作成功',
-                                            ok: function(){
+                                            ok: function() {
                                                 window.location.reload();
                                             }
                                         })
