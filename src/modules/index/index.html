@@ -27,15 +27,11 @@
         <nav class="navbar">
         	<a href="/" class="index_logo" id="index_logo"></a>
         	<p>车捕头运营后台</p>
-            <span class="pull-left" id="toggleMenu">&lt;-关闭菜单</span>
-            <section class="content-header pull-left">
-                <span id="breadCrumb"></span>
-            </section>
             <div class="pull-right">
                 <ul class="navbar-nav">
                     <li class="user-menu">
                         <a href="javascript:;" class="pull-left" id="userCenterLink">
-                            <i class="icon" id="userIsPassState"></i>
+                            <i class="icon icon-qd_btgl" id="userIsPassState"></i>
                             <span id="usernameText"></span>
                         </a>
                         <a href="javascript:;" class="pull-left" id="logoutLink">
@@ -50,7 +46,13 @@
 
     <article class="wrapper">
         <aside class="right-side">
-            <section class="content" id="content-container"></section>
+        	<div class="side-content">
+            	<span class="icon icon-icon_openMenu pull-left" id="toggleMenu"></span>
+        		<section class="content-header">
+	                <span id="breadCrumb"></span>
+	            </section>
+	            <section class="content" id="content-container"></section>
+        	</div>
         </aside>
     </article>
 </body>

@@ -486,7 +486,8 @@ label.error {
 }
 
 .icon.icon-user {
-    background-position: -24px -48px;
+    background: url(../img/index/exit.png) no-repeat;
+    background-size: cover;
     width: 22px;
 }
 
@@ -861,7 +862,7 @@ label.error {
 
 .user-menu span {
     color: #fff;
-    margin: 0px 10px
+    margin: 0px 18px 0 10px;
 }
 
 .header .navbar-nav>li .label {
@@ -944,7 +945,7 @@ label.error {
 }
 
 .sidebar-menu li>a {
-    padding: 0px 16px;
+    padding: 0px 50px;
     height: 56px;
     display: block;
     line-height: 56px
@@ -988,16 +989,6 @@ label.error {
     text-indent: 25px
 }
 
-.content-header {
-    text-indent: 20px;
-    height: 50px;
-    line-height: 50px;
-    float: left
-}
-
-.content-header span {
-    color: #fff;
-}
 
 .content-header h1 {
     font-size: 20px;

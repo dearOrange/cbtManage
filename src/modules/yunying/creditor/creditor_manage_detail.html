@@ -17,7 +17,7 @@
 			</div>
 			<div>
 				<ul>
-					<li>
+					<li style="border-right:0;">
 						<label>用户名：</label>
 						<span>{{data.userName}}</span>
 					</li>
@@ -27,15 +27,15 @@
 					</li>
 				</ul>
 				<ul>
-					<li>
+					<li style="border-right:0;border-bottom: 0;">
 						<label>主体名称：</label>
 						<span>{{data.companyName}}</span>
 					</li>
-					<li>
+					<li style="border-bottom: 0;">
 						<label>法人代表：</label>
 						<span>{{data.legalPerson}}</span>
 					</li>
-					<li>
+					<li style="border-right:0;border-top:0;">
 						<label>主体类型：</label>
 						<span>{{menuState(data.type)}}</span>
 					</li>
@@ -189,15 +189,15 @@
 		<div class="addContent customerType">
 			<div>
 				<label>联系对象</label>
-				<input type="text" maxlength="11" placeholder="请输入联系对象" id="subPerson" />
+				<input type="text" class="require" maxlength="11" placeholder="请输入联系对象" id="subPerson" />
 			</div>
 			<div>
 				<label>联系方式</label>
-				<input type="text" maxlength="11" placeholder="请输入联系方式" id="subStyle" />
+				<input type="text" class="require" maxlength="11" placeholder="请输入联系方式" id="subStyle" />
 			</div>
 			<div>
 				<label>联系内容</label>
-				<textarea name="" maxlength="40" placeholder="请输入联系内容" id="subContent"></textarea>
+				<textarea name="" class="require" maxlength="40" placeholder="请输入联系内容" id="subContent"></textarea>
 			</div>
 		</div>
 	</div>

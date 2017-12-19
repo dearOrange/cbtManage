@@ -13,7 +13,9 @@ define(function(require, exports, module) {
 		this.init = function() {
 			this.initContent();
 			this.registerEvent();
-			$('select').select2();
+			$('select').select2({
+            	minimumResultsForSearch:Infinity
+            });
 		};
 		this.initContent = function(isSearch) {
 			

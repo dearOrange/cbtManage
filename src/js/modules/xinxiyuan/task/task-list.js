@@ -9,7 +9,9 @@ define(function(require, exports, module) {
     function TaskList() {
         var _this = this;
         _this.form = $('#task-list-form');
-        $('select').select2();
+        $('select').select2({
+        	minimumResultsForSearch:Infinity
+        });
 
         this.init = function() {
         	this.initContent();
@@ -140,7 +142,9 @@ define(function(require, exports, module) {
 	    		$("#selectCheck").html(str);
 	    		
             	
-            	$('select').select2();
+            	$('select').select2({
+	            	minimumResultsForSearch:Infinity
+	            });
             	$('#state').val(mine.data('value'))
             	_this.initContent();
             })

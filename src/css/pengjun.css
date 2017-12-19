@@ -152,3 +152,28 @@
 	height:50px;
 	margin-left:20px;
 }
+
+/*面包屑导航*/
+.side-content {
+	margin:0 20px;
+	display:block
+}
+.content-header {
+	height: 60px;
+	line-height: 64px;
+	border-bottom:1px solid #eee;
+}
+
+.content-header span {
+	color:#666;
+	font-weight: 600;
+}
+
+#toggleMenu {
+	margin: 16px 10px 0 0;
+}
+
+#plat-sure-money table tr td input {
+	border:1px solid #eee;
+	height:28px;
+}

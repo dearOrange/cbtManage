@@ -36,7 +36,6 @@ define(function(require, exports, module) {
                 var currentUrl = m.data('url');
                 jh.utils.load(currentUrl);
             });
-
             $('#toggleMenu').click(function() {
                 var me = $(this);
                 var con = $('header').children('.navbar');
@@ -44,15 +43,13 @@ define(function(require, exports, module) {
                 var menu = $('#menusBar');
                 if (me.hasClass('closeMenu')) {
                     con.css('margin-left', '0px');
-                    hea.css('margin-left', '210px');
+                    hea.css('margin-left', '250px');
                     menu.show();
-                    me.text('<-关闭菜单');
                     me.removeClass('closeMenu');
                 } else {
                     con.css('margin-left', '0px');
                     hea.css('margin-left', '0px');
                     menu.hide();
-                    me.text('<-打开菜单');
                     me.addClass('closeMenu');
                 }
             });

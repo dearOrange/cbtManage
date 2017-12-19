@@ -14,7 +14,9 @@ define(function(require, exports, module) {
             this.initContent();
             this.initTaskTotalCount();
             this.registerEvent();
-            $('select').select2();
+            $('select').select2({
+            	minimumResultsForSearch:Infinity
+            });
         };
         this.initContent = function(isSearch) {
             var page = new jh.ui.page({

@@ -13,7 +13,9 @@ define(function(require, exports, module) {
         this.init = function() {
             this.initContent();
             this.registerEvent();
-            $('select').select2();
+            $('select').select2({
+            	minimumResultsForSearch:Infinity
+            });
         };
         this.initContent = function(isSearch) {
             var page = new jh.ui.page({
@@ -83,6 +85,14 @@ define(function(require, exports, module) {
             $('.allIdentify').click(function() {
                 var alertIdentify = jh.utils.template('taskonly_identify_template', {});
                 var checkId = jh.utils.getCheckboxValue('task_audit_container', "value");
+                if (!checkId) {
+                    jh.utils.alert({
+                        content: '请选择需要审核的任务！',
+                        ok: true,
+                        cancel: false
+                    });
+                    return false;
+                }
                 jh.utils.alert({
                     content: alertIdentify,
                     ok: function() {
