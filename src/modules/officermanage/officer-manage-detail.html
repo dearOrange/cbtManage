@@ -15,15 +15,16 @@
             	<span>{{data.phone}}</span>
         	</li>
         </ul>
-        <ul>
-            <li>
+        <ul style="margin:20px 0;">
+            <li style="border-bottom:0;border-right:0;">
             	<label>姓名：</label>
             	<span>{{data.name}}</span>
             </li>
-            <li><label>联系电话：</label>
+            <li style="border-bottom:0;">
+            	<label>联系电话：</label>
             	<span>{{data.contactPhone}}</span>
             </li>
-            <li>
+            <li style="border-right:0;">
             	<label>微信账号：</label>
             	<span>{{data.wechat}}</span>
             </li>
@@ -33,19 +34,19 @@
            	</li>
         </ul>
         <ul>
-            <li>
+            <li style="width:96.2%;">
             	<label>所属公司：</label>
             	<span>{{data.company}}</span>
             </li>
-            <li>
+            <li style="border-top:0;border-right:0;">
 				<label>法人代表：</label>
            		<span>{{data.legalPerson}}</span>
             </li>
-            <li>
+            <li style="border-top:0;">
             	<label>业务类型：</label>
            		<span>{{stateToString(data.type)}}</span>
             </li>
-            <li>
+            <li style="border-right:0;border-bottom: 0;border-top:0;">
             	<label>申请区域：</label>
             	<span>
             	{{each data.area item index}}
@@ -53,11 +54,11 @@
             	{{/each}}
             	</span>
             </li>
-            <li>
+            <li style="border-top:0;border-bottom: 0;">
             	<label>团队规模：</label>
             	<span>{{data.teamSize}}</span>
             </li>
-            <li>
+            <li style="width:96.2%;">
             	<label>详细地址：</label>
             	<span>{{data.address}}</span>
             </li>

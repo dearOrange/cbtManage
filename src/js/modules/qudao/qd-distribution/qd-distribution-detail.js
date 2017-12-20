@@ -88,6 +88,14 @@ define(function(require, exports, module) {
         };
         $('body').off('click','.sureAudit').on('click','.sureAudit',function(){
         	var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
+        	if(!ids){
+        		jh.utils.alert({
+                    content: '请先选择捕头！',
+                    ok: true,
+                    cancel: false
+                });
+                return false;
+        	}
             var opt = {
             	method: 'post',
                 url: '/task/allotDownStream',
@@ -98,7 +106,9 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     jh.utils.alert({
                         content: '任务分配成功！',
-                        ok: true,
+                        ok: function(){
+                        	$('#fpSheriffList').addClass('hide');
+                        },
                         cancel: false
                     });
                 }
