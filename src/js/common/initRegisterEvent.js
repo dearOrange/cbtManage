@@ -46,11 +46,15 @@ define(function(require, exports, module) {
                     hea.css('margin-left', '250px');
                     menu.show();
                     me.removeClass('closeMenu');
+                    me.addClass('icon-icon_closeMenu');
+                    me.removeClass('icon-icon_openMenu');
                 } else {
                     con.css('margin-left', '0px');
                     hea.css('margin-left', '0px');
                     menu.hide();
                     me.addClass('closeMenu');
+                    me.addClass('icon-icon_openMenu');
+                    me.removeClass('icon-icon_closeMenu');
                 }
             });
 
