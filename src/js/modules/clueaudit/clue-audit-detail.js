@@ -40,7 +40,7 @@ define(function(require, exports, module) {
                 },
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
-                    returnData.viewRoot = jh.config.viewImgRoot;
+                    returnData.viewImgRoot = jh.config.viewImgRoot;
                     returnData.taskId = args.id;
                     var html = jh.utils.template('admin-clueAuditDetail-template', returnData);
                     $('#admin-clueAuditDetail-container').html(html);

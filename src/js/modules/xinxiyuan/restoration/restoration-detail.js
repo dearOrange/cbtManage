@@ -63,7 +63,7 @@ define(function(require, exports, module) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
                     returnData.taskId = args.id;
-//                  returnData.baileePrice = parseFloat(returnData.data.finalPrice)*0.1;
+                    returnData.baileePrice = parseFloat(returnData.data.finalPrice)*0.1;
                     var creditorStr = jh.utils.template('restoration_detail_template', returnData);
                     $('.restorationContent').html(creditorStr);
                     _this.initValidator();

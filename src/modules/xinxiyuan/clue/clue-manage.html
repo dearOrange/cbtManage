@@ -95,13 +95,17 @@
 		{{/if}}
 		<td>{{item.createAt}}</td>
 		<td>
-			<ul class="operaitem">
+			<ul class="operaitem" style="margin-left:20px;">
 				{{if item.state == "new"}}
 				<li>
 					<a data-id="{{item.id}}" class="agreement button">通过</a>
 				</li>
 				<li>
 					<a data-id="{{item.id}}" class="pass button">拒绝</a>
+				</li>
+				{{else}}
+				<li>
+					—— ——
 				</li>
 				{{/if}}
 			</ul>

@@ -28,6 +28,14 @@ define(function(require, exports, module) {
                     //确认
                     $('body').off('click', '.isRight').on('click', '.isRight', function() {
                         var isIssueState = $('.isIssue').filter(":checked").val();
+                        if(!isIssueState){
+                        	jh.utils.alert({
+                                content: '请选择是否出具该委托！',
+                                ok: true,
+                                cancel: false
+                            })
+                        	return false;
+                        }
                         jh.utils.ajax.send({
                             url: '/verify/result',
                             data: {
