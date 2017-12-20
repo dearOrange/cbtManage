@@ -334,7 +334,8 @@ label.error {
 .icon.icon-icon_closeMenu {
     width: 32px;
     height: 30px;
-    background-position: -62px -10px;
+    background: url(../img/icon/icon-closeMenu.png) no-repeat;
+    background-size:cover;
 }
 
 .icon.icon-icon_nopass {
@@ -344,7 +345,8 @@ label.error {
 .icon.icon-icon_openMenu {
     width: 32px;
     height: 30px;
-    background-position: -10px -62px;
+    background: url(../img/icon/icon-openMenu.png) no-repeat;
+    background-size:cover;
 }
 
 .icon.icon-icon_pass {
@@ -810,7 +812,7 @@ label.error {
     width: 210px;
     height: 50px;
     float:left;
-    margin:7px 0 0 80px;
+    margin:7px 0 0 30px;
     display: inline-block;
     background: url(../img/index/logo.png) no-repeat center center;
     background-size: 82%;

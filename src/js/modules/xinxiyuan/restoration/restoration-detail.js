@@ -13,6 +13,19 @@ define(function(require, exports, module) {
 
         this.init = function() {
             this.initContent();
+            this.registerEvent();
+        };
+        this.registerEvent = function(){
+        	$('body').off('blur', '#finalPrice').on('blur', '#finalPrice', function() {
+        		var me = $(this);
+        		var num = $.trim(me.val());
+            	if( !num ){
+        			$('#baileePrice').val();
+        		}else{
+        			$('#baileePrice').val(num*0.1);
+        		}
+            	 
+            });
         };
         this.initValidator = function() {
             // 搜索
@@ -22,33 +35,20 @@ define(function(require, exports, module) {
                     form = $(form);
                     var datas = jh.utils.formToJson(form);
                     var submit = form.find('input[type="submit"]');
-                    if (submit.hasClass('priceStorage')) {
-                        jh.utils.ajax.send({
-                            url: '/task/estimate',
-                            data: datas,
-                            done: function(returnData) {
-                                jh.utils.alert({
-                                    content: '价格预估完毕',
-                                    ok: function(){
-                                        window.location.reload();
-                                    }
-                                });
-                            }
-                        });
-                    } else {
-                        jh.utils.ajax.send({
-                            url: '/task/fixPrice',
-                            data: datas,
-                            done: function(returnData) {
-                                jh.utils.alert({
-                                    content: '价格确认完毕',
-                                    ok: function(){
-                                        window.location.reload();
-                                    }
-                                });
-                            }
-                        });
-                    }
+                    var arr = submit.hasClass('priceStorage') ? '/task/estimate,价格预估完毕' : '/task/fixPrice,价格确认完毕';
+                    arr = arr.split(',');
+                    jh.utils.ajax.send({
+                        url: arr[0],
+                        data: datas,
+                        done: function(returnData) {
+                            jh.utils.alert({
+                                content: arr[1],
+                                ok: function(){
+                                    window.location.reload();
+                                }
+                            });
+                        }
+                    });
                     return false;
                 }
             });
@@ -63,6 +63,7 @@ define(function(require, exports, module) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
                     returnData.taskId = args.id;
+//                  returnData.baileePrice = parseFloat(returnData.data.finalPrice)*0.1;
                     var creditorStr = jh.utils.template('restoration_detail_template', returnData);
                     $('.restorationContent').html(creditorStr);
                     _this.initValidator();
