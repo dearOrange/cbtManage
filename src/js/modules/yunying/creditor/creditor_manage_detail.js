@@ -69,6 +69,10 @@ define(function(require, exports, module) {
                         pick: {
                             id: '#importFile'
                         },
+                        formData:{
+                            upstreamId:  returnData.data.upstreamId,
+                            token: sessionStorage.getItem('admin-X-Token')
+                        },
                         accept: {
                             title: 'Applications',
                             extensions: 'xls,xlsx',

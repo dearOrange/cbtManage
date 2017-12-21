@@ -62,9 +62,20 @@ define(function(require, exports, module) {
             //查看任务详情
             $('.dataShow').off('click', '.taskList-detail').on('click', '.taskList-detail', function() {
             	var id = $(this).data('id');
-                jh.utils.load("/src/modules/xinxiyuan/task/task-list-detail",{
-                	id:id
-                })
+                var state = $('#state').val();
+                if(state === '1'){
+                    jh.utils.load("/src/modules/xinxiyuan/task/task-list-detail",{
+                        id:id
+                    });
+                }else if(state === '2'){
+                    jh.utils.load("/src/modules/xinxiyuan/task/task-list-detailTrcaing",{
+                        id:id
+                    });
+                }else if(state === '3' || state === '4'){
+                    jh.utils.load("/src/modules/xinxiyuan/task/task-list-detailFinished",{
+                        id:id
+                    });
+                }
             });
             
             //切换状态
