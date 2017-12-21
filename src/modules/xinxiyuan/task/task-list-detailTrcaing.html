@@ -1,7 +1,5 @@
-<div class="dataContent taskListContent">
-
-</div>
-<script type="text/template" id="task_detail_template">
+<div class="dataContent taskListContent" id="task_list_detailTrcaing_content"></div>
+<script type="text/template" id="task_list_detailTrcaing_template">
 	<div class="dialog-width public_css">
 		<p class="pull-left">
 			任务详情
@@ -25,18 +23,17 @@
 		</ul>
 		<div class="remark">{{data.remark}}</div>
 		<div class="imgRecord">
+			<p>催收资料</p>
 			{{each data.attachmentVoList data index}}
-			<img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" /> {{/each}}
+			<img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" /> 
+			{{/each}}
 		</div>
-		{{if data.state === "clueChecking"}}
+		<br>
+		{{if data.state !== "unarrange" && data.state !== "tracing"}}
 		<div class="mainfile">
 			<p>线索信息</p>
-			{{if data.traceVoList&&data.traceVoList.length>0}}
-			<a href="javascript:;" class="button rejectClue">全部审核不通过</a> 
-			{{/if}}
 			{{ each data.traceVoList data index }}
 			<div class="upimg pull-left">
-				<input type="radio" value="{{data.id}}" name="traceId" class="pull-left checkId" style="margin:60px 0;" />
 				<dl>
 					<dt>
 						<div class="upfile-item">
@@ -46,7 +43,7 @@
 					<dd>全车背景照</dd>
 				</dl>
 			</div>
-			<div style="margin:10px 0;" class="pull-left">
+			<div class="pull-left">
 				<p>{{data.name}}----{{menuState(data.downstreamType)}}</p>
 				<p>线索上传时间：{{data.createAt}}</p>
 				<p>gprs信息：{{data.location}}</p>
@@ -54,21 +51,55 @@
 			</div>
 			{{/each}}
 		</div>
+		<br>
+		{{/if}}
+		{{if data.state !== "unarrange" && data.state !== "tracing" && data.state !== "clueChecking"}}
 		<div class="hopeprice">
-			<p>预估费用</p>
-			<div>
-				<label>车辆残值估算:</label>
-				<input type="text" class="OnlyPrice" maxlength="11" id="salvage" value="{{data.carPrice}}" />
-			</div>
-			<div>
-				<label>处置费用估算:</label>
-				<input type="text" maxlength="11" class="OnlyPrice" id="minMoney" value="{{data.estimatedMinPrice}}" />至<input type="text" class="OnlyPrice" maxlength="11" id="maxMoney" value="{{data.estimatedMaxPrice}}" />
-			</div>
+			<p>费用</p>
+			<table style="width: 400px;">
+				<tr>
+					<td style="width: 160px;text-align: right;">车辆残值估算：</td>
+					<td style="text-align: center;">{{data.carPrice}}</td>
+				</tr>
+				<tr>
+					<td style="width: 160px;text-align: right;">处置费用估算：</td>
+					<td style="text-align: center;">{{data.estimatedMinPrice}} 至 {{data.estimatedMaxPrice}}</td>
+				</tr>
+			</table>
 		</div>
+		<br>
+		{{/if}}
+		{{if (data.state === "unconfirmed" || data.state === "voucherInvalid" || data.state === "hunterUnreceive" || data.state === "hunterReceive" || data.state === "voucherChecking") && data.finalPrice!== "" || }}
+		<div class="hopeprice">
+			<p>确认费用</p>
+			<table style="width: 400px;">
+				<tr>
+					<td style="width: 160px;text-align: right;">最终处置费：</td>
+					<td style="text-align: center;">{{data.finalPrice}}</td>
+				</tr>
+				<tr>
+					<td style="width: 160px;text-align: right;">其中受托人费用：</td>
+					<td style="text-align: center;">{{data.baileePrice}}</td>
+				</tr>
+				<tr>
+					<td style="width: 160px;text-align: right;">资产查找费：</td>
+					<td style="text-align: center;">{{data.assetPrice}}</td>
+				</tr>
+				<tr>
+					<td style="width: 160px;text-align: right;">第三方处置请收费：</td>
+					<td style="text-align: center;">{{data.thirdpartyPrice}}</td>
+				</tr>
+			</table>
+		</div>
+		<br>
+		{{/if}}
+		{{if data.state === "voucherInvalid" || data.state === "hunterUnreceive" || data.state === "hunterReceive" || data.state === "voucherChecking"}}
 		<div class="upmainfile">
-			<p style="margin:20px 0;">分配渠道</p>
-			<div class="task-content">
-
+			<p>凭证</p>
+			<div class="showImg">
+				{{each data.voucherVoList data index}}
+				<img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" onerror="this.src='/src/img/nopic.png'" class="preview-img ml10" /> 
+				{{/each}}
 			</div>
 		</div>
 		<input type="submit" value="保存" class="button adopteInfo" />

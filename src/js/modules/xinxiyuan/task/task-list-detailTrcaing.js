@@ -8,8 +8,8 @@
 define(function(require, exports, module) {
     function TaskListDetailTrcaing() {
         var _this = this;
-        _this.form = $("#task_adopt_form");
         var args = jh.utils.getURLValue().args;
+
         this.init = function() {
             this.initDetail();
             this.registerEvent();
@@ -24,8 +24,8 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
-                    var html = jh.utils.template('task_detail_template', returnData);
-                    $('.taskListContent').html(html);
+                    var html = jh.utils.template('task_list_detailTrcaing_template', returnData);
+                    $('#task_list_detailTrcaing_content').html(html);
                     _this.initSheriff();
 
 

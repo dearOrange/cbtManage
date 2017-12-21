@@ -958,7 +958,7 @@ define(function(require, exports, module) {
             arr.push('      <option>40</option>');
             arr.push('      <option>50</option>');
             arr.push('  <select>');
-            arr.push('  <span>每页显示</span>');
+            arr.push('  <span id="jh_page_totalSize"> 总共：</span>');
             arr.push('</div>');
             arr.push('<div class="pull-right jh_pages">');
             //pre容器
@@ -1026,6 +1026,7 @@ define(function(require, exports, module) {
                         if (s.page_container.children('.jh_pages').length === 0) {
 
                             s.page_container.html(m.makeHtml()); //如果分页容器未进行初始化，则进行初始化操作
+                            $('#jh_page_totalSize').html(' 总共: '+ response.total+' 条');
                         }
                         m.create(pageNum); //处理分页
 
