@@ -1,7 +1,5 @@
-<div class="dataContent taskListContent">
-
-</div>
-<script type="text/template" id="task_detail_template">
+<div class="dataContent taskListContent" id="task_detailFinished_content"></div>
+<script type="text/template" id="task_detailFinished_template">
 	<div class="dialog-width public_css">
 		<p class="pull-left">
 			任务详情
@@ -38,7 +36,7 @@
                         <th>内容</th>
                         <th>信息修复时间</th>
                     </thead>
-                    <tbody id="distribution-illegalList-container"></tbody>
+                    <tbody id="task_detailFinished_wzInfoList"></tbody>
                 </table>
                 <div class="page-box pagination" id="page_container"></div>
             </div>
@@ -47,7 +45,6 @@
 			<p>线索信息</p>
 			{{ each data.traceVoList data index }}
 			<div class="upimg pull-left">
-				<input type="radio" value="{{data.id}}" name="traceId" class="pull-left checkId" style="margin:60px 0;" />
 				<dl>
 					<dt>
 						<div class="upfile-item">
@@ -57,7 +54,7 @@
 					<dd>全车背景照</dd>
 				</dl>
 			</div>
-			<div style="margin:10px 0;" class="pull-left">
+			<div class="pull-left ml10">
 				<p>{{data.name}}----{{menuState(data.downstreamType)}}</p>
 				<p>线索上传时间：{{data.createAt}}</p>
 				<p>gprs信息：{{data.location}}</p>
@@ -67,31 +64,27 @@
 		</div>
 		<div class="hopeprice">
 			<p>费用</p>
-			<table>
+			<table style="width: 400px;">
 				<tr>
-					<td>最终处置费：</td>
-					<td>{{data.aaa}}</td>
+					<td style="width: 160px;text-align: right;">最终处置费：</td>
+					<td style="text-align: center;">{{data.finalPrice}}</td>
 				</tr>
 				<tr>
-					<td>其中受托人费用：</td>
-					<td>{{data.aaa}}</td>
+					<td style="width: 160px;text-align: right;">其中受托人费用：</td>
+					<td style="text-align: center;">{{data.baileePrice}}</td>
 				</tr>
 				<tr>
-					<td>资产查找费：</td>
-					<td>{{data.aaa}}</td>
+					<td style="width: 160px;text-align: right;">资产查找费：</td>
+					<td style="text-align: center;">{{data.assetPrice}}</td>
 				</tr>
 				<tr>
-					<td>第三方处置请收费：</td>
-					<td>{{data.aaa}}</td>
+					<td style="width: 160px;text-align: right;">第三方处置请收费：</td>
+					<td style="text-align: center;">{{data.thirdpartyPrice}}</td>
 				</tr>
 			</table>
-			<div>
-				<label>车辆残值估算:</label>
-				<input type="text" class="OnlyPrice" maxlength="11" id="salvage" value="{{data.carPrice}}" />
-			</div>
 		</div>
 		<div class="mainfile">
-			<p>议价小计</p><br />
+			<p>议价小计</p>
 			<div class="upmainfile onlineSubtotal">
 				<table>
 					<thead>
@@ -103,48 +96,36 @@
 							<th>联系时间</th>
 						</tr>
 					</thead>
-					<tbody id="moneytotal_container"></tbody>
+					<tbody id="task_detailFinished_yjxjContent"></tbody>
 				</table>
 				<div class="page-box pagination" id="page_container"></div>
 			</div>
 		</div>
-		<div class="upmainfile">
-			<p style="margin:20px 0;">分配渠道</p>
-			<div class="task-content">
-
-			</div>
-		</div>
-		<input type="submit" value="保存" class="button adopteInfo" />
 	</div>
 </script>
-<script type="text/template" id="xx_task_list">
-	<div style="width:460px;">
-		<table>
-			<tr>
-				<td>
-					<form id="task_adopt_form">
-						<div id="qd-distribution-tab0" class="divied-type" style="max-height: 300px;overflow-y: auto;text-align: left;">
-							{{each data item index}}
-							<div>
-								<input type="radio" name="managerId" value="{{item.id}}" data-name="{{item.name}}" class="managerId" />
-								<span>{{item.name}}</span>
-								<span>
-                                {{each item.operatorProvinceVoList temp i}}
-                                     - {{temp.provinceName}},
-                                {{/each}}
-                                </span>
-							</div>
-							{{/each}}
-						</div>
-					</form>
-				</td>
-			</tr>
-		</table>
-	</div>
+<script type="text/template" id="task_detailFinished_wzInfoTemplate">
+    {{each list item index}}
+    <tr>
+        <td>{{item.desc}}</td>
+        <td>{{item.occurAt}}</td>
+    </tr>
+    {{/each}}
+</script>
+
+<script type="text/template" id="task_detailFinished_yjxjTemplate">
+	{{ each list item index }}
+    <tr class="trData">
+        <td>{{index+1}}</td>
+        <td>{{item.content}}</td>
+        <td>{{item.contacts}}</td>
+        <td>{{item.contactPhone}}</td>
+        <td>{{item.createAt}}</td>
+    </tr>
+    {{/each}}
 </script>
 <script type="text/javascript">
-	seajs.use('modules/xinxiyuan/task/task-list-detail', function(TaskListDetail) {
-		var TaskListDetail = new TaskListDetail();
-		TaskListDetail.init();
+	seajs.use('modules/xinxiyuan/task/task-list-detailFinished', function(TaskListDetailFinished) {
+		var taskListDetailFinished = new TaskListDetailFinished();
+		taskListDetailFinished.init();
 	});
 </script>

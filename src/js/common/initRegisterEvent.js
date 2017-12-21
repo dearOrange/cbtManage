@@ -132,7 +132,7 @@ define(function(require, exports, module) {
 
             $('body').off('click', '.seaMessageDetail').on('click', '.seaMessageDetail', function() {
                 var m = $(this);
-                if (_this.roleType === 'information') {
+                if (_this.roleType === 'info') {
                     jh.utils.load('/src/modules/xinxiyuan/clue/clue-manage');
                 } else if (_this.roleType === 'finance') {
                     jh.utils.load('/src/modules/sendMoney/sendMoney-list');

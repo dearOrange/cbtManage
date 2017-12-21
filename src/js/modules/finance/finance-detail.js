@@ -52,12 +52,7 @@ define(function(require, exports, module) {
 									url: '/finance/loanerMoneySure',
 									data: datas,
 									done: function(returnData) {
-										jh.utils.alert({
-											content: '已确认',
-											ok: function(){
-                                            	window.location.reload();
-                                            }
-										})
+										window.location.reload();
 									}
 								});
 							},
@@ -76,10 +71,7 @@ define(function(require, exports, module) {
 										taskId: args.id
 									},
 									done: function(returnData) {
-										jh.utils.alert({
-											content: '正在审核，请耐心等待！',
-											ok: true
-										})
+										window.location.reload();
 									}
 
 								});
