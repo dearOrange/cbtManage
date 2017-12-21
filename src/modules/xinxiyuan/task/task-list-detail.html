@@ -28,6 +28,7 @@
 			{{each data.attachmentVoList data index}}
 			<img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" /> {{/each}}
 		</div>
+		{{if data.state === "clueChecking"}}
 		<div class="mainfile">
 			<p>线索信息</p>
 			{{if data.traceVoList&&data.traceVoList.length>0}}
@@ -71,6 +72,7 @@
 			</div>
 		</div>
 		<input type="submit" value="保存" class="button adopteInfo" />
+		{{/if}}
 	</div>
 </script>
 <script type="text/template" id="xx_task_list">

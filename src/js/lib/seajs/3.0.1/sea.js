@@ -22,11 +22,11 @@ var serverHost = '';
 var viewImageRoot = 'http://oka19npup.bkt.clouddn.com/';
 
 if(window.location.host.indexOf('.cbt.com')!==-1){
-    REQUESTROOT = 'http://qa.cbt.com:8080' + REQUESTROOT;
-    serverHost = 'http://qa.cbt.com:8080';
+    REQUESTROOT = 'http://javadev:8080' + REQUESTROOT;
+    serverHost = 'http://javadev:8080';
     viewImageRoot = 'http://p0znn0pti.bkt.clouddn.com/';
 }
-if(window.location.host.indexOf('192.168.2.181')!==-1){
+if(window.location.host.indexOf('javadev')!==-1){
     ROOTURL = '/admin';
     BaseUrl = ROOTURL + BaseUrl;
     viewImageRoot = 'http://p0znn0pti.bkt.clouddn.com/';
