@@ -69,7 +69,7 @@
 		</div>
 		<br>
 		{{/if}}
-		{{if (data.state === "unconfirmed" || data.state === "voucherInvalid" || data.state === "hunterUnreceive" || data.state === "hunterReceive" || data.state === "voucherChecking") && data.finalPrice!== "" || }}
+		{{if data.state === "unconfirmed" || data.state === "voucherInvalid" || data.state === "hunterUnreceive" || data.state === "hunterReceive" || data.state === "voucherChecking" && data.finalPrice!== ""}}
 		<div class="hopeprice">
 			<p>确认费用</p>
 			<table style="width: 400px;">
@@ -98,11 +98,11 @@
 			<p>凭证</p>
 			<div class="showImg">
 				{{each data.voucherVoList data index}}
-				<img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" onerror="this.src='/src/img/nopic.png'" class="preview-img ml10" /> 
+				<img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" onerror="this.src='/src/img/nopic.png'" class="hand preview-img ml10" /> 
 				{{/each}}
 			</div>
 		</div>
-		<input type="submit" value="保存" class="button adopteInfo" />
+		<!-- <input type="submit" value="保存" class="button adopteInfo" /> -->
 		{{/if}}
 	</div>
 </script>
