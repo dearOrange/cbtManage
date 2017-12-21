@@ -2,7 +2,7 @@
 
 </div>
 <script type="text/template" id="entrustment_detail_template">
-	<div class="dialog-width">
+	<div class="dialog-width noTable">
 
 		<p class="pull-left">
 			验真委托详情
@@ -22,13 +22,16 @@
 		{{/if}}
 		<div class="clearfix"></div>
 		<div>
-			<span>上传捕头：{{data.name}}</span>
+			<label>上传捕头：</label>
+			<span>{{data.name}}</span>
 		</div>
 		<div>
-			<span>所属公司：{{data.company}}</span>
+			<label>所属公司：</label>
+			<span>{{data.company}}</span>
 		</div>
 		<div>
-			<span>上传时间：{{data.createAt}}</span>
+			<label>上传时间：</label>
+			<span>{{data.createAt}}</span>
 		</div>
 		<div class="mainfile">
 			<p>委托信息</p>
@@ -42,7 +45,7 @@
 		<div>
 			<p>委托验证</p>
 			<div>
-				<label>债权方是否出具该委托:</label>
+				<label style="width:150px;font-weight: 500;">债权方是否出具该委托:</label>
 				<input type="radio" value="1" name="isIssue" class="isIssue" />是
 				<input type="radio" value="0" name="isIssue" class="isIssue" />否
 			</div>

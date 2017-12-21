@@ -3,7 +3,7 @@
 </div>
 
 <script type="text/template" id="sendMoney_detail_template">
-	<div class="dialog-width">
+	<div class="dialog-width noTable">
 		<p class="pull-left">
 			提现申请人基本信息
 		</p>
@@ -11,23 +11,43 @@
 		<p class="showTaskState pull-right">{{menuState(data.state)}}</p>
 		<div class="clearfix"></div>
 		<hr /><br />
-		<div>账号：{{data.downStreamVo.phone}}</div>
-		<div>主体名称：{{data.downStreamVo.company}}</div>
 		<div>
-			<span>负责人：{{data.downStreamVo.linkman}}</span>
-			<span style="margin:0 20px;">联系电话：{{data.downStreamVo.contactPhone}}</span>
-			<span>微信账号：{{data.downStreamVo.wechat}}</span>
+			<label>账号：</label>
+			<span>{{data.downStreamVo.phone}}</span>
 		</div>
-		<p>提现单号：{{data.flow}}</p>
-		<p>提现申请人收款信息</p>
-		<div>提现金额：{{data.amount}}元</div>
 		<div>
+			<label>主体名称：</label>
+			<span>{{data.downStreamVo.company}}</span></div>
+		<div>
+			<label>负责人：</label>
+			<span>{{data.downStreamVo.linkman}}</span>
+			<label style="margin-left:20px;">联系电话：</label>
+			<span>{{data.downStreamVo.contactPhone}}</span>
+			<label style="margin-left:20px;">微信账号：</label>
+			<span>{{data.downStreamVo.wechat}}</span>
+		</div>
+		<div>
+			<label>提现单号：</label>
+			<span>{{data.flow}}</span>
+		</div>
+		<p>提现申请人收款信息</p>
+		<div style="margin-left:20px;">
+			<label>提现金额：</label>
+			<span>{{data.amount}}元</span>
+		</div>
+		<div style="margin-left:20px;">
 			<p>收款账号：</p>
-			<div style="margin: 10px 0;">一 支付宝 账号：{{data.downStreamVo.alipay}}</div>
+			<div style="margin: 20px 0;">
+				<label style="width:110px;">一    支付宝 账号：</label>
+				<span>{{data.downStreamVo.alipay}}</span>
+			</div>
 			<div>
-				<span>二  银行卡   卡号：{{data.downStreamVo.bankCard}}</span>
-				<span style="margin:10px;">开户行：{{data.downStreamVo.bankName}}</span>
-				<span>收款人姓名：{{data.downStreamVo.payeeName}}</span>
+				<label style="width:110px;">二 银行卡   卡号： </label>
+				<span>{{data.downStreamVo.bankCard}}</span>
+				<label style="margin-left:20px;">开户行：</label>
+				<span>{{data.downStreamVo.bankName}}</span>
+				<label style="margin-left:20px;width:84px;">收款人姓名：</label>
+				<span>{{data.downStreamVo.payeeName}}</span>
 			</div>
 		</div>
 		{{if data.state == "completed"}}

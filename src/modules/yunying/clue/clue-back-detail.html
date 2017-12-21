@@ -11,18 +11,32 @@
         <div class="clearfix"></div>
         <hr /><br />
         <p>基本信息</p><br />
-        
-        <ul>
-            <li>任务号：{{data.taskNo}}</li>
-            <li>任务类型：{{menuState(data.entrust)}}</li>
-            <li>任务发起：{{data.upstreamName}}</li>
-            <li>车牌号：{{data.carNumber}}</li>
-            <li>车型：{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</li>
-            <li>颜色：{{data.carColor}}</li>
-            <li>车辆识别号：{{data.carId}}</li>
-            <li>车辆发动机号：{{data.engineId}}</li>
-            <li>任务发布时间：{{data.createAt}}</li>
-        </ul>
+        <table class="taskTable">
+        	<tr>
+        		<th>任务号：</th>
+        		<td>{{data.taskNo}}</td>
+        		<th>任务类型：</th>
+        		<td>{{menuState(data.entrust)}}</td>
+        		<th>任务发起：</th>
+        		<td>{{data.upstreamName}}</td>
+        	</tr>
+        	<tr>
+        		<th>车牌号：</th>
+        		<td>{{data.carNumber}}</td>
+        		<th>车型：</th>
+        		<td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+        		<th>颜色：</th>
+        		<td>{{data.carColor}}</td>
+        	</tr>
+        	<tr>
+        		<th>车辆识别号：</th>
+        		<td>{{data.carId}}</td>
+        		<th>车辆发动机号：</th>
+        		<td>{{data.engineId}}</td>
+        		<th>任务发布时间：</th>
+        		<td>{{data.createAt}}</td>
+        	</tr>
+        </table>
         <div class="remark">{{data.remark}}</div>
         <div class="imgRecord">
             {{each data.attachmentVoList item index}}
@@ -32,14 +46,6 @@
         <div class="mainfile">
         	<p>线索信息</p>
         	{{each data.traceVoList data index}}
-        	<div class="upimg">
-        		<dl>
-					<dt class="upload-pa">
-		    			<img class="preview-img" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
-		    		</dt>
-					<dd>全车背景照</dd>
-				</dl>
-        	</div>
         	<div style="margin:10px 0;">线索上传时间：{{data.createAt}}</div>
         	{{/each}}
         </div>

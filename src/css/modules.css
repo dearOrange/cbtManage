@@ -927,11 +927,9 @@ input, select, textarea {
 }
 
 .remark {
-	width: 800px;
-	height: 80px;
-	border: 1px solid #000;
+	height: 50px;
+	border: 1px solid #eee;
 	line-height: 24px;
-	overflow-y: auto;
 }
 
 .remark input {

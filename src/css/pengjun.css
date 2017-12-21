@@ -2,6 +2,11 @@
 	width:450px;
 	text-align: left;
 }
+.noTable div label {
+	font-weight: 900;
+	display:inline-block;
+	width:70px;
+}
 .dialog-width>div{
 	width:100%;
 	margin:20px 0;
@@ -148,9 +153,14 @@
 }
 
 /*任务详情*/
-.public_css ul li {
-	height:50px;
-	margin-left:20px;
+.public_css table.taskTable th{
+	background:0;
+	font-weight: 900;
+	text-align: right;
+}
+.public_css table.taskTable td{
+	border: 0;
+	text-align: left;
 }
 
 /*面包屑导航*/
