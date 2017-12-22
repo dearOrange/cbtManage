@@ -1259,7 +1259,7 @@ define(function(require, exports, module) {
                     if (typeof returnData.key !== 'undefined') {
                         var item = $(
                             '<div class="upfile-item">' +
-                            '<img class="preview-img" />' +
+                            '<img class="preview-img hand" />' +
                             '<span class="delete-img"></span>' +
                             '<input type="hidden" />' +
                             '</div>'

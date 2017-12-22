@@ -961,8 +961,9 @@ input, select, textarea {
 }
 
 .imgRecord {
-	height: 100px;
+	min-height: 100px;
 	border-bottom: 1px dashed #ccc;
+	padding-bottom: 30px;
 }
 
 .imgRecord span {
