@@ -47,21 +47,24 @@
 		<div class="mainfile">
 			<p>线索信息</p>
 			{{ each data.traceVoList data index }}
-			<div class="upimg pull-left">
-				<dl>
-					<dt>
-						<div class="upfile-item">
-							<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
-						</div>
-	    			</dt>
-					<dd>全车背景照</dd>
-				</dl>
-			</div>
-			<div class="pull-left">
-				<p>{{data.name}}----{{menuState(data.downstreamType)}}</p>
-				<p>线索上传时间：{{data.createAt}}</p>
-				<p>gprs信息：{{data.location}}</p>
-				<p>定位：{{data.location}}</p>
+			<div class="mt25">
+				<div class="upimg pull-left">
+					<dl>
+						<dt>
+							<div class="upfile-item">
+								<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
+							</div>
+		    			</dt>
+						<dd>全车背景照</dd>
+					</dl>
+				</div>
+				<div class="pull-left">
+					<p>{{data.name}}----{{menuState(data.downstreamType)}}</p>
+					<p>线索上传时间：{{data.createAt}}</p>
+					<p>gprs信息：{{data.location}}</p>
+					<p>定位：{{data.location}}</p>
+				</div>
+				<div class="clearfix"></div>
 			</div>
 			{{/each}}
 		</div>
