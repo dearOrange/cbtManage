@@ -1001,6 +1001,7 @@ define(function(require, exports, module) {
                 contentType: s.contentType,
                 data: s.data,
                 done: function(returnData) {
+
                     var response = returnData.data;
                     //如果返回数据没有total数据总条数，则清空内容和分页容器 显示错误信息
                     if (typeof response.total === 'undefined' || !response.total) {
@@ -1027,10 +1028,7 @@ define(function(require, exports, module) {
 
                     //如果数据超过 1 页则进行分页显示
                     if (m.page_total > 1) {
-                        if (s.page_container.children('.jh_pages').length === 0) {
-
-                            s.page_container.html(m.makeHtml()); //如果分页容器未进行初始化，则进行初始化操作
-                        }
+                        s.page_container.html(m.makeHtml()); //如果分页容器未进行初始化，则进行初始化操作
                         m.create(pageNum); //处理分页
                         $('#jh_page_totalSize').html(' 总共: '+ response.total+' 条');
                         if (pageNum === 1) {
@@ -1044,7 +1042,7 @@ define(function(require, exports, module) {
                             s.page_container.find('.jh_page_next').html('<a class="jh_next_page" href="#page-' + m.page_total + '">' + s.nextText + '</a>');
                         }
                     } else {
-                        s.page_container.empty();
+                        s.page_container.find('.jh_pages').empty();
                     }
                 }
             });
@@ -1122,10 +1120,9 @@ define(function(require, exports, module) {
                 var el = $(this);
                 var size = parseInt(el.find('option:selected').text());
                 s.data.pageSize = size;
-                var cur = m.current();
-                s.beforRender(cur);
-                m.render(cur);
-                s.btnClickCallBack(cur);
+                s.beforRender(1);
+                m.render(1);
+                s.btnClickCallBack(1);
             });
             //跳转
             if (s.jump) {
