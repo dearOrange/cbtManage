@@ -686,6 +686,10 @@ define(function(require, exports, module) {
                     var activeFirst = moduleCon.children('a'); //一级选中的文字
                     var submoduleCon = moduleCon.find('ul li.active');
                     txt += activeFirst.text();
+                    if(!txt){
+                        breadParnet.hide();
+                        return false;
+                    }
                     txt = '首页 > ' + txt;
                     breadCrumb.text(txt);
                     if (!breadParnet.is(':visible')) {
@@ -1239,7 +1243,6 @@ define(function(require, exports, module) {
 
                 //服务端响应事件
                 uploader.on('uploadAccept', function(file, returnData) {
-
                     uploader.reset(); //重置队列
                     if (typeof returnData.code !== 'undefined') {
                         if (returnData.code !== "SUCCESS") {
@@ -1256,6 +1259,11 @@ define(function(require, exports, module) {
                     }
 
                     if (typeof returnData.key !== 'undefined') {
+                        if (typeof callbackObj !== 'undefined' && !tammy.utils.objIsNull(callbackObj)) {
+                            returnData.uploader = uploader;
+                            callbackObj.uploadAccept(file, returnData);
+                            return false;
+                        }
                         var item = $(
                             '<div class="upfile-item">' +
                             '<img class="preview-img hand" />' +

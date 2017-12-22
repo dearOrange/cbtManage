@@ -11,7 +11,6 @@ define(function(require, exports, module) {
 
         this.init = function() {
             this.initContent();
-            this.initTaskTotalCount();
             this.registerEvent();
         };
         this.initContent = function() {
@@ -28,95 +27,114 @@ define(function(require, exports, module) {
             });
             page.init();
         };
-        this.initTaskTotalCount = function() {
+        this.removeBanner = function(id) {
+            jh.utils.confirm({
+                content: '确定删除吗？',
+                ok: function() {
+                    jh.utils.ajax.send({
+                        url: '/content/deletbanner',
+                        data: {
+                            bannerId: id
+                        },
+                        method: 'post',
+                        done: function() {
+                            jh.utils.alert({
+                                content: '海报删除成功！',
+                                ok: function(){
+                                    _this.initContent();
+                                },
+                                cancel: false
+                            });
+                        }
+                    });
+                },
+                cancel: true
+            });
 
+        };
+        this.showBanner = function(obj) {
+            if(!obj){
+                obj = {};
+            }else{
+                obj.showImgUrl = jh.config.viewImgRoot + obj.url;
+            }
+            var str = jh.utils.template('poster_manage_addBannerTemplate', obj);
+            jh.utils.alert({
+                content: str,
+                ok: function() {
+                    $('#poster_manage_addBannerForm').submit();
+                    return false;
+                },
+                cancel: true
+            });
+
+            jh.utils.validator.init({
+                id: 'poster_manage_addBannerForm',
+                submitHandler: function(form) {
+                    var datas = jh.utils.formToJson(form);
+                    datas.type = '2';
+                    if (!datas.url) {
+                        jh.utils.confirm({
+                            content: '请上传海报图片！'
+                        });
+                        return false;
+                    }
+                    console.log(datas);
+                    jh.utils.ajax.send({
+                        url: '/content/addbanner',
+                        data: datas,
+                        method: 'post',
+                        done: function(returnData) {
+                            jh.utils.alert({
+                                content: '海报新增成功！',
+                                ok: function() {
+                                    _this.initContent();
+                                    jh.utils.closeArt();
+                                }
+                            });
+                        }
+                    });
+                    return false;
+                }
+            });
+
+            jh.utils.uploader.init({
+                pick: {
+                    id: '#url'
+                }
+            }, {
+                uploadAccept: function(file, returnData) {
+                    $('#bannerImageUrl').val(returnData.key);
+                    var imgStr = '<img class="preview-img" src="' + jh.config.viewImgRoot + returnData.key + '" width="608" height="304"/>';
+                    $('.img-preview-content').html(imgStr);
+                }
+            });
         };
         this.registerEvent = function() {
             //编辑banner
             $('body').off('click', '.posterEdit').on('click', '.posterEdit', function() {
                 var me = $(this);
-                var id = me.data('id');
-                var str = jh.utils.template('poster_manage_addBannerTemplate', {});
-                var traceIds = $(this).data('id');
-                jh.utils.alert({
-                    content: str,
-                    ok: function() {
-                        $('#poster_manage_addBannerForm')[0].submit();
-                    },
-                    cancel: true
-                });
-
-                jh.utils.validator.init({
-                    id: 'poster_manage_addBannerForm',
-                    submitHandler: function(form) {
-                        var datas = jh.utils.formToJson(form);
-                        console.log(datas);
-                        return false;
-                    }
-                });
+                var info = me.data('info');
+                _this.showBanner(info);
             });
             //新增banner
             $('body').off('click', '.poster_addBanner').on('click', '.poster_addBanner', function() {
                 var me = $(this);
                 var id = me.data('id');
-                var str = jh.utils.template('poster_manage_addBannerTemplate', {});
-                jh.utils.alert({
-                    content: str,
-                    ok: function() {
-                        $('#poster_manage_addBannerForm').submit();
-                        return false;
-                    },
-                    cancel: true
-                });
-
-                jh.utils.validator.init({
-                    id: 'poster_manage_addBannerForm',
-                    submitHandler: function(form) {
-                        var datas = jh.utils.formToJson(form);
-                        if(!datas.url){
-                            jh.utils.confirm({
-                                content: '请上传海报图片！'
-                            });
-                            return false;
-                        }
-                        console.log(datas);
-                        return false;
-                    }
-                });
-
-                jh.utils.uploader.init({
-                    pick: {
-                        id: '#url'
-                    }
-                }, {
-                    uploadAccept: function(file, returnData) {
-                        debugger
-                    }
-                });
+                _this.showBanner();
             });
             //删除banner
             $('body').off('click', '.removeEdit').on('click', '.removeEdit', function() {
                 var me = $(this);
                 var id = me.data('id');
-                var traceIds = $(this).data('id');
-                jh.utils.alert({
-                    content: '确定拒绝吗？',
-                    ok: function() {
-                        jh.utils.ajax.send({
-                            url: '/trace/check',
-                            data: {
-                                traceIds: traceIds,
-                                validState: 2
-                            },
-                            done: function(returnData) {
-                                _this.initContent();
-                            }
-
-                        });
-                    },
-                    cancel: true
-                })
-            })
+                _this.removeBanner(id);
+            });
+            //批量删除banner
+            $('body').off('click', '.poster_removeBanner').on('click', '.poster_removeBanner', function() {
+                var me = $(this);
+                var id = jh.utils.getCheckboxValue('poster_manage_container');
+                _this.removeBanner(id);
+            });
         };
     }
     module.exports = PosterManage;

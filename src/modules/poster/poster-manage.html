@@ -29,23 +29,23 @@
 
 <script type="text/template" id="poster-manage-template">
 	{{ each list item index }}
-	<tr class="{{if item.isRead == 0}}bgc_blue{{/if}}">
+	<tr>
 		<td>{{index+1}}</td>
 		<td>
             <input type="checkbox" data-id="{{item.id}}"/>
         </td>
 		<td class="imgWidth">
-			<img src="{{viewImgRoot}}{{item.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand"/>
+			<img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand"/>
 		</td>
-		<td>{{item.name}}</td>
-		<td>{{item.company}}</td>
-		<td>{{item.taskNo}}</td>
+		<td>{{item.redirect}}</td>
+		<td>{{item.title}}</td>
+		<td>{{item.order}}</td>
 		<td>{{item.createAt}}</td>
 		<td>
 			<ul class="operaitem" style="margin-left:24px;">
-				<li>
-					<a data-id="{{item.id}}" class="posterEdit button">编辑</a>
-				</li>
+<!-- 				<li>
+					<a data-id="{{item.id}}" data-info="{{item}}" class="posterEdit button">编辑</a>
+				</li> -->
 				<li>
 					<a data-id="{{item.id}}" class="removeEdit button">删除</a>
 				</li>
@@ -58,25 +58,29 @@
 <script type="text/template" id="poster_manage_addBannerTemplate">
 	<form id="poster_manage_addBannerForm">
 		<p>预览图片</p>
-		<div class="img-preview-content upload-list"></div>
+		<div class="img-preview-content upload-list">
+			{{if showImgUrl}}
+			<img src="{{showImgUrl}}" class="preview-img" width="608" height="304">
+			{{/if}}
+		</div>
 		<p>*上传尺寸608*304格式有jpg或PNG的图片</p>
 		<div class="ordinary">
 			<div id="url">上传图片</div>
-			<input type="hidden" name="url">
+			<input type="hidden" name="url" id="bannerImageUrl" value="{{url}}">
 		</div>
 		<div class="mt25">
 			<label>对应链接地址</label>
-			<input type="text" name="redirect" class="required url">
+			<input type="text" name="redirect" class="required url" value="{{redirect}}">
 		</div>
 
 		<div class="mt10">
 			<label>活动海报标题</label>
-			<input type="text" name="title" class="required" maxlength="50">
+			<input type="text" name="title" class="required" maxlength="50" value="{{title}}">
 		</div>
 
 		<div class="mt10">
 			<label>排&nbsp;&nbsp;&nbsp;列&nbsp;&nbsp;序&nbsp;&nbsp;号</label>
-			<input type="text" name="order" class="required number" maxlength="3">
+			<input type="text" name="order" class="required number" maxlength="3" value="{{order}}">
 		</div>
 	</form>
 </script>
