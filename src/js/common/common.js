@@ -686,6 +686,10 @@ define(function(require, exports, module) {
                     var activeFirst = moduleCon.children('a'); //一级选中的文字
                     var submoduleCon = moduleCon.find('ul li.active');
                     txt += activeFirst.text();
+                    if(!txt){
+                        breadParnet.hide();
+                        return false;
+                    }
                     txt = '首页 > ' + txt;
                     breadCrumb.text(txt);
                     if (!breadParnet.is(':visible')) {
@@ -1026,10 +1030,9 @@ define(function(require, exports, module) {
                         if (s.page_container.children('.jh_pages').length === 0) {
 
                             s.page_container.html(m.makeHtml()); //如果分页容器未进行初始化，则进行初始化操作
-                            $('#jh_page_totalSize').html(' 总共: '+ response.total+' 条');
                         }
                         m.create(pageNum); //处理分页
-
+                        $('#jh_page_totalSize').html(' 总共: '+ response.total+' 条');
                         if (pageNum === 1) {
                             s.page_container.find('.jh_page_pre').html('<span class="jh_pre_page">' + s.preText + '</span>');
                             s.page_container.find('.jh_page_next').html('<a class="jh_next_page" href="#page-' + m.page_total + '">' + s.nextText + '</a>');
@@ -1240,7 +1243,6 @@ define(function(require, exports, module) {
 
                 //服务端响应事件
                 uploader.on('uploadAccept', function(file, returnData) {
-
                     uploader.reset(); //重置队列
                     if (typeof returnData.code !== 'undefined') {
                         if (returnData.code !== "SUCCESS") {
@@ -1257,6 +1259,11 @@ define(function(require, exports, module) {
                     }
 
                     if (typeof returnData.key !== 'undefined') {
+                        if (typeof callbackObj !== 'undefined' && !tammy.utils.objIsNull(callbackObj)) {
+                            returnData.uploader = uploader;
+                            callbackObj.uploadAccept(file, returnData);
+                            return false;
+                        }
                         var item = $(
                             '<div class="upfile-item">' +
                             '<img class="preview-img hand" />' +
@@ -1687,7 +1694,7 @@ define(function(require, exports, module) {
             var str = '<div id="channel_distribution_public_template">'
                 +    '<ul class="qd-distribution-tab">'
                 +        '<li class="active">分配渠道经理</li>'
-                +        '<li>投放公开任务</li>'
+                +        '<li>投放次要任务</li>'
                 +    '</ul>'
                 +    '<div class="content">'
                 +        '<div style="width:460px;">'

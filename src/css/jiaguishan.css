@@ -87,3 +87,20 @@
 	height: 100px;
 	text-align: center;
 }
+
+#poster_manage_addBannerForm {
+
+	/*width: 700px;*/
+}
+
+#poster_manage_addBannerForm .img-preview-content {
+	width: 608px;
+	height: 304px;
+	border: 1px solid #ddd;
+}
+
+#poster_manage_addBannerForm input[type="text"] {
+	width: 520px;
+	height: 30px;
+	border: 1px solid #ddd;
+}
