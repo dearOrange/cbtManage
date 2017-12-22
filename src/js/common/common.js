@@ -1026,10 +1026,9 @@ define(function(require, exports, module) {
                         if (s.page_container.children('.jh_pages').length === 0) {
 
                             s.page_container.html(m.makeHtml()); //如果分页容器未进行初始化，则进行初始化操作
-                            $('#jh_page_totalSize').html(' 总共: '+ response.total+' 条');
                         }
                         m.create(pageNum); //处理分页
-
+                        $('#jh_page_totalSize').html(' 总共: '+ response.total+' 条');
                         if (pageNum === 1) {
                             s.page_container.find('.jh_page_pre').html('<span class="jh_pre_page">' + s.preText + '</span>');
                             s.page_container.find('.jh_page_next').html('<a class="jh_next_page" href="#page-' + m.page_total + '">' + s.nextText + '</a>');
