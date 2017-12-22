@@ -25,7 +25,7 @@
 		<div class="imgRecord">
 			<p>催收资料</p>
 			{{each data.attachmentVoList data index}}
-			<img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" /> 
+			<img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" class="preview-img" /> 
 			{{/each}}
 		</div>
 		<br>
@@ -37,7 +37,7 @@
 				<dl>
 					<dt>
 						<div class="upfile-item">
-							<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}">
+							<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}" class="preview-img"/>
 						</div>
 	    			</dt>
 					<dd>全车背景照</dd>

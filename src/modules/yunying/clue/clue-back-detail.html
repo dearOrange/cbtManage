@@ -40,7 +40,7 @@
         <div class="remark">{{data.remark}}</div>
         <div class="imgRecord">
             {{each data.attachmentVoList item index}}
-            <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'" class="preview-img"/>
             {{/each}}
         </div>
         <div class="mainfile">

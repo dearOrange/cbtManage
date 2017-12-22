@@ -41,7 +41,7 @@
         <div class="remark">备注信息：{{data.remark}}</div>
         <div class="imgRecord">
             {{each attachmentVoList item index}}
-            <img src="{{viewRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            <img src="{{viewRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'" class="preview-img"/>
             {{/each}}
         </div>
         <div class="mainfile">
@@ -51,7 +51,7 @@
                 <dl>
                     <dt>
                         <div class="upfile-item">
-                            <img class="preview-img" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
+                            <img class="preview-img" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img" />
                         </div>
                     </dt>
                     <dd>全车背景照</dd>

@@ -41,7 +41,7 @@
         <div class="remark">备注信息：{{data.remark}}</div>
         <div class="imgRecord">
             {{each data.attachmentVoList item index}}
-            <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'"/>
+            <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'" class="preview-img"/>
             {{/each}}
         </div>
         <div class="upmainfile">
@@ -51,7 +51,7 @@
         		<dl>
 					<dt>
 						<div class="upfile-item">
-							<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
+							<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img"/>
 						</div>
 	    			</dt>
 					<dd>全车背景照</dd>
@@ -78,37 +78,37 @@
 			<div class="upimg">
 				<dl>
 					<dt>
-						<img data-id="{{data.businessLicense}}" src="{{viewImgRoot}}{{data.businessLicense}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
+						<img data-id="{{data.businessLicense}}" src="{{viewImgRoot}}{{data.businessLicense}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img"/>
 		    		</dt>
 					<dd>公证书</dd>
 				</dl>
 				<dl>
 					<dt>
-						<img data-id="{{data.legalPersonIdImg}}" src="{{viewImgRoot}}{{data.legalPersonIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
+						<img data-id="{{data.legalPersonIdImg}}" src="{{viewImgRoot}}{{data.legalPersonIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img"/>
 		    		</dt>
 					<dd>按揭服务协议</dd>
 				</dl>
 				<dl>
 					<dt>
-						<img data-id="{{data.legalPersonHandIdImg}}" src="{{viewImgRoot}}{{data.legalPersonHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
+						<img data-id="{{data.legalPersonHandIdImg}}" src="{{viewImgRoot}}{{data.legalPersonHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img"/>
 		    		</dt>
 					<dd>抵押合同</dd>
 				</dl>
 				<dl>
 					<dt>
-						<img data-id="{{data.linkmanIdImg}}" src="{{viewImgRoot}}{{data.linkmanIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
+						<img data-id="{{data.linkmanIdImg}}" src="{{viewImgRoot}}{{data.linkmanIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img"/>
 		    		</dt>
 					<dd>垫付款凭证</dd>
 				</dl>
 				<dl>
 					<dt>
-						<img data-id="{{data.linkmanHandIdImg}}" src="{{viewImgRoot}}{{data.linkmanHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
+						<img data-id="{{data.linkmanHandIdImg}}" src="{{viewImgRoot}}{{data.linkmanHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img"/>
 		    		</dt>
 					<dd>还款确认书</dd>
 				</dl>
 				<dl>
 					<dt>
-						<img data-id="{{data.linkmanHandIdImg}}" src="{{viewImgRoot}}{{data.linkmanHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
+						<img data-id="{{data.linkmanHandIdImg}}" src="{{viewImgRoot}}{{data.linkmanHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img"/>
 		    		</dt>
 					<dd>法院判决书</dd>
 				</dl>
