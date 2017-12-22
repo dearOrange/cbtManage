@@ -25,7 +25,7 @@
 						<input type="text" class="search-input" name="carNumber">
 					</td>
 					<td>
-						<label class="label">任务类型：</label>
+						<label class="label">任&nbsp;务&nbsp;类&nbsp;型：</label>
 						<select name="entrust">
                         	<option value="">所有</option>
                         	<option value="all">无需定位需找+拖</option>
@@ -46,9 +46,9 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<label class="label">残值：</label>
-						<input type="text" class="search-input OnlyPrice" name="minprice">万   至   
-						<input type="text" class="search-input OnlyPrice" name="maxprice">万   
+						<label class="label">残&nbsp;&nbsp;&nbsp;值：</label>
+						<input type="text" class="search-input OnlyPrice" name="minprice">   至   
+						<input type="text" class="search-input OnlyPrice" name="maxprice">   
 					</td>
 					<td>
 						<label class="label">车辆归属地：</label>
@@ -93,8 +93,8 @@
 					</td>
 					<td colspan="3">
 						<label class="label">录入时间：</label>
-						<input type="text" class="search-input" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd'})">   至   
-						<input type="text" class="search-input" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd'})">   
+						<input type="text" class="search-input hand" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd'})">   至   
+						<input type="text" class="search-input hand" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd'})">   
 					</td>
 				</tr>
 				<tr>

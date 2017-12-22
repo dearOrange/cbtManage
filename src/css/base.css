@@ -39,12 +39,6 @@ button[disabled], html input[disabled] {
     cursor: default
 }
 
-input[readonly] {
-    background-color: #eef1f6;
-    color: #bbb;
-    cursor: not-allowed
-}
-
 ol, ul {
     list-style: none
 }
