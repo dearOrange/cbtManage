@@ -179,13 +179,13 @@
 
 /*任务详情*/
 .public_css table.taskTable th {
-	background: 0;
 	font-weight: 900;
 	text-align: right;
+	border: 1px solid #ffffff;
 }
 
 .public_css table.taskTable td {
-	border: 0;
+	border: 1px solid #eef1f6;
 	text-align: left;
 }
 
