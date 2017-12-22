@@ -57,7 +57,9 @@
         <td>{{menuState(item.state)}}</td>
         <td>
             <a data-id="{{item.id}}" class="detail button">详情</a>
+            {{if item.state === "tracing"}}
             <a data-id="{{item.id}}" class="distribution button">分配</a>
+            {{/if}}
         </td>
     </tr>
     {{/each}}

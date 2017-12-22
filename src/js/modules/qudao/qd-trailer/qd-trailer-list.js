@@ -38,7 +38,9 @@ define(function(require, exports, module) {
 
                     jh.utils.alert({
                         content: str,
-                        ok: _this.distribution,
+                        ok: function(){
+                            _this.distribution(type);
+                        },
                         cancel: true
                     });
                 }
@@ -69,17 +71,20 @@ define(function(require, exports, module) {
             return str;
         };
 
-        this.distribution = function(ids) {
+        this.distribution = function(taskids) {
             var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
             var opt = {
-                url: '/task/distributeTask',
+                url: '/task/towingAllot',
                 data: {
-                    taskIds: ids
+                    taskidList: taskids,
+                    downstreamId: ids
                 },
                 done: function(returnData) {
                     jh.utils.alert({
                         content: '任务分配成功！',
-                        ok: true,
+                        ok: function(){
+                            _this.initContent();
+                        },
                         cancel: false
                     });
                 }
