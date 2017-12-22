@@ -1713,7 +1713,7 @@ define(function(require, exports, module) {
                 +                                '{{/each}}'
                 +                            '</div>'
                 +                            '<div id="qd-distribution-tab1" class="public hide" style="height: 200px;font-size: 18px;padding-top: 100px">'
-                +                                '<p>确定将该任务进行公开吗？<br> 公开后的任务将所有在职捕头可见</p>'
+                +                                '<p>确定将该任务投放至次要任务库吗？</p>'
                 +                            '</div>'
                 +                        '</form>'
                 +                    '</td>'
