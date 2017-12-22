@@ -36,9 +36,9 @@
 		<div class="mainfile">
 			<p>委托信息</p>
 			<div class="upimg">
-				<img data-id="{{data.pic1}}" src="{{viewImgRoot}}{{data.pic1}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand"/>
-				<img data-id="{{data.pic2}}" src="{{viewImgRoot}}{{data.pic2}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand"/>
-				<img data-id="{{data.pic3}}" src="{{viewImgRoot}}{{data.pic3}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand"/>
+				<img data-id="{{data.pic1}}" src="{{viewImgRoot}}{{data.pic1}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand" onerror="this.src='/src/img/nopic.png'"/>
+				<img data-id="{{data.pic2}}" src="{{viewImgRoot}}{{data.pic2}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand" onerror="this.src='/src/img/nopic.png'"/>
+				<img data-id="{{data.pic3}}" src="{{viewImgRoot}}{{data.pic3}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand" onerror="this.src='/src/img/nopic.png'"/>
 			</div>
 		</div>
 		{{if data.state == "unverified"}}

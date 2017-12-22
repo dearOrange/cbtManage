@@ -128,7 +128,7 @@
 										<div class="upload-list">
 											<div class="upfile-item">
 												{{if voucher1}}
-												<img class="preview-img hand" src="{{viewImgRoot}}{{voucher1}}?imageMogr2/auto-orient/thumbnail/100x100">
+												<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{voucher1}}?imageMogr2/auto-orient/thumbnail/100x100">
 												<span class="delete-img"></span>
 												<input type="hidden" name="voucher1" value="{{voucher1}}">
 												{{/if}}
@@ -144,7 +144,7 @@
 										<div class="upload-list">
 											<div class="upfile-item">
 												{{if voucher2}}
-												<img class="preview-img hand" src="{{viewImgRoot}}{{voucher2}}?imageMogr2/auto-orient/thumbnail/100x100">
+												<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{voucher2}}?imageMogr2/auto-orient/thumbnail/100x100">
 												<span class="delete-img"></span>
 												<input type="hidden" name="voucher2" value="{{voucher2}}">
 												{{/if}}
@@ -160,7 +160,7 @@
 										<div class="upload-list">
 											<div class="upfile-item">
 												{{if voucher3}}
-												<img class="preview-img hand" src="{{viewImgRoot}}{{voucher3}}?imageMogr2/auto-orient/thumbnail/100x100">
+												<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{voucher3}}?imageMogr2/auto-orient/thumbnail/100x100">
 												<span class="delete-img"></span>
 												<input type="hidden" name="voucher3" value="{{voucher3}}">
 												{{/if}}

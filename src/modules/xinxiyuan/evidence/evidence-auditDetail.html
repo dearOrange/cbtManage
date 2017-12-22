@@ -51,7 +51,7 @@
         		<dl>
 					<dt>
 						<div class="upfile-item">
-							<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand"/>
+							<img data-id="{{data.carPhoto}}" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand"/>
 						</div>
 	    			</dt>
 					<dd>全车背景照</dd>
