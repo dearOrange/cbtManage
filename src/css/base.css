@@ -335,7 +335,7 @@ label.error {
     width: 32px;
     height: 30px;
     background: url(../img/icon/icon-closeMenu.png) no-repeat;
-    background-size:cover;
+    background-size: cover;
 }
 
 .icon.icon-icon_nopass {
@@ -346,7 +346,7 @@ label.error {
     width: 32px;
     height: 30px;
     background: url(../img/icon/icon-openMenu.png) no-repeat;
-    background-size:cover;
+    background-size: cover;
 }
 
 .icon.icon-icon_pass {
@@ -792,7 +792,6 @@ label.error {
     cursor: pointer
 }
 
-
 .header {
 }
 
@@ -811,16 +810,16 @@ label.error {
 .header .navbar .index_logo {
     width: 210px;
     height: 50px;
-    float:left;
-    margin:7px 0 0 30px;
+    float: left;
+    margin: 7px 0 0 30px;
     display: inline-block;
     background: url(../img/index/logo.png) no-repeat center center;
     background-size: 82%;
 }
 
 .header .navbar p {
-	float:left;
-	color: #f6f6f6;
+    float: left;
+    color: #f6f6f6;
 }
 
 .header .navbar-nav {
@@ -990,7 +989,6 @@ label.error {
 .sidebar-menu ul a {
     text-indent: 25px
 }
-
 
 .content-header h1 {
     font-size: 20px;
