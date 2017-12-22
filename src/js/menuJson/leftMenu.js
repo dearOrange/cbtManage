@@ -122,6 +122,12 @@ define(function(require, exports, module) {
             module: '/src/modules/user',
             url: '/user-manage',
             childrens: []
+        }, {
+            name: '信息-海报管理',
+            icon: 'icon-supplier',
+            module: '/src/modules/poster',
+            url: '/poster-manage',
+            childrens: []
         }]
     };
     module.exports = FINAL_MENU_DATA_JSON;
