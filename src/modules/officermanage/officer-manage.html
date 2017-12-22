@@ -6,6 +6,7 @@
                     <td>
                         <label class="label">业务类型：</label>
                         <select name="type">
+                        	<option value="">全部类型</option>
                             <option value="all">可拖车可找车</option>
                             <option value="trace">只找车</option>
                             <option value="recycle">只拖车</option>
@@ -31,7 +32,6 @@
                     <th width="8%">姓名</th>
                     <th width="10%">所属公司</th>
                     <th width="10%">区域</th>
-                    <th width="6%">星级</th>
                     <th width="10%">联系电话</th>
                     <th width="15%">通过认证时间</th>
                     <th width="10%">认证状态</th>
@@ -52,10 +52,9 @@
         <td>{{item.name}}</td>
         <td>{{item.company}}</td>
         <td>{{ each item.area data index }}
-        {{data.cityName}}
+        {{data.provinceName}}
         {{/each}}</td>
-        <td>{{item.star}}</td>
-        <td>{{item.contactPhone}}</td>
+        <td>{{item.phone}}</td>
         <td>{{item.passAt}}</td>
         <td>{{menuState(item.state)}}</td>
         <td>

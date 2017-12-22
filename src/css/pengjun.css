@@ -182,6 +182,7 @@
 	font-weight: 900;
 	text-align: right;
 	border: 1px solid #ffffff;
+	width:98px;
 }
 
 .public_css table.taskTable td {
@@ -213,4 +214,27 @@
 #plat-sure-money table tr td input {
 	border: 1px solid #eee;
 	height: 28px;
+}
+
+/*新增*/
+.admin-addNews, .admin-addPoster, .admin-removePoster {
+	/*border:1px solid #3fa1f4;
+	color:#3fa1f4;
+	padding:10px;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 36px;
+    cursor: pointer;*/
+}
+
+/*新增公告*/
+.addnews div {
+	margin-bottom: 20px;
+}
+.addnews input{
+	width:300px;
+	height:30px;
+	border:1px solid #ccc;
+	margin-left:10px;
+	border-radius: 3px;
 }
