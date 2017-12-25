@@ -956,11 +956,11 @@ define(function(require, exports, module) {
             arr.push('<div class="pull-left">');
             arr.push('  <span>每页显示</span>');
             arr.push('  <select class="jh_page_pageSize">');
-            arr.push('      <option>10</option>');
-            arr.push('      <option>20</option>');
-            arr.push('      <option>30</option>');
-            arr.push('      <option>40</option>');
-            arr.push('      <option>50</option>');
+            arr.push('      <option value="10">10</option>');
+            arr.push('      <option value="20">20</option>');
+            arr.push('      <option value="30">30</option>');
+            arr.push('      <option value="40">40</option>');
+            arr.push('      <option value="50">50</option>');
             arr.push('  <select>');
             arr.push('  <span id="jh_page_totalSize"> 总共：</span>');
             arr.push('</div>');
@@ -1025,11 +1025,11 @@ define(function(require, exports, module) {
                         log('模板拼接错误，请检查模板！');
                         log(e);
                     }
-
                     //如果数据超过 1 页则进行分页显示
                     if (m.page_total > 1) {
                         s.page_container.html(m.makeHtml()); //如果分页容器未进行初始化，则进行初始化操作
                         m.create(pageNum); //处理分页
+                        s.page_container.find('.jh_page_pageSize').val(s.data.pageSize);
                         $('#jh_page_totalSize').html(' 总共: '+ response.total+' 条');
                         if (pageNum === 1) {
                             s.page_container.find('.jh_page_pre').html('<span class="jh_pre_page">' + s.preText + '</span>');
