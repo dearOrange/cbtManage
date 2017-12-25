@@ -695,6 +695,7 @@ define(function(require, exports, module) {
                     if (!breadParnet.is(':visible')) {
                         breadParnet.show();
                     }
+                    tammy.utils.defaultPage();
                 }
             });
         };

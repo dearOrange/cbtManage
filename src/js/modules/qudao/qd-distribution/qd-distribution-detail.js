@@ -107,7 +107,7 @@ define(function(require, exports, module) {
                     jh.utils.alert({
                         content: '任务分配成功！',
                         ok: function(){
-                        	$('#fpSheriffList').addClass('hide');
+                            jh.utils.load('/src/modules/qudao/qd-distribution/qd-distribution-list');
                         },
                         cancel: false
                     });

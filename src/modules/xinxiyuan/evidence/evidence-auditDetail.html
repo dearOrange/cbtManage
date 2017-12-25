@@ -76,44 +76,12 @@
         <div class="mainfile">
 			<p>凭证审核</p>
 			<div class="upimg">
-				<dl>
-					<dt>
-						<img data-id="{{data.businessLicense}}" src="{{viewImgRoot}}{{data.businessLicense}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
-		    		</dt>
-					<dd>公证书</dd>
-				</dl>
-				<dl>
-					<dt>
-						<img data-id="{{data.legalPersonIdImg}}" src="{{viewImgRoot}}{{data.legalPersonIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
-		    		</dt>
-					<dd>按揭服务协议</dd>
-				</dl>
-				<dl>
-					<dt>
-						<img data-id="{{data.legalPersonHandIdImg}}" src="{{viewImgRoot}}{{data.legalPersonHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
-		    		</dt>
-					<dd>抵押合同</dd>
-				</dl>
-				<dl>
-					<dt>
-						<img data-id="{{data.linkmanIdImg}}" src="{{viewImgRoot}}{{data.linkmanIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
-		    		</dt>
-					<dd>垫付款凭证</dd>
-				</dl>
-				<dl>
-					<dt>
-						<img data-id="{{data.linkmanHandIdImg}}" src="{{viewImgRoot}}{{data.linkmanHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
-		    		</dt>
-					<dd>还款确认书</dd>
-				</dl>
-				<dl>
-					<dt>
-						<img data-id="{{data.linkmanHandIdImg}}" src="{{viewImgRoot}}{{data.linkmanHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
-		    		</dt>
-					<dd>法院判决书</dd>
-				</dl>
+                {{each data.voucherVoList item index}}
+                <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand pull-left ml10"/>
+                {{/each}}
+                <div class="clearfix"></div>
 			</div>
-			<a class="button search-button isSure" href="javascript:;">凭证审核</a>
+			<a class="button search-button mt25 isSure" href="javascript:;">凭证审核</a>
 		</div>
     </div>
 </script>
