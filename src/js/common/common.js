@@ -1727,7 +1727,8 @@ define(function(require, exports, module) {
         tammy.utils.getChannelHtml = ChannelDistribution;
     })();
     (function(){
-        function SheriffDistribution(){
+        function SheriffDistribution(checkType){
+            checkType = checkType ? checkType : 'checkbox';
             var str = '<div id="distribution_public_template">'
                 +    '<div style="width:460px;">'
                 +        '<table>'
@@ -1744,7 +1745,7 @@ define(function(require, exports, module) {
                 +                        '<div class="divied-type" style="height: 300px;overflow-y: auto;text-align: left;">'
                 +                            '{{each list item index}}'
                 +                            '<div>'
-                +                                '<input type="checkbox" value="{{item.id}}" class="hand"/>'
+                +                                '<input type="'+checkType+'" value="{{item.id}}" class="hand"/>'
                 +                                '<span>{{item.name}} - </span>'
                 +                                '<span>{{stateToString(item.type)}}</span>'
                 +                                '<span>{{if item.isRefuse}}-拒绝{{/if}}</span>'

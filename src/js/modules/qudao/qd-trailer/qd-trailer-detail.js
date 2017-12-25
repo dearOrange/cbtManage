@@ -32,7 +32,7 @@ define(function(require, exports, module) {
         };
 
         this.distributionSheriff = function(arr) {
-            var source = jh.utils.getSheriffHtml();
+            var source = jh.utils.getSheriffHtml('radio');
             var render = jh.utils.template.compile(source);
             var menuState = function(state) {
                 switch (state) {
@@ -67,9 +67,11 @@ define(function(require, exports, module) {
         $('body').off('click', '.sureAudit').on('click', '.sureAudit', function() {
             var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
             var opt = {
-                url: '/task/distributeTask',
+                url: '/task/towingAllot',
+                method: 'post',
                 data: {
-                    taskIds: ids
+                    taskidList: args.id,
+                    downstreamId: ids
                 },
                 done: function(returnData) {
                     jh.utils.alert({

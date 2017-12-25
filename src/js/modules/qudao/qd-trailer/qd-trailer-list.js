@@ -48,7 +48,7 @@ define(function(require, exports, module) {
         };
 
         this.distributionSheriff = function(arr) {
-            var source = jh.utils.getSheriffHtml();
+            var source = jh.utils.getSheriffHtml('radio');
             var render = jh.utils.template.compile(source);
             var menuState = function(state) {
                 switch (state) {
@@ -75,6 +75,7 @@ define(function(require, exports, module) {
             var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
             var opt = {
                 url: '/task/towingAllot',
+                method: 'post',
                 data: {
                     taskidList: taskids,
                     downstreamId: ids
