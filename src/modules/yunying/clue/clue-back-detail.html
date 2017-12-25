@@ -51,11 +51,23 @@
         </div>
         {{if data.state == "unconfirmed"}}
         <div class="hopeprice">
-        	<p>预估费用</p>
+        	<p>确认费用</p>
         	<div>
-        		<label>处置费用预估:</label>
-        		<span>{{if data.estimatedPrice}}{{data.estimatedPrice}}{{else}}暂无估价{{/if}}</span>
-        	</div>
+                <label>最终处置费用:</label>
+                <span>{{if data.finalPrice}}{{data.finalPrice}}{{else}}暂无费用{{/if}}</span>
+            </div>
+            <div>
+                <label>其中受托人费用:</label>
+                <span>{{if data.baileePrice}}{{data.baileePrice}}{{else}}暂无费用{{/if}}</span>
+            </div>
+            <div>
+                <label>资产查找费:</label>
+                <span>{{if data.assetPrice}}{{data.assetPrice}}{{else}}暂无费用{{/if}}</span>
+            </div>
+            <div>
+                <label>第三方处置清收费:</label>
+                <span>{{if data.thirdpartyPrice}}{{data.thirdpartyPrice}}{{else}}暂无费用{{/if}}</span>
+            </div>
         </div>
         <div class="clearfix"></div>
 		<p>联系小计</p><br />
