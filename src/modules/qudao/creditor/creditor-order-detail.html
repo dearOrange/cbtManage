@@ -51,7 +51,10 @@
             <div>
                 <table class="pull-left" style="width: 90%;">
                     <thead>
+                        <th>车牌号</th>
                         <th>信息描述</th>
+                        <th>信息修复地点</th>
+                        <th>信息修复城市</th>
                         <th>发生时间</th>
                     </thead>
                     <tbody id="distribution-illegalList-container"></tbody>
@@ -105,7 +108,10 @@
 <script type="text/template" id="distribution-illegalList-template">
     {{each list item index}}
     <tr>
+        <td>{{item.carNumber}}</td>
         <td>{{item.desc}}</td>
+        <td>{{item.site}}</td>
+        <td>{{item.city}}</td>
         <td>{{item.occurAt}}</td>
     </tr>
     {{/each}}
