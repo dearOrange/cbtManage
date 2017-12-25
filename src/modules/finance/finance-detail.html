@@ -71,26 +71,38 @@
 	                </tr>
 	                <tr>
 	                    <td>交易时间</td>
-	                    <td>
-	                        <input type="text" name="dealTime" value="{{if data.loanerFinanceVo}}{{data.loanerFinanceVo.dealTime}}{{/if}}" id="dealTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'dealTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+	                    <td>{{if data.loanerMoneyStatus == "1"}}
+	                    	<span>{{data.loanerFinanceVo.dealTime}}</span>
+	                    	{{else}}
+	                        <input type="text" name="dealTime" value="" id="dealTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'dealTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+	                        {{/if}}
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <td>打款人</td>
-	                    <td>
-	                        <input type="text" name="payer" value="{{if data.loanerFinanceVo}}{{data.loanerFinanceVo.payer}}{{/if}}">
+	                    <td>{{if data.loanerMoneyStatus == "1"}}
+	                    	<span>{{data.loanerFinanceVo.payer}}</span>
+	                    	{{else}}
+	                        <input type="text" name="payer" value="">
+	                        {{/if}}
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <td>收款人</td>
-	                    <td>
-	                        <input type="text" name="payee" value="{{if data.loanerFinanceVo}}{{data.loanerFinanceVo.payee}}{{/if}}">
+	                    <td>{{if data.loanerMoneyStatus == "1"}}
+	                    	<span>{{data.loanerFinanceVo.payee}}</span>
+	                    	{{else}}
+	                        <input type="text" name="payee">
+	                        {{/if}}
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <td>实收金额</td>
-	                    <td>
-	                        <input type="text" name="amount" value="{{if data.loanerFinanceVo}}{{data.loanerFinanceVo.amount}}{{/if}}">
+	                    <td>{{if data.loanerMoneyStatus == "1"}}
+	                    	<span>{{data.loanerFinanceVo.amount}}</span>
+	                    	{{else}}
+	                        <input type="text" name="amount">
+	                        {{/if}}
 	                    </td>
 	                </tr>
 	            </table>
