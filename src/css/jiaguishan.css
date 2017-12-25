@@ -73,6 +73,8 @@
 	right: 5px;
 	bottom: 5px;
 	border: 1px solid #ddd;
+	background-color: #fff;
+	z-index: 99;
 }
 
 .new-message .title {
