@@ -60,9 +60,11 @@
         <div class="clearfix"></div>
 		<p>联系小计</p><br />
 		<div class="upmainfile onlineSubtotal">
+			{{if data.state == "unvaluation"}}
 			<ol>
 				<li class="addMoneytotal hand">+添加议价小计</li>
 			</ol>
+			{{/if}}
 			<table>
 				<thead>
 					<tr>

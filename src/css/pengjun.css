@@ -238,3 +238,18 @@
 	margin-left:10px;
 	border-radius: 3px;
 }
+
+/*状态开启/关闭*/
+p.btn-status {
+	width:48px;
+	height:40px;
+}
+p.openStatus {
+	background: url(../img/index/open.png) no-repeat center;
+	background-size: 20px 20px;
+}
+
+p.closeStatus {
+	background: url(../img/index/close.png) no-repeat center;
+	background-size: 20px 20px;
+}

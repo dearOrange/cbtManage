@@ -18,7 +18,6 @@ define(function(require, exports, module) {
             });
 		};
 		this.initContent = function(isSearch) {
-			
 			var page = new jh.ui.page({
 				data_container: $('#finance_list_container'),
 				page_container: $('#page_container'),
@@ -34,7 +33,6 @@ define(function(require, exports, module) {
 			page.init();
 		};
 		this.registerEvent = function() {
-
 			// 搜索
 			jh.utils.validator.init({
 				id: 'finance-list-form',

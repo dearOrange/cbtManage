@@ -72,25 +72,25 @@
 	                <tr>
 	                    <td>交易时间</td>
 	                    <td>
-	                        <input type="text" name="dealTime" value="" id="dealTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'dealTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+	                        <input type="text" name="dealTime" value="{{if data.loanerFinanceVo}}{{data.loanerFinanceVo.dealTime}}{{/if}}" id="dealTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'dealTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss'})">
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <td>打款人</td>
 	                    <td>
-	                        <input type="text" name="payer" value="">
+	                        <input type="text" name="payer" value="{{if data.loanerFinanceVo}}{{data.loanerFinanceVo.payer}}{{/if}}">
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <td>收款人</td>
 	                    <td>
-	                        <input type="text" name="payee">
+	                        <input type="text" name="payee" value="{{if data.loanerFinanceVo}}{{data.loanerFinanceVo.payee}}{{/if}}">
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <td>实收金额</td>
 	                    <td>
-	                        <input type="text" name="amount">
+	                        <input type="text" name="amount" value="{{if data.loanerFinanceVo}}{{data.loanerFinanceVo.amount}}{{/if}}">
 	                    </td>
 	                </tr>
 	            </table>
@@ -113,7 +113,7 @@
                     	(未发)
                     	{{/if}}
                     	: {{data.thirdpartyPrice}}</td>
-                    <td rowspan="3">
+                    <td rowspan="2">
                     	{{if data.hunterMoneyStatus == "1" && data.infoMoneyStatus == "1"}}
                         <span>已放款</span>
                         {{else}}
@@ -126,8 +126,14 @@
                 	<td colspan="2"></td>
                 </tr>
                 <tr>
-                	<td><a class="button">查看债权委托书</a></td>
-                	<td colspan="2"><a class="button">查看捕头委托书</a></td>
+                	<td>查看债权委托书</td>
+                	<td>{{if data.loanerElecEntrust}}
+				<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.loanerElecEntrust}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}}</td>
+                	<td>查看捕头委托书</td>
+                	<td>
+                		{{if data.hunterElecEntrust}}
+				<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.hunterElecEntrust}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}}
+                	</td>
                 </tr>
             </table>
         </div>

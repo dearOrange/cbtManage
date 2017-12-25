@@ -16,13 +16,26 @@ define(function(require, exports, module) {
             this.registerEvent();
         };
         this.registerEvent = function(){
-        	$('body').off('blur', '#finalPrice').on('blur', '#finalPrice', function() {
+        	var numPlus;
+        	$('body').off('blur', '#baileePrice').on('blur', '#baileePrice', function() {
         		var me = $(this);
-        		var num = $.trim(me.val());
+        		var num = $.trim($('#finalPrice').val());
             	if( !num ){
-        			$('#baileePrice').val();
+        			me.val();
         		}else{
-        			$('#baileePrice').val(num*0.1);
+        			me.val(num*0.1);
+        		}
+        		numPlus = num - me.val();
+            	 
+            });
+            
+            $('body').off('blur', '#assetPrice').on('blur', '#assetPrice', function() {
+        		var me = $(this);
+        		var menum = $.trim(me.val());
+            	if( !menum ){
+        			$('#thirdpartyPrice').val();
+        		}else{
+        			$('#thirdpartyPrice').val(numPlus-menum);
         		}
             	 
             });

@@ -45,6 +45,7 @@ define(function(require, exports, module) {
             //编辑
             $('.dataAudit').off('click', '.edit-user').on('click', '.edit-user', function() {
                 var infos = $(this).data('infos');
+                
                 var editTemplate = jh.utils.template('edit_usermanage_template', {data: infos});
 				jh.utils.alert({
                     content: editTemplate,
@@ -63,24 +64,26 @@ define(function(require, exports, module) {
                 });
             });
             
-            //删除
-            $('body').off('click', '.delete-user').on('click', '.delete-user', function() {
-                var dataId = $(this).data('id');
-                jh.utils.alert({
-                    content: '确定删除用户吗？',
-                    ok:function(){
-//                  	jh.utils.ajax.send({
-//                  		url: '/task/verify',
-//                  		data: {
-//                  			taskIds: dataId
-//                  		},
-//                  		done: function(data){
-//                  			console.log(data)
-//                  		}
-//                  	})
-                    },
-                    cancel:true
-                });
+            //开启状态
+            $('body').off('click', '.btn-status').on('click', '.btn-status', function() {
+                var statusId = $(this).data("id");
+                var className = $('.btn-father').find('.openStatus');
+                var statusNum = className.length == 1 ? 0 : 1;
+                jh.utils.ajax.send({
+            		url: '/operator/status',
+            		data: {
+						operatorId: statusId,
+						status: statusNum
+            		},
+            		done: function(data){
+            			if(statusNum == 0){
+            				$('.btn-status').addClass('closeStatus').removeClass('openStatus');
+            			}else{
+            				$('.btn-status').removeClass('closeStatus').addClass('openStatus');
+            			}
+//          			window.location.reload();
+            		}
+            	})
             });
             
         };

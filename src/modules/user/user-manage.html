@@ -65,7 +65,7 @@
         <td>
             <ul class="operaitem">
                 <li>
-                    <a data-infos="{{item}}" class="edit-user button">编辑</a>
+                    <a data-infos="{{item}}" data-id="{{item.id}}" class="edit-user button">编辑</a>
                 </li>
                 <li>
                     <a data-id="{{item.id}}" class="delete-user button">删除</a>
@@ -82,8 +82,8 @@
         </p>
         <div class="clearfix"></div>
         <hr /><br />
-        <div style="overflow: hidden;margin-right:22px;">
-        	<p class="pull-right">开启</p>
+        <div class="btn-father" style="overflow: hidden;margin-right:22px;">
+        	<p class="pull-right btn-status {{if data.status === 1}}openStatus{{else}}closeStatus{{/if}}" data-id="{{data.id}}"></p>
         </div>
         <form id="edit-user-form">
 	        <ul>
