@@ -27,8 +27,6 @@ if(window.location.host.indexOf('.cbt.com')!==-1){
     viewImageRoot = 'http://p0znn0pti.bkt.clouddn.com/';
 }
 if(window.location.host.indexOf('javadev')!==-1){
-    ROOTURL = '/admin';
-    BaseUrl = ROOTURL + BaseUrl;
     viewImageRoot = 'http://p0znn0pti.bkt.clouddn.com/';
 }
 
