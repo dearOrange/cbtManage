@@ -36,7 +36,7 @@ define(function(require, exports, module) {
 
                     var h = $(window).height();
                     $("#leftMenu-box").mCustomScrollbar({
-                        setHeight: h - 140,
+                        setHeight: h - 60,
                         theme: "light"
                     });
 
@@ -52,7 +52,7 @@ define(function(require, exports, module) {
             if (_this.roleType === "finance") {
                 _this.requestDate *= 30;
             }
-            if (_this.roleType === 'info' || _this.roleType === 'finance') {
+            if (_this.roleType === 'information' || _this.roleType === 'finance') {
                 _this.requestInterId = window.setInterval(function() {
                     _this.requestUnReadMessage();
                 }, _this.requestDate);
