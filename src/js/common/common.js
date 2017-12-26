@@ -1188,7 +1188,11 @@ define(function(require, exports, module) {
                     }
                 };
                 var opt = $.extend({}, options, opts); //合并参数
-                opt.formData.token = sessionStorage.getItem('admin-uploadToken');
+                if(options.server === 'http://up.qiniu.com/'){
+                    opt.formData.token = sessionStorage.getItem('admin-uploadToken');
+                }else{
+                    opt.formData.token = sessionStorage.getItem('customer-X-Token');
+                }
                 var uploader = WebUploader.create(opt); //创建上传对象
                 var pickId = uploader.options.pick.id.replace(/#/, '');
                 var queueList = $('#' + pickId).siblings('.upload-list');
