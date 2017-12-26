@@ -68,9 +68,6 @@
                 <li>
                     <a data-infos="{{item}}" data-id="{{item.id}}" class="edit-user button">编辑</a>
                 </li>
-                <li>
-                    <a data-id="{{item.id}}" class="delete-user button">删除</a>
-                </li>
             </ul>
         </td>
     </tr>
@@ -94,11 +91,11 @@
 	        	</li>
 	        	<li>
 	        		<label>真实姓名</label>
-	        		<input type="text" name="name" id="" value="{{data.name}}" />
+	        		<input type="text" name="name" value="{{data.name}}" />
 	        	</li>
 	        	<li>
 	        		<label>电话</label>
-	        		<input type="text" name="mobile" id="" value="{{data.mobile}}" />
+	        		<input type="text" name="mobile" class="isMobile" maxlength="11" value="{{data.mobile}}" />
 	        	</li>
 	        	<li>
 	        		<label>微信</label>
@@ -106,16 +103,29 @@
 	        	</li>
 	        	<li style="width:100%;">
 	        		<label>邮箱</label>
-	        		<input type="text" name="email" id="" value="{{data.email}}" style="width: 95%;" />
-	        	</li>
-	        	<li style="width:100%;">
-	        		<span>地区</span>
-	        		<select name="provinceName" style="width:40%;margin:10px;">
-	        			<option value="浙">浙江</option>
-	        			<option value="苏">江苏</option>
-	        		</select>
+	        		<input type="text" name="email" class="isEmail" value="{{data.email}}" style="width: 95%;" />
 	        	</li>
 	        </ul>
+	        {{if data.type === "channel"}}
+	        <table>
+		    	<tr>
+		    		<td>
+		    			<p class="pull-left">地区</p>
+		    			
+		    			<div class="clearfix"></div>
+		    			<hr />
+		    			<div class="area-list" style="height:240px;overflow-y: auto;">
+		    				{{each list item index}}
+		    				<div style="overflow: hidden;">
+		    					<input type="checkbox" name="operatorProvinceDtoList" id="editArea{{index}}" value="{{item.provinceCode}}-{{item.provinceName}}" style="float:left;margin-top:4px;" />
+		    					<span style="float:left;">{{item.provinceName}}</span>
+		    				</div>
+		    				{{/each}}
+		    			</div>
+		    		</td>
+		    	</tr>
+		    </table>
+		    {{/if}}
 	    </form>
     </div>
 </script>
@@ -134,23 +144,24 @@
 		<div class="next-content">
 			<div>
 				<label>用户名称</label>
-				<input type="text" name="username" style="width:200px;height:30px;border:1px solid #ccc;" />
+				<input type="text" name="username" id="usernameTxt" class="required" style="width:200px;height:30px;border:1px solid #ccc;" />
+			</div>
+			<div>
+				<label>真实姓名</label>
+				<input type="text" name="name" id="nameTxt" class="required" style="width:200px;height:30px;border:1px solid #ccc;" />
 			</div>
 			<div class="address-select">
 			    <table>
 			    	<tr>
 			    		<td>
 			    			<p class="pull-left">地区</p>
-			    			<p style="float:right;">
-			    				<label>全选</label>
-			    				<input type="checkbox" id="checkAll" />
-			    			</p>
+			    			
 			    			<div class="clearfix"></div>
 			    			<hr />
-			    			<div class="area-list">
-			    				{{each data item index}}
-			    				<div  style="overflow: hidden;">
-			    					<input type="checkbox" data-infos="{{item}}" style="float:left;margin-top:4px;" />
+			    			<div class="area-list" style="height:240px;overflow-y: auto;">
+			    				{{each list item index}}
+			    				<div style="overflow: hidden;">
+			    					<input type="checkbox" name="operatorProvinceDtoList" id="checkArea{{index}}" value="{{item.provinceCode}}-{{item.provinceName}}" style="float:left;margin-top:4px;" />
 			    					<span style="float:left;">{{item.provinceName}}</span>
 			    				</div>
 			    				{{/each}}

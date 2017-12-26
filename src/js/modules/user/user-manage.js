@@ -40,6 +40,7 @@ define(function(require, exports, module) {
             });
             page.init();
         };
+        
         this.registerEvent = function() {
             // 搜索
             jh.utils.validator.init({
@@ -49,26 +50,18 @@ define(function(require, exports, module) {
                     return false;
                 }
             });
-//          获取省code
-			var areaCode,operatorProvinceDtoList=[];
-			jh.utils.ajax.send({
-        		url: '/operator/getOperatorProvince',
-        		done: function(data){
-        			areaCode = data;
-	        		
-        		}
-        	})   
-
 			
 //			新建
 			$('.addUser').click(function() {
-				var newTemplate = jh.utils.template('new-increate-template', areaCode);
-				for(var i=0;i<areaCode.data.length;i++){
-					var obj = {};
-					obj.provinceCode = areaCode.data[i].provinceCode;
-					obj.provinceName = areaCode.data[i].provinceName;
-        		operatorProvinceDtoList.push(obj);
-    			}
+	
+				var arr =[];
+				$.each(jh.config.citylist,function(index,item){
+					arr.push({
+						provinceCode: item.pid,
+						provinceName: item.p
+					});
+				});
+				var newTemplate = jh.utils.template('new-increate-template', {list:arr});
 				jh.utils.alert({
 					title: '新建用户',
                     content: newTemplate,
@@ -76,8 +69,58 @@ define(function(require, exports, module) {
                     ok:function(){
                     	$('.next-content').css('display','block');
 						$('.new-increate').css('display','none');
-	        		console.log(operatorProvinceDtoList)
-						console.log(jh.utils.formToJson($('#newincreate-form')))
+						
+						//          获取省code
+						jh.utils.ajax.send({
+			        		url: '/operator/getOperatorProvince',
+			        		done: function(data){
+			        			var areaCode = data.data;
+			        			for(var i=0;i<arr.length;i++){
+									var provinceCodeArr = arr[i].provinceCode;
+									for(var j=0;j<areaCode.length;j++){
+										var provinceAreaCode = areaCode[j].provinceCode;
+										if(provinceCodeArr === provinceAreaCode){
+											$('#checkArea'+i).attr('disabled',true);
+										}
+									}
+								}
+			        		}
+			        	})
+						var formData = jh.utils.formToJson($('#newincreate-form'));
+						var arrs = [];
+						var valueArr = formData.operatorProvinceDtoList;
+						var ids = jh.utils.getCheckboxValue('newincreate-form', 'value');
+						if($('#usernameTxt').val() && $('#nameTxt').val()){
+							for(var a=0;a<valueArr.length;a++){
+								var provinceType = valueArr[a].split('-');
+								arrs.push({
+									provinceCode: provinceType[0],
+									provinceName: provinceType[1]
+								})
+							}
+							formData.operatorProvinceDtoList = arrs;
+							jh.utils.ajax.send({
+								method: 'post',
+								url: '/operator/create',
+								contentType: 'application/json',
+								data: formData,
+								done: function(data){
+									jh.utils.alert({
+										content: '添加成功',
+										ok: function(){
+											window.location.reload();
+										}
+									})
+								}
+							})
+						}else{
+							jh.utils.alert({
+								title: '请注意!!!',
+								content: '都不能为空',
+								ok: true
+							})
+						}
+						
 						return false;
 					}
                 });
@@ -85,22 +128,61 @@ define(function(require, exports, module) {
 			
             //编辑
             $('.dataAudit').off('click', '.edit-user').on('click', '.edit-user', function() {
+            	var arrEdit =[];
+				$.each(jh.config.citylist,function(index,item){
+					arrEdit.push({
+						provinceCode: item.pid,
+						provinceName: item.p
+					});
+				});
+				//          获取省code
+				jh.utils.ajax.send({
+	        		url: '/operator/getOperatorProvince',
+	        		done: function(data){
+	        			var editCode = data.data;
+	        			for(var i=0;i<arrEdit.length;i++){
+							var provinceCodeEdit = arrEdit[i].provinceCode;
+							for(var j=0;j<editCode.length;j++){
+								var provinceEditCode = editCode[j].provinceCode;
+								if(provinceCodeEdit === provinceEditCode){
+									$('#editArea'+i).attr('disabled',true);
+								}
+							}
+						}
+	        		}
+	        	});
                 var infos = $(this).data('infos');
-                var editTemplate = jh.utils.template('edit_usermanage_template', {data: infos});
+                var editTemplate = jh.utils.template('edit_usermanage_template', {data: infos,list: arrEdit});
 				jh.utils.alert({
                     content: editTemplate,
                     ok:function(){
                     	var editData = jh.utils.formToJson($('#edit-user-form'));
-                    	editData.operatorId = infos.id;
+                    	var editarr = [];
+						var valueEdit = editData.operatorProvinceDtoList;
+						for(var b=0;b<valueEdit.length;b++){
+							var provinceEdit = valueEdit[b].split('-');
+							editarr.push({
+								provinceCode: provinceEdit[0],
+								provinceName: provinceEdit[1]
+							})
+						}
+						editData.operatorProvinceDtoList = editarr;
+						editData.operatorId = infos.id;
                     	jh.utils.ajax.send({
                     		method: 'post',
                     		url: '/operator/edit',
                     		data: editData,
                     		contentType: 'application/json',
                     		done: function(data){
-                    			jh.utils.load('/src/modules/user/user-manage');
+                    			jh.utils.alert({
+									content: '编辑成功',
+									ok: function(){
+										window.location.reload();
+									}
+								})
                     		}
                     	})
+                    	
                     },
                     cancel:true
                 });

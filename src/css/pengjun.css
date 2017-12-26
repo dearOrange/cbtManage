@@ -119,7 +119,7 @@
 }
 
 .bgc_blue {
-	background-color: #bfe2ff;
+	background-color: #fff5f6;
 }
 
 .imgWidth img {
@@ -258,9 +258,11 @@ p.closeStatus {
 .next-content {
 	display: none;
 }
+.next-content div {
+	margin:10px;
+}
 .address-select {
 	display: none;
-	margin:10px 0;
 }
 #newincreate-form div label {
 	display:inline-block;
