@@ -11,9 +11,8 @@
                     <th width="8%">车牌号</th>
                     <th width="10%">品牌</th>
                     <th width="10%">上传线索时间</th>
-                    <th width="10%">线索所在地区</th>
-                    <th width="10%">操作</th>
-                    <th width="18%">分配</th>
+                    <th width="20%">线索所在地区</th>
+                    <th width="13%">操作</th>
                 </tr>
             </thead>
             <tbody id="admin-qdTrailerList-container"></tbody>
@@ -60,8 +59,17 @@
         <td>{{item.carBrand}}</td>
         <td>{{item.createAt}}</td>
         <td>{{item.city}}</td>
-        <td><a data-id="{{item.taskId}}" class="detail button">详情</a></td>
-        <td><a data-id="{{item.taskId}}" class="distribution button">分配</a></td>
+        <td>
+            <ul>
+                <li>
+                    <a data-id="{{item.taskId}}" class="detail button">详情</a>
+                </li>
+                <li>
+                    <a data-id="{{item.taskId}}" class="distribution button">分配</a>
+                </li>
+            </ul>
+            
+        </td>
     </tr>
     {{/each}}
 </script>

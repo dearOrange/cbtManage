@@ -1766,16 +1766,15 @@ define(function(require, exports, module) {
     (function(){
         function SheriffDistribution(checkType){
             checkType = checkType ? checkType : 'checkbox';
+            var className = checkType ? 'hide' : '';
+            var name = checkType ? '拖车单' : '捕头';
             var str = '<div id="distribution_public_template">'
                 +    '<div style="width:460px;">'
                 +        '<table>'
                 +            '<tr>'
                 +                '<td>'
-                +                    '<p class="pull-left">分配捕头</p>'
-                +                    '<label style="float: right;">'
-                +                        '全选'
-                +                        '<input type="checkbox" id="checkAll">'
-                +                    '</label>'
+                +                    '<p class="pull-left">分配'+name+'</p>'
+                +                    '<label style="float: right;" class="'+className+'">全选<input type="checkbox" id="checkAll"></label>'
                 +                    '<div class="clearfix"></div>'
                 +                    '<hr />'
                 +                    '<form id="distribution_public_form">'

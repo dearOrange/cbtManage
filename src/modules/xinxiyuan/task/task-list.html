@@ -10,7 +10,6 @@
 							<li data-value="2" data-state="trcaing" class="taskState">优先任务库</li>
 							<li data-value="3" data-state="finished" class="taskState">已完成</li>
 							<li data-value="4" data-state="closed" class="taskState">已失效</li>
-							<li data-value="5" data-state="all" class="taskState">所有任务</li>
 							<input type="hidden" name="tabType" id="state" value="1">
 						</ol>
 					</td>
@@ -111,14 +110,15 @@
             <thead>
                 <tr>
                     <th width="3%">&nbsp;</th>
-                    <th width="4%"><input type="checkbox" id="checkAll" /></th>
+                    <th width="2%"><input type="checkbox" id="checkAll" /></th>
                     <th width="10%">任务号</th>
                     <th width="10%">车牌号</th>
                     <th width="8%">品牌</th>
                     <th width="6%">车系</th>
                     <th width="10%">任务类型</th>
                     <th width="10%">债权方</th>
-                    <th width="15%">任务发布时间</th>
+                    <th width="10%">任务发布时间</th>
+                    <th width="7%">任务状态</th>
                     <th width="6%">操作</th>
                 </tr>
             </thead>
@@ -141,6 +141,7 @@
         <td>{{menuState(item.entrust)}}</td>
         <td>{{item.upstreamName}}</td>
         <td>{{item.createAt}}</td>
+        <td>{{menuState(item.state)}}</td>
         <td>
             <ul class="operaitem">
                 <li>
