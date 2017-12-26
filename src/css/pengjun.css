@@ -253,3 +253,16 @@ p.closeStatus {
 	background: url(../img/index/close.png) no-repeat center;
 	background-size: 20px 20px;
 }
+
+/*新建*/
+.next-content {
+	display: none;
+}
+.address-select {
+	display: none;
+	margin:10px 0;
+}
+#newincreate-form div label {
+	display:inline-block;
+	width:58px;
+}

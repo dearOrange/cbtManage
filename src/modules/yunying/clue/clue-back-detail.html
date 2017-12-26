@@ -49,6 +49,15 @@
         	<div style="margin:10px 0;">线索上传时间：{{data.createAt}}</div>
         	{{/each}}
         </div>
+        {{if data.state == "unvaluation"}}
+        <div class="hopeprice">
+        	<p>预估费用</p>
+        	<div>
+                <label>预估处置费用:</label>
+                <span>{{if data.estimatedPrice}}{{data.estimatedPrice}}{{else}}暂无费用{{/if}}</span>
+            </div>
+        </div>
+        {{/if}}
         {{if data.state == "unconfirmed"}}
         <div class="hopeprice">
         	<p>确认费用</p>

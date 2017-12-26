@@ -16,6 +16,14 @@ define(function(require, exports, module) {
             $('select').select2({
             	minimumResultsForSearch:Infinity
             });
+            $('body').off('change', '#select-person').on('change', '#select-person', function() {
+            	var selectValue = $('#select-person').val();
+            	if(selectValue === 'channel'){
+            		$('.address-select').css('display','block');
+            	}else{
+            		$('.address-select').css('display','');
+            	}
+            })
         };
         this.initContent = function(isSearch) {
             var page = new jh.ui.page({
@@ -41,11 +49,43 @@ define(function(require, exports, module) {
                     return false;
                 }
             });
+//          获取省code
+			var areaCode,operatorProvinceDtoList=[];
+			jh.utils.ajax.send({
+        		url: '/operator/getOperatorProvince',
+        		done: function(data){
+        			areaCode = data;
+	        		
+        		}
+        	})   
 
+			
+//			新建
+			$('.addUser').click(function() {
+				var newTemplate = jh.utils.template('new-increate-template', areaCode);
+				for(var i=0;i<areaCode.data.length;i++){
+					var obj = {};
+					obj.provinceCode = areaCode.data[i].provinceCode;
+					obj.provinceName = areaCode.data[i].provinceName;
+        		operatorProvinceDtoList.push(obj);
+    			}
+				jh.utils.alert({
+					title: '新建用户',
+                    content: newTemplate,
+                    okValue: '下一步',
+                    ok:function(){
+                    	$('.next-content').css('display','block');
+						$('.new-increate').css('display','none');
+	        		console.log(operatorProvinceDtoList)
+						console.log(jh.utils.formToJson($('#newincreate-form')))
+						return false;
+					}
+                });
+			});
+			
             //编辑
             $('.dataAudit').off('click', '.edit-user').on('click', '.edit-user', function() {
                 var infos = $(this).data('infos');
-                
                 var editTemplate = jh.utils.template('edit_usermanage_template', {data: infos});
 				jh.utils.alert({
                     content: editTemplate,
@@ -53,8 +93,10 @@ define(function(require, exports, module) {
                     	var editData = jh.utils.formToJson($('#edit-user-form'));
                     	editData.operatorId = infos.id;
                     	jh.utils.ajax.send({
+                    		method: 'post',
                     		url: '/operator/edit',
                     		data: editData,
+                    		contentType: 'application/json',
                     		done: function(data){
                     			jh.utils.load('/src/modules/user/user-manage');
                     		}
@@ -85,6 +127,8 @@ define(function(require, exports, module) {
             		}
             	})
             });
+            
+            
             
         };
     }
