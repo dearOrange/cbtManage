@@ -1044,6 +1044,8 @@ define(function(require, exports, module) {
                             s.page_container.find('.jh_page_next').html('<a class="jh_next_page" href="#page-' + m.page_total + '">' + s.nextText + '</a>');
                         }
                     } else {
+                        s.page_container.find('.jh_page_pageSize').val(s.data.pageSize);
+                        $('#jh_page_totalSize').html(' 总共: '+ response.total+' 条');
                         s.page_container.find('.jh_pages').empty();
                     }
                 }

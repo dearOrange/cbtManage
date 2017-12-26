@@ -61,7 +61,7 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     jh.utils.alert({
                         content: '任务分配成功！',
-                        ok: function(){
+                        ok: function() {
                             window.history.go(-1);
                         },
                         cancel: false
@@ -90,7 +90,7 @@ define(function(require, exports, module) {
                         window.setTimeout(function() {
                             $('#distribution-illegalList').removeClass('disabled');
                             $('#distribution-illegalList').siblings().remove();
-                        }, 1300);
+                        }, 1000);
                     }
                 }
             });
@@ -112,9 +112,13 @@ define(function(require, exports, module) {
                         taskIds: args.id
                     },
                     done: function(returnData) {
-                        _this.searchIllegalInfo(me);
+                        window.setTimeout(function() {
+                            _this.searchIllegalInfo(me);
+                        }, 10000);
                     }
-                })
+                });
+
+
             });
 
             //信息任务分配
