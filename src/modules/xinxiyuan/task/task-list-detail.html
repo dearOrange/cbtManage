@@ -39,8 +39,10 @@
         </table>
 		<div class="remark">{{data.remark}}</div>
 		<div class="imgRecord">
+			<p>催收资料</p>
 			{{each data.attachmentVoList data index}}
-			<img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" class="preview-img hand" /> {{/each}}
+			<img src="{{viewImgRoot}}{{data.url}}" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" class="preview-img hand" /> 
+			{{/each}}
 		</div>
 		{{if data.state === "clueChecking"}}
 		<div class="mainfile">
