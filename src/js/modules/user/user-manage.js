@@ -90,37 +90,36 @@ define(function(require, exports, module) {
 						var arrs = [];
 						var valueArr = formData.operatorProvinceDtoList;
 						var ids = jh.utils.getCheckboxValue('newincreate-form', 'value');
-						if($('#usernameTxt').val() && $('#nameTxt').val()){
-							for(var a=0;a<valueArr.length;a++){
-								var provinceType = valueArr[a].split('-');
-								arrs.push({
-									provinceCode: provinceType[0],
-									provinceName: provinceType[1]
-								})
-							}
-							formData.operatorProvinceDtoList = arrs;
-							jh.utils.ajax.send({
-								method: 'post',
-								url: '/operator/create',
-								contentType: 'application/json',
-								data: formData,
-								done: function(data){
-									jh.utils.alert({
-										content: '添加成功',
-										ok: function(){
-											window.location.reload();
-										}
-									})
-								}
-							})
-						}else{
+						if(!$('#usernameTxt').val() && !$('#nameTxt').val()){
 							jh.utils.alert({
 								title: '请注意!!!',
 								content: '都不能为空',
 								ok: true
 							})
+							return false;
 						}
-						
+						for(var a=0;a<valueArr.length;a++){
+							var provinceType = valueArr[a].split('-');
+							arrs.push({
+								provinceCode: provinceType[0],
+								provinceName: provinceType[1]
+							})
+						}
+						formData.operatorProvinceDtoList = arrs;
+						jh.utils.ajax.send({
+							method: 'post',
+							url: '/operator/create',
+							contentType: 'application/json',
+							data: formData,
+							done: function(data){
+								jh.utils.alert({
+									content: '添加成功',
+									ok: function(){
+										window.location.reload();
+									}
+								})
+							}
+						})
 						return false;
 					}
                 });
@@ -186,7 +185,7 @@ define(function(require, exports, module) {
                     			jh.utils.alert({
 									content: '编辑成功',
 									ok: function(){
-										window.location.reload();
+										_this.initContent();
 									}
 								})
                     		}
