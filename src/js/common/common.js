@@ -601,8 +601,8 @@ define(function(require, exports, module) {
                     //错误时提示信息
                     if (settings.isAlert) {
                         //错误时提示信息
-                        tammy.utils.alert({
-                            content: responseText.msg
+                        tammy.utils.confirm({
+                            content: '<span style="display:inline-block;padding:30px 50px;">' + responseText.msg + '</span>'
                         });
                     }
                     settings.fail.call(null, responseText);

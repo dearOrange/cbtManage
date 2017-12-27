@@ -51,11 +51,14 @@
 			</table>
 		</form>
 	</div>
-	<div class="data-container">
+	<a href="javascript:;" class="button" id="batchPass">批量通过</a>
+	<a href="javascript:;" class="button" id="batchRefuse">批量拒绝</a>
+	<div class="data-container mt25">
 		<table class="dataShow">
 			<thead>
 				<tr>
 					<th width="3%">&nbsp;</th>
+					<th width="3%"><input type="checkbox" id="checkAll"></th>
 					<th width="8%">车牌号</th>
 					<th width="10%">全车背景照</th>
 					<th width="10%">捕头</th>
@@ -78,6 +81,7 @@
 	{{ each list item index }}
 	<tr class="{{if item.isRead == 0}}bgc_blue{{/if}}">
 		<td>{{index+1}}</td>
+		<td><input type="checkbox" data-id="{{item.id}}"></td>
 		<td>{{item.carNumber}}</td>
 		<td class="imgWidth">
 			<img src="{{viewImgRoot}}{{item.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>

@@ -15,7 +15,7 @@ define(function(require, exports, module) {
             this.initTaskTotalCount();
             this.registerEvent();
             $('select').select2({
-            	minimumResultsForSearch:Infinity
+                minimumResultsForSearch: Infinity
             });
         };
         this.initContent = function(isSearch) {
@@ -28,15 +28,15 @@ define(function(require, exports, module) {
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
-                	data.passState = $('#state').val();
-                	data.viewImgRoot = jh.config.viewImgRoot;
-                	if(data.passState == 0){
-	            		$('.clueMatch').css("display","none");
-	            	}else{
-	            		$('.clueMatch').css("display","");
-	            	}
+                    data.passState = $('#state').val();
+                    data.viewImgRoot = jh.config.viewImgRoot;
+                    if (data.passState == 0) {
+                        $('.clueMatch').css("display", "none");
+                    } else {
+                        $('.clueMatch').css("display", "");
+                    }
                     return jh.utils.template('clue-manage-template', data);
-                    
+
                 }
             });
             page.init();
@@ -55,7 +55,35 @@ define(function(require, exports, module) {
                 }
             });
         };
+
+        this.traceOperator = function(ids, state) {
+            if (!ids) {
+                jh.utils.confirm({
+                    content: '请选择线索后操作！'
+                });
+                return false;
+            }
+            var tip = state === 1 ? '通过' : '拒绝';
+            jh.utils.alert({
+                content: '确定' + tip + '吗？',
+                ok: function() {
+                    jh.utils.ajax.send({
+                        url: '/trace/check',
+                        data: {
+                            traceIds: ids,
+                            validState: state
+                        },
+                        done: function(returnData) {
+                            _this.initContent();
+                        }
+                    });
+                },
+                cancel: true
+            });
+        };
+
         this.registerEvent = function() {
+
             // 搜索
             jh.utils.validator.init({
                 id: 'clue-manage-form',
@@ -67,63 +95,46 @@ define(function(require, exports, module) {
 
             //查看任务详情
             $('.dataShow').off('click', '.clueManage-detail').on('click', '.clueManage-detail', function() {
-            	var id = $(this).data('id');
-            	var state = $(this).data('state');
-                jh.utils.load("/src/modules/xinxiyuan/clue/clue-manage-detail",{
-                	id:id,
-                	state:state
+                var id = $(this).data('id');
+                var state = $(this).data('state');
+                jh.utils.load("/src/modules/xinxiyuan/clue/clue-manage-detail", {
+                    id: id,
+                    state: state
                 })
             });
+
             //切换状态
             $('body').off('click', '.taskState').on('click', '.taskState', function() {
-            	$(this).addClass("active").siblings().removeClass("active");
-            	_this.form[0].reset();
-            	$('select').select2();
-            	$('#state').val($(this).data('value'))
-            	_this.initContent();
+                $(this).addClass("active").siblings().removeClass("active");
+                _this.form[0].reset();
+                $('select').select2();
+                $('#state').val($(this).data('value'))
+                _this.initContent();
             })
-            
+
+            //批量通过
+            $('body').off('click', '#batchPass').on('click', '#batchPass', function() {
+                var me = $(this);
+                var ids = jh.utils.getCheckboxValue('clue_manage_container');
+                _this.traceOperator(ids, 1);
+            })
+
+            //批量拒绝
+            $('body').off('click', '#batchRefuse').on('click', '#batchRefuse', function() {
+                var me = $(this);
+                var ids = jh.utils.getCheckboxValue('clue_manage_container');
+                _this.traceOperator(ids, 2);
+            })
+
             //通过
-            $('body').off('click','.agreement').on('click','.agreement',function(){
-            	var traceIds = $(this).data('id');
-            	jh.utils.alert({
-                	content:'确定通过吗？',
-                	ok:function(){
-                		jh.utils.ajax.send({
-			                url: '/trace/check',
-			                data: {
-			                	traceIds: traceIds,
-			                	validState: 1
-			                },
-			                done: function(returnData) {
-			                     _this.initContent();
-			                }
-                
-            			});
-                	},
-                	cancel:true
-                })
+            $('body').off('click', '.agreement').on('click', '.agreement', function() {
+                var traceIds = $(this).data('id');
+                _this.traceOperator(traceIds, 1);
             })
             //拒绝
-            $('body').off('click','.pass').on('click','.pass',function(){
-            	var traceIds = $(this).data('id');
-            	jh.utils.alert({
-                	content:'确定拒绝吗？',
-                	ok:function(){
-                		jh.utils.ajax.send({
-			                url: '/trace/check',
-			                data: {
-			                	traceIds: traceIds,
-			                	validState: 2
-			                },
-			                done: function(returnData) {
-			                    _this.initContent();
-			                }
-                
-            			});
-                	},
-                	cancel:true
-                })
+            $('body').off('click', '.pass').on('click', '.pass', function() {
+                var traceIds = $(this).data('id');
+                _this.traceOperator(traceIds, 2);
             })
         };
     }
