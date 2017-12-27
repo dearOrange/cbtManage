@@ -174,7 +174,7 @@ define(function(require, exports, module) {
 									provinceName: provinceEdit[1]
 								})
 							}
-                    	}
+                    	};
 						editData.operatorProvinceDtoList = editarr;
 						editData.operatorId = infos.id;
                     	jh.utils.ajax.send({
