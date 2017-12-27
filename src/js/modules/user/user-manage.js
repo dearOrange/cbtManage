@@ -128,6 +128,7 @@ define(function(require, exports, module) {
 			
             //编辑
             $('.dataAudit').off('click', '.edit-user').on('click', '.edit-user', function() {
+            	var id = $(this).data('id');
             	var arrEdit =[];
 				$.each(jh.config.citylist,function(index,item){
 					arrEdit.push({
@@ -138,14 +139,20 @@ define(function(require, exports, module) {
 				//          获取省code
 				jh.utils.ajax.send({
 	        		url: '/operator/getOperatorProvince',
+	        		data: {
+	        			channelId: id
+	        		},
 	        		done: function(data){
 	        			var editCode = data.data;
 	        			for(var i=0;i<arrEdit.length;i++){
 							var provinceCodeEdit = arrEdit[i].provinceCode;
 							for(var j=0;j<editCode.length;j++){
 								var provinceEditCode = editCode[j].provinceCode;
-								if(provinceCodeEdit === provinceEditCode){
+								if(provinceCodeEdit === provinceEditCode && editCode[j].isSelected === 0){
 									$('#editArea'+i).attr('disabled',true);
+								}
+								if(provinceCodeEdit === provinceEditCode && editCode[j].isSelected === 1){
+									$('#editArea'+i).attr('checked',true);
 								}
 							}
 						}
