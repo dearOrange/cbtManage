@@ -165,7 +165,7 @@ define(function(require, exports, module) {
                     ok:function(){
                     	var editData = jh.utils.formToJson($('#edit-user-form'));
                     	var editarr = [];
-                    	if(infos.roleName === '渠道经理'){
+                    	if(infos.type === "channel"){
                     		var valueEdit = editData.operatorProvinceDtoList;
 							for(var b=0;b<valueEdit.length;b++){
 								var provinceEdit = valueEdit[b].split('-');
