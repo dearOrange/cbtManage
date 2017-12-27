@@ -62,7 +62,7 @@ define(function(require, exports, module) {
                     jh.utils.alert({
                         content: '任务分配成功！',
                         ok: function() {
-                            window.history.go(-1);
+                            window.location.reload();
                         },
                         cancel: false
                     });
@@ -140,7 +140,9 @@ define(function(require, exports, module) {
                     done: function(returnData) {
                         jh.utils.alert({
                             content: '任务分配成功！',
-                            ok: true,
+                            ok: function(){
+                                window.history.go(-1);
+                            },
                             cancel: false
                         });
                         me.removeClass('disabled');
