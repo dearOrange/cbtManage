@@ -165,14 +165,16 @@ define(function(require, exports, module) {
                     ok:function(){
                     	var editData = jh.utils.formToJson($('#edit-user-form'));
                     	var editarr = [];
-						var valueEdit = editData.operatorProvinceDtoList;
-						for(var b=0;b<valueEdit.length;b++){
-							var provinceEdit = valueEdit[b].split('-');
-							editarr.push({
-								provinceCode: provinceEdit[0],
-								provinceName: provinceEdit[1]
-							})
-						}
+                    	if(infos.roleName === '渠道经理'){
+                    		var valueEdit = editData.operatorProvinceDtoList;
+							for(var b=0;b<valueEdit.length;b++){
+								var provinceEdit = valueEdit[b].split('-');
+								editarr.push({
+									provinceCode: provinceEdit[0],
+									provinceName: provinceEdit[1]
+								})
+							}
+                    	}
 						editData.operatorProvinceDtoList = editarr;
 						editData.operatorId = infos.id;
                     	jh.utils.ajax.send({
