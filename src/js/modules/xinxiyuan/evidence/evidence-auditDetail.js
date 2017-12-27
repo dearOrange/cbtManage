@@ -45,7 +45,7 @@ define(function(require, exports, module) {
 		                				jh.utils.alert({
 		                					content: '已审核',
 		                					ok: function(){
-		                						window.history.go(-1);
+		                						jh.utils.load('/src/modules/xinxiyuan/evidence/evidence-audit');
 		                					}
 		                				})
 		                			}
