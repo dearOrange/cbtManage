@@ -12,6 +12,21 @@ define(function(require, exports, module) {
         $('select').select2({
         	minimumResultsForSearch:Infinity
         });
+        
+        $('.public_price').blur(function() {
+        	var minprice = $('#minprice').val();
+        	var maxprice = $('#maxprice').val();
+        	if(maxprice && minprice){
+	        	if(minprice > maxprice){
+	        		jh.utils.alert({
+	        			content: '最小值不能比最大值大！！！',
+	        			ok: function(){
+	        				maxprice;
+	        			}
+	        		})
+	        	}
+        	}
+        })
 
         this.init = function() {
         	this.initContent();
