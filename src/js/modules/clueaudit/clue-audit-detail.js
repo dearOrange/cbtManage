@@ -77,6 +77,13 @@ define(function(require, exports, module) {
                     content: rejectCon,
                     ok: function() {
                         var throughState = $('.through').filter(':checked').val();
+                        if(!throughState){
+                        	jh.utils.alert({
+                        		content: '请先选择条件',
+                        		ok: true
+                        	})
+                        	return false;
+                        }
                         jh.utils.ajax.send({
                             method: 'post',
                             url: '/trace/channel/check',
