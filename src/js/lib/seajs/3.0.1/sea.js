@@ -22,11 +22,11 @@ var serverHost = '';
 var viewImageRoot = 'http://oka19npup.bkt.clouddn.com/';
 
 if(window.location.host.indexOf('.cbt.com')!==-1){
-    REQUESTROOT = 'http://javadev:8080' + REQUESTROOT;
-    serverHost = 'http://javadev:8080';
+    REQUESTROOT = 'http://admin.cbtdev.com' + REQUESTROOT;
+    serverHost = 'http://admin.cbtdev.com';
     viewImageRoot = 'http://p0znn0pti.bkt.clouddn.com/';
 }
-if(window.location.host.indexOf('javadev')!==-1){
+if(window.location.host.indexOf('.cbtdev.com')!==-1){
     viewImageRoot = 'http://p0znn0pti.bkt.clouddn.com/';
 }
 
@@ -44,8 +44,6 @@ seajs.config({
     },
     preload: ['jquery','mock'],
     map: [
-//      ['.js', '.js?v='+versionDate.year+versionDate.month+versionDate.day],
-//      ['.html', '.html?v='+versionDate.year+versionDate.month+versionDate.day]
         ['.js', '.js?v='+Math.random()],
         ['.html', '.html?v='+Math.random()]
     ]
