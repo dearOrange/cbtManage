@@ -1770,7 +1770,7 @@ define(function(require, exports, module) {
         tammy.utils.getChannelHtml = ChannelDistribution;
     })();
     (function(){
-        function SheriffDistribution(checkType){
+        function SheriffDistribution(checkType,list){
             var title = checkType ? '拖车单' : '捕头';
             var className = checkType ? 'hide' : '';
             var name = checkType ? 'name="sheriff"' : '';
@@ -1791,7 +1791,7 @@ define(function(require, exports, module) {
                 +                                '<input type="'+checkType+'" value="{{item.id}}" class="hand" '+name+'/>'
                 +                                '<span>{{item.name}} - </span>'
                 +                                '<span>{{stateToString(item.type)}}</span>'
-                +                                '<span>{{if item.isRefuse}}-拒绝{{/if}}</span>'
+                +                                '<span class="isRefuse"></span>'
                 +                            '</div>'
                 +                            '{{/each}}'
                 +                        '</div>'

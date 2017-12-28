@@ -73,6 +73,37 @@ define(function(require, exports, module) {
             return str;
         };
 
+        //已分配
+        this.sheriffDownstream = function(arr){
+            var inputs = $('#distribution_public_form').find(':checkbox');
+            for(var i = 0;i<inputs.length;i++){
+                var item = inputs.eq(i);
+                var iid = item.val();
+                for(var j=0;j<arr.length;j++){
+                    var temp = arr[j];
+                    var tid = temp.id;
+                    if(tid == iid){
+                        item.attr('checked','checked');
+                    }
+                }
+            }
+        };
+        //拒绝分配
+        this.sheriffRefuse = function(arr){
+            var inputs = $('#distribution_public_form').find(':checkbox');
+            for(var i = 0;i<inputs.length;i++){
+                var item = inputs.eq(i);
+                var iid = item.val();
+                for(var j=0;j<arr.length;j++){
+                    var temp = arr[j];
+                    var tid = temp.id;
+                    if(tid == iid){
+                        item.siblings('.isRefuse').html('-拒');
+                    }
+                }
+            }
+        };
+
         this.initSheriff = function() {
             jh.utils.ajax.send({
                 url: '/task/downstreamByTaskChannel',
@@ -82,6 +113,9 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     var str = _this.distributionSheriff(returnData.data.alldownstream);
                     $('#fpSheriffList').html(str);
+                    //标识拒绝和已分配
+                    _this.sheriffDownstream(returnData.data.downstream);
+                    _this.sheriffRefuse(returnData.data.refuseList);
 
                 }
             });

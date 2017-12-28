@@ -71,9 +71,45 @@ define(function(require, exports, module) {
                         },
                         cancel: true
                     });
+
+                    //标识拒绝和已分配
+                    _this.sheriffDownstream(returnData.data.downstream);
+                    _this.sheriffRefuse(returnData.data.refuseList);
                 }
             });
         };
+        
+        //已分配
+        this.sheriffDownstream = function(arr){
+            var inputs = $('#distribution_public_form').find(':checkbox');
+            for(var i = 0;i<inputs.length;i++){
+                var item = inputs.eq(i);
+                var iid = item.val();
+                for(var j=0;j<arr.length;j++){
+                    var temp = arr[j];
+                    var tid = temp.id;
+                    if(tid == iid){
+                        item.attr('checked','checked');
+                    }
+                }
+            }
+        };
+        //拒绝分配
+        this.sheriffRefuse = function(arr){
+            var inputs = $('#distribution_public_form').find(':checkbox');
+            for(var i = 0;i<inputs.length;i++){
+                var item = inputs.eq(i);
+                var iid = item.val();
+                for(var j=0;j<arr.length;j++){
+                    var temp = arr[j];
+                    var tid = temp.id;
+                    if(tid == iid){
+                        item.siblings('.isRefuse').html('-拒');
+                    }
+                }
+            }
+        };
+        
         this.distributionSheriff = function(arr) {
             var source = jh.utils.getSheriffHtml();
             var render = jh.utils.template.compile(source);
