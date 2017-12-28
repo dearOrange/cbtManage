@@ -74,7 +74,7 @@ define(function(require, exports, module) {
 
                     //批量导入
                     jh.utils.uploader.init({
-                        server: '/task/import',
+                        server: REQUESTROOT + '/task/import',
                         pick: {
                             id: '#importFile'
                         },
@@ -82,10 +82,14 @@ define(function(require, exports, module) {
                             title: 'Applications',
                             extensions: 'xls,xlsx',
                             mimeTypes: 'application/xls,application/xlsx'
+                        },
+                        formData:{
+                            upstreamId:  args.id,
+                            token: sessionStorage.getItem('admin-X-Token')
                         }
                     }, {
                         uploadAccept: function(file, response) {
-                            alert(response)
+                            alert(response.data)
                         }
                     });
 

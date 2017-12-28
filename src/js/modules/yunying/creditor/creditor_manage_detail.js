@@ -65,12 +65,12 @@ define(function(require, exports, module) {
 
                     //批量导入
                     jh.utils.uploader.init({
-                        server: '/task/import',
+                        server: REQUESTROOT + '/task/import',
                         pick: {
                             id: '#importFile'
                         },
                         formData:{
-                            upstreamId:  returnData.data.upstreamId,
+                            upstreamId:  args.id,
                             token: sessionStorage.getItem('admin-X-Token')
                         },
                         accept: {
@@ -80,7 +80,7 @@ define(function(require, exports, module) {
                         }
                     }, {
                         uploadAccept: function(file, response) {
-                            alert(response)
+                            alert(response.data)
                         }
                     });
 

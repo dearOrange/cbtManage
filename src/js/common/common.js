@@ -1193,7 +1193,7 @@ define(function(require, exports, module) {
                 if(options.server === 'http://up.qiniu.com/'){
                     opt.formData.token = sessionStorage.getItem('admin-uploadToken');
                 }else{
-                    opt.formData.token = sessionStorage.getItem('customer-X-Token');
+                    opt.formData.token = sessionStorage.getItem('admin-X-Token');
                 }
                 var uploader = WebUploader.create(opt); //创建上传对象
                 var pickId = uploader.options.pick.id.replace(/#/, '');
@@ -1252,7 +1252,7 @@ define(function(require, exports, module) {
                     if (typeof returnData.code !== 'undefined') {
                         if (returnData.code !== "SUCCESS") {
                             tammy.utils.alert({
-                                content: result.msg
+                                content: returnData.msg
                             });
                             return false;
                         }
