@@ -211,9 +211,10 @@
             <div class="clearfix"></div>
             <hr /><br />
             <div class="taskpull">
-            	<p class="pull-left" style="border-right:1px dashed #ccc;width: 30%;">
+            	<p class="pull-left" style="border-right:1px dashed #ccc;width: 40%;">
     	            <label class="big-label">任务类型</label><br /><br />
-                    <select name="entrust" class="search-select">
+                    <select name="entrust" class="search-select required" style="border-color:#eee;outline: 0;" id="taskTypeFlag">
+                    	<option value="">请选择</option>
                         <option value="all">无定位需找+拖</option>
                         <option value="trace">无定位只需找车</option>
                         <option value="recycle">有定位只需拖车</option>
@@ -221,16 +222,17 @@
     		    </p>
     		    <p class="pull-left" style="padding-left:50px;">
     	            <label class="big-label">债务人(车主)姓名</label>
-    	            <input type="text" class="search-input" name="debtor" required="" maxlength="10" placeholder="请输入债务人姓名"><br />
+    	            <input type="text" style="width:220px;" class="search-input" name="debtor" maxlength="10" placeholder="请输入债务人姓名"><br />
     	            <label class="big-label">债务人(车主)身份证号</label>
-    	            <input type="text" class="search-input required" name="debtorIdNumber" maxlength="18" placeholder="请输入债务人身份证号">
+    	            <input type="text" style="width:220px;" class="search-input" name="debtorIdNumber" maxlength="18" placeholder="请输入债务人身份证号">
     		    </p>
             </div>
             <div class="increateNewInfo">
-            	<h2 class="carsInfo">车辆信息</h2>
+            	<p class="carsInfo">车辆信息</p>
             	<div>
             		<label class="newlabel">车 牌 号：</label>
-                    <select name="carNumber_province" class="search-select carSelect">
+                    <select name="carNumber_province" class="search-select carSelect public-select" style="width:72px;">
+                    	<option value="">区域</option>
                         <option value="京">京</option>
                         <option value="粤">粤</option>
                         <option value="皖">皖</option>
@@ -271,15 +273,15 @@
             	</div>
     	        <div>
     	        	<label class="newlabel">车辆信息：</label>
-    		        <select name="carBrand" class="search-select" id="customer-addTask-carBrand">
+    		        <select name="carBrand" class="search-select public-select" id="customer-addTask-carBrand">
     		            <option value="" data-id="">请选择品牌</option>
     		        </select>
                     <input type="hidden" name="carBrandId" id="carBrandId">
-    		        <select name="carSeries" class="search-select" id="customer-addTask-carSeries">
+    		        <select name="carSeries" class="search-select public-select" id="customer-addTask-carSeries">
     		            <option value="" data-id="">请选择车系</option>
     		        </select>
                     <input type="hidden" name="carSeriesId" id="carSeriesId">
-    		        <select name="carModel" class="search-select" id="customer-addTask-carModel">
+    		        <select name="carModel" class="search-select public-select" id="customer-addTask-carModel">
     		            <option value="" data-id="">请选择车型</option>
     		        </select>
                     <input type="hidden" name="carModelId" id="carModelId">
@@ -287,8 +289,9 @@
     	        <div>
     	        	<label class="newlabel">车身颜色：</label>
     	        	<input type="text" class="search-input" name="carColor" maxlength="10" placeholder="请输入车辆颜色">
-    	        	<label class="newlabel" style="margin-left:20px;">定位区域：</label>
-                    <select name="location" class="search-select carSelect">
+    	        	<label class="newlabel hide" style="margin-left:20px;width:70px;">定位区域：</label>
+                    <select name="location" class="search-select carSelect hide" style="width:72px;" id="dwLocation">
+                    	<option value="">区域</option>
                         <option value="京">京</option>
                         <option value="粤">粤</option>
                         <option value="皖">皖</option>
@@ -335,10 +338,15 @@
     	        	<label class="newlabel">车辆发动机号：</label>
     	        	<input type="text" class="search-input" name="engineId" maxlength="10" placeholder="请输入发动机号">
     	        </div>
-    	        <textarea name="remark" style="width:800px;height:80px;resize:none;" placeholder="此处填写该车已经掌握的线索及历史催收记录，有利于我们制定更合理的催收策略，提成催收成功率" maxlength="50"></textarea>
+    	        <textarea name="remark" style="width:800px;height:80px;resize:none;" placeholder="此处填写您需要特别说明的备注信息" maxlength="50"></textarea>
             </div>
             <div class="upimg ordinary">
                 <div id="attachment">上传催收记录资料</div>
+                <br><br>
+                <div class="upload-list"></div>
+            </div>
+            <div class="upimg ordinary addHide">
+                <div id="courtDecision">上传法院判决书</div>
                 <br><br>
                 <div class="upload-list"></div>
             </div>

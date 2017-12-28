@@ -787,6 +787,9 @@ label.error {
 }
 
 .header {
+	position: fixed;
+    width: 100%;
+    z-index: 10;
 }
 
 .header .navbar #toggleMenu {
@@ -901,7 +904,7 @@ label.error {
 }
 
 .wrapper {
-    margin-left: 250px
+    margin-left: 250px;
 }
 
 .sidebar {
