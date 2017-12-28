@@ -39,6 +39,16 @@ define(function(require, exports, module) {
         		}
             	 
             });
+            $('body').off('blur', '#thirdpartyPrice').on('blur', '#thirdpartyPrice', function() {
+        		var thme = $(this);
+        		var thmenum = $.trim(thme.val());
+            	if( !thmenum ){
+        			$('#assetPrice').val();
+        		}else{
+        			$('#thirdpartyPrice').val(numPlus-$('#assetPrice').val());
+        		}
+            	 
+            });
         };
         this.initValidator = function() {
             // 搜索
