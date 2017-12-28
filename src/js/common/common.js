@@ -1771,15 +1771,16 @@ define(function(require, exports, module) {
     })();
     (function(){
         function SheriffDistribution(checkType){
-            checkType = checkType ? checkType : 'checkbox';
+            var title = checkType ? '拖车单' : '捕头';
             var className = checkType ? 'hide' : '';
-            var name = checkType ? '拖车单' : '捕头';
+            var name = checkType ? 'name="sheriff"' : '';
+            checkType = checkType ? checkType : 'checkbox';
             var str = '<div id="distribution_public_template">'
                 +    '<div style="width:460px;">'
                 +        '<table>'
                 +            '<tr>'
                 +                '<td>'
-                +                    '<p class="pull-left">分配'+name+'</p>'
+                +                    '<p class="pull-left">分配'+title+'</p>'
                 +                    '<label style="float: right;" class="'+className+'">全选<input type="checkbox" id="checkAll"></label>'
                 +                    '<div class="clearfix"></div>'
                 +                    '<hr />'
@@ -1787,7 +1788,7 @@ define(function(require, exports, module) {
                 +                        '<div class="divied-type" style="height: 300px;overflow-y: auto;text-align: left;">'
                 +                            '{{each list item index}}'
                 +                            '<div>'
-                +                                '<input type="'+checkType+'" value="{{item.id}}" class="hand"/>'
+                +                                '<input type="'+checkType+'" value="{{item.id}}" class="hand" '+name+'/>'
                 +                                '<span>{{item.name}} - </span>'
                 +                                '<span>{{stateToString(item.type)}}</span>'
                 +                                '<span>{{if item.isRefuse}}-拒绝{{/if}}</span>'

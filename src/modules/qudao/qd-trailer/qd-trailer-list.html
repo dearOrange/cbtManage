@@ -60,15 +60,8 @@
         <td>{{item.createAt}}</td>
         <td>{{item.city}}</td>
         <td>
-            <ul>
-                <li>
-                    <a data-id="{{item.taskId}}" class="detail button">详情</a>
-                </li>
-                <li>
-                    <a data-id="{{item.taskId}}" class="distribution button">分配</a>
-                </li>
-            </ul>
-            
+            <a data-id="{{item.taskId}}" class="detail button">详情</a>
+            <a data-id="{{item.taskId}}" class="distribution button">分配</a>
         </td>
     </tr>
     {{/each}}
