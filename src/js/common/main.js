@@ -57,7 +57,7 @@ define(function(require, exports, module) {
                     _this.requestUnReadMessage();
                     if(_this.roleType === 'finance'){
                         _this.requestNewMoneyNum();
-                    }else{
+                    }else {
                     	_this.requestNewTraceNum();
                     }
                 }, _this.requestDate);
@@ -82,14 +82,14 @@ define(function(require, exports, module) {
                 url: '/trace/countNew',
                 done: function(returnData) {
                     var list = $('.first-menu-item');
-                    $(list).each(function(){
-                		if(returnData.data.num > 0){
-	                        if($(this).attr('data-url') === '/src/modules/xinxiyuan/clue/clue-manage'){
-		                    	var str = '<sup>'+returnData.data.num+'</sup>';
-                    			$(this).append(str);
+                    if(returnData.data.num > 0){
+	                    $(list).each(function(){
+                        	if($(this).attr('data-url') === '/src/modules/xinxiyuan/clue/clue-manage'){
+                        		var supNum = '<sup>'+returnData.data.num+'</sup>';
+		                    	$(this).parent().append(supNum);
 	                        }
-                		}
-                    });
+	                    });
+                	}
                 }
             });
         };
@@ -99,14 +99,14 @@ define(function(require, exports, module) {
                 url: '/withdraw/countNew',
                 done: function(returnData) {
                     var list = $('.first-menu-item');
-                    $(list).each(function(){
-                		if(returnData.data.num > 0){
-	                        if($(this).attr('data-url') === '/src/modules/sendMoney/sendMoney-list'){
-		                    	var str1 = '<sup>'+returnData.data.num+'</sup>';
-		                    	$(this).append(str1);
+                	if(returnData.data.num > 0){
+                    	$(list).each(function(){
+                    		if($(this).attr('data-url') === '/src/modules/sendMoney/sendMoney-list'){
+                        		var supNumMoney = '<sup>'+returnData.data.num+'</sup>';
+		                    	$(this).parent().append(supNumMoney);
 	                        }
-                		}
-                    });
+                    	});
+                	}
                 }
             });
         };

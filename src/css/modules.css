@@ -824,10 +824,10 @@ input, select, textarea {
 	padding-top: 20px;
 	float: left;
 }
-.first-menu-item {
+#leftMenu-box li {
 	position: relative;
 }
-.first-menu-item sup{
+#leftMenu-box li sup{
 	position: absolute;
 	top: 11px;
 	right: 84px;

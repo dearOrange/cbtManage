@@ -1729,6 +1729,26 @@ define(function(require, exports, module) {
         }
         tammy.utils.menuState = menuState;
     })();
+    (function() {
+        var officerState = function(state) {
+            switch (state) {
+                case "all":
+                    state = "可找可拖";
+                    break;
+                case "trace":
+                    state = "只找";
+                    break;
+                case "recycle":
+                    state = "只拖";
+                    break;
+                case "tracerecycle":
+                    state = "找加拖一体";
+                    break;
+            }
+            return state;
+        }
+        tammy.utils.officerState = officerState;
+    })();
     (function(){
         function ChannelDistribution(){
             var str = '<div id="channel_distribution_public_template">'
