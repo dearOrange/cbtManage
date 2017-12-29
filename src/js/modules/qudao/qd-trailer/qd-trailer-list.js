@@ -31,10 +31,14 @@ define(function(require, exports, module) {
         };
 
         this.initSheriff = function(type) {
+        	console.log(type)
             jh.utils.ajax.send({
-                url: '/task/downStreamListByChannel',
+                url: '/task/downstreamByTaskChannel',
+                data: {
+                    taskId: type
+                },
                 done: function(returnData) {
-                    var str = _this.distributionSheriff(returnData.data);
+                    var str = _this.distributionSheriff(returnData.data.alldownstream);
 
                     jh.utils.alert({
                         content: str,
@@ -111,11 +115,18 @@ define(function(require, exports, module) {
             });
 
             //批量分配
-            $('body').off('click', '#qd-qdTrailerList-distributeTask').on('click', '#qd-qdTrailerList-distributeTask', function() {
-                var me = $(this);
-                var ids = jh.utils.getCheckboxValue('admin-qdTrailerList-container');
-                _this.initSheriff(ids);
-            });
+//          $('body').off('click', '#qd-qdTrailerList-distributeTask').on('click', '#qd-qdTrailerList-distributeTask', function() {
+//              var me = $(this);
+//              var ids = jh.utils.getCheckboxValue('admin-qdTrailerList-container');
+//              if(!ids) {
+//              	jh.utils.alert({
+//              		content: '请先选择捕头！',
+//              		ok: true
+//              	})
+//              	return false;
+//              }
+//              _this.initSheriff(ids);
+//          });
         };
     }
     module.exports = QDTrailerList;

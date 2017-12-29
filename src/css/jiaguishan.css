@@ -73,7 +73,7 @@
 	right: 5px;
 	bottom: 5px;
 	border: 1px solid #ddd;
-	background-color: #fff;
+	background-color: #f7f7f7;
 	z-index: 99;
 }
 
@@ -81,13 +81,22 @@
 	height: 40px;
 	line-height: 40px;
 	padding: 0 10px 0 10px;
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid #3a79f3;
+	background:#3a79f3;
+}
+
+.new-message .title span{
+	color:#fff;
 }
 
 .new-message .content {
 	width: 280px;
 	height: 100px;
 	text-align: center;
+}
+
+.new-message .content p {
+	color:#3a79f3;	
 }
 
 #poster_manage_addBannerForm {

@@ -685,7 +685,10 @@ label.error {
     float: left;
     margin: 10px 10px 0 10px;
 }
-
+.upimg dl dd{
+	width:100px;
+	text-align: center;
+}
 .upimg img {
     width: 100px;
     height: 100px;
