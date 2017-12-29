@@ -82,16 +82,15 @@ define(function(require, exports, module) {
                 url: '/trace/countNew',
                 done: function(returnData) {
                     var list = $('.first-menu-item');
-                    $.each(list,function(index,item){
+                    $(list).each(function(){
                 		if(returnData.data.num > 0){
-//              			console.log(item.attr('data-url'))
-	                        if(item.attr('data-url') === '/src/modules/xinxiyuan/clue/clue-manage'){
-//								console.log($(this),list)
-		                    	var str = '<span>'+returnData.data.num+'</span>';
-		                    	list.append(str);
+	                        if($(this).attr('data-url') === '/src/modules/xinxiyuan/clue/clue-manage'){
+		                    	var str = '<sup>'+returnData.data.num+'</sup>';
+                    			$(this).append(str);
 	                        }
                 		}
                     });
+                    console.log(list)
                 }
             });
         };
@@ -101,13 +100,13 @@ define(function(require, exports, module) {
                 url: '/withdraw/countNew',
                 done: function(returnData) {
                     var list = $('.first-menu-item');
-                    $.each(list,function(index,item){
-                        if($('a').attr('data-url') === '/src/modules/sendMoney/sendMoney-list'){
-							if(returnData.data.num > 0){
-		                    	var str1 = '<span>'+returnData.data.num+'</span>';
-		                    	list.append(str1);
-		                    }
-                        }
+                    $(list).each(function(){
+                		if(returnData.data.num > 0){
+	                        if($(this).attr('data-url') === '/src/modules/sendMoney/sendMoney-list'){
+		                    	var str1 = '<sup>'+returnData.data.num+'</sup>';
+		                    	$(this).append(str1);
+	                        }
+                		}
                     });
                 }
             });
