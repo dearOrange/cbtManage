@@ -30,16 +30,28 @@ define(function(require, exports, module) {
                 jh.utils.alert({
                     content: alertStr,
                     ok: function() {
-                        var datachange = {
-                            password: $.trim($('.find-oldpwd').val()),
-                            newPassword: $.trim($('.find-newpwd').val())
-                        };
+                        var newpwd = $.trim($('.find-newpwd').val());
+                		var repnewpwd = $.trim($('.find-repnewpwd').val());
+                		var datachange = {
+	                    	password: $.trim($('.find-oldpwd').val()),
+	                    	newPassword: newpwd
+	                   	};
+	                   	if(newpwd !== repnewpwd) {
+	                   		jh.utils.alert({
+	                   			content: '新密码请保持一致！',
+	                   			ok: true
+	                   		})
+	                   		return false;
+	                   	}
                         jh.utils.ajax.send({
                             url: '/operator/updatePassword',
                             method: 'post',
                             data: datachange,
                             done: function(returnData) {
-                                jh.utils.load("/src/modules/login/login");
+                                sessionStorage.removeItem('admin-X-Token');
+                                sessionStorage.removeItem('admin-uploadToken');
+                                sessionStorage.removeItem('admin-username');
+		                    	window.location.href = jh.config.pageLogin;
                             }
                         });
                     },
