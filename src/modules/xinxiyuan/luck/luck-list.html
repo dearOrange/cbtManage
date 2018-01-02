@@ -1,4 +1,27 @@
 <div class="dataContent">
+	<div class="search-container">
+		<form id="luck-list-form">
+			<table class="common_query textLeft search-content">
+				<tr>
+					<td>
+						<label class="label">车牌号：</label>
+						<input type="text" class="search-input" name="carNumber">
+					</td>
+					<td>
+						<label class="label">匹配状态：</label>
+						<select name="isMatch">
+                        	<option value="">全部</option>
+                        	<option value="1">匹配成功</option>
+                        	<option value="0">匹配不成功</option>
+                        </select>
+					</td>
+					<td>
+						<input type="submit" value="查询" class="button search-button">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
     <div class="data-container">
         <table class="dataShow">
             <thead>
