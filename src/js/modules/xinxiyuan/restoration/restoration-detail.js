@@ -67,7 +67,7 @@ define(function(require, exports, module) {
                             jh.utils.alert({
                                 content: arr[1],
                                 ok: function(){
-                                    window.location.reload();
+                                    jh.utils.load('/src/modules/xinxiyuan/restoration/restoration-list');
                                 }
                             });
                         }
