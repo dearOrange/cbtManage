@@ -67,6 +67,44 @@ define(function(require, exports, module) {
                     content: newTemplate,
                     okValue: '下一步',
                     ok:function(){
+                    	if($('.next-content').is(':visible')){
+							if(!$('#usernameTxt').val() && !$('#nameTxt').val()){
+								jh.utils.alert({
+									content: '请填写用户信息',
+									ok: true
+								})
+								return false;
+							}
+							
+							var formData = jh.utils.formToJson($('#newincreate-form'));
+							var arrs = [];
+							var valueArr = formData.operatorProvinceDtoList;
+							var ids = jh.utils.getCheckboxValue('newincreate-form', 'value');
+							
+							
+							for(var a=0;a<valueArr.length;a++){
+								var provinceType = valueArr[a].split('-');
+								arrs.push({
+									provinceCode: provinceType[0],
+									provinceName: provinceType[1]
+								})
+							}
+							formData.operatorProvinceDtoList = arrs;
+							jh.utils.ajax.send({
+								method: 'post',
+								url: '/operator/create',
+								contentType: 'application/json',
+								data: formData,
+								done: function(data){
+									jh.utils.alert({
+										content: '添加成功',
+										ok: function(){
+											window.location.reload();
+										}
+									})
+								}
+							})
+						}
                     	$('.next-content').css('display','block');
 						$('.new-increate').css('display','none');
 						
@@ -86,40 +124,7 @@ define(function(require, exports, module) {
 								}
 			        		}
 			        	})
-						var formData = jh.utils.formToJson($('#newincreate-form'));
-						var arrs = [];
-						var valueArr = formData.operatorProvinceDtoList;
-						var ids = jh.utils.getCheckboxValue('newincreate-form', 'value');
-						if(!$('#usernameTxt').val() && !$('#nameTxt').val()){
-							jh.utils.alert({
-								title: '请注意!!!',
-								content: '都不能为空',
-								ok: true
-							})
-							return false;
-						}
-						for(var a=0;a<valueArr.length;a++){
-							var provinceType = valueArr[a].split('-');
-							arrs.push({
-								provinceCode: provinceType[0],
-								provinceName: provinceType[1]
-							})
-						}
-						formData.operatorProvinceDtoList = arrs;
-						jh.utils.ajax.send({
-							method: 'post',
-							url: '/operator/create',
-							contentType: 'application/json',
-							data: formData,
-							done: function(data){
-								jh.utils.alert({
-									content: '添加成功',
-									ok: function(){
-										window.location.reload();
-									}
-								})
-							}
-						})
+						
 						return false;
 					}
                 });
