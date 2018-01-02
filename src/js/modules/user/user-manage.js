@@ -78,7 +78,7 @@ define(function(require, exports, module) {
 							
 							var formData = jh.utils.formToJson($('#newincreate-form'));
 							var arrs = [];
-							var valueArr = formData.operatorProvinceDtoList;
+							var valueArr = jh.utils.isArray(formData.operatorProvinceDtoList) ? formData.operatorProvinceDtoList : [formData.operatorProvinceDtoList];
 							var ids = jh.utils.getCheckboxValue('newincreate-form', 'value');
 							
 							
