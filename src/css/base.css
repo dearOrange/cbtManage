@@ -791,10 +791,7 @@ label.error {
 }
 
 .header {
-    position: fixed;
     width: 100%;
-    min-width: 1000px;
-    z-index: 10;
 }
 
 .header .navbar #toggleMenu {
