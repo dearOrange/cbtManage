@@ -1811,7 +1811,7 @@ define(function(require, exports, module) {
                 +                                '<input type="'+checkType+'" value="{{item.id}}" class="hand" '+name+'/>'
                 +                                '<span>{{item.name}} - </span>'
                 +                                '<span>{{stateToString(item.type)}}</span>'
-                +                                '<span class="isRefuse"></span>'
+                +                                '<span class="isRefuse" style="font-size:30px;color:red;"></span>'
                 +                            '</div>'
                 +                            '{{/each}}'
                 +                        '</div>'
