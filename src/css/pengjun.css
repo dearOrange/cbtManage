@@ -18,6 +18,10 @@
 	width:214px;
 }
 
+.noTable table td {
+	text-align: left !important;
+}
+
 .dialog-width>div {
 	width: 100%;
 	margin: 20px 0;
