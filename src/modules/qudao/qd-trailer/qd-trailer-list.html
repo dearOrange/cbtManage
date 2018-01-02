@@ -4,8 +4,7 @@
         <table class="dataShow">
             <thead>
                 <tr>
-                    <th width="3%">&nbsp;</th>
-                    <th width="3%"><input type="checkbox" id="checkAll"/></th>
+                    <th width="3%">序号</th>
                     <th width="8%">车牌号</th>
                     <th width="10%">品牌</th>
                     <th width="10%">上传线索时间</th>
@@ -50,9 +49,6 @@
     {{ each list item index }}
     <tr>
         <td>{{index+1}}</td>
-        <td>
-            <input type="checkbox" data-id="item.taskId"/>
-        </td>
         <td>{{item.carNumber}}</td>
         <td>{{item.carBrand}}</td>
         <td>{{item.createAt}}</td>
