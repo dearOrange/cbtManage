@@ -23,7 +23,7 @@ define(function(require, exports, module) {
             	if( !num ){
         			me.val();
         		}else{
-        			me.val(num*0.1);
+        			me.val((num*0.1).toFixed(2));
         		}
         		numPlus = num - me.val();
             	 
