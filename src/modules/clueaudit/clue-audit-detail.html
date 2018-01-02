@@ -92,7 +92,9 @@
         	{{/if}}
         	<div>
         		<label>捕头意愿处置费用:</label>
-        		<span>{{data.estimatedPrice}}</span>
+        		{{each data.traceVoList data index}}
+        		<span>{{data.estimatedCost}}</span>
+        		{{/each}}
         	</div>
         </div>
         {{if data.state == "unconfirmed"|| data.state ==="unvaluation"}}
