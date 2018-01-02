@@ -9,10 +9,11 @@ define(function(require, exports, module) {
     function CreditorManageDetail() {
         var _this = this;
         var args = jh.utils.getURLValue().args;
-
+		_this.userInfo = null;
         this.init = function() {
             this.initContent();
             this.registerEvent();
+            this.getUserinfo();
         };
 
         this.initLinkList = function() {
@@ -50,6 +51,18 @@ define(function(require, exports, module) {
             });
             pageTask.init();
         };
+        
+        this.getUserinfo = function(){
+			jh.utils.ajax.send({
+                url: '/upstreams/detail',
+                data: {
+                    upstreamId: args.id
+                },
+                done: function(returnData) {
+                	_this.userInfo = returnData.data;
+                }
+          	})
+		};
 
         this.initContent = function() {
             jh.utils.ajax.send({
@@ -148,23 +161,53 @@ define(function(require, exports, module) {
             //协助任务发布
             $('body').off('click', '.helpTask').on('click', '.helpTask', function() {
                 var me = $(this);
-                var alertInfo = jh.utils.template('creditor-xzPublishTask-template', {});
+                var alertInfo = jh.utils.template('creditor-publishTask-template', {});
                 jh.utils.alert({
                     content: alertInfo,
                     ok: function() {
-                        $('#creditor-xzPublishTask-form').submit();
+                        $('#creditor-publishTask-form').submit();
                         return false;
                     },
                     cancel: true
                 });
-
+				if(_this.userInfo.type === 'UPSTREAM_PERSONAL'){
+	            	$('.upHide').removeClass('hide');
+	            }else{
+	            	$('.upHide').addClass('hide');
+	            }
+				
                 //表单绑定提交事件
                 jh.utils.validator.init({
-                    id: 'creditor-xzPublishTask-form',
+                    id: 'creditor-publishTask-form',
                     submitHandler: function(form) {
+                        //禁止重复提交
+                        if ($(form).hasClass('disabled')) {
+                            return false;
+                        }
+                        $(form).addClass('disabled');
+                    	
                         var datas = jh.utils.formToJson(form);
                         datas.carNumber = datas.carNumber_province + datas.add_carNumber;
+                        
+                        //如果是个人则必须上传法院判决书
+                        if( _this.userInfo.type === 'UPSTREAM_PERSONAL' && !datas.courtDecision ){
+                            jh.utils.confirm({
+                                content: '请上传法院判决书',
+                            });
+                            $(form).removeClass('disabled');
+                            return false;
+                        }
+                        
+                        if( !datas.attachment){
+                            datas.attachment = [];
+                        }
+
                         datas.attachment = jh.utils.isArray(datas.attachment) ? datas.attachment : [datas.attachment];
+                        if( _this.userInfo.type === 'UPSTREAM_PERSONAL'){
+                            datas.courtDecision = jh.utils.isArray(datas.courtDecision) ? datas.courtDecision : [datas.courtDecision];
+                        }
+                        
+                        
                         datas.upstreamId = args.id;
                         delete datas.carNumber_province;
                         delete datas.add_carNumber;
@@ -182,6 +225,9 @@ define(function(require, exports, module) {
                                     },
                                     cancel: false
                                 });
+                            },
+                            fail: function() {
+                                $(form).removeClass('disabled');
                             }
                         });
                         return false;
@@ -193,7 +239,15 @@ define(function(require, exports, module) {
                         id: '#attachment'
                     }
                 });
-
+				
+				
+                jh.utils.uploader.init({
+                    fileNumLimit: 10,
+                    pick: {
+                        id: '#courtDecision'
+                    }
+                });
+				
                 //初始化品牌
                 jh.utils.ajax.send({
                     url: '/car/brand',

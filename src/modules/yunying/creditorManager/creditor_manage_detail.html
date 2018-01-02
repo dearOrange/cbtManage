@@ -202,9 +202,9 @@
 		</div>
 	</div>
 </script>
-<script type="text/template" id="creditor-xzPublishTask-template">
+<script type="text/template" id="creditor-publishTask-template">
     <div class="increated">
-        <form id="creditor-xzPublishTask-form">
+        <form id="creditor-publishTask-form">
             <p class="pull-left">
                 协助发布任务
             </p>
@@ -230,7 +230,8 @@
             	<h2 class="carsInfo">车辆信息</h2>
             	<div>
             		<label class="newlabel">车 牌 号：</label>
-                    <select name="carNumber_province" class="search-select carSelect">
+                    <select name="carNumber_province" class="search-select carSelect" style="width:72px;">
+                    	<option value="">区域</option>
                         <option value="京">京</option>
                         <option value="粤">粤</option>
                         <option value="皖">皖</option>
@@ -287,8 +288,9 @@
     	        <div>
     	        	<label class="newlabel">车身颜色：</label>
     	        	<input type="text" class="search-input" name="carColor" maxlength="10" placeholder="请输入车辆颜色">
-    	        	<label class="newlabel" style="margin-left:20px;">定位区域：</label>
-                    <select name="location" class="search-select carSelect">
+    	        	<label class="newlabel" style="margin-left:20px;width:70px;">定位区域：</label>
+                    <select name="location" class="search-select carSelect" style="width:72px;" id="dwLocation">
+                    	<option value="">区域</option>
                         <option value="京">京</option>
                         <option value="粤">粤</option>
                         <option value="皖">皖</option>
@@ -339,6 +341,11 @@
             </div>
             <div class="upimg ordinary">
                 <div id="attachment">上传催收记录资料</div>
+                <br><br>
+                <div class="upload-list"></div>
+            </div>
+            <div class="upimg ordinary upHide">
+                <div id="courtDecision">上传法院判决书</div>
                 <br><br>
                 <div class="upload-list"></div>
             </div>
