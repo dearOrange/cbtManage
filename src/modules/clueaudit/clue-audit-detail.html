@@ -84,16 +84,16 @@
         </div>
         <div class="hopeprice">
         	<p>预估费用</p>
-        	<div>
-        		<label>捕头意愿处置费用:</label>
-        		<span>{{data.estimatedPrice}}</span>
-        	</div>
-        	{{if data.state == "unconfirmed"}}
+        	{{if data.state === "unconfirmed" || data.state === "unvaluation"}}
         	<div>
         		<label>处置费用预估:</label>
         		<span>{{data.estimatedPrice}}</span>
         	</div>
         	{{/if}}
+        	<div>
+        		<label>捕头意愿处置费用:</label>
+        		<span>{{data.estimatedPrice}}</span>
+        	</div>
         </div>
         {{if data.state == "unconfirmed"|| data.state ==="unvaluation"}}
         <p>议价小计</p><br />
