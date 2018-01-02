@@ -370,7 +370,7 @@ label.error {
 }
 
 .icon.icon-qd_zqfqr {
-    background-position: -62px -62px;
+    background-position: -67px -65px;
 }
 
 .icon.icon-xx_cjjg {
@@ -685,10 +685,12 @@ label.error {
     float: left;
     margin: 10px 10px 0 10px;
 }
-.upimg dl dd{
-	width:100px;
-	text-align: center;
+
+.upimg dl dd {
+    width: 100px;
+    text-align: center;
 }
+
 .upimg img {
     width: 100px;
     height: 100px;
@@ -790,7 +792,7 @@ label.error {
 }
 
 .header {
-	position: fixed;
+    position: fixed;
     width: 100%;
     z-index: 10;
 }
