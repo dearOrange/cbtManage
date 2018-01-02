@@ -28,10 +28,6 @@
 				<th>主体名称</th>
 				<td colspan="3">{{data.downStreamVo.company}}</td>
 			</tr>
-			<tr>
-				<th>提现单号</th>
-				<td colspan="3">{{data.flow}}</td>
-			</tr>
 		</table>
 		<p>提现申请人收款信息</p>
 		<table>
@@ -50,7 +46,7 @@
 			<tr>
 				<th>收款账号(银行卡)</th>
 				<td>卡号:{{data.downStreamVo.bankCard}}</td>
-				<td>开户行:{{data.downStreamVo.bankCard}}</td>
+				<td>开户行:{{data.downStreamVo.bankName}}</td>
 				<td>收款人姓名:{{data.downStreamVo.payeeName}}</td>
 			</tr>
 		</table>
@@ -74,7 +70,7 @@
 			<tr>
 				<th>打款账号(银行卡)</th>
 				<td>卡号:{{data.downStreamVo.bankCard}}</td>
-				<td>开户行:{{data.downStreamVo.bankCard}}</td>
+				<td>开户行:{{data.downStreamVo.bankName}}</td>
 				<td>收款人姓名:{{data.downStreamVo.payeeName}}</td>
 			</tr>
 			{{/if}}
@@ -107,13 +103,13 @@
 					<tr class="changePaystyle" id="payStyle">
 						<td>支付宝账号</td>
 						<td colspan="3">
-							<input type="text" value="{{data.downStreamVo.alipay}}" />
+							<input type="text" class="isMobile" value="{{data.downStreamVo.alipay}}" />
 						</td>
 					</tr>
 					<tr class="changePaystyle">
 						<td>银行卡账号</td>
 						<td>
-							<input type="text" value="{{data.downStreamVo.bankCard}}" />
+							<input type="text" class="OnlyPrice" value="{{data.downStreamVo.bankCard}}" />
 						</td>
 						<td>开户支行</td>
 						<td>
@@ -123,7 +119,7 @@
 					<tr>
 						<td>申请提现金额</td>
 						<td>
-							<input type="text" value="{{data.amount}}" disabled="disabled">
+							<input type="text" class="OnlyPrice" value="{{data.amount}}" disabled="disabled">
 						</td>
 						<td>实际发放金额</td>
 						<td>
