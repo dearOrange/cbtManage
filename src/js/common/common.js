@@ -774,9 +774,9 @@ define(function(require, exports, module) {
                 for (var i = 0, len = allMenu.length; i < len; ++i) {
                     var item = allMenu.eq(i);
                     var itemModule = item.children('a').data('url');
-
-                    if (args === itemModule + '.html') {
-
+                    var str1 = args.substring(0,args.lastIndexOf('/'));
+                    var str2 = itemModule.substring(0,args.lastIndexOf('/'));
+                    if (args === itemModule + '.html' || str1 === str2) {
                         if (typeof fn === 'function') {
                             fn(item);
                         } else {
