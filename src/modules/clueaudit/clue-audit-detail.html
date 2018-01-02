@@ -86,9 +86,7 @@
         	<p>预估费用</p>
         	<div>
         		<label>捕头意愿处置费用:</label>
-        		{{each data.traceVoList data index}}
-        		<span>{{data.estimatedCost}}</span>
-        		{{/each}}
+        		<span>{{data.estimatedPrice}}</span>
         	</div>
         	{{if data.state == "unconfirmed"}}
         	<div>
