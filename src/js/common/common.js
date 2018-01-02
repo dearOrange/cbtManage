@@ -1185,8 +1185,8 @@ define(function(require, exports, module) {
                     }, //向后台发送的formData数据
                     accept: {
                         title: 'Images',
-                        extensions: 'jpg,jpeg,png',
-                        mimeTypes: 'image/*'
+                        extensions: 'jpg,jpeg,bmp,png',
+                        mimeTypes: 'image/jpg,image/jpeg,image/png,image/bmp'
                     }
                 };
                 var opt = $.extend({}, options, opts); //合并参数
