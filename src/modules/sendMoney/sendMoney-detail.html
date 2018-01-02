@@ -11,63 +11,76 @@
 		<p class="showTaskState pull-right">{{menuState(data.state)}}</p>
 		<div class="clearfix"></div>
 		<hr /><br />
-		<div>
-			<label>账号：</label>
-			<span>{{data.downStreamVo.phone}}</span>
-		</div>
-		<div>
-			<label>主体名称：</label>
-			<span>{{data.downStreamVo.company}}</span></div>
-		<div>
-			<label>负责人：</label>
-			<span>{{data.downStreamVo.linkman}}</span>
-			<label style="margin-left:20px;">联系电话：</label>
-			<span>{{data.downStreamVo.contactPhone}}</span>
-			<label style="margin-left:20px;">微信账号：</label>
-			<span>{{data.downStreamVo.wechat}}</span>
-		</div>
-		<div>
-			<label>提现单号：</label>
-			<span>{{data.flow}}</span>
-		</div>
+		<table>
+			<tr>
+				<th>账号</th>
+				<td>{{data.downStreamVo.phone}}</td>
+				<th>微信账号</th>
+				<td>{{data.downStreamVo.wechat}}</td>
+			</tr>
+			<tr>
+				<th>负责人</th>
+				<td>{{data.downStreamVo.linkman}}</td>
+				<th>联系电话</th>
+				<td>{{data.downStreamVo.contactPhone}}</td>
+			</tr>
+			<tr>
+				<th>主体名称</th>
+				<td colspan="3">{{data.downStreamVo.company}}</td>
+			</tr>
+			<tr>
+				<th>提现单号</th>
+				<td colspan="3">{{data.flow}}</td>
+			</tr>
+		</table>
 		<p>提现申请人收款信息</p>
-		<div style="margin-left:20px;">
-			<label>提现金额：</label>
-			<span>{{data.amount}}元</span>
-		</div>
-		<div style="margin-left:20px;">
-			<p>收款账号：</p>
-			<div style="margin: 20px 0;">
-				<label style="width:110px;">一    支付宝 账号：</label>
-				<span>{{data.downStreamVo.alipay}}</span>
-			</div>
-			<div>
-				<label style="width:110px;">二 银行卡   卡号： </label>
-				<span>{{data.downStreamVo.bankCard}}</span>
-				<label style="margin-left:20px;">开户行：</label>
-				<span>{{data.downStreamVo.bankName}}</span>
-				<label style="margin-left:20px;width:84px;">收款人姓名：</label>
-				<span>{{data.downStreamVo.payeeName}}</span>
-			</div>
-		</div>
-		{{if data.state == "completed"}}
-		<div>
-			<p>打款信息</p>
-			<div>实际打款金额：{{data.amount}}元</div>
-			<div>打款时间：{{data.payTime}}</div>
-			<div>
-				{{if data.payWay == "1"}}
-				<span>支付宝 账号：{{data.downStreamVo.alipay}}</span> {{else}}
-				<span>银行卡   卡号：{{data.downStreamVo.bankCard}}</span>
-				<span style="margin:10px;">开户行：{{data.downStreamVo.bankName}}</span>
-				<span>收款人姓名：{{data.downStreamVo.payeeName}}</span> {{/if}}
-			</div>
-			<div class="showImg">实际打款凭证: {{if data.voucher1}}
-				<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.voucher1}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}} {{if data.voucher2}}
-				<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.voucher2}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}} {{if data.voucher3}}
-				<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.voucher3}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}}
-			</div>
-
+		<table>
+			<tr>
+				<th>提现单号</th>
+				<td>{{data.flow}}</td>
+				<th>提现金额</th>
+				<td colspan="3">{{data.amount}}元</td>
+			</tr>
+			<tr>
+				<th>收款账号(支付宝)</th>
+				<td colspan="5">{{data.downStreamVo.alipay}}</td>
+			</tr>
+			<tr>
+				<th>收款账号(银行卡)</th>
+				<td>卡号:{{data.downStreamVo.bankCard}}</td>
+				<td>开户行:{{data.downStreamVo.bankCard}}</td>
+				<td>收款人姓名:{{data.downStreamVo.payeeName}}</td>
+			</tr>
+		</table>
+		{{if data.state === "completed"}}
+		<p>打款信息</p>
+		<table>
+			<tr>
+				<th>实际打款金额</th>
+				<td colspan="5">{{data.amount}}元</td>
+			</tr>
+			<tr>
+				<th>打款时间</th>
+				<td colspan="5">{{data.payTime}}</td>
+			</tr>
+			{{if data.payWay == "1"}}
+			<tr>
+				<th>收款账号(支付宝)</th>
+				<td colspan="5">{{data.downStreamVo.alipay}}</td>
+			</tr>
+			{{else}}
+			<tr>
+				<th>收款账号(银行卡)</th>
+				<td>卡号:{{data.downStreamVo.bankCard}}</td>
+				<td>开户行:{{data.downStreamVo.bankCard}}</td>
+				<td>收款人姓名:{{data.downStreamVo.payeeName}}</td>
+			</tr>
+			{{/if}}
+		</table>
+		<div class="showImg" style="font-weight: 900;">实际打款凭证: {{if data.voucher1}}
+			<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.voucher1}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}} {{if data.voucher2}}
+			<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.voucher2}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}} {{if data.voucher3}}
+			<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.voucher3}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}}
 		</div>
 		{{/if}} {{if data.state == "withdrawing"}}
 		<a href="javascript:;" class="button playMoney">打款</a>

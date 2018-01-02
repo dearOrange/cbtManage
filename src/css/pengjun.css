@@ -9,6 +9,14 @@
 	width: 70px;
 }
 
+.noTable table {
+	margin:10px 0;
+}
+
+.noTable table th {
+	border:1px solid #dedede;
+}
+
 .dialog-width>div {
 	width: 100%;
 	margin: 20px 0;
