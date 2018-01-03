@@ -44,6 +44,27 @@
 			<img src="{{viewImgRoot}}{{data.url}}" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" class="preview-img hand" /> 
 			{{/each}}
 		</div>
+		{{if data.state === "tracing"}}
+		<div class="upmainfile">
+            <div>
+                <a href="javascript:;" class="button" id="taskList-illegalList" data-id="{{taskId}}">违章信息修复</a>
+            </div>
+            <div>
+                <table class="pull-left" style="width: 90%;">
+                    <thead>
+                    	<th>序号</th>
+                        <th>车牌号</th>
+                        <th>内容</th>
+                        <th>修复地点</th>
+                        <th>修复城市</th>
+                        <th>信息修复时间</th>
+                    </thead>
+                    <tbody id="task_detail_wzInfoList"></tbody>
+                </table>
+                <div class="page-box pagination" id="page_container"></div>
+            </div>
+        </div>
+		{{/if}}
 		{{if data.state === "clueChecking"}}
 		<div class="mainfile">
 			<p>线索信息</p>
@@ -84,6 +105,7 @@
 				<input type="text" maxlength="11" class="OnlyPrice" id="minMoney" value="{{data.estimatedMinPrice}}" />至<input type="text" class="OnlyPrice" maxlength="11" id="maxMoney" value="{{data.estimatedMaxPrice}}" />
 			</div>
 		</div>
+		{{/if}}
 		<div class="upmainfile">
 			<p style="margin:20px 0;">分配渠道</p>
 			<div class="task-content">
@@ -91,7 +113,6 @@
 			</div>
 		</div>
 		<input type="submit" value="保存" class="button adopteInfo" />
-		{{/if}}
 	</div>
 </script>
 <script type="text/template" id="xx_task_list">
@@ -118,6 +139,18 @@
 			</tr>
 		</table>
 	</div>
+</script>
+<script type="text/template" id="task_detail_wzInfoTemplate">
+    {{each list item index}}
+    <tr>
+    	<td>{{index+1}}</td>
+    	<td>{{item.carNumber}}</td>
+        <td>{{item.desc}}</td>
+        <td>{{item.site}}</td>
+        <td>{{item.city}}</td>
+        <td>{{item.occurAt}}</td>
+    </tr>
+    {{/each}}
 </script>
 <script type="text/javascript">
 	seajs.use('modules/xinxiyuan/task/task-list-detail', function(TaskListDetail) {

@@ -27,11 +27,37 @@ define(function(require, exports, module) {
                     returnData.viewImgRoot = jh.config.viewImgRoot;
                     var html = jh.utils.template('task_detail_template', returnData);
                     $('.taskListContent').html(html);
+                    _this.searchIllegalInfo();
                     _this.initSheriff();
 
 
                 }
             });
+        };
+        //查询违章信息列表
+        this.searchIllegalInfo = function(obj) {
+            var page = new jh.ui.page({
+                data_container: $('#task_detail_wzInfoList'),
+                page_container: $('#page_container'),
+                method: 'post',
+                url: '/clue/illegalList',
+                contentType: 'application/json',
+                data: {
+                    taskId: args.id
+                },
+                callback: function(data) {
+                    return jh.utils.template('task_detail_wzInfoTemplate', data);
+                },
+                onload: function() {
+                    if (obj) {
+                        window.setTimeout(function() {
+                            $('#taskList-illegalList').removeClass('disabled');
+                            $('#taskList-illegalList').siblings().remove();
+                        }, 1000);
+                    }
+                }
+            });
+            page.init();
         };
         this.initSheriff = function() {
             jh.utils.ajax.send({
@@ -48,7 +74,7 @@ define(function(require, exports, module) {
         };
 
         this.registerEvent = function() {
-            //信息修复
+            //审核
             $('body').off('click', '.auditClue').on('click', '.auditClue', function() {
                 jh.utils.alert({
                     content: '确定审核吗？',
@@ -150,6 +176,29 @@ define(function(require, exports, module) {
                     },
                     cancel: true
                 })
+            });
+            
+            //信息修复
+            $('body').off('click', '#taskList-illegalList').on('click', '#taskList-illegalList', function() {
+                var me = $(this);
+                if (me.hasClass('disabled')) {
+                    return false;
+                }
+                $('<img src="/src/img/loading.gif" height="29"/>').insertAfter(me);
+                me.addClass('disabled');
+                jh.utils.ajax.send({
+                    url: '/clue/bondRepair',
+                    data: {
+                        taskIds: args.id
+                    },
+                    done: function(returnData) {
+                        window.setTimeout(function() {
+                            _this.searchIllegalInfo(me);
+                        }, 10000);
+                    }
+                });
+
+
             });
         };
     }
