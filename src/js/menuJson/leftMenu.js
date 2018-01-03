@@ -8,92 +8,125 @@
 define(function(require, exports, module) {
     var FINAL_MENU_DATA_JSON = {
         menus: [{
-            name: '任务管理',
-            icon: 'icon-region',
-            module: '/src/modules/task',
-            url: '/task-list',
-            childrens: []
-        }, {
-            name: '运营任务待审核',
-            icon: 'icon-operate',
-            module: '/src/modules/yunying/task',
-            url: '/task-audit',
-            childrens: []
-        }, {
-            name: '线索审核',
-            icon: 'icon-supplier',
-            module: '/src/modules/clueaudit',
-            url: '/clue-audit',
-            childrens: []
-        }, {
-            name: '运营线索反馈',
-            icon: 'icon-message',
-            module: '/src/modules/yunying/clue',
-            url: '/clue-back',
-            childrens: []
-        }, {
-            name: '债权方已确定订单',
-            icon: 'icon-config',
-            module: '/src/modules/creditororder',
-            url: '/creditor-order',
-            childrens: []
-        }, {
-            name: '运营债权方管理',
-            icon: 'icon-region',
-            module: '/src/modules/yunying/creditor',
-            url: '/creditor-manage',
-            childrens: []
-        }, {
-            name: '信息债权方认证',
-            icon: 'icon-region',
-            module: '/src/modules/xinxiyuan/creditor',
-            url: '/creditor-identify',
-            childrens: []
-        }, {
-            name: '捕头管理',
-            icon: 'icon-region',
-            module: '/src/modules/officermanage',
-            url: '/officer-manage',
-            childrens: []
-        }, {
-            name: '信息凭证审核',
-            icon: 'icon-supplier',
-            module: '/src/modules/xinxiyuan/evidence',
-            url: '/evidence-audit',
-            childrens: []
-        }, {
-            name: '预估价格',
-            icon: 'icon-supplier',
-            module: '/src/modules/estimatedprice',
-            url: '/estimated-price',
-            name: '查账管理',
-            icon: 'icon-supplier',
-            module: '/src/modules/finance',
-            url: '/finance-list',
-            childrens: []
-        }, {
-            name: '发放提现申请',
-            icon: 'icon-supplier',
-            module: '/src/modules/sendMoney',
-            url: '/sendMoney-list',
-            childrens: []
-        }, {
-            name: '信息任务分配',
+            name: '信息-任务分配',
             icon: 'icon-supplier',
             module: '/src/modules/xinxiyuan/xx-distribution',
             url: '/xx-distribution-list',
             childrens: []
         }, {
-            name: '渠道任务分配',
+            name: '信息-出具价格',
+            icon: 'icon-supplier',
+            module: '/src/modules/xinxiyuan/restoration',
+            url: '/restoration-list',
+            childrens: []
+        }, {
+            name: '信息-凭证审核',
+            icon: 'icon-supplier',
+            module: '/src/modules/xinxiyuan/evidence',
+            url: '/evidence-audit',
+            childrens: []
+        },{
+            name: '信息-任务管理',
+            icon: 'icon-region',
+            module: '/src/modules/xinxiyuan/task',
+            url: '/task-list',
+            childrens: []
+        }, {
+            name: '信息-线索管理',
+            icon: 'icon-supplier',
+            module: '/src/modules/xinxiyuan/clue',
+            url: '/clue-manage',
+            childrens: []
+        }, {
+            name: '信息-委托验真',
+            icon: 'icon-supplier',
+            module: '/src/modules/xinxiyuan/xx-entrustment',
+            url: '/xx-entrustment-list',
+            childrens: []
+        }, {
+            name: '信息-债权方认证',
+            icon: 'icon-region',
+            module: '/src/modules/xinxiyuan/creditor',
+            url: '/creditor-identify',
+            childrens: []
+        }, {
+            name: '运营-待审核任务',
+            icon: 'icon-operate',
+            module: '/src/modules/yunying/task',
+            url: '/task-audit',
+            childrens: []
+        }, {
+            name: '运营-线索反馈',
+            icon: 'icon-message',
+            module: '/src/modules/yunying/clue',
+            url: '/clue-back',
+            childrens: []
+        }, {
+            name: '运营-债权方管理',
+            icon: 'icon-region',
+            module: '/src/modules/yunying/creditor',
+            url: '/creditor-manage',
+            childrens: []
+        }
+        , {
+            name: '运营总监-债权方管理',
+            icon: 'icon-region',
+            module: '/src/modules/yunying/creditorManager',
+            url: '/creditor-manage-list',
+            childrens: []
+        }, {
+            name: '渠道-任务分配',
             icon: 'icon-supplier',
             module: '/src/modules/qudao/qd-distribution',
             url: '/qd-distribution-list',
             childrens: []
         }, {
-            name: '信息出具价格',
+            name: '渠道-拖车单分配',
             icon: 'icon-supplier',
-            module: '/src/modules/xinxiyuan/restoration',
-            url: '/restoration-list',
+            module: '/src/modules/qudao/qd-trailer',
+            url: '/qd-trailer-list',
+            childrens: []
+        }, {
+            name: '渠道-线索审核',
+            icon: 'icon-supplier',
+            module: '/src/modules/clueaudit',
+            url: '/clue-audit',
+            childrens: []
+        }, {
+            name: '渠道-债权方已确定',
+            icon: 'icon-config',
+            module: '/src/modules/qudao/creditor',
+            url: '/creditor-order',
+            childrens: []
+        }, {
+            name: '渠道-捕头管理',
+            icon: 'icon-region',
+            module: '/src/modules/officermanage',
+            url: '/officer-manage',
+            childrens: []
+        }, {
+            name: '财务-查账管理',
+            icon: 'icon-supplier',
+            module: '/src/modules/finance',
+            url: '/finance-list',
+            childrens: []
+        }, {
+            name: '财务-发放提现申请',
+            icon: 'icon-supplier',
+            module: '/src/modules/sendMoney',
+            url: '/sendMoney-list',
+            childrens: []
+        }, {
+            name: '平台-用户管理',
+            icon: 'icon-supplier',
+            module: '/src/modules/user',
+            url: '/user-manage',
+            childrens: []
+        }, {
+            name: '信息-海报管理',
+            icon: 'icon-supplier',
+            module: '/src/modules/poster',
+            url: '/poster-manage',
             childrens: []
         }]
     };

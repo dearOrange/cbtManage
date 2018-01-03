@@ -10,6 +10,7 @@
                     <td>
                         <label class="label">任务类型</label>
                         <select name="entrust">
+                            <option value="">全部</option>
                             <option value="all">无定位需找车并拖车</option>
                             <option value="trace">无定位只需找车</option>
                             <option value="recycle">有定位只需拖车</option>
@@ -30,7 +31,7 @@
         <table class="dataShow">
             <thead>
                 <tr>
-                    <th width="3%">&nbsp;</th>
+                    <th width="4%">序号</th>
                     <th width="10%">车牌号</th>
                     <th width="8%">品牌</th>
                     <th width="6%">车系</th>
@@ -69,17 +70,38 @@
         </td>
         <td>
             <ul class="operaitem">
+                {{if item.state == "unvaluation"}}
                 <li>
-                    {{if item.state == "unconfirmed"}}
                     <a data-id="{{item.id}}" class="addSub button">添加</a>
-                    {{else}}
-                    ——  ——
-                    {{/if}}
                 </li>
+                {{/if}}
             </ul>
         </td>
     </tr>
     {{/each}}
+</script>
+<script type="text/template" id="clue_addSubtotal_template">
+	<div class="officer-width">
+		<p class="pull-left">
+			添加议价小计
+		</p>
+		<div class="clearfix"></div>
+		<hr /><br />
+		<div class="addContent customerType">
+			<div>
+				<label>联系对象</label>
+				<input type="text" maxlength="11" placeholder="请输入联系对象" id="subPerson" />
+			</div>
+			<div>
+				<label>联系方式</label>
+				<input type="text" maxlength="11" placeholder="请输入联系方式" id="subStyle" />
+			</div>
+			<div>
+				<label>联系内容</label>
+				<textarea name="" maxlength="40" placeholder="请输入联系内容" id="subContent"></textarea>
+			</div>
+		</div>
+	</div>
 </script>
 <script type="text/javascript">
 seajs.use('modules/yunying/clue/clue-back', function(ClueBack) {

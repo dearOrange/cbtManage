@@ -12,7 +12,6 @@ define(function(require, exports, module) {
 
         this.init = function() {
             this.initDetail();
-            this.registerEvent();
         };
 
         this.initDetail = function(isSearch) {
@@ -23,20 +22,42 @@ define(function(require, exports, module) {
                 },
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
-                    returnData.viewRoot = jh.config.viewImgRoot;
+                    returnData.viewImgRoot = jh.config.viewImgRoot;
                     returnData.taskId = args.id;
                     var html = jh.utils.template('admin-evidenceAuditDetail-template', returnData);
                     $('#admin-evidenceAuditDetail-container').html(html);
+                    
+                    //凭证审核
+		            $('body').off('click','.isSure').on('click','.isSure',function(){
+		                var contentTemplate = jh.utils.template('evidence_audit_template', {});
+		                jh.utils.alert({
+		                	content: contentTemplate,
+		                	ok:function(){
+		                		var throughState = $('.auditThrough').filter(":checked").val();
+		                		jh.utils.ajax.send({
+		                			url: '/task/checkingVoucher',
+		                			data: {
+		                				taskId: args.id,
+		                				reason: $('.reason').val(),
+		                				checkingState: throughState
+		                			},
+		                			done: function(data){
+		                				jh.utils.alert({
+		                					content: '已审核',
+		                					ok: function(){
+		                						jh.utils.load('/src/modules/xinxiyuan/evidence/evidence-audit');
+		                					}
+		                				})
+		                			}
+		                		})
+		                	},
+		                	cancel:true
+		                })
+		            });
                 }
             });
         };
 
-        this.registerEvent = function() {
-            //信息修复
-            $('body').off('click','#distribution-illegalList').on('click','#distribution-illegalList',function(){
-                _this.searchIllegalInfo();
-            });
-        };
     }
     module.exports = EvidenceAuditDetail;
 });

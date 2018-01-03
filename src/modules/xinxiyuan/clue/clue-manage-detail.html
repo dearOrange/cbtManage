@@ -1,0 +1,77 @@
+<div class="dataContent clueManageContent">
+	
+</div>
+<script type="text/template" id="clueManage_detail_template">
+    <div class="dialog-width">
+        <p class="pull-left">
+            线索详情
+        </p>
+        <a href="javascript:;" class="button gobackPage goBack">返回</a>
+        <div class="clearfix"></div>
+        <hr />
+        <div style="overflow: hidden; margin-bottom:0;">
+        	<p class="pull-left">上传捕头</p>
+        	{{if passState == "1"}}
+        	<p class="showTaskState pull-right">已成功匹配任务{{data.taskNo}}</p>
+        	{{else}}
+        	<p class="showTaskState pull-right">未成功匹配任务</p>
+        	{{/if}}
+        </div>
+        <div style="margin-top:0;">
+        	<span>{{data.name}}</span>
+        </div>
+        <div>
+        	<p>捕头所属公司</p>
+        	<span>{{data.company}}</span>
+        </div>
+        <div>
+        	<p>上传时间</p>
+        	<span>{{data.createAt}}</span>
+        </div>
+        <div>
+        	<p>线索车辆信息</p>
+        	<span>车牌号：{{data.carNumber}}</span>
+        	<span style="margin-left:20px;">车架号后6位：{{data.carId}}</span>
+        </div>
+        <div class="mainfile">
+        	<p>线索照片</p>
+        	<div class="upimg">
+        		<dl>
+					<dt class="upload-pa">
+		    				<div id="carPhoto"></div>
+							<div class="upload-list">
+								<div class="upfile-item">
+									<img class="preview-img hand" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'">
+								</div>
+							</div>
+		    			</dt>
+					<dd>全车背景照</dd>
+				</dl>
+        	</div>
+        </div>
+        <div class="hopeprice areaInfo">
+        	<p>定位信息</p>
+        	<div>
+        		<label>GPRS</label>
+        		<span>{{data.location}}</span>
+        	</div>
+        	<div>
+        		<label>上传地址</label>
+        		<span id="{{data.carPhoto}}"></span>
+        	</div>
+        	<div>
+        		<label>IP地址</label>
+        		<span>{{data.ipCity}}</span>
+        	</div>
+        	{{if passState == "1"}}
+        	<input type="button" value="审核" class="button search-button auditClue" style="margin-bottom:40px;width:150px;height:30px;">
+        	{{/if}}
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+seajs.use('modules/xinxiyuan/clue/clue-manage-detail', function(ClueManageDetail) {
+    var ClueManageDetail = new ClueManageDetail();
+    ClueManageDetail.init();
+});
+</script>

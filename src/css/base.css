@@ -5,12 +5,16 @@ a, address, b, td, th, body, code, dd, del, div, dl, dt, em, fieldset, form, h1,
     outline: none
 }
 
+input[type=text], input[type=password], textarea {
+    text-indent: 16px;
+}
+
 body {
     background: #fff;
     width: 100%;
     height: 100%;
     min-width: 1000px;
-    font: 14px/150% Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif
+    font: 14px/150% Microsoft YaHei, Helvetica, PingFang SC, Arial
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
@@ -34,12 +38,6 @@ input, select, img {
 
 button[disabled], html input[disabled] {
     cursor: default
-}
-
-input[readonly] {
-    background-color: #eef1f6;
-    color: #bbb;
-    cursor: not-allowed
 }
 
 ol, ul {
@@ -72,7 +70,7 @@ td {
 }
 
 th {
-    background: #eef1f6;
+    background: #ddeefe;
     border: 0
 }
 
@@ -97,6 +95,10 @@ a:hover, a:active, a:focus {
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset
+}
+
+.red-border {
+    border: 1px solid red !important;
 }
 
 .is-required:before {
@@ -141,6 +143,10 @@ input:-webkit-autofill {
 
 .pull-right {
     float: right
+}
+
+.hand {
+    cursor: pointer;
 }
 
 .hide {
@@ -215,12 +221,16 @@ label.error {
     margin-top: 5px
 }
 
+.mt10 {
+    margin-top: 5px
+}
+
 .mt25 {
     margin-top: 25px
 }
 
 .ui-dialog-content {
-    padding: 20px 20px
+    padding: 10px 20px
 }
 
 .button, a.button {
@@ -298,13 +308,114 @@ label.error {
 }
 
 .button.disabled_btn:hover {
-    cursor: not-allowed
+    color: #a9a9a9 !important;
+    cursor: not-allowed;
+    background-color: #fff !important;
 }
 
 .icon {
+    width: 20px;
+    height: 20px;
     display: inline-block;
-    background: url(../img/icon.png) no-repeat;
+    background-image: url(../img/css_sprites.png);
+    background-repeat: no-repeat;
     vertical-align: middle
+}
+
+.icon.icon-cw_czgl {
+    background-position: -114px -10px;
+}
+
+.icon.icon-cw_fftx {
+    background-position: -154px -90px;
+}
+
+.icon.icon-icon_closeMenu {
+    width: 32px;
+    height: 30px;
+    background: url(../img/icon/icon-closeMenu.png) no-repeat;
+    background-size: cover;
+}
+
+.icon.icon-icon_nopass {
+    background-position: -154px -10px;
+}
+
+.icon.icon-icon_openMenu {
+    width: 32px;
+    height: 30px;
+    background: url(../img/icon/icon-openMenu.png) no-repeat;
+    background-size: cover;
+}
+
+.icon.icon-icon_pass {
+    background-position: -114px -50px;
+}
+
+.icon.icon-icon_userCenter {
+    background-position: -10px -112px;
+}
+
+.icon.icon-qd_btgl {
+    background-position: -50px -112px;
+}
+
+.icon.icon-qd_rwfp {
+    background-position: -90px -112px;
+}
+
+.icon.icon-qd_tcdfp {
+    background-position: -12px -12px;
+}
+
+.icon.icon-qd_xssh {
+    background-position: -154px -50px;
+}
+
+.icon.icon-qd_zqfqr {
+    background-position: -67px -65px;
+}
+
+.icon.icon-xx_cjjg {
+    background-position: -10px -152px;
+}
+
+.icon.icon-xx_pzsh {
+    background-position: -50px -152px;
+}
+
+.icon.icon-xx_rwfp {
+    background-position: -90px -152px;
+}
+
+.icon.icon-xx_rwgl {
+    background-position: -130px -152px;
+}
+
+.icon.icon-xx_wtyz {
+    background-position: -194px -10px;
+}
+
+.icon.icon-xx_xsgl {
+    background-position: -194px -50px;
+}
+
+.icon.icon-xx_zqfrz {
+    background-position: -194px -90px;
+}
+
+.icon.icon-yy_dshrw {
+    background-position: -194px -130px;
+}
+
+.icon.icon-yy_xsfk {
+    width: 20px;
+    height: 15px;
+    background-position: -50px -192px;
+}
+
+.icon.icon-yy_zqfgl {
+    background-position: -10px -192px;
 }
 
 .icon.icon-out {
@@ -374,9 +485,9 @@ label.error {
 }
 
 .icon.icon-user {
-    background-position: -1px 0px;
-    width: 17px;
-    height: 17px
+    background: url(../img/index/exit.png) no-repeat;
+    background-size: cover;
+    width: 22px;
 }
 
 .icon.icon-bottom-arrow {
@@ -395,6 +506,18 @@ label.error {
     border-right-color: transparent;
     border-left-color: transparent;
     background: none
+}
+
+.icon.icon-cw1 {
+    width: 20px;
+    height: 20px;
+    background-image: url(../img/cw1.png);
+}
+
+.icon.icon-cw2 {
+    width: 20px;
+    height: 20px;
+    background-image: url(../img/cw2.png);
 }
 
 .pagination {
@@ -566,6 +689,11 @@ label.error {
     margin: 10px 10px 0 10px;
 }
 
+.upimg dl dd {
+    width: 100px;
+    text-align: center;
+}
+
 .upimg img {
     width: 100px;
     height: 100px;
@@ -609,6 +737,11 @@ label.error {
 }
 
 .upload-list .upfile-item img {
+    width: 100px;
+    height: 100px;
+}
+
+.showImg img {
     width: 100px;
     height: 100px;
 }
@@ -661,28 +794,35 @@ label.error {
     cursor: pointer
 }
 
-.index_logo {
-    width: 202px;
-    height: 50px;
-    display: inline-block;
-    background: url(../img/index/logo.png) no-repeat center center;
-    background-size: 82%
-}
-
 .header {
+    width: 100%;
 }
 
 .header .navbar #toggleMenu {
     margin-left: 5px;
     cursor: pointer;
-    color: #20a0ff
+    color: #fff;
 }
 
 .header .navbar {
+    height: 70px;
+    line-height: 70px;
+    background-color: #434554;
+}
+
+.header .navbar .index_logo {
+    width: 210px;
     height: 50px;
-    line-height: 50px;
-    background-color: #eef1f6;
-    margin-left: 210px
+    float: left;
+    margin: 7px 0 0 30px;
+    display: inline-block;
+    background: url(../img/index/logo.png) no-repeat center center;
+    background-size: 82%;
+}
+
+.header .navbar p {
+    float: left;
+    color: #f6f6f6;
 }
 
 .header .navbar-nav {
@@ -721,12 +861,12 @@ label.error {
 }
 
 .header .navbar-nav>li>a .icon-user {
-    height: 20px
+    height: 22px;
 }
 
 .user-menu span {
-    color: #000;
-    margin: 0px 10px
+    color: #fff;
+    margin: 0px 18px 0 10px;
 }
 
 .header .navbar-nav>li .label {
@@ -770,30 +910,31 @@ label.error {
 }
 
 .wrapper {
-    margin-left: 210px
+    margin-left: 250px;
 }
 
 .sidebar {
-    color: #555
+    color: #555;
+    overflow-y: auto;
 }
 
 .left-side {
-    width: 210px;
+    width: 250px;
     height: 100%;
     position: fixed;
     left: 0px;
-    background: #324157;
+    background: #363845;
     -webkit-box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.1);
     box-shadow: inset -3px 0px 8px -4px rgba(0, 0, 0, 0.07);
     min-height: 100%;
-    top: 0px;
-    overflow: auto
+    top: 70px;
+    z-index: 9;
 }
 
 .right-side {
-    width: 98%;
-    margin: 0 auto;
+    width: 99%;
+    margin: 0 0 0 1%;
     overflow-y: auto
 }
 
@@ -805,25 +946,31 @@ label.error {
 }
 
 .sidebar-menu li {
+    border-bottom: 1px solid #474a5e;
 }
 
 .sidebar-menu li>a {
-    padding: 0px 20px;
+    padding: 0px 50px;
     height: 56px;
     display: block;
     line-height: 56px
 }
 
 .sidebar-menu li>a:hover {
-    background-color: #48576a
+    background-color: #2e303c;
+    transition: background-color .6s;
+    -moz-transition: background-color .6s; /* Firefox 4 */
+    -webkit-transition: background-color .6s; /* Safari 和 Chrome */
+    -o-transition: background-color .6s; /* Opera */
 }
 
 .sidebar-menu li>a>span {
-    color: #bfcbd9
+    font-size: 16px;
+    color: #c5c5c5;
 }
 
 .sidebar-menu li>a>.icon {
-    margin-right: 10px
+    margin-right: 10px;
 }
 
 .sidebar-menu li>a .pull-right:after {
@@ -847,13 +994,6 @@ label.error {
     text-indent: 25px
 }
 
-.content-header {
-    text-indent: 20px;
-    height: 50px;
-    line-height: 50px;
-    float: left
-}
-
 .content-header h1 {
     font-size: 20px;
     margin: 0;
@@ -872,14 +1012,14 @@ label.error {
 }
 
 .dataContent table {
-    margin: 10px auto 0px
 }
 
 .advanced_query {
 }
 
 .search-container {
-    overflow: hidden
+    overflow: hidden;
+    padding: 15px 0px;
 }
 
 .search-container input[type=text], .search-container input[type=password] {
@@ -939,7 +1079,7 @@ label.error {
 }
 
 .dataShow tbody>tr:hover {
-    background-color: #eef1f6
+    background-color: #f7faff;
 }
 
 .dataShow .operaList {
@@ -1819,7 +1959,9 @@ label.label_check, label.label_radio {
 /*返回上一级*/
 .gobackPage {
     float: left;
-    width: 100px;
+    width: 80px;
     height: 30px;
+    text-align: center;
+    line-height: 30px;
     margin: 10px 0 0 20px;
 }

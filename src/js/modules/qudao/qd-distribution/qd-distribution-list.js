@@ -44,9 +44,114 @@ define(function(require, exports, module) {
             };
             jh.utils.ajax.send(opt);
         };
+        this.initSheriff = function(taskId) {
+            jh.utils.ajax.send({
+                url: '/task/downstreamByTaskChannel',
+                data: {
+                    taskId: taskId
+                },
+                done: function(returnData) {
+                    var str = _this.distributionSheriff(returnData.data.alldownstream);
+                    jh.utils.alert({
+                        content: str,
+                        ok: function() {
+                            var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value'),
+                                obj = {};
+                            if (!ids) {
+                                jh.utils.alert({
+                                    content: '请选择捕头！',
+                                    ok: true,
+                                    cancel: false
+                                });
+                                return false;
+                            }
+                            obj.downstreamlist = ids;
+                            obj.taskId = taskId;
+                            _this.distribution(obj);
+                        },
+                        cancel: true
+                    });
 
+                    //标识拒绝和已分配
+                    _this.sheriffDownstream(returnData.data.downstream);
+                    _this.sheriffRefuse(returnData.data.refuseList);
+                }
+            });
+        };
+        
+        //已分配
+        this.sheriffDownstream = function(arr){
+            var inputs = $('#distribution_public_form').find(':checkbox');
+            for(var i = 0;i<inputs.length;i++){
+                var item = inputs.eq(i);
+                var iid = item.val();
+                for(var j=0;j<arr.length;j++){
+                    var temp = arr[j];
+                    var tid = temp.id;
+                    if(tid == iid){
+                        item.attr('checked','checked');
+                    }
+                }
+            }
+        };
+        //拒绝分配
+        this.sheriffRefuse = function(arr){
+            var inputs = $('#distribution_public_form').find(':checkbox');
+            for(var i = 0;i<inputs.length;i++){
+                var item = inputs.eq(i);
+                var iid = item.val();
+                for(var j=0;j<arr.length;j++){
+                    var temp = arr[j];
+                    var tid = temp.id;
+                    if(tid == iid){
+                        item.siblings('.isRefuse').html('-拒');
+                    }
+                }
+            }
+        };
+        
+        this.distributionSheriff = function(arr) {
+            var source = jh.utils.getSheriffHtml();
+            var render = jh.utils.template.compile(source);
+            var menuState = function(state) {
+                switch (state) {
+                    case "all":
+                        state = "可找车可拖车";
+                        break;
+                    case "trace":
+                        state = "只找车";
+                        break;
+                    case "recycle":
+                        state = "只拖车";
+                        break;
+                    case "tracerecycle":
+                        state = "找车+拖车一体";
+                        break;
+                }
+                return state;
+            }
+            var str = render({ list: arr, stateToString: menuState });
+            return str;
+        };
+
+        this.distribution = function(obj) {
+            var opt = {
+            	method: 'post',
+                url: '/task/allotDownStream',
+                data:obj,
+                done: function(returnData) {
+                    jh.utils.alert({
+                        content: '任务分配成功！',
+                        ok: function(){
+                            _this.initContent();
+                        },
+                        cancel: false
+                    });
+                }
+            };
+            jh.utils.ajax.send(opt);
+        };
         this.registerEvent = function() {
-
             //查询
             jh.utils.validator.init({
                 id: 'qd-distributionList-form',
@@ -64,32 +169,11 @@ define(function(require, exports, module) {
                     id: id
                 });
             });
-
-            //批量分配
-            $('body').off('click', '#distributeTask').on('click', '#distributeTask', function() {
+            //分配
+            $('body').off('click', '.distribution').on('click', '.distribution', function() {
                 var me = $(this);
-                var list = $('#admin-qDDistributionList-container').find(':checked');
-                var ids = [];
-                $.each(list, function(index, item) {
-                    var id = $(item).data('id');
-                    ids.push(id);
-                });
-                ids = ids.join(',');
-                var opt = {
-                    url: '/task/distributeTask',
-                    data: {
-                        taskIds: ids
-                    },
-                    done: function(returnData) {
-                        jh.utils.alert({
-                            content: '任务分配成功！',
-                            ok: true,
-                            cancel: false
-                        });
-                    }
-                };
-                return false;
-                jh.utils.ajax.send(opt);
+                var taskId = me.data('id');
+                _this.initSheriff(taskId);
             });
         };
     }

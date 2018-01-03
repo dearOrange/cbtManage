@@ -6,114 +6,52 @@
  */
 'use strict';
 define(function(require, exports, module) {
-    function TaskList() {
-        var _this = this;
-        _this.form = $('#task-list-form');
+	function FinanceList() {
+		var _this = this;
+		_this.form = $('#finance-list-form');
 
-        this.init = function() {
-            this.registerEvent();
-        };
-
-        this.registerEvent = function() {
-            //          jh.utils.uploader.init({
-            //              hiddenName: 'test',
-            //              server:'/adminServer/task/import',
-            //              pick: {
-            //                  id: '#importFile'
-            //              },
-            //              accept: {
-            //                  title: 'Applications',
-            //                  extensions: 'xls,xlsx',
-            //                  mimeTypes: 'application/xls,application/xlsx'
-            //              }
-            //          },{
-            //              uploadAccept:function(file, response){
-            //                  alert(response)
-            //              }
-            //          });
-            //
-            //          // 搜索
-            //          jh.utils.validator.init({
-            //              id: 'task-list-form',
-            //              submitHandler: function(form) {
-            //                  _this.initContent(true);
-            //                  return false;
-            //              }
-            //          });
-
-            //查看任务详情
-            $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
-                var me = $(this);
-                var infos = me.data('infos');
-                //              jh.utils.ajax.send({
-                //                  url: '/trace/matchedTrace',
-                //                  data: {
-                //                      taskId: infos.id
-                //                  },
-                //                  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                //                  done: function(returnData, status, xhr) {
-                //                      infos.informantList = returnData.data;
-                //                      infos.chuzhi = parseFloat(infos.carPrice*0.15).toFixed(2)
-                var alertStr = jh.utils.template('task_detail_template', {});
-                jh.utils.alert({
-                    content: alertStr
-                });
-                //                  }
-                //              });
-
+		this.init = function() {
+			this.initContent();
+			this.registerEvent();
+			$('select').select2({
+            	minimumResultsForSearch:Infinity
             });
+		};
+		this.initContent = function(isSearch) {
+			var page = new jh.ui.page({
+				data_container: $('#finance_list_container'),
+				page_container: $('#page_container'),
+				method: 'post',
+				url: '/finance/taskOrderList',
+				contentType: 'application/json',
+				data: jh.utils.formToJson(_this.form),
+				isSearch: isSearch,
+				callback: function(data) {
+					return jh.utils.template('finance-list-template', data);
+				}
+			});
+			page.init();
+		};
+		this.registerEvent = function() {
+			// 搜索
+			jh.utils.validator.init({
+				id: 'finance-list-form',
+				submitHandler: function(form) {
+					_this.initContent(true);
+					return false;
+				}
+			});
 
-            //分配捕头
-            $('body').off('click', '.divied').on('click', '.divied', function() {
-                var me = $(this);
-                //              var infos = me.data('infos');
-                //              jh.utils.ajax.send({
-                //                  url: '/trace/matchedTrace',
-                //                  data: {
-                //                      taskId: infos.id
-                //                  },
-                //                  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                //                  done: function(returnData, status, xhr) {
-                //                      infos.informantList = returnData.data;
-                //                      infos.chuzhi = parseFloat(infos.carPrice*0.15).toFixed(2)
-                var alertDivied = jh.utils.template('task_divied_template', {});
-                jh.utils.alert({
-                    content: alertDivied,
-                });
-                //                  }
-                //              });
+			//查看任务详情
+			$('.dataShow').off('click', '.finance-detail').on('click', '.finance-detail', function() {
+				var id = $(this).data('id');
+				jh.utils.load("/src/modules/finance/finance-detail", {
+					id: id
+				})
 
-            });
+			});
 
-            //删除任务
-            $('body').off('click', '.delete').on('click', '.delete', function() {
-                var me = $(this);
-                var id = me.data('id');
-                jh.utils.alert({
-                    content: '确定删除任务吗？',
-                    ok: function() {
-                        jh.utils.ajax.send({
-                            url: '/task/delTask',
-                            data: {
-                                taskId: id
-                            },
-                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                            done: function(returnData) {
-                                jh.utils.alert({
-                                    content: '任务删除成功！',
-                                    ok: function() {
-                                        me.parents('tr').remove();
-                                    }
-                                });
-                            }
-                        });
-                    },
-                    cancel: true
-                });
-
-            });
-
-        };
-    }
-    module.exports = TaskList;
+		};
+	}
+	module.exports = FinanceList;
 });

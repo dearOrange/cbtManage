@@ -16,8 +16,8 @@ define(function(require, exports, module) {
             this.registerEvent();
         };
 
-        this.initCode = function(){
-            $('#checkCode').attr( 'src', REQUESTROOT + '/operator/getAuthCode' );
+        this.initCode = function() {
+            $('#checkCode').attr('src', REQUESTROOT + '/operator/getAuthCode');
         };
 
         this.initPlugins = function() {
@@ -37,7 +37,7 @@ define(function(require, exports, module) {
                 id: 'form_login',
                 submitHandler: function(form) {
                     var datas = jh.utils.formToJson(form); //表单数据
-                    datas.captchaCode = $.cookie('captchaCode');//验证码key
+                    datas.captchaCode = $.cookie('captchaCode'); //验证码key
                     jh.utils.ajax.send({
                         url: '/operator/login',
                         method: 'post',
@@ -47,29 +47,13 @@ define(function(require, exports, module) {
                             if (returnData.code === 'SUCCESS') {
                                 sessionStorage.setItem('admin-X-Token', returnData.data.token);
                                 sessionStorage.setItem('admin-username', $("#username").val());
+                                sessionStorage.setItem('admin-roleType', returnData.data.type);
                                 window.location.href = jh.config.pageIndex;
                             }
                         },
-//                      fail: function(xhr) {
-//                          refreshCode();
-//                          // if (xhr.result.code === 10007) {
-//                          //     var num;
-//                          //     if (errnum) {
-//                          //         num = parseInt(errnum) + 1;
-//                          //     } else {
-//                          //         num = 1;
-//                          //     }
-//                          //     localStorage[flag] = num;
-//                          //     var errstr = '用户名或密码错误！';
-//                          //     if (num >= 3) {
-//                          //         errstr = '请联系管理员,找回密码！';
-//                          //     }
-//                          //     jh.utils.alert({
-//                          //         content: errstr,
-//                          //         ok: function() {}
-//                          //     });
-//                          // }
-//                      }
+                        fail: function(xhr) {
+                            refreshCode();
+                        }
                     });
                     return false;
                 }

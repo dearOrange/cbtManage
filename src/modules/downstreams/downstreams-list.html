@@ -60,7 +60,7 @@
 <script type="text/template" id="downStreamsList_content_template">
     {{ each list item index }}
     <tr class="trData">
-        <td>{{item.name}}</td>
+        <td class="hand xrNameInfo" data-id="{{item.referrer}}">{{item.name}}</td>
         <td>{{item.phone}}</td>
         <td>{{item.province}} - {{item.city}}</td>
         <td>{{item.company}}</td>

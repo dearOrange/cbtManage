@@ -1,7 +1,117 @@
 .sidebar-menu li.active {
-	background-color: #5a707d;
+	background-color: #2e303c;
+}
+
+.sidebar-menu li.active>a>span {
+	color: #20a0ff;
 }
 
 .search-container .submit {
 	padding: 10px 40px;
+}
+
+.pagination select, .pagination .select2-container {
+	margin: 0;
+	width: 80px;
+	text-align: left;
+}
+
+.qd-distribution-tab {
+}
+
+.qd-distribution-tab li {
+	float: left;
+	text-align: center;
+	line-height: 36px;
+	padding: 5px 20px;
+	cursor: pointer;
+	border: 1px solid #3fa1f4;
+}
+
+.qd-distribution-tab li.active {
+	background-color: #3fa1f4;
+	color: #fff;
+}
+
+.red-border {
+	border: 1px solid red !important;
+}
+
+.hand {
+	cursor: pointer !important;
+}
+
+.ml10 {
+	margin-left: 10px;
+}
+
+.zoomIcon {
+	width: 33px;
+	height: 33px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: url(icon.png);
+}
+
+/* these styles are for the demo, and are not required for the plugin */
+.zoom {
+	display: inline-block;
+	position: relative;
+}
+
+.zoom img {
+	display: block;
+}
+
+.zoom img::selection {
+	background-color: transparent;
+}
+
+.new-message {
+	position: fixed;
+	right: 5px;
+	bottom: 5px;
+	border: 1px solid #ddd;
+	background-color: #f7f7f7;
+	z-index: 99;
+}
+
+.new-message .title {
+	height: 40px;
+	line-height: 40px;
+	padding: 0 10px 0 10px;
+	border-bottom: 1px solid #3a79f3;
+	background:#3a79f3;
+}
+
+.new-message .title span{
+	color:#fff;
+}
+
+.new-message .content {
+	width: 280px;
+	height: 100px;
+	text-align: center;
+}
+
+.new-message .content p {
+	color:#3a79f3;	
+}
+
+#poster_manage_addBannerForm {
+
+	/*width: 700px;*/
+}
+
+#poster_manage_addBannerForm .img-preview-content {
+	width: 608px;
+	height: 304px;
+	border: 1px solid #ddd;
+}
+
+#poster_manage_addBannerForm input[type="text"] {
+	width: 520px;
+	height: 30px;
+	border: 1px solid #ddd;
 }

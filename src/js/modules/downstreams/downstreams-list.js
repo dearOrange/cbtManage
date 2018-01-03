@@ -22,7 +22,7 @@ define(function(require, exports, module) {
                 isSearch: isSearch,
                 callback: function(data) {
                     data.RoleToString = jh.utils.RoleToString;
-                    data.isCaptain = function(code){
+                    data.isCaptain = function(code) {
                         return code ? '是' : '否';
                     };
                     var contentHtml = jh.utils.template('downStreamsList_content_template', data);
@@ -44,7 +44,7 @@ define(function(require, exports, module) {
             });
 
             //通过
-            $('.dataShow').off('click','.agreement').on('click', '.agreement', function() {
+            $('.dataShow').off('click', '.agreement').on('click', '.agreement', function() {
                 var me = $(this);
                 var id = me.data('id');
                 jh.utils.alert({
@@ -64,8 +64,33 @@ define(function(require, exports, module) {
                 });
             });
 
+            //线人上级
+            $('.dataShow').off('mouseenter', '.xrNameInfo').on('mouseenter', '.xrNameInfo', function() {
+                var me = $(this);
+                var id = me.data('id');
+                if(me.hasClass('title')){
+                    return false;
+                }
+                me.addClass('isload', true);
+                jh.utils.ajax.send({
+                    url: '/downstreams/findById',
+                    data: {
+                        id: id
+                    },
+                    isShadow:false,
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    done: function(data, status, xhr) {
+                        if(data && data.data && data.data.name){
+                            me.attr('title','该线人上级：' + data.data.name);
+                        }else{
+                            me.attr('title','该线人无上级');
+                        }
+                    }
+                });
+            });
+
             //拒绝
-            $('.dataShow').off('click','.pass').on('click', '.pass', function() {
+            $('.dataShow').off('click', '.pass').on('click', '.pass', function() {
                 var me = $(this);
                 var id = me.data('id');
                 jh.utils.alert({
@@ -86,7 +111,7 @@ define(function(require, exports, module) {
             });
 
             //推荐人查询
-            $('.dataShow').off('click','.blue_recommendCode').on('click', '.blue_recommendCode', function() {
+            $('.dataShow').off('click', '.blue_recommendCode').on('click', '.blue_recommendCode', function() {
                 var me = $(this);
                 var id = me.data('id');
                 var name = me.data('name');
@@ -95,7 +120,7 @@ define(function(require, exports, module) {
             });
 
             //推荐人查询
-            _this.form.off('click','#clearReferrer').on('click', '#clearReferrer', function() {
+            _this.form.off('click', '#clearReferrer').on('click', '#clearReferrer', function() {
                 _this.form.find('[name=referrer]').val('').siblings('input').val('');
                 _this.initContent();
             });

@@ -30,6 +30,19 @@ define(function(require, exports, module) {
             page.init();
         };
         this.registerEvent = function() {
+            //          获取捕头
+            jh.utils.ajax.send({
+                url: '/task/downStreamListByChannel',
+                done: function(returnData) {
+                    var data = returnData.data;
+                    var optionStr = '';
+                    for (var i = 0; i < data.length; i++) {
+                        optionStr += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+                    }
+                    $('#clueAudit-butou').append(optionStr);
+                }
+            })
+
             //查询
             jh.utils.validator.init({
                 id: 'admin-clueAuditList-form',
@@ -38,12 +51,12 @@ define(function(require, exports, module) {
                     return false;
                 }
             });
-            
+
             //查看任务详情
-            $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
+            $('.dataShow').off('click', '.clue-audit-detail').on('click', '.clue-audit-detail', function() {
                 var me = $(this);
                 var id = me.data('id');
-                jh.utils.load('/src/modules/clueaudit/clue-audit-detail',{
+                jh.utils.load('/src/modules/clueaudit/clue-audit-detail', {
                     id: id
                 });
             });

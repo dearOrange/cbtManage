@@ -13,7 +13,9 @@ define(function(require, exports, module) {
         this.init = function() {
             this.initContent();
             this.registerEvent();
-            $('select').select2();
+            $('select').select2({
+            	minimumResultsForSearch:Infinity
+            });
         };
         this.initContent = function(isSearch) {
             var page = new jh.ui.page({
@@ -43,18 +45,38 @@ define(function(require, exports, module) {
             //查看任务详情
             $('.dataShow').off('click', '.clueBackDetail').on('click', '.clueBackDetail', function() {
                 var id = $(this).data('id');
-                jh.utils.load("/src/modules/yunying/clue/clue-back-detail",{
-                	id:id
+                jh.utils.load("/src/modules/yunying/clue/clue-back-detail", {
+                    id: id
                 })
             });
-            
+
             //添加议价小计
-            $('.dataShow').off('click', '.addSub').on('click', '.addSub', function() {
-                var id = $(this).data('id');
-                jh.utils.load("/src/modules/yunying/clue/clue-back-detail",{
-                	id:id
-                })
-            });
+            $('body').off('click', '.addSub').on('click', '.addSub', function() {
+                var me = $(this);
+                var id = me.data('id');
+                var addStr = jh.utils.template('clue_addSubtotal_template', {});
+                jh.utils.alert({
+                    content: addStr,
+                    ok: function() {
+                        jh.utils.ajax.send({
+                            url: '/record/addBargain',
+                            data: {
+                                content: $('#subContent').val(),
+                                contacts: $('#subPerson').val(),
+                                contactPhone: $('#subStyle').val(),
+                                taskId: id
+                            },
+                            done: function(returnData) {
+                                jh.utils.alert({
+                                    content: '议价小计添加成功',
+                                    ok: true,
+                                    cancel: false
+                                });
+                            }
+                        });
+                    }
+                });
+            })
         };
     }
     module.exports = ClueBack;

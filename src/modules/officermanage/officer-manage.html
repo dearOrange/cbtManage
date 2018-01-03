@@ -1,11 +1,12 @@
 <div class="dataContent">
     <div class="search-container">
-        <form id="admin-offcerManager-form">
+        <form id="admin-officerManager-form">
             <table class="common_query textLeft search-content">
                 <tr>
                     <td>
                         <label class="label">业务类型：</label>
-                        <select name="entrust">
+                        <select name="type">
+                        	<option value="">全部</option>
                             <option value="all">可拖车可找车</option>
                             <option value="trace">只找车</option>
                             <option value="recycle">只拖车</option>
@@ -13,14 +14,9 @@
                         </select>
                     </td>
                     <td>
-                        <label class="label">车牌号：</label>
-                        <input type="text" class="search-input" name="carNumber" maxlength="7">
+                        <label class="label">捕头：</label>
+                        <input type="text" class="search-input" name="downstream" maxlength="20">
                     </td>
-                    <td>
-                        <label class="label">债权方名称：</label>
-                        <input type="text" class="search-input" name="companyName" maxlength="30">
-                    </td>
-                    
                     <td>
                         <input type="submit" value="查询" class="button search-button">
                     </td>
@@ -32,192 +28,44 @@
         <table class="dataShow">
             <thead>
                 <tr>
-                    <th width="3%">&nbsp;</th>
-                    <th width="4%"><input type="checkbox" /></th>
-                    <th width="10%">公司全称</th>
+                    <th width="4%">序号</th>
+                    <th width="8%">姓名</th>
+                    <th width="10%">所属公司</th>
+                    <th width="10%">区域</th>
+                    <th width="10%">联系电话</th>
+                    <th width="15%">通过认证时间</th>
                     <th width="10%">认证状态</th>
-                    <th width="6%">星级</th>
-                    <th width="8%">在线状态</th>
-                    <th width="8%">联系人</th>
-                    <th width="10%">联系方式</th>
-                    <th width="10%">状态</th>
-                    <th width="15%">注册时间</th>
                     <th width="6%">操作</th>
                 </tr>
-                <tr>
-                	<td>1</td>
-                	<td><input type="checkbox" /></td>
-                	<td>捕头一号</td>
-                	<td>未认证</td>
-                	<td>二星</td>
-                	<td>在岗</td>
-                	<td>赵经理</td>
-                	<td>12345678901</td>
-                	<td>未审核</td>
-                	<td>2017.05.24   12:23:22</td>
-                	<td><a data-id="1" class="detail button" data-infos="1">详情</a></td>
-                </tr>
             </thead>
-            <tbody id="order_list_container">
+            <tbody id="officer_list_container">
             </tbody>
         </table>
         <div class="page-box pagination" id="page_container"></div>
     </div>
 </div>
 
-<script type="text/template" id="taskList_content_template">
-    <!--{{ each list item index }}
+<script type="text/template" id="officerManager_content_template">
+    {{ each list item index }}
     <tr class="trData">
-        <td>1</td>
-        <td>{{item.carColor}}</td>
-        <td>{{item.carBrand}}</td>
-        <td>{{item.carSeries}}</td>
-        <td>{{item.carModel}}</td>
-        <td>{{item.companyName}}</td>
-        <td>{{item.contactPhone}}</td>
+        <td>{{index+1}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.company}}</td>
+        <td>{{ each item.area data index }}
+        {{data.provinceName}}
+        {{/each}}</td>
+        <td>{{item.phone}}</td>
+        <td>{{item.passAt}}</td>
+        <td>{{menuState(item.state)}}</td>
         <td>
-            <ul class="operaitem">
+            <ul class="operaitem" style="margin-left:10px;">
                 <li>
-                    <a data-id="{{item.id}}" class="detail button" data-infos="{{item}}">详情</a>
+                    <a data-id="{{item.id}}" class="officerDetail button">详情</a>
                 </li>
             </ul>
         </td>
     </tr>
-    {{/each}}-->
-</script>
-<script type="text/template" id="task_detail_template">
-    <div class="dialog-width officer-width">
-        <p class="pull-left">
-            捕头详情
-        </p>
-        <p class="pull-right audit">审核</p>
-        <div class="clearfix"></div>
-        <hr /><br />
-        <p>基本信息</p><br />
-        <ul>
-            <li>
-            	<label>主体名称：</label>
-            	<span>浙江亿众担保有限公司</span>
-            </li>
-            <li><label>法人代表：</label>
-            	<span>刘晓东</span>
-            </li>
-            <li>
-            	<label>详细地址：</label>
-            	<span>bndbbmh</span>
-            </li>
-           	<li>
-           		<label>业务类型：</label>
-           		<select id="serviceType" name="serviceType" class="search-select">
-                    <option value="">只找车</option>
-                    <option value="">只拖车</option>
-                    <option value="">可找可拖</option>
-                    <option value="">找拖一体</option>
-                </select>
-           	</li>
-            <li>
-            	<label>申请区域：</label>
-            	<span>杭州  金华</span>
-            </li>
-            <li>
-				<label>团队规模：</label>
-           		<select id="teamArea" name="teamArea" class="search-select">
-                    <option value="">5人以下</option>
-                    <option value="">5-10人</option>
-                    <option value="">11-50人</option>
-                    <option value="">50人以上</option>
-                </select>
-            </li>
-            <li>
-            	<label>捕头星际：</label>
-           		<select id="officerStar" name="officerStar" class="search-select">
-                    <option value="">一星</option>
-                    <option value="">二星</option>
-                    <option value="">三星</option>
-                    <option value="">四星</option>
-                    <option value="">五星</option>
-                </select>
-            </li>
-            <li>
-            	<label>捕头在岗状态：</label>
-            	<input type="radio" name="onlinestate" value="" /> 在岗
-				<input type="radio" name="onlinestate" value="" /> 不在岗
-            </li>
-        </ul>
-        <ul>
-            <li>
-            	<label>负责人：</label>
-            	<span>赵经理</span>
-            </li>
-            <li>
-            	<label>联系电话：</label>
-            	<span>12345678901</span>
-            </li>
-            <li>
-            	<label>微信账号：</label>
-            	<span>ehehe</span>
-            </li>
-            <li>
-            	<label>邮箱：</label>
-            	<span>1564645544</span>
-            </li>
-        </ul>
-        <div class="instruction">
-        	<div class="advantage">
-        		<label>优势说明</label>
-        		<span></span>
-        	</div>
-        	<div class="otherstate">
-        		<label>其他情况说明</label>
-        		<span></span>
-        	</div>
-        </div>
-        <div class="upmainfile">
-        	<p>资质上传</p>
-        	<div class="upimg">
-        		<dl>
-        			<dt><img src="../../img/nopic.png" alt="" /></dt>
-        			<dd>营业执照</dd>
-        		</dl>
-        		<dl>
-        			<dt><img src="../../img/nopic.png" alt="" /></dt>
-        			<dd>上传法人身份证照片</dd>
-        		</dl>
-        		<dl>
-        			<dt><img src="../../img/nopic.png" alt="" /></dt>
-        			<dd>法人手持身份证正面照片</dd>
-        		</dl>
-        		<dl>
-        			<dt><img src="../../img/nopic.png" alt="" /></dt>
-        			<dd>负责人身份证照片</dd>
-        		</dl>
-        		<dl>
-        			<dt><img src="../../img/nopic.png" alt="" /></dt>
-        			<dd>负责人手持身份证正面照片</dd>
-        		</dl>
-        	</div>
-        	<div class="buttonAnt">
-	        	<a class="pull-right button">保存</a>
-	        </div>
-        </div>
-    </div>
-</script>
-<script type="text/template" id="task_audit_template">
-	<div class="divied-width ">
-        <p class="pull-left">
-            资质审核
-        </p>
-        <div class="clearfix"></div>
-        <hr /><br />
-        <div class="divied-type">
-        	<input type="radio" name="audit" />审核通过
-        	<input type="radio" name="audit" />审核不通过
-        </div>
-        <div class="buttonAnt">
-        	<a class="pull-right button divied-no">取消</a>
-        	<a class="pull-right button divied-sure">确定</a>
-        </div>
-    </div>
+    {{/each}}
 </script>
 <script type="text/javascript">
 seajs.use('modules/officermanage/officer-manage', function(OfficerManage) {

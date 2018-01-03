@@ -13,7 +13,9 @@ define(function(require, exports, module) {
         this.init = function() {
             this.initContent();
             this.registerEvent();
-            $('select').select2();
+            $('select').select2({
+            	minimumResultsForSearch:Infinity
+            });
         };
         this.initContent = function(isSearch) {
             var page = new jh.ui.page({
@@ -43,60 +45,80 @@ define(function(require, exports, module) {
             //查看任务详情
             $('.dataAudit').off('click', '.detail').on('click', '.detail', function() {
                 var id = $(this).data('id');
-                jh.utils.load("/src/modules/yunying/task/task-audit-detail",{
-                	id:id
+                jh.utils.load("/src/modules/yunying/task/task-audit-detail", {
+                    id: id
                 })
 
             });
-            
+
             //任务审核
             $('body').off('click', '.onlyIdentify').on('click', '.onlyIdentify', function() {
                 var alertIdentify = jh.utils.template('taskonly_identify_template', {});
                 var dataId = $(this).data('id');
                 jh.utils.alert({
                     content: alertIdentify,
-                    ok:function(){
-                    	var throughState = $('.onlythrough').filter(':checked').val();
-                    	jh.utils.ajax.send({
-                    		url: '/task/verify',
-                    		data: {
-                    			taskIds: dataId,
-                    			reason: $('#identifyContents').val(),
-                    			validState: throughState
-                    		},
-                    		done: function(data){
-                    			console.log(data)
-                    		}
-                    	})
+                    ok: function() {
+                        var throughState = $('.onlythrough').filter(':checked').val();
+                        jh.utils.ajax.send({
+                            url: '/task/verify',
+                            data: {
+                                taskIds: dataId,
+                                reason: $.trim($('#identifyContents').val()),
+                                validState: throughState
+                            },
+                            done: function(data) {
+                                jh.utils.alert({
+                                    content: '任务操作成功！',
+                                    ok: function(){
+                                        _this.initContent();
+                                    },
+                                    cancel: false
+                                });
+                            }
+                        })
                     },
-                    cancel:true
+                    cancel: true
                 });
             });
-            
+
             //批量审核
-            $('.allIdentify').click(function(){
-            	var alertIdentify = jh.utils.template('taskonly_identify_template', {});
-            	var checkId = jh.utils.getCheckboxValue('task_audit_container',"value");
+            $('.allIdentify').click(function() {
+                var alertIdentify = jh.utils.template('taskonly_identify_template', {});
+                var checkId = jh.utils.getCheckboxValue('task_audit_container', "value");
+                if (!checkId) {
+                    jh.utils.alert({
+                        content: '请选择需要审核的任务！',
+                        ok: true,
+                        cancel: false
+                    });
+                    return false;
+                }
                 jh.utils.alert({
                     content: alertIdentify,
-                    ok:function(){
-                    	var throughState = $('.onlythrough').filter(':checked').val();
-                    	jh.utils.ajax.send({
-                    		url: '/task/verify',
-                    		data: {
-                    			taskIds: checkId,
-                    			reason: $('#identifyContents').val(),
-                    			validState: throughState
-                    		},
-                    		done: function(data){
-                    			console.log(data)
-                    		}
-                    	})
+                    ok: function() {
+                        var throughState = $('.onlythrough').filter(':checked').val();
+                        jh.utils.ajax.send({
+                            url: '/task/verify',
+                            data: {
+                                taskIds: checkId,
+                                reason: $.trim($('#identifyContents').val()),
+                                validState: throughState
+                            },
+                            done: function(data) {
+                                jh.utils.alert({
+                                    content: '批量操作成功！',
+                                    ok: function(){
+                                        _this.initContent();
+                                    },
+                                    cancel: false
+                                });
+                            }
+                        })
                     },
-                    cancel:true
+                    cancel: true
                 });
             })
-                
+
         };
     }
     module.exports = TaskAudit;

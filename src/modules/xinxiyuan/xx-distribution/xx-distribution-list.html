@@ -1,10 +1,12 @@
 <div class="dataContent">
-    <input type="button" class="button" id="distributeTask" value="批量分配">
+    <div class="search-container">
+        <input type="button" class="button mt10" id="distributeTask" value="批量分配">
+    </div>
     <div class="data-container">
         <table class="dataShow">
             <thead>
                 <tr>
-                    <th width="3%">&nbsp;</th>
+                    <th width="4%">序号</th>
                     <th width="3%"><input type="checkbox" id="checkAll"/></th>
                     <th width="8%">车牌号</th>
                     <th width="10%">品牌</th>
@@ -25,7 +27,7 @@
     <tr>
         <td>{{index+1}}</td>
         <td>
-            <input type="checkbox" data-businessManagerId="{{item.businessManagerId}}" data-businessManager="{{item.businessManager}}" data-id="item.id"/>
+            <input type="checkbox" data-id="{{item.id}}"/>
         </td>
         <td>{{item.carNumber}}</td>
         <td>{{item.carBrand}}</td>
@@ -34,8 +36,8 @@
         <td>{{item.businessManager}}</td>
         <td>{{item.createAt}}</td>
         <td>
-            <a data-id="{{item.id}}" class="detail button" data-infos="1">详情</a>
-            <a data-id="{{item.id}}" class="detail button" data-infos="1">分配</a>
+            <a data-id="{{item.id}}" class="detail button">详情</a>
+            <a data-id="{{item.id}}" class="distribution button">分配</a>
         </td>
     </tr>
     {{/each}}

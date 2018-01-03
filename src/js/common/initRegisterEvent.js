@@ -5,6 +5,9 @@
  */
 define(function(require, exports, module) {
     function RegisterJQueryEvent() {
+        var _this = this;
+        _this.roleType = sessionStorage.getItem('admin-roleType');
+
         this.init = function() {
             this.registerEvent();
         };
@@ -13,7 +16,7 @@ define(function(require, exports, module) {
             jh.utils.ajax.send({
                 url: '/qiniu/getToken',
                 done: function(returnData) {
-                    sessionStorage.setItem('admin-uploadToken',returnData.data.uploadToken);
+                    sessionStorage.setItem('admin-uploadToken', returnData.data.uploadToken);
                 }
             });
 
@@ -33,24 +36,25 @@ define(function(require, exports, module) {
                 var currentUrl = m.data('url');
                 jh.utils.load(currentUrl);
             });
-
             $('#toggleMenu').click(function() {
                 var me = $(this);
                 var con = $('header').children('.navbar');
                 var hea = $('article.wrapper');
                 var menu = $('#menusBar');
                 if (me.hasClass('closeMenu')) {
-                    con.css('margin-left', '210px');
-                    hea.css('margin-left', '210px');
+                    con.css('margin-left', '0px');
+                    hea.css('margin-left', '250px');
                     menu.show();
-                    me.text('<-关闭菜单');
                     me.removeClass('closeMenu');
+                    me.addClass('icon-icon_closeMenu');
+                    me.removeClass('icon-icon_openMenu');
                 } else {
                     con.css('margin-left', '0px');
                     hea.css('margin-left', '0px');
                     menu.hide();
-                    me.text('<-打开菜单');
                     me.addClass('closeMenu');
+                    me.addClass('icon-icon_openMenu');
+                    me.removeClass('icon-icon_closeMenu');
                 }
             });
 
@@ -88,19 +92,12 @@ define(function(require, exports, module) {
             /*返回事件*/
             $('#content-container').on('click', '.goBack', function() {
                 window.history.go(-1);
+                jh.utils.defaultPage();
             });
 
-            $('.label_checkbox,.label_radio').iCheck({
-                checkboxClass: 'icheckbox_flat-orange',
-                radioClass: 'iradio_flat-orange',
-                increaseArea: '20%'
-            });
-
-
-            $('.user-menu').on('click', function() {
+            $('#userCenterLink').on('click', function() {
                 var me = $(this);
-                me.find('ol').toggleClass('hide');
-                me.find('.icon-black-top').toggleClass('hide');
+                jh.utils.load('/src/modules/person/person-file');
             });
 
             $('.user-menu ol').on('mouseleave', function() {
@@ -122,18 +119,36 @@ define(function(require, exports, module) {
                 window.location.href = REQUESTROOT + '/task/export' + '?' + datas + '&XToken=' + XToken;
             });
 
-            $('body').off('click', '.img-preview img').on('click', '.img-preview img', function() {
+            $('body').off('click', '.preview-img').on('click', '.preview-img', function() {
                 var m = $(this);
                 var src = m.attr('src');
                 var title = m.data('tips') ? m.data('tips') : '查看大图';
-                src = src.replace(/imageView2\/0\/w\/100/, 'imageslim');
+                src = src.replace(/\?imageMogr2\/auto-orient\/thumbnail\/100x100/, '');
                 jh.utils.alert({
                     title: title,
                     content: '<img src="' + src + '"/>'
                 });
             });
 
-            $('#loginout').on('click', function() {
+            $('body').off('click', '.seaMessageDetail').on('click', '.seaMessageDetail', function() {
+                var m = $(this);
+                if (_this.roleType === 'info') {
+                    jh.utils.load('/src/modules/xinxiyuan/clue/clue-manage');
+                } else if (_this.roleType === 'finance') {
+                    jh.utils.load('/src/modules/sendMoney/sendMoney-list');
+                } else {
+                    m.parents('.new-message').remove();
+                }
+            });
+
+            $('body').off('click', '.newMessage_close').on('click', '.newMessage_close', function() {
+                var m = $(this);
+                m.parents('.new-message').animate({ bottom: '-193px' }, 'slow', 'swing', function() {
+                    $(this).remove();
+                });
+            });
+
+            $('#logoutLink').on('click', function() {
                 var me = $(this);
                 jh.utils.alert({
                     content: '确定要安全退出吗？',
@@ -141,8 +156,9 @@ define(function(require, exports, module) {
                         jh.utils.ajax.send({
                             url: '/operator/logout',
                             done: function() {
-//                              $.cookie('admin-username', null);
-//                              $.cookie('admin-X-Token', null);
+                                sessionStorage.removeItem('admin-X-Token');
+                                sessionStorage.removeItem('admin-uploadToken');
+                                sessionStorage.removeItem('admin-username');
                                 window.location.href = jh.config.pageLogin;
                             },
                             fail: function() {
@@ -154,10 +170,6 @@ define(function(require, exports, module) {
                 });
             });
 
-            $('body').on('change', 'select', function() {
-                $(this).parents('form').validate().element($(this));
-            });
-
             $('body').off('change', '#checkAll').on('click', '#checkAll', function() {
                 var me = $(this);
                 var state = me.is(':checked');
@@ -167,6 +179,24 @@ define(function(require, exports, module) {
                 } else {
                     checkboxs.prop('checked', false);
                 }
+            });
+
+            //批量分配
+            $('body').off('click', '.qd-distribution-tab li').on('click', '.qd-distribution-tab li', function() {
+                var me = $(this);
+                me.addClass('active').siblings().removeClass('active');
+                var ind = me.index();
+                $('#qd-distribution-tab' + ind).removeClass('hide').siblings().addClass('hide');
+            });
+
+            $(window).on('resize', function() {
+                jh.utils.updateMenuBoxHeight();
+
+                var h = $(window).height();
+                $("#leftMenu-box").mCustomScrollbar({
+                    setHeight: h,
+                    theme: "minimal-dark"
+                });
             });
 
         };

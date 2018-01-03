@@ -6,123 +6,89 @@
  */
 'use strict';
 define(function(require, exports, module) {
-    function TaskList() {
-        var _this = this;
-        _this.form = $('#task-list-form');
+	function SendMoneyList() {
+		var _this = this;
+		_this.form = $('#sendMoney-list-form');
+		this.init = function() {
+			this.initContent();
+			this.registerEvent();
+		};
+		this.initContent = function(isSearch) {
+			var page = new jh.ui.page({
+				data_container: $('#sendMoney_list_container'),
+				page_container: $('#page_container'),
+				method: 'post',
+				url: '/withdraw/list',
+				contentType: 'application/json',
+				data: jh.utils.formToJson(_this.form),
+				isSearch: isSearch,
+				callback: function(data) {
+					return jh.utils.template('sendMoney-list-template', data);
+				}
+			});
+			page.init();
+		};
+		this.registerEvent = function() {
+			// 搜索
+			jh.utils.validator.init({
+				id: 'sendMoney-list-form',
+				submitHandler: function(form) {
+					_this.initContent(true);
+					return false;
+				}
+			});
 
-        this.init = function() {
-            this.registerEvent();
-        };
+			//查看任务详情
+			$('.dataShow').off('click', '.sendMoney-detail').on('click', '.sendMoney-detail', function() {
+				var id = $(this).data('id');
+				var state = $(this).data('state');
+				jh.utils.load("/src/modules/sendMoney/sendMoney-detail", {
+					id: id
+				})
+			});
 
-        this.registerEvent = function() {
-            //          jh.utils.uploader.init({
-            //              hiddenName: 'test',
-            //              server:'/adminServer/task/import',
-            //              pick: {
-            //                  id: '#importFile'
-            //              },
-            //              accept: {
-            //                  title: 'Applications',
-            //                  extensions: 'xls,xlsx',
-            //                  mimeTypes: 'application/xls,application/xlsx'
-            //              }
-            //          },{
-            //              uploadAccept:function(file, response){
-            //                  alert(response)
-            //              }
-            //          });
-            //
-            //          // 搜索
-            //          jh.utils.validator.init({
-            //              id: 'task-list-form',
-            //              submitHandler: function(form) {
-            //                  _this.initContent(true);
-            //                  return false;
-            //              }
-            //          });
-
-            //查看任务详情
-            $('.dataShow').off('click', '.sendMoney').on('click', '.sendMoney', function() {
-                var me = $(this);
-                var infos = me.data('infos');
-                //              jh.utils.ajax.send({
-                //                  url: '/trace/matchedTrace',
-                //                  data: {
-                //                      taskId: infos.id
-                //                  },
-                //                  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                //                  done: function(returnData, status, xhr) {
-                //                      infos.informantList = returnData.data;
-                //                      infos.chuzhi = parseFloat(infos.carPrice*0.15).toFixed(2)
-                var alertStr = jh.utils.template('sendMoney_template', {});
-                jh.utils.alert({
-                    content: alertStr,
-                    ok: function() {
-                        alert('提交了');
-                        return false;
-                    },
-                    cancel: true
-                });
-                //                  }
-                //              });
-
-            });
-
-            //分配捕头
-            $('body').off('click', '.refuse').on('click', '.refuse', function() {
-                var me = $(this);
-                var id = me.data('id');
-                jh.utils.alert({
-                    content: '确定拒绝提现吗？',
-                    ok: function() {
-                        // jh.utils.ajax.send({
-                        //     url: '/trace/matchedTrace',
-                        //     data: {
-                        //         taskId: id
-                        //     },
-                        //     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                        //     done: function(returnData, status, xhr) {
-                        //         infos.informantList = returnData.data;
-                        //         infos.chuzhi = parseFloat(infos.carPrice * 0.15).toFixed(2)
-                        //     }
-                        // });
-
-                        return false;
-                    },
-                    cancel: true
-                });
-
-            });
-
-            //删除任务
-            $('body').off('click', '.delete').on('click', '.delete', function() {
-                var me = $(this);
-                var id = me.data('id');
-                jh.utils.alert({
-                    content: '确定删除任务吗？',
-                    ok: function() {
-                        jh.utils.ajax.send({
-                            url: '/task/delTask',
-                            data: {
-                                taskId: id
-                            },
-                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                            done: function(returnData) {
-                                jh.utils.alert({
-                                    content: '任务删除成功！',
-                                    ok: function() {
-                                        me.parents('tr').remove();
+			//打款
+			$('body').off('click', '.sendMoney').on('click', '.sendMoney', function() {
+				var me = $(this);
+				var data = me.data('infos');
+				data.viewImgRoot = jh.config.viewImgRoot;
+				var alertContent = jh.utils.template('sendMoneyList_sure_template', data);
+				var id = $(this).data('id');
+				jh.utils.alert({
+					content: alertContent,
+					ok: function() {
+						var datas = jh.utils.formToJson($('#play-money-form'));
+						datas.drawId = id;
+						jh.utils.ajax.send({
+							url: '/withdraw/confirm',
+							data: datas,
+							done: function(returnData) {
+								jh.utils.alert({
+									content: '已打款',
+									ok: function(){
+                                    	window.location.reload();
                                     }
-                                });
-                            }
-                        });
-                    },
-                    cancel: true
-                });
-
-            });
-
-        };
-    }
-    module.exports = TaskList;
+								})
+							}
+						});
+					},
+					cancel: true
+				});
+				var picArr = ['voucher1', 'voucher2', 'voucher3'];
+				for (var i = 0; i < 3; i++) {
+					jh.utils.uploader.init({
+						isAppend: false,
+						pick: {
+							id: '#' + picArr[i]
+						}
+					});
+				};
+			});
+			$('body').off('click', '#selectPay').on('click', '#selectPay', function() {
+				var selectVal = $("#selectPay").val();
+				$('.changePaystyle').eq(selectVal-1).attr("id", "payStyle").siblings().removeAttr("id");
+			});
+		};
+	}
+	module.exports = SendMoneyList;
 });

@@ -13,7 +13,9 @@ define(function(require, exports, module) {
         this.init = function() {
             this.initContent();
             this.registerEvent();
-            $('select').select2();
+            $('select').select2({
+            	minimumResultsForSearch:Infinity
+            });
         };
         this.initContent = function(isSearch) {
             var page = new jh.ui.page({
@@ -41,7 +43,7 @@ define(function(require, exports, module) {
             });
 
             //查看任务详情
-            $('.dataShow').off('click', '.admin-detail').on('click', '.admin-detail', function() {
+            $('.dataShow').off('click', '.creditor-detail').on('click', '.creditor-detail', function() {
             	var id = $(this).data('id');
                 jh.utils.load("/src/modules/xinxiyuan/creditor/creditor-identify-detail",{
                 	id:id

@@ -19,70 +19,66 @@
 
 <body>
     <aside class="left-side" id="menusBar">
-        <a href="/" class="index_logo" id="index_logo"></a>
         <section class="sidebar">
             <ul class="sidebar-menu" id="leftMenu-box"></ul>
         </section>
     </aside>
     <header class="header">
         <nav class="navbar">
-            <span class="pull-left" id="toggleMenu">&lt;-关闭菜单</span>
-            <section class="content-header pull-left">
-                <span id="breadCrumb"></span>
-            </section>
+        	<a href="/" class="index_logo" id="index_logo"></a>
+        	<p>车捕头运营后台</p>
             <div class="pull-right">
                 <ul class="navbar-nav">
                     <li class="user-menu">
-                        <a href="javascript:void(0);">
-                            <i class="icon icon-user"></i>
+                        <a href="javascript:;" class="pull-left" id="userCenterLink">
+                            <i class="icon icon-qd_btgl" id="userIsPassState"></i>
                             <span id="usernameText"></span>
-                            <i class="icon icon-user-down"></i>
                         </a>
-                        <!-- <i class="icon icon-black-top hide"></i> -->
-                        <ol class="loginBox hide">
-                            <li class="loginout" id="loginout">
-                                <i class="icon icon-out"></i>
-                                <span>账号注销</span>
-                            </li>
-                        </ol>
+                        <a href="javascript:;" class="pull-left" id="logoutLink">
+                            <i class="icon icon-user"></i>
+                            <span id="loginout">安全退出</span>
+                        </a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
-
+    
     <article class="wrapper">
         <aside class="right-side">
-            <section class="content" id="content-container"></section>
+        	<div class="side-content">
+            	<span class="icon icon-icon_closeMenu pull-left hand" id="toggleMenu"></span>
+        		<section class="content-header">
+	                <a href="javascript:;" id="breadCrumb"></a>
+	            </section>
+	            <section class="content" id="content-container"></section>
+        	</div>
         </aside>
     </article>
 </body>
+<script type="text/template" id="newMessage_template">
+    <div class="new-message">
+        <div class="title">
+            <span class="pull-left">新消息提示</span>
+            <span class="pull-right hand newMessage_close">X</span>
+        </div>
+        <div class="content">
+            <p style="margin-top: 50px;">{{message}}</p>
+            <a href="javascript:;" class="button bigButton mt25 seaMessageDetail">立即查看</a>
+        </div>
+    </div>
+</script>
 <script type="text/template" id="main_leftMenu_template">
-    {{ each menus item index }}
+    {{ each list item index }}
     <li>
-        <a href="javascript:void(0);" class="first-menu-item" data-url="{{item.module}}{{item.url}}">
+        <a href="javascript:void(0);" class="first-menu-item" data-url="{{item.url}}">
             <i class="icon {{item.icon}}"></i>
             <span>{{item.name}}</span>
-            {{if item.childrens.length>0 }}
-            <i class="icon icon-bottom-arrow fr mt25"></i>
-            {{/if}}
-        </a> 
-        {{if item.childrens.length>0 }}
-        <ul class="hide">
-            {{each item.childrens sub n}}
-            <li>
-                <a href="javascript:void(0);" data-url="{{sub.url}}" data-flag="{{sub.flag}}">
-                    <span>{{sub.name}}</span>
-                </a>
-            </li>
-            {{/each}}
-        </ul>
-        {{/if}}
+        </a>
     </li>
     {{/each}}
 </script>
 <script type="text/javascript" src="../../js/lib/seajs/3.0.1/sea.js?version=20170721"></script>
-<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.0&key=4710f3db882029c3838ac9eaf1ecda5c"></script> 
 <script type="text/javascript">
 seajs.use('main', function(Main) {
     var main = new Main();

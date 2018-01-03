@@ -8274,7 +8274,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                type: method
 	            }
 	        })
-
 	        this.custom.timeout = function(timeout) {
 	            if (typeof timeout === 'number') return timeout
 	            if (typeof timeout === 'string' && !~timeout.indexOf('-')) return parseInt(timeout, 10)
