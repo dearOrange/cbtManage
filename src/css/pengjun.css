@@ -1,0 +1,283 @@
+.areaInfo span {
+	width: 450px;
+	text-align: left;
+}
+
+.noTable div label {
+	font-weight: 900;
+	display: inline-block;
+	width: 70px;
+}
+
+.noTable table {
+	margin:10px 0;
+}
+
+.noTable table th {
+	border:1px solid #dedede;
+	width:214px;
+}
+
+.noTable table td {
+	text-align: left !important;
+}
+
+.dialog-width>div {
+	width: 100%;
+	margin: 20px 0;
+}
+
+.dialog-width div p {
+	margin: 10px 0;
+}
+
+.imgRecord img {
+	width: 100px;
+	height: 100px;
+}
+
+/*个人中心*/
+.personContent .center-site {
+	width: 900px;
+	margin: 4px 0 0 96px;
+}
+
+.personContent .center-site ul {
+	overflow: hidden;
+}
+
+.personContent .center-site ul.person-option {
+	margin: 80px 0 22px 0;
+}
+
+.personContent .center-site ul li {
+	width: 48%;
+	float: left;
+	border: 1px solid #cecece;
+}
+
+.personContent .center-site ul.person-option li {
+	width: 14%;
+	border-radius: 6px;
+	margin-right: 20px;
+	text-align: center;
+	line-height: 36px;
+	cursor: pointer;
+}
+
+.personContent .center-site ul.person-option li.changePassword {
+	background: #206aa0;
+}
+
+.personContent .center-site ul.person-option li.editFile {
+	background: #15a735;
+}
+
+.personContent .center-site ul.person-option li span {
+	color: #fff;
+}
+
+.personContent .center-site ul.username-ul {
+	margin-bottom: 30px;
+}
+
+.personContent .center-site ul li label {
+	display: inline-block;
+	width: 120px;
+	text-align: center;
+	padding: 10px 0;
+	border-right: 1px solid #cecece;
+	background-color: aliceblue;
+}
+
+.personContent ul li textarea {
+	width: 370px;
+	height: 30px;
+	resize: none;
+	margin-left: 70px;
+}
+
+.personContent ul li input[type="text"], .personContent ul li select {
+	width: 302px;
+}
+
+.personContent ul li select.useraddress {
+	width: 100px;
+}
+
+.change-width p {
+	width: 660px;
+	font-weight: 900;
+}
+
+.change-width .changeForm .inputGroup {
+	margin: 10px 0;
+}
+
+.change-width .changeForm .inputGroup label {
+	width: 100px;
+	display: inline-block;
+}
+
+.change-width .changeForm .inputGroup input {
+	width: 80%;
+	height: 30px;
+	border: 1px solid #ccc;
+}
+
+.officer-width form table input {
+	width: 200px;
+	height: 30px;
+	border: 1px solid #ccc;
+}
+
+.bgc_blue {
+	background-color: #fff5f6;
+}
+
+.imgWidth img {
+	width: 50px;
+	height: 50px;
+}
+
+.changePaystyle {
+	display: none;
+}
+
+#payStyle {
+	display: table-row;
+}
+
+/*用户管理*/
+.user-width {
+	width: 600px;
+}
+
+.user-width ul {
+}
+
+.user-width ul li {
+	width: 50%;
+	float: left;
+	margin-bottom: 10px;
+}
+
+.user-width ul li label {
+	display: block;
+	width: 100px;
+}
+
+.user-width ul li input {
+	border: 1px solid #ccc;
+	height: 40px;
+}
+
+.icons {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+.icons.icons-edit {
+	background: url(../img/edit.png) no-repeat center;
+	background-size: cover;
+}
+
+.icons.icons-username {
+	background: url(../img/changepwd.png) no-repeat center;
+	background-size: cover;
+}
+
+/*任务详情*/
+.public_css table.taskTable th {
+	font-weight: 900;
+	text-align: right;
+	border: 1px solid #ffffff;
+	width:98px;
+}
+
+.public_css table.taskTable td {
+	border: 1px solid #eef1f6;
+	text-align: left;
+}
+
+/*面包屑导航*/
+.side-content {
+	margin: 0 20px;
+	display: block
+}
+
+.content-header {
+	height: 60px;
+	line-height: 64px;
+	border-bottom: 1px solid #eee;
+}
+
+.content-header span {
+	color: #666;
+	font-weight: 600;
+}
+
+#toggleMenu {
+	margin: 17px 10px 0 0;
+}
+
+#plat-sure-money table tr td input {
+	border: 1px solid #eee;
+	height: 28px;
+}
+
+/*新增*/
+.admin-addNews, .admin-addPoster, .admin-removePoster {
+	/*border:1px solid #3fa1f4;
+	color:#3fa1f4;
+	padding:10px;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 36px;
+    cursor: pointer;*/
+}
+
+/*新增公告*/
+.addnews div {
+	margin-bottom: 20px;
+}
+.addnews input{
+	width:300px;
+	height:30px;
+	border:1px solid #ccc;
+	margin-left:10px;
+	border-radius: 3px;
+}
+
+/*状态开启/关闭*/
+p.btn-status {
+	width:48px;
+	height:40px;
+}
+p.openStatus {
+	background: url(../img/index/open.png) no-repeat center;
+	background-size: 20px 20px;
+}
+
+p.closeStatus {
+	background: url(../img/index/close.png) no-repeat center;
+	background-size: 20px 20px;
+}
+
+/*新建*/
+.next-content {
+	display: none;
+}
+.next-content div {
+	margin:10px;
+}
+.address-select {
+	display: none;
+}
+#newincreate-form div label {
+	display:inline-block;
+	width:58px;
+}

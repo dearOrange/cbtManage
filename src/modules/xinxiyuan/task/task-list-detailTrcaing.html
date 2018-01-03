@@ -1,0 +1,205 @@
+<div class="dataContent taskListContent" id="task_list_detailTrcaing_content"></div>
+<script type="text/template" id="task_list_detailTrcaing_template">
+	<div class="dialog-width public_css">
+		<p class="pull-left">
+			任务详情
+		</p>
+		<a href="javascript:;" class="button gobackPage goBack">返回</a>
+		<p class="showTaskState pull-right">{{menuState(data.state)}}</p>
+		<div class="clearfix"></div>
+		<hr /><br />
+		<p>基本信息</p><br />
+		<table class="taskTable">
+        	<tr>
+        		<th>任务号：</th>
+        		<td>{{data.taskNo}}</td>
+        		<th>任务类型：</th>
+        		<td>{{menuState(data.entrust)}}</td>
+        		<th>任务发起：</th>
+        		<td>{{data.upstreamName}}</td>
+        	</tr>
+        	<tr>
+        		<th>车牌号：</th>
+        		<td>{{data.carNumber}}</td>
+        		<th>车型：</th>
+        		<td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+        		<th>颜色：</th>
+        		<td>{{data.carColor}}</td>
+        	</tr>
+        	<tr>
+        		<th>车辆识别号：</th>
+        		<td>{{data.carId}}</td>
+        		<th>车辆发动机号：</th>
+        		<td>{{data.engineId}}</td>
+        		<th>任务发布时间：</th>
+        		<td>{{data.createAt}}</td>
+        	</tr>
+        </table>
+		<div class="remark">{{data.remark}}</div>
+		<div class="imgRecord">
+			<p>催收资料</p>
+			{{each data.attachmentVoList data index}}
+			<img src="{{viewImgRoot}}{{data.url}}" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" class="preview-img hand" /> 
+			{{/each}}
+		</div>
+		<br>
+		{{if data.state === "clueChecking"}}
+		<div class="mainfile">
+			<p>线索信息</p>
+			{{if data.traceVoList&&data.traceVoList.length>0}}
+			<a href="javascript:;" class="button rejectClue">全部审核不通过</a> 
+			{{/if}}
+			{{ each data.traceVoList data index }}
+			<div class="mt25">
+				<div class="upimg pull-left">
+					<input type="radio" value="{{data.id}}" name="traceId" class="pull-left checkId" style="margin:60px 0;" />
+					<dl>
+						<dt>
+							<div class="upfile-item">
+								<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}" class="preview-img hand" onerror="this.src='/src/img/nopic.png'"/>
+							</div>
+		    			</dt>
+						<dd>全车背景照</dd>
+					</dl>
+				</div>
+				<div style="margin:10px 0;" class="pull-left">
+					<p>{{data.name}}----{{menuState(data.downstreamType)}}</p>
+					<p>线索上传时间：{{data.createAt}}</p>
+					<p>gprs信息：{{data.location}}</p>
+					<p>定位：{{data.location}}</p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			{{/each}}
+		</div>
+		<div class="hopeprice">
+			<p>预估费用</p>
+			<div>
+				<label>车辆残值估算:</label>
+				<input type="text" class="OnlyPrice" maxlength="11" id="salvage" value="{{data.carPrice}}" />
+			</div>
+			<div>
+				<label>处置费用估算:</label>
+				<input type="text" maxlength="11" class="OnlyPrice" id="minMoney" value="{{data.estimatedMinPrice}}" />至<input type="text" class="OnlyPrice" maxlength="11" id="maxMoney" value="{{data.estimatedMaxPrice}}" />
+			</div>
+		</div>
+		<div class="upmainfile">
+			<p style="margin:20px 0;">分配渠道</p>
+			<div class="task-content">
+
+			</div>
+		</div>
+		<input type="submit" value="保存" class="button adopteInfo" />
+		{{/if}}
+
+		{{if data.state !== "unarrange" && data.state !== "tracing"&& data.state !== "clueChecking"}}
+		<div class="mainfile">
+			<p>线索信息</p>
+			{{ each data.traceVoList data index }}
+			<div class="mt25">
+				<div class="upimg pull-left">
+					<dl>
+						<dt>
+							<div class="upfile-item">
+								<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
+							</div>
+		    			</dt>
+						<dd>全车背景照</dd>
+					</dl>
+				</div>
+				<div class="pull-left">
+					<p>{{data.name}}----{{menuState(data.downstreamType)}}</p>
+					<p>线索上传时间：{{data.createAt}}</p>
+					<p>gprs信息：{{data.location}}</p>
+					<p>定位：{{data.location}}</p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			{{/each}}
+		</div>
+		<br>
+		{{/if}}
+		{{if data.state !== "unarrange" && data.state !== "tracing" && data.state !== "clueChecking"}}
+		<div class="hopeprice">
+			<p>费用</p>
+			<table style="width: 400px;">
+				<tr>
+					<td style="width: 160px;text-align: right;">车辆残值估算：</td>
+					<td style="text-align: center;">{{data.carPrice}}</td>
+				</tr>
+				<tr>
+					<td style="width: 160px;text-align: right;">处置费用估算：</td>
+					<td style="text-align: center;">{{data.estimatedMinPrice}} 至 {{data.estimatedMaxPrice}}</td>
+				</tr>
+			</table>
+		</div>
+		<br>
+		{{/if}}
+		{{if data.state === "unconfirmed" || data.state === "voucherInvalid" || data.state === "hunterUnreceive" || data.state === "hunterReceive" || data.state === "voucherChecking" && data.finalPrice!== ""}}
+		<div class="hopeprice">
+			<p>确认费用</p>
+			<table style="width: 400px;">
+				<tr>
+					<td style="width: 160px;text-align: right;">最终处置费：</td>
+					<td style="text-align: center;">{{data.finalPrice}}</td>
+				</tr>
+				<tr>
+					<td style="width: 160px;text-align: right;">其中受托人费用：</td>
+					<td style="text-align: center;">{{data.baileePrice}}</td>
+				</tr>
+				<tr>
+					<td style="width: 160px;text-align: right;">资产查找费：</td>
+					<td style="text-align: center;">{{data.assetPrice}}</td>
+				</tr>
+				<tr>
+					<td style="width: 160px;text-align: right;">第三方处置请收费：</td>
+					<td style="text-align: center;">{{data.thirdpartyPrice}}</td>
+				</tr>
+			</table>
+		</div>
+		<br>
+		{{/if}}
+		{{if data.state === "voucherInvalid" || data.state === "hunterUnreceive" || data.state === "hunterReceive" || data.state === "voucherChecking"}}
+		<div class="upmainfile">
+			<p>凭证</p>
+			<div class="showImg">
+				{{each data.voucherVoList data index}}
+				<img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" onerror="this.src='/src/img/nopic.png'" class="hand preview-img ml10" /> 
+				{{/each}}
+			</div>
+		</div>
+		<!-- <input type="submit" value="保存" class="button adopteInfo" /> -->
+		{{/if}}
+	</div>
+</script>
+<script type="text/template" id="xx_task_list">
+	<div style="width:460px;">
+		<table>
+			<tr>
+				<td>
+					<form id="task_adopt_form">
+						<div id="qd-distribution-tab0" class="divied-type" style="max-height: 300px;overflow-y: auto;text-align: left;">
+							{{each data item index}}
+							<div>
+								<input type="radio" name="managerId" value="{{item.id}}" data-name="{{item.name}}" class="managerId" />
+								<span>{{item.name}}</span>
+								<span>
+                                {{each item.operatorProvinceVoList temp i}}
+                                     - {{temp.provinceName}},
+                                {{/each}}
+                                </span>
+							</div>
+							{{/each}}
+						</div>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+</script>
+<script type="text/javascript">
+	seajs.use('modules/xinxiyuan/task/task-list-detailTrcaing', function(TaskListDetailTrcaing) {
+		var taskListDetailTrcaing = new TaskListDetailTrcaing();
+		taskListDetailTrcaing.init();
+	});
+</script>

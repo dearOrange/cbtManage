@@ -18,13 +18,18 @@ var versionDate = {
 var ROOTURL = '';/*项目根目录名称 谨慎修改*/
 var BaseUrl = '/src/js/';
 var REQUESTROOT = '/adminServer'; /*服务器默认为/manager 当本地开发时切换为域名映射*/
+var serverHost = '';
+var viewImageRoot = 'http://oka19npup.bkt.clouddn.com/';
+
 if(window.location.host.indexOf('.cbt.com')!==-1){
-    REQUESTROOT = 'http://qa.cbt.com:8080' + REQUESTROOT;
+    REQUESTROOT = 'http://javadev:8080' + REQUESTROOT;
+    serverHost = 'http://javadev:8080';
+    viewImageRoot = 'http://p0znn0pti.bkt.clouddn.com/';
 }
-if(window.location.host.indexOf('192.168.2.181')!==-1){
-    ROOTURL = '/admin';
-    BaseUrl = ROOTURL + BaseUrl;
+if(window.location.host.indexOf('javadev')!==-1){
+    viewImageRoot = 'http://p0znn0pti.bkt.clouddn.com/';
 }
+
 seajs.config({
     base: BaseUrl,
     charset: 'utf-8',
@@ -34,13 +39,12 @@ seajs.config({
         'art-dialog': 'plugin/artDialog/dialog',
         'template': 'lib/template/4.0.0/template-web',
         'common': 'common/common',
-        'jsencrypt': 'common/jsencrypt.min',
         'mock': 'lib/Mock/mock',
         'main': 'common/main'
     },
     preload: ['jquery','mock'],
     map: [
-        ['.js', '.js?v='+versionDate.year+versionDate.month+versionDate.day],
-        ['.html', '.html?v='+versionDate.year+versionDate.month+versionDate.day]
+        ['.js', '.js?v='+Math.random()],
+        ['.html', '.html?v='+Math.random()]
     ]
 });

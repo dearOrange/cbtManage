@@ -1,0 +1,125 @@
+<div class="dataContent creditorOrderContent">
+	
+</div>
+<script type="text/template" id="creditor_detail_template">
+    <div class="dialog-width public_css">
+        <p class="pull-left">
+            任务详情
+        </p>
+        <a href="javascript:;" class="button gobackPage goBack">返回</a>
+        <p class="showTaskState pull-right">{{menuState(data.state)}}</p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <p>基本信息</p><br />
+        
+        <table class="taskTable">
+        	<tr>
+        		<th>任务号：</th>
+        		<td>{{data.taskNo}}</td>
+        		<th>任务类型：</th>
+        		<td>{{menuState(data.entrust)}}</td>
+        		<th>任务发起：</th>
+        		<td>{{data.upstreamName}}</td>
+        	</tr>
+        	<tr>
+        		<th>车牌号：</th>
+        		<td>{{data.carNumber}}</td>
+        		<th>车型：</th>
+        		<td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+        		<th>颜色：</th>
+        		<td>{{data.carColor}}</td>
+        	</tr>
+        	<tr>
+        		<th>车辆识别号：</th>
+        		<td>{{data.carId}}</td>
+        		<th>车辆发动机号：</th>
+        		<td>{{data.engineId}}</td>
+        		<th>任务发布时间：</th>
+        		<td>{{data.createAt}}</td>
+        	</tr>
+        </table>
+        <div class="remark">{{data.remark}}</div>
+        <div class="imgRecord">
+            {{each data.attachmentVoList data index}}
+            <img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" class="preview-img hand"/>
+            {{/each}}
+        </div>
+        <div class="upmainfile">
+            <div>
+                <span>违章信息</span>
+            </div>
+            <div>
+                <table class="pull-left" style="width: 90%;">
+                    <thead>
+                        <th>车牌号</th>
+                        <th>信息描述</th>
+                        <th>信息修复地点</th>
+                        <th>信息修复城市</th>
+                        <th>发生时间</th>
+                    </thead>
+                    <tbody id="distribution-illegalList-container"></tbody>
+                </table>
+                <div class="page-box pagination" id="page_container"></div>
+            </div>
+        </div>
+        <div class="mainfile">
+        	<p>线索信息</p>
+        	{{each data.traceVoList data index}}
+        	<div class="upimg">
+        		<dl>
+					<dt>
+						<div class="upfile-item">
+							<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
+						</div>
+	    			</dt>
+					<dd>全车背景照</dd>
+				</dl>
+        	</div>
+        	<div style="margin:10px 0;">
+        		<p>线索上传时间：{{data.clueUploadAt}}</p>
+        		<p>车架号后6位：{{data.carId}}</p>
+        		<p>定位：{{data.location}}</p>
+        	</div>
+        	{{/each}}
+        </div>
+        <div class="hopeprice">
+        	<p>预估费用</p>
+        	{{each data.traceVoList data index}}
+        	<div>
+        		<label>意愿处置费用:</label>
+        		<span>{{data.estimatedCost}}</span>
+        	</div>
+        	{{/each}}
+        	<div>
+        		<label>处置费用预估:</label>
+        		<span>{{data.estimatedPrice}}</span>
+        	</div>
+        	<div>
+        		<label>最终确认费用:</label>
+        		<span>{{data.finalPrice}}</span>
+        	</div>
+        	{{if data.state == 'hunterReceive'}}
+        	<a class="button search-button isSure" href="javascript:;">平台收车</a>
+        	{{/if}}
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="distribution-illegalList-template">
+    {{each list item index}}
+    <tr>
+        <td>{{item.carNumber}}</td>
+        <td>{{item.desc}}</td>
+        <td>{{item.site}}</td>
+        <td>{{item.city}}</td>
+        <td>{{item.occurAt}}</td>
+    </tr>
+    {{/each}}
+</script>
+
+<script type="text/javascript">
+seajs.use('modules/qudao/creditor/creditor-order-detail', function(CreditorOrderDetail) {
+    var CreditorOrderDetail = new CreditorOrderDetail();
+    CreditorOrderDetail.init();
+});
+</script>

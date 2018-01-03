@@ -18,7 +18,7 @@ define(function(require, exports, module) {
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
-                    data.viewImgRoot = jh.arguments.viewImgRoot;
+                    data.viewImgRoot = jh.config.viewImgRoot;
                     var contentHtml = jh.utils.template('upstreamsList_content_template', data);
                     return contentHtml;
                 }

@@ -1,0 +1,147 @@
+<div class="dataContent clueBack-detail">
+	
+</div>
+<script type="text/template" id="clueBack_detail_template">
+    <div class="dialog-width public_css">
+        <p class="pull-left">
+            线索详情
+        </p>
+        <a href="javascript:;" class="button gobackPage goBack">返回</a>
+        <p class="showTaskState pull-right">{{menuState(data.state)}}</p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <p>基本信息</p><br />
+        <table class="taskTable">
+        	<tr>
+        		<th>任务号：</th>
+        		<td>{{data.taskNo}}</td>
+        		<th>任务类型：</th>
+        		<td>{{menuState(data.entrust)}}</td>
+        		<th>任务发起：</th>
+        		<td>{{data.upstreamName}}</td>
+        	</tr>
+        	<tr>
+        		<th>车牌号：</th>
+        		<td>{{data.carNumber}}</td>
+        		<th>车型：</th>
+        		<td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+        		<th>颜色：</th>
+        		<td>{{data.carColor}}</td>
+        	</tr>
+        	<tr>
+        		<th>车辆识别号：</th>
+        		<td>{{data.carId}}</td>
+        		<th>车辆发动机号：</th>
+        		<td>{{data.engineId}}</td>
+        		<th>任务发布时间：</th>
+        		<td>{{data.createAt}}</td>
+        	</tr>
+        </table>
+        <div class="remark">{{data.remark}}</div>
+        <div class="imgRecord">
+            {{each data.attachmentVoList item index}}
+            <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
+            {{/each}}
+        </div>
+        <div class="mainfile">
+        	<p>线索信息</p>
+        	{{each data.traceVoList data index}}
+        	<div style="margin:10px 0;">线索上传时间：{{data.createAt}}</div>
+        	{{/each}}
+        </div>
+        {{if data.state == "unvaluation"}}
+        <div class="hopeprice">
+        	<p>预估费用</p>
+        	<div>
+                <label>预估处置费用:</label>
+                <span>{{if data.estimatedPrice}}{{data.estimatedPrice}}{{else}}暂无费用{{/if}}</span>
+            </div>
+        </div>
+        {{/if}}
+        {{if data.state == "unconfirmed"}}
+        <div class="hopeprice">
+        	<p>确认费用</p>
+        	<div>
+                <label>最终处置费用:</label>
+                <span>{{if data.finalPrice}}{{data.finalPrice}}{{else}}暂无费用{{/if}}</span>
+            </div>
+            <div>
+                <label>其中受托人费用:</label>
+                <span>{{if data.baileePrice}}{{data.baileePrice}}{{else}}暂无费用{{/if}}</span>
+            </div>
+            <div>
+                <label>资产查找费:</label>
+                <span>{{if data.assetPrice}}{{data.assetPrice}}{{else}}暂无费用{{/if}}</span>
+            </div>
+            <div>
+                <label>第三方处置清收费:</label>
+                <span>{{if data.thirdpartyPrice}}{{data.thirdpartyPrice}}{{else}}暂无费用{{/if}}</span>
+            </div>
+        </div>
+        {{/if}}
+        <div class="clearfix"></div>
+		<p>联系小计</p><br />
+		<div class="upmainfile onlineSubtotal">
+			{{if data.state == "unvaluation"}}
+			<ol>
+				<li class="addMoneytotal hand">+添加议价小计</li>
+			</ol>
+			{{/if}}
+			<table>
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>议价内容</th>
+						<th>联系对象</th>
+						<th>联系方式</th>
+						<th>联系时间</th>
+					</tr>
+				</thead>
+				<tbody id="moneytotal_container">
+					
+				</tbody>
+			</table>
+			<div class="page-box pagination" id="page_container"></div>
+		</div>
+    </div>
+</script>
+<script type="text/template" id="addMoneytotal_template">
+	{{ each list item index }}
+    <tr class="trData">
+        <td>{{index+1}}</td>
+        <td>{{item.content}}</td>
+        <td>{{item.contacts}}</td>
+        <td>{{item.contactPhone}}</td>
+        <td>{{item.createAt}}</td>
+    </tr>
+    {{/each}}
+</script>
+<script type="text/template" id="clue_addSubtotal_template">
+	<div class="officer-width">
+		<p class="pull-left">
+			添加议价小计
+		</p>
+		<div class="clearfix"></div>
+		<hr /><br />
+		<div class="addContent customerType">
+			<div>
+				<label>联系对象</label>
+				<input type="text" maxlength="11" placeholder="请输入联系对象" id="subPerson" />
+			</div>
+			<div>
+				<label>联系方式</label>
+				<input type="text" maxlength="11" placeholder="请输入联系方式" id="subStyle" />
+			</div>
+			<div>
+				<label>联系内容</label>
+				<textarea name="" maxlength="40" placeholder="请输入联系内容" id="subContent"></textarea>
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/javascript">
+seajs.use('modules/yunying/clue/clue-back-detail', function(ClueBackDetail) {
+    var ClueBackDetail = new ClueBackDetail();
+    ClueBackDetail.init();
+});
+</script>

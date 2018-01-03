@@ -1,0 +1,159 @@
+<div class="dataContent financeDetailContent">
+	
+</div>
+<script type="text/template" id="finance_detail_template">
+    <div class="dialog-width public_css">
+        <p class="pull-left">
+            任务详情
+        </p>
+        <a href="javascript:;" class="button gobackPage goBack">返回</a>
+        <p class="showTaskState pull-right">{{menuState(data.state)}}</p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <p>基本信息</p><br />
+        
+        <table class="taskTable">
+        	<tr>
+        		<th>任务号：</th>
+        		<td>{{data.taskNo}}</td>
+        		<th>任务类型：</th>
+        		<td>{{menuState(data.entrust)}}</td>
+        		<th>任务发起：</th>
+        		<td>{{data.upstreamName}}</td>
+        	</tr>
+        	<tr>
+        		<th>车牌号：</th>
+        		<td>{{data.carNumber}}</td>
+        		<th>车型：</th>
+        		<td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+        		<th>颜色：</th>
+        		<td>{{data.carColor}}</td>
+        	</tr>
+        	<tr>
+        		<th>车辆识别号：</th>
+        		<td>{{data.carId}}</td>
+        		<th>车辆发动机号：</th>
+        		<td>{{data.engineId}}</td>
+        		<th>任务发布时间：</th>
+        		<td>{{data.createAt}}</td>
+        	</tr>
+        </table>
+        <div class="remark">{{data.remark}}</div>
+        <div class="imgRecord">
+            {{each data.attachmentVoList data index}}
+            <img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" class="preview-img hand"/>
+            {{/each}}
+        </div>
+        <div class="upmainfile">
+        	<label>债权方最终确认费用：{{data.finalPrice}}</label>
+        	<span></span>
+        </div>
+        <div class="upmainfile" style="border-top:1px dashed #ccc;">
+        	<p style="margin:20px 0;">平台到账确认</p>
+        	<form id="plat-sure-money">
+	        	<table>
+	                <tr>
+	                    <td>交易方式</td>
+	                    <td>
+	                        <select name="payType">
+	                            <option value="1">支付宝</option>
+	                            <option value="2">微信</option>
+	                            <option value="3">现金</option>
+	                        </select>
+	                    </td>
+	                    <td rowspan="5">
+	                    	{{if data.loanerMoneyStatus == "1"}}
+	                        <span>已收款</span>
+	                        {{else}}
+	                        <a class="button platSure">平台确认收到款项</a>
+	                        {{/if}}
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>交易时间</td>
+	                    <td>{{if data.loanerMoneyStatus == "1"}}
+	                    	<span>{{data.loanerFinanceVo.dealTime}}</span>
+	                    	{{else}}
+	                        <input type="text" name="dealTime" value="" id="dealTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'dealTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+	                        {{/if}}
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>打款人</td>
+	                    <td>{{if data.loanerMoneyStatus == "1"}}
+	                    	<span>{{data.loanerFinanceVo.payer}}</span>
+	                    	{{else}}
+	                        <input type="text" name="payer" value="">
+	                        {{/if}}
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>收款人</td>
+	                    <td>{{if data.loanerMoneyStatus == "1"}}
+	                    	<span>{{data.loanerFinanceVo.payee}}</span>
+	                    	{{else}}
+	                        <input type="text" name="payee">
+	                        {{/if}}
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>实收金额</td>
+	                    <td>{{if data.loanerMoneyStatus == "1"}}
+	                    	<span>{{data.loanerFinanceVo.amount}}</span>
+	                    	{{else}}
+	                        <input type="text" name="amount">
+	                        {{/if}}
+	                    </td>
+	                </tr>
+	            </table>
+        	</form>
+        </div>
+        <div class="upmainfile" style="border-top:1px dashed #ccc;">
+        	<table>
+                <tr>
+                    <td>总处置费: {{finalilmoney}}</td>
+                    <td>查找费
+                    	{{if data.infoMoneyStatus == "1"}}
+                    	(已发)
+                    	{{else}}
+                    	(未发)
+                    	{{/if}}
+                    	:{{data.assetPrice}}</td>
+                    <td>清收费{{if data.hunterMoneyStatus == "1"}}
+                    	(已发)
+                    	{{else}}
+                    	(未发)
+                    	{{/if}}
+                    	: {{data.thirdpartyPrice}}</td>
+                    <td rowspan="2">
+                    	{{if data.hunterMoneyStatus == "1" && data.infoMoneyStatus == "1"}}
+                        <span>已放款</span>
+                        {{else}}
+                        <a class="button advanceLoan">提前放款</a>
+                        {{/if}}
+                    </td>
+                </tr>
+                <tr>
+                	<td>发放费用：{{finalsendmoney}}</td>
+                	<td colspan="2"></td>
+                </tr>
+                <tr>
+                	<td>查看债权委托书</td>
+                	<td>{{if data.loanerElecEntrust}}
+				<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.loanerElecEntrust}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}}</td>
+                	<td>查看捕头委托书</td>
+                	<td>
+                		{{if data.hunterElecEntrust}}
+				<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.hunterElecEntrust}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}}
+                	</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+seajs.use('modules/finance/finance-detail', function(FinanceDetail) {
+    var FinanceDetail = new FinanceDetail();
+    FinanceDetail.init();
+});
+</script>

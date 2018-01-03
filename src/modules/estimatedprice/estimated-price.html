@@ -1,0 +1,185 @@
+<div class="dataContent">
+	<!--<div class="search-container">
+        <form id="task-list-form">
+            <table class="common_query textLeft search-content">
+                <tr>
+                    <td>
+                        <label class="label">ID 号：</label>
+                        <input type="text" class="search-input" name="IDNumber">
+                    </td>
+                    <td>
+                        <label class="label">公司全称：</label>
+                        <input type="text" class="search-input" name="componyName">
+                    </td>
+                    <td>
+                    	<button class="searchInfo">查找</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>-->
+    <div class="data-container">
+        <table class="dataShow">
+            <thead>
+                <tr>
+                    <th width="3%">&nbsp;</th>
+                    <th width="4%"><input type="checkbox" /></th>
+                    <th width="8%">任务号</th>
+                    <th width="8%">任务类型</th>
+                    <th width="18%">债权方</th>
+                    <th width="8%">运营经理</th>
+                    <th width="8%">渠道经理</th>
+                    <th width="8%">车牌号</th>
+                    <th width="8%">品牌</th>
+                    <th width="8%">车系</th>
+                    <th width="8%">任务状态</th>
+                    <th width="10%">线索发布时间</th>
+                    <th width="6%">操作</th>
+                </tr>
+                <tr>
+                	<td>1</td>
+                	<td><input type="checkbox" /></td>
+                	<td>RW1154122145</td>
+                	<td>无定位需找+拖</td>
+                	<td>浙江亿众担保有限公司</td>
+                	<td>张三</td>
+                	<td>赵经理</td>
+                	<td>浙A·8GD8K</td>
+                	<td>大众</td>
+                	<td>途观</td>
+                	<td>未估价</td>
+                	<td>2017.05.24 12:23:25</td>
+                	<td><a data-id="1" class="detail button" data-infos="1">详情</a></td>
+                </tr>
+            </thead>
+            <tbody id="order_list_container">
+            </tbody>
+        </table>
+        <div class="page-box pagination" id="page_container"></div>
+    </div>
+</div>
+
+<script type="text/template" id="taskList_content_template">
+    <!--{{ each list item index }}
+    <tr class="trData">
+        <td>1</td>
+        <td>{{item.carColor}}</td>
+        <td>{{item.carBrand}}</td>
+        <td>{{item.carSeries}}</td>
+        <td>{{item.carModel}}</td>
+        <td>{{item.companyName}}</td>
+        <td>{{item.contactPhone}}</td>
+        <td>
+            <ul class="operaitem">
+                <li>
+                    <a data-id="{{item.id}}" class="detail button" data-infos="{{item}}">详情</a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    {{/each}}-->
+</script>
+<script type="text/template" id="task_detail_template">
+    <div class="dialog-width">
+        <p class="pull-left">
+            线索详情
+        </p>
+        <p class="showTaskState pull-right">未估价</p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <p>基本信息</p><br />
+        
+        <ul>
+            <li>任务号：bghbfbf</li>
+            <li>任务类型：dgeg</li>
+            <li>任务发布时间：ehehe</li>
+            <li>车牌号：hhefhfb</li>
+            <li>品牌：getdvghrg</li>
+            <li>车系：kykmgthbf</li>
+            <li>车型：tegvdfgr</li>
+            <li>颜色：tgdfggrgg</li>
+            <li>定位地区：浙江</li>
+            <li>车辆识别号：gegdgrgrb</li>
+            <li>车辆发动机号：jkyfghetg</li>
+        </ul>
+        <div class="remark">备注信息：着放大镜功能国家设立方式</div>
+        <div class="imgRecord">
+        	<span><i>2014年催收记录</i><img src="" alt="图片" class="preview-img hand" /></span>
+        	<span><i>2015年催收记录</i><img src="" alt="图片" class="preview-img hand" /></span>
+        	<span><i>2016年催收记录</i><img src="" alt="图片" class="preview-img hand" /></span>
+        </div>
+        <div class="upmainfile">
+        	<span style="margin:20px 0;">线索提供：二号捕头</span>
+        	<span>2017.05.24  12:23:22</span>
+        	<div class="upimg">
+        		<dl>
+        			<dt><img src="../../img/nopic.png" alt="全车背景照" /></dt>
+        			<dd>全车背景照</dd>
+        		</dl>
+        	</div>
+        </div>
+        <div class="hopeprice evaluePrice" style="border-top:1px dashed #ccc;">
+        	<p>预估费用</p>
+        	<div>
+        		<label>车辆残值估算:</label>
+        		<input type="" name="" id="" value="" />
+        	</div>
+        	<div>
+        		<label>处置费用预估:</label>
+        		<input type="" name="" id="" value="30000" />至<input type="" name="" id="" value="40000" />
+        	</div>
+        	<div class="buttonAnt">
+	        	<a class="pull-right button">保存</a>
+	        </div>
+        </div>
+        <div class="hopeprice evaluePrice" style="border-top:1px dashed #ccc;">
+        	<p>确认费用及打款时间</p>
+        	<div>
+        		<label>最终确认处置费:</label>
+        		<input type="" name="" id="" value="" />
+        	</div>
+        	<div>
+        		<label>其中受托人服务费:</label>
+        		<input type="" name="" id="" value="" />
+        	</div>
+        	<div>
+        		<label>资产查找费:</label>
+        		<input type="" name="" id="" value="" />
+        	</div>
+        	<div>
+        		<label>第三方不良资产处置清收费:</label>
+        		<input type="" name="" id="" value="" />
+        	</div>
+        	<div class="buttonAnt">
+	        	<a class="pull-right button">保存</a>
+	        </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="task_person_template">
+	<div class="allot">
+        <p class="pull-left">
+            分配运营经理
+        </p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <div class="divied-type">
+        	<p class="pull-left" style="margin-top:20px;">运营经理</p>
+        	<select id="officerStar" name="officerStar" class="search-select pull-left" style="margin:10px 20px;">
+                <option value="">李晓晓</option>
+                <option value="">二星</option>
+                <option value="">三星</option>
+            </select>
+        </div>
+        <div class="buttonAnt">
+        	<a class="pull-right button divied-no">取消</a>
+        	<a class="pull-right button divied-sure">确定</a>
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+seajs.use('modules/estimatedprice/estimated-price', function(EstimatedPrice) {
+    var EstimatedPrice = new EstimatedPrice();
+    EstimatedPrice.init();
+});
+</script>

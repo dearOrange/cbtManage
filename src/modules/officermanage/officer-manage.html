@@ -1,0 +1,75 @@
+<div class="dataContent">
+    <div class="search-container">
+        <form id="admin-officerManager-form">
+            <table class="common_query textLeft search-content">
+                <tr>
+                    <td>
+                        <label class="label">业务类型：</label>
+                        <select name="type">
+                        	<option value="">全部</option>
+                            <option value="all">可拖车可找车</option>
+                            <option value="trace">只找车</option>
+                            <option value="recycle">只拖车</option>
+                            <option value="tracerecycle">拖车找车一体</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="label">捕头：</label>
+                        <input type="text" class="search-input" name="downstream" maxlength="20">
+                    </td>
+                    <td>
+                        <input type="submit" value="查询" class="button search-button">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="data-container">
+        <table class="dataShow">
+            <thead>
+                <tr>
+                    <th width="4%">序号</th>
+                    <th width="8%">姓名</th>
+                    <th width="10%">所属公司</th>
+                    <th width="10%">区域</th>
+                    <th width="10%">联系电话</th>
+                    <th width="15%">通过认证时间</th>
+                    <th width="10%">认证状态</th>
+                    <th width="6%">操作</th>
+                </tr>
+            </thead>
+            <tbody id="officer_list_container">
+            </tbody>
+        </table>
+        <div class="page-box pagination" id="page_container"></div>
+    </div>
+</div>
+
+<script type="text/template" id="officerManager_content_template">
+    {{ each list item index }}
+    <tr class="trData">
+        <td>{{index+1}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.company}}</td>
+        <td>{{ each item.area data index }}
+        {{data.provinceName}}
+        {{/each}}</td>
+        <td>{{item.phone}}</td>
+        <td>{{item.passAt}}</td>
+        <td>{{menuState(item.state)}}</td>
+        <td>
+            <ul class="operaitem" style="margin-left:10px;">
+                <li>
+                    <a data-id="{{item.id}}" class="officerDetail button">详情</a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+<script type="text/javascript">
+seajs.use('modules/officermanage/officer-manage', function(OfficerManage) {
+    var OfficerManage = new OfficerManage();
+    OfficerManage.init();
+});
+</script>
