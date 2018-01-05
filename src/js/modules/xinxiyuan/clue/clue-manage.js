@@ -65,7 +65,7 @@ define(function(require, exports, module) {
             }
             var tip = state === 1 ? '通过' : '拒绝';
             jh.utils.alert({
-                content: '确定' + tip + '吗？',
+                content: '确定' + tip + '吗？通过后将给线索上传人员发放5元活动费用',
                 ok: function() {
                     jh.utils.ajax.send({
                         url: '/trace/check',
