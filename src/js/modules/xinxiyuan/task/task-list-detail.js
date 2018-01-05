@@ -150,11 +150,12 @@ define(function(require, exports, module) {
                 })
             });
 
-
             //采纳情报
             $('body').off('click', '.adopteInfo').on('click', '.adopteInfo', function() {
                 var managerId = $(".managerId").filter(":checked");
                 var checkId = $.trim($(".checkId").filter(":checked").val());
+                var downstreamType = $(".checkId").filter(":checked").data('downstream');
+				var type = $(".checkId").filter(":checked").data('type');
                 var carPrice = $.trim($("#salvage").val());
                 var estimatedMinPrice = $.trim($("#minMoney").val());
                 var estimatedMaxPrice = $.trim($("#maxMoney").val());
@@ -176,9 +177,9 @@ define(function(require, exports, module) {
                     });
                     return false;
                 }
-
+				var contentStr = downstreamType === 'trace' && type === 0 ? '确定采纳吗？本条线索为只找车捕头上传，如果采纳将给捕头发放线索费' : '确定采纳吗？';
                 jh.utils.alert({
-                    content: '确定采纳吗？本条线索为只找车捕头上传，如果采纳将给捕头发放线索费',
+                    content: contentStr,
                     ok: function() {
                         var adoptData = {
                             taskId: args.id,
