@@ -68,11 +68,40 @@ define(function(require, exports, module) {
                     $('body').off('click', '.checkId').on('click', '.checkId', function() {
                         var checks = jh.utils.getURLValue().args;
                     })
-
+                    
+                    var str = _this.distributionSheriff(returnData.data);
+                    $('#task_list_distribution').html(str);
                 }
             });
         };
+		
+		this.distributionSheriff = function(arr) {
+            var source = jh.utils.getChannelHtml();
+            var render = jh.utils.template.compile(source);
+            var str = render({ list: arr });
+            return str;
+        };
 
+        this.distribution = function(ids) {
+            var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
+            var opt = {
+                url: '/task/distributeTask',
+                data: {
+                    taskIds: ids
+                },
+                done: function(returnData) {
+                    jh.utils.alert({
+                        content: '任务分配成功！',
+                        ok: function() {
+                            window.history.go(-1);
+                        },
+                        cancel: false
+                    });
+                }
+            };
+            jh.utils.ajax.send(opt);
+        };
+		
         this.registerEvent = function() {
             //审核
             $('body').off('click', '.auditClue').on('click', '.auditClue', function() {
@@ -135,21 +164,21 @@ define(function(require, exports, module) {
                     });
                     return false;
                 }
-                if (!managerId || !$.trim(managerId.val())) {
-                    jh.utils.confirm({
-                        content: '请选择相应渠道经理！'
-                    });
-                    return false;
-                }
                 if (!carPrice || !estimatedMinPrice || !estimatedMaxPrice) {
                     jh.utils.confirm({
                         content: '请预估费用！'
                     });
                     return false;
                 }
+                if (!managerId || !$.trim(managerId.val())) {
+                    jh.utils.confirm({
+                        content: '请选择相应渠道经理！'
+                    });
+                    return false;
+                }
 
                 jh.utils.alert({
-                    content: '确定采纳吗？',
+                    content: '确定采纳吗？本条线索为只找车捕头上传，如果采纳将给捕头发放线索费',
                     ok: function() {
                         var adoptData = {
                             taskId: args.id,
@@ -199,6 +228,49 @@ define(function(require, exports, module) {
                 });
 
 
+            });
+            
+            //分配渠道
+            $('body').off('click', '.clueInfo').on('click', '.clueInfo', function() {
+                var me = $(this);
+                var ids = '',
+                    tab, opt, qdId, qdName;
+
+                if (me.hasClass('disabled')) {
+                    return false;
+                }
+                me.addClass('disabled');
+
+                opt = {
+                    url: '/task/distributeTask',
+                    data: {
+                        taskIds: args.id
+                    },
+                    done: function(returnData) {
+                        jh.utils.alert({
+                            content: '任务分配成功！',
+                            ok: function(){
+                                window.location.reload();
+                            },
+                            cancel: false
+                        });
+                        me.removeClass('disabled');
+                    },
+                    fail: function() {
+                        me.removeClass('disabled');
+                    }
+                };
+                tab = $('.qd-distribution-tab li.active').index();
+                if (!tab) {
+                    var radio = $('#qd-distribution-tab0').find(':checked');
+                    opt.data.type = 1;
+                    opt.data.channelManagerId = radio.val();
+                    opt.data.channelManagerName = radio.data('name');
+                } else {
+                    opt.data.type = 2;
+                }
+
+                jh.utils.ajax.send(opt);
             });
         };
     }
