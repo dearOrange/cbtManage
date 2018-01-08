@@ -52,7 +52,7 @@ define(function(require, exports, module) {
             if (_this.roleType === "finance") {
                 _this.requestDate *= 30;
             }
-            if (_this.roleType === 'info' || _this.roleType === 'finance') {
+            if (_this.roleType === 'info' || _this.roleType === 'finance' || _this.roleType === 'infoauditor') {
                 _this.requestInterId = window.setInterval(function() {
                     _this.requestUnReadMessage();
                     if(_this.roleType === 'finance'){
