@@ -1649,7 +1649,7 @@ define(function(require, exports, module) {
                     state = "捕头已接受";
                     break;
                 case "platReceive":
-                    state = "平台已收车";
+                    state = "平台已接收";
                     break;
                 case "upstreamReceive":
                     state = "债权方已收车";

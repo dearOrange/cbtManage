@@ -111,6 +111,11 @@
         {{if data.state == "unconfirmed"|| data.state ==="unvaluation"}}
         <p>议价小计</p><br />
 		<div class="upmainfile onlineSubtotal">
+			{{if data.state == "unvaluation"}}
+			<ol>
+				<li class="addMoneytotal hand">+添加议价小计</li>
+			</ol>
+			{{/if}}
 			<table>
 				<thead>
 					<tr>
@@ -170,6 +175,29 @@
         	<input type="radio" name="audit" value="2" class="through" />审核不通过
         </div>
     </div>
+</script>
+<script type="text/template" id="clueaudit_addSubtotal_template">
+	<div class="officer-width">
+		<p class="pull-left">
+			添加议价小计
+		</p>
+		<div class="clearfix"></div>
+		<hr /><br />
+		<div class="addContent customerType">
+			<div>
+				<label>联系对象</label>
+				<input type="text" maxlength="11" placeholder="请输入联系对象" id="subPerson" />
+			</div>
+			<div>
+				<label>联系方式</label>
+				<input type="text" maxlength="11" placeholder="请输入联系方式" id="subStyle" />
+			</div>
+			<div>
+				<label>联系内容</label>
+				<textarea name="" maxlength="40" placeholder="请输入联系内容" id="subContent"></textarea>
+			</div>
+		</div>
+	</div>
 </script>
 <script type="text/javascript">
 seajs.use('modules/clueaudit/clue-audit-detail', function(ClueAuditDetail) {
