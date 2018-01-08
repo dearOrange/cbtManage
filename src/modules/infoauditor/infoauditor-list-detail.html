@@ -1,0 +1,166 @@
+<div class="dataContent taskListContent">
+
+</div>
+<script type="text/template" id="infoauditor_detail_template">
+	<div class="dialog-width public_css">
+		<p class="pull-left">
+			任务详情
+		</p>
+		<a href="javascript:;" class="button gobackPage goBack">返回</a>
+		<p class="showTaskState pull-right">{{menuState(data.state)}}</p>
+		<div class="clearfix"></div>
+		<hr /><br />
+		<p>基本信息</p><br />
+		<table class="taskTable">
+        	<tr>
+        		<th>任务号：</th>
+        		<td>{{data.taskNo}}</td>
+        		<th>任务类型：</th>
+        		<td>{{menuState(data.entrust)}}</td>
+        		<th>任务发起：</th>
+        		<td>{{data.upstreamName}}</td>
+        	</tr>
+        	<tr>
+        		<th>车牌号：</th>
+        		<td>{{data.carNumber}}</td>
+        		<th>车型：</th>
+        		<td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+        		<th>颜色：</th>
+        		<td>{{data.carColor}}</td>
+        	</tr>
+        	<tr>
+        		<th>车辆识别号：</th>
+        		<td>{{data.carId}}</td>
+        		<th>车辆发动机号：</th>
+        		<td>{{data.engineId}}</td>
+        		<th>任务发布时间：</th>
+        		<td>{{data.createAt}}</td>
+        	</tr>
+        </table>
+		<div class="remark">{{data.remark}}</div>
+		<div class="imgRecord">
+			<p>催收资料</p>
+			{{each data.attachmentVoList data index}}
+			<img class="preview-img hand" src="{{viewImgRoot}}{{data.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" />
+			{{/each}}
+		</div>
+        <div class="upmainfile">
+            <div>
+                <span>违章信息</span>
+            </div>
+            <div>
+                <table class="pull-left" style="width: 90%;">
+                    <thead>
+                        <th>车牌号</th>
+                        <th>内容</th>
+                        <th>修复地点</th>
+                        <th>修复城市</th>
+                        <th>信息修复时间</th>
+                    </thead>
+                    <tbody id="task_detailFinished_wzInfoList"></tbody>
+                </table>
+                <div class="page-box pagination" id="page_container"></div>
+            </div>
+        </div>
+		<div class="mainfile">
+			<p>线索信息</p>
+			{{ each data.traceVoList data index }}
+			<div class="mt25">
+				<div class="upimg pull-left">
+					<dl>
+						<dt>
+							<div class="upfile-item">
+								<img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}" onerror="this.src='/src/img/nopic.png'">
+							</div>
+		    			</dt>
+						<dd>全车背景照</dd>
+					</dl>
+				</div>
+				<div class="pull-left ml10">
+					<p>{{data.name}}----{{menuState(data.downstreamType)}}</p>
+					<p>线索上传时间：{{data.createAt}}</p>
+					<p>gprs信息：{{data.location}}</p>
+					<p>定位：{{data.location}}</p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			{{/each}}
+		</div>
+		<div class="hopeprice">
+			<p>费用</p>
+			<table style="width: 400px;">
+				<tr>
+					<td style="width: 160px;text-align: right;">最终处置费：</td>
+					<td style="text-align: center;">{{data.finalPrice}}</td>
+				</tr>
+				<tr>
+					<td style="width: 160px;text-align: right;">其中受托人费用：</td>
+					<td style="text-align: center;">{{data.baileePrice}}</td>
+				</tr>
+				<tr>
+					<td style="width: 160px;text-align: right;">资产查找费：</td>
+					<td style="text-align: center;">{{data.assetPrice}}</td>
+				</tr>
+				<tr>
+					<td style="width: 160px;text-align: right;">第三方处置请收费：</td>
+					<td style="text-align: center;">{{data.thirdpartyPrice}}</td>
+				</tr>
+			</table>
+		</div>
+		<div class="mainfile">
+			<p>议价小计</p>
+			<div class="upmainfile onlineSubtotal">
+				<table>
+					<thead>
+						<tr>
+							<th>&nbsp;</th>
+							<th>议价内容</th>
+							<th>联系对象</th>
+							<th>联系方式</th>
+							<th>联系时间</th>
+						</tr>
+					</thead>
+					<tbody id="infoauditor_detailFinished_yjxjContent"></tbody>
+				</table>
+				<div class="page-box pagination" id="page_container"></div>
+			</div>
+		</div>
+		<div class="upmainfile">
+			<p>凭证</p>
+			<div class="showImg">
+				{{each data.voucherVoList data index}}
+				<img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}" onerror="this.src='/src/img/nopic.png'" class="hand preview-img ml10" /> 
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/template" id="infoauditor_detailFinished_wzInfoTemplate">
+    {{each list item index}}
+    <tr>
+    	<td>{{item.carNumber}}</td>
+        <td>{{item.desc}}</td>
+        <td>{{item.site}}</td>
+        <td>{{item.city}}</td>
+        <td>{{item.occurAt}}</td>
+    </tr>
+    {{/each}}
+</script>
+
+<script type="text/template" id="infoauditor_detailFinished_yjxjTemplate">
+	{{ each list item index }}
+    <tr class="trData">
+        <td>{{index+1}}</td>
+        <td>{{item.content}}</td>
+        <td>{{item.contacts}}</td>
+        <td>{{item.contactPhone}}</td>
+        <td>{{item.createAt}}</td>
+    </tr>
+    {{/each}}
+</script>
+<script type="text/javascript">
+	seajs.use('modules/infoauditor/infoauditor-list-detail', function(InfoauditorListDetail) {
+		var InfoauditorListDetail = new InfoauditorListDetail();
+		InfoauditorListDetail.init();
+	});
+</script>

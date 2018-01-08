@@ -105,6 +105,35 @@ define(function(require, exports, module) {
                     cancel: true
                 })
             });
+            
+            //添加议价小计
+            $('body').off('click', '.addMoneytotal').on('click', '.addMoneytotal', function() {
+                var addStr = jh.utils.template('clueaudit_addSubtotal_template', {});
+                jh.utils.alert({
+                    content: addStr,
+                    ok: function() {
+                        jh.utils.ajax.send({
+                            url: '/record/addBargain',
+                            data: {
+                                content: $('#subContent').val(),
+                                contacts: $('#subPerson').val(),
+                                contactPhone: $('#subStyle').val(),
+                                taskId: args.id
+                            },
+                            done: function(returnData) {
+                            	jh.utils.alert({
+                            		content: '添加议价小计成功！',
+                            		ok:function(){
+                            			_this.initLinkList();
+                            		},
+                            		cancel:false
+                            	});
+                                
+                            }
+                        });
+                    }
+                });
+            });
         };
     }
     module.exports = ClueAuditDetail;
