@@ -124,7 +124,7 @@ define(function(require, exports, module) {
                             	jh.utils.alert({
                             		content: '添加议价小计成功！',
                             		ok:function(){
-                            			_this.initLinkList();
+                            			_this.initYjList();
                             		},
                             		cancel:false
                             	});

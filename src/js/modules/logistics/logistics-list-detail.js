@@ -69,9 +69,9 @@ define(function(require, exports, module) {
 
         this.initDetail = function() {
             jh.utils.ajax.send({
-                url: '/withdraw/detail',
+                url: '/logistics/detail',
                 data: {
-                    drawId: args.id
+                    id: args.id
                 },
                 done: function(returnData) {
                     var html = jh.utils.template('logistics_detail_template', returnData);

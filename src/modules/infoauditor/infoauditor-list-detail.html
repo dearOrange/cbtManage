@@ -149,7 +149,7 @@
 
 <script type="text/template" id="infoauditor_detailFinished_yjxjTemplate">
 	{{ each list item index }}
-    <tr class="trData">
+    <tr class="{{if item.isSelf === 0}}grey{{/if}}">
         <td>{{index+1}}</td>
         <td>{{item.content}}</td>
         <td>{{item.contacts}}</td>
