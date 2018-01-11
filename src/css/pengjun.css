@@ -281,3 +281,7 @@ p.closeStatus {
 	display:inline-block;
 	width:58px;
 }
+
+.grey {
+	background:gray;
+}
