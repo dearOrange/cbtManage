@@ -1,0 +1,84 @@
+<div class="dataContent">
+    <div class="search-container">
+        <form id="logistics-list-form">
+            <table class="common_query textLeft search-content">
+                <tr>
+                    <td>
+                        <label class="label">捕头：</label>
+                        <input type="text" class="search-input" name="downstream" maxlength="20">
+                    </td>
+                    <td>
+                        <label class="label">业务类型：</label>
+                        <select name="status">
+                        	<option value="">全部</option>
+                            <option value="new">未接单</option>
+                            <option value="accept">已接单</option>
+                            <option value="refuse">已拒单</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="submit" value="查询" class="button search-button">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="data-container">
+        <table class="dataShow">
+            <thead>
+                <tr>
+                    <th width="5%">序号</th>
+                    <th width="8%">捕头</th>
+                    <th width="10%">联系电话</th>
+                    <th width="15%">运输物流单号</th>
+                    <th width="8%">起点城市</th>
+                    <th width="8%">重点城市</th>
+                    <th width="10%">发车时间</th>
+                    <th width="10%">提交时间</th>
+                    <th width="8%">状态</th>
+                    <th width="6%">操作</th>
+                </tr>
+            </thead>
+            <tbody id="logistics_list_container">
+            </tbody>
+        </table>
+        <div class="page-box pagination" id="page_container"></div>
+    </div>
+</div>
+
+<script type="text/template" id="logisticsList_content_template">
+    {{ each list item index }}
+    <tr class="trData">
+        <td>{{index+1}}</td>
+        <td>{{item.downstream}}</td>
+        <td>{{item.downstreamPhone}}</td>
+        <td>{{item.logisticsNumber}}</td>
+        <td>{{item.startCity}}</td>
+        <td>{{item.endCity}}</td>
+        <td>{{item.createAt}}</td>
+        <td>{{item.departAt}}</td>
+        {{if item.status === "new"}}
+        <td>未接单</td>
+        {{/if}}
+        {{if item.status === "accept"}}
+        <td>已接单</td>
+        {{/if}}
+        {{if item.status === "refuse"}}
+        <td>已拒单</td>
+        {{/if}}
+        <td>
+            <ul class="operaitem" style="margin-left:10px;">
+                <li>
+                    <a data-id="{{item.id}}" class="logisticsDetail button">详情</a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+<script type="text/javascript">
+seajs.use('modules/logistics/logistics-list', function(LogisticsList) {
+    var LogisticsList = new LogisticsList();
+    LogisticsList.init();
+});
+</script>

@@ -1,0 +1,50 @@
+<div class="dataContent logisticsListDetail">
+
+</div>
+
+<script type="text/template" id="logistics_detail_template">
+	<div class="dialog-width noTable">
+		<p class="pull-left">
+			物流运输详情
+		</p>
+		<a href="javascript:;" class="button gobackPage goBack">返回</a>
+		{{if data.state === "new"}}<p class="showTaskState pull-right">未接单</p>{{/if}}
+		{{if data.state === "accept"}}<p class="showTaskState pull-right">已接单</p>{{/if}}
+		{{if data.state === "refuse"}}<p class="showTaskState pull-right">已拒单</p>{{/if}}
+		<div class="clearfix"></div>
+		<hr />
+		<p>基本信息</p>
+		<table>
+			<tr>
+				<th>捕头</th>
+				<td>{{data.downStreamVo.phone}}</td>
+				<th>联系方式</th>
+				<td>{{data.downStreamVo.phone}}</td>
+			</tr>
+			<tr>
+				<th>提交时间</th>
+				<td colspan="3">{{data.downStreamVo.linkman}}</td>
+			</tr>
+		</table>
+		<p>物流运输信息</p>
+		<table>
+			<tr>
+				<td>起点城市：{{data.flow}} —— —— 终点城市：{{data.flow}}</td>
+			</tr>
+			<tr>
+				<td>捕头要求发车时间{{data.amount}}</td>
+			</tr>
+		</table>
+		{{if data.state === "new"}}
+		<a href="javascript:;" class="button acceptBill">接单</a>
+		<a href="javascript:;" class="button refuseBill">拒单</a>
+		{{/if}}
+	</div>
+</script>
+
+<script type="text/javascript">
+	seajs.use('modules/logistics/logistics-list-detail', function(LogisticsListDetail) {
+		var LogisticsListDetail = new LogisticsListDetail();
+		LogisticsListDetail.init();
+	});
+</script>
