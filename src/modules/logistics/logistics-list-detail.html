@@ -8,34 +8,34 @@
 			物流运输详情
 		</p>
 		<a href="javascript:;" class="button gobackPage goBack">返回</a>
-		{{if data.state === "new"}}<p class="showTaskState pull-right">未接单</p>{{/if}}
-		{{if data.state === "accept"}}<p class="showTaskState pull-right">已接单</p>{{/if}}
-		{{if data.state === "refuse"}}<p class="showTaskState pull-right">已拒单</p>{{/if}}
+		{{if data.status === "new"}}<p class="showTaskState pull-right">未接单</p>{{/if}}
+		{{if data.status === "accept"}}<p class="showTaskState pull-right">已接单</p>{{/if}}
+		{{if data.status === "refuse"}}<p class="showTaskState pull-right">已拒单</p>{{/if}}
 		<div class="clearfix"></div>
 		<hr />
 		<p>基本信息</p>
 		<table>
 			<tr>
 				<th>捕头</th>
-				<td>{{data.downStreamVo.phone}}</td>
+				<td>{{data.downstream}}</td>
 				<th>联系方式</th>
-				<td>{{data.downStreamVo.phone}}</td>
+				<td>{{data.downstreamPhone}}</td>
 			</tr>
 			<tr>
 				<th>提交时间</th>
-				<td colspan="3">{{data.downStreamVo.linkman}}</td>
+				<td colspan="3">{{data.createAt}}</td>
 			</tr>
 		</table>
 		<p>物流运输信息</p>
 		<table>
 			<tr>
-				<td>起点城市：{{data.flow}} —— —— 终点城市：{{data.flow}}</td>
+				<td>起点城市：{{data.startCity}} —— —— 终点城市：{{data.endCity}}</td>
 			</tr>
 			<tr>
-				<td>捕头要求发车时间{{data.amount}}</td>
+				<td>捕头要求发车时间：{{data.departAt}}</td>
 			</tr>
 		</table>
-		{{if data.state === "new"}}
+		{{if data.status === "new"}}
 		<a href="javascript:;" class="button acceptBill">接单</a>
 		<a href="javascript:;" class="button refuseBill">拒单</a>
 		{{/if}}
