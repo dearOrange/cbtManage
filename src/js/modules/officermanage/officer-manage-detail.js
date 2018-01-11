@@ -59,6 +59,8 @@ define(function(require, exports, module) {
                             content: rejectCon,
                             ok: function() {
                                 var throughState = $('.through').filter(':checked').val();
+                                var btn = $('[i-id="ok"]');
+                                $('<img src="/src/img/loading.gif" height="29"/>').insertAfter(btn);
                                 jh.utils.ajax.send({
                                     method: 'post',
                                     url: '/downstreams/channel/approve',
@@ -74,6 +76,9 @@ define(function(require, exports, module) {
                                                 window.location.reload();
                                             }
                                         })
+                                    },
+                                    always:function(){
+                                        btn.siblings('img').remove();
                                     }
 
                                 });
