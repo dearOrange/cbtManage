@@ -53,9 +53,9 @@
                     <thead>
                     	<th>车牌号</th>
                         <th>内容</th>
-                        <th>违章地点</th>
-                        <th>违章城市</th>
-                        <th>违章发生时间</th>
+                        <th>信息修复地点</th>
+                        <th>信息修复城市</th>
+                        <th>信息修复时间</th>
                     </thead>
                     <tbody id="distribution-illegalList-container"></tbody>
                 </table>
@@ -96,17 +96,6 @@
         		<span>{{data.estimatedCost}}</span>
         		{{/each}}
         	</div>
-        	{{if data.state === 'unconfirmed'}}
-            <p>确认费用</p>
-            <div>
-                <label>资产查找费:</label>
-                <span>{{data.assetPrice}}</span>
-            </div>
-            <div>
-                <label>第三方处置清收费:</label>
-                <span>{{data.thirdpartyPrice}}</span>
-            </div>
-            {{/if}}
         </div>
         {{if data.state == "unconfirmed"|| data.state ==="unvaluation"}}
         <p>议价小计</p><br />

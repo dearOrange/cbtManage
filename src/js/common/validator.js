@@ -108,6 +108,10 @@ define(function(require, exports, module) {
         var regx = /^[a-zA-Z]+$/;
         return this.optional(element) || (regx.test(value));
     }, "只能输入字母");
+    jQuery.validator.addMethod("carNumberReg", function(value, element) {
+        var regx = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/;
+        return this.optional(element) || (regx.test(value));
+    }, "请输入正确车牌号");
     jQuery.validator.addMethod("businessLiNo", function(value, element) {
         var regex1 = /^\d{13}$|^\d{18}|^[a-zA-Z]{18}|^[0-9a-zA-Z]{18}$/;
         var regex2 = /^\d{14}([0-9]|X|x)$/;

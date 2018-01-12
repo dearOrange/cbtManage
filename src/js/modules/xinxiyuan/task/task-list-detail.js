@@ -68,38 +68,10 @@ define(function(require, exports, module) {
                     $('body').off('click', '.checkId').on('click', '.checkId', function() {
                         var checks = jh.utils.getURLValue().args;
                     })
-                    
                 }
             });
         };
-		
-		this.distributionSheriff = function(arr) {
-            var source = jh.utils.getChannelHtml();
-            var render = jh.utils.template.compile(source);
-            var str = render({ list: arr });
-            return str;
-        };
 
-        this.distribution = function(ids) {
-            var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value');
-            var opt = {
-                url: '/task/distributeTask',
-                data: {
-                    taskIds: ids
-                },
-                done: function(returnData) {
-                    jh.utils.alert({
-                        content: '任务分配成功！',
-                        ok: function() {
-                            window.history.go(-1);
-                        },
-                        cancel: false
-                    });
-                }
-            };
-            jh.utils.ajax.send(opt);
-        };
-		
         this.registerEvent = function() {
             //审核
             $('body').off('click', '.auditClue').on('click', '.auditClue', function() {
@@ -148,12 +120,11 @@ define(function(require, exports, module) {
                 })
             });
 
+
             //采纳情报
             $('body').off('click', '.adopteInfo').on('click', '.adopteInfo', function() {
                 var managerId = $(".managerId").filter(":checked");
                 var checkId = $.trim($(".checkId").filter(":checked").val());
-                var downstreamType = $(".checkId").filter(":checked").data('downstream');
-				var type = $(".checkId").filter(":checked").data('type');
                 var carPrice = $.trim($("#salvage").val());
                 var estimatedMinPrice = $.trim($("#minMoney").val());
                 var estimatedMaxPrice = $.trim($("#maxMoney").val());
@@ -163,21 +134,21 @@ define(function(require, exports, module) {
                     });
                     return false;
                 }
-                if (!carPrice || !estimatedMinPrice || !estimatedMaxPrice) {
-                    jh.utils.confirm({
-                        content: '请预估费用！'
-                    });
-                    return false;
-                }
                 if (!managerId || !$.trim(managerId.val())) {
                     jh.utils.confirm({
                         content: '请选择相应渠道经理！'
                     });
                     return false;
                 }
-				var contentStr = downstreamType === 'trace' && type === 0 ? '确定采纳吗？本条线索为只找车捕头上传，如果采纳将给捕头发放线索费' : '确定采纳吗？';
+                if (!carPrice || !estimatedMinPrice || !estimatedMaxPrice) {
+                    jh.utils.confirm({
+                        content: '请预估费用！'
+                    });
+                    return false;
+                }
+
                 jh.utils.alert({
-                    content: contentStr,
+                    content: '确定采纳吗？',
                     ok: function() {
                         var adoptData = {
                             taskId: args.id,
