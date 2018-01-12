@@ -69,8 +69,6 @@ define(function(require, exports, module) {
                         var checks = jh.utils.getURLValue().args;
                     })
                     
-                    var str = _this.distributionSheriff(returnData.data);
-                    $('#task_list_distribution').html(str);
                 }
             });
         };
@@ -234,8 +232,7 @@ define(function(require, exports, module) {
             //分配渠道
             $('body').off('click', '.clueInfo').on('click', '.clueInfo', function() {
                 var me = $(this);
-                var ids = '',
-                    tab, opt, qdId, qdName;
+                var ids = '', opt;
 
                 if (me.hasClass('disabled')) {
                     return false;
@@ -261,16 +258,10 @@ define(function(require, exports, module) {
                         me.removeClass('disabled');
                     }
                 };
-                tab = $('.qd-distribution-tab li.active').index();
-                if (!tab) {
-                    var radio = $('#qd-distribution-tab0').find(':checked');
-                    opt.data.type = 1;
-                    opt.data.channelManagerId = radio.val();
-                    opt.data.channelManagerName = radio.data('name');
-                } else {
-                    opt.data.type = 2;
-                }
-
+                var radio = $('#qd-distribution-tab0').find(':checked');
+                opt.data.type = 1;
+                opt.data.channelManagerId = radio.val();
+                opt.data.channelManagerName = radio.data('name');
                 jh.utils.ajax.send(opt);
             });
         };

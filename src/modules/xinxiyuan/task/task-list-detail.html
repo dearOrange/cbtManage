@@ -105,15 +105,13 @@
 				<input type="text" maxlength="11" class="OnlyPrice" id="minMoney" value="{{data.estimatedMinPrice}}" />至<input type="text" class="OnlyPrice" maxlength="11" id="maxMoney" value="{{data.estimatedMaxPrice}}" />
 			</div>
 		</div>
+		{{/if}}
 		<div class="upmainfile">
 			<p style="margin:20px 0;">分配渠道</p>
 			<div class="task-content">
 
 			</div>
 		</div>
-		{{else}}
-		<div class="upmainfile" id="task_list_distribution"></div>
-		{{/if}}
 		{{if data.state === "clueChecking"}}
 		<input type="submit" value="保存" class="button adopteInfo" />
 		{{else}}
