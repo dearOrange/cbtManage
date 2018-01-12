@@ -8,6 +8,9 @@
 define(function(require, exports, module) {
     function CreditorManageDetail() {
         var _this = this;
+        _this.baileePrice = 0;
+        _this.numPlus = 0;
+        _this.num = 0;
         _this.form = $('#restoration-detail-form');
         var args = jh.utils.getURLValue().args;
 
@@ -16,30 +19,30 @@ define(function(require, exports, module) {
             this.registerEvent();
         };
         this.registerEvent = function(){
-        	var numPlus;
+        	
         	$('body').off('blur', '#baileePrice').on('blur', '#baileePrice', function() {
         		var me = $(this);
-        		var num = parseFloat($.trim($('#finalPrice').val()));
-            	if( !num ){
-        			me.val();
+        		_this.num = parseFloat($.trim($('#finalPrice').val()));
+            	if( !_this.num ){
+        			me.val('');
         		}else{
-        			me.val((num*0.1).toFixed(2));
+        			me.val((_this.num*0.1).toFixed(2));
         		}
-        		numPlus = num - me.val();
-            	 
+        		_this.numPlus = _this.num - me.val();
             });
             
+        	
             $('body').off('blur', '#assetPrice').on('blur', '#assetPrice', function() {
         		var me = $(this);
         		var menum = parseFloat($.trim(me.val()));
             	if( !menum ){
         			$('#thirdpartyPrice').val('');
         		}else{
-        			if (menum < 0) {
-	        			$('#assetPrice').val('');
+        			if (menum < 0 || menum >= _this.numPlus) {
+	        			me.val('');
 	        			$('#thirdpartyPrice').val('');
 	        		}else{
-        				$('#thirdpartyPrice').val(numPlus-menum);
+        				$('#thirdpartyPrice').val(parseFloat(_this.numPlus-menum));
 	        		}
         		}
             	 
@@ -48,13 +51,12 @@ define(function(require, exports, module) {
         		var thme = $(this);
         		var thmenum = parseFloat($.trim(thme.val()));
             	if( !thmenum ){
-        			$('#assetPrice').val('');
+        			thme.val('');
         		}else{
-        			if (thmenum < 0) {
-	        			$('#assetPrice').val('');
-	        			$('#thirdpartyPrice').val('');
+        			if (thmenum < 0 || thmenum >= _this.numPlus) {
+	        			thme.val('');
 	        		}else{
-        				$('#assetPrice').val(numPlus-parseFloat($('#thirdpartyPrice').val()));
+        				$('#assetPrice').val(_this.numPlus-parseFloat(thme.val()));
 	        		}
         		}
             	 
@@ -96,9 +98,15 @@ define(function(require, exports, module) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
                     returnData.taskId = args.id;
-                    returnData.baileePrice = parseFloat(returnData.data.finalPrice)*0.1;
+                    returnData.baileePrice = (parseFloat(returnData.data.finalPrice)*0.1).toFixed(2);
                     var creditorStr = jh.utils.template('restoration_detail_template', returnData);
                     $('.restorationContent').html(creditorStr);
+                    
+                    _this.baileePrice = returnData.baileePrice;
+                    
+                    _this.num = parseFloat($.trim($('#finalPrice').val()));
+                    _this.numPlus = _this.num - $('#baileePrice').val();
+                    
                     _this.initValidator();
                     $('#taskId').val(args.id);
                     var picArr = ['carPhoto', 'carNumberPhoto'];
