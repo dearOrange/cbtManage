@@ -19,7 +19,7 @@ define(function(require, exports, module) {
         	var numPlus;
         	$('body').off('blur', '#baileePrice').on('blur', '#baileePrice', function() {
         		var me = $(this);
-        		var num = $.trim($('#finalPrice').val());
+        		var num = parseFloat($.trim($('#finalPrice').val()));
             	if( !num ){
         			me.val();
         		}else{
@@ -31,21 +31,31 @@ define(function(require, exports, module) {
             
             $('body').off('blur', '#assetPrice').on('blur', '#assetPrice', function() {
         		var me = $(this);
-        		var menum = $.trim(me.val());
+        		var menum = parseFloat($.trim(me.val()));
             	if( !menum ){
-        			$('#thirdpartyPrice').val();
+        			$('#thirdpartyPrice').val('');
         		}else{
-        			$('#thirdpartyPrice').val(numPlus-menum);
+        			if (menum < 0) {
+	        			$('#assetPrice').val('');
+	        			$('#thirdpartyPrice').val('');
+	        		}else{
+        				$('#thirdpartyPrice').val(numPlus-menum);
+	        		}
         		}
             	 
             });
             $('body').off('blur', '#thirdpartyPrice').on('blur', '#thirdpartyPrice', function() {
         		var thme = $(this);
-        		var thmenum = $.trim(thme.val());
+        		var thmenum = parseFloat($.trim(thme.val()));
             	if( !thmenum ){
-        			$('#assetPrice').val();
+        			$('#assetPrice').val('');
         		}else{
-        			$('#thirdpartyPrice').val(numPlus-$('#assetPrice').val());
+        			if (thmenum < 0) {
+	        			$('#assetPrice').val('');
+	        			$('#thirdpartyPrice').val('');
+	        		}else{
+        				$('#assetPrice').val(numPlus-parseFloat($('#thirdpartyPrice').val()));
+	        		}
         		}
             	 
             });

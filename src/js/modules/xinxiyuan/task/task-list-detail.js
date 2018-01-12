@@ -68,7 +68,6 @@ define(function(require, exports, module) {
                     $('body').off('click', '.checkId').on('click', '.checkId', function() {
                         var checks = jh.utils.getURLValue().args;
                     })
-
                 }
             });
         };
@@ -199,6 +198,42 @@ define(function(require, exports, module) {
                 });
 
 
+            });
+            
+            //分配渠道
+            $('body').off('click', '.clueInfo').on('click', '.clueInfo', function() {
+                var me = $(this);
+                var ids = '', opt;
+
+                if (me.hasClass('disabled')) {
+                    return false;
+                }
+                me.addClass('disabled');
+
+                opt = {
+                    url: '/task/distributeTask',
+                    data: {
+                        taskIds: args.id
+                    },
+                    done: function(returnData) {
+                        jh.utils.alert({
+                            content: '任务分配成功！',
+                            ok: function(){
+                                window.location.reload();
+                            },
+                            cancel: false
+                        });
+                        me.removeClass('disabled');
+                    },
+                    fail: function() {
+                        me.removeClass('disabled');
+                    }
+                };
+                var radio = $('#qd-distribution-tab0').find(':checked');
+                opt.data.type = 1;
+                opt.data.channelManagerId = radio.val();
+                opt.data.channelManagerName = radio.data('name');
+                jh.utils.ajax.send(opt);
             });
         };
     }
