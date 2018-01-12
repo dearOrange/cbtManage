@@ -104,7 +104,7 @@
                 {{/if}}
                 {{/if}}
 
-                {{if data.state == 'unconfirmed'}}
+                {{if data.state === 'unconfirmed'}}
                 <p>预估费用</p>
                 <div>
                     <label>车辆残值估算:</label>
@@ -117,19 +117,19 @@
                 <p>确认费用</p>
                 <div>
                     <label>最终处置费用:</label>
-                    <input type="text require" name="finalPrice" maxlength="11" class="OnlyPrice" id="finalPrice" value="{{data.finalPrice}}" required="" />
+                    <input type="text require" name="finalPrice" maxlength="11" class="OnlyPrice finalPrice" id="finalPrice" value="{{data.finalPrice}}" required="" />
                 </div>
                 <div>
                     <label>其中受托人费用:</label>
-                    <input type="text require" name="baileePrice" maxlength="11" class="OnlyPrice" id="baileePrice" value="{{if data.finalPrice}}{{baileePrice}}{{/if}}" required="" />
+                    <input type="text require" name="baileePrice" maxlength="11" class="OnlyPrice baileePrice" id="baileePrice" value="{{if data.finalPrice}}{{baileePrice}}{{/if}}" required="" />
                 </div>
                 <div>
                     <label>资产查找费:</label>
-                    <input type="text require" name="assetPrice" maxlength="11" class="OnlyPrice" id="assetPrice" value="{{data.assetPrice}}" required="" />
+                    <input type="text require" name="assetPrice" maxlength="11" class="OnlyPrice assetPrice" id="assetPrice" value="{{data.assetPrice}}" required="" />
                 </div>
                 <div>
                     <label>第三方处置清收费:</label>
-                    <input type="text require" name="thirdpartyPrice" maxlength="11" class="OnlyPrice" id="thirdpartyPrice" value="{{data.thirdpartyPrice}}" required="" />
+                    <input type="text require" name="thirdpartyPrice" maxlength="11" class="OnlyPrice thirdpartyPrice" id="thirdpartyPrice" value="{{data.thirdpartyPrice}}" required="" />
                 </div>
                 <input type="submit" value="确认" class="button search-button surePrice" style="margin-bottom:40px;width:150px;height:30px;">
                 {{/if}}

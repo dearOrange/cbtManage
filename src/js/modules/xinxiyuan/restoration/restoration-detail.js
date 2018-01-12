@@ -13,7 +13,7 @@ define(function(require, exports, module) {
 
         this.init = function() {
             this.initContent();
-            this.registerEvent();
+//          this.registerEvent();
         };
         this.registerEvent = function(){
         	var numPlus;
@@ -32,16 +32,18 @@ define(function(require, exports, module) {
             $('body').off('blur', '#assetPrice').on('blur', '#assetPrice', function() {
         		var me = $(this);
         		var menum = parseFloat($.trim(me.val()));
+        		console.log(menum,numPlus)
             	if( !menum ){
         			$('#thirdpartyPrice').val('');
         		}else{
-        			if (menum < 0) {
+        			if (menum < 0 || menum >= numPlus) {
 	        			$('#assetPrice').val('');
 	        			$('#thirdpartyPrice').val('');
 	        		}else{
-        				$('#thirdpartyPrice').val(numPlus-menum);
+        				$('#thirdpartyPrice').val(parseFloat(numPlus-menum));
 	        		}
         		}
+        		console.log($('#thirdpartyPrice').val())
             	 
             });
             $('body').off('blur', '#thirdpartyPrice').on('blur', '#thirdpartyPrice', function() {
@@ -50,7 +52,7 @@ define(function(require, exports, module) {
             	if( !thmenum ){
         			$('#assetPrice').val('');
         		}else{
-        			if (thmenum < 0) {
+        			if (thmenum < 0 || thmenum >= numPlus) {
 	        			$('#assetPrice').val('');
 	        			$('#thirdpartyPrice').val('');
 	        		}else{
@@ -99,6 +101,48 @@ define(function(require, exports, module) {
                     returnData.baileePrice = parseFloat(returnData.data.finalPrice)*0.1;
                     var creditorStr = jh.utils.template('restoration_detail_template', returnData);
                     $('.restorationContent').html(creditorStr);
+                    
+                    var numPlus, num = parseFloat($.trim($('#finalPrice').val()));;
+		        	$('body').off('blur', '#baileePrice').on('blur', '#baileePrice', function() {
+		            	if( !num ){
+		        			$('#baileePrice').val('');
+		        		}else{
+		        			$('#baileePrice').val((num*0.1).toFixed(2));
+		        		}
+		            });
+		        	numPlus = num - $('#baileePrice').val();
+		            $('body').off('blur', '#assetPrice').on('blur', '#assetPrice', function() {
+		        		var me = $(this);
+		        		var menum = parseFloat($.trim(me.val()));
+		            	if( !menum ){
+		        			$('#thirdpartyPrice').val('');
+		        		}else{
+		        			if (menum < 0 || menum >= numPlus) {
+			        			$('#assetPrice').val('');
+			        			$('#thirdpartyPrice').val('');
+			        		}else{
+		        				$('#thirdpartyPrice').val(parseFloat(numPlus-menum));
+			        		}
+		        		}
+		        		console.log($('#thirdpartyPrice').val())
+		            	 
+		            });
+		            $('body').off('blur', '#thirdpartyPrice').on('blur', '#thirdpartyPrice', function() {
+		        		var thme = $(this);
+		        		var thmenum = parseFloat($.trim(thme.val()));
+		            	if( !thmenum ){
+		        			$('#assetPrice').val('');
+		        		}else{
+		        			if (thmenum < 0 || thmenum >= numPlus) {
+			        			$('#assetPrice').val('');
+			        			$('#thirdpartyPrice').val('');
+			        		}else{
+		        				$('#assetPrice').val(numPlus-parseFloat($('#thirdpartyPrice').val()));
+			        		}
+		        		}
+		            	 
+		            });
+                    
                     _this.initValidator();
                     $('#taskId').val(args.id);
                     var picArr = ['carPhoto', 'carNumberPhoto'];
