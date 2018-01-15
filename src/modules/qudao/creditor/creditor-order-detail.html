@@ -95,8 +95,12 @@
         		<span>{{data.estimatedPrice}}</span>
         	</div>
         	<div>
-        		<label>最终确认费用:</label>
-        		<span>{{finalPrice}}</span>
+        		<label>资产查找费:</label>
+        		<span>{{data.assetPrice}}</span>
+        	</div>
+        	<div>
+        		<label>第三方处置清收费:</label>
+        		<span>{{data.thirdpartyPrice}}</span>
         	</div>
         	{{if data.state == 'hunterReceive'}}
         	<a class="button search-button isSure" href="javascript:;">平台收车</a>
