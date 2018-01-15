@@ -24,6 +24,7 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
+                    returnData.finalPrice = returnData.data.assetPrice - 0 + returnData.data.thirdpartyPrice;
                     var html = jh.utils.template('creditor_detail_template', returnData);
                     $('.creditorOrderContent').html(html);
                     _this.searchIllegalInfo(); //查询违章信息
