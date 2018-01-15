@@ -52,12 +52,15 @@ define(function(require, exports, module) {
             if (_this.roleType === "finance") {
                 _this.requestDate *= 30;
             }
-            if (_this.roleType === 'info' || _this.roleType === 'finance' || _this.roleType === 'infoauditor') {
+            if (_this.roleType === "channel") {
+                _this.requestDate *= 5;
+            }
+            if (_this.roleType === 'info' || _this.roleType === 'finance' || _this.roleType === 'infoauditor' || _this.roleType === 'channel') {
                 _this.requestInterId = window.setInterval(function() {
                     _this.requestUnReadMessage();
                     if(_this.roleType === 'finance'){
                         _this.requestNewMoneyNum();
-                    }else {
+                    }else if( _this.roleType === 'info' || _this.roleType === 'infoauditor' ){
                     	_this.requestNewTraceNum();
                     }
                 }, _this.requestDate);

@@ -136,6 +136,8 @@ define(function(require, exports, module) {
                     jh.utils.load('/src/modules/xinxiyuan/clue/clue-manage');
                 } else if (_this.roleType === 'finance') {
                     jh.utils.load('/src/modules/sendMoney/sendMoney-list');
+                }else if(_this.roleType === 'channel'){
+                    jh.utils.load('/src/modules/officermanage/officer-manage');
                 } else {
                     m.parents('.new-message').remove();
                 }
