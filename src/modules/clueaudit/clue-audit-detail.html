@@ -96,6 +96,25 @@
         		<span>{{data.estimatedCost}}</span>
         		{{/each}}
         	</div>
+        	{{if data.state === "unconfirmed"}}
+        	<p>确认费用</p>
+        	<div>
+                <label>最终处置费用:</label>
+                <span>{{data.finalPrice}}</span>
+            </div>
+            <div>
+                <label>其中受托人费用:</label>
+                <span>{{data.baileePrice}}</span>
+            </div>
+        	<div>
+        		<label>资产查找费:</label>
+        		<span>{{data.assetPrice}}</span>
+        	</div>
+        	<div>
+        		<label>第三方处置清收费:</label>
+        		<span>{{data.thirdpartyPrice}}</span>
+        	</div>
+        	{{/if}}
         </div>
         {{if data.state == "unconfirmed"|| data.state ==="unvaluation"}}
         <p>议价小计</p><br />
