@@ -32,6 +32,7 @@ define(function(require, exports, module) {
             $('body').off('click', '.taskIdentify').on('click', '.taskIdentify', function() {
                 var alertIdentify = jh.utils.template('task_identify_template', {});
                 jh.utils.alert({
+                	title: '任务审核',
                     content: alertIdentify,
                     ok: function() {
                         var throughState = $('.through').filter(':checked').val();

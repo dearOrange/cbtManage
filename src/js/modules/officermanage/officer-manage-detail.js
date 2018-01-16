@@ -56,6 +56,7 @@ define(function(require, exports, module) {
                     $('body').off('click', '.officerAudit').on('click', '.officerAudit', function() {
                         var rejectCon = jh.utils.template('officer_audit_template', {});
                         jh.utils.alert({
+                        	title: '捕头认证',
                             content: rejectCon,
                             ok: function() {
                                 var throughState = $('.through').filter(':checked').val();

@@ -42,6 +42,7 @@ define(function(require, exports, module) {
             $('body').off('click', '.identify').on('click', '.identify', function() {
                 var IdentifyStr = jh.utils.template('admin_creditorIdentify_template', {});
                 jh.utils.alert({
+                	title: '债权方认证',
                     content: IdentifyStr,
                     ok: function() {
                         var throughState = $('.through').filter(':checked').val();

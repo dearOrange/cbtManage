@@ -31,6 +31,7 @@ define(function(require, exports, module) {
 		            $('body').off('click','.isSure').on('click','.isSure',function(){
 		                var contentTemplate = jh.utils.template('evidence_audit_template', {});
 		                jh.utils.alert({
+		                	title: '凭证审核',
 		                	content: contentTemplate,
 		                	ok:function(){
 		                		var throughState = $('.auditThrough').filter(":checked").val();
