@@ -20,6 +20,7 @@ define(function(require, exports, module) {
             $('body').off('click', '.rejectMoney').on('click', '.rejectMoney', function() {
                 var rejectCon = jh.utils.template('rejectMoney_template', {});
                 jh.utils.alert({
+                	title: '拒绝提现申请',
                     content: rejectCon,
                     ok: function() {
                         jh.utils.ajax.send({

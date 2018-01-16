@@ -53,14 +53,14 @@
 
 <script type="text/template" id="sendMoney-list-template">
 	{{ each list item index }}
-	<tr class="{{if item.isRead == " 0 "}}bgc_blue{{/if}}">
+	<tr class="{{if item.isRead === 0}}bgc_blue{{/if}}">
 		<td>{{index+1}}</td>
 		<td>{{item.name}}</td>
 		<td>{{item.company}}</td>
 		<td>{{item.amount}}</td>
 		<td>{{item.actualAmount}}</td>
 		<td>
-			{{if item.payWay == "2"}} 银行卡 {{else}} 支付宝 {{/if}}
+			{{if item.payWay === 2}} 银行卡 {{else}} 支付宝 {{/if}}
 		</td>
 		<td>{{menuState(item.state)}}</td>
 		<td>{{item.createAt}}</td>
@@ -112,11 +112,11 @@
 					<tr>
 						<td>申请提现金额</td>
 						<td>
-							<input type="text" value="{{amount}}" />
+							<input type="text" value="{{amount}}" placeholder="请填写申请金额"/>
 						</td>
 						<td>实际发放金额</td>
 						<td>
-							<input type="text" name="actualAmount" />
+							<input type="text" name="actualAmount" placeholder="请填写发放金额" />
 						</td>
 					</tr>
 					<tr>
