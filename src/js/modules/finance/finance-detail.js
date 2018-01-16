@@ -42,10 +42,24 @@ define(function(require, exports, module) {
 
 					//平台确定收到款
 					$('body').off('click', '.platSure').on('click', '.platSure', function() {
+						var datas = jh.utils.formToJson($('#plat-sure-money'));
+						if(!datas.dealTime) {
+							jh.utils.alert({
+								content: '请输入时间',
+								ok: true
+							})
+							return false;
+						};
+						if(!datas.amount) {
+							jh.utils.alert({
+								content: '请输入金额',
+								ok: true
+							})
+							return false;
+						};
 						jh.utils.alert({
 							content: '确定已经收到对方款项了吗？',
 							ok: function() {
-								var datas = jh.utils.formToJson($('#plat-sure-money'));
 								datas.taskId = args.id;
 								jh.utils.ajax.send({
 									method: 'post',
