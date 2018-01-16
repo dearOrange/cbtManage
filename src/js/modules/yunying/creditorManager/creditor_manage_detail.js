@@ -116,6 +116,7 @@ define(function(require, exports, module) {
             $('body').off('click', '.addSubtotal').on('click', '.addSubtotal', function() {
                 var addStr = jh.utils.template('creditor_addSubtotal_template', {});
                 jh.utils.alert({
+                	title: '添加联系小计',
                     content: addStr,
                     ok: function() {
                         jh.utils.ajax.send({

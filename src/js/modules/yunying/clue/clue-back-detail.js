@@ -54,6 +54,7 @@ define(function(require, exports, module) {
             $('body').off('click', '.addMoneytotal').on('click', '.addMoneytotal', function() {
                 var addStr = jh.utils.template('clue_addSubtotal_template', {});
                 jh.utils.alert({
+                	title: '添加议价小计',
                     content: addStr,
                     ok: function() {
                         jh.utils.ajax.send({
