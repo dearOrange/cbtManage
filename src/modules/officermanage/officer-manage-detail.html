@@ -108,10 +108,10 @@
         		<span>{{data.situation}}</span>
         	</div>
         </div>
-    	{{if data.state == "wait"}}
+    	{{if data.state === "wait" || data.state === "new"}}
         	<a class="button officerAudit">认证</a>
         	{{else}}
-        	<span class="button disabled_btn">{{menuState(data.state)}}</span>
+        	<span class="button disabled_btn">{{officerClueState(data.state)}}</span>
         {{/if}}
     </div>
 </script>
