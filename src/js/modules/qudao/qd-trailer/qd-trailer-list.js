@@ -31,9 +31,8 @@ define(function(require, exports, module) {
         };
 
         this.initSheriff = function(type) {
-        	console.log(type)
             jh.utils.ajax.send({
-                url: '/task/downstreamByTaskChannel',
+                url: '/task/downstreamByTrailerChannel',
                 data: {
                     taskId: type
                 },

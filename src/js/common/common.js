@@ -1019,6 +1019,7 @@ define(function(require, exports, module) {
 
                     try {
                         response.menuState = tammy.utils.menuState;
+                        response.officerClueState = tammy.utils.officerClueState;
                         var viewStr = s.callback.call(null, response); //获取拼接后的展示数据，增加容错处理
                         s.data_container.html(viewStr); //插入数据
                         m.onload(returnData);
@@ -1663,18 +1664,6 @@ define(function(require, exports, module) {
                 case "recycle":
                     state = "有定位只需拖车";
                     break;
-                case "unavailable":
-                    state = "认证不通过";
-                    break;
-                case "available":
-                    state = "已认证";
-                    break;
-                case "new":
-                    state = "未提交认证";
-                    break;
-                case "wait":
-                    state = "待认证";
-                    break;
                 case 0:
                     state = "关闭";
                     break;
@@ -1748,6 +1737,29 @@ define(function(require, exports, module) {
         }
         tammy.utils.officerState = officerState;
     })();
+    
+    (function() {
+        var officerClueState = function(state) {
+            switch (state) {
+                case "unavailable":
+                    state = "认证失败";
+                    break;
+                case "available":
+                    state = "已认证";
+                    break;
+                case "new":
+                    state = "未审核";
+                    break;
+                case "wait":
+                    state = "待认证";
+                    break;
+            }
+            return state;
+        }
+        tammy.utils.officerClueState = officerClueState;
+    })();
+    
+                
     (function(){
         function ChannelDistribution(){
             var str = '<div id="channel_distribution_public_template">'

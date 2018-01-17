@@ -21,6 +21,7 @@ define(function(require, exports, module) {
                 },
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
+                    returnData.officerClueState = jh.utils.officerClueState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
                     var menuState = function(state) {
                         switch (state) {
