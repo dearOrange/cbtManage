@@ -8,6 +8,8 @@
 define(function(require, exports, module) {
     function PersonFile() {
         var _this = this;
+        _this.roleType = sessionStorage.getItem('admin-roleType');
+    
         this.init = function() {
             this.initContent();
             this.registerEvent();
@@ -19,6 +21,12 @@ define(function(require, exports, module) {
                     returnData.password = sessionStorage.getItem("admin-password");
                     var getStr = jh.utils.template('task_getAuditInfo_template', returnData);
                     $('.modelData').html(getStr);
+                    
+                    if(_this.roleType === 'channel') {
+			        	$('.channelArea').removeClass('hide');
+			        }else {
+			        	$('.channelArea').addClass('hide');
+			        }
                 }
             });
         };
