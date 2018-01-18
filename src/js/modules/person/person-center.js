@@ -10,11 +10,6 @@ define(function(require, exports, module) {
         var _this = this;
         _this.roleType = sessionStorage.getItem('admin-roleType');
         _this.resData = '';
-        if(_this.roleType === 'channel') {
-        	$('.channelArea').removeClass('hide');
-        }else {
-        	$('.channelArea').addClass('hide');
-        }
         _this.key = '';
         this.init = function() {
             this.initContent();
@@ -32,9 +27,15 @@ define(function(require, exports, module) {
                     $('#wechat').val(returnData.data.wechat);
                     $('#email').val(returnData.data.email);
                     _this.resData = returnData.data.operatorProvinceVoList;
-                    for(var i=0;i<_this.resData.length;i++){
-                    	$('.personArea').append(_this.resData[i].provinceName);
-                    }
+                    if(_this.roleType === 'channel') {
+			        	$('.channelArea').removeClass('hide');
+			        	for(var i=0;i<_this.resData.length;i++){
+	                    	$('.personArea').append(_this.resData[i].provinceName);
+	                    }
+			        }else {
+			        	$('.channelArea').addClass('hide');
+			        }
+                    
                     //修改密码
                     $('body').off('click', '.changePassword').on('click', '.changePassword', function() {
 	                    var alertStr = jh.utils.template('task_changePassword_template', returnData);
