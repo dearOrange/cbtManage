@@ -796,6 +796,8 @@ label.error {
 
 .header {
     width: 100%;
+    position:fixed;
+    z-index: 9;
 }
 
 .header .navbar #toggleMenu {
