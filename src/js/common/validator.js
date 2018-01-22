@@ -108,6 +108,10 @@ define(function(require, exports, module) {
         var regx = /^[a-zA-Z]+$/;
         return this.optional(element) || (regx.test(value));
     }, "只能输入字母");
+    jQuery.validator.addMethod("cnNumberLetter", function(value, element) {
+        var regx = /^[A-Za-z0-9]+$/;
+        return this.optional(element) || (regx.test(value));
+    }, "只能输入数字和字母");
     jQuery.validator.addMethod("carNumberReg", function(value, element) {
         var regx = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/;
         return this.optional(element) || (regx.test(value));
