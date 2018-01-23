@@ -11,12 +11,21 @@ define(function(require, exports, module) {
         _this.form = $('#clue-manage-form');
 
         this.init = function() {
+        	this.initGeo();
             this.initContent();
             this.initTaskTotalCount();
             this.registerEvent();
             $('select').select2({
                 minimumResultsForSearch: Infinity
             });
+        };
+        this.initGeo = function() {
+            AMap.service('AMap.Geocoder', function() { //回调函数
+                //实例化Geocoder
+                _this.geocoder = new AMap.Geocoder({
+                    city: "010"//城市，默认：“全国”
+                });
+            })
         };
         this.initContent = function(isSearch) {
             var page = new jh.ui.page({
@@ -34,12 +43,69 @@ define(function(require, exports, module) {
                         $('.clueMatch').css("display", "none");
                     } else {
                         $('.clueMatch').css("display", "");
-                    }
+                    };
+                    data.getImgInfo = function(key) {
+                        var http = new XMLHttpRequest();
+                        http.open("GET", jh.config.viewImgRoot + key, true);
+                        http.responseType = "blob";
+                        http.onload = function(e) {
+                            if (this.status === 200) {
+                                var image = new Image();
+                                image.onload = function() {
+
+                                    EXIF.getData(this, function() {
+                                        var src = this.src;
+                                        var lastPath = src.lastIndexOf('/');
+                                        src = src.substring(lastPath + 1);
+                                        var id;
+                                        if(src.indexOf('.')!=-1){
+                                            id = src.substring(0,src.indexOf('.'));
+                                        }else{
+                                            id = src;
+                                        }
+                                        var jsons = jh.utils.getImageInfo(EXIF.getAllTags(this));
+                                        var imgObj = $('[id^='+id+']').parent().siblings('.photoGps');
+                                        var gps = $.trim(imgObj.prev().text());
+                                        if(gps){
+                                            gps = gps.split(',');
+                                            _this.getAddressInfo(gps,imgObj.prev());
+                                        }
+                                        if (jsons.success) {
+                                            var arr = jsons.lnglatXY;
+                                            _this.getAddressInfo(arr,imgObj);
+                                        } else {
+                                            imgObj.find('.photoAddress').text(jsons.lnglatXY);
+                                        }
+
+                                        imgObj.find('.photoAddress').siblings('p').text(jsons.time);
+                                    });
+                                };
+                                image.src = jh.config.viewImgRoot + key;
+                            };
+                        };
+                        http.send();
+                    };
                     return jh.utils.template('clue-manage-template', data);
 
                 }
             });
             page.init();
+        };
+        this.getAddressInfo = function(arr,obj){
+            _this.geocoder.getAddress(arr, function(status, result) {
+                if(obj.find('.photoAddress').length===0){
+                    obj = obj;
+                }else{
+                    obj = obj.find('.photoAddress');
+                }
+                if (status === 'complete' && result.info === 'OK') {
+                    obj.text(result.regeocode.formattedAddress);
+                    //获得了有效的地址信息:
+                    //即，result.regeocode.formattedAddress
+                } else {
+                    obj.text('未获取成功');
+                }
+            });
         };
         this.initTaskTotalCount = function() {
             jh.utils.ajax.send({

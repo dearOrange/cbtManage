@@ -24,21 +24,21 @@
 					<td>
 						<label class="label">捕头类型：</label>
 						<select name="type">
-                        	<option value="">全部</option>
-                        	<option value="all">可找可拖</option>
-                        	<option value="trace">只找</option>
-                        	<option value="recycle">只拖</option>
-                        	<option value="tracerecycle">找加拖一体</option>
-                        </select>
+							<option value="">全部</option>
+							<option value="all">可找可拖</option>
+							<option value="trace">只找</option>
+							<option value="recycle">只拖</option>
+							<option value="tracerecycle">找加拖一体</option>
+						</select>
 					</td>
 					<td>
 						<label class="label">线索类型：</label>
 						<select name="state">
 							<option value="">全部</option>
-                        	<option value="new">未认证</option>
-                        	<option value="passed">认证通过</option>
-                        	<option value="rejected">认证不通过</option>
-                        </select>
+							<option value="new">未认证</option>
+							<option value="passed">认证通过</option>
+							<option value="rejected">认证不通过</option>
+						</select>
 					</td>
 					<td>
 						<label class="label">城市：</label>
@@ -86,20 +86,20 @@
 		<td><input type="checkbox" data-id="{{item.id}}"></td>
 		<td>{{item.carNumber}}</td>
 		<td class="imgWidth">
-			<img src="{{viewImgRoot}}{{item.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
+			<img src="{{viewImgRoot}}{{item.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand" />
 		</td>
 		<td>{{item.name}}</td>
 		<td>{{item.company}}</td>
-		<td>{{item.name}}</td>
-		<td>{{item.name}}</td>
+		<td>{{item.location}}</td>
+		<td class="photoGps">
+			<p class="photoAddress">{{item.ipCity}}</p>
+			<hr />
+			<p>{{item.lastUpdateAt}}</p>
+		</td>
 		{{if passState == 1}}
 		<td>{{item.taskNo}}</td>
 		<td>
-			{{if item.isArrange == 0}}
-			次要任务库
-			{{else}}
-			优先任务库
-			{{/if}}
+			{{if item.isArrange == 0}} 次要任务库 {{else}} 优先任务库 {{/if}}
 		</td>
 		{{/if}}
 		<td>{{item.createAt}}</td>
