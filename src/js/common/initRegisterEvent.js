@@ -132,17 +132,18 @@ define(function(require, exports, module) {
 
             $('body').off('click', '.seaMessageDetail').on('click', '.seaMessageDetail', function() {
                 var m = $(this);
-                var moduleInfo = jh.utils.getURLValue();
                 if (_this.roleType === 'info') {
                     jh.utils.load('/src/modules/xinxiyuan/clue/clue-manage');
+                    jh.utils.showHTML();
                 } else if (_this.roleType === 'finance') {
                     jh.utils.load('/src/modules/sendMoney/sendMoney-list');
+                    jh.utils.showHTML();
                 }else if(_this.roleType === 'channel'){
                     jh.utils.load('/src/modules/officermanage/officer-manage');
+                    jh.utils.showHTML();
                 } else {
                     m.parents('.new-message').remove();
                 }
-                jh.utils.showHTML(moduleInfo.module);
             });
 
             $('body').off('click', '.newMessage_close').on('click', '.newMessage_close', function() {
