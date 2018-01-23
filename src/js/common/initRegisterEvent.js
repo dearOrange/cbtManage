@@ -134,13 +134,13 @@ define(function(require, exports, module) {
                 var m = $(this);
                 if (_this.roleType === 'info') {
                     jh.utils.load('/src/modules/xinxiyuan/clue/clue-manage');
-                    jh.utils.showHTML();
+                    jh.utils.showHTML('/src/modules/xinxiyuan/clue/clue-manage');
                 } else if (_this.roleType === 'finance') {
                     jh.utils.load('/src/modules/sendMoney/sendMoney-list');
-                    jh.utils.showHTML();
+                    jh.utils.showHTML('/src/modules/sendMoney/sendMoney-list');
                 }else if(_this.roleType === 'channel'){
                     jh.utils.load('/src/modules/officermanage/officer-manage');
-                    jh.utils.showHTML();
+                    jh.utils.showHTML('/src/modules/officermanage/officer-manage');
                 } else {
                     m.parents('.new-message').remove();
                 }
