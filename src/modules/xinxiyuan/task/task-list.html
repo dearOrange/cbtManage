@@ -6,11 +6,12 @@
 					<td colspan="6">
 						<label for="tag" class="pull-left label">线索状态：</label>
 						<ol id="taskState" class="stateChange pull-left">
-							<li data-value="1" data-state="open" class="taskState active">次要任务库</li>
+							<li data-value="6" data-state="matched" class="taskState active">匹配成功</li>
+							<li data-value="1" data-state="open" class="taskState">次要任务库</li>
 							<li data-value="2" data-state="trcaing" class="taskState">优先任务库</li>
 							<li data-value="3" data-state="finished" class="taskState">已完成</li>
 							<li data-value="4" data-state="closed" class="taskState">已失效</li>
-							<input type="hidden" name="tabType" id="state" value="1">
+							<input type="hidden" name="tabType" id="state" value="6">
 						</ol>
 					</td>
 				</tr>
@@ -23,7 +24,15 @@
 						<label class="label">车牌号：</label>
 						<input type="text" class="search-input" name="carNumber">
 					</td>
-					<td>
+					<td class="taskLocation">
+						<label class="label">任务所在位置</label>
+						<select name="isArrange">
+                        	<option value="">全部</option>
+                        	<option value="0">次要任务库</option>
+                        	<option value="1">优先任务库</option>
+                        </select>
+					</td>
+					<td class="successTask hide">
 						<label class="label">任&nbsp;务&nbsp;类&nbsp;型：</label>
 						<select name="entrust">
                         	<option value="">全部</option>
@@ -32,7 +41,7 @@
                         	<option value="recycle">有定位只需拖车</option>
                         </select>
 					</td>
-					<td>
+					<td class="successTask hide">
 						<label class="label">任务状态：</label>
 						<select name="state" id="selectCheck">
 							<option value="">全部</option>
@@ -44,7 +53,7 @@
 						<input type="submit" value="查询" class="button search-button">
 					</td>
 				</tr>
-				<tr>
+				<tr class="successTask hide">
 					<td colspan="2">
 						<label class="label">残&nbsp;&nbsp;&nbsp;值：</label>
 						<input type="text" class="search-input OnlyPrice" id="minprice" name="minprice">   至   
@@ -97,7 +106,7 @@
 						<input type="text" class="search-input hand" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd'})">   
 					</td>
 				</tr>
-				<tr>
+				<tr class="successTask hide">
 					<td colspan="6">
 						<a class="button search-button allrepair" href="javascript:;">一键信息修复更新</a>
 					</td>
@@ -117,7 +126,7 @@
                     <th width="6%">车系</th>
                     <th width="10%">任务类型</th>
                     <th width="10%">债权方</th>
-                    <th width="10%">任务发布时间</th>
+                    <th class="textCon" width="10%">匹配成功时间</th>
                     <th width="7%">任务状态</th>
                     <th width="6%">操作</th>
                 </tr>
@@ -140,7 +149,7 @@
         <td>{{item.carSeries}}</td>
         <td>{{menuState(item.entrust)}}</td>
         <td>{{item.upstreamName}}</td>
-        <td>{{item.createAt}}</td>
+        <td>{{if passState === '6'}}{{item.matchAt}}{{else}}{{item.createAt}}{{/if}}</td>
         <td>{{menuState(item.state)}}</td>
         <td>
             <ul class="operaitem">

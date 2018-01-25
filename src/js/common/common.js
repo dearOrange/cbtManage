@@ -25,6 +25,7 @@ define(function(require, exports, module) {
     require('plugin/select2/select2.min');
     require('lib/cookie/jquery.cookie');
     require('plugin/scrollbar/scrollbar'); //scrollbar
+    require('plugin/echarts/echarts.min');//echarts
     require('http://webapi.amap.com/maps?v=1.4.0&key=22cbab88f1adb58577a439cf53331522');
 
     var FINAL_OPTIONS = {

@@ -3,6 +3,7 @@
 </div>
 <script type="text/template" id="admin-evidenceAuditDetail-template">
     <div class="dialog-width public_css">
+    	<form id="uploadVouch-form">
         <p class="pull-left">
             任务详情
         </p>
@@ -72,7 +73,25 @@
         		<label>最终确认费用:</label>
         		<span>{{data.finalPrice}}</span>
         	</div>
-        </div>
+       </div>
+       <div class="mainfile">
+			<p>平台委托书</p>
+			<div class="upimg" style="width:740px;">
+                <div class="ordinary">
+                    <div id="entrustUrl" class="mt10">上传平台委托书</div>
+                    <br>
+                    <div class="upload-list uploaderRequired mt10">
+                    {{each data.plateEntrustVoList item index}}
+                        <div class="upfile-item">
+                            <img class="preview-img" src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" />
+                            <span class="delete-img"></span>
+                            <input type="hidden" name="entrustUrl" class="entrustUrl" value="{{item.url}}"/>
+                        </div>
+                    {{/each}}
+                    </div>
+                </div>
+            </div>
+		</div>
         <div class="mainfile">
 			<p>凭证审核</p>
 			<div class="upimg">
@@ -83,6 +102,7 @@
 			</div>
 			<a class="button search-button mt25 isSure" href="javascript:;">凭证审核</a>
 		</div>
+		</form>
     </div>
 </script>
 <script type="text/template" id="evidence_audit_template">

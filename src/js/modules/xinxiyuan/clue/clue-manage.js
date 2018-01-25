@@ -39,11 +39,7 @@ define(function(require, exports, module) {
                 callback: function(data) {
                     data.passState = $('#state').val();
                     data.viewImgRoot = jh.config.viewImgRoot;
-                    if (data.passState == 0) {
-                        $('.clueMatch').css("display", "none");
-                    } else {
-                        $('.clueMatch').css("display", "");
-                    };
+                    console.log(data);
                     data.getImgInfo = function(key) {
                         var http = new XMLHttpRequest();
                         http.open("GET", jh.config.viewImgRoot + key, true);
@@ -85,12 +81,18 @@ define(function(require, exports, module) {
                         };
                         http.send();
                     };
+                    if (data.passState == 0) {
+                        $('.clueMatch').css("display", "none");
+                    } else {
+                        $('.clueMatch').css("display", "");
+                    };
                     return jh.utils.template('clue-manage-template', data);
 
                 }
             });
             page.init();
         };
+        
         this.getAddressInfo = function(arr,obj){
             _this.geocoder.getAddress(arr, function(status, result) {
                 if(obj.find('.photoAddress').length===0){
@@ -107,6 +109,7 @@ define(function(require, exports, module) {
                 }
             });
         };
+        
         this.initTaskTotalCount = function() {
             jh.utils.ajax.send({
                 url: '/trace/count',
