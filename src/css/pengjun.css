@@ -287,10 +287,10 @@ p.closeStatus {
 }
 
 /*业务统计*/
-.dataContent .data-container ul {
+.dataContent .data-container ul.echarts-list {
 	width:100%;
 }
-.dataContent .data-container ul li{
+.dataContent .data-container ul.echarts-list li{
 	width:286px;
 	float:left;
 	height:168px;
@@ -298,6 +298,6 @@ p.closeStatus {
 	margin:20px 30px 0 0;
 	padding:0 2%;
 }
-.dataContent .data-container ul li p {
+.dataContent .data-container ul.echarts-list li p {
 	margin-top:16px;
 }
