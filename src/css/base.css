@@ -741,6 +741,11 @@ label.error {
     height: 100px;
 }
 
+.upfile-item {
+	margin-right: 10px;
+}
+
+
 .showImg img {
     width: 100px;
     height: 100px;

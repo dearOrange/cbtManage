@@ -78,7 +78,7 @@ define(function(require, exports, module) {
             $('.dataShow').off('click', '.taskList-detail').on('click', '.taskList-detail', function() {
             	var id = $(this).data('id');
                 var state = $('#state').val();
-                if(state === '1'){
+                if(state === '1' || state === '6'){
                     jh.utils.load("/src/modules/xinxiyuan/task/task-list-detail",{
                         id:id
                     });
@@ -99,6 +99,15 @@ define(function(require, exports, module) {
             	var state = mine.data('state');
             	$(this).addClass("active").siblings().removeClass("active");
             	_this.form[0].reset();
+            	if(state === 'matched') {
+            		$('.successTask').addClass('hide');
+            		$('.taskLocation').removeClass('hide');
+            		$('.textCon').html('匹配成功时间');
+            	}else {
+            		$('.successTask').removeClass('hide');
+            		$('.taskLocation').addClass('hide');
+            		$('.textCon').html('任务发布时间');
+            	}
             	var arr = [{
 	    			val: 'unarrange',
 	    			name:"渠道经理未分配",
@@ -179,6 +188,13 @@ define(function(require, exports, module) {
 			//一键修复
             $('body').off('click', '.allrepair').on('click', '.allrepair', function() {
             	var checkId = jh.utils.getCheckboxValue('task_list_container',"value");
+            	if(!checkId) {
+            		jh.utils.alert({
+        				content: "请先选中要修复的信息",
+        				ok: true
+        			})
+            		return false;
+            	}
                 jh.utils.alert({
                     content: "确定修复吗",
                     ok:function(){
@@ -188,12 +204,16 @@ define(function(require, exports, module) {
                     			taskIds: checkId
                     		},
                     		done: function(data){
-                    			jh.utils.alert({
-                    				content: "信息已修复",
-                    				ok: function(){
-                                    	window.location.reload();
-                                    }
-                    			})
+                    			(new jh.ui.shadow()).init();
+                    			window.setTimeout(function() {
+                    				(new jh.ui.shadow()).close();
+	                    			jh.utils.alert({
+	                    				content: "信息已修复",
+	                    				ok: function(){
+	                                    	_this.initContent();
+	                                    }
+	                    			})
+                    			}, 10000);
                     		}
                     	})
                     },
