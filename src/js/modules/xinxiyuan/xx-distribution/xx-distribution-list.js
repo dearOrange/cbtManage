@@ -121,7 +121,7 @@ define(function(require, exports, module) {
             });
             
             //查看违章
-            $('body').off('mouseenter', '.showTr').on('mouseenter', '.showTr', function() {
+            $('body').off('click', '.showTr').on('click', '.showTr', function() {
             	var me = $(this);
                 _this.id = me.data('info').id;
             	var strInfo = jh.utils.template('searchIllegalInfo-template', {});

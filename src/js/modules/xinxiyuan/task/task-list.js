@@ -115,11 +115,11 @@ define(function(require, exports, module) {
 	    		},{
 	    			val: 'tracing',
 	    			name:"线索未提交",
-	    			flag:'open,trcaing'
+	    			flag:'trcaing'
 	    		},{
 	    			val: 'clueChecking',
 	    			name:"线索审核中",
-	    			flag:'open,trcaing'
+	    			flag:''
 	    		},{
 	    			val: 'unvaluation',
 	    			name:"待估价",

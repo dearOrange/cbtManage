@@ -54,7 +54,7 @@
                         <th>车牌号</th>
                         <th>信息描述</th>
                         <th>信息修复地点</th>
-                        <th>信息修复城市</th>
+                        <th width="10%">信息修复城市</th>
                         <th>发生时间</th>
                     </thead>
                     <tbody id="distribution-illegalList-container"></tbody>
@@ -102,10 +102,25 @@
         		<label>第三方处置清收费:</label>
         		<span>{{data.thirdpartyPrice}}</span>
         	</div>
-        	{{if data.state == 'hunterReceive'}}
-        	<a class="button search-button isSure" href="javascript:;">平台收车</a>
-        	{{/if}}
         </div>
+        <div class="mainfile">
+        	<p>交车凭证</p>
+        	{{each data.plateEntrustVoList data index}}
+        	<div class="upimg">
+        		<p style="font-weight: 100;margin-left:10px;">债权方交车照片</p>
+        		<dl>
+					<dt>
+						<div class="upfile-item">
+							<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
+						</div>
+	    			</dt>
+				</dl>
+        	</div>
+        	{{/each}}
+        </div>
+    	{{if data.state == 'hunterReceive'}}
+    	<a class="button search-button isSure" href="javascript:;">平台收车</a>
+    	{{/if}}
     </div>
 </script>
 
