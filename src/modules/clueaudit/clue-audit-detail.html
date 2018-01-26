@@ -131,7 +131,7 @@
 			<div class="page-box pagination" id="page_container"></div>
 		</div>
 		{{/if}}
-		{{if data.state == "clueChecking"}}
+		{{if data.state === "clueChecking"}}
 		{{each data.traceVoList data index}}
 		<a href="javascript:;" data-id="{{data.id}}" class="button clueaudit">审核线索</a>
 		{{/each}}
@@ -174,6 +174,7 @@
         	<input type="radio" name="audit" value="1" class="through" />审核通过
         	<input type="radio" name="audit" value="2" class="through" />审核不通过
         </div>
+        <textarea name="reason" class="textReason"></textarea>
     </div>
 </script>
 <script type="text/template" id="clueaudit_addSubtotal_template">

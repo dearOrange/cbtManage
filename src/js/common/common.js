@@ -94,7 +94,6 @@ define(function(require, exports, module) {
                 } else {
                     targetEle.text('未获取成功');
                 }
-
                 if (fn && typeof fn === "function") {
                     fn(data);
                 }

@@ -83,13 +83,14 @@ define(function(require, exports, module) {
                         		ok: true
                         	})
                         	return false;
-                        }
+                        };
                         jh.utils.ajax.send({
                             method: 'post',
                             url: '/trace/channel/check',
                             data: {
                                 traceId: traceId,
-                                verifyStatus: throughState
+                                verifyStatus: throughState,
+                                reason: $('.textReason').val()
                             },
                             done: function(returnData) {
                                 jh.utils.alert({

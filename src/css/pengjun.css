@@ -97,6 +97,12 @@
 	margin-left: 70px;
 }
 
+.textReason {
+	width:300px;
+	height: 50px;
+	resize: none;
+}
+
 .personContent ul li input[type="text"], .personContent ul li select {
 	width: 302px;
 }
