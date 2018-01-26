@@ -289,6 +289,7 @@ p.closeStatus {
 /*业务统计*/
 .dataContent .data-container ul.echarts-list {
 	width:100%;
+	overflow: hidden;
 }
 .dataContent .data-container ul.echarts-list li{
 	width:286px;
@@ -299,5 +300,108 @@ p.closeStatus {
 	padding:0 2%;
 }
 .dataContent .data-container ul.echarts-list li p {
-	margin-top:16px;
+	margin-top:10px;
+}
+.dataContent .data-container ul.echarts-list li p.font-style {
+	font-size:26px;
+	font-weight: 900;
+}
+
+.dataContent .data-container ul.echarts-list li p.title-style {
+	overflow: hidden;
+}
+.dataContent .data-container ul.echarts-list li p.title-style span {
+	float:left;
+}
+.dataContent .data-container ul.echarts-list li p.title-style i {
+	float:right;
+}
+.dataContent .data-container .information, .dataContent .data-container .channelPie {
+	width:100%;
+	height:300px;
+	margin:20px 0;
+}
+.dataContent .data-container .channelPie {
+	height:200px;
+}
+
+.dataContent .data-container .information p.title-style{
+	padding:5px;
+	width:100%;
+	height:30px;
+	border-bottom:1px solid #ccc;
+}
+
+.dataContent .data-container .information p.title-style span {
+	color:#3398DB;
+};
+
+.dataContent .data-container .information div {
+	padding:5px;
+}
+.dataContent .data-container .information div .mainInformate {
+	float:left;
+}
+.dataContent .data-container .information div #informateTable {
+	float:right;
+	width:40%;
+	height:260px;
+	overflow: auto;
+	text-align: center;
+}
+.dataContent .data-container .information div #informateTable p {
+	font-weight:900;
+	margin:10px 0;
+}
+.dataContent .data-container .information div #informateTable ul li {
+	width:100%;
+	height:30px;
+}
+
+.dataContent .data-container .information div #informateTable ul li span {
+	display: inline-block;
+	width:20%;
+}
+.dataContent .data-container .channelPie div.floatList div {
+	float:left;
+}
+.dataContent .data-container .channelPie div.floatList div.publicBtn {
+	width:32px;
+	height:164px;
+	text-align: center;
+	line-height: 164px;
+	background:#F9F9F9;
+}
+.dataContent .data-container .channelPie div.floatList div.nextBtn {
+	border-left:2px solid #ccc;
+	float:right;
+}
+.dataContent .data-container .channelPie div.floatList div.preBtn {
+	border-right:2px solid #ccc;
+}
+.dataContent .data-container .channelPie div.floatList div.channelInfo {
+	width:90%;
+	height:144px;
+	overflow-x: hidden;
+	padding:10px 20px;
+}
+.dataContent .data-container .channelPie div.floatList div.channelInfo dl {
+	height:136px;
+	width:240px;
+	float:left;
+}
+.dataContent .data-container .channelPie div.floatList div.channelInfo dl dd{
+	float:left;
+	width:80px;
+	text-align: center;
+	line-height: 48px;
+}
+.dataContent .data-container .channelPie div.floatList div.channelInfo dl dd p:first-child {
+	font-size:16px;font-weight: 900;
+}
+.dataContent .data-container .channelPie div.floatList div.channelInfo dl dd p:last-child {
+	font-size:24px;font-weight: 900;
+}
+.dataContent .data-container .channelPie div.floatList div.channelInfo dl dt{
+	float:left;
 }

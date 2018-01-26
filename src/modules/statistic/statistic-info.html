@@ -1,13 +1,13 @@
 <div class="dataContent">
     <div class="data-container colorbg">
         <ul class="echarts-list">
-        	<li id="main">
-        		<p>
+        	<li>
+        		<p class="title-style">
         			<span>总任务数</span>
-        			<i class="icon icon-nopass"></i>
+        			<i class="">hhhh</i>
         		</p>
-        		<p>126,500</p>
-        		<p style="overflow: hidden;">
+        		<p class="font-style">126,500</p>
+        		<p style="overflow: hidden;width:100%;height:50px;line-height: 50px;">
         			<span style="float:left;">
         				<i>日增长</i>
         				<i>2</i>
@@ -24,67 +24,170 @@
         		</p>
         	</li>
         	<li>
-        		<p>
+        		<p class="title-style">
         			<span>债权方数</span>
         			<i class="icon icon-nopass"></i>
         		</p>
-        		<p>126,500</p>
-        		<p>
+        		<p class="font-style">126,500</p>
+        		<p id="mainLine" style="width:100%;height:50px;">
         			
         		</p>
-        		<hr />
         		<p>
+        		<hr />
         			<span>月度增长量</span>
         			<span>5052</span>
         		</p>
         	</li>
         	<li>
-        		<p>
-        			<span>总任务数</span>
+        		<p class="title-style">
+        			<span>捕头(线人)数</span>
         			<i class="icon icon-nopass"></i>
         		</p>
-        		<p>126,500</p>
-        		<p style="overflow: hidden;">
-        			<span style="float:left;">
-        				<i>日增长</i>
-        				<i>2</i>
-        			</span>
-        			<span style="float:right;">
-        				<i>月累计</i>
-        				<i>5862</i>
-        			</span>
+        		<p class="font-style">126,500</p>
+        		<p id="mainBar" style="width:100%;height:50px;">
+        			
         		</p>
-        		<hr />
         		<p>
-        			<span>月均任务量</span>
+        			<hr />
+        			<span>月度新增</span>
         			<span>5052</span>
         		</p>
         	</li>
         	<li>
-        		<p>
-        			<span>总任务数</span>
+        		<p class="title-style">
+        			<span>情报数</span>
         			<i class="icon icon-nopass"></i>
         		</p>
-        		<p>126,500</p>
-        		<p style="overflow: hidden;">
+        		<p class="font-style">126,500</p>
+        		<p id="mainArea" style="width:100%;height:50px;">
+        			
+        		</p>
+        		<p>
+        			<hr />
         			<span style="float:left;">
-        				<i>日增长</i>
+        				<i>今日情报</i>
         				<i>2</i>
         			</span>
         			<span style="float:right;">
-        				<i>月累计</i>
+        				<i>匹配数</i>
         				<i>5862</i>
         			</span>
         		</p>
-        		<hr />
-        		<p>
-        			<span>月均任务量</span>
-        			<span>5052</span>
-        		</p>
         	</li>
         </ul>
+        <div class="information">
+        	<p class="title-style">
+        		<span>情报数</span>
+        		<input type="text" class="search-input hand" style="float:right;" readonly="readonly" name="" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd'})">
+        	</p>
+        	<div>
+        		<div id="mainInformate" class="mainInformate" style="width:40%;height:260px;"></div>
+        		<div id="informateTable">
+        			<p>情报数统计</p>
+        			<div class="data-container">
+				        <table class="dataShow">
+				            <thead>
+				                <tr>
+				                    <th width="4%">排名</th>
+				                    <th width="10%">姓名</th>
+				                    <th width="10%">情报数</th>
+				                    <th width="8%">下线数</th>
+				                </tr>
+				            </thead>
+				            <tbody id="statistic_container">
+				            </tbody>
+				        </table>
+				        <div class="page-box pagination" id="page_container"></div>
+				    </div>
+        		</div>
+        	</div>
+        </div>
+        <div class="channelPie information">
+        	<p class="title-style">
+        		<span>渠道委托</span>
+        		<input type="text" class="search-input hand" style="float:right;" readonly="readonly" name="" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd'})">
+        	</p>
+        	<div class="floatList">
+        		<div class="preBtn publicBtn"><</div>
+        		<div class="channelInfo">
+        			<dl>
+        				<dd>
+        					<p>落下</p>
+        					<p>委托数</p>
+        					<p>56</p>
+        				</dd>
+        				<dt id="pieOne" style="width:160px;height:144px;"></dt>
+        			</dl>
+        			<dl>
+        				<dd>
+        					<p>落下</p>
+        					<p>委托数</p>
+        					<p>56</p>
+        				</dd>
+        				<dt id="pieTwo" style="width:160px;height:144px;"></dt>
+        			</dl>
+        			<dl>
+        				<dd>
+        					<p>落下</p>
+        					<p>委托数</p>
+        					<p>56</p>
+        				</dd>
+        				<dt id="pieThree" style="width:160px;height:144px;"></dt>
+        			</dl>
+        			<dl>
+        				<dd>
+        					<p>落下</p>
+        					<p>委托数</p>
+        					<p>56</p>
+        				</dd>
+        				<dt id="pieFour" style="width:160px;height:144px;"></dt>
+        			</dl>
+        		</div>
+        		<div class="nextBtn publicBtn">></div>
+        	</div>
+        </div>
+        <div class="information">
+        	<p class="title-style">
+        		<span>车辆清收数</span>
+        		<input type="text" class="search-input hand" style="float:right;" readonly="readonly" name="" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd'})">
+        	</p>
+        	<div>
+        		<div id="mainCarNum" class="mainInformate" style="width:40%;height:260px;"></div>
+        		<div id="informateTable">
+        			<p>清收数排名（2018-1）</p>
+        			<ul>
+        				<li>
+        					<span>1</span>
+        					<span>捕头一号</span>
+        					<span>123</span>
+        				</li>
+        				<li>
+        					<span>2</span>
+        					<span>捕头一号</span>
+        					<span>123</span>
+        				</li>
+        				<li>
+        					<span>3</span>
+        					<span>捕头一号</span>
+        					<span>123</span>
+        				</li>
+        			</ul>
+        		</div>
+        	</div>
+        </div>
     </div>
 </div>
+
+<script type="text/template" id="statistic_content_template">
+    {{ each list item index }}
+    <tr>
+        <td>{{item.taskNo}}</td>
+        <td>{{item.carNumber}}</td>
+        <td>{{item.carBrand}}</td>
+        <td>{{item.carSeries}}</td>
+    </tr>
+    {{/each}}
+</script>
 
 <script type="text/javascript">
 seajs.use('modules/statistic/statistic-info', function(StatisticInfo) {
