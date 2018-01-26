@@ -73,8 +73,8 @@
 			{{/if}}
 			{{ each data.traceVoList data index }}
 			<div class="mt25">
-				<input type="radio" value="{{data.id}}" name="traceId" class="pull-left checkId" style="margin:60px 10px;" />
-				<div class="pull-left" {{if data.type === 0 }}style="width:70%;height:155px;border:1px solid #ccc;"{{/if}}>
+				<input type="radio" value="{{data.id}}" data-type="{{data.role}}" name="traceId" class="pull-left checkId" style="margin:60px 10px;" />
+				<div class="pull-left" {{if data.type === 0 }}style="width:70%;height:170px;border:1px solid #ccc;"{{/if}}>
 					<div class="upimg pull-left" style="margin-top:10px;">
 						<dl>
 							<dt>
@@ -90,6 +90,7 @@
 						<p>线索上传时间：{{data.createAt}}</p>
 						<p>gprs信息：{{data.location}}</p>
 						<p>定位：{{data.location}}</p>
+						<p>GPS:{{if data.gpsSource === 0}}自己安装{{else}}他人协助安装(安装人员{{data.gpsPerson}}){{/if}}</p>
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -115,7 +116,7 @@
 			</div>
 		</div>
 		{{if data.state === "clueChecking"}}
-		<input type="submit" value="保存" class="button adopteInfo" />
+		<input type="submit" value="保存" class="button adopteInfo"  />
 		{{else}}
 		<input type="submit" value="确定" class="button clueInfo"/>
 		{{/if}}

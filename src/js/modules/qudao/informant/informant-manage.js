@@ -24,6 +24,7 @@ define(function(require, exports, module) {
                 contentType: 'application/json',
                 data: jh.utils.formToJson($('#informant-manage-form')),
                 callback: function(data) {
+                	data.officerClueState = jh.utils.officerClueState;
                     return jh.utils.template('informantManage_content_template', data);
                 }
             });
@@ -42,6 +43,43 @@ define(function(require, exports, module) {
                     _this.initContent();
                     return false;
                 }
+            });
+            
+            //认证
+            $('body').off('click', '.changeOfficer').on('click', '.changeOfficer', function() {
+                var rejectCon = jh.utils.template('officer_change_template', {});
+                jh.utils.alert({
+                	title: '确定成为捕头吗？',
+                    content: rejectCon,
+                    ok: function() {
+                        var throughState = $('.through').filter(':checked').val();
+                        var btn = $('[i-id="ok"]');
+                        $('<img src="/src/img/loading.gif" height="29"/>').insertAfter(btn);
+                        jh.utils.ajax.send({
+                            method: 'post',
+                            url: '/downstreams/channel/approve',
+                            data: {
+                                downstreamId: args.id,
+                                approveStatus: throughState,
+                                reason: $('.butouReason').val()
+                            },
+                            done: function(returnData) {
+                                jh.utils.alert({
+                                    content: '操作成功',
+                                    ok: function() {
+                                        window.location.reload();
+                                    }
+                                })
+                            },
+                            always:function(){
+                                btn.siblings('img').remove();
+                            }
+
+                        });
+                        return false;
+                    },
+                    cancel: true
+                })
             });
         };
     }

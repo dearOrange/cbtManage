@@ -24,6 +24,7 @@
                     <th width="20%">区域</th>
                     <th width="10%">联系电话</th>
                     <th width="15%">注册时间</th>
+                    <th width="10%">操作</th>
                 </tr>
             </thead>
             <tbody id="informant_manage_container">
@@ -42,8 +43,31 @@
         <td>{{each item.area data index}}{{data.provinceName}}{{/each}}</td>
         <td>{{item.phone}}</td>
         <td>{{item.createAt}}</td>
+        <td>
+        	<ul class="operaitem" style="margin-left:10px;">
+                <li>
+                	{{if item.state === "wait"}}
+                    <a data-id="{{item.id}}" class="changeOfficer button">{{officerClueState(item.state)}}</a>
+                    {{else}}
+                    <a data-id="{{item.id}}" class="disabled_btn button">{{officerClueState(item.state)}}</a>
+                    {{/if}}
+                </li>
+            </ul>
+        </td>
     </tr>
     {{/each}}
+</script>
+
+<script type="text/template" id="officer_change_template">
+	<div class="divied-width ">
+        <div class="divied-type">
+        	<input type="radio" name="audit" value="1" class="through" />认证通过
+        	<input type="radio" name="audit" value="2" class="through" />认证不通过
+        </div>
+        <div class="divied-content">
+        	<textarea placeholder="请填写原因" maxlength="40" class="butouReason"></textarea>
+        </div>
+    </div>
 </script>
 
 <script type="text/javascript">

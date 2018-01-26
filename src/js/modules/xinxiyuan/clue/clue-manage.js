@@ -9,7 +9,6 @@ define(function(require, exports, module) {
     function ClueManage() {
         var _this = this;
         _this.form = $('#clue-manage-form');
-
         this.init = function() {
         	this.initGeo();
             this.initContent();
@@ -39,47 +38,32 @@ define(function(require, exports, module) {
                 callback: function(data) {
                     data.passState = $('#state').val();
                     data.viewImgRoot = jh.config.viewImgRoot;
-                    console.log(data);
+                    
                     data.getImgInfo = function(key) {
-                        var http = new XMLHttpRequest();
-                        http.open("GET", jh.config.viewImgRoot + key, true);
-                        http.responseType = "blob";
-                        http.onload = function(e) {
-                            if (this.status === 200) {
-                                var image = new Image();
-                                image.onload = function() {
-
-                                    EXIF.getData(this, function() {
-                                        var src = this.src;
-                                        var lastPath = src.lastIndexOf('/');
-                                        src = src.substring(lastPath + 1);
-                                        var id;
-                                        if(src.indexOf('.')!=-1){
-                                            id = src.substring(0,src.indexOf('.'));
-                                        }else{
-                                            id = src;
-                                        }
-                                        var jsons = jh.utils.getImageInfo(EXIF.getAllTags(this));
-                                        var imgObj = $('[id^='+id+']').parent().siblings('.photoGps');
-                                        var gps = $.trim(imgObj.prev().text());
-                                        if(gps){
-                                            gps = gps.split(',');
-                                            _this.getAddressInfo(gps,imgObj.prev());
-                                        }
-                                        if (jsons.success) {
-                                            var arr = jsons.lnglatXY;
-                                            _this.getAddressInfo(arr,imgObj);
-                                        } else {
-                                            imgObj.find('.photoAddress').text(jsons.lnglatXY);
-                                        }
-
-                                        imgObj.find('.photoAddress').siblings('p').text(jsons.time);
-                                    });
-                                };
-                                image.src = jh.config.viewImgRoot + key;
-                            };
-                        };
-                        http.send();
+                        $.ajax({
+			                url: jh.config.viewImgRoot + key + '?exif'
+			            }).done(function(data) {
+			                var id = key;
+			                if (key.indexOf('.') !== -1) {
+			                    id = key.substring(0, key.indexOf('.'));
+			                }
+			                var targetEle = $('[id^=' + id + ']');
+			                if (data.GPSLongitude && data.GPSLatitude) {
+			                    var lon = transformTude(data.GPSLongitude.val); //经度
+			                    var lat = transformTude(data.GPSLatitude.val); //纬度
+			                    _this.getAddressInfo([lon, lat], targetEle);
+			                } else {
+			                    targetEle.text('未获取成功');
+			                }
+			
+			                function transformTude(tude) {
+			                    var rst = tude.split(', ');
+			                    $.each(rst, function(index, item) {
+			                        rst[index] = Number(item);
+			                    });
+			                    return (rst[0] + rst[1] / 60 + rst[2] / 3600).toFixed(6);
+			                }
+			            });
                     };
                     if (data.passState == 0) {
                         $('.clueMatch').css("display", "none");
@@ -93,19 +77,22 @@ define(function(require, exports, module) {
             page.init();
         };
         
-        this.getAddressInfo = function(arr,obj){
-            _this.geocoder.getAddress(arr, function(status, result) {
-                if(obj.find('.photoAddress').length===0){
-                    obj = obj;
-                }else{
-                    obj = obj.find('.photoAddress');
+        
+        this.getAddressInfo = function(position, targetEle){
+            _this.geocoder.getAddress(position, function(status, result) {
+            	console.log(status,result);
+                if (jh.utils.isString(targetEle)) {
+                    targetEle = $('[id^=' + targetEle + ']');
+                }
+                if (targetEle.find('.photoAddress').length === 0) {
+                    targetEle = targetEle;
+                } else {
+                    targetEle = targetEle.find('.photoAddress');
                 }
                 if (status === 'complete' && result.info === 'OK') {
-                    obj.text(result.regeocode.formattedAddress);
-                    //获得了有效的地址信息:
-                    //即，result.regeocode.formattedAddress
+                    targetEle.text(result.regeocode.formattedAddress);
                 } else {
-                    obj.text('未获取成功');
+                    targetEle.text('未获取成功');
                 }
             });
         };

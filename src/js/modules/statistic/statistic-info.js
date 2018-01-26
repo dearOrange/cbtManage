@@ -9,10 +9,14 @@ define(function(require, exports, module) {
 	function StatisticInfo() {
 		var _this = this;
 		//      _this.form = $('#user-manage-form');
-
+		_this.traceData = [];
+		_this.carRecoveryData = [];
 		this.init = function() {
+			this.initHead();
+			this.sectionTable();
 			this.initContent();
 			this.registerEvent();
+			
 			$('select').select2({
 				minimumResultsForSearch: Infinity
 			});
@@ -31,19 +35,23 @@ define(function(require, exports, module) {
 			});
 			page.init();
 		};
-
-		this.registerEvent = function() {
-			// 图表
+//		开头数据
+		this.initHead = function(){
+			jh.utils.ajax.send({
+                url: '/statistics/general',
+                done: function(returnData) {
+                    var dataFirst = jh.utils.template('statistic_first_template', returnData.data);
+                    $('.echarts-list').html(dataFirst);
+                    _this.headTable();
+                }
+            });
+		};
+		
+		this.headTable = function(){
 			var mainBar = echarts.init(document.getElementById('mainBar'));
 			var mainLine = echarts.init(document.getElementById('mainLine'));
 			var mainArea = echarts.init(document.getElementById('mainArea'));
-			var mainInformate = echarts.init(document.getElementById('mainInformate'));
-			var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
-			var pieOne = echarts.init(document.getElementById('pieOne'));
-			var pieTwo = echarts.init(document.getElementById('pieTwo'));
-			var pieThree = echarts.init(document.getElementById('pieThree'));
-			var pieFour = echarts.init(document.getElementById('pieFour'));
-
+			
 			var optionBar = {
 				color: ['#3398DB'],
 				tooltip: {
@@ -113,6 +121,26 @@ define(function(require, exports, module) {
 				}]
 			};
 			
+			mainLine.setOption(optionLine);
+			mainBar.setOption(optionBar);
+			mainArea.setOption(optionLine);
+			
+		};
+		this.sectionTable = function() {
+			jh.utils.ajax.send({
+                url: '/statistics/trend',
+                data: {
+                	year: '2017'
+                },
+                done: function(returnData) {
+                    _this.trace = returnData.data.trace;
+                    var carRecovery = returnData.data.carRecovery;
+                    
+                }
+            });
+			
+			
+			var mainInformate = echarts.init(document.getElementById('mainInformate'));
 			var informateBar = {
 				color: ['#3398DB'],
 				tooltip: {
@@ -145,6 +173,16 @@ define(function(require, exports, module) {
 				}]
 			};
 			
+			mainInformate.setOption(informateBar);
+			
+		};
+		this.registerEvent = function() {
+			// 图表
+			var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
+			var pieOne = echarts.init(document.getElementById('pieOne'));
+			var pieTwo = echarts.init(document.getElementById('pieTwo'));
+			var pieThree = echarts.init(document.getElementById('pieThree'));
+			var pieFour = echarts.init(document.getElementById('pieFour'));
 			var carNumBar = {
 				color: ['#3398DB'],
 				tooltip: {
@@ -217,10 +255,6 @@ define(function(require, exports, module) {
 			    ]
 			};
 			
-			mainLine.setOption(optionLine);
-			mainBar.setOption(optionBar);
-			mainArea.setOption(optionLine);
-			mainInformate.setOption(informateBar);
 			mainCarNum.setOption(carNumBar);
 			pieOne.setOption(mainPie);
 			pieTwo.setOption(mainPie);
