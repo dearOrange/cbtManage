@@ -15,9 +15,9 @@ define(function(require, exports, module) {
 		_this.carRecoveryCount = [];
 		this.init = function() {
 			this.initHead();
+			this.registerEvent();
 			this.sectionTable();
 			this.initContent();
-			this.registerEvent();
 			
 			$('select').select2({
 				minimumResultsForSearch: Infinity
@@ -141,14 +141,28 @@ define(function(require, exports, module) {
                     	_this.traceMonths.push(trace[i].months);
                     	_this.traceCount.push(trace[i].count);
                     }
+                    for(var j=0;j<carRecovery.length;j++){
+                    	_this.carRecoveryMonths.push(carRecovery[j].months);
+                    	_this.carRecoveryCount.push(carRecovery[j].count);
+                    }
                     mainInformate.setOption({
 				        xAxis: {
 				            data: _this.traceMonths
 				        },
 				        series: [{
 				            // 根据名字对应到相应的系列
-				            name: '直接访问',
+				            name: '情报数',
 				            data: _this.traceCount
+				        }]
+				    });
+				    mainCarNum.setOption({
+				        xAxis: {
+				            data: _this.carRecoveryMonths
+				        },
+				        series: [{
+				            // 根据名字对应到相应的系列
+				            name: '车辆清收数',
+				            data: _this.carRecoveryCount
 				        }]
 				    });
                     
@@ -157,6 +171,7 @@ define(function(require, exports, module) {
 			
 			
 			var mainInformate = echarts.init(document.getElementById('mainInformate'));
+			var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
 			mainInformate.setOption({
 				color: ['#3398DB'],
 				tooltip: {
@@ -182,23 +197,14 @@ define(function(require, exports, module) {
 					type: 'value'
 				}],
 				series: [{
-					name: '直接访问',
+					name: '情报数',
 					type: 'bar',
 					barWidth: '60%',
 					data: []
 				}]
 			});
 			
-//			mainInformate.setOption(informateBar);
-		};
-		this.registerEvent = function() {
-			// 图表
-			var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
-			var pieOne = echarts.init(document.getElementById('pieOne'));
-			var pieTwo = echarts.init(document.getElementById('pieTwo'));
-			var pieThree = echarts.init(document.getElementById('pieThree'));
-			var pieFour = echarts.init(document.getElementById('pieFour'));
-			var carNumBar = {
+			mainCarNum.setOption({
 				color: ['#3398DB'],
 				tooltip: {
 					trigger: 'axis',
@@ -217,19 +223,28 @@ define(function(require, exports, module) {
 				},
 				xAxis: [{
 					type: 'category',
-					data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+					data: []
 				}],
 				yAxis: [{
 					type: 'value'
 				}],
 				series: [{
-					name: '直接访问',
+					name: '车辆清收数',
 					type: 'bar',
 					barWidth: '60%',
-					data: [10, 52, 200, 334, 390, 330, 220]
+					data: []
 				}]
-			};
+			});
 			
+
+		};
+		this.registerEvent = function() {
+			// 图表
+			
+			var pieOne = echarts.init(document.getElementById('pieOne'));
+			var pieTwo = echarts.init(document.getElementById('pieTwo'));
+			var pieThree = echarts.init(document.getElementById('pieThree'));
+			var pieFour = echarts.init(document.getElementById('pieFour'));
 			var mainPie = {
 			    tooltip: {
 			        trigger: 'item',
@@ -270,7 +285,6 @@ define(function(require, exports, module) {
 			    ]
 			};
 			
-			mainCarNum.setOption(carNumBar);
 			pieOne.setOption(mainPie);
 			pieTwo.setOption(mainPie);
 			pieThree.setOption(mainPie);
