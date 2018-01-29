@@ -9,6 +9,7 @@ define(function(require, exports, module) {
     function XXDistributionList() {
         var _this = this;
         _this.id = 0;
+        _this.form = $('#distribution-list-form');
         this.init = function() {
             this.initContent();
             this.registerEvent();
@@ -21,7 +22,7 @@ define(function(require, exports, module) {
                 method: 'post',
                 url: '/task/distributeList',
                 contentType: 'application/json',
-                data: {},
+                data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
                     return jh.utils.template('admin-xXDistributionList-template', data);
@@ -89,6 +90,14 @@ define(function(require, exports, module) {
         };
 
         this.registerEvent = function() {
+        	// 搜索
+            jh.utils.validator.init({
+                id: 'distribution-list-form',
+                submitHandler: function(form) {
+                    _this.initContent(true);
+                    return false;
+                }
+            });
             //查看任务详情
             $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
                 var me = $(this);

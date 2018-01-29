@@ -105,9 +105,21 @@
         </div>
         <div class="mainfile">
         	<p>交车凭证</p>
-        	{{each data.plateEntrustVoList data index}}
+        	{{each data.receiveCarVoList data index}}
         	<div class="upimg">
-        		<p style="font-weight: 100;margin-left:10px;">债权方交车照片(或交车单)</p>
+        		<p style="font-weight: 100;margin-left:10px;">债权方交车照片</p>
+        		<dl>
+					<dt>
+						<div class="upfile-item">
+							<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
+						</div>
+	    			</dt>
+				</dl>
+        	</div>
+        	{{/each}}
+        	{{each data.rectVoList data index}}
+        	<div class="upimg">
+        		<p style="font-weight: 100;margin-left:10px;">交车单照片</p>
         		<dl>
 					<dt>
 						<div class="upfile-item">
