@@ -9,8 +9,10 @@ define(function(require, exports, module) {
 	function StatisticInfo() {
 		var _this = this;
 		//      _this.form = $('#user-manage-form');
-		_this.traceData = [];
-		_this.carRecoveryData = [];
+		_this.traceMonths = [];
+		_this.traceCount = [];
+		_this.carRecoveryMonths = [];
+		_this.carRecoveryCount = [];
 		this.init = function() {
 			this.initHead();
 			this.sectionTable();
@@ -133,15 +135,29 @@ define(function(require, exports, module) {
                 	year: '2017'
                 },
                 done: function(returnData) {
-                    _this.trace = returnData.data.trace;
+                    var trace = returnData.data.trace;
                     var carRecovery = returnData.data.carRecovery;
+                    for(var i=0;i<trace.length;i++){
+                    	_this.traceMonths.push(trace[i].months);
+                    	_this.traceCount.push(trace[i].count);
+                    }
+                    mainInformate.setOption({
+				        xAxis: {
+				            data: _this.traceMonths
+				        },
+				        series: [{
+				            // 根据名字对应到相应的系列
+				            name: '直接访问',
+				            data: _this.traceCount
+				        }]
+				    });
                     
                 }
             });
 			
 			
 			var mainInformate = echarts.init(document.getElementById('mainInformate'));
-			var informateBar = {
+			mainInformate.setOption({
 				color: ['#3398DB'],
 				tooltip: {
 					trigger: 'axis',
@@ -160,7 +176,7 @@ define(function(require, exports, module) {
 				},
 				xAxis: [{
 					type: 'category',
-					data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+					data: []
 				}],
 				yAxis: [{
 					type: 'value'
@@ -169,12 +185,11 @@ define(function(require, exports, module) {
 					name: '直接访问',
 					type: 'bar',
 					barWidth: '60%',
-					data: [10, 52, 200, 334, 390, 330, 220]
+					data: []
 				}]
-			};
+			});
 			
-			mainInformate.setOption(informateBar);
-			
+//			mainInformate.setOption(informateBar);
 		};
 		this.registerEvent = function() {
 			// 图表
