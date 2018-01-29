@@ -47,6 +47,7 @@ define(function(require, exports, module) {
             
             //认证
             $('body').off('click', '.changeOfficer').on('click', '.changeOfficer', function() {
+            	var id = $(this).data('id');
                 var rejectCon = jh.utils.template('officer_change_template', {});
                 jh.utils.alert({
                 	title: '确定成为捕头吗？',
@@ -59,7 +60,7 @@ define(function(require, exports, module) {
                             method: 'post',
                             url: '/downstreams/channel/approve',
                             data: {
-                                downstreamId: args.id,
+                                downstreamId: id,
                                 approveStatus: throughState,
                                 reason: $('.butouReason').val()
                             },
