@@ -350,7 +350,7 @@ p.closeStatus {
 }
 .dataContent .data-container .information div #informateTable {
 	float:right;
-	width:40%;
+	width:30%;
 	height:260px;
 	overflow: auto;
 	text-align: center;

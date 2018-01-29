@@ -51,11 +51,11 @@ define(function(require, exports, module) {
 			                if (data.GPSLongitude && data.GPSLatitude) {
 			                    var lon = transformTude(data.GPSLongitude.val); //经度
 			                    var lat = transformTude(data.GPSLatitude.val); //纬度
-			                    _this.getAddressInfo([lon, lat], targetEle);
+			                    _this.getAddressInfo([lon,lat], targetEle);
 			                } else {
 			                    targetEle.text('未获取成功');
 			                }
-			
+							
 			                function transformTude(tude) {
 			                    var rst = tude.split(', ');
 			                    $.each(rst, function(index, item) {
@@ -80,10 +80,6 @@ define(function(require, exports, module) {
         
         this.getAddressInfo = function(position, targetEle){
             _this.geocoder.getAddress(position, function(status, result) {
-            	console.log(status,result);
-                if (jh.utils.isString(targetEle)) {
-                    targetEle = $('[id^=' + targetEle + ']');
-                }
                 if (targetEle.find('.photoAddress').length === 0) {
                     targetEle = targetEle;
                 } else {
