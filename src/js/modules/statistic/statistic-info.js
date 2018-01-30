@@ -8,7 +8,10 @@
 define(function(require, exports, module) {
 	function StatisticInfo() {
 		var _this = this;
-		//      _this.form = $('#user-manage-form');
+		_this.form = $('#information-form');
+		_this.clearform = $('#clear-info-form');
+		_this.trendform = $('#trend-info-form');
+		_this.clearnum = $('#clear-num-form');
 		_this.traceMonths = [];
 		_this.traceCount = [];
 		_this.carRecoveryMonths = [];
@@ -18,6 +21,7 @@ define(function(require, exports, module) {
 			this.registerEvent();
 			this.sectionTable();
 			this.initContent();
+			this.initClear();
 			
 			$('select').select2({
 				minimumResultsForSearch: Infinity
@@ -28,11 +32,25 @@ define(function(require, exports, module) {
 				data_container: $('#statistic_container'),
 				page_container: $('#page_container'),
 				method: 'post',
-				url: '/task/distributeList',
+				url: '/statistics/sort',
 				contentType: 'application/json',
-				data: {},
+				data: jh.utils.formToJson(_this.form),
 				callback: function(data) {
 					return jh.utils.template('statistic_content_template', data);
+				}
+			});
+			page.init();
+		};
+		this.initClear = function() {
+			var page = new jh.ui.page({
+				data_container: $('#clear_info_container'),
+				page_container: $('#page_clear_container'),
+				method: 'post',
+				url: '/statistics/sort',
+				contentType: 'application/json',
+				data: jh.utils.formToJson(_this.clearform),
+				callback: function(data) {
+					return jh.utils.template('clear_content_template', data);
 				}
 			});
 			page.init();
@@ -130,20 +148,15 @@ define(function(require, exports, module) {
 		};
 		this.sectionTable = function() {
 			jh.utils.ajax.send({
-                url: '/statistics/trend',
-                data: {
-                	year: '2017'
-                },
+				method: 'post',
+                url: '/statistics/traceTrend',
+				contentType: 'application/json',
+				data: jh.utils.formToJson(_this.trendform),
                 done: function(returnData) {
                     var trace = returnData.data.trace;
-                    var carRecovery = returnData.data.carRecovery;
                     for(var i=0;i<trace.length;i++){
                     	_this.traceMonths.push(trace[i].months);
                     	_this.traceCount.push(trace[i].count);
-                    }
-                    for(var j=0;j<carRecovery.length;j++){
-                    	_this.carRecoveryMonths.push(carRecovery[j].months);
-                    	_this.carRecoveryCount.push(carRecovery[j].count);
                     }
                     mainInformate.setOption({
 				        xAxis: {
@@ -155,6 +168,20 @@ define(function(require, exports, module) {
 				            data: _this.traceCount
 				        }]
 				    });
+                    
+                }
+            });
+            jh.utils.ajax.send({
+				method: 'post',
+                url: '/statistics/recoveryTrend',
+				contentType: 'application/json',
+				data: jh.utils.formToJson(_this.clearnum),
+                done: function(returnData) {
+                    var carRecovery = returnData.data.task;
+                    for(var j=0;j<carRecovery.length;j++){
+                    	_this.carRecoveryMonths.push(carRecovery[j].months);
+                    	_this.carRecoveryCount.push(carRecovery[j].count);
+                    }
 				    mainCarNum.setOption({
 				        xAxis: {
 				            data: _this.carRecoveryMonths

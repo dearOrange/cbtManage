@@ -133,12 +133,27 @@ define(function(require, exports, module) {
             $('body').off('click', '.showTr').on('click', '.showTr', function() {
             	var me = $(this);
                 _this.id = me.data('info').id;
-            	var strInfo = jh.utils.template('searchIllegalInfo-template', {});
-                jh.utils.alert({
-                	title: me.data('info').carNumber,
-                	content: strInfo
+                jh.utils.ajax.send({
+            		method: 'post',
+	                url: '/clue/illegalList',
+	                contentType: 'application/json',
+	                data: {
+	                	pageNum:1,
+	                	pageSize:10,
+	                	params: {
+	                    	taskId: _this.id
+	                	}
+	                },
+            		done: function(data){
+            			var strInfo = jh.utils.template('searchIllegalInfo-template', data.data);
+		                jh.utils.alert({
+		                	title: me.data('info').carNumber,
+		                	content: strInfo
+		                })
+            		}
                 })
-                _this.searchIllegalInfo();
+            	
+                
             });
             
             //一键修复

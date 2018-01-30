@@ -90,7 +90,9 @@
 						<p>线索上传时间：{{data.createAt}}</p>
 						<p>gprs信息：{{data.location}}</p>
 						<p>定位：{{data.location}}</p>
+						{{if data.role === 'type_A'}}
 						<p>GPS:{{if data.gpsSource === 0}}自己安装{{else}}他人协助安装(安装人员{{data.gpsPerson}}){{/if}}</p>
+						{{/if}}
 					</div>
 				</div>
 				<div class="clearfix"></div>

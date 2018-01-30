@@ -70,7 +70,7 @@
 
 <script type="text/template" id="searchIllegalInfo-template">
     <div>
-        <table class="pull-left">
+        <table>
             <thead>
                 <th>序号</th>
                 <th>信息描述</th>
@@ -78,23 +78,22 @@
                 <th>违章城市</th>
                 <th>发生时间</th>
             </thead>
-            <tbody id="search-illegalList-container"></tbody>
+            <tbody id="search-illegalList-container">
+            	{{each list item index}}
+			    <tr>
+			        <td>{{index+1}}</td>
+			        <td>{{item.desc}}</td>
+			        <td>{{item.site}}</td>
+			        <td>{{item.city}}</td>
+			        <td>{{item.occurAt}}</td>
+			    </tr>
+			    {{/each}}
+            </tbody>
         </table>
-        <div class="page-box pagination" id="page_container"></div>
     </div>
 </script>
 
-<script type="text/template" id="search-illegalList-template">
-    {{each list item index}}
-    <tr>
-        <td>{{index+1}}</td>
-        <td>{{item.desc}}</td>
-        <td>{{item.site}}</td>
-        <td>{{item.city}}</td>
-        <td>{{item.occurAt}}</td>
-    </tr>
-    {{/each}}
-</script>
+
 
 <script type="text/javascript">
 seajs.use('modules/xinxiyuan/xx-distribution/xx-distribution-list', function(XXDistributionList) {

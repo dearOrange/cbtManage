@@ -210,7 +210,6 @@ define(function(require, exports, module) {
                     imgObj.src = imgSrc;
                     return false;
                 }
-
                 var dg = dialog(defaults);
                 dg.showModal();
                 var dgo = $('.ui-dialog-grid');

@@ -64,7 +64,6 @@
 					<th width="12%">GPS定位</th>
 					<th width="12%">照片拍摄地/时间</th>
 					<th class="clueMatch" width="8%">匹配任务号</th>
-					<th class="clueMatch" width="8%">任务所在位置</th>
 					<th width="10%">上传时间</th>
 					<th width="10%">操作</th>
 				</tr>
@@ -96,9 +95,6 @@
 		</td>
 		{{if passState == 1}}
 		<td>{{item.taskNo}}</td>
-		<td>
-			{{if item.isArrange == 0}} 次要任务库 {{else}} 优先任务库 {{/if}}
-		</td>
 		{{/if}}
 		<td>{{item.createAt}}</td>
 		<td>

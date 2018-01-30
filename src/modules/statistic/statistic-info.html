@@ -2,12 +2,19 @@
     <div class="data-container colorbg">
         <ul class="echarts-list"></ul>
         <div class="information">
+        	<form id="information-form">
         	<p class="title-style">
         		<span>情报数</span>
-        		<input type="text" class="search-input hand" style="float:right;" readonly="readonly" name="year" id="beginTime" onclick="WdatePicker({dateFmt:'yyyy-MM'})">
+        		<input type="hidden" name="type" value="trace" />
+        		<input type="text" class="search-input hand" style="float:right;" readonly="readonly" value="2018-01" name="yearMonth" id="beginTime" onclick="WdatePicker({dateFmt:'yyyy-MM'})">
         	</p>
+        	</form>
         	<div>
-        		<div id="mainInformate" class="mainInformate" style="width:50%;height:260px;"></div>
+        		<form id="trend-info-form">
+        		<input type="hidden" name="tabName" value="trace" />
+        		<input type="text" class="search-input hand" readonly="readonly" name="year" value="2018" id="beginTime" onclick="WdatePicker({dateFmt:'yyyy'})">
+        		</form>
+        		<div id="mainInformate" class="mainInformate" style="width:65%;height:300px;"></div>
         		<div id="informateTable">
         			<p>情报数统计</p>
         			<div class="data-container">
@@ -31,7 +38,7 @@
         <div class="channelPie information">
         	<p class="title-style">
         		<span>渠道委托</span>
-        		<input type="text" class="search-input hand" style="float:right;" readonly="readonly" name="year" id="beginTime" onclick="WdatePicker({dateFmt:'yyyy-MM'})">
+        		<input type="text" class="search-input hand" style="float:right;" readonly="readonly" value="2018-01" name="year" id="beginTime" onclick="WdatePicker({dateFmt:'yyyy-MM'})">
         	</p>
         	<div class="floatList">
         		<div class="preBtn publicBtn"><</div>
@@ -73,31 +80,23 @@
         	</div>
         </div>
         <div class="information">
+        	<form id="clear-info-form">
         	<p class="title-style">
         		<span>车辆清收数</span>
-        		<input type="text" class="search-input hand" style="float:right;" readonly="readonly" name="year" id="beginTime" onclick="WdatePicker({dateFmt:'yyyy-MM'})">
+        		<input type="hidden" name="type" value="carRecovery" />
+        		<input type="text" class="search-input hand" style="float:right;" readonly="readonly" value="2018-01" name="yearMonth" id="beginTime" onclick="WdatePicker({dateFmt:'yyyy-MM'})">
         	</p>
+        	</form>
         	<div>
-        		<div id="mainCarNum" class="mainInformate" style="width:50%;height:260px;"></div>
-        		<div id="informateTable" style="width:40%;">
+        		<form id="clear-num-form">
+        		<input type="hidden" name="tabName" value="task" />
+        		<input type="text" class="search-input hand" readonly="readonly" name="year" value="2018" id="beginTime" onclick="WdatePicker({dateFmt:'yyyy'})">
+        		</form>
+        		<div id="mainCarNum" class="mainInformate" style="width:65%;height:300px;"></div>
+        		<div id="informateTable">
         			<p>清收数排名（2018-1）</p>
-        			<ul>
-        				<li>
-        					<span>1</span>
-        					<span>捕头一号</span>
-        					<span>123</span>
-        				</li>
-        				<li>
-        					<span>2</span>
-        					<span>捕头一号</span>
-        					<span>123</span>
-        				</li>
-        				<li>
-        					<span>3</span>
-        					<span>捕头一号</span>
-        					<span>123</span>
-        				</li>
-        			</ul>
+        			<ul id="clear_info_container"></ul>
+        			<div class="page-box pagination" id="page_clear_container"></div>
         		</div>
         	</div>
         </div>
@@ -184,11 +183,21 @@
 <script type="text/template" id="statistic_content_template">
     {{ each list item index }}
     <tr>
-        <td>{{item.taskNo}}</td>
-        <td>{{item.carNumber}}</td>
-        <td>{{item.carBrand}}</td>
-        <td>{{item.carSeries}}</td>
+        <td>{{item.rank}}</td>
+        <td>{{item.dname}}</td>
+        <td>{{item.countTrace}}</td>
+        <td>{{item.countDownline}}</td>
     </tr>
+    {{/each}}
+</script>
+
+<script type="text/template" id="clear_content_template">
+    {{ each list item index }}
+    <li>
+		<span>{{index+1}}</span>
+		<span>{{item.dname}}</span>
+		<span>{{item.countRecovery}}</span>
+	</li>
     {{/each}}
 </script>
 

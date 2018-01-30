@@ -64,7 +64,38 @@
                 <p>定位：{{data.location}}</p>
             </div>
             {{/each}}
-        </div>  
+            <div class="clearfix"></div>
+        	{{if data.state === 'hunterUnreceive'}}
+        	<p>拖车失败记录</p>
+        	{{each data.traceVoList data index}}
+        	<div class="upimg">
+        		<p class="failRecord" style="font-weight: 500;">
+        			<span>捕头：</span>
+        			<span>失败原因：</span>
+        			<span>上传凭证时间：</span>
+        			<span>备注说明：</span>
+        		</p>
+        		<p style="font-weight: 500;margin-left:20px;">图片凭证</p>
+        		<dl>
+					<dt>
+						<div class="upfile-item">
+							<img class="preview-img hand" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'"/>
+						</div>
+	    			</dt>
+				</dl>
+				<div class="clearfix"></div>
+				<p style="font-weight: 500;margin-left:20px;">视频凭证</p>
+				<dl>
+					<dt>
+						<div class="upfile-item">
+							<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100">
+						</div>
+	    			</dt>
+				</dl>
+        	</div>
+        	{{/each}}
+        	{{/if}}
+        </div>
         <div id="fpSheriffList"></div>     
         <a href="javascript:;" class="button sureAudit">确定</a>
     </div>

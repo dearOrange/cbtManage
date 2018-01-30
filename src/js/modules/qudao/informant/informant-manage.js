@@ -36,51 +36,12 @@ define(function(require, exports, module) {
                 minimumResultsForSearch: Infinity
             });
 
-            // 搜索
-            jh.utils.validator.init({
-                id: 'informant-manage-form',
-                submitHandler: function(form) {
-                    _this.initContent();
-                    return false;
-                }
-            });
-            
-            //认证
+            //认证成为捕头
             $('body').off('click', '.changeOfficer').on('click', '.changeOfficer', function() {
             	var id = $(this).data('id');
-                var rejectCon = jh.utils.template('officer_change_template', {});
-                jh.utils.alert({
-                	title: '确定成为捕头吗？',
-                    content: rejectCon,
-                    ok: function() {
-                        var throughState = $('.through').filter(':checked').val();
-                        var btn = $('[i-id="ok"]');
-                        $('<img src="/src/img/loading.gif" height="29"/>').insertAfter(btn);
-                        jh.utils.ajax.send({
-                            method: 'post',
-                            url: '/downstreams/channel/approve',
-                            data: {
-                                downstreamId: id,
-                                approveStatus: throughState,
-                                reason: $('.butouReason').val()
-                            },
-                            done: function(returnData) {
-                                jh.utils.alert({
-                                    content: '操作成功',
-                                    ok: function() {
-                                        window.location.reload();
-                                    }
-                                })
-                            },
-                            always:function(){
-                                btn.siblings('img').remove();
-                            }
-
-                        });
-                        return false;
-                    },
-                    cancel: true
-                })
+                jh.utils.load('/src/modules/qudao/informant/informant-manage-detail', {
+                    id: id
+                });
             });
         };
     }

@@ -324,7 +324,7 @@ p.closeStatus {
 }
 .dataContent .data-container .information, .dataContent .data-container .channelPie {
 	width:100%;
-	height:300px;
+	height:350px;
 	margin:20px 0;
 }
 .dataContent .data-container .channelPie {
@@ -351,9 +351,10 @@ p.closeStatus {
 .dataContent .data-container .information div #informateTable {
 	float:right;
 	width:30%;
-	height:260px;
+	height:300px;
 	overflow: auto;
 	text-align: center;
+	margin-left:10px;
 }
 .dataContent .data-container .information div #informateTable p {
 	font-weight:900;
@@ -410,4 +411,8 @@ p.closeStatus {
 }
 .dataContent .data-container .channelPie div.floatList div.channelInfo dl dt{
 	float:left;
+}
+
+.mainfile .upimg .failRecord span {
+	margin-left:20px;
 }
