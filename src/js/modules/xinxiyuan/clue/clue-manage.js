@@ -80,6 +80,7 @@ define(function(require, exports, module) {
         
         this.getAddressInfo = function(position, targetEle){
             _this.geocoder.getAddress(position, function(status, result) {
+            	console.log(position);
                 if (targetEle.find('.photoAddress').length === 0) {
                     targetEle = targetEle;
                 } else {
