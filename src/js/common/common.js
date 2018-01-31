@@ -26,7 +26,7 @@ define(function(require, exports, module) {
     require('lib/cookie/jquery.cookie');
     require('plugin/scrollbar/scrollbar'); //scrollbar
     require('plugin/echarts/echarts.min');//echarts
-    require('http://webapi.amap.com/maps?v=1.4.0&key=22cbab88f1adb58577a439cf53331522');
+    require('http://webapi.amap.com/maps?v=1.4.0&key=316c31848ab9d39c729461358c3dc7d4');
 
     var FINAL_OPTIONS = {
         viewImgRoot: viewImageRoot,
@@ -78,21 +78,28 @@ define(function(require, exports, module) {
 
     (function() {
         function GetPositionByImage(key, fn) {
+
             $.ajax({
                 url: tammy.config.viewImgRoot + key + '?exif'
             }).done(function(data) {
-                console.log(data);
                 var id = key;
                 if (key.indexOf('.') !== -1) {
                     id = key.substring(0, key.indexOf('.'));
                 }
                 var targetEle = $('[id^=' + id + ']');
+                var timeEle = targetEle.siblings('[class$=_creatAt]');
+
                 if (data.GPSLongitude && data.GPSLatitude) {
                     var lon = transformTude(data.GPSLongitude.val); //经度
                     var lat = transformTude(data.GPSLatitude.val); //纬度
                     tammy.utils.getAddressByPosition([lon, lat], targetEle);
                 } else {
                     targetEle.text('未获取成功');
+                }
+                if( timeEle.length > 0 && data.DateTime ){
+                    timeEle.text(data.DateTime.val);
+                }else{
+                    timeEle.text('未获取成功');
                 }
                 if (fn && typeof fn === "function") {
                     fn(data);
@@ -105,6 +112,12 @@ define(function(require, exports, module) {
                     });
                     return (rst[0] + rst[1] / 60 + rst[2] / 3600).toFixed(6);
                 }
+            }).
+            fail(function(data){
+                var targetEle = $('[id^=' + key + ']');
+                var timeEle = targetEle.siblings('[class$=_creatAt]');
+                targetEle.text('未获取成功');
+                timeEle.text('未获取成功');
             });
         }
         tammy.utils.getPositionByImage = GetPositionByImage;
