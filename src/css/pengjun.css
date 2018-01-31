@@ -207,6 +207,7 @@
 .public_css table.taskTable td {
 	border: 1px solid #eef1f6;
 	text-align: left;
+	min-width: 270px;
 }
 
 /*面包屑导航*/
@@ -401,10 +402,17 @@ p.closeStatus {
 	float:left;
 	width:80px;
 	text-align: center;
-	line-height: 48px;
 }
 .dataContent .data-container .channelPie div.floatList div.channelInfo dl dd p:first-child {
-	font-size:16px;font-weight: 900;
+	font-size:16px;
+	font-weight: 900;
+    width: 78px;
+    height: 58px;
+    overflow: hidden;
+    line-height: 58px;
+}
+.dataContent .data-container .channelPie div.floatList div.channelInfo dl dd p:nth-child(2) {
+	line-height: 48px;
 }
 .dataContent .data-container .channelPie div.floatList div.channelInfo dl dd p:last-child {
 	font-size:24px;font-weight: 900;
