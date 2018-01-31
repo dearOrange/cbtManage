@@ -1,71 +1,77 @@
-<div class="dataContent officer-detail">
+<div class="dataContent informant-detail">
 	
 </div>
-<script type="text/template" id="officer_detail_template">
-    <div class="dialog-width officer-width">
+<script type="text/template" id="informant_detail_template">
+    <div class="dialog-width public_css">
         <p class="pull-left">
-            捕头详情
+            线人申请认证捕头
         </p>
         <a href="javascript:;" class="button gobackPage goBack">返回</a>
         <div class="clearfix"></div>
         <hr /><br />
-        <ul>
-        	<li>
-        		<label>账号：</label>
-            	<span>{{data.phone}}</span>
-        	</li>
-        </ul>
-        <ul style="margin:20px 0;">
-            <li style="border-bottom:0;border-right:0;">
-            	<label>姓名：</label>
-            	<span>{{data.name}}</span>
-            </li>
-            <li style="border-bottom:0;">
-            	<label>联系电话：</label>
-            	<span>{{data.phone}}</span>
-            </li>
-            <li style="border-right:0;">
-            	<label>微信账号：</label>
-            	<span>{{data.wechat}}</span>
-            </li>
-           	<li>
-           		<label>邮箱：</label>
-           		<span>{{data.email}}</span>
-           	</li>
-        </ul>
-        <ul>
-            <li style="width:96.2%;">
-            	<label>所属公司：</label>
-            	<span>{{data.company}}</span>
-            </li>
-            <li style="border-top:0;border-right:0;">
-				<label>法人代表：</label>
-           		<span>{{data.legalPerson}}</span>
-            </li>
-            <li style="border-top:0;">
-            	<label>业务类型：</label>
-           		<span>{{stateToString(data.type)}}</span>
-            </li>
-            <li style="border-right:0;border-bottom: 0;border-top:0;">
-            	<label>申请区域：</label>
-            	<span>
-            	{{each data.area item index}}
+        <table class="taskTable">
+        	<tr>
+        		<th>账号：</th>
+        		<td>{{data.phone}}</td>
+        		<th>申请捕头类型：</th>
+        		<td colspan="3">{{if data.property === 1}}企业捕头{{else}}个人捕头{{/if}}</td>
+        	</tr>
+        	<tr>
+        		<th>姓名：</th>
+        		<td>{{data.name}}</td>
+        		<th>法人手机号：</th>
+        		<td>{{data.legalPersonMobile}}</td>
+        	</tr>
+        	<tr>
+        		<th>微信账号：</th>
+        		<td>{{data.wechat}}</td>
+        		<th>公司邮箱：</th>
+        		<td>{{data.coEmail}}</td>
+        	</tr>
+        	<tr>
+        		<th>所属公司：</th>
+        		<td>{{data.company}}</td>
+        		<th>法人代表：</th>
+        		<td>{{data.legalPerson}}</td>
+        	</tr>
+        	<tr>
+        		<th>业务类型：</th>
+        		<td>{{stateToString(data.type)}}</td>
+        		<th>申请区域：</th>
+        		<td>
+        		{{each data.area item index}}
             		{{item.provinceName}}
             	{{/each}}
-            	</span>
-            </li>
-            <li style="border-top:0;border-bottom: 0;">
-            	<label>团队规模：</label>
-            	<span>{{data.teamSize}}</span>
-            </li>
-            <li style="width:96.2%;">
-            	<label>详细地址：</label>
-            	<span>{{data.address}}</span>
-            </li>
-        </ul>
+        		</td>
+        	</tr>
+        	<tr>
+        		<th>团队规模：</th>
+        		<td>{{data.teamSize}}</td>
+        		<th>详细地址：</th>
+        		<td>{{data.address}}</td>
+        	</tr>
+        	{{if data.property === 1}}
+        	<tr>
+        		<th>营业执照编号：</th>
+        		<td>{{data.businessLicenseNo}}</td>
+        		<th>法人身份证号：</th>
+        		<td>
+            		{{data.legalIdCard}}
+        		</td>
+        	</tr>
+        	{{else}}
+        	<tr>
+        		<th>法人身份证号：</th>
+        		<td colspan="3">
+            		{{data.idCard}}
+        		</td>
+        	</tr>
+        	{{/if}}
+        </table>
         <div class="mainfile">
 			<p>资质</p>
 			<div class="upimg">
+				{{if data.property === 1}}
 				<dl>
 					<dt>
 						<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.businessLicense}}" src="{{viewImgRoot}}{{data.businessLicense}}?imageMogr2/auto-orient/thumbnail/100x100">
@@ -96,6 +102,14 @@
 		    		</dt>
 					<dd>负责人手持身份证正面照片</dd>
 				</dl>
+				{{else}}
+				<dl>
+					<dt>
+						<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.linkmanIdImg}}" src="{{viewImgRoot}}{{data.linkmanIdImg}}?imageMogr2/auto-orient/thumbnail/100x100">
+		    		</dt>
+					<dd>负责人身份证照片</dd>
+				</dl>
+				{{/if}}
 			</div>
 		</div>
         <div class="instruction">
@@ -108,14 +122,14 @@
         		<span>{{data.situation}}</span>
         	</div>
         </div>
-    	{{if data.state === "wait" || data.state === "new"}}
-        	<a class="button officerAudit">认证</a>
+    	{{if data.state === "wait"}}
+        	<a class="button informantAudit">认证</a>
         	{{else}}
         	<span class="button disabled_btn">{{officerClueState(data.state)}}</span>
         {{/if}}
     </div>
 </script>
-<script type="text/template" id="officer_audit_template">
+<script type="text/template" id="informant_audit_template">
 	<div class="divied-width ">
         <div class="divied-type">
         	<input type="radio" name="audit" value="1" class="through" />认证通过
@@ -127,7 +141,7 @@
     </div>
 </script>
 <script type="text/javascript">
-seajs.use('modules/informant/informant-manage-detail', function(InformantManageDetail) {
+seajs.use('modules/qudao/informant/informant-manage-detail', function(InformantManageDetail) {
     var InformantManageDetail = new InformantManageDetail();
     InformantManageDetail.init();
 });

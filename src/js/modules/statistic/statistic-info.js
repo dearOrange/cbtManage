@@ -12,6 +12,7 @@ define(function(require, exports, module) {
 		_this.clearform = $('#clear-info-form');
 		_this.trendform = $('#trend-info-form');
 		_this.clearnum = $('#clear-num-form');
+		_this.entrustform = $('#entrust-form');
 		_this.traceMonths = [];
 		_this.traceCount = [];
 		_this.carRecoveryMonths = [];
@@ -266,20 +267,40 @@ define(function(require, exports, module) {
 
 		};
 		this.registerEvent = function() {
+			jh.utils.ajax.send({
+				method: 'post',
+                url: '/statistics/entrust',
+				contentType: 'application/json',
+				data: jh.utils.formToJson(_this.entrustform),
+                done: function(returnData) {
+                	var entrust = returnData.data;
+                	var obj = {};
+                	var entrustContent = jh.utils.template('entrust_content_template', returnData);
+                    $('.channelInfo').html(entrustContent);
+                    for(var k=0;k<entrust.length;k++){
+                    	obj.value = entrust[k].successRate;
+                    	obj.name = '委托数';
+                    	_this.pieContent(k,obj);
+                    }
+                    
+                }
+            });
+			
+			
+			
+		};
+		this.pieContent = function(k,obj){
 			// 图表
 			
-			var pieOne = echarts.init(document.getElementById('pieOne'));
-			var pieTwo = echarts.init(document.getElementById('pieTwo'));
-			var pieThree = echarts.init(document.getElementById('pieThree'));
-			var pieFour = echarts.init(document.getElementById('pieFour'));
-			var mainPie = {
+			var pieOne = echarts.init(document.getElementById('pie'+k));
+			pieOne.setOption({
 			    tooltip: {
 			        trigger: 'item',
 			        formatter: "{a} <br/>{b}: {c} ({d}%)"
 			    },
 			    series: [
 			        {
-			            name:'访问来源',
+			            name:'渠道委托',
 			            type:'pie',
 			            radius: ['50%', '70%'],
 			            avoidLabelOverlap: false,
@@ -301,22 +322,11 @@ define(function(require, exports, module) {
 			                    show: false
 			                }
 			            },
-			            data:[
-			                {value:335, name:'直接访问'},
-			                {value:310, name:'邮件营销'},
-			                {value:234, name:'联盟广告'},
-			                {value:135, name:'视频广告'},
-			                {value:1548, name:'搜索引擎'}
-			            ]
+			            data:[obj]
 			        }
 			    ]
-			};
-			
-			pieOne.setOption(mainPie);
-			pieTwo.setOption(mainPie);
-			pieThree.setOption(mainPie);
-			pieFour.setOption(mainPie);
-		};
+			});
+		}
 	}
 	module.exports = StatisticInfo;
 });

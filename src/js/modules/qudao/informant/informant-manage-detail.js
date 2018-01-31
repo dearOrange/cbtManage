@@ -41,8 +41,8 @@ define(function(require, exports, module) {
                         return state;
                     }
                     returnData.stateToString = menuState;
-                    var html = jh.utils.template('officer_detail_template', returnData);
-                    $('.officer-detail').html(html);
+                    var html = jh.utils.template('informant_detail_template', returnData);
+                    $('.informant-detail').html(html);
                     var picArr = ['businessLicense', 'legalPersonIdImg', 'legalPersonHandIdImg', 'linkmanIdImg', 'linkmanHandIdImg'];
                     for (var i = 0; i < 5; i++) {
                         jh.utils.uploader.init({
@@ -53,9 +53,9 @@ define(function(require, exports, module) {
                         });
                     }
 
-                    //认证
-                    $('body').off('click', '.officerAudit').on('click', '.officerAudit', function() {
-                        var rejectCon = jh.utils.template('officer_audit_template', {});
+                    //认证成为捕头
+                    $('body').off('click', '.informantAudit').on('click', '.informantAudit', function() {
+                        var rejectCon = jh.utils.template('informant_audit_template', {});
                         jh.utils.alert({
                         	title: '捕头认证',
                             content: rejectCon,

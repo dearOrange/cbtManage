@@ -36,10 +36,12 @@
         	</div>
         </div>
         <div class="channelPie information">
+        	<form id="entrust-form">
         	<p class="title-style">
         		<span>渠道委托</span>
-        		<input type="text" class="search-input hand" style="float:right;" readonly="readonly" value="2018-01" name="year" id="beginTime" onclick="WdatePicker({dateFmt:'yyyy-MM'})">
+        		<input type="text" class="search-input hand" style="float:right;" readonly="readonly" value="2018-01" name="yearMonth" id="beginTime" onclick="WdatePicker({dateFmt:'yyyy-MM'})">
         	</p>
+        	</form>
         	<div class="floatList">
         		<div class="preBtn publicBtn"><</div>
         		<div class="channelInfo">
@@ -200,7 +202,18 @@
 	</li>
     {{/each}}
 </script>
-
+<script type="text/template" id="entrust_content_template">
+    {{ each data item index }}
+    <dl>
+		<dd>
+			<p>{{item.channelName}}</p>
+			<p>委托数</p>
+			<p>{{item.countEntrust}}</p>
+		</dd>
+		<dt id="pie{{index}}" style="width:160px;height:144px;"></dt>
+	</dl>
+    {{/each}}
+</script>
 <script type="text/javascript">
 seajs.use('modules/statistic/statistic-info', function(StatisticInfo) {
     var StatisticInfo = new StatisticInfo();
