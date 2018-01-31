@@ -274,13 +274,15 @@ define(function(require, exports, module) {
 				data: jh.utils.formToJson(_this.entrustform),
                 done: function(returnData) {
                 	var entrust = returnData.data;
-                	var obj = {};
+                	var objSucceed = {}, objFailed = {};
                 	var entrustContent = jh.utils.template('entrust_content_template', returnData);
                     $('.channelInfo').html(entrustContent);
                     for(var k=0;k<entrust.length;k++){
-                    	obj.value = entrust[k].successRate;
-                    	obj.name = '委托数';
-                    	_this.pieContent(k,obj);
+                    	objSucceed.value = entrust[k].countSucceed;
+                    	objSucceed.name = '委托成功数';
+                    	objFailed.value = entrust[k].countFailed;
+                    	objFailed.name = '委托失败数';
+                    	_this.pieContent(k,objSucceed,objFailed);
                     }
                     
                 }
@@ -289,9 +291,8 @@ define(function(require, exports, module) {
 			
 			
 		};
-		this.pieContent = function(k,obj){
+		this.pieContent = function(k,objSucceed,objFailed){
 			// 图表
-			
 			var pieOne = echarts.init(document.getElementById('pie'+k));
 			pieOne.setOption({
 			    tooltip: {
@@ -322,7 +323,7 @@ define(function(require, exports, module) {
 			                    show: false
 			                }
 			            },
-			            data:[obj]
+			            data:[objSucceed,objFailed]
 			        }
 			    ]
 			});
