@@ -88,10 +88,10 @@
 		<td>{{item.name}}</td>
 		<td>{{item.company}}</td>
 		<td>{{item.location}}</td>
-		<td class="photoGps" id="{{item.carPhoto}}">
-			<p class="photoAddress">{{getImgInfo(item.carPhoto)}}</p>
+		<td>
+			<p id="{{item.carPhoto}}">{{getPositionByImage(item.carPhoto)}}</p>
 			<hr />
-			<p>{{item.lastUpdateAt}}</p>
+			<p class="{{item.carPhoto}}_creatAt">{{item.lastUpdateAt}}</p>
 		</td>
 		{{if passState == 1}}
 		<td>{{item.taskNo}}</td>

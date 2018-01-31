@@ -10,22 +10,11 @@ define(function(require, exports, module) {
         var _this = this;
         _this.form = $('#clue-manage-form');
         this.init = function() {
-        	this.initGeo();
             this.initContent();
             this.initTaskTotalCount();
             this.registerEvent();
-            $('select').select2({
-                minimumResultsForSearch: Infinity
-            });
         };
-        this.initGeo = function() {
-            AMap.service('AMap.Geocoder', function() { //回调函数
-                //实例化Geocoder
-                _this.geocoder = new AMap.Geocoder({
-                    city: "010"//城市，默认：“全国”
-                });
-            })
-        };
+
         this.initContent = function(isSearch) {
             var page = new jh.ui.page({
                 data_container: $('#clue_manage_container'),
@@ -38,60 +27,17 @@ define(function(require, exports, module) {
                 callback: function(data) {
                     data.passState = $('#state').val();
                     data.viewImgRoot = jh.config.viewImgRoot;
-                    
-                    data.getImgInfo = function(key) {
-                        $.ajax({
-			                url: jh.config.viewImgRoot + key + '?exif'
-			            }).done(function(data) {
-			                var id = key;
-			                if (key.indexOf('.') !== -1) {
-			                    id = key.substring(0, key.indexOf('.'));
-			                }
-			                var targetEle = $('[id^=' + id + ']');
-			                if (data.GPSLongitude && data.GPSLatitude) {
-			                    var lon = transformTude(data.GPSLongitude.val); //经度
-			                    var lat = transformTude(data.GPSLatitude.val); //纬度
-			                    _this.getAddressInfo([lon,lat], targetEle);
-			                } else {
-			                    targetEle.text('未获取成功');
-			                }
-							
-			                function transformTude(tude) {
-			                    var rst = tude.split(', ');
-			                    $.each(rst, function(index, item) {
-			                        rst[index] = Number(item);
-			                    });
-			                    return (rst[0] + rst[1] / 60 + rst[2] / 3600).toFixed(6);
-			                }
-			            });
-                    };
+                    data.getPositionByImage = jh.utils.getPositionByImage;
+
                     if (data.passState == 0) {
                         $('.clueMatch').css("display", "none");
                     } else {
                         $('.clueMatch').css("display", "");
                     };
                     return jh.utils.template('clue-manage-template', data);
-
                 }
             });
             page.init();
-        };
-        
-        
-        this.getAddressInfo = function(position, targetEle){
-            _this.geocoder.getAddress(position, function(status, result) {
-            	console.log(position);
-                if (targetEle.find('.photoAddress').length === 0) {
-                    targetEle = targetEle;
-                } else {
-                    targetEle = targetEle.find('.photoAddress');
-                }
-                if (status === 'complete' && result.info === 'OK') {
-                    targetEle.text(result.regeocode.formattedAddress);
-                } else {
-                    targetEle.text('未获取成功');
-                }
-            });
         };
         
         this.initTaskTotalCount = function() {
@@ -136,6 +82,10 @@ define(function(require, exports, module) {
         };
 
         this.registerEvent = function() {
+
+            $('select').select2({
+                minimumResultsForSearch: Infinity
+            });
 
             // 搜索
             jh.utils.validator.init({
