@@ -50,14 +50,14 @@ define(function(require, exports, module) {
         //上传平台委托书
         this.uploadVouch = function() {
         	var datas = jh.utils.formToJson($('#uploadVouch-form'));
-        	if (!datas.entrustUrl) {
-                jh.utils.confirm({
-                    content: '请上传委托书原件！',
-                    ok: true,
-                    cancel: true
-                });
-                return false;
-            }
+//      	if (!datas.entrustUrl) {
+//              jh.utils.confirm({
+//                  content: '请上传平台委托书原件！',
+//                  ok: true,
+//                  cancel: true
+//              });
+//              return false;
+//          }
         	datas.entrustUrl = jh.utils.isArray(datas.entrustUrl) ? datas.entrustUrl.join(',') : datas.entrustUrl;
         	
 		    var contentTemplate = jh.utils.template('evidence_audit_template', {});
