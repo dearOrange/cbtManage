@@ -837,6 +837,7 @@ define(function(require, exports, module) {
                 jump: true,
                 noData: '',
                 ident: '', //模块标识
+                showPageTotal: true,
                 data: {
                     pageNum: 1,
                     pageSize: tammy.config.pageSize,
@@ -858,6 +859,7 @@ define(function(require, exports, module) {
                 delete options.data;
             }
             m.settings.data.params = $.extend({}, m.settings.data.params, options.data);
+            m.settings.data.pageSize = m.settings.data.params.pageSize ? m.settings.data.params.pageSize : m.settings.data.pageSize;
             options.data = m.settings.data;
             $.extend(m.settings, options);
         }
@@ -966,17 +968,19 @@ define(function(require, exports, module) {
             var m = this,
                 s = m.settings,
                 arr = [];
-            arr.push('<div class="pull-left">');
-            arr.push('  <span>每页显示</span>');
-            arr.push('  <select class="jh_page_pageSize">');
-            arr.push('      <option value="10">10</option>');
-            arr.push('      <option value="20">20</option>');
-            arr.push('      <option value="30">30</option>');
-            arr.push('      <option value="40">40</option>');
-            arr.push('      <option value="50">50</option>');
-            arr.push('  <select>');
-            arr.push('  <span id="jh_page_totalSize"> 总共：</span>');
-            arr.push('</div>');
+            if(s.showPageTotal){
+                arr.push('<div class="pull-left">');
+                arr.push('  <span>每页显示</span>');
+                arr.push('  <select class="jh_page_pageSize">');
+                arr.push('      <option value="10">10</option>');
+                arr.push('      <option value="20">20</option>');
+                arr.push('      <option value="30">30</option>');
+                arr.push('      <option value="40">40</option>');
+                arr.push('      <option value="50">50</option>');
+                arr.push('  <select>');
+                arr.push('  <span id="jh_page_totalSize"> 总共：</span>');
+                arr.push('</div>');
+            }
             arr.push('<div class="pull-right jh_pages">');
             //pre容器
             arr.push('<div class="jh_page_pre">');
@@ -1025,7 +1029,6 @@ define(function(require, exports, module) {
                         m.onload(returnData);
                         return false;
                     }
-
                     m.page_total = Math.ceil(response.total / s.data.pageSize); //分页总数
                     m.page_last_second = m.page_total - 1; //倒数第二页
 
