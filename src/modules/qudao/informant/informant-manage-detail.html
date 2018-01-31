@@ -16,23 +16,12 @@
         		<th>申请捕头类型：</th>
         		<td colspan="3">{{if data.property === 1}}企业捕头{{else}}个人捕头{{/if}}</td>
         	</tr>
+        	{{if data.property === 1}}
         	<tr>
-        		<th>姓名：</th>
-        		<td>{{data.name}}</td>
-        		<th>法人手机号：</th>
-        		<td>{{data.legalPersonMobile}}</td>
-        	</tr>
-        	<tr>
-        		<th>微信账号：</th>
-        		<td>{{data.wechat}}</td>
-        		<th>公司邮箱：</th>
-        		<td>{{data.coEmail}}</td>
-        	</tr>
-        	<tr>
-        		<th>所属公司：</th>
+        		<th>公司名称：</th>
         		<td>{{data.company}}</td>
-        		<th>法人代表：</th>
-        		<td>{{data.legalPerson}}</td>
+        		<th>公司地址：</th>
+        		<td>{{data.address}}</td>
         	</tr>
         	<tr>
         		<th>业务类型：</th>
@@ -45,25 +34,40 @@
         		</td>
         	</tr>
         	<tr>
-        		<th>团队规模：</th>
-        		<td>{{data.teamSize}}</td>
-        		<th>详细地址：</th>
-        		<td>{{data.address}}</td>
-        	</tr>
-        	{{if data.property === 1}}
-        	<tr>
+        		<th>法人代表：</th>
+        		<td>{{data.legalPerson}}</td>
         		<th>营业执照编号：</th>
         		<td>{{data.businessLicenseNo}}</td>
+        	</tr>
+        	<tr>
+        		<th>法人手机号：</th>
+        		<td>{{data.legalPersonMobile}}</td>
         		<th>法人身份证号：</th>
         		<td>
             		{{data.legalIdCard}}
         		</td>
         	</tr>
+        	<tr>
+        		<th>企业邮箱：</th>
+        		<td colspan="3">{{data.coEmail}}</td>
+        	</tr>
         	{{else}}
         	<tr>
-        		<th>法人身份证号：</th>
+        		<th>姓名：</th>
+        		<td>{{data.name}}</td>
+        		<th>身份证号：</th>
         		<td colspan="3">
             		{{data.idCard}}
+        		</td>
+        	</tr>
+        	<tr>
+        		<th>业务类型：</th>
+        		<td>{{stateToString(data.type)}}</td>
+        		<th>申请区域：</th>
+        		<td>
+        		{{each data.area item index}}
+            		{{item.provinceName}}
+            	{{/each}}
         		</td>
         	</tr>
         	{{/if}}
@@ -116,10 +120,6 @@
         	<div class="advantage">
         		<label>优势说明</label>
         		<span>{{data.introduce}}</span>
-        	</div>
-        	<div class="otherstate">
-        		<label>其他情况说明</label>
-        		<span>{{data.situation}}</span>
         	</div>
         </div>
     	{{if data.state === "wait"}}
