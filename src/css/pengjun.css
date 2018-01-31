@@ -332,7 +332,7 @@ p.closeStatus {
     background: #fff;
     margin: 20px 2% 0 0;
     padding: 10px 2%;
-    box-shadow: 3px 3px 20px 3px #b5b5b5;
+    box-shadow: 0px -3px 18px -2px #b5b5b5;
 }
 
 .dataContent .data-container ul.echarts-list li p {
@@ -362,7 +362,7 @@ p.closeStatus {
     height: 390px;
     margin: 60px 0;
     padding: 15px;
-    box-shadow: 3px 3px 20px 3px #b5b5b5;
+    box-shadow: 0px -3px 18px -2px #b5b5b5;
 }
 
 .dataContent .data-container .channelPie {
@@ -495,4 +495,7 @@ p.closeStatus {
     height: 25px;
     padding-left: 2px;
     display: inline-block;
+}
+.colorbg input {
+	border:1px solid #eee;
 }

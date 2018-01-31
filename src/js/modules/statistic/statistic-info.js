@@ -16,10 +16,10 @@ define(function(require, exports, module) {
         _this.carRecoveryMonths = [];
         _this.carRecoveryCount = [];
 
-        var date = new Date();
-        var constYear = {
-            nowYear: date.getFullYear().toString()
-        };
+//      var date = new Date();
+//      var constYear = {
+//          nowYear: date.getFullYear().toString()
+//      };
 
         this.init = function() {
             this.initHead();
@@ -48,7 +48,7 @@ define(function(require, exports, module) {
                 contentType: 'application/json',
                 data: {
                     tabName: 'trace',
-                    year: constYear.nowYear
+                    monthLimit: 12
                 },
                 done: function(returnData) {
                     var trace = returnData.data.trace;
@@ -75,7 +75,7 @@ define(function(require, exports, module) {
                 contentType: 'application/json',
                 data: {
                     tabName: 'task',
-                    year: constYear.nowYear
+                    monthLimit: 12
                 },
                 done: function(returnData) {
                     var carRecovery = returnData.data.task;
@@ -210,7 +210,7 @@ define(function(require, exports, module) {
             var mainLine = echarts.init(document.getElementById('mainLine'));
             var mainArea = echarts.init(document.getElementById('mainArea'));
 
-            var optionBar = {
+            mainBar.setOption({
                 color: ['#3398DB'],
                 tooltip: {
                     trigger: 'axis',
@@ -234,14 +234,14 @@ define(function(require, exports, module) {
                     type: 'value'
                 }],
                 series: [{
-                    name: '直接访问',
+                    name: '月度新增',
                     type: 'bar',
-                    barWidth: '60%',
+                    barWidth: '40%',
                     data: [10, 52, 200, 334, 390, 330, 220]
                 }]
-            };
+            });
 
-            var optionLine = {
+            mainLine.setOption({
                 tooltip: {
                     trigger: 'axis'
                 },
@@ -262,7 +262,7 @@ define(function(require, exports, module) {
                     type: 'value'
                 },
                 series: [{
-                    name: '模拟数据',
+                    name: '月度增长量',
                     type: 'line',
                     data: [820, 932, 901, 934, 1290, 1330, 1320],
                     areaStyle: {
@@ -277,11 +277,46 @@ define(function(require, exports, module) {
                         }
                     }
                 }]
-            };
+            });
+            
+            mainArea.setOption({
+                tooltip: {
+                    trigger: 'axis'
+                },
+                grid: {
+                    top: '3%',
+                    left: 0,
+                    right: 0,
+                    bottom: '2%'
+                },
+                xAxis: {
+                    show: false,
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                },
+                yAxis: {
+                    show: false,
+                    type: 'value'
+                },
+                series: [{
+                    name: '情报数',
+                    type: 'line',
+                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgb(255, 158, 68)'
+                            }, {
+                                offset: 1,
+                                color: 'rgb(255, 70, 131)'
+                            }])
+                        }
+                    }
+                }]
+            });
 
-            mainLine.setOption(optionLine);
-            mainBar.setOption(optionBar);
-            mainArea.setOption(optionLine);
 
         };
         
