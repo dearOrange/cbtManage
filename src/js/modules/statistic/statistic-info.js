@@ -15,6 +15,12 @@ define(function(require, exports, module) {
         _this.traceCount = [];
         _this.carRecoveryMonths = [];
         _this.carRecoveryCount = [];
+        _this.upstreamTrendMonths = [];
+        _this.traceTrendMonths = [];
+        _this.downstreamTrendMonths = [];
+        _this.upstreamTrendCount = [];
+        _this.traceTrendCount = [];
+        _this.downstreamTrendCount = [];
 
 //      var date = new Date();
 //      var constYear = {
@@ -23,7 +29,7 @@ define(function(require, exports, module) {
 
         this.init = function() {
             this.initHead();
-            this.sectionTable();
+            this.initSection();
             this.initContent();
             this.initClear();
             this.registerEvent();
@@ -34,21 +40,35 @@ define(function(require, exports, module) {
             jh.utils.ajax.send({
                 url: '/statistics/general',
                 done: function(returnData) {
+                	var upstreamTrendList =  returnData.data.upstream.trendList;
+                	var traceTrendList =  returnData.data.trace.trendList;
+                	var downstreamTrendList =  returnData.data.downstream.trendList;
+                	for (var a = 0; a < upstreamTrendList.length; a++) {
+                        _this.upstreamTrendMonths.push(upstreamTrendList[a].months);
+                        _this.upstreamTrendCount.push(upstreamTrendList[a].count);
+                    }
+                	for (var b = 0; b < traceTrendList.length; b++) {
+                        _this.traceTrendMonths.push(traceTrendList[b].months);
+                        _this.traceTrendCount.push(traceTrendList[b].count);
+                    }
+                	for (var c = 0; c < downstreamTrendList.length; c++) {
+                        _this.downstreamTrendMonths.push(downstreamTrendList[c].months);
+                        _this.downstreamTrendCount.push(downstreamTrendList[c].count);
+                    }
                     var dataFirst = jh.utils.template('statistic_first_template', returnData.data);
                     $('.echarts-list').html(dataFirst);
                     _this.headTable();
                 }
             });
         };
-
-        this.sectionTable = function() {
-            jh.utils.ajax.send({
+		this.initSection = function() {
+			jh.utils.ajax.send({
                 method: 'post',
                 url: '/statistics/traceTrend',
                 contentType: 'application/json',
                 data: {
                     tabName: 'trace',
-                    monthLimit: 12
+                    limit: '12'
                 },
                 done: function(returnData) {
                     var trace = returnData.data.trace;
@@ -56,17 +76,7 @@ define(function(require, exports, module) {
                         _this.traceMonths.push(trace[i].months);
                         _this.traceCount.push(trace[i].count);
                     }
-                    mainInformate.setOption({
-                        xAxis: {
-                            data: _this.traceMonths
-                        },
-                        series: [{
-                            // 根据名字对应到相应的系列
-                            name: '情报数',
-                            data: _this.traceCount
-                        }]
-                    });
-
+                    _this.sectionTable();
                 }
             });
             jh.utils.ajax.send({
@@ -75,7 +85,7 @@ define(function(require, exports, module) {
                 contentType: 'application/json',
                 data: {
                     tabName: 'task',
-                    monthLimit: 12
+                    limit: '12'
                 },
                 done: function(returnData) {
                     var carRecovery = returnData.data.task;
@@ -83,19 +93,12 @@ define(function(require, exports, module) {
                         _this.carRecoveryMonths.push(carRecovery[j].months);
                         _this.carRecoveryCount.push(carRecovery[j].count);
                     }
-                    mainCarNum.setOption({
-                        xAxis: {
-                            data: _this.carRecoveryMonths
-                        },
-                        series: [{
-                            // 根据名字对应到相应的系列
-                            name: '车辆清收数',
-                            data: _this.carRecoveryCount
-                        }]
-                    });
-
+                    _this.sectionTable();
                 }
             });
+		}
+        this.sectionTable = function() {
+            
 
 
             var mainInformate = echarts.init(document.getElementById('mainInformate'));
@@ -119,7 +122,7 @@ define(function(require, exports, module) {
                 },
                 xAxis: [{
                     type: 'category',
-                    data: []
+                    data: _this.traceMonths
                 }],
                 yAxis: [{
                     type: 'value'
@@ -128,7 +131,7 @@ define(function(require, exports, module) {
                     name: '情报数',
                     type: 'bar',
                     barWidth: '60%',
-                    data: []
+                    data: _this.traceCount
                 }]
             });
 
@@ -151,7 +154,7 @@ define(function(require, exports, module) {
                 },
                 xAxis: [{
                     type: 'category',
-                    data: []
+                    data: _this.carRecoveryMonths
                 }],
                 yAxis: [{
                     type: 'value'
@@ -160,7 +163,7 @@ define(function(require, exports, module) {
                     name: '车辆清收数',
                     type: 'bar',
                     barWidth: '60%',
-                    data: []
+                    data: _this.carRecoveryCount
                 }]
             });
 
@@ -227,7 +230,7 @@ define(function(require, exports, module) {
                 xAxis: [{
                     show: false,
                     type: 'category',
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    data: _this.downstreamTrendMonths
                 }],
                 yAxis: [{
                     show: false,
@@ -236,8 +239,8 @@ define(function(require, exports, module) {
                 series: [{
                     name: '月度新增',
                     type: 'bar',
-                    barWidth: '40%',
-                    data: [10, 52, 200, 334, 390, 330, 220]
+                    barWidth: '50%',
+                    data: _this.downstreamTrendCount
                 }]
             });
 
@@ -255,7 +258,7 @@ define(function(require, exports, module) {
                     show: false,
                     type: 'category',
                     boundaryGap: false,
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    data: _this.upstreamTrendMonths
                 },
                 yAxis: {
                     show: false,
@@ -264,7 +267,7 @@ define(function(require, exports, module) {
                 series: [{
                     name: '月度增长量',
                     type: 'line',
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    data: _this.upstreamTrendCount,
                     areaStyle: {
                         normal: {
                             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
@@ -293,7 +296,7 @@ define(function(require, exports, module) {
                     show: false,
                     type: 'category',
                     boundaryGap: false,
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    data: _this.traceTrendMonths
                 },
                 yAxis: {
                     show: false,
@@ -302,7 +305,7 @@ define(function(require, exports, module) {
                 series: [{
                     name: '情报数',
                     type: 'line',
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    data: _this.traceTrendCount,
                     areaStyle: {
                         normal: {
                             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
