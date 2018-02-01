@@ -25,6 +25,7 @@ define(function(require, exports, module) {
         _this.upstreamTrendCount = [];
         _this.traceTrendCount = [];
         _this.downstreamTrendCount = [];
+        _this.countRate = 0;
 
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
@@ -361,16 +362,11 @@ define(function(require, exports, module) {
                         noResultBox.addClass('hide');
                         noResultBox.prev().removeClass('hide');
                     }
-                    var objSucceed = {},
-                        objFailed = {};
                     var entrustContent = jh.utils.template('entrust_content_template', returnData);
                     $('#entrustResultBox').html(entrustContent);
                     for (var k = 0; k < entrust.length; k++) {
-                        objSucceed.value = entrust[k].countSucceed;
-                        objSucceed.name = '委托成功数';
-                        objFailed.value = entrust[k].countFailed;
-                        objFailed.name = '委托失败数';
-                        _this.pieContent(k, objSucceed, objFailed);
+                        _this.countRate = entrust[k].countRate;
+                        _this.pieContent(k, _this.countRate);
                     }
 
                 }
@@ -384,40 +380,15 @@ define(function(require, exports, module) {
             });
 
         };
-        this.pieContent = function(k, objSucceed, objFailed) {
-            //图表
-            var pieOne = echarts.init(document.getElementById('pie' + k));
-            pieOne.setOption({
-                tooltip: {
-                    trigger: 'item',
-                    formatter: "{a} <br/>{b}: {c} ({d}%)"
-                },
-                series: [{
-                    name: '渠道委托',
-                    type: 'pie',
-                    radius: ['50%', '70%'],
-                    avoidLabelOverlap: false,
-                    label: {
-                        normal: {
-                            show: false,
-                            position: 'center'
-                        },
-                        emphasis: {
-                            show: true,
-                            textStyle: {
-                                fontSize: '14',
-                                fontWeight: 'bold'
-                            }
-                        }
-                    },
-                    labelLine: {
-                        normal: {
-                            show: false
-                        }
-                    },
-                    data: [objSucceed, objFailed]
-                }]
-            });
+        this.pieContent = function(k, countRate) {
+        	radialIndicator('#pie' + k, {
+			    showPercentage : false, // option
+			    barColor: '#87CEEB',
+		        barWidth: 10,
+		        initValue: countRate,
+		        roundCorner : true,
+		        percentage: true
+			});
         }
     }
     /**
