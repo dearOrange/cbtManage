@@ -8,9 +8,13 @@
 define(function(require, exports, module) {
     function StatisticInfo() {
         var _this = this;
-        _this.form = $('#information-form');
-        _this.clearform = $('#clear-info-form');
-        _this.entrustform = $('#entrust-form');
+        var date = new Date();
+        var now = {
+            year: date.getFullYear(),
+            month: date.getMonth() + 1
+        };
+        now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
+
         _this.traceMonths = [];
         _this.traceCount = [];
         _this.carRecoveryMonths = [];
@@ -22,16 +26,13 @@ define(function(require, exports, module) {
         _this.traceTrendCount = [];
         _this.downstreamTrendCount = [];
 
-//      var date = new Date();
-//      var constYear = {
-//          nowYear: date.getFullYear().toString()
-//      };
-
         this.init = function() {
+            $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
             this.initHead();
-            this.initSection();
-            this.initContent();
-            this.initClear();
+            this.sectionTable();
+            window.initContent('2018-01');
+            window.initClear('2018-01');
+            window.initEntrustSort('2018-01');
             this.registerEvent();
         };
 
@@ -40,18 +41,18 @@ define(function(require, exports, module) {
             jh.utils.ajax.send({
                 url: '/statistics/general',
                 done: function(returnData) {
-                	var upstreamTrendList =  returnData.data.upstream.trendList;
-                	var traceTrendList =  returnData.data.trace.trendList;
-                	var downstreamTrendList =  returnData.data.downstream.trendList;
-                	for (var a = 0; a < upstreamTrendList.length; a++) {
+                    var upstreamTrendList = returnData.data.upstream.trendList;
+                    var traceTrendList = returnData.data.trace.trendList;
+                    var downstreamTrendList = returnData.data.downstream.trendList;
+                    for (var a = 0; a < upstreamTrendList.length; a++) {
                         _this.upstreamTrendMonths.push(upstreamTrendList[a].months);
                         _this.upstreamTrendCount.push(upstreamTrendList[a].count);
                     }
-                	for (var b = 0; b < traceTrendList.length; b++) {
+                    for (var b = 0; b < traceTrendList.length; b++) {
                         _this.traceTrendMonths.push(traceTrendList[b].months);
                         _this.traceTrendCount.push(traceTrendList[b].count);
                     }
-                	for (var c = 0; c < downstreamTrendList.length; c++) {
+                    for (var c = 0; c < downstreamTrendList.length; c++) {
                         _this.downstreamTrendMonths.push(downstreamTrendList[c].months);
                         _this.downstreamTrendCount.push(downstreamTrendList[c].count);
                     }
@@ -61,8 +62,8 @@ define(function(require, exports, module) {
                 }
             });
         };
-		this.initSection = function() {
-			jh.utils.ajax.send({
+        this.initSection = function() {
+            jh.utils.ajax.send({
                 method: 'post',
                 url: '/statistics/traceTrend',
                 contentType: 'application/json',
@@ -96,11 +97,8 @@ define(function(require, exports, module) {
                     _this.sectionTable();
                 }
             });
-		}
+        }
         this.sectionTable = function() {
-            
-
-
             var mainInformate = echarts.init(document.getElementById('mainInformate'));
             var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
             mainInformate.setOption({
@@ -170,7 +168,11 @@ define(function(require, exports, module) {
 
         };
 
-        this.initContent = function() {
+        window.initContent = function(obj) {
+
+            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+
             var page = new jh.ui.page({
                 data_container: $('#statistic_container'),
                 page_container: $('#page_container'),
@@ -182,8 +184,8 @@ define(function(require, exports, module) {
                 contentType: 'application/json',
                 data: {
                     type: 'trace',
-                    pageSize:5,
-                    yearMonth: $('#infoTimeInput').val()
+                    pageSize: 5,
+                    yearMonth: obj.y + '-' + obj.M
                 },
                 callback: function(data) {
                     return jh.utils.template('statistic_content_template', data);
@@ -192,14 +194,21 @@ define(function(require, exports, module) {
             page.init();
         };
 
-        this.initClear = function() {
+        window.initClear = function(obj) {
+
+            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+
             var page = new jh.ui.page({
                 data_container: $('#clear_info_container'),
                 page_container: $('#page_clear_container'),
                 method: 'post',
                 url: '/statistics/sort',
                 contentType: 'application/json',
-                data: jh.utils.formToJson(_this.clearform),
+                data: {
+                    type: 'carRecovery',
+                    yearMonth: obj.y + '-' + obj.M
+                },
                 callback: function(data) {
                     return jh.utils.template('clear_content_template', data);
                 }
@@ -281,7 +290,7 @@ define(function(require, exports, module) {
                     }
                 }]
             });
-            
+
             mainArea.setOption({
                 tooltip: {
                     trigger: 'axis'
@@ -322,18 +331,17 @@ define(function(require, exports, module) {
 
 
         };
-        
-        this.registerEvent = function() {
 
-            $('select').select2({
-                minimumResultsForSearch: Infinity
-            });
-
+        window.initEntrustSort = function(obj) {
+            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
             jh.utils.ajax.send({
                 method: 'post',
                 url: '/statistics/entrust',
                 contentType: 'application/json',
-                data: jh.utils.formToJson(_this.entrustform),
+                data: {
+                    yearMonth: obj.y + '-' + obj.M
+                },
                 done: function(returnData) {
                     var entrust = returnData.data;
                     var objSucceed = {},
@@ -350,8 +358,13 @@ define(function(require, exports, module) {
 
                 }
             });
+        };
 
+        this.registerEvent = function() {
 
+            $('select').select2({
+                minimumResultsForSearch: Infinity
+            });
 
         };
         this.pieContent = function(k, objSucceed, objFailed) {
@@ -390,5 +403,50 @@ define(function(require, exports, module) {
             });
         }
     }
+    /**
+     * 情报begin
+     */
+    window.statisticTraceMonthChanged = function() {
+        var obj = $dp.cal.newdate;
+        window.initContent(obj);
+    };
+    window.statisticTraceYearChanged = function() {
+        var obj = $dp.cal.newdate;
+        window.initContent(obj);
+    };
+    /**
+     * 情报end
+     */
+
+    /**
+     * 渠道委托begin
+     */
+    window.statisticEntrustMonthChanged = function() {
+        var obj = $dp.cal.newdate;
+        window.initEntrustSort(obj);
+    };
+    window.statisticEntrustYearChanged = function() {
+        var obj = $dp.cal.newdate;
+        window.initEntrustSort(obj);
+    };
+    /**
+     * 渠道委托end
+     */
+
+    /**
+     * 车辆清收begin
+     */
+    window.statisticRecoveryMonthChanged = function() {
+        var obj = $dp.cal.newdate;
+        window.initClear(obj);
+    };
+    window.statisticRecoveryYearChanged = function() {
+        var obj = $dp.cal.newdate;
+        window.initClear(obj);
+    };
+    /**
+     * 车辆清收end
+     */
+
     module.exports = StatisticInfo;
 });
