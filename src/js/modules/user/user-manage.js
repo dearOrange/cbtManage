@@ -171,6 +171,7 @@ define(function(require, exports, module) {
                     	var editarr = [];
                     	if(infos.type === "channel"){
                     		var valueEdit = editData.operatorProvinceDtoList;
+                    		valueEdit = jh.utils.isArray(valueEdit) ? valueEdit : [valueEdit];
 							for(var b=0;b<valueEdit.length;b++){
 								var provinceEdit = valueEdit[b].split('-');
 								editarr.push({
