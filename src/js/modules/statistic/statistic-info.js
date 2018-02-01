@@ -30,6 +30,7 @@ define(function(require, exports, module) {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
             this.initHead();
             this.sectionTable();
+            this.initSection();
             window.initContent('2018-01');
             window.initClear('2018-01');
             window.initEntrustSort('2018-01');
@@ -130,7 +131,16 @@ define(function(require, exports, module) {
                     type: 'bar',
                     barWidth: '60%',
                     data: _this.traceCount
-                }]
+                }],
+                noDataLoadingOption: {
+                    text: '暂无数据',
+                    effect: 'bubble',
+                    effectOption: {
+                        effect: {
+                            n: 0
+                        }
+                    }
+                }
             });
 
             mainCarNum.setOption({
@@ -328,8 +338,6 @@ define(function(require, exports, module) {
                     }
                 }]
             });
-
-
         };
 
         window.initEntrustSort = function(obj) {
@@ -344,10 +352,19 @@ define(function(require, exports, module) {
                 },
                 done: function(returnData) {
                     var entrust = returnData.data;
+                    var noResultBox = $('#entrustNoResultBox');
+                    if (!entrust.length) {
+                        noResultBox.removeClass('hide');
+                        noResultBox.prev().addClass('hide');
+                        return false;
+                    } else {
+                        noResultBox.addClass('hide');
+                        noResultBox.prev().removeClass('hide');
+                    }
                     var objSucceed = {},
                         objFailed = {};
                     var entrustContent = jh.utils.template('entrust_content_template', returnData);
-                    $('.channelInfo').html(entrustContent);
+                    $('#entrustResultBox').html(entrustContent);
                     for (var k = 0; k < entrust.length; k++) {
                         objSucceed.value = entrust[k].countSucceed;
                         objSucceed.name = '委托成功数';
