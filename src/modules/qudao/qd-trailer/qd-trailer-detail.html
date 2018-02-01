@@ -70,16 +70,31 @@
         	{{each data.trailerFailList data index}}
         	<div class="upimg">
         		<p class="failRecord" style="font-weight: 500;">
-        			<span>捕头：</span>
-        			<span>失败原因：</span>
-        			<span>上传凭证时间：</span>
-        			<span>备注说明：</span>
+        			<span>{{index+1}}</span>
+        			<span>捕头：{{data.downstreamName}}</span>
+        			<span>失败原因：{{data.reason}}</span>
+        			<span>上传凭证时间：{{data.createAt}}</span>
+        			<span>备注说明：{{data.remark}}</span>
         		</p>
         		<p style="font-weight: 500;margin-left:20px;">图片凭证</p>
         		<dl>
 					<dt>
 						<div class="upfile-item">
-							<img class="preview-img hand" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'"/>
+							<img class="preview-img hand" src="{{viewImgRoot}}{{data.picture1}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'"/>
+						</div>
+	    			</dt>
+				</dl>
+				<dl>
+					<dt>
+						<div class="upfile-item">
+							<img class="preview-img hand" src="{{viewImgRoot}}{{data.picture2}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'"/>
+						</div>
+	    			</dt>
+				</dl>
+				<dl>
+					<dt>
+						<div class="upfile-item">
+							<img class="preview-img hand" src="{{viewImgRoot}}{{data.picture3}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'"/>
 						</div>
 	    			</dt>
 				</dl>
@@ -88,7 +103,9 @@
 				<dl>
 					<dt>
 						<div class="upfile-item">
-							<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100">
+						<video width="100" height="100" autoplay>
+							<source class="preview-img hand" src="{{viewImgRoot}}{{data.video}}" type="video/mp4"></source>
+						</video>
 						</div>
 	    			</dt>
 				</dl>
