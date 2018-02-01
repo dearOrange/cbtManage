@@ -6,7 +6,7 @@
                 <p class="title-style">
                     <span>情报数</span>
                     <input type="hidden" name="type" value="trace" />
-                    <input type="text" class="search-input hand startTime pull-right" readonly="readonly" value="2018-01" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM'})">
+                    <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanged:statisticTraceMonthChanged,ychanged:statisticTraceYearChanged})">
                 </p>
             </form>
             <div>
@@ -35,29 +35,28 @@
             <form id="entrust-form">
                 <p class="title-style">
                     <span>渠道委托</span>
-                    <input type="text" class="search-input hand startTime pull-right" readonly="readonly" value="2018-01" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM'})">
+                    <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanged:statisticEntrustMonthChanged,ychanged:statisticEntrustYearChanged})">
                 </p>
             </form>
             <div class="floatList mt10">
                 <div class="preBtn publicBtn hand">&lt;</div>
-                        <div class="channelInfo">
-                            
-                        </div>
-                        <div class="nextBtn publicBtn hand">&gt;</div>
-                </div>
+                <div class="channelInfo" id="entrustResultBox"></div>
+                <div class="nextBtn publicBtn hand">&gt;</div>
+            </div>
+            <div class="mt10 hide" id="entrustNoResultBox" style="height: 166px;line-height: 166px;text-align: center;">暂无委托</div>
             </div>
             <div class="information">
                 <form id="clear-info-form">
                     <p class="title-style">
                         <span>车辆清收数</span>
                         <input type="hidden" name="type" value="carRecovery" />
-                        <input type="text" class="search-input hand startTime pull-right" readonly="readonly" value="2018-01" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM'})">
+                        <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="carRecoveryInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanged:statisticRecoveryMonthChanged,ychanged:statisticRecoveryYearChanged})">
                     </p>
                 </form>
                 <div>
                     <div id="mainCarNum" class="mainInformate" style="width:65%;height:300px;"></div>
                     <div id="informateTable">
-                        <p>清收数排名（2018-1）</p>
+                        <p>清收数排名</p>
                         <div class="data-container">
                             <table class="dataShow">
                                 <thead>
