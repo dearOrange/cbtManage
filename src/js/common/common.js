@@ -883,12 +883,12 @@ define(function(require, exports, module) {
             var s = m.settings;
             s.page_container.addClass('pagination');
 
-            if ( typeof data_flag[s.url] === 'undefined' || s.isSearch) {
-                m.render(1);
-            } else {
-                m.render(data_flag[s.url]);
-            }
-            // m.render(1);
+            // if ( typeof data_flag[s.url] === 'undefined' || s.isSearch) {
+            //     m.render(1);
+            // } else {
+            //     m.render(data_flag[s.url]);
+            // }
+            m.render(1);
             m.regEvent();
         };
         Page.prototype.create = function(num) {
@@ -1032,7 +1032,7 @@ define(function(require, exports, module) {
         Page.prototype.render = function(pageNum) {
             var m = this,
                 s = m.settings;
-            data_flag[s.url] = pageNum;
+            // data_flag[s.url] = pageNum;
             s.data.pageNum = pageNum;
             tammy.utils.ajax.send({
                 url: s.url,
