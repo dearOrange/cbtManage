@@ -789,7 +789,7 @@ define(function(require, exports, module) {
                     var str1 = args.substring(0, args.lastIndexOf('/'));
                     var str2 = itemModule.substring(0, args.lastIndexOf('/'));
                     if (args === itemModule + '.html' || str1 === str2) {
-                    	findFlag = true;
+                        findFlag = true;
                         if (typeof fn === 'function') {
                             fn(item);
                         } else {
@@ -805,8 +805,8 @@ define(function(require, exports, module) {
                 if(!findFlag) {
                     breadCrumb.text(txt);
                 } else {
-                	txt += activeFirst.text();
-                	txt = '首页 > ' + txt;
+                    txt += activeFirst.text();
+                    txt = '首页 > ' + txt;
                     breadCrumb.text(txt);
                 }
                 
@@ -883,12 +883,24 @@ define(function(require, exports, module) {
             var s = m.settings;
             s.page_container.addClass('pagination');
 
-            // if ( typeof data_flag[s.url] === 'undefined' || s.isSearch) {
-            //     m.render(1);
-            // } else {
-            //     m.render(data_flag[s.url]);
-            // }
-            m.render(1);
+            if( typeof data_flag[s.url] === 'undefined' ){
+                data_flag[s.url] = {
+                   pageNum: 1,
+                   data: s.data
+                };
+            }
+
+            if( s.isSearch ){
+                data_flag[s.url].pageNum = 1;
+                data_flag[s.url].data = s.data;
+            }
+
+            if ( typeof data_flag[s.url] === 'undefined' || s.isSearch) {
+                m.render(1);
+            } else {
+                m.render(data_flag[s.url].pageNum);
+            }
+            // m.render(1);
             m.regEvent();
         };
         Page.prototype.create = function(num) {
@@ -1032,7 +1044,10 @@ define(function(require, exports, module) {
         Page.prototype.render = function(pageNum) {
             var m = this,
                 s = m.settings;
-            // data_flag[s.url] = pageNum;
+              
+            data_flag[s.url].pageNum = pageNum;
+            data_flag[s.url].data = s.data;
+            
             s.data.pageNum = pageNum;
             tammy.utils.ajax.send({
                 url: s.url,

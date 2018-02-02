@@ -29,7 +29,7 @@ define(function(require, exports, module) {
         })
 
         this.init = function() {
-        	this.initContent();
+        	this.initContent(true);
         	this.initTaskTotalCount();
             this.registerEvent();
         };
@@ -181,7 +181,7 @@ define(function(require, exports, module) {
 	            	minimumResultsForSearch:Infinity
 	            });
             	$('#state').val(mine.data('value'))
-            	_this.initContent();
+            	_this.initContent(true);
             })
 			
 			
@@ -210,7 +210,7 @@ define(function(require, exports, module) {
 	                    			jh.utils.alert({
 	                    				content: "信息已修复",
 	                    				ok: function(){
-	                                    	_this.initContent();
+	                                    	_this.initContent(false);
 	                                    }
 	                    			})
                     			}, 10000);
