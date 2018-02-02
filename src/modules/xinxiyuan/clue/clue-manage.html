@@ -99,7 +99,7 @@
 		<td>{{item.createAt}}</td>
 		<td>
 			<ul class="operaitem" style="margin-left:24px;">
-				{{if item.state == "new"}}
+				{{if item.state === "new"}}
 				<li>
 					<a data-id="{{item.id}}" class="agreement button">通过</a>
 				</li>
@@ -107,9 +107,15 @@
 					<a data-id="{{item.id}}" class="pass button">拒绝</a>
 				</li>
 				{{else}}
-				<li>
-					—— ——
+				{{if item.state === "passed"}}
+				<li style="color:limegreen;">
+					已通过
 				</li>
+				{{else}}
+				<li style="color:red;">
+					已拒绝
+				</li>
+				{{/if}}
 				{{/if}}
 			</ul>
 		</td>
