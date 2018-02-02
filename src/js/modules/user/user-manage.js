@@ -78,10 +78,16 @@ define(function(require, exports, module) {
 							
 							var formData = jh.utils.formToJson($('#newincreate-form'));
 							var arrs = [];
-							var valueArr = jh.utils.isArray(formData.operatorProvinceDtoList) ? formData.operatorProvinceDtoList : [formData.operatorProvinceDtoList];
+							var valueArr = formData.operatorProvinceDtoList;
+							if(!valueArr) {
+								jh.utils.alert({
+									content: '请选择省份',
+									ok: true
+								})
+								return false;
+							}
+							valueArr = jh.utils.isArray(valueArr) ? valueArr : [valueArr];
 							var ids = jh.utils.getCheckboxValue('newincreate-form', 'value');
-							
-							
 							for(var a=0;a<valueArr.length;a++){
 								var provinceType = valueArr[a].split('-');
 								arrs.push({
@@ -171,6 +177,13 @@ define(function(require, exports, module) {
                     	var editarr = [];
                     	if(infos.type === "channel"){
                     		var valueEdit = editData.operatorProvinceDtoList;
+                    		if(!valueEdit) {
+								jh.utils.alert({
+									content: '请选择省份',
+									ok: true
+								})
+								return false;
+							}
                     		valueEdit = jh.utils.isArray(valueEdit) ? valueEdit : [valueEdit];
 							for(var b=0;b<valueEdit.length;b++){
 								var provinceEdit = valueEdit[b].split('-');
