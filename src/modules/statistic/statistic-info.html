@@ -174,8 +174,9 @@
     {{/each}}
 </script>
 <script type="text/template" id="entrust_content_template">
+	<div class="channelInner">
     {{ each data item index }}
-    <dl>
+    <dl class="channelDistance">
         <dd>
             <p>{{item.channelName}}</p>
             <p>委托数</p>
@@ -184,6 +185,7 @@
         <dt id="pie{{index}}"></dt>
     </dl>
     {{/each}}
+	</div>
 </script>
 <script type="text/javascript">
 seajs.use('modules/statistic/statistic-info', function(StatisticInfo) {

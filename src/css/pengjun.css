@@ -427,6 +427,7 @@ p.closeStatus {
     text-align: center;
     line-height: 164px;
     background: #F9F9F9;
+    z-index:9;
 }
 
 .dataContent .data-container .channelPie div.floatList div.nextBtn {
@@ -441,8 +442,15 @@ p.closeStatus {
 .dataContent .data-container .channelPie div.floatList div.channelInfo {
     width: 88%;
     height: 144px;
-    overflow-x: hidden;
+    overflow: hidden;
     padding: 10px 20px;
+    position:relative;
+}
+
+.dataContent .data-container .channelPie div.floatList div.channelInfo .channelInner {
+	position:absolute;
+	left:20px;
+	top:10px;
 }
 
 .dataContent .data-container .channelPie div.floatList div.channelInfo dl {
