@@ -394,9 +394,10 @@ define(function(require, exports, module) {
 			var cc = $('.channelInfo').width();
 			if(aa > cc) {
 	        	$('body').off('click', '.preBtn').on('click', '.preBtn', function() {
-	        		$('.channelInner').css('marginLeft','-240px');
-	        		$(".channelInner dl").eq(k).prependTo($(".channelInner"));
-	        		$('.channelInner').animate({marginLeft:"0px"}, 1000);
+	        		$('.channelInner').animate({marginLeft:"0px"}, 1000, function() {
+	        			$(".channelInner dl").eq(k).prependTo($(".channelInner"));
+	        			$('.channelInner').css('marginLeft','-240px');
+	        		});
 	        	});
 	        	$('body').off('click', '.nextBtn').on('click', '.nextBtn', function() {
 	        		$('.channelInner').animate({marginLeft:"-240px"},1000, function(){
