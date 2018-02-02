@@ -701,7 +701,6 @@ define(function(require, exports, module) {
                     txt += activeFirst.text();
                     if (!txt) {
                         breadParnet.hide();
-                        return false;
                     }
                     txt = '首页 > ' + txt;
                     breadCrumb.text(txt);
@@ -780,6 +779,7 @@ define(function(require, exports, module) {
     (function() {
         var defaultContent = function(targetURL, fn) {
             var currURL = window.location;
+            var findFlag = false;
             if (currURL.hash) {
                 var args = targetURL ? targetURL : (tammy.utils.getURLValue()).module;
                 var allMenu = $('#leftMenu-box').find('li');
@@ -789,6 +789,7 @@ define(function(require, exports, module) {
                     var str1 = args.substring(0, args.lastIndexOf('/'));
                     var str2 = itemModule.substring(0, args.lastIndexOf('/'));
                     if (args === itemModule + '.html' || str1 === str2) {
+                    	findFlag = true;
                         if (typeof fn === 'function') {
                             fn(item);
                         } else {
@@ -797,6 +798,18 @@ define(function(require, exports, module) {
                         }
                     }
                 }
+                var txt = '';
+                var breadCrumb = $('#breadCrumb'); //面包屑容器
+                var moduleCon = $('#leftMenu-box').find('li.active'); //一级菜单
+                var activeFirst = moduleCon.children('a');
+                if(!findFlag) {
+                    breadCrumb.text(txt);
+                } else {
+                	txt += activeFirst.text();
+                	txt = '首页 > ' + txt;
+                    breadCrumb.text(txt);
+                }
+                
             } else {
                 jh.utils.load('/src/modules/welcome/welcome.html');
             }
