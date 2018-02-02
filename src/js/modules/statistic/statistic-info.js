@@ -389,7 +389,23 @@ define(function(require, exports, module) {
 		        roundCorner : true,
 		        percentage: true
 			});
-        }
+			var aa = $('.channelDistance').width() * (k+1);
+			$('.channelInner').width(aa);
+			var cc = $('.channelInfo').width();
+			if(aa > cc) {
+	        	$('body').off('click', '.preBtn').on('click', '.preBtn', function() {
+	        		$('.channelInner').css('marginLeft','-240px');
+	        		$(".channelInner dl").eq(k).prependTo($(".channelInner"));
+	        		$('.channelInner').animate({marginLeft:"0px"}, 1000);
+	        	});
+	        	$('body').off('click', '.nextBtn').on('click', '.nextBtn', function() {
+	        		$('.channelInner').animate({marginLeft:"-240px"},1000, function(){
+	        			$(".channelInner dl").eq(0).appendTo($(".channelInner"));
+	        			$('.channelInner').css('marginLeft','0px');
+	        		})
+	        	})
+        	}
+        };
     }
     /**
      * 情报begin
