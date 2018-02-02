@@ -12,11 +12,11 @@
 		<div class="clearfix"></div>
 		<hr /><br />
 		<p class="pull-left">基本信息</p>
-		{{if data.state == "unverified"}}
+		{{if data.state === "unverified"}}
 		<p class="showTaskState pull-right">{{menuState(data.state)}}</p>
 		{{else}}
 		<p class="showTaskState pull-right">
-			{{if data.isIssue == "0"}} 委托不存在 {{else}} 委托存在 {{/if}}
+			{{if data.isIssue === "0"}} 委托不存在 {{else}} 委托存在 {{/if}}
 		</p>
 		
 		{{/if}}
@@ -41,7 +41,7 @@
 				<img data-id="{{data.pic3}}" src="{{viewImgRoot}}{{data.pic3}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand" onerror="this.src='/src/img/nopic.png'"/>
 			</div>
 		</div>
-		{{if data.state == "unverified"}}
+		{{if data.state === "unverified"}}
 		<div>
 			<p>委托验证</p>
 			<div>

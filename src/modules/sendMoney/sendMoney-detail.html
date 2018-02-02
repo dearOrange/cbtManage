@@ -81,7 +81,7 @@
 			<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.voucher2}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}} {{if data.voucher3}}
 			<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{data.voucher3}}?imageMogr2/auto-orient/thumbnail/100x100" /> {{/if}}
 		</div>
-		{{/if}} {{if data.state == "withdrawing"}}
+		{{/if}} {{if data.state === "withdrawing"}}
 		<a href="javascript:;" class="button playMoney">打款</a>
 		<a href="javascript:;" class="button rejectMoney">拒绝提现申请</a> {{/if}}
 	</div>

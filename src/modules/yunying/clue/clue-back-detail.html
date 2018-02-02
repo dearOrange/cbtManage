@@ -49,7 +49,7 @@
         	<div style="margin:10px 0;">线索上传时间：{{data.createAt}}</div>
         	{{/each}}
         </div>
-        {{if data.state == "unvaluation"}}
+        {{if data.state === "unvaluation"}}
         <div class="hopeprice">
         	<p>预估费用</p>
         	<div>
@@ -58,7 +58,7 @@
             </div>
         </div>
         {{/if}}
-        {{if data.state == "unconfirmed"}}
+        {{if data.state === "unconfirmed"}}
         <div class="hopeprice">
         	<p>确认费用</p>
         	<div>
@@ -82,7 +82,7 @@
         <div class="clearfix"></div>
 		<p>议价小计</p><br />
 		<div class="upmainfile onlineSubtotal">
-			{{if data.state == "unvaluation"}}
+			{{if data.state === "unvaluation"}}
 			<ol>
 				<li class="addMoneytotal hand">+添加议价小计</li>
 			</ol>

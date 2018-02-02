@@ -11,7 +11,7 @@
         <hr />
         <div style="overflow: hidden; margin-bottom:0;">
         	<p class="pull-left">上传捕头</p>
-        	{{if passState == "1"}}
+        	{{if passState === "1"}}
         	<p class="showTaskState pull-right">已成功匹配任务{{data.taskNo}}</p>
         	{{else}}
         	<p class="showTaskState pull-right">未成功匹配任务</p>
@@ -63,7 +63,7 @@
         		<label>IP地址</label>
         		<span>{{data.ipCity}}</span>
         	</div>
-        	{{if passState == "1"}}
+        	{{if passState === "1"}}
         	<input type="button" value="审核" class="button search-button auditClue" style="margin-bottom:40px;width:150px;height:30px;">
         	{{/if}}
         </div>

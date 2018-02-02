@@ -108,10 +108,10 @@
         	</div>
         	{{/if}}
         </div>
-        {{if data.state == "unconfirmed"|| data.state ==="unvaluation"}}
+        {{if data.state === "unconfirmed"|| data.state === "unvaluation"}}
         <p>议价小计</p><br />
 		<div class="upmainfile onlineSubtotal">
-			{{if data.state == "unvaluation"}}
+			{{if data.state === "unvaluation"}}
 			<ol>
 				<li class="addMoneytotal hand">+添加议价小计</li>
 			</ol>
