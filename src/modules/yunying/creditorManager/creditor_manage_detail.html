@@ -181,20 +181,22 @@
 </script>
 <script type="text/template" id="creditor_addSubtotal_template">
 	<div class="officer-width">
+		<form id="sub-customer-form">
 		<div class="addContent customerType">
 			<div>
 				<label>联系对象</label>
-				<input type="text" maxlength="11" placeholder="请输入联系对象" id="subPerson" />
+				<input type="text" name='contacts' maxlength="11" placeholder="请输入联系对象" id="subPerson" />
 			</div>
 			<div>
 				<label>联系方式</label>
-				<input type="text" class="require isTelephone" maxlength="13" placeholder="请输入联系方式" id="subStyle" />
+				<input type="text" name='contactPhone' maxlength="13" placeholder="请输入联系方式" class="isMobile" id="subStyle" />
 			</div>
 			<div>
 				<label>联系内容</label>
-				<textarea name="" maxlength="40" placeholder="请输入联系内容" id="subContent"></textarea>
+				<textarea name="content" maxlength="40" placeholder="请输入联系内容" id="subContent"></textarea>
 			</div>
 		</div>
+		</form>
 	</div>
 </script>
 <script type="text/template" id="creditor-publishTask-template">
