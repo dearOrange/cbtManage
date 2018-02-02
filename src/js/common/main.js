@@ -12,6 +12,7 @@ define(function(require, exports, module) {
         _this.requestInterId = null;
         this.init = function() {
             this.initPlugins();
+        	this.initLogin();
             _this.initMenu();
             _this.registerEvent();
 
@@ -21,7 +22,19 @@ define(function(require, exports, module) {
 
             _this.initUnReadMessage();
         };
-
+		this.initLogin = function() {
+			jh.utils.ajax.send({
+                url: '/operator/info',
+                done: function(returnData) {
+                    var isData = returnData.data;
+                    if(!isData.wechat || !isData.mobile || !isData.email) {
+                    	jh.utils.load("/src/modules/person/person-center");
+                    	$('#leftMenu-box').addClass('hide');
+                    }
+                }
+            });
+		};
+		
         this.initPlugins = function() {
             window.jh = require('common'); //自定义对象
             jh.utils.template = require('template'); //为自定义函数

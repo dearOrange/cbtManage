@@ -83,7 +83,7 @@ define(function(require, exports, module) {
                        url: '/operator/editInfo',
                        data: datas,
                        done: function(returnData) {
-                           jh.utils.load("/src/modules/person/person-file");
+                           window.location.reload();
                        }
                    });
                    return false;
