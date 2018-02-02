@@ -841,6 +841,7 @@ define(function(require, exports, module) {
     })();
 
     (function() {
+        var data_flag = {};
         function Page(options) {
             var m = this;
             m.settings = {
@@ -879,9 +880,15 @@ define(function(require, exports, module) {
         }
         Page.prototype.init = function() {
             var m = this;
-            // m.settings.pageSize = tammy.config.defaultPageSize;
-            m.settings.page_container.addClass('pagination');
-            m.render(1);
+            var s = m.settings;
+            s.page_container.addClass('pagination');
+
+            if ( typeof data_flag[s.url] === 'undefined' || s.isSearch) {
+                m.render(1);
+            } else {
+                m.render(data_flag[s.url]);
+            }
+            // m.render(1);
             m.regEvent();
         };
         Page.prototype.create = function(num) {
@@ -1025,6 +1032,7 @@ define(function(require, exports, module) {
         Page.prototype.render = function(pageNum) {
             var m = this,
                 s = m.settings;
+            data_flag[s.url] = pageNum;
             s.data.pageNum = pageNum;
             tammy.utils.ajax.send({
                 url: s.url,
