@@ -410,11 +410,11 @@ define(function(require, exports, module) {
     /**
      * 情报begin
      */
-    window.statisticTraceMonthChanged = function() {
+    window.statisticTraceMonthing = function() {
         var obj = $dp.cal.newdate;
         window.initContent(obj);
     };
-    window.statisticTraceYearChanged = function() {
+    window.statisticTraceYearing = function() {
         var obj = $dp.cal.newdate;
         window.initContent(obj);
     };
@@ -425,11 +425,11 @@ define(function(require, exports, module) {
     /**
      * 渠道委托begin
      */
-    window.statisticEntrustMonthChanged = function() {
+    window.statisticEntrustMonthing = function() {
         var obj = $dp.cal.newdate;
         window.initEntrustSort(obj);
     };
-    window.statisticEntrustYearChanged = function() {
+    window.statisticEntrustYearing = function() {
         var obj = $dp.cal.newdate;
         window.initEntrustSort(obj);
     };
@@ -440,11 +440,11 @@ define(function(require, exports, module) {
     /**
      * 车辆清收begin
      */
-    window.statisticRecoveryMonthChanged = function() {
+    window.statisticRecoveryMonthing = function() {
         var obj = $dp.cal.newdate;
         window.initClear(obj);
     };
-    window.statisticRecoveryYearChanged = function() {
+    window.statisticRecoveryYearing = function() {
         var obj = $dp.cal.newdate;
         window.initClear(obj);
     };
