@@ -66,12 +66,24 @@ define(function(require, exports, module) {
     })();
     (function() {
         function initGeocoder() {
-            AMap.service('AMap.Geocoder', function() { //回调函数
-                //实例化Geocoder
-                tammy.utils.geocoder = new AMap.Geocoder({
-                    city: "010" //城市，默认：“全国”
+            try{
+                AMap.service('AMap.Geocoder', function() { //回调函数
+                    //实例化Geocoder
+                    tammy.utils.geocoder = new AMap.Geocoder({
+                        city: "010" //城市，默认：“全国”
+                    });
                 });
-            });
+            }catch(e){
+                window.setInterval(function(){
+                    AMap.service('AMap.Geocoder', function() { //回调函数
+                        //实例化Geocoder
+                        jh.utils.geocoder = new AMap.Geocoder({
+                            city: "010" //城市，默认：“全国”
+                        });
+                    });
+                },600);
+            }
+            
         }
         tammy.utils.initGeocoder = initGeocoder;
     })();
