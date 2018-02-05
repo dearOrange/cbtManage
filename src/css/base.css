@@ -331,9 +331,9 @@ label.error {
 }
 
 .icon.icon-icon_closeMenu {
-    width: 32px;
-    height: 30px;
-    background: url(../img/icon/icon-closeMenu.png) no-repeat;
+    width: 26px;
+    height: 50px;
+    background: url(../img/icon/icon-closeMenu.png) no-repeat -14px 0;
     background-size: cover;
 }
 
@@ -342,9 +342,9 @@ label.error {
 }
 
 .icon.icon-icon_openMenu {
-    width: 32px;
-    height: 30px;
-    background: url(../img/icon/icon-openMenu.png) no-repeat;
+    width: 26px;
+    height: 50px;
+    background: url(../img/icon/icon-openMenu.png) no-repeat -14px 0;
     background-size: cover;
 }
 
