@@ -79,6 +79,9 @@
         		<p>线索上传时间：{{data.clueUploadAt}}</p>
         		<p>车架号后6位：{{data.carId}}</p>
         		<p>定位：{{data.location}}</p>
+        		{{if data.role === 'type_A'}}
+				<p>GPS:{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装(安装人员{{data.gpsPerson}}){{/if}}{{if data.gpsSource === 2}}未安装{{/if}}</p>
+				{{/if}}
         	</div>
         	{{/each}}
         </div>
