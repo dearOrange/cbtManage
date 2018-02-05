@@ -17,8 +17,8 @@ define(function(require, exports, module) {
             	minimumResultsForSearch:Infinity
             });
             $('body').off('change', '#select-person').on('change', '#select-person', function() {
-            	var selectValue = $('#select-person').val();
-            	if(selectValue === 'channel'){
+            	_this.selectValue = $('#select-person').val();
+            	if(_this.selectValue === 'channel'){
             		$('.address-select').css('display','block');
             	}else{
             		$('.address-select').css('display','');
@@ -79,12 +79,14 @@ define(function(require, exports, module) {
 							var formData = jh.utils.formToJson($('#newincreate-form'));
 							var arrs = [];
 							var valueArr = formData.operatorProvinceDtoList;
-							if(!valueArr) {
-								jh.utils.alert({
-									content: '请选择省份',
-									ok: true
-								})
-								return false;
+							if(_this.selectValue === 'channel'){
+								if(!valueArr) {
+									jh.utils.alert({
+										content: '请选择省份',
+										ok: true
+									})
+									return false;
+								}
 							}
 							valueArr = jh.utils.isArray(valueArr) ? valueArr : [valueArr];
 							var ids = jh.utils.getCheckboxValue('newincreate-form', 'value');
