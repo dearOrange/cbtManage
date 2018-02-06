@@ -23,7 +23,6 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
-                    returnData.officerState = jh.utils.officerState;
                     returnData.taskId = args.id;
                     var html = jh.utils.template('admin-qdTrailerDetail-template', returnData);
                     $('#admin-qdTrailerDetail-container').html(html);
@@ -80,8 +79,9 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     jh.utils.alert({
                         content: '任务分配成功！',
-                        ok: true,
-                        cancel: false
+                        ok: function() {
+                        	window.history.go(-1);
+                        }
                     });
                 }
             };
