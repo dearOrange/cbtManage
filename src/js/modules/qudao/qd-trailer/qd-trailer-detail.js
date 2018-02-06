@@ -23,6 +23,7 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
+                    returnData.officerState = jh.utils.officerState;
                     returnData.taskId = args.id;
                     var html = jh.utils.template('admin-qdTrailerDetail-template', returnData);
                     $('#admin-qdTrailerDetail-container').html(html);
