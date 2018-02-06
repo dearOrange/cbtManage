@@ -26,7 +26,7 @@ define(function(require, exports, module) {
                     var html = jh.utils.template('infoauditor_detail_template', returnData);
                     $('.taskListContent').html(html);
                     _this.searchIllegalInfo();
-
+					_this.initYjList();
 
                 }
             });
@@ -43,7 +43,7 @@ define(function(require, exports, module) {
                     taskId: args.id
                 },
                 callback: function(data) {
-                    return jh.utils.template('infoauditor_detail_wzInfoTemplate', data);
+                    return jh.utils.template('infoauditor_detailFinished_wzInfoTemplate', data);
                 },
                 onload: function() {
                     if (obj) {
@@ -57,6 +57,23 @@ define(function(require, exports, module) {
             page.init();
         };
         
+        
+        this.initYjList = function() {
+            var page = new jh.ui.page({
+                data_container: $('#infoauditor_detailFinished_yjxjContent'),
+                page_container: $('#page_container'),
+                method: 'post',
+                url: '/record/bargainList',
+                contentType: 'application/json',
+                data: {
+                    taskId: args.id
+                },
+                callback: function(data) {
+                    return jh.utils.template('infoauditor_detailFinished_yjxjTemplate', data);
+                }
+            });
+            page.init();
+        };
 
         
     }
