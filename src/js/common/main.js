@@ -102,7 +102,7 @@ define(function(require, exports, module) {
 	                    $(list).each(function(){
                         	if($(this).attr('data-url') === '/src/modules/xinxiyuan/clue/clue-manage'){
                         		var supNum = '<sup>'+returnData.data.num+'</sup>';
-		                    	$(this).parent().append(supNum);
+		                    	$(this).parent().find('sup').remove().end().append(supNum);
 	                        }
 	                    });
                 	}
@@ -119,7 +119,7 @@ define(function(require, exports, module) {
                     	$(list).each(function(){
                     		if($(this).attr('data-url') === '/src/modules/sendMoney/sendMoney-list'){
                         		var supNumMoney = '<sup>'+returnData.data.num+'</sup>';
-		                    	$(this).parent().append(supNumMoney);
+		                    	$(this).parent().find('sup').remove().end().append(supNumMoney);
 	                        }
                     	});
                 	}

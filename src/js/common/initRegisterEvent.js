@@ -38,23 +38,26 @@ define(function(require, exports, module) {
             });
             $('#toggleMenu').click(function() {
                 var me = $(this);
-                var con = $('header').children('.navbar');
                 var hea = $('article.wrapper');
                 var menu = $('#menusBar');
+                var leftMenu = $('#leftMenu-box .first-menu-item');
                 if (me.hasClass('closeMenu')) {
-                    con.css('margin-left', '0px');
                     hea.css('margin-left', '250px');
-                    menu.show();
-                    me.removeClass('closeMenu');
-                    me.addClass('icon-icon_closeMenu');
-                    me.removeClass('icon-icon_openMenu');
+                    menu.animate({width:250});
+                    //折叠按钮
+                    me.addClass('icon-icon_closeMenu')
+                        .removeClass('closeMenu')
+                        .removeClass('icon-icon_openMenu')
+                        .animate({left:250});
+                    leftMenu.animate({padding:'0 50px'}).children('span').show();
                 } else {
-                    con.css('margin-left', '0px');
-                    hea.css('margin-left', '0px');
-                    menu.hide();
-                    me.addClass('closeMenu');
-                    me.addClass('icon-icon_openMenu');
-                    me.removeClass('icon-icon_closeMenu');
+                    hea.css('margin-left', '40px');
+                    menu.animate({width:40});
+                    //折叠按钮
+                    me.addClass('closeMenu icon-icon_openMenu')
+                        .removeClass('icon-icon_closeMenu')
+                        .animate({left:40});
+                    leftMenu.animate({padding:'0 10px'}).children('span').hide();
                 }
             });
 

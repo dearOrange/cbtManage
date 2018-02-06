@@ -236,7 +236,10 @@
 }
 
 #toggleMenu {
-    margin: 17px 10px 0 0;
+    position: fixed;
+    top: 300px;
+    left: 250px;
+    z-index: 999999;
 }
 
 #plat-sure-money table tr td input {

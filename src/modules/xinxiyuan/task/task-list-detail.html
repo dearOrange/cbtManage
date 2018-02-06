@@ -12,69 +12,66 @@
 		<hr /><br />
 		<p>基本信息</p><br />
 		<table class="taskTable">
-        	<tr>
-        		<th>任务号：</th>
-        		<td>{{data.taskNo}}</td>
-        		<th>任务类型：</th>
-        		<td>{{menuState(data.entrust)}}</td>
-        		<th>任务发起：</th>
-        		<td>{{data.upstreamName}}</td>
-        	</tr>
-        	<tr>
-        		<th>车牌号：</th>
-        		<td>{{data.carNumber}}</td>
-        		<th>车型：</th>
-        		<td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
-        		<th>颜色：</th>
-        		<td>{{data.carColor}}</td>
-        	</tr>
-        	<tr>
-        		<th>车辆识别号：</th>
-        		<td>{{data.carId}}</td>
-        		<th>车辆发动机号：</th>
-        		<td>{{data.engineId}}</td>
-        		<th>任务发布时间：</th>
-        		<td>{{data.createAt}}</td>
-        	</tr>
-        </table>
+			<tr>
+				<th>任务号：</th>
+				<td>{{data.taskNo}}</td>
+				<th>任务类型：</th>
+				<td>{{menuState(data.entrust)}}</td>
+				<th>任务发起：</th>
+				<td>{{data.upstreamName}}</td>
+			</tr>
+			<tr>
+				<th>车牌号：</th>
+				<td>{{data.carNumber}}</td>
+				<th>车型：</th>
+				<td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+				<th>颜色：</th>
+				<td>{{data.carColor}}</td>
+			</tr>
+			<tr>
+				<th>车辆识别号：</th>
+				<td>{{data.carId}}</td>
+				<th>车辆发动机号：</th>
+				<td>{{data.engineId}}</td>
+				<th>任务发布时间：</th>
+				<td>{{data.createAt}}</td>
+			</tr>
+		</table>
 		<div class="remark">{{data.remark}}</div>
 		<div class="imgRecord">
 			<p>催收资料</p>
 			{{each data.attachmentVoList data index}}
-			<img src="{{viewImgRoot}}{{data.url}}" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" class="preview-img hand" /> 
-			{{/each}}
+			<img src="{{viewImgRoot}}{{data.url}}" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" class="preview-img hand" /> {{/each}}
 		</div>
 		{{if data.state === "tracing"}}
 		<div class="upmainfile">
-            <div>
-                <a href="javascript:;" class="button" id="taskList-illegalList" data-id="{{taskId}}">违章信息修复</a>
-            </div>
-            <div>
-                <table class="pull-left" style="width: 90%;">
-                    <thead>
-                    	<th>序号</th>
-                        <th>车牌号</th>
-                        <th>内容</th>
-                        <th>修复地点</th>
-                        <th>修复城市</th>
-                        <th>信息修复时间</th>
-                    </thead>
-                    <tbody id="task_detail_wzInfoList"></tbody>
-                </table>
-                <div class="page-box pagination" id="page_container"></div>
-            </div>
-        </div>
-		{{/if}}
-		{{if data.state === "clueChecking"}}
+			<div>
+				<a href="javascript:;" class="button" id="taskList-illegalList" data-id="{{taskId}}">违章信息修复</a>
+			</div>
+			<div>
+				<table class="pull-left" style="width: 90%;">
+					<thead>
+						<th>序号</th>
+						<th>车牌号</th>
+						<th>内容</th>
+						<th>修复地点</th>
+						<th>修复城市</th>
+						<th>信息修复时间</th>
+					</thead>
+					<tbody id="task_detail_wzInfoList"></tbody>
+				</table>
+				<div class="page-box pagination" id="page_container"></div>
+			</div>
+		</div>
+		{{/if}} {{if data.state === "clueChecking"}}
 		<div class="mainfile">
 			<p>线索信息</p>
 			{{if data.traceVoList&&data.traceVoList.length>0}}
-			<a href="javascript:;" class="button rejectClue">全部不采纳</a> 
-			{{/if}}
-			{{ each data.traceVoList data index }}
+			<a href="javascript:;" class="button rejectClue">全部不采纳</a>
+			{{/if}} {{ each data.traceVoList data index }}
 			<div class="mt25">
 				<input type="radio" value="{{data.id}}" data-type="{{data.role}}" name="traceId" class="pull-left checkId" style="margin:60px 10px;" />
-				<div class="pull-left" {{if data.type === 0 }}style="width:70%;height:170px;border:1px solid #ccc;"{{/if}}>
+				<div class="pull-left" {{if data.type===0 }}style="width:70%;height:170px;border:1px solid #ccc;" {{/if}}>
 					<div class="upimg pull-left" style="margin-top:10px;">
 						<dl>
 							<dt>
@@ -86,12 +83,12 @@
 						</dl>
 					</div>
 					<div style="margin:10px 0;" class="pull-left">
-						<p>{{data.name}}----{{if data.role === 'type_A'}}线人{{else}}捕头{{/if}}-----{{data.phone}}</p>
+						<p>{{data.name}}----{{if data.role === 'type_A'}}线人-----{{data.phone}}{{else}}捕头----{{officerState(data.downstreamType)}}{{/if}}</p>
 						<p>线索上传时间：{{data.createAt}}</p>
 						<p>gprs信息：{{data.location}}</p>
 						<p>定位：{{data.location}}</p>
 						{{if data.role === 'type_A'}}
-						<p>GPS:{{if data.gpsSource === 0}}自己安装{{else}}{{if data.gpsSource === 1}}他人协助安装(安装人员{{data.gpsPerson}}){{else}}未安装{{/if}}{{/if}}</p>
+						<p>GPS:{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装(安装人员{{data.gpsPerson}}){{/if}}{{if data.gpsSource === 2}}未安装{{/if}}</p>
 						{{/if}}
 					</div>
 				</div>
@@ -118,10 +115,8 @@
 			</div>
 		</div>
 		{{if data.state === "clueChecking"}}
-		<input type="submit" value="保存" class="button adopteInfo"  />
-		{{else}}
-		<input type="submit" value="确定" class="button clueInfo"/>
-		{{/if}}
+		<input type="submit" value="保存" class="button adopteInfo" /> {{else}}
+		<input type="submit" value="确定" class="button clueInfo" /> {{/if}}
 	</div>
 </script>
 <script type="text/template" id="xx_task_list">
@@ -150,16 +145,16 @@
 	</div>
 </script>
 <script type="text/template" id="task_detail_wzInfoTemplate">
-    {{each list item index}}
-    <tr>
-    	<td>{{index+1}}</td>
-    	<td>{{item.carNumber}}</td>
-        <td>{{item.desc}}</td>
-        <td>{{item.site}}</td>
-        <td>{{item.city}}</td>
-        <td>{{item.occurAt}}</td>
-    </tr>
-    {{/each}}
+	{{each list item index}}
+	<tr>
+		<td>{{index+1}}</td>
+		<td>{{item.carNumber}}</td>
+		<td>{{item.desc}}</td>
+		<td>{{item.site}}</td>
+		<td>{{item.city}}</td>
+		<td>{{item.occurAt}}</td>
+	</tr>
+	{{/each}}
 </script>
 <script type="text/javascript">
 	seajs.use('modules/xinxiyuan/task/task-list-detail', function(TaskListDetail) {
