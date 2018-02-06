@@ -9,41 +9,25 @@ define(function(require, exports, module) {
     function TaskList() {
         var _this = this;
         _this.form = $('#task-list-form');
-        $('select').select2({
-        	minimumResultsForSearch:Infinity
-        });
-        
-        $('.public_price').blur(function() {
-        	var minprice = $('#minprice').val();
-        	var maxprice = $('#maxprice').val();
-        	if(maxprice && minprice){
-	        	if(minprice > maxprice){
-	        		jh.utils.alert({
-	        			content: '最小值不能比最大值大！！！',
-	        			ok: function(){
-	        				maxprice;
-	        			}
-	        		})
-	        	}
-        	}
-        })
+
 
         this.init = function() {
-        	this.initContent(true);
-        	this.initTaskTotalCount();
+            this.initContent(true);
+            this.initTaskTotalCount();
             this.registerEvent();
         };
-		this.initContent = function(isSearch) {
+        this.initContent = function(isSearch) {
             var page = new jh.ui.page({
                 data_container: $('#task_list_container'),
                 page_container: $('#page_container'),
+                form_container: _this.form,
                 method: 'post',
                 url: '/task/taskList',
                 contentType: 'application/json',
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
-                	data.passState = $('#state').val();
+                    data.passState = $('#state').val();
                     return jh.utils.template('taskList_content_template', data);
                 }
             });
@@ -74,158 +58,177 @@ define(function(require, exports, module) {
                 }
             });
 
+            $('select').select2({
+                minimumResultsForSearch: Infinity
+            });
+
+            $('.public_price').blur(function() {
+                var minprice = $('#minprice').val();
+                var maxprice = $('#maxprice').val();
+                if (maxprice && minprice) {
+                    if (minprice > maxprice) {
+                        jh.utils.alert({
+                            content: '最小值不能比最大值大！！！',
+                            ok: function() {
+                                maxprice;
+                            }
+                        })
+                    }
+                }
+            })
+
             //查看任务详情
             $('.dataShow').off('click', '.taskList-detail').on('click', '.taskList-detail', function() {
-            	var id = $(this).data('id');
+                var id = $(this).data('id');
                 var state = $('#state').val();
-                if(state === '1' || state === '6'){
-                    jh.utils.load("/src/modules/xinxiyuan/task/task-list-detail",{
-                        id:id
+                if (state === '1' || state === '6') {
+                    jh.utils.load("/src/modules/xinxiyuan/task/task-list-detail", {
+                        id: id
                     });
-                }else if(state === '2'){
-                    jh.utils.load("/src/modules/xinxiyuan/task/task-list-detailTrcaing",{
-                        id:id
+                } else if (state === '2') {
+                    jh.utils.load("/src/modules/xinxiyuan/task/task-list-detailTrcaing", {
+                        id: id
                     });
-                }else if(state === '3' || state === '4'){
-                    jh.utils.load("/src/modules/xinxiyuan/task/task-list-detailFinished",{
-                        id:id
+                } else if (state === '3' || state === '4') {
+                    jh.utils.load("/src/modules/xinxiyuan/task/task-list-detailFinished", {
+                        id: id
                     });
                 }
             });
-            
+
             //切换状态
             $('body').off('click', '.taskState').on('click', '.taskState', function() {
-            	var mine = $(this);
-            	var state = mine.data('state');
-            	$(this).addClass("active").siblings().removeClass("active");
-            	_this.form[0].reset();
-            	if(state === 'matched') {
-            		$('.successTask').addClass('hide');
-            		$('.taskLocation').removeClass('hide');
-            		$('.textCon').html('匹配成功时间');
-            	}else {
-            		$('.successTask').removeClass('hide');
-            		$('.taskLocation').addClass('hide');
-            		$('.textCon').html('任务发布时间');
-            	}
-            	var arr = [{
-	    			val: 'unarrange',
-	    			name:"渠道经理未分配",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'tracing',
-	    			name:"线索未提交",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'clueChecking',
-	    			name:"线索审核中",
-	    			flag:''
-	    		},{
-	    			val: 'unvaluation',
-	    			name:"待估价",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'unconfirmed',
-	    			name:"待债权方确认",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'voucherChecking',
-	    			name:"凭证审核中",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'voucherInvalid',
-	    			name:"凭证审核未通过",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'hunterUnreceive',
-	    			name:"捕头未接受",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'hunterReceive',
-	    			name:"捕头已接受",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'platReceive',
-	    			name:"平台已收车",
-	    			flag:''
-	    		},{
-	    			val: 'upstreamReceive',
-	    			name:"债权方已收车",
-	    			flag:''
-	    		},{
-	    			val: 'closed',
-	    			name:"已失效",
-	    			flag:''
-	    		}];
-	    		
-	    		var optionArr = [];
-	    		for(var i=0;i<arr.length;i++){
-	    			var item = arr[i];
-            		if(state === 'all'){
-            			optionArr.push(item);
-            			continue;
-            		}
-            		if( item.flag.indexOf(state) !== -1){
-            			optionArr.push(item);
-            		}
-            	}
-	    		var str='<option value="">全部</option>';
-	    		for(var j=0;j<optionArr.length;j++){
-	    			var temp = optionArr[j];
-	    			str += '<option value="'+temp.val+'">'+temp.name+'</option>';
-	    		}
-	    		$("#selectCheck").html(str);
-	    		
-            	
-            	$('select').select2({
-	            	minimumResultsForSearch:Infinity
-	            });
-            	$('#state').val(mine.data('value'))
-            	_this.initContent(true);
+                var mine = $(this);
+                var state = mine.data('state');
+                $(this).addClass("active").siblings().removeClass("active");
+                _this.form[0].reset();
+                if (state === 'matched') {
+                    $('.successTask').addClass('hide');
+                    $('.taskLocation').removeClass('hide');
+                    $('.textCon').html('匹配成功时间');
+                } else {
+                    $('.successTask').removeClass('hide');
+                    $('.taskLocation').addClass('hide');
+                    $('.textCon').html('任务发布时间');
+                }
+                var arr = [{
+                    val: 'unarrange',
+                    name: "渠道经理未分配",
+                    flag: 'trcaing'
+                }, {
+                    val: 'tracing',
+                    name: "线索未提交",
+                    flag: 'trcaing'
+                }, {
+                    val: 'clueChecking',
+                    name: "线索审核中",
+                    flag: ''
+                }, {
+                    val: 'unvaluation',
+                    name: "待估价",
+                    flag: 'trcaing'
+                }, {
+                    val: 'unconfirmed',
+                    name: "待债权方确认",
+                    flag: 'trcaing'
+                }, {
+                    val: 'voucherChecking',
+                    name: "凭证审核中",
+                    flag: 'trcaing'
+                }, {
+                    val: 'voucherInvalid',
+                    name: "凭证审核未通过",
+                    flag: 'trcaing'
+                }, {
+                    val: 'hunterUnreceive',
+                    name: "捕头未接受",
+                    flag: 'trcaing'
+                }, {
+                    val: 'hunterReceive',
+                    name: "捕头已接受",
+                    flag: 'trcaing'
+                }, {
+                    val: 'platReceive',
+                    name: "平台已收车",
+                    flag: ''
+                }, {
+                    val: 'upstreamReceive',
+                    name: "债权方已收车",
+                    flag: ''
+                }, {
+                    val: 'closed',
+                    name: "已失效",
+                    flag: ''
+                }];
+
+                var optionArr = [];
+                for (var i = 0; i < arr.length; i++) {
+                    var item = arr[i];
+                    if (state === 'all') {
+                        optionArr.push(item);
+                        continue;
+                    }
+                    if (item.flag.indexOf(state) !== -1) {
+                        optionArr.push(item);
+                    }
+                }
+                var str = '<option value="">全部</option>';
+                for (var j = 0; j < optionArr.length; j++) {
+                    var temp = optionArr[j];
+                    str += '<option value="' + temp.val + '">' + temp.name + '</option>';
+                }
+                $("#selectCheck").html(str);
+
+
+                $('select').select2({
+                    minimumResultsForSearch: Infinity
+                });
+                $('#state').val(mine.data('value'))
+                _this.initContent(true);
             })
-			
-			
-			//一键修复
+
+
+            //一键修复
             $('body').off('click', '.allrepair').on('click', '.allrepair', function() {
-            	var checkId = jh.utils.getCheckboxValue('task_list_container',"value");
-            	if(!checkId) {
-            		jh.utils.alert({
-        				content: "请先选中要修复的信息",
-        				ok: true
-        			})
-            		return false;
-            	}
+                var checkId = jh.utils.getCheckboxValue('task_list_container', "value");
+                if (!checkId) {
+                    jh.utils.alert({
+                        content: "请先选中要修复的信息",
+                        ok: true
+                    })
+                    return false;
+                }
                 jh.utils.alert({
                     content: "确定修复吗",
-                    ok:function(){
-                    	jh.utils.ajax.send({
-                    		url: '/clue/bondRepair',
-                    		data: {
-                    			taskIds: checkId
-                    		},
-                    		done: function(data){
-                    			(new jh.ui.shadow()).init();
-                    			window.setTimeout(function() {
-                    				(new jh.ui.shadow()).close();
-	                    			jh.utils.alert({
-	                    				content: "信息已修复",
-	                    				ok: function(){
-	                                    	_this.initContent(false);
-	                                    }
-	                    			})
-                    			}, 10000);
-                    		}
-                    	})
+                    ok: function() {
+                        jh.utils.ajax.send({
+                            url: '/clue/bondRepair',
+                            data: {
+                                taskIds: checkId
+                            },
+                            done: function(data) {
+                                (new jh.ui.shadow()).init();
+                                window.setTimeout(function() {
+                                    (new jh.ui.shadow()).close();
+                                    jh.utils.alert({
+                                        content: "信息已修复",
+                                        ok: function() {
+                                            _this.initContent(false);
+                                        }
+                                    })
+                                }, 10000);
+                            }
+                        })
                     },
-                    cancel:true
+                    cancel: true
                 });
             })
 
         };
-       
-	    	
-	    		
-	    	
+
+
+
+
     }
     module.exports = TaskList;
 });

@@ -66,24 +66,24 @@ define(function(require, exports, module) {
     })();
     (function() {
         function initGeocoder() {
-            try{
+            try {
                 AMap.service('AMap.Geocoder', function() { //回调函数
                     //实例化Geocoder
                     tammy.utils.geocoder = new AMap.Geocoder({
                         city: "010" //城市，默认：“全国”
                     });
                 });
-            }catch(e){
-                window.setInterval(function(){
+            } catch (e) {
+                window.setInterval(function() {
                     AMap.service('AMap.Geocoder', function() { //回调函数
                         //实例化Geocoder
                         jh.utils.geocoder = new AMap.Geocoder({
                             city: "010" //城市，默认：“全国”
                         });
                     });
-                },600);
+                }, 600);
             }
-            
+
         }
         tammy.utils.initGeocoder = initGeocoder;
     })();
@@ -814,14 +814,14 @@ define(function(require, exports, module) {
                 var breadCrumb = $('#breadCrumb'); //面包屑容器
                 var moduleCon = $('#leftMenu-box').find('li.active'); //一级菜单
                 var activeFirst = moduleCon.children('a');
-                if(!findFlag) {
+                if (!findFlag) {
                     breadCrumb.text(txt);
                 } else {
                     txt += activeFirst.text();
                     txt = '首页 > ' + txt;
                     breadCrumb.text(txt);
                 }
-                
+
             } else {
                 jh.utils.load('/src/modules/welcome/welcome.html');
             }
@@ -854,6 +854,7 @@ define(function(require, exports, module) {
 
     (function() {
         var data_flag = {};
+
         function Page(options) {
             var m = this;
             m.settings = {
@@ -863,7 +864,6 @@ define(function(require, exports, module) {
                 contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
                 jump: true,
                 noData: '',
-                ident: '', //模块标识
                 showPageTotal: true,
                 data: {
                     pageNum: 1,
@@ -872,6 +872,7 @@ define(function(require, exports, module) {
                 },
                 data_container: $('.data_container'), //数据容器
                 page_container: $('.page_container'), //分页容器
+                form_container: $('#exampleForm'),
                 firstText: '<',
                 preText: '上一页',
                 nextText: '下一页',
@@ -885,35 +886,33 @@ define(function(require, exports, module) {
             if (jh.utils.objIsNull(options.data)) {
                 delete options.data;
             }
-            m.settings.data.params = $.extend({}, m.settings.data.params, options.data);
-            m.settings.data.pageSize = m.settings.data.params.pageSize ? m.settings.data.params.pageSize : m.settings.data.pageSize;
-            options.data = m.settings.data;
-            $.extend(m.settings, options);
+            m.settings.data.params = $.extend({}, m.settings.data.params, options.data); //接口参数合并
+            if (typeof m.settings.data.params.pageSize !== 'undefined') {
+                m.settings.data.pageSize = m.settings.data.params.pageSize;
+                delete m.settings.data.params.pageSize;
+            }
+            options.data = m.settings.data; //接口整体参数进行统一
+            if (options.isSearch && data_flag[options.url]) {
+                data_flag[options.url].data = options.data;
+            }
+            $.extend(m.settings, options);//所有列表参数进行合并
         }
         Page.prototype.init = function() {
             var m = this;
-            var s = m.settings;
-            s.page_container.addClass('pagination');
-
-            if( typeof data_flag[s.url] === 'undefined' ){
-                data_flag[s.url] = {
-                   pageNum: 1,
-                   data: s.data
+            var ms = m.settings;
+            ms.page_container.addClass('pagination');//分页容器样式类添加
+            if (typeof data_flag[ms.url] === 'undefined') {
+                data_flag[ms.url] = {
+                    pageNum: 1,
+                    data: ms.data
                 };
             }
-
-            if( s.isSearch ){
-                data_flag[s.url].pageNum = 1;
-                data_flag[s.url].data = s.data;
-            }
-
-            if ( typeof data_flag[s.url] === 'undefined' || s.isSearch) {
-                m.render(1);
+            if (typeof data_flag[ms.url] === 'undefined' || ms.isSearch) {
+                m.render(1, 'click');
             } else {
-                m.render(data_flag[s.url].pageNum);
+                m.render(data_flag[ms.url].pageNum);
             }
-            // m.render(1);
-            m.regEvent();
+            m.regEvent();//注册事件
         };
         Page.prototype.create = function(num) {
             var m = this;
@@ -1053,22 +1052,25 @@ define(function(require, exports, module) {
             arr.push('</div>'); //分页容器结束
             return arr.join('');
         };
-        Page.prototype.render = function(pageNum) {
+        Page.prototype.render = function(pageNum, eventType) {
             var m = this,
                 s = m.settings;
-              
-            data_flag[s.url].pageNum = pageNum;
-            data_flag[s.url].data = s.data;
-            
             s.data.pageNum = pageNum;
+            var currentData = data_flag[s.url] ? data_flag[s.url].data : s.data;
+            if (eventType && eventType === 'click') {
+                data_flag[s.url].data.pageNum = pageNum;
+                currentData.pageNum = pageNum;
+            } else {
+                pageNum = data_flag[s.url].data.pageNum;
+            }
             tammy.utils.ajax.send({
                 url: s.url,
                 method: s.method,
                 contentType: s.contentType,
-                data: s.data,
+                data: currentData,
                 done: function(returnData) {
-
                     var response = returnData.data;
+                    m.assignData(data_flag[s.url].data.params);
                     //如果返回数据没有total数据总条数，则清空内容和分页容器 显示错误信息
                     if (typeof response.total === 'undefined' || !response.total) {
                         var tdCol = s.data_container.siblings().find('th').length;
@@ -1115,6 +1117,27 @@ define(function(require, exports, module) {
                 }
             });
         };
+        Page.prototype.assignData = function(originData) {
+            var m = this;
+            var settings = m.settings;
+            if (settings.form_container.length === 0) {
+                //如果页面不存在需要赋值的表单，则不执行后续动作
+                return false;
+            }
+            for (var item in originData) {
+                var val = originData[item];
+                var target = settings.form_container.find('[name=' + item + ']');
+
+                if(target.is('input')){
+                    target.val(val);
+                }else if(target.is('select')){
+                    target.val(val).attr('selectedVal',val);
+                    target.select2({
+                        minimumResultsForSearch: Infinity
+                    });
+                }
+            }
+        };
         Page.prototype.current = function() {
             var m = this;
             return parseInt(m.settings.page_container.find('.jh_page .jh_current_page').html(), 10);
@@ -1143,7 +1166,7 @@ define(function(require, exports, module) {
                 }
                 var preNum = cur - 1;
                 s.beforRender(preNum);
-                m.render(preNum);
+                m.render(preNum, 'click');
                 s.btnClickCallBack(preNum);
             });
             //第几页
@@ -1156,7 +1179,7 @@ define(function(require, exports, module) {
                 }
                 val = parseInt(val, 10);
                 s.beforRender(val);
-                m.render(val);
+                m.render(val, 'click');
                 s.btnClickCallBack();
             });
             //下一页
@@ -1168,7 +1191,7 @@ define(function(require, exports, module) {
                 }
                 var preNum = cur + 1;
                 s.beforRender(preNum);
-                m.render(preNum);
+                m.render(preNum, 'click');
                 s.btnClickCallBack(preNum);
             });
             //尾页
@@ -1189,7 +1212,7 @@ define(function(require, exports, module) {
                 var size = parseInt(el.find('option:selected').text());
                 s.data.pageSize = size;
                 s.beforRender(1);
-                m.render(1);
+                m.render(1, 'click');
                 s.btnClickCallBack(1);
             });
             //跳转
@@ -1203,7 +1226,7 @@ define(function(require, exports, module) {
                         if (val > m.page_total) {
                             val = m.page_total;
                         }
-                        m.render(val);
+                        m.render(val, 'click');
                     } else {
                         tammy.utils.tips({
                             content: '请输入正确的页数！',

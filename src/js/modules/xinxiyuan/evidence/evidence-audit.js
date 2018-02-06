@@ -18,6 +18,7 @@ define(function(require, exports, module) {
             var page = new jh.ui.page({
                 data_container: $('#admin-evidenceAuditList-container'),
                 page_container: $('#page_container'),
+                form_container: _this.form,
                 method: 'post',
                 url: '/task/checkingList',
                 contentType: 'application/json',

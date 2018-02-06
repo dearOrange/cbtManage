@@ -11,17 +11,15 @@ define(function(require, exports, module) {
         _this.form = $('#restoration-list-form');
 
         this.init = function() {
-        	this.initContent();
-        	this.searchSelect();
+            this.initContent();
+            this.searchSelect();
             this.registerEvent();
-            $('select').select2({
-            	minimumResultsForSearch:Infinity
-            });
         };
-		this.initContent = function(isSearch) {
+        this.initContent = function(isSearch) {
             var page = new jh.ui.page({
                 data_container: $('#restoration_list_container'),
                 page_container: $('#page_container'),
+                form_container: _this.form,
                 method: 'post',
                 url: '/task/offerList',
                 contentType: 'application/json',
@@ -33,32 +31,36 @@ define(function(require, exports, module) {
             });
             page.init();
         };
-        this.searchSelect = function(){
-        	jh.utils.ajax.send({
+        this.searchSelect = function() {
+            jh.utils.ajax.send({
                 url: '/operator/getAllBusiness',
-                done: function(returnData){
-                	var operateData = returnData.data;
-                	var operateStr = "";
-                	for(var i=0;i<operateData.length;i++){
-                		operateStr += '<option value="'+operateData[i].id+'">'+operateData[i].name+'</option>';
-                	}
-                	$('#operateManage').append(operateStr);
+                done: function(returnData) {
+                    var operateData = returnData.data;
+                    var operateStr = "";
+                    for (var i = 0; i < operateData.length; i++) {
+                        operateStr += '<option value="' + operateData[i].id + '">' + operateData[i].name + '</option>';
+                    }
+                    $('#operateManage').append(operateStr);
                 }
-          	});
-        	jh.utils.ajax.send({
+            });
+            jh.utils.ajax.send({
                 url: '/operator/getAllChannel',
-                done: function(returnData){
-                	var channelData = returnData.data;
-                	var channelStr = "";
-                	for(var i=0;i<channelData.length;i++){
-                		channelStr += '<option value="'+channelData[i].id+'">'+channelData[i].name+'</option>';
-                	}
-                	$('#channelManage').append(channelStr);
+                done: function(returnData) {
+                    var channelData = returnData.data;
+                    var channelStr = "";
+                    for (var i = 0; i < channelData.length; i++) {
+                        channelStr += '<option value="' + channelData[i].id + '">' + channelData[i].name + '</option>';
+                    }
+                    $('#channelManage').append(channelStr);
                 }
-          	})
+            })
         };
         this.registerEvent = function() {
-            
+
+            $('select').select2({
+                minimumResultsForSearch: Infinity
+            });
+
             // 搜索
             jh.utils.validator.init({
                 id: 'restoration-list-form',
@@ -70,12 +72,11 @@ define(function(require, exports, module) {
 
             //查看任务详情
             $('.dataShow').off('click', '.admin-detail').on('click', '.admin-detail', function() {
-            	var id = $(this).data('id');
-                jh.utils.load("/src/modules/xinxiyuan/restoration/restoration-detail",{
-                	id:id
+                var id = $(this).data('id');
+                jh.utils.load("/src/modules/xinxiyuan/restoration/restoration-detail", {
+                    id: id
                 })
             });
-
 
         };
     }

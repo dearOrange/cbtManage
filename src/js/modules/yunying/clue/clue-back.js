@@ -21,6 +21,7 @@ define(function(require, exports, module) {
             var page = new jh.ui.page({
                 data_container: $('#clue_back_container'),
                 page_container: $('#page_container'),
+                form_container: _this.form,
                 method: 'post',
                 url: '/task/feedbackList',
                 contentType: 'application/json',

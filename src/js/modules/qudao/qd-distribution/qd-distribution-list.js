@@ -8,6 +8,7 @@
 define(function(require, exports, module) {
     function QDDistributionList() {
         var _this = this;
+        _this.form = $('#qd-distributionList-form');
 
         this.init = function() {
             this.initContent();
@@ -19,6 +20,7 @@ define(function(require, exports, module) {
             var page = new jh.ui.page({
                 data_container: $('#admin-qDDistributionList-container'),
                 page_container: $('#page_container'),
+                form_container: _this.form,
                 method: 'post',
                 url: '/task/channelTaskList',
                 contentType: 'application/json',
