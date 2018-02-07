@@ -183,7 +183,7 @@ define(function(require, exports, module) {
                 $('select').select2({
                     minimumResultsForSearch: Infinity
                 });
-                $('#state').val(mine.data('value'))
+                $('#state').val(mine.data('value'));
                 _this.initContent(true);
             })
 
@@ -225,10 +225,6 @@ define(function(require, exports, module) {
             })
 
         };
-
-
-
-
     }
     module.exports = TaskList;
 });
