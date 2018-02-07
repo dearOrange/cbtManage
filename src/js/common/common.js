@@ -1877,6 +1877,9 @@ define(function(require, exports, module) {
             var target = $('#'+targetId);
             var defaultValue = target.attr('selectedVal');
             target.val(defaultValue);
+            $('select').select2({
+                minimumResultsForSearch: Infinity
+            });
         }
         tammy.utils.assignSelect = assignSelect;
     })();
