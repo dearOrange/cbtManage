@@ -71,7 +71,10 @@ define(function(require, exports, module) {
 	                            done: function(returnData) {
 	                                jh.utils.alert({
 	                                    content: '议价小计添加成功',
-	                                    ok: true,
+	                                    ok: function() {
+	                                    	_this.initContent();
+	                                    	jh.utils.closeArt();
+	                                    },
 	                                    cancel: false
 	                                });
 	                            }
@@ -81,8 +84,8 @@ define(function(require, exports, module) {
                         		content: '请填写正确的联系方式',
                         		ok:true
                         	});
-                        	return false;
                     	}
+                        return false;
                     }
                 });
             })

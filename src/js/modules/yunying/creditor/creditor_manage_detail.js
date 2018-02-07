@@ -122,6 +122,7 @@ define(function(require, exports, module) {
 	                                    content: '联系小计添加成功',
 	                                    ok: function(){
 	                                    	_this.initLinkList();
+	                                    	jh.utils.closeArt();
 	                                    },
 	                                    cancel: false
 	                                });
@@ -132,8 +133,8 @@ define(function(require, exports, module) {
                         		content: '请填写正确的联系方式',
                         		ok:true
                         	});
-                        	return false;
                     	}
+                        return false;
                     }
                 });
             })
