@@ -186,7 +186,7 @@ define(function(require, exports, module) {
                 data_container: $('#statistic_container'),
                 page_container: $('#page_container'),
                 method: 'post',
-                url: '/statistics/sort',
+                url: '/statistics/traceSort',
                 showPageTotal: false,
                 jump: false,
                 show_page_number: 3,
@@ -210,9 +210,10 @@ define(function(require, exports, module) {
                 data_container: $('#clear_info_container'),
                 page_container: $('#page_clear_container'),
                 method: 'post',
-                url: '/statistics/sort',
+                url: '/statistics/recoverySort',
                 contentType: 'application/json',
                 data: {
+                	pageSize: 5,
                     type: 'carRecovery',
                     yearMonth: obj.y + '-' + obj.M
                 },
