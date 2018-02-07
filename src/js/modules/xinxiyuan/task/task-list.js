@@ -184,6 +184,7 @@ define(function(require, exports, module) {
                     minimumResultsForSearch: Infinity
                 });
                 $('#state').val(mine.data('value'))
+                _this.initContent('tab');
             })
 
 

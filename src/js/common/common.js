@@ -1131,7 +1131,9 @@ define(function(require, exports, module) {
                 if (target.is('input')) {
                     target.val(val);
                     if (target.attr('type') === 'hidden') {
-                        target.siblings('[data-value=' + val + ']').trigger('click');
+                        if(settings.isSearch === 'tab'){
+                            target.siblings('[data-value=' + val + ']').addClass('active').siblings().removeClass('active');
+                        }
                     }
                 } else if (target.is('select')) {
                     target.val(val).attr('selectedVal', val);
