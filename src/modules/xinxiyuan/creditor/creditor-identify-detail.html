@@ -81,6 +81,7 @@
 		<div class="mainfile">
 			<p>资质</p>
 			<div class="upimg">
+				{{if data.type !== 'UPSTREAM_PERSONAL'}}
 				<dl>
 					<dt class="upload-pa">
 		    				<div id="businessLicense"></div>
@@ -117,6 +118,7 @@
 		    			</dt>
 					<dd>法人手持身份证正面照片</dd>
 				</dl>
+				{{/if}}
 				<dl>
 					<dt class="upload-pa">
 		    				<div id="linkmanIdImg"></div>
