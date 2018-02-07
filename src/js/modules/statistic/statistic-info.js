@@ -32,9 +32,9 @@ define(function(require, exports, module) {
             this.initHead();
             this.sectionTable();
             this.initSection();
-            window.initContent('2018-01');
-            window.initClear('2018-01');
-            window.initEntrustSort('2018-01');
+            window.initContent('2018-01', true);
+            window.initClear('2018-01', true);
+            window.initEntrustSort('2018-01', true);
             this.registerEvent();
         };
 
@@ -179,7 +179,7 @@ define(function(require, exports, module) {
 
         };
 
-        window.initContent = function(obj) {
+        window.initContent = function(obj, isSearch) {
             obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
             var page = new jh.ui.page({
@@ -196,6 +196,7 @@ define(function(require, exports, module) {
                     type: 'trace',
                     yearMonth: obj.y + '-' + obj.M
                 },
+                isSearch: isSearch,
                 callback: function(data) {
                     return jh.utils.template('statistic_content_template', data);
                 }
@@ -203,7 +204,7 @@ define(function(require, exports, module) {
             page.init();
         };
 
-        window.initClear = function(obj) {
+        window.initClear = function(obj, isSearch) {
             obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
             var page = new jh.ui.page({
@@ -217,6 +218,7 @@ define(function(require, exports, module) {
                     type: 'carRecovery',
                     yearMonth: obj.y + '-' + obj.M
                 },
+                isSearch: isSearch,
                 callback: function(data) {
                     return jh.utils.template('clear_content_template', data);
                 }
@@ -338,7 +340,7 @@ define(function(require, exports, module) {
             });
         };
 
-        window.initEntrustSort = function(obj) {
+        window.initEntrustSort = function(obj, isSearch) {
             obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
             jh.utils.ajax.send({
@@ -348,6 +350,7 @@ define(function(require, exports, module) {
                 data: {
                     yearMonth: obj.y + '-' + obj.M
                 },
+                isSearch: isSearch,
                 done: function(returnData) {
                     var entrust = returnData.data;
                     var noResultBox = $('#entrustNoResultBox');
@@ -410,11 +413,11 @@ define(function(require, exports, module) {
      */
     window.statisticTraceMonthing = function() {
         var obj = $dp.cal.newdate;
-        window.initContent(obj);
+        window.initContent(obj, true);
     };
     window.statisticTraceYearing = function() {
         var obj = $dp.cal.newdate;
-        window.initContent(obj);
+        window.initContent(obj, true);
     };
     /**
      * 情报end
@@ -425,11 +428,11 @@ define(function(require, exports, module) {
      */
     window.statisticEntrustMonthing = function() {
         var obj = $dp.cal.newdate;
-        window.initEntrustSort(obj);
+        window.initEntrustSort(obj, true);
     };
     window.statisticEntrustYearing = function() {
         var obj = $dp.cal.newdate;
-        window.initEntrustSort(obj);
+        window.initEntrustSort(obj, true);
     };
     /**
      * 渠道委托end
@@ -440,11 +443,11 @@ define(function(require, exports, module) {
      */
     window.statisticRecoveryMonthing = function() {
         var obj = $dp.cal.newdate;
-        window.initClear(obj);
+        window.initClear(obj, true);
     };
     window.statisticRecoveryYearing = function() {
         var obj = $dp.cal.newdate;
-        window.initClear(obj);
+        window.initClear(obj, true);
     };
     /**
      * 车辆清收end
