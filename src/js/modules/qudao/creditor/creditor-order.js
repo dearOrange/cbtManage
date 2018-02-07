@@ -19,6 +19,7 @@ define(function(require, exports, module) {
             var page = new jh.ui.page({
                 data_container: $('#admin-creditorOrderList-container'),
                 page_container: $('#page_container'),
+                form_container: _this.form,
                 method: 'post',
                 url: '/task/channel/loanerSure',
                 contentType: 'application/json',
@@ -40,6 +41,7 @@ define(function(require, exports, module) {
                         optionStr += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
                     }
                     $('#creditorOrder-butou').append(optionStr);
+                    jh.utils.assignSelect('creditorOrder-butou');
                 }
             })
             // 搜索

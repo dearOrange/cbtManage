@@ -17,6 +17,7 @@ define(function(require, exports, module) {
 			var page = new jh.ui.page({
 				data_container: $('#sendMoney_list_container'),
 				page_container: $('#page_container'),
+				form_container: _this.form,
 				method: 'post',
 				url: '/withdraw/list',
 				contentType: 'application/json',

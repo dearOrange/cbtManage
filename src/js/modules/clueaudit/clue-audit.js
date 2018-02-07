@@ -18,6 +18,7 @@ define(function(require, exports, module) {
             var page = new jh.ui.page({
                 data_container: $('#admin-clueAuditList-container'),
                 page_container: $('#page_container'),
+                form_container: _this.form,
                 method: 'post',
                 url: '/trace/channel/list',
                 contentType: 'application/json',
@@ -40,6 +41,7 @@ define(function(require, exports, module) {
                         optionStr += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
                     }
                     $('#clueAudit-butou').append(optionStr);
+                    jh.utils.assignSelect('clueAudit-butou');
                 }
             })
 

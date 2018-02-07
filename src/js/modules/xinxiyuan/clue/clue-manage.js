@@ -19,6 +19,7 @@ define(function(require, exports, module) {
             var page = new jh.ui.page({
                 data_container: $('#clue_manage_container'),
                 page_container: $('#page_container'),
+                form_container: _this.form,
                 method: 'post',
                 url: '/trace/traceList',
                 contentType: 'application/json',
@@ -111,8 +112,7 @@ define(function(require, exports, module) {
                 $(this).addClass("active").siblings().removeClass("active");
                 _this.form[0].reset();
                 $('select').select2();
-                $('#state').val($(this).data('value'))
-                _this.initContent();
+                $('#state').val($(this).data('value'));
             })
 
             //批量通过

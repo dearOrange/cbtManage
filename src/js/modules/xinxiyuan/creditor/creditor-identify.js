@@ -21,6 +21,7 @@ define(function(require, exports, module) {
             var page = new jh.ui.page({
                 data_container: $('#creditor_identify_container'),
                 page_container: $('#page_container'),
+                form_container: _this.form,
                 method: 'post',
                 url: '/upstreams/infoList',
                 contentType: 'application/json',

@@ -19,6 +19,7 @@ define(function(require, exports, module) {
             var page = new jh.ui.page({
                 data_container: $('#admin-xXDistributionList-container'),
                 page_container: $('#page_container'),
+                form_container: _this.form,
                 method: 'post',
                 url: '/task/distributeList',
                 contentType: 'application/json',
@@ -90,7 +91,7 @@ define(function(require, exports, module) {
         };
 
         this.registerEvent = function() {
-        	// 搜索
+            // 搜索
             jh.utils.validator.init({
                 id: 'distribution-list-form',
                 submitHandler: function(form) {
@@ -128,71 +129,71 @@ define(function(require, exports, module) {
                 var taskIds = me.data('id');
                 _this.initSheriff(taskIds);
             });
-            
+
             //查看违章
             $('body').off('click', '.showTr').on('click', '.showTr', function() {
-            	var me = $(this);
+                var me = $(this);
                 _this.id = me.data('info').id;
                 jh.utils.ajax.send({
-            		method: 'post',
-	                url: '/clue/illegalList',
-	                contentType: 'application/json',
-	                data: {
-	                	pageNum:1,
-	                	pageSize:10,
-	                	params: {
-	                    	taskId: _this.id
-	                	}
-	                },
-            		done: function(data){
-            			var strInfo = jh.utils.template('searchIllegalInfo-template', data.data);
-		                jh.utils.alert({
-		                	title: me.data('info').carNumber,
-		                	content: strInfo
-		                })
-            		}
+                    method: 'post',
+                    url: '/clue/illegalList',
+                    contentType: 'application/json',
+                    data: {
+                        pageNum: 1,
+                        pageSize: 10,
+                        params: {
+                            taskId: _this.id
+                        }
+                    },
+                    done: function(data) {
+                        var strInfo = jh.utils.template('searchIllegalInfo-template', data.data);
+                        jh.utils.alert({
+                            title: me.data('info').carNumber,
+                            content: strInfo
+                        })
+                    }
                 })
-            	
-                
+
+
             });
-            
+
             //一键修复
             $('body').off('click', '#allrepair').on('click', '#allrepair', function() {
-            	var checkId = jh.utils.getCheckboxValue('admin-xXDistributionList-container',"value");
-            	if(!checkId) {
-            		jh.utils.alert({
-        				content: "请先选中要修复的信息",
-        				ok: true
-        			})
-            		return false;
-            	}
+                var checkId = jh.utils.getCheckboxValue('admin-xXDistributionList-container', "value");
+                if (!checkId) {
+                    jh.utils.alert({
+                        content: "请先选中要修复的信息",
+                        ok: true
+                    })
+                    return false;
+                }
                 jh.utils.alert({
                     content: "确定修复吗",
-                    ok:function(){
-                    	jh.utils.ajax.send({
-                    		url: '/clue/bondRepair',
-                    		data: {
-                    			taskIds: checkId
-                    		},
-                    		done: function(data){
-                    			(new jh.ui.shadow()).init();
-                    			window.setTimeout(function() {
-                    				(new jh.ui.shadow()).close();
-	                    			jh.utils.alert({
-	                    				content: "信息已修复",
-	                    				ok: function(){
-	                                    	_this.initContent();
-	                                    }
-	                    			})
-                    			}, 10000);
-                    		}
-                    	})
+                    ok: function() {
+                        jh.utils.ajax.send({
+                            url: '/clue/bondRepair',
+                            data: {
+                                taskIds: checkId
+                            },
+                            done: function(data) {
+                                (new jh.ui.shadow()).init();
+                                window.setTimeout(function() {
+                                    (new jh.ui.shadow()).close();
+                                    jh.utils.alert({
+                                        content: "信息已修复",
+                                        ok: function() {
+                                            _this.initContent();
+                                        }
+                                    })
+                                }, 10000);
+                            }
+                        })
                     },
-                    cancel:true
+                    cancel: true
                 });
             })
         };
-        
+
         //查询违章信息列表
         this.searchIllegalInfo = function() {
             var page = new jh.ui.page({

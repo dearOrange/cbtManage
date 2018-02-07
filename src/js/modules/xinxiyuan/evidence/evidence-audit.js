@@ -14,14 +14,16 @@ define(function(require, exports, module) {
             this.initContent();
             this.registerEvent();
         };
-        this.initContent = function() {
+        this.initContent = function(isSearch) {
             var page = new jh.ui.page({
                 data_container: $('#admin-evidenceAuditList-container'),
                 page_container: $('#page_container'),
+                form_container: _this.form,
                 method: 'post',
                 url: '/task/checkingList',
                 contentType: 'application/json',
                 data: jh.utils.formToJson(_this.form),
+                isSearch: isSearch,
                 callback: function(data) {
                     return jh.utils.template('admin-evidenceAuditList-template', data);
                 }
