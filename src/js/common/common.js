@@ -1,4 +1,5 @@
-﻿/**
+﻿﻿
+/**
  * @authors jiaguishan (jiaguishan@gmail.com)
  * @date    2017-04-18 11:39:52 测试版本回退
  * @version 1.0
@@ -1131,9 +1132,10 @@ define(function(require, exports, module) {
                 if (target.is('input')) {
                     target.val(val);
                     if (target.attr('type') === 'hidden') {
-                        if(settings.isSearch === 'tab'){
-                            target.siblings('[data-value=' + val + ']').addClass('active').siblings().removeClass('active');
-                        }
+                        // if (settings.isSearch === 'tab') {
+                        //     target.siblings('[data-value=' + val + ']').addClass('active').siblings().removeClass('active');
+                        // }
+                        target.siblings('[data-value=' + val + ']').trigger('click');
                     }
                 } else if (target.is('select')) {
                     target.val(val).attr('selectedVal', val);
@@ -1876,7 +1878,7 @@ define(function(require, exports, module) {
     (function() {
         function assignSelect(targetId) {
             var _this = this;
-            var target = $('#'+targetId);
+            var target = $('#' + targetId);
             var defaultValue = target.attr('selectedVal');
             target.val(defaultValue);
             $('select').select2({

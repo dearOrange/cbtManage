@@ -40,7 +40,7 @@ define(function(require, exports, module) {
             });
             page.init();
         };
-        
+
         this.initTaskTotalCount = function() {
             jh.utils.ajax.send({
                 url: '/trace/count',
@@ -110,10 +110,10 @@ define(function(require, exports, module) {
             //切换状态
             $('body').off('click', '.taskState').on('click', '.taskState', function() {
                 $(this).addClass("active").siblings().removeClass("active");
-                _this.form[0].reset();
+                // _this.form[0].reset();
                 $('select').select2();
                 $('#state').val($(this).data('value'));
-                _this.initContent('tab');
+                // _this.initContent('tab');
             })
 
             //批量通过
