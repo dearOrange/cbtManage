@@ -101,7 +101,7 @@ define(function(require, exports, module) {
                 var mine = $(this);
                 var state = mine.data('state');
                 $(this).addClass("active").siblings().removeClass("active");
-                _this.form[0].reset();
+                // _this.form[0].reset();
                 if (state === 'matched') {
                     $('.successTask').addClass('hide');
                     $('.taskLocation').removeClass('hide');
@@ -184,7 +184,6 @@ define(function(require, exports, module) {
                     minimumResultsForSearch: Infinity
                 });
                 $('#state').val(mine.data('value'))
-                _this.initContent('tab');
             })
 
 
