@@ -128,6 +128,7 @@ define(function(require, exports, module) {
 	                            		content: '添加议价小计成功！',
 	                            		ok:function(){
 	                            			_this.initYjList();
+	                            			jh.utils.closeArt();
 	                            		},
 	                            		cancel:false
 	                            	});
@@ -140,6 +141,7 @@ define(function(require, exports, module) {
                         		ok:true
                         	});
                     	}
+                    	return false;
                     }
                 });
             });

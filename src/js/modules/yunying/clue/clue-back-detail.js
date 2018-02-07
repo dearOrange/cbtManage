@@ -82,6 +82,7 @@ define(function(require, exports, module) {
                         		content: '请填写正确的联系方式',
                         		ok:true
                         	});
+                        	return false;
                     	}
                     }
                 });
