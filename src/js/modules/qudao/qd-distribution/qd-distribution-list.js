@@ -42,6 +42,7 @@ define(function(require, exports, module) {
                         str += '<option value="' + item.id + '">' + item.name + '</option>';
                     });
                     $('#qd-distributionList-downstreamId').html(str);
+                    jh.utils.assignSelect('qd-distributionList-downstreamId');
                 }
             };
             jh.utils.ajax.send(opt);

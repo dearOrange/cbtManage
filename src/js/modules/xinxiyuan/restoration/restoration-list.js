@@ -41,6 +41,7 @@ define(function(require, exports, module) {
                         operateStr += '<option value="' + operateData[i].id + '">' + operateData[i].name + '</option>';
                     }
                     $('#operateManage').append(operateStr);
+                    jh.utils.assignSelect('operateManage');
                 }
             });
             jh.utils.ajax.send({
@@ -52,6 +53,7 @@ define(function(require, exports, module) {
                         channelStr += '<option value="' + channelData[i].id + '">' + channelData[i].name + '</option>';
                     }
                     $('#channelManage').append(channelStr);
+                    jh.utils.assignSelect('channelManage');
                 }
             })
         };

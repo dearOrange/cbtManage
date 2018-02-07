@@ -41,6 +41,7 @@ define(function(require, exports, module) {
                         optionStr += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
                     }
                     $('#clueAudit-butou').append(optionStr);
+                    jh.utils.assignSelect('clueAudit-butou');
                 }
             })
 
