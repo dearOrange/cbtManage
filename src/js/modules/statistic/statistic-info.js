@@ -180,10 +180,8 @@ define(function(require, exports, module) {
         };
 
         window.initContent = function(obj) {
-
             obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-
             var page = new jh.ui.page({
                 data_container: $('#statistic_container'),
                 page_container: $('#page_container'),
@@ -194,8 +192,8 @@ define(function(require, exports, module) {
                 show_page_number: 3,
                 contentType: 'application/json',
                 data: {
-                    type: 'trace',
                     pageSize: 5,
+                    type: 'trace',
                     yearMonth: obj.y + '-' + obj.M
                 },
                 callback: function(data) {
@@ -206,10 +204,8 @@ define(function(require, exports, module) {
         };
 
         window.initClear = function(obj) {
-
             obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-
             var page = new jh.ui.page({
                 data_container: $('#clear_info_container'),
                 page_container: $('#page_clear_container'),
