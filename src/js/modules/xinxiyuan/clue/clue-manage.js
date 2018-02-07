@@ -113,7 +113,6 @@ define(function(require, exports, module) {
                 _this.form[0].reset();
                 $('select').select2();
                 $('#state').val($(this).data('value'));
-                _this.initContent(true);
             })
 
             //批量通过
