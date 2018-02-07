@@ -1130,6 +1130,9 @@ define(function(require, exports, module) {
 
                 if(target.is('input')){
                     target.val(val);
+                    if( target.attr('type') === 'hidden' ){
+                        target.siblings('[data-value='+val+']').trigger('click');
+                    }
                 }else if(target.is('select')){
                     target.val(val).attr('selectedVal',val);
                     target.select2({
