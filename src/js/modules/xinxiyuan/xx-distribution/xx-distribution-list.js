@@ -160,7 +160,6 @@ define(function(require, exports, module) {
             //一键修复
             $('body').off('click', '#allrepair').on('click', '#allrepair', function() {
                 var checkId = jh.utils.getCheckboxValue('admin-xXDistributionList-container', "value");
-                console.log(checkId);
                 if (!checkId) {
                     jh.utils.alert({
                         content: "请先选中要修复的信息",
