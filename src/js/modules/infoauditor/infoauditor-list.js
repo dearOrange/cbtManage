@@ -10,30 +10,29 @@ define(function(require, exports, module) {
         var _this = this;
         _this.form = $('#infoauditor-list-form');
         $('select').select2({
-        	minimumResultsForSearch:Infinity
+            minimumResultsForSearch: Infinity
         });
-        
+
         $('.public_price').blur(function() {
-        	var minprice = $('#minprice').val();
-        	var maxprice = $('#maxprice').val();
-        	if(maxprice && minprice){
-	        	if(minprice > maxprice){
-	        		jh.utils.alert({
-	        			content: '最小值不能比最大值大！！！',
-	        			ok: function(){
-	        				maxprice;
-	        			}
-	        		})
-	        	}
-        	}
+            var minprice = $('#minprice').val();
+            var maxprice = $('#maxprice').val();
+            if (maxprice && minprice) {
+                if (minprice > maxprice) {
+                    jh.utils.alert({
+                        content: '最小值不能比最大值大！！！',
+                        ok: function() {
+                            maxprice;
+                        }
+                    })
+                }
+            }
         })
 
         this.init = function() {
-//      	this.initContent();
-        	this.initTaskTotalCount();
+            this.initTaskTotalCount();
             this.registerEvent();
         };
-		this.initContent = function(isSearch) {
+        this.initContent = function(isSearch) {
             var page = new jh.ui.page({
                 data_container: $('#infoauditor_list_container'),
                 page_container: $('#page_container'),
@@ -44,7 +43,7 @@ define(function(require, exports, module) {
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
-                	data.passState = $('#state').val();
+                    data.passState = $('#state').val();
                     return jh.utils.template('infoauditorList_content_template', data);
                 }
             });
@@ -77,111 +76,110 @@ define(function(require, exports, module) {
 
             //查看任务详情
             $('.dataShow').off('click', '.taskList-detail').on('click', '.taskList-detail', function() {
-            	var id = $(this).data('id');
+                var id = $(this).data('id');
                 var state = $('#state').val();
-                if(state === '1'){
-                    jh.utils.load("/src/modules/infoauditor/infoauditor-list-detail",{
-                        id:id
+                if (state === '1') {
+                    jh.utils.load("/src/modules/infoauditor/infoauditor-list-detail", {
+                        id: id
                     });
-                }else if(state === '2'){
-                    jh.utils.load("/src/modules/xinxiyuan/task/task-list-detailTrcaing",{
-                        id:id
+                } else if (state === '2') {
+                    jh.utils.load("/src/modules/xinxiyuan/task/task-list-detailTrcaing", {
+                        id: id
                     });
-                }else if(state === '3' || state === '4'){
-                    jh.utils.load("/src/modules/xinxiyuan/task/task-list-list-detailFinished",{
-                        id:id
+                } else if (state === '3' || state === '4') {
+                    jh.utils.load("/src/modules/xinxiyuan/task/task-list-list-detailFinished", {
+                        id: id
                     });
                 }
             });
-            
+
             //切换状态
             $('body').off('click', '.taskState').on('click', '.taskState', function() {
-            	var mine = $(this);
-            	var state = mine.data('state');
-            	$(this).addClass("active").siblings().removeClass("active");
-            	_this.form[0].reset();
-            	var arr = [{
-	    			val: 'unarrange',
-	    			name:"渠道经理未分配",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'tracing',
-	    			name:"线索未提交",
-	    			flag:'open,trcaing'
-	    		},{
-	    			val: 'clueChecking',
-	    			name:"线索审核中",
-	    			flag:'open,trcaing'
-	    		},{
-	    			val: 'unvaluation',
-	    			name:"待估价",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'unconfirmed',
-	    			name:"待债权方确认",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'voucherChecking',
-	    			name:"凭证审核中",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'voucherInvalid',
-	    			name:"凭证审核未通过",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'hunterUnreceive',
-	    			name:"捕头未接受",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'hunterReceive',
-	    			name:"捕头已接受",
-	    			flag:'trcaing'
-	    		},{
-	    			val: 'platReceive',
-	    			name:"平台已收车",
-	    			flag:''
-	    		},{
-	    			val: 'upstreamReceive',
-	    			name:"债权方已收车",
-	    			flag:''
-	    		},{
-	    			val: 'closed',
-	    			name:"已失效",
-	    			flag:''
-	    		}];
-	    		
-	    		var optionArr = [];
-	    		for(var i=0;i<arr.length;i++){
-	    			var item = arr[i];
-            		if(state === 'all'){
-            			optionArr.push(item);
-            			continue;
-            		}
-            		if( item.flag.indexOf(state) !== -1){
-            			optionArr.push(item);
-            		}
-            	}
-	    		var str='<option value="">全部</option>';
-	    		for(var j=0;j<optionArr.length;j++){
-	    			var temp = optionArr[j];
-	    			str += '<option value="'+temp.val+'">'+temp.name+'</option>';
-	    		}
-	    		$("#selectCheck").html(str);
-	    		
-            	
-            	$('select').select2({
-	            	minimumResultsForSearch:Infinity
-	            });
-            	$('#state').val(mine.data('value'))
-//          	_this.initContent();
+                var mine = $(this);
+                var state = mine.data('state');
+                $(this).addClass("active").siblings().removeClass("active");
+                _this.form[0].reset();
+                var arr = [{
+                    val: 'unarrange',
+                    name: "渠道经理未分配",
+                    flag: 'trcaing'
+                }, {
+                    val: 'tracing',
+                    name: "线索未提交",
+                    flag: 'open,trcaing'
+                }, {
+                    val: 'clueChecking',
+                    name: "线索审核中",
+                    flag: 'open,trcaing'
+                }, {
+                    val: 'unvaluation',
+                    name: "待估价",
+                    flag: 'trcaing'
+                }, {
+                    val: 'unconfirmed',
+                    name: "待债权方确认",
+                    flag: 'trcaing'
+                }, {
+                    val: 'voucherChecking',
+                    name: "凭证审核中",
+                    flag: 'trcaing'
+                }, {
+                    val: 'voucherInvalid',
+                    name: "凭证审核未通过",
+                    flag: 'trcaing'
+                }, {
+                    val: 'hunterUnreceive',
+                    name: "捕头未接受",
+                    flag: 'trcaing'
+                }, {
+                    val: 'hunterReceive',
+                    name: "捕头已接受",
+                    flag: 'trcaing'
+                }, {
+                    val: 'platReceive',
+                    name: "平台已收车",
+                    flag: ''
+                }, {
+                    val: 'upstreamReceive',
+                    name: "债权方已收车",
+                    flag: ''
+                }, {
+                    val: 'closed',
+                    name: "已失效",
+                    flag: ''
+                }];
+
+                var optionArr = [];
+                for (var i = 0; i < arr.length; i++) {
+                    var item = arr[i];
+                    if (state === 'all') {
+                        optionArr.push(item);
+                        continue;
+                    }
+                    if (item.flag.indexOf(state) !== -1) {
+                        optionArr.push(item);
+                    }
+                }
+                var str = '<option value="">全部</option>';
+                for (var j = 0; j < optionArr.length; j++) {
+                    var temp = optionArr[j];
+                    str += '<option value="' + temp.val + '">' + temp.name + '</option>';
+                }
+                $("#selectCheck").html(str);
+
+
+                $('select').select2({
+                    minimumResultsForSearch: Infinity
+                });
+                $('#state').val(mine.data('value'))
             })
-			
+
 
         };
-       
-	    	
-	    		
-	    	
+
+
+
+
     }
     module.exports = InfoauditorList;
 });
