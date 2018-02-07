@@ -41,6 +41,7 @@ define(function(require, exports, module) {
                         optionStr += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
                     }
                     $('#creditorOrder-butou').append(optionStr);
+                    jh.utils.assignSelect('creditorOrder-butou');
                 }
             })
             // 搜索

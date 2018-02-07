@@ -895,12 +895,12 @@ define(function(require, exports, module) {
             if (options.isSearch && data_flag[options.url]) {
                 data_flag[options.url].data = options.data;
             }
-            $.extend(m.settings, options);//所有列表参数进行合并
+            $.extend(m.settings, options); //所有列表参数进行合并
         }
         Page.prototype.init = function() {
             var m = this;
             var ms = m.settings;
-            ms.page_container.addClass('pagination');//分页容器样式类添加
+            ms.page_container.addClass('pagination'); //分页容器样式类添加
             if (typeof data_flag[ms.url] === 'undefined') {
                 data_flag[ms.url] = {
                     pageNum: 1,
@@ -912,7 +912,7 @@ define(function(require, exports, module) {
             } else {
                 m.render(data_flag[ms.url].pageNum);
             }
-            m.regEvent();//注册事件
+            m.regEvent(); //注册事件
         };
         Page.prototype.create = function(num) {
             var m = this;
@@ -1128,13 +1128,13 @@ define(function(require, exports, module) {
                 var val = originData[item];
                 var target = settings.form_container.find('[name=' + item + ']');
 
-                if(target.is('input')){
+                if (target.is('input')) {
                     target.val(val);
-                    if( target.attr('type') === 'hidden' ){
-                        target.siblings('[data-value='+val+']').trigger('click');
+                    if (target.attr('type') === 'hidden') {
+                        target.siblings('[data-value=' + val + ']').trigger('click');
                     }
-                }else if(target.is('select')){
-                    target.val(val).attr('selectedVal',val);
+                } else if (target.is('select')) {
+                    target.val(val).attr('selectedVal', val);
                     target.select2({
                         minimumResultsForSearch: Infinity
                     });
@@ -1870,6 +1870,15 @@ define(function(require, exports, module) {
             return str;
         }
         tammy.utils.getChannelHtml = ChannelDistribution;
+    })();
+    (function() {
+        function assignSelect(targetId) {
+            var _this = this;
+            var target = $('#'+targetId);
+            var defaultValue = target.attr('selectedVal');
+            target.val(defaultValue);
+        }
+        tammy.utils.assignSelect = assignSelect;
     })();
     (function() {
         function SheriffDistribution(checkType, list) {
