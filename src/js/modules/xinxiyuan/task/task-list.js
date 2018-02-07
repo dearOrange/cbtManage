@@ -12,7 +12,7 @@ define(function(require, exports, module) {
 
 
         this.init = function() {
-            this.initContent(true);
+            this.initContent();
             this.initTaskTotalCount();
             this.registerEvent();
         };
@@ -183,8 +183,7 @@ define(function(require, exports, module) {
                 $('select').select2({
                     minimumResultsForSearch: Infinity
                 });
-                $('#state').val(mine.data('value'));
-                _this.initContent(true);
+                $('#state').val(mine.data('value'))
             })
 
 
@@ -213,7 +212,7 @@ define(function(require, exports, module) {
                                     jh.utils.alert({
                                         content: "信息已修复",
                                         ok: function() {
-                                            _this.initContent(false);
+                                            _this.initContent();
                                         }
                                     })
                                 }, 10000);
