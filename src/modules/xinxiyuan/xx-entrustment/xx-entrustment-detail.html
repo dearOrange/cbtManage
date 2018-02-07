@@ -16,7 +16,7 @@
 		<p class="showTaskState pull-right">{{menuState(data.state)}}</p>
 		{{else}}
 		<p class="showTaskState pull-right">
-			{{if data.isIssue === "0"}} 委托不存在 {{else}} 委托存在 {{/if}}
+			{{if data.isIssue === 0}} 委托不存在 {{else}} 委托存在 {{/if}}
 		</p>
 		
 		{{/if}}
