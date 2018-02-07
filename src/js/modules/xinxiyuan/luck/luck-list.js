@@ -15,14 +15,16 @@ define(function(require, exports, module) {
             this.registerEvent();
         };
 
-        this.initContent = function() {
+        this.initContent = function(isSearch) {
             var page = new jh.ui.page({
                 data_container: $('#luck_list_container'),
                 page_container: $('#page_container'),
+                form_container: _this.form,
                 method: 'post',
                 url: '/trace/luckTask',
                 contentType: 'application/json',
-                data: jh.utils.formToJson($('#luck-list-form')),
+                data: jh.utils.formToJson(_this.form),
+                isSearch: isSearch,
                 callback: function(data) {
                     return jh.utils.template('luckList_content_template', data);
                 }
@@ -39,7 +41,7 @@ define(function(require, exports, module) {
             jh.utils.validator.init({
                 id: 'luck-list-form',
                 submitHandler: function(form) {
-                    _this.initContent();
+                    _this.initContent(true);
                     return false;
                 }
             });

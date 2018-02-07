@@ -70,7 +70,7 @@
 		<td>
 			<ul class="operaitem">
 				<li>
-					{{if item.state == "withdrawing"}}
+					{{if item.state === "withdrawing"}}
 					<a data-id="{{item.id}}" data-infos="{{item}}" class="sendMoney button">打款</a> {{else}} — — {{/if}}
 				</li>
 			</ul>

@@ -43,7 +43,7 @@
 		<td>{{item.company}}</td>
 		<td>{{item.createAt}}</td>
 		<td>{{menuState(item.state)}}</td>
-		<td>{{if item.state == "verified"}} {{if item.isIssue == "0"}} 假 {{else}} 真 {{/if}} {{else}} — — {{/if}}
+		<td>{{if item.state === "verified"}} {{if item.isIssue === 0}} 假 {{else}} 真 {{/if}} {{else}} — — {{/if}}
 		</td>
 		<td>
 			<a data-id="{{item.id}}" class="entrustmentList-detail button">详情</a>
