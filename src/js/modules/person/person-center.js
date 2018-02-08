@@ -29,9 +29,11 @@ define(function(require, exports, module) {
                     _this.resData = returnData.data.operatorProvinceVoList;
                     if(_this.roleType === 'channel') {
 			        	$('.channelArea').removeClass('hide');
+			        	var strArea = '';
 			        	for(var i=0;i<_this.resData.length;i++){
-	                    	$('.personArea').append(_this.resData[i].provinceName);
-	                    }
+			        		strArea += _this.resData[i].provinceName + '\n';
+	                   }
+			        	$('.personArea').html(strArea);
 			        }else {
 			        	$('.channelArea').addClass('hide');
 			        }
