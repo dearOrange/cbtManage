@@ -97,11 +97,10 @@ define(function(require, exports, module) {
             });
 
             //切换状态
-            $('body').off('click', '.taskState').on('click', '.taskState', function() {
+            $('body').off('click', '.taskState').on('click', '.taskState', function(event,param) {
                 var mine = $(this);
                 var state = mine.data('state');
                 $(this).addClass("active").siblings().removeClass("active");
-                // _this.form[0].reset();
                 if (state === 'matched') {
                     $('.successTask').addClass('hide');
                     $('.taskLocation').removeClass('hide');
@@ -184,6 +183,11 @@ define(function(require, exports, module) {
                     minimumResultsForSearch: Infinity
                 });
                 $('#state').val(mine.data('value'))
+                if(param && param==='autoClick'){
+                    
+                }else{
+                    _this.initContent('tab');
+                }
             })
 
 

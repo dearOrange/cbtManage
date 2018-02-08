@@ -108,12 +108,15 @@ define(function(require, exports, module) {
             });
 
             //切换状态
-            $('body').off('click', '.taskState').on('click', '.taskState', function() {
+            $('body').off('click', '.taskState').on('click', '.taskState', function(event,parame) {
                 $(this).addClass("active").siblings().removeClass("active");
-                // _this.form[0].reset();
                 $('select').select2();
                 $('#state').val($(this).data('value'));
-                // _this.initContent('tab');
+                if(param && param==='autoClick'){
+                    
+                }else{
+                    _this.initContent('tab');
+                }
             })
 
             //批量通过
