@@ -1,7 +1,7 @@
 <div class="dataContent">
 	<div class="search-container">
         <div class="pull-left mt25">
-            <a href="javascript:;" class="button admin-addNews"> 新增新闻公告</a>
+            <a href="javascript:;" class="button style-btn admin-addNews"> 新增新闻公告</a>
         </div>
 	</div>
 	<div class="data-container">
@@ -14,7 +14,7 @@
 					<th width="12%">新闻公告内容</th>
 					<th width="8%">序号</th>
 					<th width="13%">发布时间</th>
-					<th width="8%">操作</th>
+					<th width="10%">操作</th>
 				</tr>
 			</thead>
 			<tbody id="news_list_container">
@@ -37,11 +37,7 @@
 		<td>{{item.order}}</td>
 		<td>{{item.createAt}}</td>
 		<td>
-			<ul class="operaitem" style="margin-left:24px;">
-				<li>
-					<a data-id="{{item.id}}" class="removeNews button">删除</a>
-				</li>
-			</ul>
+			<a data-id="{{item.id}}" class="removeNews button">删除</a>
 		</td>
 	</tr>
 	{{/each}}

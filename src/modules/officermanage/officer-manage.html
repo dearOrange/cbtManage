@@ -2,7 +2,7 @@
     <div class="search-container">
         <form id="admin-officerManager-form">
             <table class="common_query textLeft search-content">
-                <tr>
+                <tr class="new-style">
                     <td>
                         <label class="label">业务类型：</label>
                         <select name="type">
@@ -35,7 +35,7 @@
                     <th width="10%">联系电话</th>
                     <th width="15%">通过认证时间</th>
                     <th width="10%">认证状态</th>
-                    <th width="6%">操作</th>
+                    <th width="10%">操作</th>
                 </tr>
             </thead>
             <tbody id="officer_list_container">
@@ -58,11 +58,7 @@
         <td>{{item.passAt}}</td>
         <td>{{officerClueState(item.state)}}</td>
         <td>
-            <ul class="operaitem" style="margin-left:10px;">
-                <li>
-                    <a data-id="{{item.id}}" class="officerDetail button">详情</a>
-                </li>
-            </ul>
+            <a data-id="{{item.id}}" class="officerDetail button">详情</a>
         </td>
     </tr>
     {{/each}}

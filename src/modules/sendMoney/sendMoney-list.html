@@ -2,7 +2,7 @@
 	<div class="search-container">
 		<form id="sendMoney-list-form">
 			<table class="common_query textLeft search-content">
-				<tr>
+				<tr class="new-style">
 					<td>
 						<label class="label">提现人：</label>
 						<input type="text" class="search-input" name="downstream">
@@ -39,8 +39,8 @@
 					<th width="8%">发放形式</th>
 					<th width="6%">打款状态</th>
 					<th width="15%">提现申请时间</th>
-					<th width="6%">操作</th>
-					<th width="6%">打款</th>
+					<th width="10%">操作</th>
+					<th width="10%">打款</th>
 				</tr>
 			</thead>
 			<tbody id="sendMoney_list_container">
@@ -68,12 +68,8 @@
 			<a data-id="{{item.id}}" class="sendMoney-detail button">详情</a>
 		</td>
 		<td>
-			<ul class="operaitem">
-				<li>
-					{{if item.state === "withdrawing"}}
-					<a data-id="{{item.id}}" data-infos="{{item}}" class="sendMoney button">打款</a> {{else}} — — {{/if}}
-				</li>
-			</ul>
+			{{if item.state === "withdrawing"}}
+			<a data-id="{{item.id}}" data-infos="{{item}}" class="sendMoney oneStyle button">打款</a> {{else}} — — {{/if}}
 		</td>
 	</tr>
 	{{/each}}

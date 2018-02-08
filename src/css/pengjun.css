@@ -510,3 +510,39 @@ p.closeStatus {
 .colorbg input {
 	border:1px solid #eee;
 }
+
+.dataContent .search-container .new-style {
+	border:1px solid #eef1f6;
+	background:#fafafa;
+}
+.dataContent .search-container .new-style td input[type="submit"] {
+	width:100px;
+	background:#ff8812;
+	color:#fff;
+	border:1px solid #ff8812;
+}
+.dataContent .search-container .new-style td input[type="submit"]:hover {
+	background:#f5810d;
+}
+.style-btn {
+	border:1px solid #aaa !important;
+	border-radius: 0 !important;
+	color: #515151 !important;
+	background:#fff !important;
+}
+.style-btn:hover {
+	background: #fafafa !important;
+	color:#515151 !important;
+}
+.oneStyle {
+	border:1px solid #eb4d41 !important;
+	background: #eb4d41 !important;
+}
+.oneStyle:hover {
+	background: #d73d33 !important;
+}
+.dataContent .search-container .stateChange {
+	width: 100%;
+	border-bottom:4px solid dodgerblue;
+	margin-bottom: 20px;
+}

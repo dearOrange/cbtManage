@@ -4,7 +4,6 @@
 			<table class="common_query textLeft search-content">
 				<tr>
 					<td colspan="6">
-						<label for="tag" class="pull-left label">线索状态：</label>
 						<ol id="taskState" class="stateChange pull-left">
 							<li data-value="1" data-state="matched" class="taskState active">已匹配成功线索</li>
 							<li data-value="0" data-state="unmatched" class="taskState">未匹配成功线索</li>
@@ -12,7 +11,7 @@
 						</ol>
 					</td>
 				</tr>
-				<tr>
+				<tr class="new-style">
 					<td>
 						<label class="label">车牌号：</label>
 						<input type="text" class="search-input" name="carNumber">
@@ -49,8 +48,8 @@
 			</table>
 		</form>
 	</div>
-	<a href="javascript:;" class="button" id="batchPass">批量通过</a>
-	<a href="javascript:;" class="button" id="batchRefuse">批量拒绝</a>
+	<a href="javascript:;" class="button style-btn" id="batchPass">批量通过</a>
+	<a href="javascript:;" class="button style-btn" id="batchRefuse">批量拒绝</a>
 	<div class="data-container mt25">
 		<table class="dataShow">
 			<thead>
@@ -65,7 +64,7 @@
 					<th width="12%">照片拍摄地/时间</th>
 					<th class="clueMatch" width="8%">匹配任务号</th>
 					<th width="10%">上传时间</th>
-					<th width="10%">操作</th>
+					<th width="15%">操作</th>
 				</tr>
 			</thead>
 			<tbody id="clue_manage_container">
@@ -104,7 +103,7 @@
 					<a data-id="{{item.id}}" class="agreement button">通过</a>
 				</li>
 				<li>
-					<a data-id="{{item.id}}" class="pass button">拒绝</a>
+					<a data-id="{{item.id}}" class="pass button oneStyle">拒绝</a>
 				</li>
 				{{/if}}
 				{{if item.state === "passed"}}

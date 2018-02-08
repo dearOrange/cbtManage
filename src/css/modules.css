@@ -843,9 +843,10 @@ input, select, textarea {
 .search-container .stateChange li {
 	cursor: pointer;
 	float: left;
-	border: 1px solid transparent;
-	padding: 5px 10px;
+	padding: 5px 26px;
 	position: relative;
+	color: #20a0ff;
+	border: 1px solid #20a0ff;
 }
 
 .search-container .stateChange li sup {
@@ -866,14 +867,9 @@ input, select, textarea {
 	vertical-align: middle;
 }
 
-.search-container .stateChange li:hover {
-	color: #20a0ff;
-	border: 1px solid #20a0ff;
-}
-
 .search-container .stateChange li.active {
-	color: #20a0ff;
-	border: 1px solid #20a0ff;
+	color: #fff;
+	background: #20a0ff;
 }
 
 /**
@@ -901,7 +897,7 @@ input, select, textarea {
 .dialog-width .showTaskState {
 	width: 100px;
 	height: 34px;
-	background: dodgerblue;
+	background: #68c8f8;
 	color: white;
 	text-align: center;
 	line-height: 34px;

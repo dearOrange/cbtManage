@@ -2,7 +2,7 @@
     <div class="search-container">
         <form id="admin-evidenceAuditList-form">
             <table class="common_query textLeft search-content">
-                <tr>
+                <tr class="new-style">
                     <td>
                         <label class="label">车牌号：</label>
                         <input type="text" class="search-input" name="carNumber" maxlength="7">
@@ -38,7 +38,7 @@
                     <th width="10%">任务类型</th>
                     <th width="15%">债权方</th>
                     <th width="15%">提交凭证时间</th>
-                    <th width="6%">操作</th>
+                    <th width="12%">操作</th>
                 </tr>
             </thead>
             <tbody id="admin-evidenceAuditList-container">
@@ -59,11 +59,7 @@
         <td>{{item.upstreamName}}</td>
         <td>{{item.voucherUploadAt}}</td>
         <td>
-            <ul class="operaitem">
-                <li>
-                    <a data-id="{{item.id}}" class="detail button">详情</a>
-                </li>
-            </ul>
+            <a data-id="{{item.id}}" class="detail button">详情</a>
         </td>
     </tr>
     {{/each}}

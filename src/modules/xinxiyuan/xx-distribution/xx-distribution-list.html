@@ -2,7 +2,7 @@
     <div class="search-container">
     	<form id="distribution-list-form">
 			<table class="common_query textLeft search-content">
-				<tr>
+				<tr class="new-style">
 					<td>
 						<label class="label">车牌号：</label>
 						<input type="text" class="search-input" name="carNumber">
@@ -17,8 +17,8 @@
 				</tr>
 				<tr>
 					<td>
-						<input type="button" class="button mt10" id="distributeTask" value="批量分配">
-						<input type="button" class="button mt10" id="allrepair" value="批量信息修复">
+						<input type="button" class="button style-btn mt10" id="distributeTask" value="批量分配">
+						<input type="button" class="button style-btn mt10" id="allrepair" value="批量信息修复">
 					</td>
 				</tr>
 			</table>
@@ -62,7 +62,7 @@
         <td class="showTr" data-info="{{item}}">{{item.city}}</td>
         <td>
             <a data-id="{{item.id}}" class="detail button">详情</a>
-            <a data-id="{{item.id}}" class="distribution button">分配</a>
+            <a data-id="{{item.id}}" class="distribution oneStyle button">分配</a>
         </td>
     </tr>
     {{/each}}

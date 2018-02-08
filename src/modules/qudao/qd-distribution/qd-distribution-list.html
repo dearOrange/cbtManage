@@ -2,7 +2,7 @@
     <div class="search-container">
         <form id="qd-distributionList-form">
             <table class="common_query textLeft">
-                <tr>
+                <tr class="new-style">
                     <td>
                         <label class="pull-left label">车牌号：</label>
                         <input type="text" name="carNumber" class="search-input" placeholder="输入车牌号">
@@ -58,7 +58,7 @@
         <td>
             <a data-id="{{item.id}}" class="detail button">详情</a>
             {{if item.state !== "clueChecking"}}
-            <a data-id="{{item.id}}" class="distribution button">分配</a>
+            <a data-id="{{item.id}}" class="distribution oneStyle button">分配</a>
             {{/if}}
         </td>
     </tr>

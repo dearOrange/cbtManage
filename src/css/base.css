@@ -70,7 +70,7 @@ td {
 }
 
 th {
-    background: #ddeefe;
+    background: #f0f4f7;
     border: 0
 }
 
@@ -235,7 +235,7 @@ label.error {
 
 .button, a.button {
     display: inline-block;
-    border: 1px solid #3fa1f4;
+    border: 1px solid #68c8f8;
     cursor: pointer;
     text-align: center;
     -webkit-border-radius: 3px;
@@ -243,15 +243,15 @@ label.error {
     border-radius: 3px;
     font-size: 14px;
     font-family: 'microsoft yahei';
-    color: #3fa1f4;
-    padding: 3px 8px;
+    color: #fff;
+    padding: 3px 20px;
     vertical-align: middle;
-    margin-right: 5px
+    margin-right: 5px;
+    background-color: #68c8f8;
 }
 
 .button:hover, a.button:hover {
-    background-color: #3fa1f4;
-    color: #fff !important
+    background-color: #56b5e3;
 }
 
 .button.add_btn {
@@ -1086,7 +1086,7 @@ label.error {
 }
 
 .dataShow tbody>tr:hover {
-    background-color: #f7faff;
+    background-color: #f0f4f7;
 }
 
 .dataShow .operaList {

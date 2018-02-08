@@ -2,7 +2,7 @@
 	<div class="search-container">
 		<form id="informant-manage-form">
 			<table class="common_query textLeft search-content">
-				<tr>
+				<tr class="new-style">
 					<td>
 						<label class="label">线人：</label>
 						<input type="text" class="search-input" name="downstream">
@@ -44,15 +44,11 @@
         <td>{{item.phone}}</td>
         <td>{{item.createAt}}</td>
         <td>
-        	<ul class="operaitem" style="margin-left:10px;">
-                <li>
-                	{{if item.state === "wait"}}
-                    <a data-id="{{item.id}}" class="changeOfficer button">审核线人为捕头</a>
-                    {{else}}
-                    —— ——
-                    {{/if}}
-                </li>
-            </ul>
+        	{{if item.state === "wait"}}
+            <a data-id="{{item.id}}" class="changeOfficer button">审核线人为捕头</a>
+            {{else}}
+            —— ——
+            {{/if}}
         </td>
     </tr>
     {{/each}}
