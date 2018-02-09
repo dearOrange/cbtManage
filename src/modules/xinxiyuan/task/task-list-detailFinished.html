@@ -76,13 +76,32 @@
 					</dl>
 				</div>
 				<div class="pull-left ml10">
-					<p>{{data.name}}----{{if data.role === 'type_A'}}线人-----{{data.phone}}{{else}}捕头----{{officerState(data.downstreamType)}}{{/if}}</p>
-					<p>线索上传时间：{{data.createAt}}</p>
-					<p>gprs信息：{{data.location}}</p>
-					<p>定位：{{data.location}}</p>
-					{{if data.role === 'type_A'}}
-					<p>GPS:{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装(安装人员{{data.gpsPerson}}){{/if}}{{if data.gpsSource === 2}}未安装{{/if}}</p>
-					{{/if}}
+					<table>
+						<tr>
+							<th>上传人员</th>
+							<td>{{data.name}}----{{if data.role === 'type_A'}}线人{{else}}捕头----{{officerState(data.downstreamType)}}{{/if}}</td>
+							<th>联系电话</th>
+							<td>{{data.phone}}</td>
+						</tr>
+						<tr>
+							<th>gprs信息</th>
+							<td colspan="3">{{data.location}}</td>
+						</tr>
+						<tr>
+							<th>定位</th>
+							<td colspan="3">{{data.location}}</td>
+						</tr>
+						{{if data.role === 'type_A'}}
+						<tr>
+							<th>GPS</th>
+							<td {{if data.gpsSource !== 1}}colspan="3"{{/if}}>{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装{{/if}}{{if data.gpsSource === 2}}未安装{{/if}}</td>
+							{{if data.gpsSource === 1}}
+							<th>安装人员</th>
+							<td>{{data.gpsPerson}}</td>
+							{{/if}}
+						</tr>
+						{{/if}}
+					</table>
 				</div>
 				<div class="clearfix"></div>
 			</div>
