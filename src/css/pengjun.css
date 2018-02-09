@@ -543,6 +543,65 @@ p.closeStatus {
 }
 .dataContent .search-container .stateChange {
 	width: 100%;
-	border-bottom:4px solid dodgerblue;
+	border-bottom:1px solid #68C8F8;
 	margin-bottom: 20px;
+}
+
+a.switch-btn {
+	float:right;
+}
+a.switch-btn span {
+	float:left;
+}
+a.switch-btn span i {
+	float:left;
+	margin-left:6px;
+	line-height: 24px;
+}
+span.operatorTaskOpen, span.operatorTaskClose {
+    width: 48px;
+    height: 20px;
+}
+
+.operatorTaskOpen {
+    background: url(../img/index/open.png) no-repeat center;
+    background-size: 20px 20px;
+}
+
+.operatorTaskClose {
+    background: url(../img/index/close.png) no-repeat center;
+    background-size: 20px 20px;
+}
+i.icon-issue {
+	width:24px;
+	height:24px;
+	background: url(../img/index/icon-issue.png) no-repeat center;
+    background-size: cover;
+}
+
+.activity-content {
+	width:580px;
+	height:90px;
+	background:#FAFAFA;
+	text-align: center;
+	line-height: 30px;
+	border:1px solid #ccc;
+	position:absolute;
+	right:200px;
+	top:190px;
+	display: none;
+	z-index: 10;
+}
+.isOpen-content {
+	width:250px;
+	height:120px;
+	background:#fff;
+	text-align: center;
+	line-height: 39px;
+	border:1px solid #ccc;
+	position:absolute;
+	right:0;
+	top:220px;
+	z-index: 10;
+	display:none;
 }

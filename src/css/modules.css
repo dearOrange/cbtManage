@@ -845,8 +845,9 @@ input, select, textarea {
 	float: left;
 	padding: 5px 26px;
 	position: relative;
-	color: #20a0ff;
-	border: 1px solid #20a0ff;
+	color: #68C8F8;
+	border: 1px solid #68C8F8;
+	border-bottom: 0;
 }
 
 .search-container .stateChange li sup {
@@ -869,7 +870,7 @@ input, select, textarea {
 
 .search-container .stateChange li.active {
 	color: #fff;
-	background: #20a0ff;
+	background: #68C8F8;
 }
 
 /**
