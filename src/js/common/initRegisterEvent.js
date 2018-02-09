@@ -75,8 +75,8 @@ define(function(require, exports, module) {
             });
 
             /*只能输入数字，并且小数点只能输入一个*/
-            $('#content-container').on('keyup change', '.OnlyPrice', function() {
-                this.value = this.value.replace(/[^\d.]/, ''); /*禁止输入非数字和小数点以外字符*/
+            $('body').on('keyup change', '.OnlyPrice', function() {
+                this.value = this.value.replace(/[^\d.,]/, ''); /*禁止输入非数字和小数点以外字符*/
                 this.value = this.value.replace(/^\./, ''); /*禁止开头为‘.’*/
                 this.value = this.value.replace(/[\u4e00-\u9fa5]/ig, ''); /*禁止输入汉字*/
                 this.value = this.value.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.'); /*不允许两个及以上小数点*/
