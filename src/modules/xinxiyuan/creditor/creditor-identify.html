@@ -2,7 +2,7 @@
 	<div class="search-container">
         <form id="creditor-identify-form">
             <table class="common_query textLeft search-content">
-                <tr>
+                <tr class="new-style">
                     <td>
                         <label class="label">负责人：</label>
                         <input type="text" class="search-input" name="linkman">
@@ -44,7 +44,7 @@
                     <th width="8%">联系电话</th>
                     <th width="7%">认证状态</th>
                     <th width="10%">通过认证时间</th>
-                    <th width="8%">操作</th>
+                    <th width="12%">操作</th>
                 </tr>
             </thead>
             <tbody id="creditor_identify_container">
@@ -66,11 +66,7 @@
         <td>{{officerClueState(item.state)}}</td>
         <td>{{item.passAt}}</td>
         <td>
-            <ul class="operaitem">
-                <li>
-                    <a data-id="{{item.id}}" class="creditor-detail button">详情</a>
-                </li>
-            </ul>
+            <a data-id="{{item.id}}" class="creditor-detail button">详情</a>
         </td>
     </tr>
     {{/each}}

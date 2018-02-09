@@ -2,7 +2,7 @@
 	<div class="search-container">
         <form id="user-manage-form">
             <table class="common_query textLeft search-content">
-                <tr>
+                <tr class="new-style">
                     <td>
                         <label class="label">用户名</label>
                         <input type="text" class="search-input" name="username">
@@ -19,6 +19,7 @@
                             <option value="channel">渠道经理</option>
                             <option value="finance">财务</option>
                             <option value="logistic">物流公司</option>
+                            <option value="onlineoper">线上运营</option>
                         </select>
                     </td>
                     <td>
@@ -27,7 +28,7 @@
                 </tr>
                 <tr>
                 	<td>
-                		<input type="button" class="button addUser" value="添加用户">
+                		<input type="button" class="button style-btn addUser" value="添加用户">
                 	</td>
                 </tr>
             </table>
@@ -65,11 +66,7 @@
         <td>{{if item.status == 0}} 关闭  {{else}} 开启  {{/if}}</td>
         <td>{{item.createAt}}</td>
         <td>
-            <ul class="operaitem">
-                <li>
-                    <a data-infos="{{item}}" data-id="{{item.id}}" class="edit-user button">编辑</a>
-                </li>
-            </ul>
+            <a data-infos="{{item}}" data-id="{{item.id}}" class="edit-user button">编辑</a>
         </td>
     </tr>
     {{/each}}
@@ -143,6 +140,7 @@
 		        <option value="channel">渠道经理</option>
 		        <option value="finance">财务</option>
                 <option value="logistic">物流公司</option>
+                <option value="onlineoper">线上运营</option>
 		    </select>
 		</div>
 		<div class="next-content">

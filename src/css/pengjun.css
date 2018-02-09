@@ -510,3 +510,98 @@ p.closeStatus {
 .colorbg input {
 	border:1px solid #eee;
 }
+
+.dataContent .search-container .new-style {
+	border:1px solid #eef1f6;
+	background:#fafafa;
+}
+.dataContent .search-container .new-style td input[type="submit"] {
+	width:100px;
+	background:#ff8812;
+	color:#fff;
+	border:1px solid #ff8812;
+}
+.dataContent .search-container .new-style td input[type="submit"]:hover {
+	background:#f5810d;
+}
+.style-btn {
+	border:1px solid #aaa !important;
+	border-radius: 0 !important;
+	color: #515151 !important;
+	background:#fff !important;
+}
+.style-btn:hover {
+	background: #fafafa !important;
+	color:#515151 !important;
+}
+.oneStyle {
+	border:1px solid #eb4d41 !important;
+	background: #eb4d41 !important;
+}
+.oneStyle:hover {
+	background: #d73d33 !important;
+}
+.dataContent .search-container .stateChange {
+	width: 100%;
+	border-bottom:1px solid #68C8F8;
+	margin-bottom: 20px;
+}
+
+a.switch-btn {
+	float:right;
+}
+a.switch-btn span {
+	float:left;
+}
+a.switch-btn span i {
+	float:left;
+	margin-left:6px;
+	line-height: 24px;
+}
+span.operatorTaskOpen, span.operatorTaskClose {
+    width: 48px;
+    height: 20px;
+}
+
+.operatorTaskOpen {
+    background: url(../img/index/open.png) no-repeat center;
+    background-size: 20px 20px;
+}
+
+.operatorTaskClose {
+    background: url(../img/index/close.png) no-repeat center;
+    background-size: 20px 20px;
+}
+i.icon-issue {
+	width:24px;
+	height:24px;
+	background: url(../img/index/icon-issue.png) no-repeat center;
+    background-size: cover;
+}
+
+.activity-content {
+	width:580px;
+	height:90px;
+	background:#FAFAFA;
+	text-align: center;
+	line-height: 30px;
+	border:1px solid #ccc;
+	position:absolute;
+	right:200px;
+	top:190px;
+	display: none;
+	z-index: 10;
+}
+.isOpen-content {
+	width:250px;
+	height:120px;
+	background:#fff;
+	text-align: center;
+	line-height: 39px;
+	border:1px solid #ccc;
+	position:absolute;
+	right:0;
+	top:220px;
+	z-index: 10;
+	display:none;
+}

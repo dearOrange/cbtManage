@@ -13,6 +13,12 @@ define(function(require, exports, module) {
             this.initContent();
             this.initTaskTotalCount();
             this.registerEvent();
+            $('.icon-issue').mouseover(function(){
+            	$('.activity-content').css('display','block');
+            });
+            $('.icon-issue').mouseout(function(){
+            	$('.activity-content').css('display','');
+            })
         };
 
         this.initContent = function(isSearch) {
@@ -54,6 +60,38 @@ define(function(require, exports, module) {
                     var sup = $('<sup></sup>');
                 }
             });
+            
+            jh.utils.ajax.send({
+                url: '/system/isActive',
+                done: function(returnData) {
+                    _this.isOpen = returnData.data.isOpen;
+                    if(_this.isOpen) {
+                    	$('.operater-btn').addClass('operatorTaskOpen');
+                    	$('.operater-btn').removeClass('operatorTaskClose');
+                    } else {
+                    	$('.operater-btn').removeClass('operatorTaskOpen');
+                    	$('.operater-btn').addClass('operatorTaskClose');
+                    }
+                }
+	        });
+            
+            $('.operater-btn').click(function(){
+            	$('.isOpen-content').css('display','block');
+            });
+            
+            $('#isOpen-submit').click(function(){
+            	var switchBtn = $('.operater-btn').hasClass('operatorTaskOpen') ? false : true;
+            	jh.utils.ajax.send({
+	                url: '/system/setActive',
+	                data: {
+	                	isOpen: switchBtn,
+	                	password: $('#isOpen-password').val()
+	                },
+	                done: function(returnData) {
+	                    window.location.reload();
+	                }
+	            });
+            })
         };
 
         this.traceOperator = function(ids, state) {

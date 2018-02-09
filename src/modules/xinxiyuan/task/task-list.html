@@ -4,7 +4,6 @@
 			<table class="common_query textLeft search-content">
 				<tr>
 					<td colspan="6">
-						<label for="tag" class="pull-left label">线索状态：</label>
 						<ol id="taskState" class="stateChange pull-left">
 							<li data-value="6" data-state="matched" class="taskState active">匹配成功</li>
 							<li data-value="1" data-state="open" class="taskState">次要任务库</li>
@@ -15,7 +14,7 @@
 						</ol>
 					</td>
 				</tr>
-				<tr>
+				<tr class="new-style">
 					<td>
 						<label class="label">任务号：</label>
 						<input type="text" class="search-input" name="taskNo">
@@ -128,7 +127,7 @@
                     <th width="10%">债权方</th>
                     <th class="textCon" width="10%">匹配成功时间</th>
                     <th width="7%">任务状态</th>
-                    <th width="6%">操作</th>
+                    <th width="10%">操作</th>
                 </tr>
             </thead>
             <tbody id="task_list_container">
@@ -152,11 +151,7 @@
         <td>{{if passState === '6'}}{{item.matchAt}}{{else}}{{item.createAt}}{{/if}}</td>
         <td>{{menuState(item.state)}}</td>
         <td>
-            <ul class="operaitem">
-                <li>
-                    <a data-id="{{item.id}}" class="taskList-detail button">详情</a>
-                </li>
-            </ul>
+            <a data-id="{{item.id}}" class="taskList-detail button">详情</a>
         </td>
     </tr>
     {{/each}}
