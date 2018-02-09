@@ -71,7 +71,7 @@
 			{{/if}} {{ each data.traceVoList data index }}
 			<div class="mt25">
 				<input type="radio" value="{{data.id}}" data-type="{{data.role}}" name="traceId" class="pull-left checkId" style="margin:60px 10px;" />
-				<div class="pull-left" {{if data.type===0 }}style="width:70%;height:170px;border:1px solid #ccc;" {{/if}}>
+				<div class="pull-left" {{if data.type===0 }}style="width:70%;height:190px;border:1px solid #ccc;" {{/if}}>
 					<div class="upimg pull-left" style="margin-top:10px;">
 						<dl>
 							<dt>
@@ -82,14 +82,33 @@
 							<dd>全车背景照</dd>
 						</dl>
 					</div>
-					<div style="margin:10px 0;" class="pull-left">
-						<p>{{data.name}}----{{if data.role === 'type_A'}}线人-----{{data.phone}}{{else}}捕头----{{officerState(data.downstreamType)}}{{/if}}</p>
-						<p>线索上传时间：{{data.createAt}}</p>
-						<p>gprs信息：{{data.location}}</p>
-						<p>定位：{{data.location}}</p>
-						{{if data.role === 'type_A'}}
-						<p>GPS:{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装(安装人员{{data.gpsPerson}}){{/if}}{{if data.gpsSource === 2}}未安装{{/if}}</p>
-						{{/if}}
+					<div style="margin:1px 0;" class="pull-left">
+						<table>
+							<tr>
+								<th>上传人员</th>
+								<td>{{data.name}}----{{if data.role === 'type_A'}}线人{{else}}捕头----{{officerState(data.downstreamType)}}{{/if}}</td>
+								<th>联系电话</th>
+								<td>{{data.phone}}</td>
+							</tr>
+							<tr>
+								<th>gprs信息</th>
+								<td colspan="3">{{data.location}}</td>
+							</tr>
+							<tr>
+								<th>定位</th>
+								<td colspan="3">{{data.location}}</td>
+							</tr>
+							{{if data.role === 'type_A'}}
+							<tr>
+								<th>GPS</th>
+								<td {{if data.gpsSource !== 1}}colspan="3"{{/if}}>{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装{{/if}}{{if data.gpsSource === 2}}未安装{{/if}}</td>
+								{{if data.gpsSource === 1}}
+								<th>安装人员</th>
+								<td>{{data.gpsPerson}}</td>
+								{{/if}}
+							</tr>
+							{{/if}}
+						</table>
 					</div>
 				</div>
 				<div class="clearfix"></div>
