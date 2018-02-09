@@ -22,6 +22,7 @@ define(function(require, exports, module) {
                 data_container: $('#subtotal_container'),
                 page_container: $('#page_container'),
                 method: 'post',
+                isSearch: true,
                 url: '/record/contactList',
                 contentType: 'application/json',
                 data: {
@@ -40,6 +41,7 @@ define(function(require, exports, module) {
                 data_container: $('#subTask_container'),
                 page_container: $('#page_task_container'),
                 method: 'post',
+                isSearch: true,
                 url: '/task/upstreamTask',
                 contentType: 'application/json',
                 data: {

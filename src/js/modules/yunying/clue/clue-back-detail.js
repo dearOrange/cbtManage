@@ -37,6 +37,7 @@ define(function(require, exports, module) {
                 data_container: $('#moneytotal_container'),
                 page_container: $('#page_container'),
                 method: 'post',
+                isSearch: true,
                 url: '/record/bargainList',
                 contentType: 'application/json',
                 data: {

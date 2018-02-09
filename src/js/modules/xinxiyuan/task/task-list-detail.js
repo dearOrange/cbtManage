@@ -40,6 +40,7 @@ define(function(require, exports, module) {
                 data_container: $('#task_detail_wzInfoList'),
                 page_container: $('#page_container'),
                 method: 'post',
+                isSearch: true,
                 url: '/clue/illegalList',
                 contentType: 'application/json',
                 data: {

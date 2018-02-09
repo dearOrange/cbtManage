@@ -21,6 +21,7 @@ define(function(require, exports, module) {
                 page_container: $('#page_container'),
                 method: 'post',
                 url: '/record/bargainList',
+                isSearch: true,
                 contentType: 'application/json',
                 data: {
                     taskId: args.id
@@ -57,6 +58,7 @@ define(function(require, exports, module) {
                 data_container: $('#distribution-illegalList-container'),
                 page_container: $('#page_container'),
                 method: 'post',
+                isSearch: true,
                 url: '/clue/illegalList',
                 contentType: 'application/json',
                 data: {

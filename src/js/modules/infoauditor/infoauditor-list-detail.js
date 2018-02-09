@@ -37,6 +37,7 @@ define(function(require, exports, module) {
                 data_container: $('#infoauditor_detail_wzInfoList'),
                 page_container: $('#page_container'),
                 method: 'post',
+                isSearch: true,
                 url: '/clue/illegalList',
                 contentType: 'application/json',
                 data: {
@@ -63,6 +64,7 @@ define(function(require, exports, module) {
                 data_container: $('#infoauditor_detailFinished_yjxjContent'),
                 page_container: $('#page_container'),
                 method: 'post',
+                isSearch: true,
                 url: '/record/bargainList',
                 contentType: 'application/json',
                 data: {

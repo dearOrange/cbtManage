@@ -18,6 +18,7 @@ define(function(require, exports, module) {
             var page = new jh.ui.page({
                 data_container: $('#admin-qdTrailerList-container'),
                 page_container: $('#page_container'),
+                isSearch: true,
                 method: 'post',
                 url: '/task/trailerOrder',
                 contentType: 'application/json',
