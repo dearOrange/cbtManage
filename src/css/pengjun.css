@@ -605,3 +605,9 @@ i.icon-issue {
 	z-index: 10;
 	display:none;
 }
+.isOpen-content span {
+	position:absolute;
+	right:5px;
+	top: -8px;
+	cursor: pointer;
+}
