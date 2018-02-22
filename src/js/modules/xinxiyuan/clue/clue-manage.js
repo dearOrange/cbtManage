@@ -91,7 +91,11 @@ define(function(require, exports, module) {
 	                    window.location.reload();
 	                }
 	            });
-            })
+            });
+            
+            $('.isOpen-content>span').click(function(){
+            	$('.isOpen-content').css('display','');
+            });
         };
 
         this.traceOperator = function(ids, state) {
