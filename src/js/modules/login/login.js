@@ -17,7 +17,9 @@ define(function(require, exports, module) {
         };
 
         this.initCode = function() {
-            $('#checkCode').attr('src', REQUESTROOT + '/operator/getAuthCode');
+            if(window.location.host.indexOf('.cbt.com')!==-1){
+                $('#checkCode').attr('src', REQUESTROOT + '/operator/getAuthCode');
+            }
         };
 
         this.initPlugins = function() {
