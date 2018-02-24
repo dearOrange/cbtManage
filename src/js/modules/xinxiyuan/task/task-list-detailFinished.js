@@ -24,6 +24,7 @@ define(function(require, exports, module) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.officerState = jh.utils.officerState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
+                    returnData.getPositionByImage = jh.utils.getPositionByImage;
                     var html = jh.utils.template('task_detailFinished_template', returnData);
                     $('#task_detailFinished_content').html(html);
                     _this.searchIllegalInfo();

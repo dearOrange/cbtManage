@@ -84,12 +84,12 @@
 							<td>{{data.phone}}</td>
 						</tr>
 						<tr>
-							<th>gprs信息</th>
+							<th>GPS信息</th>
 							<td colspan="3">{{data.location}}</td>
 						</tr>
 						<tr>
 							<th>定位</th>
-							<td colspan="3">{{data.location}}</td>
+							<td colspan="3" id="{{data.carPhoto}}">{{getPositionByImage(data.carPhoto)}}</td>
 						</tr>
 						{{if data.role === 'type_A'}}
 						<tr>
