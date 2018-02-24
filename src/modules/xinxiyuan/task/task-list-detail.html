@@ -49,7 +49,7 @@
 				<a href="javascript:;" class="button" id="taskList-illegalList" data-id="{{taskId}}">违章信息修复</a>
 			</div>
 			<div>
-				<table class="pull-left" style="width: 90%;">
+				<table class="pull-left">
 					<thead>
 						<th>序号</th>
 						<th>车牌号</th>
@@ -70,9 +70,9 @@
 			<a href="javascript:;" class="button rejectClue">全部不采纳</a>
 			{{/if}} {{ each data.traceVoList data index }}
 			<div class="mt25">
-				<input type="radio" value="{{data.id}}" data-type="{{data.role}}" name="traceId" class="pull-left checkId" style="margin:60px 10px;" />
-				<div class="pull-left" {{if data.type===0 }}style="width:70%;height:190px;border:1px solid #ccc;" {{/if}}>
-					<div class="upimg pull-left" style="margin-top:10px;">
+				<input type="radio" value="{{data.id}}" data-type="{{data.role}}" name="traceId" class="pull-left checkId" style="margin:80px 10px;cursor: pointer;" />
+				<div class="pull-left" {{if data.type===0 }}style="width:70%;height:100%;border:1px solid #ccc;padding: 20px 10px;"  {{else}}style="width:74%;" {{/if}}>
+					<div class="upimg pull-left" style="margin-top:0px;">
 						<dl>
 							<dt>
 								<div class="upfile-item">
@@ -82,8 +82,8 @@
 							<dd>全车背景照</dd>
 						</dl>
 					</div>
-					<div style="margin:1px 0;" class="pull-left">
-						<table>
+					<div style="margin:1px 0;width: 84%;" class="pull-left">
+						<table class="taskTable">
 							<tr>
 								<th>上传人员</th>
 								<td>{{data.name}}----{{if data.role === 'type_A'}}线人{{else}}捕头----{{officerState(data.downstreamType)}}{{/if}}</td>

@@ -47,7 +47,7 @@
                 <span>违章信息</span>
             </div>
             <div>
-                <table class="pull-left" style="width: 90%;">
+                <table class="pull-left">
                     <thead>
                     	<th></th>
                         <th>车牌号</th>
@@ -75,8 +75,8 @@
 						<dd>全车背景照</dd>
 					</dl>
 				</div>
-				<div class="pull-left ml10">
-					<table>
+				<div class="pull-left"  style="margin-top:5px;width:70%;">
+					<table class="taskTable">
 						<tr>
 							<th>上传人员</th>
 							<td>{{data.name}}----{{if data.role === 'type_A'}}线人{{else}}捕头----{{officerState(data.downstreamType)}}{{/if}}</td>
@@ -107,24 +107,20 @@
 			</div>
 			{{/each}}
 		</div>
-		<div class="hopeprice">
+		<div class="hopeprice" style="width: 80%;">
 			<p>费用</p>
-			<table style="width: 400px;">
+			<table>
 				<tr>
-					<td style="width: 160px;text-align: right;">最终处置费：</td>
-					<td style="text-align: center;">{{data.finalPrice}}</td>
+					<th style="width: 16%;text-align: right;">最终处置费：</th>
+					<td style="width:34%;text-align: center;">{{data.finalPrice}}</td>
+					<th style="width: 16%;text-align: right;">其中受托人费用：</th>
+					<td style="width:34%;text-align: center;">{{data.baileePrice}}</td>
 				</tr>
 				<tr>
-					<td style="width: 160px;text-align: right;">其中受托人费用：</td>
-					<td style="text-align: center;">{{data.baileePrice}}</td>
-				</tr>
-				<tr>
-					<td style="width: 160px;text-align: right;">资产查找费：</td>
-					<td style="text-align: center;">{{data.assetPrice}}</td>
-				</tr>
-				<tr>
-					<td style="width: 160px;text-align: right;">第三方处置请收费：</td>
-					<td style="text-align: center;">{{data.thirdpartyPrice}}</td>
+					<th style="width: 16%;text-align: right;">资产查找费：</th>
+					<td style="width:34%;text-align: center;">{{data.assetPrice}}</td>
+					<th style="width: 16%;text-align: right;">第三方处置请收费：</th>
+					<td style="width:34%;text-align: center;">{{data.thirdpartyPrice}}</td>
 				</tr>
 			</table>
 		</div>

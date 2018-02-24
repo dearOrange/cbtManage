@@ -891,8 +891,8 @@ input, select, textarea {
 
 /*任务详情*/
 .dialog-width {
-	width: 98%;
-	margin: 0 auto;
+	width: 78%;
+	/*margin: 0 auto;*/
 }
 
 .dialog-width .showTaskState {

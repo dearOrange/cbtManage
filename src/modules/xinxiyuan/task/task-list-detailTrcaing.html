@@ -64,7 +64,7 @@
 						</dl>
 					</div>
 					<div style="margin:1px 0;" class="pull-left">
-						<table>
+						<table class="taskTable">
 							<tr>
 								<th>上传人员</th>
 								<td>{{data.name}}----{{if data.role === 'type_A'}}线人{{else}}捕头----{{officerState(data.downstreamType)}}{{/if}}</td>
@@ -131,8 +131,8 @@
 						<dd>全车背景照</dd>
 					</dl>
 				</div>
-				<div class="pull-left" style="margin-top:10px;">
-					<table>
+				<div class="pull-left" style="margin-top:5px;width:70%;">
+					<table class="taskTable">
 						<tr>
 							<th>上传人员</th>
 							<td>{{data.name}}----{{if data.role === 'type_A'}}线人{{else}}捕头----{{officerState(data.downstreamType)}}{{/if}}</td>
@@ -166,40 +166,35 @@
 		<br>
 		{{/if}}
 		{{if data.state !== "unarrange" && data.state !== "tracing" && data.state !== "clueChecking"}}
-		<div class="hopeprice">
+		<div class="hopeprice" style="width: 80%;">
 			<p>费用</p>
-			<table style="width: 400px;">
+			<table>
 				<tr>
-					<td style="width: 160px;text-align: right;">车辆残值估算：</td>
-					<td style="text-align: center;">{{data.carPrice}}</td>
+					<th style="width: 16%;text-align: right;">车辆残值估算：</th>
+					<td style="width:34%;text-align: center;">{{data.carPrice}}</td>
+					<th style="width: 16%;text-align: right;">处置费用估算：</th>
+					<td style="width:34%;text-align: center;">{{data.estimatedMinPrice}} 至 {{data.estimatedMaxPrice}}</td>
 				</tr>
-				<tr>
-					<td style="width: 160px;text-align: right;">处置费用估算：</td>
-					<td style="text-align: center;">{{data.estimatedMinPrice}} 至 {{data.estimatedMaxPrice}}</td>
-				</tr>
+				
 			</table>
 		</div>
 		<br>
 		{{/if}}
 		{{if data.state === "unconfirmed" || data.state === "voucherInvalid" || data.state === "hunterUnreceive" || data.state === "hunterReceive" || data.state === "voucherChecking" && data.finalPrice!== ""}}
-		<div class="hopeprice">
+		<div class="hopeprice" style="width: 80%;">
 			<p>确认费用</p>
-			<table style="width: 400px;">
+			<table>
 				<tr>
-					<td style="width: 160px;text-align: right;">最终处置费：</td>
-					<td style="text-align: center;">{{data.finalPrice}}</td>
+					<th style="width: 16%;text-align: right;">最终处置费：</th>
+					<td style="width:34%;text-align: center;">{{data.finalPrice}}</td>
+					<th style="width: 16%;text-align: right;">其中受托人费用：</th>
+					<td style="width:34%;text-align: center;">{{data.baileePrice}}</td>
 				</tr>
 				<tr>
-					<td style="width: 160px;text-align: right;">其中受托人费用：</td>
-					<td style="text-align: center;">{{data.baileePrice}}</td>
-				</tr>
-				<tr>
-					<td style="width: 160px;text-align: right;">资产查找费：</td>
-					<td style="text-align: center;">{{data.assetPrice}}</td>
-				</tr>
-				<tr>
-					<td style="width: 160px;text-align: right;">第三方处置请收费：</td>
-					<td style="text-align: center;">{{data.thirdpartyPrice}}</td>
+					<th style="width: 16%;text-align: right;">资产查找费：</th>
+					<td style="width:34%;text-align: center;">{{data.assetPrice}}</td>
+					<th style="width: 16%;text-align: right;">第三方处置请收费：</th>
+					<td style="width:34%;text-align: center;">{{data.thirdpartyPrice}}</td>
 				</tr>
 			</table>
 		</div>
