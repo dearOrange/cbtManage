@@ -20,34 +20,36 @@
         	<tr>
         		<th>公司名称：</th>
         		<td>{{data.company}}</td>
-        		<th>公司地址：</th>
-        		<td>{{data.address}}</td>
+        		<th>公司负责人：</th>
+        		<td>{{data.name}}</td>
         	</tr>
         	<tr>
+        		<th>公司地址：</th>
+        		<td>{{data.address}}</td>
         		<th>业务类型：</th>
         		<td>{{stateToString(data.type)}}</td>
+        	</tr>
+        	<tr>
         		<th>申请区域：</th>
         		<td>
         		{{each data.area item index}}
             		{{item.provinceName}}
             	{{/each}}
         		</td>
-        	</tr>
-        	<tr>
         		<th>法人代表：</th>
         		<td>{{data.legalPerson}}</td>
-        		<th>营业执照编号：</th>
-        		<td>{{data.businessLicenseNo}}</td>
         	</tr>
         	<tr>
+        		<th>营业执照编号：</th>
+        		<td>{{data.businessLicenseNo}}</td>
         		<th>法人手机号：</th>
         		<td>{{data.legalPersonMobile}}</td>
+        	</tr>
+        	<tr>
         		<th>法人身份证号：</th>
         		<td>
             		{{data.legalIdCard}}
         		</td>
-        	</tr>
-        	<tr>
         		<th>企业邮箱：</th>
         		<td colspan="3">{{data.coEmail}}</td>
         	</tr>

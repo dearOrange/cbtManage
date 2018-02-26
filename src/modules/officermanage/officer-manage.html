@@ -29,7 +29,7 @@
             <thead>
                 <tr>
                     <th width="4%">序号</th>
-                    <th width="8%">姓名</th>
+                    <th width="8%">主体名称</th>
                     <th width="10%">捕头类型</th>
                     <th width="10%">区域</th>
                     <th width="10%">联系电话</th>
@@ -49,7 +49,12 @@
     {{ each list item index }}
     <tr class="trData">
         <td>{{index+1}}</td>
-        <td>{{item.name}}</td>
+        <td>
+        	{{if item.property === 1}}
+        	{{item.company}}<br />
+        	{{/if}}
+        	<span style="color:#68c8f8;">{{item.name}}</span>
+        </td>
         <td>{{if item.property === 0}}个人{{else}}企业{{/if}}</td>
         <td>{{ each item.area data index }}
         {{data.provinceName}}
