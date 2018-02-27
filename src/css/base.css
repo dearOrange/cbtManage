@@ -1920,13 +1920,6 @@ label.label_check, label.label_radio {
     line-height: 32px !important
 }
 
-.edui-button.edui-for-135editor .edui-button-wrap .edui-button-body .edui-icon {
-    background-image: url("../img/editor-135-icon.png") !important;
-    background-size: 85%;
-    background-position: center;
-    background-repeat: no-repeat
-}
-
 /**
  * 错误提示
  */

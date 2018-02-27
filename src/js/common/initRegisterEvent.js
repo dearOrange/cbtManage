@@ -197,6 +197,10 @@ define(function(require, exports, module) {
                 $('#qd-distribution-tab' + ind).removeClass('hide').siblings().addClass('hide');
             });
 
+            $('#ueditorExample').on('click',function(){
+                jh.utils.load('/src/modules/ueditor/ueditor');
+            });
+
             $(window).on('resize', function() {
                 jh.utils.updateMenuBoxHeight();
 

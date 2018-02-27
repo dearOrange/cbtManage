@@ -1551,9 +1551,6 @@ define(function(require, exports, module) {
 
         function UEditorExtend(id, opt) {
             opt = opt || {};
-            opt.toolbars = [
-                ['135editor']
-            ];
             opt.selfId = id;
             if (window['ueditor'] === undefined) {
                 window['ueditor'] = {};
@@ -1564,13 +1561,6 @@ define(function(require, exports, module) {
                 window['ueditor'][id].destroy();
                 window['ueditor'][id] = UE.getEditor(id, opt);
             }
-            window['ueditor'][id].addListener('ready', function() {
-                $('[id$=_toolbarbox]').hide();
-            });
-            window['ueditor'][id].addListener('click', function(event) {
-                $('#' + opt.selfId).find('[id$=_body]').click();
-            });
-
             return window['ueditor'][id];
         }
         tammy.utils.ueditor = UEditorExtend;

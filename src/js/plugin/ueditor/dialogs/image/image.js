@@ -179,6 +179,7 @@
                 $('#filePickerReady').after($('<div>').html(lang.errorLoadConfig)).hide();
                 return;
             }
+            var qiniuToken = sessionStorage.getItem('admin-uploadToken');
             uploader = _this.uploader = WebUploader.create({
                 pick: {
                     id: '#filePickerReady',
@@ -191,10 +192,11 @@
                 },
                 swf: '../../third-party/webuploader/Uploader.swf',
                 formData: {
-                    size_type: 'all'
+                    size_type: 'all',
+                    token: qiniuToken
                 },
                 server: actionUrl,
-                fileVal: 'upfile',
+                fileVal: 'file',
                 duplicate: true,
                 fileSingleSizeLimit: 5242880,
                 compress: editor.getOpt('imageCompressEnable') ? {
@@ -550,12 +552,11 @@
                 try {
                     var responseText = (ret._raw || ret),
                         json = utils.str2json(responseText);
-                        json = json.response;
-                    if (json.state.toUpperCase() == 'SUCCESS') {
+                    if (json.key) {
                         _this.imageList.push(json);
                         $file.append('<span class="success"></span>');
                     } else {
-                        $file.find('.error').text(json.state).show();
+                        $file.find('.error').text('上传失败').show();
                     }
                 } catch (e) {
                     $file.find('.error').text(lang.errorServerUpload).show();
@@ -605,9 +606,8 @@
             for (i = 0; i < this.imageList.length; i++) {
                 data = this.imageList[i];
                 list.push({
-                    src: 'http://static.9hds.com/' + data.url,
-                    _src: 'http://static.9hds.com/' + data.url,
-                    title: data.title
+                    src: parent.viewImageRoot + data.key,
+                    _src: parent.viewImageRoot + data.key
                 });
             }
             return list;

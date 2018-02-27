@@ -1,0 +1,16 @@
+<div class="dataContent">
+    <div class="data-container">
+    	<form id="editorForm">
+    		<input type="hidden" name="test" value="1">
+	    	<script type="text/plain" id="editor" name="testName"></script>
+	    	<input type="submit" value="提交" id="getContent">
+    	</form>
+    </div>
+</div>
+
+<script type="text/javascript">
+seajs.use('modules/ueditor/ueditor', function(Ueditor) {
+    var ueditor = new Ueditor();
+    ueditor.init();
+});
+</script>
