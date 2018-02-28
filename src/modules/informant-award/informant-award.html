@@ -9,8 +9,8 @@
 					</td>
 					<td>
 						<label class="label">活动起止时间：</label>
-						<input type="text" class="search-input hand" readonly="readonly" name="startAt" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss'})">   至   
-						<input type="text" class="search-input hand" readonly="readonly" name="endAt" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+						<input type="text" class="search-input hand" readonly="readonly" name="startAt" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})">   至   
+						<input type="text" class="search-input hand" readonly="readonly" name="endAt" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})">
 					</td>
 					<td>
 						<label class="label">活动状态：</label>
@@ -85,21 +85,21 @@
 				</tr>
 				<tr>
 					<th>活动开始时间</th>
-					<td><input type="text" class="search-input hand" readonly="readonly" name="startAt" id="startAt" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss'})"></td>
+					<td><input type="text" class="search-input hand" readonly="readonly" name="startAt" id="startAt" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})"></td>
 					<th>活动结束时间</th>
-					<td><input type="text" class="search-input hand" readonly="readonly" name="endAt" id="endAt" onclick="WdatePicker({minDate:'#F{$dp.$D(\'startAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss'})"></td>
+					<td><input type="text" class="search-input hand" readonly="readonly" name="endAt" id="endAt" onclick="WdatePicker({minDate:'#F{$dp.$D(\'startAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})"></td>
 				</tr>
 				<tr>
 					<th>活动奖励金</th>
-					<td><input type="text" class="search-input" name="activity" ></td>
+					<td><input type="text" class="search-input activity" name="activity" value="0" ></td>
 					<th>关联活动奖励金</th>
-					<td><input type="text" class="search-input" name="referrerTrace" ></td>
+					<td><input type="text" class="search-input referrerTrace" name="referrerTrace" value="0" ></td>
 				</tr>
 				<tr>
 					<th>首线索奖励金</th>
-					<td><input type="text" class="search-input" name="firstTrace" ></td>
+					<td><input type="text" class="search-input firstTrace" name="firstTrace" value="0" ></td>
 					<th>关联首线索奖励金</th>
-					<td><input type="text" class="search-input" name="referrerFirstTrace" ></td>
+					<td><input type="text" class="search-input referrerFirstTrace" name="referrerFirstTrace" value="0" ></td>
 				</tr>
 			</table>
 		</form>
