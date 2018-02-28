@@ -65,13 +65,17 @@ define(function(require, exports, module) {
                 url: '/activity/current',
                 done: function(returnData) {
                    var dataInfo = returnData.data;
-                   $('.title').html(dataInfo.title);
-                   $('.activity').html(dataInfo.activity);
-                   $('.reactivity').html(dataInfo.referrerTrace);
-                   $('.endAt').html(dataInfo.endAt);
-                   $('.startAt').html(dataInfo.startAt);
-                   $('.newMoney').html(dataInfo.firstTrace);
-                   $('.firstMoney').html(dataInfo.referrerFirstTrace);
+                   if(dataInfo.isActivity === false) {
+                       $('.activity-content').html('暂无活动');
+                   } else {
+                       $('.title').html(dataInfo.title);
+                       $('.activity').html(dataInfo.activity);
+                       $('.reactivity').html(dataInfo.referrerTrace);
+                       $('.endAt').html(dataInfo.endAt);
+                       $('.startAt').html(dataInfo.startAt);
+                       $('.newMoney').html(dataInfo.firstTrace);
+                       $('.firstMoney').html(dataInfo.referrerFirstTrace);
+                   }
                 }
 	        });
             
