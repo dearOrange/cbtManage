@@ -85,9 +85,9 @@
 				</tr>
 				<tr>
 					<th>活动开始时间</th>
-					<td><input type="text" class="search-input hand" readonly="readonly" name="startAt" id="startAt" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})"></td>
+					<td><input type="text" class="search-input hand" readonly="readonly" name="startAt" id="startAt" onclick="WdatePicker({minDate:'%y-%M-%d',maxDate:'#F{$dp.$D(\'endAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})"></td>
 					<th>活动结束时间</th>
-					<td><input type="text" class="search-input hand" readonly="readonly" name="endAt" id="endAt" onclick="WdatePicker({minDate:'#F{$dp.$D(\'startAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})"></td>
+					<td><input type="text" class="search-input hand" readonly="readonly" name="endAt" id="endAt" onclick="WdatePicker({minDate:'#F{$dp.$D(\'startAt\')}',startDate:'#F{$dp.$D(\'startAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})"></td>
 				</tr>
 				<tr>
 					<th>活动奖励金</th>
