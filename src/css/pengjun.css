@@ -581,10 +581,10 @@ i.icon-issue {
 
 .activity-content {
 	width:580px;
-	height:90px;
 	background:#FAFAFA;
 	text-align: center;
 	line-height: 30px;
+	padding:12px 0;
 	border:1px solid #ccc;
 	position:absolute;
 	right:200px;
@@ -610,4 +610,12 @@ i.icon-issue {
 	right:5px;
 	top: -8px;
 	cursor: pointer;
+}
+
+form#new-increate-award-form table input {
+	border:1px solid #ccc;
+	height:30px;
+}
+.bgc_grey {
+	background: #ddd;
 }

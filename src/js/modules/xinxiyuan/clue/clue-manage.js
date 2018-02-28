@@ -62,40 +62,19 @@ define(function(require, exports, module) {
             });
             
             jh.utils.ajax.send({
-                url: '/system/isActive',
+                url: '/activity/current',
                 done: function(returnData) {
-                    _this.isOpen = returnData.data.isOpen;
-                    if(_this.isOpen) {
-                    	$('.operater-btn').addClass('operatorTaskOpen');
-                    	$('.operater-btn').removeClass('operatorTaskClose');
-                    } else {
-                    	$('.operater-btn').removeClass('operatorTaskOpen');
-                    	$('.operater-btn').addClass('operatorTaskClose');
-                    }
+                   var dataInfo = returnData.data;
+                   $('.title').html(dataInfo.title);
+                   $('.activity').html(dataInfo.activity);
+                   $('.reactivity').html(dataInfo.referrerTrace);
+                   $('.endAt').html(dataInfo.endAt);
+                   $('.startAt').html(dataInfo.startAt);
+                   $('.newMoney').html(dataInfo.firstTrace);
+                   $('.firstMoney').html(dataInfo.referrerFirstTrace);
                 }
 	        });
             
-            $('.operater-btn').click(function(){
-            	$('.isOpen-content').css('display','block');
-            });
-            
-            $('#isOpen-submit').click(function(){
-            	var switchBtn = $('.operater-btn').hasClass('operatorTaskOpen') ? false : true;
-            	jh.utils.ajax.send({
-	                url: '/system/setActive',
-	                data: {
-	                	isOpen: switchBtn,
-	                	password: $('#isOpen-password').val()
-	                },
-	                done: function(returnData) {
-	                    window.location.reload();
-	                }
-	            });
-            });
-            
-            $('.isOpen-content>span').click(function(){
-            	$('.isOpen-content').css('display','');
-            });
         };
 
         this.traceOperator = function(ids, state) {
