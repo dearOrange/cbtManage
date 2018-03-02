@@ -1302,7 +1302,16 @@ define(function(require, exports, module) {
                 });
 
                 // 文件上传失败，显示上传出错。
-                uploader.on('uploadError', function(file) {
+                uploader.on('uploadError', function(file,reason) {
+                    if(reason === 'http'){
+                        tammy.utils.confirm({
+                            content: '网络开小差了！',
+                            ok: function() {
+                                window.location.reload();
+                            },
+                            cancel: false
+                        });
+                    }
                     var li = $('#' + file.id),
                         error = li.find('div.error');
                     // 避免重复创建

@@ -1,0 +1,43 @@
+<div class="dataContent">
+    <div class="data-container">
+        <form id="addDynamic-form" class="dialog-width dynamic-form">
+            <p class="pull-left">新增动态</p>
+            <a href="javascript:;" class="button gobackPage goBack">返回</a>
+            <div class="clearfix"></div>
+            <hr />
+            <br />
+            <table>
+                <tr>
+                    <th>标题</th>
+                    <td>
+                        <input type="text" name="title" class="form-input">
+                    </td>
+                </tr>
+                <tr>
+                    <th>配图</th>
+                    <td>
+                        <div id="image"></div>
+                        <div class="upload-list"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>内容</th>
+                    <td>
+                        <script type="text/plain" id="dynamicEditor" name="content" style="width:100%;"></script>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <input type="submit" value="提交" class="button" style="padding: 10px 60px;">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+seajs.use('modules/dynamic/dynamic-add', function(DynamicAdd) {
+    var dynamicAdd = new DynamicAdd();
+    dynamicAdd.init();
+});
+</script>

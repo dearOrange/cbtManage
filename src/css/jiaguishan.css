@@ -115,3 +115,16 @@
 	height: 30px;
 	border: 1px solid #ddd;
 }
+
+.dynamic-form table th{
+	width: 7%;
+	text-align: right;
+}
+.dynamic-form table td{
+	text-align: left;
+}
+.dynamic-form .form-input{
+	width: 99%;
+	line-height: 40px;
+	border: 1px solid #ddd;
+}
