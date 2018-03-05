@@ -28,6 +28,11 @@ define(function(require, exports, module) {
                 isSearch: isSearch,
                 callback: function(data) {
                     data.passState = $('#state').val();
+                    if(data.passState == '1') {
+                        $('.distributeTask').css('display','');
+                    } else {
+                        $('.distributeTask').css('display','none');
+                    }
                     return jh.utils.template('taskList_content_template', data);
                 }
             });
@@ -188,8 +193,68 @@ define(function(require, exports, module) {
                 }else{
                     _this.initContent('tab');
                 }
+                
             })
+            
+            this.initSheriff = function(taskIds) {
+                jh.utils.ajax.send({
+                    url: '/operator/getAllChannel',
+                    done: function(returnData) {
+                        var str = _this.distributionSheriff(returnData.data);
+                        jh.utils.alert({
+                            content: str,
+                            ok: function() {
+                                var tab = $('.qd-distribution-tab li.active').index(),
+                                    taskObj = {};
+                                if (!tab) {
+                                    var radio = $('#qd-distribution-tab0').find(':checked');
+                                    if (radio.length === 0) {
+                                        jh.utils.alert({
+                                            content: '请选择渠道经理！',
+                                            ok: true,
+                                            cancel: false
+                                        });
+                                        return false;
+                                    }
+                                    taskObj.type = 1;
+                                    taskObj.channelManagerId = radio.val();
+                                    taskObj.channelManagerName = radio.data('name');
+                                } else {
+                                    taskObj.type = 2;
+                                }
+                                taskObj.taskIds = taskIds;
+                                _this.distribution(taskObj);
+                            },
+                            cancel: true
+                        });
+                    }
+                });
+            };
+            
+            
 
+            this.distributionSheriff = function(arr) {
+                var source = jh.utils.getChannelHtml(true);
+                var render = jh.utils.template.compile(source);
+                var str = render({ list: arr });
+                return str;
+            };
+    
+            this.distribution = function(taskObj) {
+                jh.utils.ajax.send({
+                    url: '/task/distributeTask',
+                    data: taskObj,
+                    done: function(returnData) {
+                        jh.utils.alert({
+                            content: '任务分配成功！',
+                            ok: function() {
+                                _this.initContent();
+                            },
+                            cancel: false
+                        });
+                    }
+                });
+            };
 
             //一键修复
             $('body').off('click', '.allrepair').on('click', '.allrepair', function() {
@@ -226,6 +291,49 @@ define(function(require, exports, module) {
                     cancel: true
                 });
             })
+            
+            
+            //批量分配
+            $('body').off('click', '.distributeTask').on('click', '.distributeTask', function() {
+                var me = $(this);
+                var taskIds = jh.utils.getCheckboxValue('task_list_container');
+                if (!taskIds) {
+                    jh.utils.alert({
+                        content: '请选择任务！',
+                        ok: true,
+                        cancel: false
+                    });
+                    return false;
+                }
+                _this.initSheriff(taskIds);
+            });
+
+            
+            //查看违章
+            $('body').off('click', '.showTr').on('click', '.showTr', function() {
+                var me = $(this);
+                _this.id = me.data('info').id;
+                jh.utils.ajax.send({
+                    method: 'post',
+                    url: '/clue/illegalList',
+                    contentType: 'application/json',
+                    data: {
+                        pageNum: 1,
+                        pageSize: 10,
+                        params: {
+                            taskId: _this.id
+                        }
+                    },
+                    done: function(data) {
+                        var strInfo = jh.utils.template('searchIllegalInfo-template', data.data);
+                        jh.utils.alert({
+                            title: me.data('info').carNumber,
+                            content: strInfo
+                        })
+                    }
+                })
+
+            });
 
         };
     }
