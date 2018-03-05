@@ -42,7 +42,7 @@ define(function(require, exports, module) {
 	        			me.val('');
 	        			$('#thirdpartyPrice').val('');
 	        		}else{
-        				$('#thirdpartyPrice').val(parseFloat(_this.numPlus-menum));
+        				$('#thirdpartyPrice').val((_this.numPlus-menum).toFixed(2));
 	        		}
         		}
             	 
@@ -56,7 +56,7 @@ define(function(require, exports, module) {
         			if (thmenum < 0 || thmenum > _this.numPlus) {
 	        			thme.val('');
 	        		}else{
-        				$('#assetPrice').val(_this.numPlus-parseFloat(thme.val()));
+        				$('#assetPrice').val((_this.numPlus-thme.val()).toFixed(2));
 	        		}
         		}
             	 
