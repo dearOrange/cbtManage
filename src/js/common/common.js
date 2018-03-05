@@ -1822,11 +1822,14 @@ define(function(require, exports, module) {
 
 
     (function() {
-        function ChannelDistribution() {
+        function ChannelDistribution(isShow) {
+            var isShowStr = isShow ? 'hide' : '';
             var str = '<div id="channel_distribution_public_template">' +
                 '<ul class="qd-distribution-tab">' +
                 '<li class="active">分配渠道经理</li>' +
-                '<li>投放次要任务</li>' +
+                '<li class="' + 
+                isShowStr +
+                '">投放次要任务</li>' +
                 '</ul>' +
                 '<div class="content">' +
                 '<div style="width:460px;">' +
