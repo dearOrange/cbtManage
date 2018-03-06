@@ -8,7 +8,7 @@ define(function(require, exports, module) {
     function Main() {
         var _this = this;
         _this.roleType = sessionStorage.getItem('admin-roleType');
-        _this.requestDate = 60 * 1000;
+        _this.requestDate = 10 * 1000;
         _this.requestInterId = null;
         this.init = function() {
             this.initPlugins();
@@ -87,6 +87,9 @@ define(function(require, exports, module) {
                     var result = returnData.data;
                     if (result.length > 0) {
                         var str = jh.utils.template('newMessage_template', { message: result[0].content });
+                        if($('#newMessageTips').length>0){
+                            return false;
+                        }
                         $('body').append(str);
                     }
                 }
