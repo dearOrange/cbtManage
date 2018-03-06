@@ -108,6 +108,7 @@
 				<tr class="successTask hide">
 					<td colspan="6">
 						<a class="button search-button allrepair" href="javascript:;">一键信息修复更新</a>
+						<a class="button search-button distributeTask" href="javascript:;">批量分配</a>
 					</td>
 				</tr>
 			</table>
@@ -141,20 +142,44 @@
     {{ each list item index }}
     <tr class="trData">
         <td>{{index+1}}</td>
-        <td><input type="checkbox" value="{{item.id}}" name="taskIds" /></td>
-        <td>{{item.taskNo}}</td>
-        <td>{{item.carNumber}}</td>
-        <td>{{item.carBrand}}</td>
-        <td>{{item.carSeries}}</td>
-        <td>{{menuState(item.entrust)}}</td>
-        <td>{{item.upstreamName}}</td>
-        <td>{{if passState === '6'}}{{item.matchAt}}{{else}}{{item.createAt}}{{/if}}</td>
-        <td>{{menuState(item.state)}}</td>
+        <td><input type="checkbox" value="{{item.id}}" data-id="{{item.id}}" name="taskIds" /></td>
+        <td {{if passState == '1'}}class="showTr"{{/if}} data-info="{{item}}">{{item.taskNo}}</td>
+        <td {{if passState == '1'}}class="showTr"{{/if}} data-info="{{item}}">{{item.carNumber}}</td>
+        <td {{if passState == '1'}}class="showTr"{{/if}} data-info="{{item}}">{{item.carBrand}}</td>
+        <td {{if passState == '1'}}class="showTr"{{/if}} data-info="{{item}}">{{item.carSeries}}</td>
+        <td {{if passState == '1'}}class="showTr"{{/if}} data-info="{{item}}">{{menuState(item.entrust)}}</td>
+        <td {{if passState == '1'}}class="showTr"{{/if}} data-info="{{item}}">{{item.upstreamName}}</td>
+        <td {{if passState == '1'}}class="showTr"{{/if}} data-info="{{item}}">{{if passState === '6'}}{{item.matchAt}}{{else}}{{item.createAt}}{{/if}}</td>
+        <td {{if passState == '1'}}class="showTr"{{/if}} data-info="{{item}}">{{menuState(item.state)}}</td>
         <td>
             <a data-id="{{item.id}}" class="taskList-detail button">详情</a>
         </td>
     </tr>
     {{/each}}
+</script>
+<script type="text/template" id="searchIllegalInfo-template">
+    <div>
+        <table>
+            <thead>
+                <th>序号</th>
+                <th>信息描述</th>
+                <th>违章地点</th>
+                <th>违章城市</th>
+                <th>发生时间</th>
+            </thead>
+            <tbody id="search-illegalList-container">
+                {{each list item index}}
+                <tr>
+                    <td>{{index+1}}</td>
+                    <td>{{item.desc}}</td>
+                    <td>{{item.site}}</td>
+                    <td>{{item.city}}</td>
+                    <td>{{item.occurAt}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </script>
 
 <script type="text/javascript">
