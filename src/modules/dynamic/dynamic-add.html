@@ -8,20 +8,41 @@
             <br />
             <table>
                 <tr>
-                    <th>标题</th>
+                    <th><sup class="must">*</sup>标题</th>
                     <td>
-                        <input type="text" name="title" class="form-input">
+                        <input type="text" name="title" class="form-input required" maxlength="20">
                     </td>
                 </tr>
                 <tr>
-                    <th>配图</th>
+                    <th><sup class="must">*</sup>内容摘要</th>
+                    <td>
+                        <input type="text" name="synopsis" maxlength="30" class="form-input required">
+                    </td>
+                </tr>
+                <tr>
+                    <th><sup class="must">*</sup>分类</th>
+                    <td>
+                        <select name="type" class="form-input required">
+                            <option value="公司动态">公司动态</option>
+                            <option value="行业咨询">行业咨询</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th><sup class="must">*</sup>作者</th>
+                    <td>
+                        <input type="text" name="author" class="form-input required" value="车捕头">
+                    </td>
+                </tr>
+                <tr>
+                    <th><sup class="must">*</sup>配图</th>
                     <td>
                         <div id="image"></div>
-                        <div class="upload-list"></div>
+                        <div class="upload-list required"></div>
                     </td>
                 </tr>
                 <tr>
-                    <th>内容</th>
+                    <th><sup class="must">*</sup>内容</th>
                     <td>
                         <script type="text/plain" id="dynamicEditor" name="content" style="width:100%;"></script>
                     </td>

@@ -13,18 +13,19 @@ define(function(require, exports, module) {
             this.initContent();
             this.registerEvent();
         };
-        this.initContent = function() {
+        this.initContent = function(isSearch) {
             var page = new jh.ui.page({
                 data_container: $('#dynamic_list_container'),
                 page_container: $('#page_container'),
                 url: '/content/getNewsList',
                 method: 'post',
+                isSearch: isSearch,
+                data: jh.utils.formToJson($('#dynamicAdd-form')),
                 contentType: 'application/json',
                 callback: function(returnData) {
                     returnData.viewImgRoot = jh.config.viewImgRoot;
                     returnData.imageScale = jh.config.imageScale;
                     return jh.utils.template('dynamic-list-template', returnData);
-
                 }
             });
             page.init();
@@ -51,6 +52,15 @@ define(function(require, exports, module) {
         }
 
         this.registerEvent = function() {
+
+            //查询
+            jh.utils.validator.init({
+                id: 'dynamicAdd-form',
+                submitHandler: function(form) {
+                    _this.initContent(true);
+                    return false;
+                }
+            });
 
             //新增
             $('.admin-addDynamic').off('click').on('click',  function() {

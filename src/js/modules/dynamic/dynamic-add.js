@@ -33,6 +33,19 @@ define(function(require, exports, module) {
                 id: 'addDynamic-form',
                 submitHandler: function(form) {
                     var datas = jh.utils.formToJson(form);
+                    var imageItems = $('#image').siblings('.upload-list.required').children('div');
+                    if( imageItems.length === 0 ){
+                        jh.utils.confirm({
+                            content: '请上传配图'
+                        });
+                        return false;
+                    }
+                    if( !ueditor.getContent() ){
+                        jh.utils.confirm({
+                            content: '请填写详细内容'
+                        });
+                        return false;
+                    }
                     jh.utils.ajax.send({
                         url: '/content/addNews',
                         method: 'post',
