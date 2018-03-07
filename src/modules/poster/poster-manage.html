@@ -9,14 +9,15 @@
 		<table class="dataShow">
 			<thead>
 				<tr>
-					<th width="4%">序号</th>
-					<th width="3%"><input type="checkbox" id="checkAll"/></th>
+					<th width="5%">序号</th>
+					<th width="5%"><input type="checkbox" id="checkAll"/></th>
 					<th width="10%">图片</th>
-					<th width="10%">对应链接</th>
-					<th width="12%">活动海报标题</th>
-					<th width="8%">序号</th>
-					<th width="13%">发布时间</th>
-					<th width="10%">操作</th>
+					<th width="20%">对应链接</th>
+					<th width="20%">活动海报标题</th>
+					<th width="5%">序号</th>
+					<th width="5%">应用位置</th>
+					<th width="15%">发布时间</th>
+					<th width="15%">操作</th>
 				</tr>
 			</thead>
 			<tbody id="poster_manage_container">
@@ -40,6 +41,7 @@
 		<td>{{item.redirect}}</td>
 		<td>{{item.title}}</td>
 		<td>{{item.order}}</td>
+		<td>{{stateToString(item.type)}}</td>
 		<td>{{item.createAt}}</td>
 		<td>
 			<a data-id="{{item.id}}" class="removeEdit button">删除</a>
@@ -63,17 +65,23 @@
 		</div>
 		<div class="mt25">
 			<label>对应链接地址</label>
-			<input type="text" name="redirect" class="url" value="{{redirect}}">
+			<input type="text" name="redirect" class="url" value="{{redirect}}" placeholder="例：http://www.chebutou.com.cn">
 		</div>
-
 		<div class="mt10">
 			<label>活动海报标题</label>
-			<input type="text" name="title" class="required" maxlength="50" value="{{title}}">
+			<input type="text" name="title" class="required" maxlength="50" value="{{title}}" placeholder="请输入标题">
 		</div>
-
 		<div class="mt10">
-			<label>排&nbsp;&nbsp;&nbsp;列&nbsp;&nbsp;序&nbsp;&nbsp;号</label>
-			<input type="text" name="order" class="required number" maxlength="3" value="{{order}}">
+			<label>海报排列序号</label>
+			<input type="text" name="order" class="required number" maxlength="3" value="{{order}}" placeholder="请输入序号">
+		</div>
+		<div class="mt25">
+			<label>海报应用位置</label>
+			<select name="type">
+				<option value="1" {{if type==1}}selected{{/if}}>移动端</option>
+				<option value="2" {{if type==2}}selected{{/if}}>官网</option>
+				<option value="3" {{if type==3}}selected{{/if}}>债权方端</option>
+			</select>
 		</div>
 	</form>
 </script>
