@@ -20,7 +20,7 @@ define(function(require, exports, module) {
                 url: '/operator/info',
                 done: function(returnData) {
                 	returnData.password = sessionStorage.getItem("admin-password");
-                    $(".personUser").html(returnData.data.userName);
+                    $(".personUser").html(returnData.data.username);
                     $(".personPhone").html(returnData.password);
                     $('#name').val(returnData.data.name);
                     $('#mobile').val(returnData.data.mobile);
