@@ -65,7 +65,8 @@
 					<th width="3%"><input type="checkbox" id="checkAll"></th>
 					<th width="8%">车牌号</th>
 					<th width="10%">全车背景照</th>
-					<th width="6%">捕头</th>
+					<th width="6%">姓名</th>
+					<th width="6%">类型</th>
 					<th width="8%">所属公司</th>
 					<th width="12%">GPS定位</th>
 					<th width="12%">照片拍摄地/时间</th>
@@ -92,6 +93,7 @@
 			<img src="{{viewImgRoot}}{{item.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand" />
 		</td>
 		<td>{{item.name}}</td>
+		<td>{{if item.role === 'type_A'}}线人{{else}}捕头{{/if}}</td>
 		<td>{{item.company}}</td>
 		<td>{{item.location}}</td>
 		<td>
