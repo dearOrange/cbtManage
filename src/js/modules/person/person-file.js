@@ -71,6 +71,16 @@ define(function(require, exports, module) {
             $('body').off('click', '.editFile').on('click', '.editFile', function() {
                 jh.utils.load("/src/modules/person/person-center");
             })
+            
+            //下载二维码
+            $('body').off('click', '.upErweima').on('click', '.upErweima', function() {
+                var erweimaStr = jh.utils.template('up_erweima_template', {});
+                jh.utils.alert({
+                    content: erweimaStr,
+                    ok: true,
+                    cancel: true
+                });
+            })
         };
     }
     module.exports = PersonFile;
