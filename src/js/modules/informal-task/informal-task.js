@@ -20,7 +20,7 @@ define(function(require, exports, module) {
                 page_container: $('#page_container'),
                 form_container: _this.form,
                 method: 'post',
-                url: '/task/offerList',
+                url: '/thirdTask/list',
                 contentType: 'application/json',
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,

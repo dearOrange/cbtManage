@@ -8,6 +8,14 @@
                         <input type="text" class="search-input" name="carNumber">
                     </td>
                     <td>
+                        <label class="label">是否匹配：</label>
+                        <select name="isMatch">
+                            <option value="">全部</option>
+                            <option value="1">匹配</option>
+                            <option value="0">未匹配</option>
+                        </select>
+                    </td>
+                    <td>
                         <input type="submit" value="查询" class="button search-button">
                     </td>
                 </tr>
@@ -40,8 +48,8 @@
         <td>{{index+1}}</td>
         <td>{{item.carNumber}}</td>
         <td>{{item.carBrand}}</td>
-        <td>{{item.channelManager}}</td>
-        <td>{{item.clueUploadAt}}</td>
+        <td>{{item.source}}</td>
+        <td>{{item.createAt}}</td>
         <td>
             <a data-id="{{item.id}}" class="informal-task-detail button">详情</a>
         </td>

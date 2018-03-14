@@ -7,7 +7,6 @@
             任务详情
         </p>
         <a href="javascript:;" class="button gobackPage goBack">返回</a>
-        <p class="showTaskState pull-right">{{menuState(data.state)}}</p>
         <div class="clearfix"></div>
         <hr /><br />
         <p>基本信息</p><br />
@@ -16,18 +15,18 @@
                 <th>车牌号：</th>
                 <td>{{data.carNumber}}</td>
                 <th>车型：</th>
-                <td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+                <td>{{data.carBrand}}</td>
             </tr>
             <tr>
                 <th>来源：</th>
-                <td>{{data.carId}}</td>
+                <td>{{data.source}}</td>
                 <th>录入时间：</th>
                 <td>{{data.createAt}}</td>
             </tr>
         </table>
         <div class="mainfile">
             <p>线索信息</p>
-            {{ each data.traceVoList item index }}
+            {{ each data.traceList item index }}
             <div class="upimg pull-left">
                 <dl>
                     <dt>

@@ -15,14 +15,12 @@ define(function(require, exports, module) {
         };
         this.initContent = function() {
             jh.utils.ajax.send({
-                url: '/task/info/detail',
+                url: '/thirdTask/taskDetail',
                 data: {
                     taskId: args.id
                 },
                 done: function(returnData) {
-                    returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
-                    returnData.taskId = args.id;
                     returnData.officerState = jh.utils.officerState;
                     returnData.getPositionByImage = jh.utils.getPositionByImage;
                     var informalStr = jh.utils.template('informal_task_detail_template', returnData);
