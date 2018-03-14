@@ -63,6 +63,7 @@ define(function(require, exports, module) {
                         var regaward4 = /^[1-9]\d*|0$/.test(award4);
                         if(award1 && award2 && award3 && award4 && regaward1 && regaward2 && regaward3 && regaward4) {
                     		var newData = jh.utils.formToJson($('#new-increate-award-form'));
+                    		newData.type = 1;
                     		jh.utils.ajax.send({
                                 method: 'post',
                                 url: '/activity/create',
@@ -89,7 +90,49 @@ define(function(require, exports, module) {
                 	cancel: true
                 })
             })
+            
+            //新建活动
+            $('body').off('click', '#increate-creditor-award').on('click', '#increate-creditor-award', function() {
+                var creditorAward = jh.utils.template('increate-creditor-award-template', {});
+                jh.utils.alert({
+                    title: '新建线人奖励活动',
+                    content: creditorAward,
+                    ok: function() {
+                        var award1 = $.trim($('.activity').val());
+                        var award2 = $.trim($('.referrerTrace').val());
+                        var regaward1 = /^[1-9]\d*|0$/.test(award1);
+                        var regaward2 = /^[1-9]\d*|0$/.test(award2);
+                        if(award1 && award2 && regaward1 && regaward2) {
+                            var creditorData = jh.utils.formToJson($('#increate-creditor-award-form'));
+                            creditorData.type = 2;
+                            jh.utils.ajax.send({
+                                method: 'post',
+                                url: '/activity/create',
+                                data: creditorData,
+                                done: function(returnData) {
+                                    jh.utils.alert({
+                                        content: '新增活动成功',
+                                        ok: function(){
+                                            _this.initContent();
+                                        }
+                                    })
+                                }
+                            });
+                            return false;
+                        } else {
+                            jh.utils.alert({
+                                content: '请填写正确的金额',
+                                ok: true
+                            })
+                            return false;
+                        }
+                    },
+                    okValue: '新建',
+                    cancel: true
+                })
+            })
 
+            
             //停止活动
             $('body').off('click', '.stopAward').on('click', '.stopAward', function() {
                 var awardsId = $(this).data('id');

@@ -33,6 +33,17 @@
     </td>
   </tr>
   <tr>
+    <th><sup class="must">*</sup>显示地方</th>
+    <td>
+      <select name="showAt" class="form-input required">
+        <option value="0" {{if data.showAt=="0"}}selected{{/if}}>全部</option>
+        <option value="1" {{if data.showAt=="1"}}selected{{/if}}>WEB</option>
+        <option value="2" {{if data.showAt=="2"}}selected{{/if}}>捕头端</option>
+        <option value="3" {{if data.showAt=="3"}}selected{{/if}}>债权方</option>
+      </select>
+  </td>
+  </tr>
+  <tr>
     <th><sup class="must">*</sup>作者</th>
     <td>
         <input type="text" name="author" class="form-input required" value="{{data.author}}">

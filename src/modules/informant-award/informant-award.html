@@ -28,12 +28,14 @@
 		</form>
 	</div>
 	<a href="javascript:;" class="button style-btn" id="increate-award">+新建线人奖励活动</a>
+	<a href="javascript:;" class="button style-btn" id="increate-creditor-award">+新建推荐债权方奖励</a>
 	<div class="data-container mt25">
 		<table class="dataShow">
 			<thead>
 				<tr>
 					<th width="4%">序号</th>
 					<th width="8%">活动名称</th>
+					<th width="8%">活动类型</th>
 					<th width="12%">开始时间</th>
 					<th width="12%">停止时间</th>
 					<th width="8%">活动奖励金</th>
@@ -57,6 +59,7 @@
 	<tr class="{{if item.isOver === 1}}bgc_grey{{/if}}">
 		<td>{{index+1}}</td>
 		<td>{{item.title}}</td>
+		<td>{{if item.type === 1}}线人奖励活动{{else}}推荐债权方奖励活动{{/if}}</td>
 		<td>{{item.startAt}}</td>
 		<td>{{item.endAt}}</td>
 		<td>{{item.activity}}</td>
@@ -105,6 +108,32 @@
 		</form>
     </div>
 </script>
+
+<script type="text/template" id="increate-creditor-award-template">
+    <div>
+        <form id="increate-creditor-award-form">
+            <table>
+                <tr>
+                    <th>活动名称</th>
+                    <td colspan="3"><input type="text" class="search-input" name="title" ></td>
+                </tr>
+                <tr>
+                    <th>活动开始时间</th>
+                    <td><input type="text" class="search-input hand" readonly="readonly" name="startAt" id="startAt" onclick="WdatePicker({minDate:'%y-%M-%d',maxDate:'#F{$dp.$D(\'endAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})"></td>
+                    <th>活动结束时间</th>
+                    <td><input type="text" class="search-input hand" readonly="readonly" name="endAt" id="endAt" onclick="WdatePicker({minDate:'#F{$dp.$D(\'startAt\')}',startDate:'#F{$dp.$D(\'startAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})"></td>
+                </tr>
+                <tr>
+                    <th>推荐债权方任务奖励金</th>
+                    <td><input type="text" class="search-input activity" name="referrerLoaner" value="0" ></td>
+                    <th>推荐债权方清收奖励金</th>
+                    <td><input type="text" class="search-input referrerTrace" name="loanerClean" value="0" ></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</script>
+
 <script type="text/template" id="stop-award-template">
 	<div>
 		<p style="font-weight: 900;">确认停止本次线人奖励活动吗</p>
