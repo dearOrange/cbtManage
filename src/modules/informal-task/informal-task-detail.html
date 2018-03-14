@@ -1,0 +1,72 @@
+<div class="dataContent informalContent">
+    
+</div>
+<script type="text/template" id="informal_task_detail_template">
+    <div class="dialog-width public_css">
+        <p class="pull-left">
+            任务详情
+        </p>
+        <a href="javascript:;" class="button gobackPage goBack">返回</a>
+        <p class="showTaskState pull-right">{{menuState(data.state)}}</p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <p>基本信息</p><br />
+        <table class="taskTable">
+            <tr>
+                <th>车牌号：</th>
+                <td>{{data.carNumber}}</td>
+                <th>车型：</th>
+                <td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+            </tr>
+            <tr>
+                <th>来源：</th>
+                <td>{{data.carId}}</td>
+                <th>录入时间：</th>
+                <td>{{data.createAt}}</td>
+            </tr>
+        </table>
+        <div class="mainfile">
+            <p>线索信息</p>
+            {{ each data.traceVoList item index }}
+            <div class="upimg pull-left">
+                <dl>
+                    <dt>
+                        <div class="upfile-item">
+                            <img data-id="{{item.carPhoto}}" src="{{viewImgRoot}}{{item.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand" onerror="this.src='/src/img/nopic.png'"/>
+                        </div>
+                    </dt>
+                    <dd>全车背景照</dd>
+                </dl>
+            </div>
+            <div style="margin:1px 0;width: 84%;" class="pull-left">
+                <table class="taskTable">
+                    <tr>
+                        <th>上传人员</th>
+                        <td>{{data.name}}----{{if data.role === 'type_A'}}线人{{else}}捕头----{{officerState(data.downstreamType)}}{{/if}}</td>
+                        <th>联系电话</th>
+                        <td>{{data.phone}}</td>
+                    </tr>
+                    <tr>
+                        <th>GPS信息</th>
+                        <td colspan="3">{{data.location}}</td>
+                    </tr>
+                    <tr>
+                        <th>定位</th>
+                        <td colspan="3" id="{{data.carPhoto}}">{{getPositionByImage(data.carPhoto)}}</td>
+                    </tr>
+                    <tr>
+                        <th>上传时间</th>
+                        <td colspan="3">{{data.location}}</td>
+                    </tr>
+                </table>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+seajs.use('modules/informal-task/informal-task-detail', function(InformalTaskDetail) {
+    var InformalTaskDetail = new InformalTaskDetail();
+    InformalTaskDetail.init();
+});
+</script>

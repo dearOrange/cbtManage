@@ -6,7 +6,7 @@
  */
 'use strict';
 define(function(require, exports, module) {
-    function CreditorManageDetail() {
+    function RestorationDetail() {
         var _this = this;
         _this.baileePrice = 0;
         _this.numPlus = 0;
@@ -122,5 +122,5 @@ define(function(require, exports, module) {
             });
         };
     }
-    module.exports = CreditorManageDetail;
+    module.exports = RestorationDetail;
 });

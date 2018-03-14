@@ -612,7 +612,7 @@ i.icon-issue {
 	cursor: pointer;
 }
 
-form#new-increate-award-form table input {
+form#new-increate-award-form table input, form#increate-creditor-award-form table input {
 	border:1px solid #ccc;
 	height:30px;
 }
