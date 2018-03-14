@@ -26,7 +26,13 @@ define(function(require, exports, module) {
 			        	$('.channelArea').removeClass('hide');
 			        }else {
 			        	$('.channelArea').addClass('hide');
-			        }
+			        };
+			        
+			        if(_this.roleType === 'business') {
+                        $('.upErweima').removeClass('hide');
+                    }else {
+                        $('.upErweima').addClass('hide');
+                    }
                 }
             });
         };
@@ -70,6 +76,16 @@ define(function(require, exports, module) {
             //重新编辑
             $('body').off('click', '.editFile').on('click', '.editFile', function() {
                 jh.utils.load("/src/modules/person/person-center");
+            })
+            
+            //下载二维码
+            $('body').off('click', '.upErweima').on('click', '.upErweima', function() {
+                var erweimaStr = jh.utils.template('up_erweima_template', {});
+                jh.utils.alert({
+                    content: erweimaStr,
+                    ok: true,
+                    cancel: true
+                });
             })
         };
     }
