@@ -26,7 +26,13 @@ define(function(require, exports, module) {
 			        	$('.channelArea').removeClass('hide');
 			        }else {
 			        	$('.channelArea').addClass('hide');
-			        }
+			        };
+			        
+			        if(_this.roleType === 'business') {
+                        $('.upErweima').removeClass('hide');
+                    }else {
+                        $('.upErweima').addClass('hide');
+                    }
                 }
             });
         };
