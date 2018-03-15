@@ -161,6 +161,27 @@ define(function(require, exports, module) {
                 	cancel: true
                 })
             })
+            
+            //切换状态
+            $('body').off('click', '.taskState').on('click', '.taskState', function(event,param) {
+                var mine = $(this);
+                var state = mine.data('state');
+                $(this).addClass("active").siblings().removeClass("active");
+                $('#state').val(mine.data('value'))
+                if(state === 1) {
+                    $('#increate-award').css('display','');
+                    $('#increate-creditor-award').css('display','none');
+                } else {
+                   $('#increate-award').css('display','none');
+                    $('#increate-creditor-award').css('display',''); 
+                }
+                if(param && param==='autoClick'){
+                    
+                }else{
+                    _this.initContent('tab');
+                }
+                
+            })
         };
     }
     module.exports = InformantAward;

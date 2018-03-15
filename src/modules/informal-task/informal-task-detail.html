@@ -41,21 +41,21 @@
                 <table class="taskTable">
                     <tr>
                         <th>上传人员</th>
-                        <td>{{data.name}}----{{if data.role === 'type_A'}}线人{{else}}捕头----{{officerState(data.downstreamType)}}{{/if}}</td>
+                        <td>{{item.name}}----{{if item.role === 'type_A'}}线人{{else}}捕头{{/if}}</td>
                         <th>联系电话</th>
-                        <td>{{data.phone}}</td>
+                        <td>{{item.phone}}</td>
                     </tr>
                     <tr>
                         <th>GPS信息</th>
-                        <td colspan="3">{{data.location}}</td>
+                        <td colspan="3">{{item.location}}</td>
                     </tr>
                     <tr>
                         <th>定位</th>
-                        <td colspan="3" id="{{data.carPhoto}}">{{getPositionByImage(data.carPhoto)}}</td>
+                        <td colspan="3" id="{{item.carPhoto}}">{{getPositionByImage(item.carPhoto)}}</td>
                     </tr>
                     <tr>
                         <th>上传时间</th>
-                        <td colspan="3">{{data.location}}</td>
+                        <td colspan="3">{{item.traceCreateAt}}</td>
                     </tr>
                 </table>
             </div>

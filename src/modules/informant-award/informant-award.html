@@ -2,6 +2,15 @@
 	<div class="search-container">
 		<form id="informant-award-form">
 			<table class="common_query textLeft search-content">
+			    <tr>
+                    <td colspan="4">
+                        <ol id="taskState" class="stateChange pull-left">
+                            <li data-value="1" data-state="1" class="taskState active">线人奖励活动</li>
+                            <li data-value="2" data-state="2" class="taskState">推荐债权方奖励活动</li>
+                            <input type="hidden" name="tabType" id="state" value="1">
+                        </ol>
+                    </td>
+                </tr>
 				<tr class="new-style">
 					<td>
 						<label class="label">活动名称：</label>
@@ -35,7 +44,6 @@
 				<tr>
 					<th width="4%">序号</th>
 					<th width="8%">活动名称</th>
-					<th width="8%">活动类型</th>
 					<th width="12%">开始时间</th>
 					<th width="12%">停止时间</th>
 					<th width="8%">活动奖励金</th>
@@ -59,7 +67,6 @@
 	<tr class="{{if item.isOver === 1}}bgc_grey{{/if}}">
 		<td>{{index+1}}</td>
 		<td>{{item.title}}</td>
-		<td>{{if item.type === 1}}线人奖励活动{{else}}推荐债权方奖励活动{{/if}}</td>
 		<td>{{item.startAt}}</td>
 		<td>{{item.endAt}}</td>
 		<td>{{item.activity}}</td>
