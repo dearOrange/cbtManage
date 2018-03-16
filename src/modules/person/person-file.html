@@ -79,10 +79,10 @@
 </script>
 <script type="text/template" id="up_erweima_template">
     <div class="upload-erweima">
-        <img src="../../img/nopic.png"/>
-        <div>64*64</div>
-        <div>128*128</div>
-        <div>512*512</div>
+        <img class="preview-img" src="{{REQUESTROOT}}/operator/showQRCode?id={{id}}&type=1&side=300" alt="图片" onerror="this.src='/src/img/nopic.png'">
+        <div><a href="{{REQUESTROOT}}/operator/downloadQRCode?id={{id}}&type=1&size=64*64">64*64</a></div>
+        <div><a href="{{REQUESTROOT}}/operator/downloadQRCode?id={{id}}&type=1&size=128*128">128*128</a></div>
+        <div><a href="{{REQUESTROOT}}/operator/downloadQRCode?id={{id}}&type=1&size=512*512">512*512</a></div>
     </div>
 </script>
 <script type="text/javascript">
