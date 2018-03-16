@@ -53,83 +53,70 @@ define(function(require, exports, module) {
                 	title: '新建线人奖励活动',
                 	content: newAward,
                 	ok: function() {
-                		var award1 = $.trim($('.activity').val());
-                		var award2 = $.trim($('.referrerTrace').val());
-                		var award3 = $.trim($('.firstTrace').val());
-                        var award4 = $.trim($('.referrerFirstTrace').val());
-                        var regaward1 = /^[1-9]\d*|0$/.test(award1);
-                        var regaward2 = /^[1-9]\d*|0$/.test(award2);
-                        var regaward3 = /^[1-9]\d*|0$/.test(award3);
-                        var regaward4 = /^[1-9]\d*|0$/.test(award4);
-                        if(award1 && award2 && award3 && award4 && regaward1 && regaward2 && regaward3 && regaward4) {
-                    		var newData = jh.utils.formToJson($('#new-increate-award-form'));
-                    		newData.type = 1;
-                    		jh.utils.ajax.send({
-                                method: 'post',
-                                url: '/activity/create',
-                                data: newData,
-                                done: function(returnData) {
-                                    jh.utils.alert({
-                                        content: '新增活动成功',
-                                        ok: function(){
-                                            _this.initContent();
-                                        }
-                                    })
-                                }
-                            });
-                            return false;
-                        } else {
-                            jh.utils.alert({
-                                content: '请填写正确的金额',
-                                ok: true
-                            })
-                            return false;
-                        }
+                	    $('#new-increate-award-form').submit();
+                	    return false;
                 	},
                 	okValue: '新建',
                 	cancel: true
                 })
+                jh.utils.validator.init({
+                    id: 'new-increate-award-form',
+                    submitHandler: function(form) {
+                        var datas = jh.utils.formToJson(form);
+                        datas.type = 1;
+                        jh.utils.ajax.send({
+                            url: '/activity/create',
+                            data: datas,
+                            method: 'post',
+                            done: function(returnData) {
+                                jh.utils.alert({
+                                    content: '新增活动成功',
+                                    ok: function(){
+                                        _this.initContent();
+                                    }
+                                })
+                            }
+                        });
+                        return false;
+                    }
+                });
             })
             
-            //新建活动
+            //新建债权方
             $('body').off('click', '#increate-creditor-award').on('click', '#increate-creditor-award', function() {
                 var creditorAward = jh.utils.template('increate-creditor-award-template', {});
                 jh.utils.alert({
-                    title: '新建线人奖励活动',
+                    title: '新建债权方奖励活动',
                     content: creditorAward,
                     ok: function() {
-                        var award1 = $.trim($('.activity').val());
-                        var award2 = $.trim($('.referrerTrace').val());
-                        var regaward1 = /^[1-9]\d*|0$/.test(award1);
-                        var regaward2 = /^[1-9]\d*|0$/.test(award2);
-                        if(award1 && award2 && regaward1 && regaward2) {
-                            var creditorData = jh.utils.formToJson($('#increate-creditor-award-form'));
-                            creditorData.type = 2;
-                            jh.utils.ajax.send({
-                                method: 'post',
-                                url: '/activity/create',
-                                data: creditorData,
-                                done: function(returnData) {
-                                    jh.utils.alert({
-                                        content: '新增活动成功',
-                                        ok: function(){
-                                            _this.initContent();
-                                        }
-                                    })
-                                }
-                            });
-                            return false;
-                        } else {
-                            jh.utils.alert({
-                                content: '请填写正确的金额',
-                                ok: true
-                            })
-                            return false;
-                        }
+                        $('#increate-creditor-award-form').submit();
+                        return false;
                     },
                     okValue: '新建',
                     cancel: true
                 })
+                
+                jh.utils.validator.init({
+                    id: 'increate-creditor-award-form',
+                    submitHandler: function(form) {
+                        var creditorData = jh.utils.formToJson(form);
+                        creditorData.type = 2;
+                        jh.utils.ajax.send({
+                            method: 'post',
+                            url: '/activity/create',
+                            data: creditorData,
+                            done: function(returnData) {
+                                jh.utils.alert({
+                                    content: '新增活动成功',
+                                    ok: function(){
+                                        _this.initContent();
+                                    }
+                                })
+                            }
+                        });
+                        return false;
+                    }
+                });
             })
 
             
