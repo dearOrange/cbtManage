@@ -47,7 +47,20 @@ define(function(require, exports, module) {
 					id: id
 				})
 			});
-
+            
+            //切换状态
+            $('body').off('click', '.taskState').on('click', '.taskState', function(event,param) {
+                var mine = $(this);
+                $(this).addClass("active").siblings().removeClass("active");
+                $('#state').val(mine.data('value'))
+                if(param && param==='autoClick'){
+                    
+                }else{
+                    _this.initContent('tab');
+                }
+                
+            })
+            
 			//打款
 			$('body').off('click', '.sendMoney').on('click', '.sendMoney', function() {
 				var me = $(this);
