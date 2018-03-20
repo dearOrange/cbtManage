@@ -798,6 +798,9 @@ label.error {
     background-position: 95% 50%;
     cursor: pointer
 }
+.begin-input, .end-input{
+    width: 90px !important;
+}
 
 .header {
     width: 100%;

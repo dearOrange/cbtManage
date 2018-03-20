@@ -1,0 +1,90 @@
+<div class="dataContent taskListContent">
+
+</div>
+<script type="text/template" id="task_detail_template">
+	<div class="dialog-width public_css">
+		<p class="pull-left">
+			任务详情
+		</p>
+		<a href="javascript:;" class="button gobackPage goBack">返回</a>
+		<p class="showTaskState pull-right">{{menuState(data.state)}}</p>
+		<div class="clearfix"></div>
+		<hr /><br />
+		<p>基本信息</p><br />
+		<table class="taskTable">
+			<tr>
+				<th>任务号：</th>
+				<td>{{data.taskNo}}</td>
+				<th>任务类型：</th>
+				<td>{{menuState(data.entrust)}}</td>
+				<th>任务发起：</th>
+				<td>{{data.upstreamName}}</td>
+			</tr>
+			<tr>
+				<th>车牌号：</th>
+				<td>{{data.carNumber}}</td>
+				<th>车型：</th>
+				<td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+				<th>颜色：</th>
+				<td>{{data.carColor}}</td>
+			</tr>
+			<tr>
+				<th>车辆识别号：</th>
+				<td>{{data.carId}}</td>
+				<th>车辆发动机号：</th>
+				<td>{{data.engineId}}</td>
+				<th>任务发布时间：</th>
+				<td>{{data.createAt}}</td>
+			</tr>
+		</table>
+		<div class="remark">{{data.remark}}</div>
+		<div class="imgRecord">
+			<p>催收资料</p>
+			{{each data.attachmentVoList data index}}
+			<img src="{{viewImgRoot}}{{data.url}}" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" class="preview-img hand" /> {{/each}}
+		</div>
+	</div>
+</script>
+<script type="text/template" id="xx_task_list">
+	<div style="width:460px;">
+		<table>
+			<tr>
+				<td>
+					<form id="task_adopt_form">
+						<div id="qd-distribution-tab0" class="divied-type" style="max-height: 300px;overflow-y: auto;text-align: left;">
+							{{each data item index}}
+							<div>
+								<input type="radio" name="managerId" value="{{item.id}}" data-name="{{item.name}}" class="managerId" />
+								<span>{{item.name}}</span>
+								<span>
+                                {{each item.operatorProvinceVoList temp i}}
+                                     - {{temp.provinceName}},
+                                {{/each}}
+                                </span>
+							</div>
+							{{/each}}
+						</div>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+</script>
+<script type="text/template" id="task_detail_wzInfoTemplate">
+	{{each list item index}}
+	<tr>
+		<td>{{index+1}}</td>
+		<td>{{item.carNumber}}</td>
+		<td>{{item.desc}}</td>
+		<td>{{item.site}}</td>
+		<td>{{item.city}}</td>
+		<td>{{item.occurAt}}</td>
+	</tr>
+	{{/each}}
+</script>
+<script type="text/javascript">
+	seajs.use('modules/xinxiyuan/task/task-list-detail', function(TaskListDetail) {
+		var TaskListDetail = new TaskListDetail();
+		TaskListDetail.init();
+	});
+</script>
