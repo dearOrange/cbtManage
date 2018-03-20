@@ -12,6 +12,37 @@ define(function(require, exports, module) {
             this.registerEvent();
         };
 
+        this.getDirectUrlByType = function(type){
+            var urlStr = '';
+            switch( type ){
+                case 1: 
+                    urlStr = '/src/modules/xinxiyuan/clue/clue-manage';
+                    break;
+                case 2: 
+                    urlStr = '/src/modules/sendMoney/sendMoney-list';
+                    break;
+                case 3: 
+                    urlStr = '/src/modules/officermanage/officer-manage';
+                    break;
+                case 4: 
+                    urlStr = '/src/modules/xinxiyuan/xx-distribution/xx-distribution-list';
+                    break;
+                case 5: 
+                    urlStr = '/src/modules/logistics/logistics-list';
+                    break;
+                case 6: 
+                    urlStr = '/src/modules/qudao/qd-distribution/qd-distribution-list';
+                    break;
+                case 7: 
+                    urlStr = '/src/modules/yunying/task/task-audit';
+                    break;
+                case 8: 
+                    urlStr = '/src/modules/xinxiyuan/creditor/creditor-identify';
+                    break;
+            }
+            return urlStr;
+        };
+
         this.registerEvent = function() {
             jh.utils.ajax.send({
                 url: '/qiniu/getToken',
@@ -135,13 +166,10 @@ define(function(require, exports, module) {
 
             $('body').off('click', '.seaMessageDetail').on('click', '.seaMessageDetail', function() {
                 var m = $(this);
-                if (_this.roleType === 'info') {
-                    jh.utils.load('/src/modules/xinxiyuan/clue/clue-manage');
-                } else if (_this.roleType === 'finance') {
-                    jh.utils.load('/src/modules/sendMoney/sendMoney-list');
-                }else if(_this.roleType === 'channel'){
-                    jh.utils.load('/src/modules/officermanage/officer-manage');
-                }
+                var type =  m.data('type');
+                var targetUrl = _this.getDirectUrlByType(type);
+                jh.utils.load(targetUrl);
+
                 m.parents('.new-message').remove();
             });
 
