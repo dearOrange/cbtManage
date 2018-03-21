@@ -5,15 +5,30 @@
 				<tr class="new-style">
 					<td>
 						<label class="label">车牌号：</label>
-						<input type="text" class="search-input" name="carNumber">
+						<input type="text" class="search-input" name="carNumber" style="width:60%;">
 					</td>
 					<td>
+                        <label class="label">品牌：</label>
+                        <input type="text" class="search-input" name="carBrand" style="width:60%;">
+                    </td>
+                    <td>
+                        <label class="label">违章地区：</label>
+                        <input type="text" class="search-input" name="city" style="width:60%;">
+                    </td>
+					<td>
 						<label class="label">债权方：</label>
-						<input type="text" class="search-input" name="companyName">
+						<input type="text" class="search-input" name="companyName" style="width:60%;">
 					</td>
 					<td>
 						<input type="submit" value="查询" class="button search-button">
 					</td>
+				</tr>
+				<tr class="new-style">
+					<td colspan="5">
+                        <label class="label">发布任务时间：</label>
+                        <input type="text" class="search-input hand" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">   至   
+                        <input type="text" class="search-input hand" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">   
+                    </td>
 				</tr>
 				<tr>
 					<td>

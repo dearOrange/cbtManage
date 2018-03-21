@@ -98,6 +98,13 @@
                     <label>第三方处置清收费:</label>
                     <input type="text require" name="thirdpartyPrice" maxlength="11" class="OnlyPrice" id="thirdpartyPrice" value="" required="" />
                 </div>
+                <div>
+                    <label>费用类型:</label>
+                    <select name="entrust">
+                    	<option value="all">找车并拖车</option>
+                    	<option value="trace">只找车</option>
+                    </select>
+                </div>
                 <input type="submit" value="确认" class="button search-button surePrice" style="margin-bottom:40px;width:150px;height:30px;">
                 {{else}}
                 <input type="submit" value="预估" class="button search-button priceStorage" style="margin-bottom:40px;width:150px;height:30px;">
@@ -130,6 +137,13 @@
                 <div>
                     <label>第三方处置清收费:</label>
                     <input type="text require" name="thirdpartyPrice" maxlength="11" class="OnlyPrice thirdpartyPrice" id="thirdpartyPrice" value="{{data.thirdpartyPrice}}" required="" />
+                </div>
+                <div>
+                    <label>费用类型:</label>
+                    <select name="entrust">
+                        <option value="all">找车并拖车</option>
+                        <option value="trace">只找车</option>
+                    </select>
                 </div>
                 <input type="submit" value="确认" class="button search-button surePrice" style="margin-bottom:40px;width:150px;height:30px;">
                 {{/if}}

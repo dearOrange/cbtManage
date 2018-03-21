@@ -91,25 +91,32 @@
 			<table>
 				<tr>
 					<th>活动名称</th>
-					<td colspan="3"><input type="text" class="search-input" name="title" ></td>
+					<td colspan="6"><input type="text" class="search-input" name="title" ></td>
 				</tr>
 				<tr>
 					<th>活动开始时间</th>
-					<td><input type="text" class="search-input required hand" readonly="readonly" name="startAt" id="startAt" onclick="WdatePicker({minDate:'%y-%M-%d',maxDate:'#F{$dp.$D(\'endAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})"></td>
+					<td colspan="3"><input type="text" class="search-input required hand" readonly="readonly" name="startAt" id="startAt" onclick="WdatePicker({minDate:'%y-%M-%d',maxDate:'#F{$dp.$D(\'endAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})"></td>
 					<th>活动结束时间</th>
-					<td><input type="text" class="search-input required hand" readonly="readonly" name="endAt" id="endAt" onclick="WdatePicker({minDate:'#F{$dp.$D(\'startAt\')}',startDate:'#F{$dp.$D(\'startAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})"></td>
+					<td colspan="2"><input type="text" class="search-input required hand" readonly="readonly" name="endAt" id="endAt" onclick="WdatePicker({minDate:'#F{$dp.$D(\'startAt\')}',startDate:'#F{$dp.$D(\'startAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})"></td>
 				</tr>
 				<tr>
 					<th>活动奖励金</th>
-					<td><input type="text" class="search-input required digits" name="activity" value="0" ></td>
-					<th>关联活动奖励金</th>
-					<td><input type="text" class="search-input digits" name="referrerTrace" value="0" ></td>
+					<td>高</td>
+					<td>5-10</td>
+					<td>中</td>
+					<td>1-4.9</td>
+					<td>低</td>
+					<td>0.1-0.9</td>
 				</tr>
 				<tr>
+                    <th>关联活动奖励金</th>
+                    <td colspan="6">等同活动奖励金</td>
+                </tr>
+				<tr>
 					<th>首线索奖励金</th>
-					<td><input type="text" class="search-input required digits" name="firstTrace" value="0" ></td>
+					<td colspan="3"><input type="text" class="search-input required digits" name="firstTrace" value="0" ></td>
 					<th>关联首线索奖励金</th>
-					<td><input type="text" class="search-input digits" name="referrerFirstTrace" value="0" ></td>
+					<td colspan="2"><input type="text" class="search-input digits" name="referrerFirstTrace" value="0" ></td>
 				</tr>
 			</table>
 		</form>
