@@ -11,19 +11,21 @@
                         <label class="label">主体类型：</label>
                         <select name="type">
                         	<option value="">全部</option>
-                            <option value="UPSTREAM_INSURANCE">保险公司</option>
-			       			<option value="UPSTREAM_BANK">银行</option>
-			       			<option value="UPSTREAM_FACTORY">厂家金融</option>
-			       			<option value="UPSTREAM_LEASE">融资租赁</option>
-			       			<option value="UPSTREAM_P2P">P2P平台</option>
-			       			<option value="UPSTREAM_LAWFIRM">律师事务所</option>
 			       			<option value="UPSTREAM_PERSONAL">个人</option>
-			       			<option value="UPSTREAM_OTHER">其他</option>
+			       			<option value="UPSTREAM_ENTERPRISE">企业</option>
                         </select>
                     </td>
                     <td>
                         <label class="label">债权方：</label>
                         <input type="text" class="search-input" name="companyName">
+                    </td>
+                    <td>
+                        <label class="label">认证状态：</label>
+                        <select name="state">
+                            <option value="">全部</option>
+                            <option value="new">未初筛</option>
+                            <option value="sifte">已初筛</option>
+                        </select>
                     </td>
                     <td>
                     	<input type="submit" value="查询" class="button search-button">

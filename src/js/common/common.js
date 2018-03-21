@@ -1761,6 +1761,9 @@ define(function(require, exports, module) {
                 case "UPSTREAM_LAWFIRM":
                     state = "律师事务所";
                     break;
+                case "UPSTREAM_ENTERPRISE":
+                    state = "企业";
+                    break;
                 case "UPSTREAM_PERSONAL":
                     state = "个人";
                     break;
