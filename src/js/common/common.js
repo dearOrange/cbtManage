@@ -21,7 +21,7 @@ define(function(require, exports, module) {
   require('common/validator'); //表单验证扩展
   require('plugin/datePicker/WdatePicker'); //时间插件
   require('plugin/webuploader/webuploader.min'); //上传模块
-
+       
   require('plugin/select2/select2.min');
   require('lib/cookie/jquery.cookie');
   require('plugin/scrollbar/scrollbar'); //scrollbar
@@ -1512,7 +1512,6 @@ define(function(require, exports, module) {
           sets.submitHandler.call(null, form);
           return false;
         }
-<<<<<<< HEAD
       });
       $('#' + sets.id).validate();
     };
@@ -1549,153 +1548,6 @@ define(function(require, exports, module) {
         var _this = this;
         if (_this.localNumber < 0) {
           _this.localNumber = 0;
-=======
-        tammy.utils.getCheckboxValue = getCheckboxValueById;
-    })();
-
-    (function() {
-        var menuState = function(state) {
-            switch (state) {
-                case "new":
-                    state = "待审核";
-                    break;
-                case "invalid":
-                    state = "审核未通过";
-                    break;
-                case "undistributed":
-                    state = "信息员未分配";
-                    break;
-                case "unarrange":
-                    state = "渠道经理未分配";
-                    break;
-                case "tracing":
-                    state = "线索未提交";
-                    break;
-                case "clueChecking":
-                    state = "线索审核中";
-                    break;
-                case "unvaluation":
-                    state = "待估价";
-                    break;
-                case "unconfirmed":
-                    state = "待确认";
-                    break;
-                case "voucherChecking":
-                    state = "凭证审核中";
-                    break;
-                case "voucherInvalid":
-                    state = "凭证审核未通过";
-                    break;
-                case "hunterUnreceive":
-                    state = "捕头未接受";
-                    break;
-                case "hunterReceive":
-                    state = "捕头已接受";
-                    break;
-                case "platReceive":
-                    state = "平台已接收";
-                    break;
-                case "upstreamReceive":
-                    state = "债权方已收车";
-                    break;
-                case "all":
-                    state = "无定位需找车并拖车";
-                    break;
-                case "trace":
-                    state = "无定位只需找车";
-                    break;
-                case "recycle":
-                    state = "有定位只需拖车";
-                    break;
-                case 0:
-                    state = "关闭";
-                    break;
-                case 'closed':
-                    state = "已关闭";
-                    break;
-                case 1:
-                    state = "开启";
-                    break;
-                case "UPSTREAM_INSURANCE":
-                    state = "保险公司";
-                    break;
-                case "UPSTREAM_BANK":
-                    state = "银行";
-                    break;
-                case "UPSTREAM_FACTORY":
-                    state = "厂家金融";
-                    break;
-                case "UPSTREAM_LEASE":
-                    state = "融资租赁";
-                    break;
-                case "UPSTREAM_P2P":
-                    state = "P2P平台";
-                    break;
-                case "UPSTREAM_LAWFIRM":
-                    state = "律师事务所";
-                    break;
-                case "UPSTREAM_ENTERPRISE":
-                    state = "企业";
-                    break;
-                case "UPSTREAM_PERSONAL":
-                    state = "个人";
-                    break;
-                case "UPSTREAM_OTHER":
-                    state = "其他";
-                    break;
-                case "withdrawing":
-                    state = "未打款";
-                    break;
-                case "completed":
-                    state = "已打款";
-                    break;
-                case "rejected":
-                    state = "已拒绝";
-                    break;
-                case "verified":
-                    state = "已验";
-                    break;
-                case "unverified":
-                    state = "未验";
-                    break;
-            }
-            return state;
-        }
-        tammy.utils.menuState = menuState;
-    })();
-    (function() {
-        var officerState = function(state) {
-            switch (state) {
-                case "all":
-                    state = "可找可拖";
-                    break;
-                case "trace":
-                    state = "只找";
-                    break;
-                case "recycle":
-                    state = "只拖";
-                    break;
-                case "tracerecycle":
-                    state = "找加拖一体";
-                    break;
-                case "new":
-                    state = "未初筛";
-                    break;
-                case "sifte":
-                    state = "已初筛";
-                    break;
-                case "wait":
-                    state = "待认证";
-                    break;
-                case "unavailable":
-                    state = "认证不通过";
-                    break;
-                case "available":
-                    state = "已认证";
-                    break;
-            }
-            return state;
->>>>>>> dba139a63b6c432ac5d9b8384e33b07f423709d5
         }
         _this.target.text('重新发送(' + _this.localNumber + ')');
       }
@@ -1952,6 +1804,21 @@ define(function(require, exports, module) {
           break;
         case "tracerecycle":
           state = "找加拖一体";
+          break;
+        case "new":
+          state = "未初筛";
+          break;
+        case "sifte":
+          state = "已初筛";
+          break;
+        case "wait":
+          state = "待认证";
+          break;
+        case "unavailable":
+          state = "认证不通过";
+          break;
+        case "available":
+          state = "已认证";
           break;
       }
       return state;
