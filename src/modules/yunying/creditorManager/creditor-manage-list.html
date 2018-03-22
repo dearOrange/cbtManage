@@ -20,7 +20,35 @@
                         <input type="text" class="search-input" name="companyName">
                     </td>
                     <td>
-                    	<input type="submit" value="查询" class="button search-button">
+                        <label class="label">公司地址：</label>
+                        <input type="text" class="search-input" name="address">
+                    </td>
+                </tr>
+                <tr class="new-style">
+                    <td>
+                        <label class="label">通过认证时间：</label>
+                        <input type="text" class="search-input hand" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
+                        <input type="text" class="search-input hand" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
+                    </td>
+                    <td>
+                        <label class="label">运营经理：</label>
+                        <select name="businessManagerId" id="operateManage">
+                            <option value="">全部</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="label">认证状态：</label>
+                        <select name="state">
+                            <option value="">全部</option>
+                            <option value="new">未初筛</option>
+                            <option value="sifte">已初筛</option>
+                            <option value="wait">待认证</option>
+                            <option value="unavailable">认证不通过</option>
+                            <option value="available">已认证</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="submit" value="查询" class="button search-button">
                     </td>
                 </tr>
             </table>
@@ -36,6 +64,7 @@
                     <th width="14%">法人</th>
                     <th width="10%">负责人</th>
                     <th width="8%">联系电话</th>
+                    <th width="8%">认证状态</th>
                     <th width="10%">通过认证时间</th>
                     <th width="6%">运营经理</th>
                     <th width="10%">操作</th>
@@ -56,6 +85,7 @@
         <td>{{item.legalPerson}}</td>
         <td>{{item.linkman}}</td>
         <td>{{item.contactPhone}}</td>
+        <td>{{officerState(item.state)}}</td>
         <td>{{item.passAt}}</td>
         <td>{{item.businessManagerName}}</td>
         <td>

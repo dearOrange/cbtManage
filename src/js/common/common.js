@@ -1805,6 +1805,21 @@ define(function(require, exports, module) {
                 case "tracerecycle":
                     state = "找加拖一体";
                     break;
+                case "new":
+                    state = "未初筛";
+                    break;
+                case "sifte":
+                    state = "已初筛";
+                    break;
+                case "wait":
+                    state = "待认证";
+                    break;
+                case "unavailable":
+                    state = "认证不通过";
+                    break;
+                case "available":
+                    state = "已认证";
+                    break;
             }
             return state;
         }
