@@ -112,8 +112,9 @@ define(function(require, exports, module) {
                   max: datas.max
                 })
               }
+              datas.bounty = JSON.stringify(datas.bounty);
             }
-            datas.bounty = JSON.stringify(datas.bounty);
+            
             jh.utils.ajax.send({
               url: '/activity/create',
               data: datas,

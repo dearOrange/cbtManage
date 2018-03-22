@@ -102,7 +102,7 @@ define(function(require, exports, module) {
              * 如果是浮动奖励金则选择档位
              */
             var result = returnData.data;
-            if (result.kind === 0) {
+            if (result.kind === '0') {
               contentStr = '确定' + tip + '吗？';
             } else {
               contentStr = '<div class="text-center"><span>确定' + tip + '吗？</span><br/>';
@@ -129,15 +129,11 @@ define(function(require, exports, module) {
                     });
                     return false;
                   }
-                  var jsons = [];
-                  var name = selectItem.data('name');
-                  var min = selectItem.data('min');
-                  var max = selectItem.data('max');
-                  jsons.push({
-                    name: name,
-                    min: min,
-                    max: max
-                  });
+                  var jsons = {
+                    name: selectItem.data('name'),
+                    min: selectItem.data('min'),
+                    max: selectItem.data('max')
+                  };
                   activityJson = JSON.stringify(jsons);
                 }
                 jh.utils.ajax.send({
@@ -150,6 +146,11 @@ define(function(require, exports, module) {
                     activityJson: activityJson
                   },
                   done: function(returnData) {
+                    jh.utils.alert({
+                      content: '操作成功',
+                      ok: true,
+                      cancel: true
+                    });
                     _this.initContent();
                   }
                 });
