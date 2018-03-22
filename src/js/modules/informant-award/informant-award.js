@@ -32,15 +32,13 @@ define(function(require, exports, module) {
     };
 
     this.registerEvent = function() {
-
-
       //活动形式切换
       $('body').off('change', '.activeTypeChange').on('change', '.activeTypeChange', function() {
         var m = $(this);
         var type = m.val();
         var gdActiveSet = $('#gdActiveSet'),
           fdActiveSet = $('#fdActiveSet');
-        if (type === "1") {
+        if (type === "2") {
           gdActiveSet.removeClass('hide');
           fdActiveSet.addClass('hide');
         } else {
@@ -97,8 +95,25 @@ define(function(require, exports, module) {
           submitHandler: function(form) {
             var datas = jh.utils.formToJson(form);
             datas.type = 1;
-            console.log(datas);
-            return false;
+            if (datas.kind === "1") {
+              datas.bounty = [];
+              if (jh.utils.isArray(datas.name)) {
+                for (var i = 0, num = datas.name.length; i < num; i++) {
+                  datas.bounty.push({
+                    name: datas.name[i],
+                    min: datas.min[i],
+                    max: datas.max[i]
+                  })
+                }
+              } else {
+                datas.bounty.push({
+                  name: datas.name,
+                  min: datas.min,
+                  max: datas.max
+                })
+              }
+            }
+            datas.bounty = JSON.stringify(datas.bounty);
             jh.utils.ajax.send({
               url: '/activity/create',
               data: datas,
