@@ -207,11 +207,11 @@ define(function(require, exports, module) {
         $(this).addClass("active").siblings().removeClass("active");
         $('#state').val(mine.data('value'))
         if (state === 1) {
-          $('#increate-award').css('display', '');
-          $('#increate-creditor-award').css('display', 'none');
+          $('#increate-award').removeClass('hide');
+          $('#increate-creditor-award').addClass('hide');
         } else {
-          $('#increate-award').css('display', 'none');
-          $('#increate-creditor-award').css('display', '');
+          $('#increate-award').addClass('hide');
+          $('#increate-creditor-award').removeClass('hide');
         }
         if (param && param === 'autoClick') {
 
