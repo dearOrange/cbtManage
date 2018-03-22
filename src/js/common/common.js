@@ -21,7 +21,7 @@ define(function(require, exports, module) {
   require('common/validator'); //表单验证扩展
   require('plugin/datePicker/WdatePicker'); //时间插件
   require('plugin/webuploader/webuploader.min'); //上传模块
-    
+       
   require('plugin/select2/select2.min');
   require('lib/cookie/jquery.cookie');
   require('plugin/scrollbar/scrollbar'); //scrollbar
