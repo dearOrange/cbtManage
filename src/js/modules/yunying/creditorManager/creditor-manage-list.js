@@ -28,12 +28,25 @@ define(function(require, exports, module) {
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,
                 callback: function(data) {
+                    data.officerState = jh.utils.officerState;
                     return jh.utils.template('creditorManager_content_template', data);
                 }
             });
             page.init();
         };
         this.registerEvent = function() {
+            jh.utils.ajax.send({
+                url: '/operator/getAllBusiness',
+                done: function(returnData) {
+                    var operateData = returnData.data;
+                    var operateStr = "";
+                    for (var i = 0; i < operateData.length; i++) {
+                        operateStr += '<option value="' + operateData[i].id + '">' + operateData[i].name + '</option>';
+                    }
+                    $('#operateManage').append(operateStr);
+                    jh.utils.assignSelect('operateManage');
+                }
+            });
             // 搜索
             jh.utils.validator.init({
                 id: 'creditorManager-manage-form',
