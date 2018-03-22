@@ -96,6 +96,15 @@ a:hover, a:active, a:focus {
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset
 }
+.text-center{
+    text-align: center;
+}
+.text-left{
+    text-align: left;
+}
+.text-right{
+    text-align: right;
+}
 
 .red-border {
     border: 1px solid red !important;

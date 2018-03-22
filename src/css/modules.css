@@ -1210,3 +1210,9 @@ color: #fff;
 	border: 1px solid #ccc;
 	margin-left: 10px;
 }
+/**
+ * 线索管理按钮
+ */
+.activityItem.active{
+	border: 1px solid #6699f7;
+}

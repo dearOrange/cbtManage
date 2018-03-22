@@ -122,6 +122,7 @@ define(function(require, exports, module) {
                 jh.utils.alert({
                   content: '新增活动成功',
                   ok: function() {
+                    jh.utils.closeArt();
                     _this.initContent();
                   }
                 })
