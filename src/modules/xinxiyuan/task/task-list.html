@@ -1,144 +1,4 @@
 <div class="dataContent">
-<<<<<<< HEAD
-    <div class="search-container">
-		<form id="task-list-form">
-			<table class="common_query textLeft search-content">
-				<tr>
-					<td colspan="6">
-						<ol id="taskState" class="stateChange pull-left">
-							<li data-value="6" data-state="matched" class="taskState active">匹配成功</li>
-							<li data-value="1" data-state="open" class="taskState">次要任务库</li>
-							<li data-value="2" data-state="trcaing" class="taskState">优先任务库</li>
-							<li data-value="3" data-state="finished" class="taskState">已完成</li>
-							<li data-value="4" data-state="closed" class="taskState">已失效</li>
-							<li data-value="7" data-state="new" class="taskState">未审核任务库</li>
-							<input type="hidden" name="tabType" id="state" value="6">
-						</ol>
-					</td>
-				</tr>
-				<tr class="new-style">
-					<td>
-						<label class="label">任务号：</label>
-						<input type="text" class="search-input" name="taskNo">
-					</td>
-					<td>
-						<label class="label">车牌号：</label>
-						<input type="text" class="search-input" name="carNumber">
-					</td>
-					<td class="taskLocation">
-						<label class="label">任务所在位置</label>
-						<select name="isArrange">
-                        	<option value="">全部</option>
-                        	<option value="0">次要任务库</option>
-                        	<option value="1">优先任务库</option>
-                        </select>
-					</td>
-					<td class="successTask hide">
-						<label class="label">任&nbsp;务&nbsp;类&nbsp;型：</label>
-						<select name="entrust">
-                        	<option value="">全部</option>
-                        	<option value="all">无需定位需找+拖</option>
-                        	<option value="trace">无定位只需找车</option>
-                        	<option value="recycle">有定位只需拖车</option>
-                        </select>
-					</td>
-					<td class="successTask hide">
-						<label class="label">任务状态：</label>
-						<select name="state" id="selectCheck">
-							<option value="">全部</option>
-                            <option value="tracing">线索未提交</option>
-                            <option value="clueChecking">线索审核中</option>
-                        </select>
-					</td>
-					<td>
-						<input type="submit" value="查询" class="button search-button">
-					</td>
-				</tr>
-				<tr class="successTask new-style hide">
-					<td colspan="2">
-						<label class="label">残&nbsp;&nbsp;&nbsp;值：</label>
-						<input type="text" class="search-input OnlyPrice" id="minprice" name="minprice">   至   
-						<input type="text" class="search-input OnlyPrice public_price" id="maxprice" name="maxprice">   
-					</td>
-					<td>
-						<label class="label">车辆归属地：</label>
-						<select name="location">
-							<option value="">全部</option>
-                        	<option value="京">京</option>
-	                        <option value="粤">粤</option>
-	                        <option value="皖">皖</option>
-	                        <option value="闽">闽</option>
-	                        <option value="甘">甘</option>
-	                        <option value="桂">桂</option>
-	                        <option value="贵">贵</option>
-	                        <option value="琼">琼</option>
-	                        <option value="冀">冀</option>
-	                        <option value="豫">豫</option>
-	                        <option value="黑">黑</option>
-	                        <option value="鄂">鄂</option>
-	                        <option value="湘">湘</option>
-	                        <option value="吉">吉</option>
-	                        <option value="苏">苏</option>
-	                        <option value="赣">赣</option>
-	                        <option value="辽">辽</option>
-	                        <option value="蒙">蒙</option>
-	                        <option value="宁">宁</option>
-	                        <option value="青">青</option>
-	                        <option value="鲁">鲁</option>
-	                        <option value="晋">晋</option>
-	                        <option value="陕">陕</option>
-	                        <option value="陕">陕</option>
-	                        <option value="沪">沪</option>
-	                        <option value="川">川</option>
-	                        <option value="津">津</option>
-	                        <option value="藏">藏</option>
-	                        <option value="新">新</option>
-	                        <option value="云">云</option>
-	                        <option value="浙">浙</option>
-	                        <option value="渝">渝</option>
-	                        <option value="港">港</option>
-	                        <option value="澳">澳</option>
-	                        <option value="台">台</option>
-                        </select>
-					</td>
-					<td colspan="3">
-						<label class="label">录入时间：</label>
-						<input type="text" class="search-input hand" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">   至   
-						<input type="text" class="search-input hand" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">   
-					</td>
-				</tr>
-				<tr class="successTask hide">
-					<td colspan="6">
-						<a class="button search-button allrepair" href="javascript:;">一键信息修复更新</a>
-						<a class="button search-button distributeTask" href="javascript:;">批量分配</a>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
-    <div class="data-container">
-        <table class="dataShow">
-            <thead>
-                <tr>
-                    <th width="4%">序号</th>
-                    <th width="2%"><input type="checkbox" id="checkAll" /></th>
-                    <th width="10%">任务号</th>
-                    <th width="10%">车牌号</th>
-                    <th width="8%">品牌</th>
-                    <th width="6%">车系</th>
-                    <th width="10%">任务类型</th>
-                    <th width="10%">债权方</th>
-                    <th class="textCon" width="10%">匹配成功时间</th>
-                    <th width="7%">任务状态</th>
-                    <th width="10%">操作</th>
-                </tr>
-            </thead>
-            <tbody id="task_list_container">
-            </tbody>
-        </table>
-        <div class="page-box pagination" id="page_container"></div>
-    </div>
-=======
   <div class="search-container">
     <form id="task-list-form">
       <table class="common_query textLeft search-content">
@@ -283,7 +143,6 @@
     </table>
     <div class="page-box pagination" id="page_container"></div>
   </div>
->>>>>>> 6f917a187c9b8378fb93aa82b44c29c578831f08
 </div>
 <script type="text/template" id="taskList_content_template">
   {{ each list item index }}
@@ -296,10 +155,11 @@
     <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.carNumber}}</td>
     <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.carBrand}}</td>
     <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.carSeries}}</td>
-    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{menuState(item.entrust)}}</td>
     <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.upstreamName}}</td>
     <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{if passState === '6'}}{{item.matchAt}}{{else}}{{item.createAt}}{{/if}}</td>
     <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{menuState(item.state)}}</td>
+    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.city}}</td>
+    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.occurAt}}</td>
     <td>
       <a data-id="{{item.id}}" class="taskList-detail button">详情</a>
     </td>

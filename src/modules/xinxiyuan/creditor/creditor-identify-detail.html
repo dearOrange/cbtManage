@@ -145,14 +145,9 @@
 				</dl>
 			</div>
 		</div>
-		{{if data.state === "new"}}
-		<input type="submit" value="初筛" class="button search-button screening" style="width:100px;height:30px;margin:30px;">
-		{{/if}}
-
-		{{if data.state === "sifte"}}
+		{{if data.state === "sifte" || data.state === "wait"}}
 		<input type="submit" value="核验" class="button search-button identify" style="width:100px;height:30px;margin:30px;">
 		{{/if}}
-
 	</div>
 </script>
 <script type="text/template" id="admin_creditorIdentify_template">
