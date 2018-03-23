@@ -107,7 +107,6 @@ define(function(require, exports, module) {
               var curUrl = item.attr('data-url');
               $.each(returnData.data, function(i, temp) {
                 var tempUrl = jh.utils.getCountNewByType(temp.type);
-                console.log(curUrl, tempUrl);
                 if (curUrl === tempUrl) {
                   var supNum = '<sup>' + temp.num + '</sup>';
                   item.children('sup').remove().end().append(supNum);

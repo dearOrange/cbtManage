@@ -10,7 +10,6 @@ define(function(require, exports, module) {
     var _this = this;
     _this.form = $('#task-list-form');
 
-
     this.init = function() {
       this.initContent();
       this.initTaskTotalCount();
@@ -28,11 +27,6 @@ define(function(require, exports, module) {
         isSearch: isSearch,
         callback: function(data) {
           data.passState = $('#state').val();
-          if (data.passState == '1') {
-            $('.distributeTask').css('display', '');
-          } else {
-            $('.distributeTask').css('display', 'none');
-          }
           return jh.utils.template('taskList_content_template', data);
         }
       });
@@ -98,109 +92,73 @@ define(function(require, exports, module) {
           jh.utils.load("/src/modules/xinxiyuan/task/task-list-detailFinished", {
             id: id
           });
-        }else if(state === '7'){
+        } else if (state === '7') {
           jh.utils.load("/src/modules/xinxiyuan/task/task-list-detailNewTask", {
             id: id
           });
         }
       });
 
-      //切换状态
-      $('body').off('click', '.taskState').on('click', '.taskState', function(event, param) {
-        var mine = $(this);
-        var state = mine.data('state');
-        $(this).addClass("active").siblings().removeClass("active");
+      //任务状态tab切换
+      $('body').off('click', '#taskState>li').on('click', '#taskState>li', function(event, param) {
+        //当前元素、任务状态state、批量匹配容器
+        //表头：时间、匹配模板名称、匹配表单容器
+        var m = $(this),
+          state = m.data('state'),
+          batchOperater = $('#batchOperater'),
+          batchDistribute = $('#batchDistribute');
+        var textCon = $('.textCon'),
+          matchTemplateName = '',
+          matchForm = $('#match-container');
+        m.addClass('active').siblings().removeClass('active'); //tab状态切换
+        /**
+         * 根据不同的任务状态state显示不同匹配表单
+         */
         if (state === 'matched') {
-          $('.successTask').addClass('hide');
-          $('.taskLocation').removeClass('hide');
-          $('.textCon').html('匹配成功时间');
-          $('.newTaskTd').addClass('hide').prev().removeClass('hide');
-        }else if(state === 'newTask'){
-          $('.successTask').addClass('hide');
-          $('.newTaskTd').removeClass('hide').prev().addClass('hide').siblings('.taskLocation').addClass('hide');
+          batchOperater.addClass('hide');
+          textCon.text('匹配成功时间');
+          matchTemplateName = 'matchSuccess-template';
+        } else if (state === 'newTask') {
+          batchOperater.addClass('hide');
+          matchTemplateName = 'unAudit-template';
         } else {
-          $('.newTaskTd').addClass('hide');
-          $('.successTask').removeClass('hide');
-          $('.taskLocation').addClass('hide');
-          $('.textCon').html('任务发布时间');
+          batchOperater.removeClass('hide');
+          textCon.text('任务发布时间');
+          matchTemplateName = 'otherMatch-template';
         }
-        var arr = [{
-          val: 'unarrange',
-          name: "渠道经理未分配",
-          flag: 'trcaing'
-        }, {
-          val: 'tracing',
-          name: "线索未提交",
-          flag: 'trcaing'
-        }, {
-          val: 'clueChecking',
-          name: "线索审核中",
-          flag: ''
-        }, {
-          val: 'unvaluation',
-          name: "待估价",
-          flag: 'trcaing'
-        }, {
-          val: 'unconfirmed',
-          name: "待债权方确认",
-          flag: 'trcaing'
-        }, {
-          val: 'voucherChecking',
-          name: "凭证审核中",
-          flag: 'trcaing'
-        }, {
-          val: 'voucherInvalid',
-          name: "凭证审核未通过",
-          flag: 'trcaing'
-        }, {
-          val: 'hunterUnreceive',
-          name: "捕头未接受",
-          flag: 'trcaing'
-        }, {
-          val: 'hunterReceive',
-          name: "捕头已接受",
-          flag: 'trcaing'
-        }, {
-          val: 'platReceive',
-          name: "平台已收车",
-          flag: ''
-        }, {
-          val: 'upstreamReceive',
-          name: "债权方已收车",
-          flag: ''
-        }, {
-          val: 'closed',
-          name: "已失效",
-          flag: ''
-        }];
 
-        var optionArr = [];
-        for (var i = 0; i < arr.length; i++) {
-          var item = arr[i];
-          if (state === 'all') {
-            optionArr.push(item);
-            continue;
-          }
-          if (item.flag.indexOf(state) !== -1) {
-            optionArr.push(item);
-          }
+        if (state === '1') {
+          batchDistribute.removeClass('hide');
         }
+
+        var locationArr = ['京','粤','皖','闽','甘','桂','贵','琼','冀','豫','黑','鄂','湘','吉','苏','赣','辽','蒙','宁','青','鲁','晋','陕','陕','沪','川','津','藏','新','云','浙','渝','港','澳','台'];
+
+        var matchFormStr = jh.utils.template(matchTemplateName, {locationArr}); //拼接匹配表单模板
+        matchForm.html(matchFormStr); //插入dom
+
+        //任务状态数组
+        var taskStateKeyArr = ['unarrange', 'tracing', 'clueChecking', 'unvaluation', 'unconfirmed', 'voucherChecking', 'voucherInvalid', 'hunterUnreceive', 'hunterReceive', 'platReceive', 'upstreamReceive', 'closed'];
+        var taskStateValueArr = ['渠道经理未分配', '线索未提交', '线索审核中', '待估价', '待债权方确认', '凭证审核中', '凭证审核未通过', '捕头未接受', '捕头已接受', '平台已收车', '债权方已收车', '已失效'];
+
+
         var str = '<option value="">全部</option>';
-        for (var j = 0; j < optionArr.length; j++) {
-          var temp = optionArr[j];
-          str += '<option value="' + temp.val + '">' + temp.name + '</option>';
+        for (var i = 0, num = taskStateKeyArr.length; i < num; i++) {
+          var key = taskStateKeyArr[i];
+          var value = taskStateValueArr[i];
+          str += '<option value="' + key + '">' + value + '</option>';
         }
+        //任务状态
         $("#selectCheck").html(str);
-
-
+        //美化select 隐藏搜索框
         $('select').select2({
           minimumResultsForSearch: Infinity
         });
-        $('#state').val(mine.data('value'))
-        if (param && param === 'autoClick') {
 
+        $('#state').val(m.data('value'))
+        if (param && param === 'autoClick') {
+          //自动触发则不进行处理
         } else {
-          _this.initContent('tab');
+          _this.initContent('tab'); //手动点击则进行列表查询
         }
 
       })

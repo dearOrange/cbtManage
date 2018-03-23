@@ -1822,7 +1822,7 @@ define(function(require, exports, module) {
           urlStr = '/src/modules/yunying/task/task-audit';
           break;
         case '601':
-          urlStr = '/src/modules/xinxiyuan/creditor/creditor-identify';
+          urlStr = '/src/modules/logistics/logistics-list';
           break;
       }
       return urlStr;

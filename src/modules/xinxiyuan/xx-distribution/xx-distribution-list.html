@@ -4,7 +4,7 @@
 			<table class="common_query textLeft search-content">
 				<tr class="new-style">
 					<td>
-						<label class="label">车牌号：</label>
+						<label class="label">车&nbsp;牌&nbsp;号&nbsp;：</label>
 						<input type="text" class="search-input" name="carNumber" style="width:60%;">
 					</td>
 					<td>
@@ -25,9 +25,9 @@
 				</tr>
 				<tr class="new-style">
 					<td colspan="5">
-                        <label class="label">发布任务时间：</label>
-                        <input type="text" class="search-input hand" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">   至   
-                        <input type="text" class="search-input hand" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">   
+                        <label class="label">发布时间：</label>
+                        <input type="text" class="search-input hand begin-input" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">   至   
+                        <input type="text" class="search-input hand end-input" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">   
                     </td>
 				</tr>
 				<tr>
