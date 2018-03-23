@@ -1,118 +1,115 @@
 <div class="dataContent">
-    <div class="search-container">
-    	<form id="distribution-list-form">
-			<table class="common_query textLeft search-content">
-				<tr class="new-style">
-					<td>
-						<label class="label">车&nbsp;牌&nbsp;号&nbsp;：</label>
-						<input type="text" class="search-input" name="carNumber" style="width:60%;">
-					</td>
-					<td>
-                        <label class="label">品牌：</label>
-                        <input type="text" class="search-input" name="carBrand" style="width:60%;">
-                    </td>
-                    <td>
-                        <label class="label">违章地区：</label>
-                        <input type="text" class="search-input" name="city" style="width:60%;">
-                    </td>
-					<td>
-						<label class="label">债权方：</label>
-						<input type="text" class="search-input" name="companyName" style="width:60%;">
-					</td>
-					<td>
-						<input type="submit" value="查询" class="button search-button">
-					</td>
-				</tr>
-				<tr class="new-style">
-					<td colspan="5">
-                        <label class="label">发布时间：</label>
-                        <input type="text" class="search-input hand begin-input" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">   至   
-                        <input type="text" class="search-input hand end-input" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">   
-                    </td>
-				</tr>
-				<tr>
-					<td>
-						<input type="button" class="button style-btn mt10" id="distributeTask" value="批量分配">
-						<input type="button" class="button style-btn mt10" id="allrepair" value="批量信息修复">
-					</td>
-				</tr>
-			</table>
-		</form>
-    </div>
-    <div class="data-container">
-        <table class="dataShow">
-            <thead>
-                <tr>
-                    <th width="4%">序号</th>
-                    <th width="3%"><input type="checkbox" id="checkAll"/></th>
-                    <th width="8%">车牌号</th>
-                    <th width="10%">品牌</th>
-                    <th width="10%">任务类型</th>
-                    <th width="18%">债权方</th>
-                    <th width="8%">运营经理</th>
-                    <th width="10%">发布任务时间</th>
-                    <th width="10%">最新违章地区</th>
-                    <th width="18%">操作</th>
-                </tr>
-            </thead>
-            <tbody id="admin-xXDistributionList-container"></tbody>
-        </table>
-        <div class="page-box pagination" id="page_container"></div>
-    </div>
-
+  <div class="search-container">
+    <form id="distribution-list-form">
+      <table class="common_query textLeft search-content">
+        <tr class="new-style">
+          <td>
+            <label class="label">车&nbsp;牌&nbsp;号&nbsp;：</label>
+            <input type="text" class="search-input" name="carNumber" style="width:60%;">
+          </td>
+          <td>
+            <label class="label">品牌：</label>
+            <input type="text" class="search-input" name="carBrand" style="width:60%;">
+          </td>
+          <td>
+            <label class="label">违章地区：</label>
+            <input type="text" class="search-input" name="city" style="width:60%;">
+          </td>
+          <td>
+            <label class="label">债权方：</label>
+            <input type="text" class="search-input" name="companyName" style="width:60%;">
+          </td>
+          <td>
+            <input type="submit" value="查询" class="button search-button">
+          </td>
+        </tr>
+        <tr class="new-style">
+          <td colspan="5">
+            <label class="label">发布时间：</label>
+            <input type="text" class="search-input hand begin-input" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
+            <input type="text" class="search-input hand end-input" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="button" class="button style-btn mt10" id="distributeTask" value="批量分配">
+            <input type="button" class="button style-btn mt10" id="allrepair" value="批量信息修复">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div class="data-container">
+    <table class="dataShow">
+      <thead>
+        <tr>
+          <th width="4%">序号</th>
+          <th width="3%">
+            <input type="checkbox" id="checkAll" />
+          </th>
+          <th width="8%">车牌号</th>
+          <th width="10%">品牌</th>
+          <th width="10%">任务类型</th>
+          <th width="18%">债权方</th>
+          <th width="8%">运营经理</th>
+          <th width="10%">发布任务时间</th>
+          <th width="10%">最新违章地区</th>
+          <th width="18%">操作</th>
+        </tr>
+      </thead>
+      <tbody id="admin-xXDistributionList-container"></tbody>
+    </table>
+    <div class="page-box pagination" id="page_container"></div>
+  </div>
 </div>
 <script type="text/template" id="admin-xXDistributionList-template">
-    {{ each list item index }}
-    <tr>
-        <td>{{index+1}}</td>
-        <td>
-            <input type="checkbox" value="{{item.id}}" data-id="{{item.id}}"/>
-        </td>
-        <td class="showTr" data-info="{{item}}">{{item.carNumber}}</td>
-        <td class="showTr" data-info="{{item}}">{{item.carBrand}}</td>
-        <td class="showTr" data-info="{{item}}">{{menuState(item.entrust)}}</td>
-        <td class="showTr" data-info="{{item}}">{{item.upstreamName}}</td>
-        <td class="showTr" data-info="{{item}}">{{item.businessManager}}</td>
-        <td class="showTr" data-info="{{item}}">{{item.createAt}}</td>
-        <td class="showTr" data-info="{{item}}">{{item.city}}</td>
-        <td>
-            <a data-id="{{item.id}}" class="detail button">详情</a>
-            <a data-id="{{item.id}}" class="distribution oneStyle button">分配</a>
-        </td>
-    </tr>
-    {{/each}}
+  {{ each list item index }}
+  <tr>
+    <td>{{index+1}}</td>
+    <td>
+      <input type="checkbox" value="{{item.id}}" data-id="{{item.id}}" />
+    </td>
+    <td class="showTr" data-info="{{item}}" data-repeat="{{item.isRepeat}}">{{if item.isRepeat ===1}}<span class="repeat">重</span>{{/if}} {{item.carNumber}}</td>
+    <td class="showTr" data-info="{{item}}">{{item.carBrand}}</td>
+    <td class="showTr" data-info="{{item}}">{{menuState(item.entrust)}}</td>
+    <td class="showTr" data-info="{{item}}">{{item.upstreamName}}</td>
+    <td class="showTr" data-info="{{item}}">{{item.businessManager}}</td>
+    <td class="showTr" data-info="{{item}}">{{item.createAt}}</td>
+    <td class="showTr" data-info="{{item}}">{{item.city}}</td>
+    <td>
+      <a data-id="{{item.id}}" class="detail button">详情</a>
+      <a data-id="{{item.id}}" class="distribution oneStyle button">分配</a>
+    </td>
+  </tr>
+  {{/each}}
 </script>
-
 <script type="text/template" id="searchIllegalInfo-template">
-    <div>
-        <table>
-            <thead>
-                <th>序号</th>
-                <th>信息描述</th>
-                <th>违章地点</th>
-                <th>违章城市</th>
-                <th>发生时间</th>
-            </thead>
-            <tbody id="search-illegalList-container">
-            	{{each list item index}}
-			    <tr>
-			        <td>{{index+1}}</td>
-			        <td>{{item.desc}}</td>
-			        <td>{{item.site}}</td>
-			        <td>{{item.city}}</td>
-			        <td>{{item.occurAt}}</td>
-			    </tr>
-			    {{/each}}
-            </tbody>
-        </table>
-    </div>
+  <div>
+    <table>
+      <thead>
+        <th>序号</th>
+        <th>信息描述</th>
+        <th>违章地点</th>
+        <th>违章城市</th>
+        <th>发生时间</th>
+      </thead>
+      <tbody id="search-illegalList-container">
+        {{each list item index}}
+        <tr>
+          <td>{{index+1}}</td>
+          <td>{{item.desc}}</td>
+          <td>{{item.site}}</td>
+          <td>{{item.city}}</td>
+          <td>{{item.occurAt}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 </script>
-
-
-
 <script type="text/javascript">
 seajs.use('modules/xinxiyuan/xx-distribution/xx-distribution-list', function(XXDistributionList) {
-    var xXDistributionList = new XXDistributionList();
-    xXDistributionList.init();
+  var xXDistributionList = new XXDistributionList();
+  xXDistributionList.init();
 });
 </script>

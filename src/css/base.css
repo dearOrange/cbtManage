@@ -1122,6 +1122,13 @@ label.error {
     word-break: break-all;
     word-wrap: break-word
 }
+.dataShow .repeat{
+    padding: 1px 4px;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: red;
+    color: #fff;
+}
 
 .modifyClassifyName {
     width: 460px;
