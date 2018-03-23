@@ -21,7 +21,7 @@ define(function(require, exports, module) {
   require('common/validator'); //表单验证扩展
   require('plugin/datePicker/WdatePicker'); //时间插件
   require('plugin/webuploader/webuploader.min'); //上传模块
-       
+
   require('plugin/select2/select2.min');
   require('lib/cookie/jquery.cookie');
   require('plugin/scrollbar/scrollbar'); //scrollbar
@@ -1789,6 +1789,45 @@ define(function(require, exports, module) {
       return state;
     }
     tammy.utils.menuState = menuState;
+  })();
+  (function() {
+    function getCountNewByType(type) {
+      var urlStr = '';
+      switch (type) {
+        case '203':
+          urlStr = '/src/modules/xinxiyuan/clue/clue-manage';
+          break;
+        case '502':
+          urlStr = '/src/modules/sendMoney/sendMoney-list';
+          break;
+        case '204':
+          urlStr = '/src/modules/xinxiyuan/restoration/restoration-list';
+          break;
+        case '206':
+          urlStr = '/src/modules/xinxiyuan/xx-entrustment/xx-entrustment-list';
+          break;
+        case '207':
+          urlStr = '/src/modules/xinxiyuan/creditor/creditor-identify';
+          break;
+        case '201':
+          urlStr = '/src/modules/xinxiyuan/xx-distribution/xx-distribution-list';
+          break;
+        case '205':
+          urlStr = '/src/modules/xinxiyuan/evidence/evidence-audit';
+          break;
+        case '401':
+          urlStr = '/src/modules/qudao/qd-distribution/qd-distribution-list';
+          break;
+        case '301':
+          urlStr = '/src/modules/yunying/task/task-audit';
+          break;
+        case '601':
+          urlStr = '/src/modules/xinxiyuan/creditor/creditor-identify';
+          break;
+      }
+      return urlStr;
+    }
+    tammy.utils.getCountNewByType = getCountNewByType;
   })();
   (function() {
     var officerState = function(state) {

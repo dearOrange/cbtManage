@@ -20,8 +20,9 @@ define(function(require, exports, module) {
       $('#usernameText').text(username);
       $('#index_logo').attr('href', ROOTURL);
 
-      //启动未读消息
+      //启动未读消息和数量统计
       _this.initUnReadMessage();
+      _this.requestCountNew();
 
       //第一次加载页面时请求未读消息
       _this.requestUnReadMessage();
@@ -71,13 +72,8 @@ define(function(require, exports, module) {
         //每15秒请求一次未读消息
         _this.requestUnReadMessage();
 
-        //财务账号则请求提现列表
-        if (_this.roleType === 'finance') {
-          _this.requestNewMoneyNum();
-        } else if (_this.roleType === 'info' || _this.roleType === 'infoauditor') {
-          //信息则请求线索数量
-          _this.requestNewTraceNum();
-        }
+        _this.requestCountNew();
+
       }, _this.requestDate);
     };
 
@@ -99,35 +95,24 @@ define(function(require, exports, module) {
       });
     };
 
-    //线索管理菜单-新情报数量展示
-    this.requestNewTraceNum = function() {
+    this.requestCountNew = function() {
       jh.utils.ajax.send({
-        url: '/trace/countNew',
+        url: '/message/countNew',
         done: function(returnData) {
           var list = $('.first-menu-item');
-          if (returnData.data.num > 0) {
-            $(list).each(function() {
-              if ($(this).attr('data-url') === '/src/modules/xinxiyuan/clue/clue-manage') {
-                var supNum = '<sup>' + returnData.data.num + '</sup>';
-                $(this).parent().find('sup').remove().end().append(supNum);
-              }
-            });
-          }
-        }
-      });
-    };
-    //提现菜单-数量展示
-    this.requestNewMoneyNum = function() {
-      jh.utils.ajax.send({
-        url: '/withdraw/countNew',
-        done: function(returnData) {
-          var list = $('.first-menu-item');
-          if (returnData.data.num > 0) {
-            $(list).each(function() {
-              if ($(this).attr('data-url') === '/src/modules/sendMoney/sendMoney-list') {
-                var supNumMoney = '<sup>' + returnData.data.num + '</sup>';
-                $(this).parent().find('sup').remove().end().append(supNumMoney);
-              }
+          if (returnData.data.length > 0) {
+            //所有菜单循环
+            $(list).each(function(index, item) {
+              item = $(item);
+              var curUrl = item.attr('data-url');
+              $.each(returnData.data, function(i, temp) {
+                var tempUrl = jh.utils.getCountNewByType(temp.type);
+                console.log(curUrl, tempUrl);
+                if (curUrl === tempUrl) {
+                  var supNum = '<sup>' + temp.num + '</sup>';
+                  item.parent().find('sup').remove().end().append(supNum);
+                }
+              });
             });
           }
         }
