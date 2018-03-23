@@ -828,15 +828,12 @@ input, select, textarea {
 	position: relative;
 }
 #leftMenu-box li sup{
-	position: absolute;
-	top: 11px;
-	right: 84px;
 	color: #fff;
 	height: 14px;
 	line-height: 14px;
 	background-color: red;
-	padding: 0 3px;
-	border-radius: 10px;
+	padding: 0 5px;
+	border-radius: 50%;
 }
 
 /*线人列表*/
