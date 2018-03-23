@@ -105,6 +105,7 @@ define(function(require, exports, module) {
         //表头：时间、匹配模板名称、匹配表单容器
         var m = $(this),
           state = m.data('state'),
+          stateValue = m.data('value'),
           batchOperater = $('#batchOperater'),
           batchDistribute = $('#batchDistribute');
         var textCon = $('.textCon'),
@@ -126,8 +127,7 @@ define(function(require, exports, module) {
           textCon.text('任务发布时间');
           matchTemplateName = 'otherMatch-template';
         }
-
-        if (state === '1') {
+        if (stateValue === 1) {
           batchDistribute.removeClass('hide');
         }
 
