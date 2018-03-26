@@ -68,7 +68,7 @@
           <label>车辆残值估算:</label>
           {{if data.estimatedMaxPrice && data.estimatedMinPrice}}
           <span>{{data.carPrice}}</span> {{else}}
-          <input type="text" name="carPrice" maxlength="11" class="OnlyPrice" required="" id="salvage" value="{{data.carPrice}}" /> 
+          <input type="text" name="carPrice" maxlength="11" class="OnlyPrice required" id="salvage" value="{{data.carPrice}}" /> 
           {{/if}}
         </div>
         <div>
@@ -76,34 +76,34 @@
           {{if data.estimatedMaxPrice && data.estimatedMinPrice}}
           <span>{{data.estimatedMinPrice}}至</span><span>{{data.estimatedMaxPrice}}</span> 
           {{else}}
-          <input type="text" maxlength="11" class="OnlyPrice" name="estimatedMinPrice" required="" id="minMoney" value="{{data.estimatedMinPrice}}" />至
-          <input type="text" name="estimatedMaxPrice" required="" class="OnlyPrice" maxlength="11" id="maxMoney" value="{{data.estimatedMaxPrice}}" /> 
+          <input type="text" name="estimatedMinPrice" class="OnlyPrice required" maxlength="11" id="minMoney" value="{{data.estimatedMinPrice}}" />至
+          <input type="text" name="estimatedMaxPrice" class="OnlyPrice required" maxlength="11" id="maxMoney" value="{{data.estimatedMaxPrice}}" /> 
           {{/if}}
         </div>
         {{if data.estimatedMaxPrice && data.estimatedMinPrice}}
         <p>确认费用</p>
         <div>
-          <label>最终处置费用:</label>
-          <input type="text require" name="finalPrice" maxlength="11" class="OnlyPrice" id="finalPrice" value="" required="" />
-        </div>
-        <div>
-          <label>其中受托人费用:</label>
-          <input type="text require" name="baileePrice" maxlength="11" class="OnlyPrice" id="baileePrice" value="" required="" />
-        </div>
-        <div>
-          <label>资产查找费:</label>
-          <input type="text require" name="assetPrice" maxlength="11" class="OnlyPrice" id="assetPrice" value="{{if data.infoMoneyStatus === 1}}{{data.assetPrice}}{{/if}}" {{if data.infoMoneyStatus===1 }}readonly="readonly"{{/if}} required="" />
-        </div>
-        <div>
-          <label>第三方处置清收费:</label>
-          <input type="text require" name="thirdpartyPrice" maxlength="11" class="OnlyPrice" id="thirdpartyPrice" value="" required="" />
-        </div>
-        <div>
           <label>费用类型:</label>
-          <select name="entrust">
+          <select name="entrust" id="unconfirmedType" class="ml10">
             <option value="all">找车并拖车</option>
             <option value="trace">只找车</option>
           </select>
+        </div>
+        <div>
+          <label>最终处置费用:</label>
+          <input type="text" name="finalPrice" maxlength="11" class="OnlyPrice required" id="finalPrice" value=""/>
+        </div>
+        <div>
+          <label>其中受托人费用:</label>
+          <input type="text" name="baileePrice" maxlength="11" class="OnlyPrice required" id="baileePrice" value=""/>
+        </div>
+        <div>
+          <label>资产查找费:</label>
+          <input type="text" name="assetPrice" maxlength="11" class="OnlyPrice required" id="assetPrice" value="{{if data.infoMoneyStatus === 1}}{{data.assetPrice}}{{/if}}" {{if data.infoMoneyStatus===1 }}readonly="readonly"{{/if}}/>
+        </div>
+        <div>
+          <label>第三方处置清收费:</label>
+          <input type="text" name="thirdpartyPrice" maxlength="11" class="OnlyPrice required" id="thirdpartyPrice" value=""/>
         </div>
         <input type="submit" value="确认" class="button search-button surePrice" style="margin-bottom:40px;width:150px;height:30px;"> 
         {{else}}
@@ -122,27 +122,27 @@
         </div>
         <p>确认费用</p>
         <div>
-          <label>最终处置费用:</label>
-          <input type="text require" name="finalPrice" maxlength="11" class="OnlyPrice finalPrice" id="finalPrice" value="{{data.finalPrice}}" required="" />
-        </div>
-        <div>
-          <label>其中受托人费用:</label>
-          <input type="text require" name="baileePrice" maxlength="11" class="OnlyPrice baileePrice" id="baileePrice" value="{{if data.finalPrice}}{{baileePrice}}{{/if}}" required="" />
-        </div>
-        <div>
-          <label>资产查找费:</label>
-          <input type="text require" name="assetPrice" maxlength="11" class="OnlyPrice assetPrice" id="assetPrice" value="{{data.assetPrice}}" required="" />
-        </div>
-        <div>
-          <label>第三方处置清收费:</label>
-          <input type="text require" name="thirdpartyPrice" maxlength="11" class="OnlyPrice thirdpartyPrice" id="thirdpartyPrice" value="{{data.thirdpartyPrice}}" required="" />
-        </div>
-        <div>
           <label>费用类型:</label>
-          <select name="entrust">
+          <select name="entrust" id="unconfirmedType" class="ml10">
             <option value="all">找车并拖车</option>
             <option value="trace">只找车</option>
           </select>
+        </div>
+        <div>
+          <label>最终处置费用:</label>
+          <input type="text" name="finalPrice" maxlength="11" class="OnlyPrice finalPrice required" id="finalPrice" value="{{data.finalPrice}}"/>
+        </div>
+        <div>
+          <label>其中受托人费用:</label>
+          <input type="text" name="baileePrice" maxlength="11" class="OnlyPrice baileePrice required" id="baileePrice" value="{{if data.finalPrice}}{{baileePrice}}{{/if}}"/>
+        </div>
+        <div>
+          <label>资产查找费:</label>
+          <input type="text" name="assetPrice" maxlength="11" class="OnlyPrice assetPrice required" id="assetPrice" value="{{data.assetPrice}}"/>
+        </div>
+        <div>
+          <label>第三方处置清收费:</label>
+          <input type="text" name="thirdpartyPrice" maxlength="11" class="OnlyPrice thirdpartyPrice required" id="thirdpartyPrice" value="{{data.thirdpartyPrice}}"/>
         </div>
         <input type="submit" value="确认" class="button search-button surePrice" style="margin-bottom:40px;width:150px;height:30px;"> 
         {{/if}}

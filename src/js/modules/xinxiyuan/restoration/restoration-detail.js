@@ -19,42 +19,61 @@ define(function(require, exports, module) {
       this.registerEvent();
     };
     this.registerEvent = function() {
-
+      //费用类型
+      $('body').off('change', '#unconfirmedType').on('change', '#unconfirmedType', function() {
+        var me = $(this);
+        var type = me.val(), thirdpartyPrice = $('#thirdpartyPrice');
+        if(type === 'all'){
+          thirdpartyPrice.addClass('required').parent().removeClass('hide');
+        }else{
+          thirdpartyPrice.removeClass('required').parent().addClass('hide');
+        }
+      });
+      //其中受托人费用
       $('body').off('blur', '#baileePrice').on('blur', '#baileePrice', function() {
         var me = $(this);
-        _this.num = parseFloat($.trim($('#finalPrice').val()));
-        if(isNaN(_this.num)){
+        _this.num = parseFloat($.trim($('#finalPrice').val()));//总处置费
+        if (isNaN(_this.num)) {
           return false;
         }
-        if (_this.num === '') {
+        if (!_this.num) {
           me.val('');
         } else {
-          me.val((_this.num * 0.1).toFixed(2));
+          if(!me.val()){
+            me.val((_this.num * 0.1).toFixed(2));//如果本身已经填写过费用，则不再重新计算，以填写的为准
+          }
         }
         _this.numPlus = _this.num - me.val();
       });
 
+      //资产查找费
       $('body').off('blur', '#assetPrice').on('blur', '#assetPrice', function() {
         var me = $(this);
         var menum = parseFloat($.trim(me.val()));
-        if(isNaN(menum)){
+        var thirdpartyPrice = $('#thirdpartyPrice');
+        if (isNaN(menum)) {
           return false;
         }
         if (menum === '') {
-          $('#thirdpartyPrice').val('');
+          thirdpartyPrice.val('');
         } else {
           if (menum < 0 || menum > _this.numPlus) {
             me.val('');
-            $('#thirdpartyPrice').val('');
+            thirdpartyPrice.val('');
           } else {
-            $('#thirdpartyPrice').val((_this.numPlus - menum).toFixed(2));
+            var resultPrice = _this.numPlus - menum;
+            if(isNaN(resultPrice) || resultPrice<0){
+              return false;
+            }
+            thirdpartyPrice.val((resultPrice).toFixed(2));
           }
         }
       });
+      //第三方处置清收费
       $('body').off('blur', '#thirdpartyPrice').on('blur', '#thirdpartyPrice', function() {
         var thme = $(this);
         var thmenum = parseFloat($.trim(thme.val()));
-        if(isNaN(thmenum)){
+        if (isNaN(thmenum)) {
           return false;
         }
         if (thmenum === '') {
@@ -70,7 +89,7 @@ define(function(require, exports, module) {
       });
     };
     this.initValidator = function() {
-      // 搜索
+      // 表单绑定
       jh.utils.validator.init({
         id: 'restoration-detail-form',
         submitHandler: function(form) {
