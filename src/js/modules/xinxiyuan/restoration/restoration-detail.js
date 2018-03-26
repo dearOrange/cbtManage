@@ -23,7 +23,7 @@ define(function(require, exports, module) {
       $('body').off('blur', '#baileePrice').on('blur', '#baileePrice', function() {
         var me = $(this);
         _this.num = parseFloat($.trim($('#finalPrice').val()));
-        if(isNan(_this.num)){
+        if(isNaN(_this.num)){
           return false;
         }
         if (_this.num === '') {
@@ -34,11 +34,10 @@ define(function(require, exports, module) {
         _this.numPlus = _this.num - me.val();
       });
 
-
       $('body').off('blur', '#assetPrice').on('blur', '#assetPrice', function() {
         var me = $(this);
         var menum = parseFloat($.trim(me.val()));
-        if(isNan(menum)){
+        if(isNaN(menum)){
           return false;
         }
         if (menum === '') {
@@ -51,12 +50,11 @@ define(function(require, exports, module) {
             $('#thirdpartyPrice').val((_this.numPlus - menum).toFixed(2));
           }
         }
-
       });
       $('body').off('blur', '#thirdpartyPrice').on('blur', '#thirdpartyPrice', function() {
         var thme = $(this);
         var thmenum = parseFloat($.trim(thme.val()));
-        if(isNan(thmenum)){
+        if(isNaN(thmenum)){
           return false;
         }
         if (thmenum === '') {
