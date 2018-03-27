@@ -30,6 +30,7 @@ define(function(require, exports, module) {
         $('#baileePrice').val('');
         if(type === 'all'){
           thirdpartyPrice.addClass('required').parent().removeClass('hide');
+          thirdpartyPrice.val('');
           _this.allType();
         }else{
           thirdpartyPrice.removeClass('required').parent().addClass('hide');
