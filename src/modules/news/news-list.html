@@ -1,68 +1,72 @@
 <div class="dataContent">
-	<div class="search-container">
-        <div class="pull-left mt25">
-            <a href="javascript:;" class="button style-btn admin-addNews"> 新增新闻公告</a>
-        </div>
-	</div>
-	<div class="data-container">
-		<table class="dataShow">
-			<thead>
-				<tr>
-					<th width="4%">序号</th>
-					<th width="3%"><input type="checkbox" id="checkAll"/></th>
-					<th width="12%">新闻公告标题</th>
-					<th width="12%">新闻公告内容</th>
-					<th width="8%">序号</th>
-					<th width="13%">发布时间</th>
-					<th width="10%">操作</th>
-				</tr>
-			</thead>
-			<tbody id="news_list_container">
-
-			</tbody>
-		</table>
-		<div class="page-box pagination" id="page_container"></div>
-	</div>
+  <div class="search-container">
+    <div class="pull-left mt25">
+      <a href="javascript:;" class="button style-btn admin-addNews"> 新增新闻公告</a>
+    </div>
+  </div>
+  <div class="data-container">
+    <table class="dataShow">
+      <thead>
+        <tr>
+          <th width="4%">序号</th>
+          <th width="3%">
+            <input type="checkbox" id="checkAll" />
+          </th>
+          <th width="12%">新闻公告标题</th>
+          <th width="12%">新闻公告内容</th>
+          <th width="8%">序号</th>
+          <th width="13%">发布时间</th>
+          <th width="10%">操作</th>
+        </tr>
+      </thead>
+      <tbody id="news_list_container">
+      </tbody>
+    </table>
+    <div class="page-box pagination" id="page_container"></div>
+  </div>
 </div>
-
 <script type="text/template" id="news-list-template">
-	{{ each list item index }}
-	<tr>
-		<td>{{index+1}}</td>
-		<td>
-            <input type="checkbox" data-id="{{item.id}}"/>
-        </td>
-		<td>{{item.title}}</td>
-		<td>{{item.content}}</td>
-		<td>{{item.order}}</td>
-		<td>{{item.createAt}}</td>
-		<td>
-			<a data-id="{{item.id}}" class="removeNews button">删除</a>
-		</td>
-	</tr>
-	{{/each}}
+  {{ each list item index }}
+  <tr>
+    <td>{{index+1}}</td>
+    <td>
+      <input type="checkbox" data-id="{{item.id}}" />
+    </td>
+    <td>{{item.title}}</td>
+    <td>{{item.content}}</td>
+    <td>{{item.order}}</td>
+    <td>{{item.createAt}}</td>
+    <td>
+      <a data-id="{{item.id}}" class="removeNews button">删除</a>
+    </td>
+  </tr>
+  {{/each}}
 </script>
 <script type="text/template" id="addnews-template">
-	<form id="addNews-form">
-		<div class="addnews">
-			<div>
-				<label>排序字段</label>
-				<input type="text" name="order" class="OnlyPrice" value="" />
-			</div>
-			<div>
-				<label>公告标题</label>
-				<input type="text" name="title" id="" value="" />
-			</div>
-			<div>
-				<label style="float:left;">公告内容</label>
-				<textarea name="content" style="float:left;resize: none; width:300px;height:50px;margin-left:10px;border:1px solid #ccc;border-radius: 3px;"></textarea>
-			</div>
-		</div>
-	</form>
+  <form id="addNews-form">
+    <div class="addnews">
+      <div>
+        <label>排序字段</label>
+        <input type="text" name="order" class="OnlyPrice" value="" />
+      </div>
+      <div>
+        <label>公告标题</label>
+        <input type="text" name="title" id="" value="" />
+      </div>
+      <div>
+        <label style="float:left;">公告内容</label>
+        <textarea name="content" style="float:left;resize: none; width:300px;height:50px;margin-left:10px;border:1px solid #ccc;border-radius: 3px;"></textarea>
+      </div>
+      <div>
+        <label>链接文章</label>
+        <select name="newsId" style="width: 300px;margin-top: 20px;" class="ml10">{{#select}}</select>
+      </div>
+    </div>
+  </form>
 </script>
 <script type="text/javascript">
-	seajs.use('modules/news/news-list', function(NewsList) {
-		var NewsList = new NewsList();
-		NewsList.init();
-	});
+seajs.use('modules/news/news-list', function(NewsList) {
+  var NewsList = new NewsList();
+  NewsList.init();
+});
 </script>

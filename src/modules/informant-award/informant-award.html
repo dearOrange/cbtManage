@@ -44,14 +44,15 @@
         <tr>
           <th width="4%">序号</th>
           <th width="8%">活动名称</th>
+          <th width="8%">活动奖励金类型</th>
           <th width="12%">开始时间</th>
           <th width="12%">停止时间</th>
           <th width="8%">活动奖励金</th>
           <th width="8%">关联活动奖励金</th>
           <th width="8%">首线索奖励金</th>
           <th class="clueMatch" width="8%">关联首线索奖励金</th>
-          <th width="8%">活动状态</th>
-          <th width="15%">操作</th>
+          <th width="6%">活动状态</th>
+          <th width="8%">操作</th>
         </tr>
       </thead>
       <tbody id="informant_award_container">
@@ -65,9 +66,10 @@
   <tr class="{{if item.isOver === 1}}bgc_grey{{/if}}">
     <td>{{index+1}}</td>
     <td>{{item.title}}</td>
+    <td>{{if item.bounty }}浮动{{else}}固定{{/if}}</td>
     <td>{{item.startAt}}</td>
     <td>{{item.endAt}}</td>
-    <td>{{item.activity}}</td>
+    <td>{{if item.bounty }}{{#showBounty(item.bounty)}}{{else}}{{item.activity}}{{/if}}</td>
     <td>{{item.referrerTrace}}</td>
     <td>{{item.firstTrace}}</td>
     <td>{{item.referrerFirstTrace}}</td>

@@ -25,6 +25,17 @@ define(function(require, exports, module) {
         data: jh.utils.formToJson(_this.form),
         isSearch: isSearch,
         callback: function(data) {
+          data.showBounty = function(jsons){
+            jsons = JSON.parse(jsons);
+            var str = '';
+            if(jsons.length>0){
+              for(var i =0,num =jsons.length;i<num;i++){
+                var item = jsons[i];
+                str += '<p><span>'+item.name+'</span>:'+item.min+'-'+item.max+'</p>';
+              }
+            }
+            return str;
+          };
           return jh.utils.template('informant-award-template', data);
         }
       });
