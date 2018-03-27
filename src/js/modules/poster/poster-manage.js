@@ -87,7 +87,6 @@ define(function(require, exports, module) {
                 id: 'poster_manage_addBannerForm',
                 submitHandler: function(form) {
                     var datas = jh.utils.formToJson(form);
-                    datas.type = '2';
                     if (!datas.url) {
                         jh.utils.confirm({
                             content: '请上传海报图片！'
@@ -103,7 +102,7 @@ define(function(require, exports, module) {
                             jh.utils.alert({
                                 content: '海报新增成功！',
                                 ok: function() {
-                                    _this.initContent();
+                                    window.location.reload();
                                     jh.utils.closeArt();
                                 }
                             });
