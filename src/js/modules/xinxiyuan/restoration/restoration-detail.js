@@ -125,7 +125,7 @@ define(function(require, exports, module) {
           returnData.baileePrice = (parseFloat(returnData.data.finalPrice) * 0.1).toFixed(2);
           var creditorStr = jh.utils.template('restoration_detail_template', returnData);
           $('.restorationContent').html(creditorStr);
-          console.log($('#unconfirmedType').val());
+          
           _this.baileePrice = returnData.baileePrice;
           _this.assetPrice = returnData.data.assetPrice;
           _this.num = parseFloat($.trim($('#finalPrice').val()));
