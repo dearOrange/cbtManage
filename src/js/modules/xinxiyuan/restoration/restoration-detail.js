@@ -9,6 +9,7 @@ define(function(require, exports, module) {
   function RestorationDetail() {
     var _this = this;
     _this.baileePrice = 0;
+    _this.assetPrice = 0;
     _this.numPlus = 0;
     _this.num = 0;
     _this.form = $('#restoration-detail-form');
@@ -16,76 +17,73 @@ define(function(require, exports, module) {
 
     this.init = function() {
       this.initContent();
+      this.allType();
       this.registerEvent();
     };
     this.registerEvent = function() {
+      
       //费用类型
       $('body').off('change', '#unconfirmedType').on('change', '#unconfirmedType', function() {
         var me = $(this);
         var type = me.val(), thirdpartyPrice = $('#thirdpartyPrice');
+        $('#finalPrice').val('');
+        $('#baileePrice').val('');
         if(type === 'all'){
           thirdpartyPrice.addClass('required').parent().removeClass('hide');
+          _this.allType();
         }else{
           thirdpartyPrice.removeClass('required').parent().addClass('hide');
+          thirdpartyPrice.val(0);
+          _this.traceType();
         }
       });
-      //其中受托人费用
-      $('body').off('blur', '#baileePrice').on('blur', '#baileePrice', function() {
-        var me = $(this);
-        _this.num = parseFloat($.trim($('#finalPrice').val()));//总处置费
+    };
+    this.allType = function() {
+      $('body').off('change', '#finalPrice').on('change', '#finalPrice', function() {
+        var me = $(this), baileePrice = $('#baileePrice');
+        _this.num = parseFloat($.trim(me.val()));//总处置费
         if (isNaN(_this.num)) {
           return false;
         }
         if (!_this.num) {
-          me.val('');
-        } else {
-          if(!me.val()){
-            me.val((_this.num * 0.1).toFixed(2));//如果本身已经填写过费用，则不再重新计算，以填写的为准
-          }
-        }
-        _this.numPlus = _this.num - me.val();
-      });
-
-      //资产查找费
-      $('body').off('blur', '#assetPrice').on('blur', '#assetPrice', function() {
-        var me = $(this);
-        var menum = parseFloat($.trim(me.val()));
-        var thirdpartyPrice = $('#thirdpartyPrice');
-        if (isNaN(menum)) {
+          baileePrice.val('');
           return false;
-        }
-        if (menum === '') {
-          thirdpartyPrice.val('');
         } else {
-          if (menum < 0 || menum > _this.numPlus) {
-            me.val('');
-            thirdpartyPrice.val('');
-          } else {
-            var resultPrice = _this.numPlus - menum;
-            if(isNaN(resultPrice) || resultPrice<0){
-              return false;
-            }
-            thirdpartyPrice.val((resultPrice).toFixed(2));
-          }
+          baileePrice.val((_this.num * 0.1).toFixed(2));//如果本身已经填写过费用，则不再重新计算，以填写的为准
+        }
+        _this.numPlus = _this.num - baileePrice.val();
+        var assetPrice = _this.numPlus - $('#assetPrice').val();
+        if(!_this.assetPrice) {
+          $('#assetPrice').change(function() {
+            $('#thirdpartyPrice').val(assetPrice);
+          })
+        } else {
+          $('#thirdpartyPrice').val(assetPrice);
         }
       });
-      //第三方处置清收费
-      $('body').off('blur', '#thirdpartyPrice').on('blur', '#thirdpartyPrice', function() {
-        var thme = $(this);
-        var thmenum = parseFloat($.trim(thme.val()));
-        if (isNaN(thmenum)) {
+    };
+    this.traceType = function() {
+      
+      $('body').off('change', '#finalPrice').on('change', '#finalPrice', function() {
+        var me = $(this), baileePrice = $('#baileePrice');
+        _this.num = parseFloat($.trim(me.val()));//总处置费
+        if (isNaN(_this.num)) {
           return false;
         }
-        if (thmenum === '') {
-          thme.val('');
+        if (!_this.num) {
+          baileePrice.val('');
+          return false;
         } else {
-          if (thmenum < 0 || thmenum > _this.numPlus) {
-            thme.val('');
+          if(!_this.assetPrice) {
+            baileePrice.val((_this.num * 0.1).toFixed(2));//如果本身已经填写过费用，则不再重新计算，以填写的为准
+            _this.numPlus = _this.num - baileePrice.val();
+            $('#assetPrice').val(_this.numPlus);
           } else {
-            $('#assetPrice').val((_this.numPlus - thme.val()).toFixed(2));
+            _this.numPlus = _this.num - $('#assetPrice').val();
+            baileePrice.val(_this.numPlus);
           }
         }
-
+        
       });
     };
     this.initValidator = function() {
@@ -127,9 +125,9 @@ define(function(require, exports, module) {
           returnData.baileePrice = (parseFloat(returnData.data.finalPrice) * 0.1).toFixed(2);
           var creditorStr = jh.utils.template('restoration_detail_template', returnData);
           $('.restorationContent').html(creditorStr);
-
+          console.log($('#unconfirmedType').val());
           _this.baileePrice = returnData.baileePrice;
-
+          _this.assetPrice = returnData.data.assetPrice;
           _this.num = parseFloat($.trim($('#finalPrice').val()));
           _this.numPlus = _this.num - $('#baileePrice').val();
 
