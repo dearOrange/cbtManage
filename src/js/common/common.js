@@ -332,7 +332,7 @@ define(function(require, exports, module) {
       var final_json = {};
       $.each(arr, function(index, item) {
         var attrName = item.name;
-        var attrVal = item.value;
+        var attrVal = $.trim(item.value);
         if (typeof final_json[attrName] === 'undefined') {
           final_json[attrName] = attrVal;
         } else {
