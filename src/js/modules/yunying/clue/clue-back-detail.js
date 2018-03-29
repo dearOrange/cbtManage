@@ -57,15 +57,15 @@ define(function(require, exports, module) {
                 jh.utils.alert({
                     content: addStr,
                     ok: function() {
-                        $('#sub-customer-form').submit();
+                        $('#clueBack_detail_form').submit();
                         return false;
                     }
                 });
                 
                 jh.utils.validator.init({
-                    id: 'sub-customer-form',
+                    id: 'clueBack_detail_form',
                     submitHandler: function(form) {
-                        var dataForm = jh.utils.formToJson($('#sub-customer-form'));
+                        var dataForm = jh.utils.formToJson(form);
                         dataForm.taskId = args.id;
                         jh.utils.ajax.send({
                             url: '/record/addBargain',

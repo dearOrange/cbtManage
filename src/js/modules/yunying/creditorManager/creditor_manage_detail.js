@@ -119,34 +119,31 @@ define(function(require, exports, module) {
                 var addStr = jh.utils.template('creditor_addSubtotal_template', {});
                 jh.utils.alert({
                 	title: '添加联系小计',
-                    content: addStr,
-                    ok: function() {
+                  content: addStr,
+                  ok: function() {
+                    $('#sub-customer-form').submit();
+                    return false;
+                  }      
+                });
+                jh.utils.validator.init({
+                    id: 'sub-customer-form',
+                    submitHandler: function(form) {
                         var dataForm = jh.utils.formToJson($('#sub-customer-form'));
-                    	dataForm.upstreamId = args.id;
-                    	var mobile1 = /^1[3|4|5|6|7|8][0-9]{9}$/;
-				        var mobile2 = /^([0-9]{3,4}-)?[0-9]{7,8}$/;
-				        var mobile3 = /^400-[0-9]{3}-[0-9]{4}$/;
-                    	if(mobile1.test(dataForm.contactPhone) || mobile2.test(dataForm.contactPhone) || mobile3.test(dataForm.contactPhone)) {
-	                        jh.utils.ajax.send({
-	                            url: '/record/addContact',
-	                            data: dataForm,
-	                            done: function(returnData) {
-	                                jh.utils.alert({
-	                                    content: '联系小计添加成功',
-	                                    ok: function(){
-	                                    	_this.initLinkList();
-	                                    	jh.utils.closeArt();
-	                                    },
-	                                    cancel: false
-	                                });
-	                            }
-	                        });
-	                    }else {
-                    		jh.utils.alert({
-                        		content: '请填写正确的联系方式',
-                        		ok:true
-                        	});
-                    	}
+                        dataForm.upstreamId = args.id;
+                        jh.utils.ajax.send({
+                            url: '/record/addContact',
+                            data: dataForm,
+                            done: function(returnData) {
+                                jh.utils.alert({
+                                    content: '联系小计添加成功',
+                                    ok: function() {
+                                      _this.initContent();
+                                      jh.utils.closeArt();
+                                    },
+                                    cancel: false
+                                });
+                            }
+                        });
                         return false;
                     }
                 });

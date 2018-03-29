@@ -1,0 +1,148 @@
+<div class="dataContent">
+    <div class="data-container colorbg">
+        <ul id="clue-echarts-list"></ul>
+        <div class="information">
+            <form id="information-form">
+                <p class="title-style">
+                    <span>线索统计</span>
+                    <input type="hidden" name="type" value="trace" />
+                    <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
+                </p>
+            </form>
+            <div>
+                <div id="mainInformate" class="mainInformate" style="width:70%;height:300px;"></div>
+                <div id="informateTable">
+                    <p>上传线索排行</p>
+                    <div class="data-container">
+                        <table class="dataShow">
+                            <thead>
+                                <tr>
+                                    <th width="4%">排名</th>
+                                    <th width="8%">名称</th>
+                                    <th width="8%">数量</th>
+                                </tr>
+                            </thead>
+                            <tbody id="statistic_container">
+                            </tbody>
+                        </table>
+                        <div class="page-box pagination" id="page_container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="information">
+          <form id="clear-info-form">
+              <p class="title-style">
+                  <span>渠道委托</span>
+                  <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+              </p>
+          </form>
+          <div>
+              <div id="mainCarNum" class="mainInformate" style="width:100%;height:300px;"></div>
+          </div>
+        </div>
+        <div class="information">
+            <form id="clear-info-form">
+                <p class="title-style">
+                    <span>车辆清收数</span>
+                    <input type="hidden" name="type" value="carRecovery" />
+                    <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="carRecoveryInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticRecoveryMonthing,ychanging:statisticRecoveryYearing})">
+                </p>
+            </form>
+            <div>
+                <div id="mainBarNum" class="mainInformate" style="width:70%;height:300px;"></div>
+                <div id="informateTable">
+                    <p>发展下线排名</p>
+                    <div class="data-container">
+                        <table class="dataShow">
+                            <thead>
+                                <tr>
+                                    <th width="4%">排名</th>
+                                    <th width="8%">名称</th>
+                                    <th width="8%">数量</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clear_info_container"></tbody>
+                        </table>
+                        <div class="page-box pagination" id="page_clear_container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/template" id="statistic_first_template">
+    <li>
+      <p>
+        <span style="float:left;">
+            <i>今日线索：</i>
+            <i>{{task.currentDayRecord}}</i>
+        </span>
+        <span style="float:right;">
+            <i>环比昨日</i>
+            <i>少{{task.currentMonthRecord}}个</i>
+        </span>
+      </p>
+    </li>
+    <li>
+      <p>
+        <span style="float:left;">
+            <i>本月线索：</i>
+            <i>{{upstream.allRecord}}</i>
+        </span>
+        <span style="float:right;">
+            <i>环比上月</i>
+            <i>多{{upstream.currentMonthRecord}}个</i>
+        </span>
+      </p>
+    </li>
+    <li>
+      <p>
+        <span style="float:left;">
+          <i>线索总数：</i>
+          <i>{{downstream.allRecord}}</i>
+        </span>
+      </p>
+    </li>
+</script>
+
+
+<script type="text/template" id="statistic_content_template">
+    {{ each list item index }}
+    <tr>
+        <td>{{item.rank}}</td>
+        <td>{{item.dname}}</td>
+        <td>{{item.countTrace}}</td>
+    </tr>
+    {{/each}}
+</script>
+
+<script type="text/template" id="clear_content_template">
+    {{ each list item index }}
+    <tr>
+        <td>{{index+1}}</td>
+        <td>{{item.dname}}</td>
+        <td>{{item.countRecovery}}</td>
+    </tr>
+    {{/each}}
+</script>
+<script type="text/template" id="entrust_content_template">
+  <div class="channelInner">
+    {{ each data item index }}
+    <dl class="channelDistance">
+        <dd>
+            <p>{{item.channelName}}</p>
+            <p>委托数</p>
+            <p>{{item.countEach}}</p>
+        </dd>
+        <dt id="pie{{index}}"></dt>
+    </dl>
+    {{/each}}
+  </div>
+</script>
+<script type="text/javascript">
+seajs.use('modules/statistic/informer-statistic', function(InformerStatistic) {
+    var InformerStatistic = new InformerStatistic();
+    InformerStatistic.init();
+});
+</script>

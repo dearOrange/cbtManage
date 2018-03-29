@@ -327,6 +327,10 @@ p.closeStatus {
     height: 220px;
     margin-top: 10px;
 }
+.dataContent .data-container ul#clue-echarts-list {
+  height:60px;
+  margin-top: 10px;
+}
 
 .dataContent .data-container ul.echarts-list li {
     width: 19%;
@@ -338,6 +342,15 @@ p.closeStatus {
     box-shadow: 0px -3px 18px -2px #b5b5b5;
 }
 
+.dataContent .data-container ul#clue-echarts-list li {
+  height:26px;
+  width: 20%;
+  float: left;
+  background: #fff;
+  margin: 20px 2% 0 0;
+  padding: 10px 2%;
+  box-shadow: 0px -3px 18px -2px #b5b5b5;
+}
 .dataContent .data-container ul.echarts-list li p {
     margin-top: 10px;
 }
@@ -399,7 +412,7 @@ p.closeStatus {
 
 .dataContent .data-container .information div #informateTable {
     float: right;
-    width: 33%;
+    width: 28%;
     height: 300px;
     text-align: center;
     margin-left: 10px;
@@ -626,4 +639,25 @@ form#new-increate-award-form table input, form#increate-creditor-award-form tabl
     height:30px;
     border:1px solid #ccc;
     margin-top: 20px;
+}
+/*业务统计*/
+.statistic-list ul {
+  width: 100%;
+  margin-top: 20px;
+  font-size: 16px;
+}
+.statistic-list ul li {
+  float: left;
+  width: 29%;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  margin: 0 30px 20px 0;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 900;
+  background-color: #20a0ff;
+}
+.statistic-list ul li span {
+  color:#fff;  
 }

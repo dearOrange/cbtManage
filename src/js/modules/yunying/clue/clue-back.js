@@ -55,7 +55,7 @@ define(function(require, exports, module) {
             $('body').off('click', '.addSub').on('click', '.addSub', function() {
                 var me = $(this);
                 var id = me.data('id');
-                var addStr = jh.utils.template('clue_addSubtotal_template', {});
+                var addStr = jh.utils.template('clue_list_addSubtotal_template', {});
                 jh.utils.alert({
                     content: addStr,
                     ok: function() {
@@ -67,7 +67,7 @@ define(function(require, exports, module) {
                 jh.utils.validator.init({
                     id: 'sub-customer-list-form',
                     submitHandler: function(form) {
-                        var dataForm = jh.utils.formToJson($('#sub-customer-list-form'));
+                        var dataForm = jh.utils.formToJson(form);
                         dataForm.taskId = id;
                         jh.utils.ajax.send({
                             url: '/record/addBargain',
@@ -76,8 +76,8 @@ define(function(require, exports, module) {
                                 jh.utils.alert({
                                     content: '议价小计添加成功',
                                     ok: function() {
-                                        _this.initContent();
-                                        jh.utils.closeArt();
+                                      jh.utils.closeArt();
+                                      _this.initContent();
                                     },
                                     cancel: false
                                 });

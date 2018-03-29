@@ -110,15 +110,15 @@ define(function(require, exports, module) {
                 	title: '添加联系小计',
                     content: addStr,
                     ok: function() {
-                        $('#sub-customer-form').submit();
+                        $('#creditor-customer-form').submit();
                         return false;
                     }
                 });
                 
                 jh.utils.validator.init({
-                    id: 'sub-customer-form',
+                    id: 'creditor-customer-form',
                     submitHandler: function(form) {
-                        var dataForm = jh.utils.formToJson($('#sub-customer-form'));
+                        var dataForm = jh.utils.formToJson(form);
                         dataForm.upstreamId = args.id;
                         jh.utils.ajax.send({
                             url: '/record/addContact',
@@ -127,8 +127,8 @@ define(function(require, exports, module) {
                                 jh.utils.alert({
                                     content: '联系小计添加成功',
                                     ok: function(){
-                                        _this.initLinkList();
-                                        jh.utils.closeArt();
+                                      _this.initLinkList();
+                                      jh.utils.closeArt();
                                     },
                                     cancel: false
                                 });
