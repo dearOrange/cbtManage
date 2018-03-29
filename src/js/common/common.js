@@ -1513,6 +1513,10 @@ define(function(require, exports, module) {
           return false;
         }
       });
+      var formCount = $('body form').filter('#'+sets.id);
+      if(formCount.length>1){
+        $('body form').filter('#'+sets.id).eq(0).remove();
+      }
       $('#' + sets.id).validate();
     };
 
