@@ -41,7 +41,6 @@
 		<td>{{item.redirect}}</td>
 		<td>{{item.title}}</td>
 		<td>{{item.order}}</td>
-		<td>{{stateToString(item.type)}}</td>
 		<td>{{item.createAt}}</td>
 		<td>
 			<a data-id="{{item.id}}" class="removeEdit button">删除</a>
@@ -74,14 +73,6 @@
 		<div class="mt10">
 			<label>海报排列序号</label>
 			<input type="text" name="order" class="required number" maxlength="3" value="{{order}}" placeholder="请输入序号">
-		</div>
-		<div class="mt25">
-			<label>海报应用位置</label>
-			<select name="type">
-				<option value="1" {{if type==1}}selected{{/if}}>移动端</option>
-				<option value="2" {{if type==2}}selected{{/if}}>官网</option>
-				<option value="3" {{if type==3}}selected{{/if}}>债权方端</option>
-			</select>
 		</div>
 	</form>
 </script>

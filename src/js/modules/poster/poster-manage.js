@@ -22,21 +22,6 @@ define(function(require, exports, module) {
                 contentType: 'application/json',
                 callback: function(data) {
                     data.viewImgRoot = jh.config.viewImgRoot;
-                    data.stateToString = function(state){
-                        var str = '';
-                        switch(state){
-                            case 1:
-                                str = '移动端';
-                                break;
-                            case 2:
-                                str = '官网';
-                                break;
-                            case 3:
-                                str = '债权方';
-                                break;
-                        }
-                        return str;
-                    };
                     return jh.utils.template('poster-manage-template', data);
                 }
             });
