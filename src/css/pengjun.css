@@ -376,15 +376,15 @@ p.closeStatus {
 .dataContent .data-container .channelPie {
     width: 96%;
     height: 390px;
-    margin: 60px 0;
+    margin: 30px 0;
     padding: 15px;
     box-shadow: 0px -3px 18px -2px #b5b5b5;
 }
 .dataContent .data-container .business-information {
-  width:50%;
+  width:60%;
 }
 .dataContent .data-container .business-list-information {
-  width:40%;
+  width:30%;
 }
 .dataContent .data-container .channelPie {
     height: 220px;

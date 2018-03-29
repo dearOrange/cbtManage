@@ -1,9 +1,205 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<body>
-	</body>
-</html>
+<div class="dataContent">
+  <div class="data-container colorbg">
+    <div class="clearfix">
+      <div class="information business-information pull-left">
+        <form id="clear-info-form">
+          <p class="title-style">
+            <span class="span-style">渠道发展线人统计</span>
+            <span class="pull-right">
+              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputStart" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">至
+              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputEnd" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+            </span>
+          </p>
+        </form>
+        <div id="mainCarNum" class="mainInformate" style="width:70%;height:300px;"></div>
+      </div>
+      <div class="information business-list-information pull-right">
+        <form id="clear-info-form">
+          <p class="title-style">
+            <span class="span-style">月度排名</span>
+            <span class="pull-right">
+              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+            </span>
+          </p>
+        </form>
+        <div id="informateTable">
+          <div class="data-container">
+            <table class="dataShow">
+              <thead>
+                <tr>
+                  <th width="4%">排名</th>
+                  <th width="8%">名称</th>
+                  <th width="8%">数量</th>
+                </tr>
+              </thead>
+              <tbody id="statistic_container">
+              </tbody>
+            </table>
+            <div class="page-box pagination" id="page_container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="information">
+      <div id="informateTable">
+        <div class="data-container">
+          <table class="dataShow">
+            <thead>
+              <tr>
+                <th width="4%">序号</th>
+                <th width="8%">名称</th>
+                <th width="8%">债权方类型</th>
+                <th width="8%">联系人姓名</th>
+                <th width="8%">联系电话</th>
+                <th width="15%">注册时间</th>
+                <th width="8%">下线</th>
+              </tr>
+            </thead>
+            <tbody id="business_statistic_container">
+            </tbody>
+          </table>
+          <div class="page-box pagination" id="page_container"></div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">
+      <div class="information business-information pull-left">
+        <form id="clear-info-form">
+          <p class="title-style">
+            <span class="span-style">渠道发展捕头统计</span>
+            <span class="pull-right">
+              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputStart" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">至
+              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputEnd" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+            </span>
+          </p>
+        </form>
+        <div id="mainCarNum" class="mainInformate" style="width:70%;height:300px;"></div>
+      </div>
+      <div class="information business-list-information pull-right">
+        <form id="clear-info-form">
+          <p class="title-style">
+            <span class="span-style">月度排名</span>
+            <span class="pull-right">
+              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+            </span>
+          </p>
+        </form>
+        <div id="informateTable">
+          <div class="data-container">
+            <table class="dataShow">
+              <thead>
+                <tr>
+                  <th width="4%">排名</th>
+                  <th width="8%">名称</th>
+                  <th width="8%">数量</th>
+                </tr>
+              </thead>
+              <tbody id="statistic_container">
+              </tbody>
+            </table>
+            <div class="page-box pagination" id="page_container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="information">
+      <div id="informateTable">
+        <div class="data-container">
+          <table class="dataShow">
+            <thead>
+              <tr>
+                <th width="4%">序号</th>
+                <th width="8%">名称</th>
+                <th width="8%">债权方类型</th>
+                <th width="8%">联系人姓名</th>
+                <th width="8%">联系电话</th>
+                <th width="15%">注册时间</th>
+                <th width="8%">下线</th>
+              </tr>
+            </thead>
+            <tbody id="business_statistic_container">
+            </tbody>
+          </table>
+          <div class="page-box pagination" id="page_container"></div>
+        </div>
+      </div>
+    </div>
+    <div class="">
+      <div class="information">
+        <form id="clear-info-form">
+          <p class="title-style">
+            <span class="span-style">清收统计</span>
+            <span>
+              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">至
+              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+            </span>
+            <span class="pull-right">
+              <input type="submit" class="button" value="查询" />
+            </span>
+          </p>
+        </form>
+        <div class="data-container">
+          <table class="dataShow">
+            <thead>
+              <tr>
+                <th width="4%">排名</th>
+                <th width="8%">名称</th>
+                <th width="8%">账号</th>
+                <th width="16%">区域</th>
+                <th width="8%">联系电话</th>
+                <th width="10%">最新线索上传地区</th>
+                <th width="15%">注册时间</th>
+                <th width="8%">任务数</th>
+              </tr>
+            </thead>
+            <tbody id="clear_info_container"></tbody>
+          </table>
+          <div class="page-box pagination" id="page_clear_container"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/template" id="statistic_content_template">
+  {{ each list item index }}
+  <tr>
+    <td>{{item.rank}}</td>
+    <td>{{item.dname}}</td>
+    <td>{{item.countTrace}}</td>
+  </tr>
+  {{/each}}
+</script>
+
+<script type="text/template" id="business_statistic_content_template">
+  {{ each list item index }}
+  <tr>
+    <td>{{item.rank}}</td>
+    <td>{{item.dname}}</td>
+    <td>{{item.countTrace}}</td>
+    <td>{{item.rank}}</td>
+    <td>{{item.dname}}</td>
+    <td>{{item.dname}}</td>
+    <td>{{item.countTrace}}</td>
+    <td>
+      <a data-id="{{item.id}}" class="button">查看发展下线</a>
+    </td>
+  </tr>
+  {{/each}}
+</script>
+
+<script type="text/template" id="clear_content_template">
+  {{ each list item index }}
+  <tr>
+    <td>{{index+1}}</td>
+    <td>{{item.dname}}</td>
+    <td>{{item.countRecovery}}</td>
+  </tr>
+  {{/each}}
+</script>
+
+<script type="text/javascript">
+  seajs.use('modules/statistic/channel-statistic', function(ChannelStatistic) {
+    var ChannelStatistic = new ChannelStatistic();
+    ChannelStatistic.init();
+  });
+</script>
