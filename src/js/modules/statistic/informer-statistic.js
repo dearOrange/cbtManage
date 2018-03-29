@@ -6,7 +6,7 @@
  */
 'use strict';
 define(function(require, exports, module) {
-    function HunterStatistic() {
+    function InformerStatistic() {
         var _this = this;
         var date = new Date();
         var now = {
@@ -443,5 +443,5 @@ define(function(require, exports, module) {
      * 车辆清收end
      */
 
-    module.exports = HunterStatistic;
+    module.exports = InformerStatistic;
 });
