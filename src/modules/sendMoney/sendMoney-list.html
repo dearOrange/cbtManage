@@ -47,33 +47,40 @@
     </form>
   </div>
   <div class="data-container">
-    <table class="dataShow">
-      <thead>
-        <tr>
-          <th width="4%">序号</th>
-          <th width="8%">提现申请人</th>
-          <th width="15%">主体名称</th>
-          <th width="12%">提现金额</th>
-          <th width="10%">实发金额</th>
-          <th width="8%">发放形式</th>
-          <th width="6%">打款状态</th>
-          <th width="15%">提现申请时间</th>
-          <th width="10%">操作</th>
-          <th width="10%">打款</th>
-        </tr>
-      </thead>
-      <tbody id="sendMoney_list_container">
-      </tbody>
-    </table>
+    <table class="dataShow" id="sendMoney_list_container"></table>
     <div class="page-box pagination" id="page_container"></div>
   </div>
 </div>
 <script type="text/template" id="sendMoney-list-template">
+  <thead>
+    <tr>
+      <th width="4%">序号</th>
+      <th width="8%">提现申请人</th>
+      <th width="15%">主体名称</th>
+      {{if searchType !== "loaner"}}
+      <th width="9%">申请人类型</th>
+      {{/if}}
+      <th width="12%">提现金额</th>
+      <th width="6%">实发金额</th>
+      <th width="8%">发放形式</th>
+      <th width="6%">打款状态</th>
+      <th width="15%">提现申请时间</th>
+      <th width="6%">操作</th>
+      <th width="6%">打款</th>
+    </tr>
+  </thead>
   {{ each list item index }}
   <tr class="{{if item.isRead === 0}}bgc_blue{{/if}}">
     <td>{{index+1}}</td>
     <td>{{item.name}}</td>
     <td>{{item.company}}</td>
+    {{if searchType !== "loaner"}}
+      {{if item.role === "type_A"}}
+      <td>线人</td>
+      {{else}}
+      <td>捕头</td>
+      {{/if}}
+    {{/if}}
     <td>{{item.amount}}</td>
     <td>{{item.actualAmount}}</td>
     <td>

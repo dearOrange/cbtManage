@@ -9,6 +9,7 @@ define(function(require, exports, module) {
   function SendMoneyList() {
     var _this = this;
     _this.form = $('#sendMoney-list-form');
+    var searchType = 'loaner';
     this.init = function() {
       this.initContent();
       this.registerEvent();
@@ -24,6 +25,7 @@ define(function(require, exports, module) {
         data: jh.utils.formToJson(_this.form),
         isSearch: isSearch,
         callback: function(data) {
+          data.searchType = searchType;
           return jh.utils.template('sendMoney-list-template', data);
         }
       });
@@ -58,14 +60,19 @@ define(function(require, exports, module) {
       //切换状态
       $('body').off('click', '.taskState').on('click', '.taskState', function(event, param) {
         var mine = $(this);
+        var val = mine.data('value');
         $(this).addClass("active").siblings().removeClass("active");
-        $('#state').val(mine.data('value'))
+        $('#state').val(val)
         if (param && param === 'autoClick') {
 
         } else {
           _this.initContent('tab');
         }
-
+        if(val === 2){
+          searchType = 'hunter';
+        }else{
+          searchType = 'loaner';
+        }
       })
 
       //打款
