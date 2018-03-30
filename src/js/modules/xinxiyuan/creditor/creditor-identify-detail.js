@@ -48,6 +48,7 @@ define(function(require, exports, module) {
             var throughState = $('.through').filter(':checked').val();
             var reason = $.trim($('#identifyContent').val());
             var btn = $('[i-id="ok"]');
+            var tipText = throughState == '1' ? '认证通过'  : '认证未通过';
             $('<img src="/src/img/loading.gif" height="29"/>').insertAfter(btn);
             jh.utils.ajax.send({
               url: '/upstreams/verify',
@@ -58,7 +59,7 @@ define(function(require, exports, module) {
               },
               done: function(returnData) {
                 jh.utils.alert({
-                  content: '认证成功！',
+                  content: tipText,
                   ok: function() {
                     window.location.reload();
                   }
