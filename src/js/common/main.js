@@ -67,7 +67,7 @@ define(function(require, exports, module) {
     };
 
     this.initUnReadMessage = function() {
-      _this.requestDate *= 1500;
+      _this.requestDate *= 15;
       _this.requestInterId = window.setInterval(function() {
         //每15秒请求一次未读消息
         _this.requestUnReadMessage();
