@@ -1080,10 +1080,7 @@ define(function(require, exports, module) {
             m.onload(returnData);
             return false;
           }
-          if(s.url.indexOf('/statistics/traceSort')!==-1){
-            response.total = 3000;
-          }
-          
+
           m.page_total = Math.ceil(response.total / s.data.pageSize); //分页总数
           m.page_last_second = m.page_total - 1; //倒数第二页
 
@@ -1611,7 +1608,6 @@ define(function(require, exports, module) {
         subArr = subArr.city;
         var str = '';
         $.each(subArr, function(index, item) {
-          debugger
           str += '<option value="' + item.cid + '" data-province="' + text + '">' + item.c + '</option>';
         });
         $('#' + name + '_city').html(cityHtml + str).select2();
@@ -1635,7 +1631,6 @@ define(function(require, exports, module) {
             }
             var str = '';
             $.each(regionList, function(index, item) {
-              debugger
               str += '<option value="' + item.sid + '">' + item.s + '</option>';
             });
             $('#' + name + '_region').html(regionHtml + str).select2();
