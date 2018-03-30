@@ -11,7 +11,8 @@ define(function(require, exports, module) {
         var date = new Date();
         var now = {
             year: date.getFullYear(),
-            month: date.getMonth() + 1
+            month: date.getMonth() + 1,
+            day: date.getDay()
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
 
@@ -50,13 +51,12 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                   console.log(returnData.data);
                   var channelOne = returnData.data;
-//                var traceTwo = returnData.data.traceTrend.rightList;
-                  var obj = {};
+                  var channelobj = {};
                   for (var a = 0; a < channelOne.length; a++) {
-                      obj.value = channelOne[a].countEach;
-                      obj.name = channelOne[a].name;
+                      channelobj.value = channelOne[a].countEach;
+                      channelobj.name = channelOne[a].name;
                   }
-                  _this.channelName.push(obj);
+                  _this.channelName.push(channelobj);
                   console.log(_this.channelName);
 //                for (var b = 0; b < traceTwo.length; b++) {
 //                    _this.trendCountTwo.push(trace[a].count);
@@ -108,11 +108,11 @@ define(function(require, exports, module) {
                             }
                         },
                         data:[
-                            {value:335, name:'直接访问'},
-                            {value:310, name:'邮件营销'},
-                            {value:234, name:'联盟广告'},
-                            {value:135, name:'视频广告'},
-                            {value:1548, name:'搜索引擎'}
+                            {value:335, name:'直接访问', id:1},
+                            {value:310, name:'邮件营销', id:2},
+                            {value:234, name:'联盟广告', id:3},
+                            {value:135, name:'视频广告', id:4},
+                            {value:1548, name:'搜索引擎', id:5}
                         ]
                     }
                 ]

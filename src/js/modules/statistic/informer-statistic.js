@@ -43,21 +43,6 @@ define(function(require, exports, module) {
             jh.utils.ajax.send({
                 url: '/statistics/general',
                 done: function(returnData) {
-//                  var upstreamTrendList = returnData.data.upstream.trendList;
-//                  var traceTrendList = returnData.data.trace.trendList;
-//                  var downstreamTrendList = returnData.data.downstream.trendList;
-//                  for (var a = 0; a < upstreamTrendList.length; a++) {
-//                      _this.upstreamTrendMonths.push(upstreamTrendList[a].months);
-//                      _this.upstreamTrendCount.push(upstreamTrendList[a].count);
-//                  }
-//                  for (var b = 0; b < traceTrendList.length; b++) {
-//                      _this.traceTrendMonths.push(traceTrendList[b].months);
-//                      _this.traceTrendCount.push(traceTrendList[b].count);
-//                  }
-//                  for (var c = 0; c < downstreamTrendList.length; c++) {
-//                      _this.downstreamTrendMonths.push(downstreamTrendList[c].months);
-//                      _this.downstreamTrendCount.push(downstreamTrendList[c].count);
-//                  }
                     var dataFirst = jh.utils.template('statistic_first_template', returnData.data);
                     $('#clue-echarts-list').html(dataFirst);
                     

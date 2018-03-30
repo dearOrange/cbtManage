@@ -15,7 +15,7 @@ define(function(require, exports, module) {
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
 
-        _this.traceMonths = [];
+        _this.businessName = [];
         _this.traceCount = [];
         _this.carRecoveryMonths = [];
         _this.carRecoveryCount = [];
@@ -40,7 +40,24 @@ define(function(require, exports, module) {
 
         //开头数据
         this.initHead = function() {
-            
+          var businessOne = jh.utils.formToJson($('#business-info-form'));
+          jh.utils.ajax.send({
+              method: 'post',
+              url: '/statistics/business/recommendRatio',
+              contentType: 'application/json',
+              data: businessOne,
+              done: function(returnData) {
+                var businessOne = returnData.data;
+                var businessobj = {};
+                for (var a = 0; a < businessOne.length; a++) {
+                    businessobj.value = businessOne[a].countEach;
+                    businessobj.name = businessOne[a].name;
+                    businessobj.id = businessOne[a].id;
+                }
+                _this.businessName.push(businessobj);
+                _this.sectionTable();
+              }
+          });
         };
         this.initSection = function() {
             
@@ -92,19 +109,19 @@ define(function(require, exports, module) {
                 data_container: $('#statistic_container'),
                 page_container: $('#page_container'),
                 method: 'post',
-                url: '/statistics/traceSort',
+                url: '/statistics/business/recommendSort',
                 showPageTotal: false,
                 jump: false,
                 show_page_number: 3,
                 contentType: 'application/json',
                 data: {
-                    type: 'trace',
                     pageSize: 5,
                     yearMonth: obj.y + '-' + obj.M
                 },
                 isSearch: isSearch,
                 callback: function(data) {
-                    return jh.utils.template('statistic_content_template', data);
+                  console.log(data);
+                  return jh.utils.template('statistic_content_template', data);
                 }
             });
             page.init();
