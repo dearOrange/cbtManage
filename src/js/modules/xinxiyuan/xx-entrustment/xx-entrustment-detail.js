@@ -44,7 +44,7 @@ define(function(require, exports, module) {
                             },
                             done: function(returnData) {
                                 jh.utils.alert({
-                                    content: '验证成功！',
+                                    content: '操作成功！',
                                     ok: function(){
                                     	window.location.reload();
                                     }
