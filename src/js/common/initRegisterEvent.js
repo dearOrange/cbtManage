@@ -25,13 +25,13 @@ define(function(require, exports, module) {
                     urlStr = '/src/modules/officermanage/officer-manage';
                     break;
                 case 4: 
-                    urlStr = '/src/modules/xinxiyuan/xx-distribution/xx-distribution-list';
+                    urlStr = '/src/modules/qudao/qd-distribution/qd-distribution-list';
                     break;
                 case 5: 
                     urlStr = '/src/modules/logistics/logistics-list';
                     break;
                 case 6: 
-                    urlStr = '/src/modules/qudao/qd-distribution/qd-distribution-list';
+                    urlStr = '/src/modules/xinxiyuan/xx-distribution/xx-distribution-list';
                     break;
                 case 7: 
                     urlStr = '/src/modules/yunying/task/task-audit';
