@@ -710,7 +710,7 @@ define(function(require, exports, module) {
           var moduleCon = $('#leftMenu-box').find('li.active'); //一级菜单
           var activeFirst = moduleCon.children('a'); //一级选中的文字
           var submoduleCon = moduleCon.find('ul li.active');
-          txt += activeFirst.text();
+          txt += activeFirst.children('span').text();
           if (!txt) {
             breadParnet.hide();
           }
