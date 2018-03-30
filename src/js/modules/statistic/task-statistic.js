@@ -190,7 +190,7 @@ define(function(require, exports, module) {
                 url: '/statistics/traceSort',
                 showPageTotal: false,
                 jump: false,
-                show_page_number: 3,
+                show_page_number: 2,
                 contentType: 'application/json',
                 data: {
                     type: 'trace',

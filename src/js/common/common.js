@@ -955,12 +955,12 @@ define(function(require, exports, module) {
           arr.push(lastPage);
         } else {
           var j = Math.floor(s.show_page_number / 2);
-          if (num >= 3 + half) {
+          if (num >= half) {
             arr.push('<a href="#page-1">1</a><a href="#page-2">2</a><span class="ellipsis">...</span>');
-            var start = m.page_total - s.show_page_number - 3;
+            var start = m.page_total - s.show_page_number;
             if (num > start) {
               if (start < 4) {
-                start = 4;
+                start = 1;
               }
               for (var i = start; i <= m.page_total; i++) {
                 if (i !== num) {
@@ -1080,6 +1080,10 @@ define(function(require, exports, module) {
             m.onload(returnData);
             return false;
           }
+          if(s.url.indexOf('/statistics/traceSort')!==-1){
+            response.total = 3000;
+          }
+          
           m.page_total = Math.ceil(response.total / s.data.pageSize); //分页总数
           m.page_last_second = m.page_total - 1; //倒数第二页
 

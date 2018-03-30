@@ -90,7 +90,6 @@ define(function(require, exports, module) {
         return false;
       }
       var tip = state === 1 ? '通过' : '拒绝';
-      if (state === 1) {
         jh.utils.ajax.send({
           url: '/trace/getRewardLevel',
           data: {
@@ -102,7 +101,7 @@ define(function(require, exports, module) {
              * 如果是浮动奖励金则选择档位
              */
             var result = returnData.data;
-            if (result.kind === '0') {
+            if (result.kind === '0' || state != '1') {
               contentStr = '确定' + tip + '吗？';
             } else {
               contentStr = '<div class="text-center"><span>确定' + tip + '吗？</span><br/>';
@@ -159,8 +158,6 @@ define(function(require, exports, module) {
             });
           }
         });
-      }
-
     };
 
     this.registerEvent = function() {
