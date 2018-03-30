@@ -8,14 +8,14 @@
 define(function(require, exports, module) {
     function ChannelStatistic() {
         var _this = this;
-//      var date = new Date();
-//      var now = {
-//          year: date.getFullYear(),
-//          month: date.getMonth() + 1
-//      };
-//      now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
+        var date = new Date();
+        var now = {
+            year: date.getFullYear(),
+            month: date.getMonth() + 1
+        };
+        now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
 
-        _this.traceMonths = [];
+        _this.channelName = [];
         _this.traceCount = [];
         _this.carRecoveryMonths = [];
         _this.carRecoveryCount = [];
@@ -28,19 +28,42 @@ define(function(require, exports, module) {
         _this.countRate = 0;
 
         this.init = function() {
-//          $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
+            $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
             this.initHead();
             this.sectionTable();
             this.initSection();
-//          window.initContent('2018-01', true);
-//          window.initClear('2018-01', true);
+            window.initContent('2018-01', true);
+            window.initClear('2018-01', true);
 //          window.initEntrustSort('2018-01', true);
             this.registerEvent();
         };
 
         //开头数据
         this.initHead = function() {
-            
+            var channelOne = jh.utils.formToJson($('#channel-list-form'));
+            console.log(channelOne)
+            jh.utils.ajax.send({
+                method: 'post',
+                url: '/statistics/channel/recommendRatio',
+                contentType: 'application/json',
+                data: channelOne,
+                done: function(returnData) {
+                  console.log(returnData.data);
+                  var channelOne = returnData.data;
+//                var traceTwo = returnData.data.traceTrend.rightList;
+                  var obj = {};
+                  for (var a = 0; a < channelOne.length; a++) {
+                      obj.value = channelOne[a].countEach;
+                      obj.name = channelOne[a].name;
+                  }
+                  _this.channelName.push(obj);
+                  console.log(_this.channelName);
+//                for (var b = 0; b < traceTwo.length; b++) {
+//                    _this.trendCountTwo.push(trace[a].count);
+//                }
+                  _this.sectionTable();
+                }
+            });
         };
         this.initSection = function() {
             
@@ -97,85 +120,85 @@ define(function(require, exports, module) {
 
         };
 
-//      window.initContent = function(obj, isSearch) {
-//          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-//          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-//
-//          var page = new jh.ui.page({
-//              data_container: $('#statistic_container'),
-//              page_container: $('#page_container'),
-//              method: 'post',
-//              url: '/statistics/traceSort',
-//              showPageTotal: false,
-//              jump: false,
-//              show_page_number: 3,
-//              contentType: 'application/json',
-//              data: {
-//                  type: 'trace',
-//                  pageSize: 5,
-//                  yearMonth: obj.y + '-' + obj.M
-//              },
-//              isSearch: isSearch,
-//              callback: function(data) {
-//                  return jh.utils.template('statistic_content_template', data);
-//              }
-//          });
-//          page.init();
-//      };
-//
-//      window.initClear = function(obj, isSearch) {
-//          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-//          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-//
-//          var page = new jh.ui.page({
-//              data_container: $('#clear_info_container'),
-//              page_container: $('#page_clear_container'),
-//              method: 'post',
-//              url: '/statistics/recoverySort',
-//              contentType: 'application/json',
-//              data: {
-//                pageSize: 5,
-//                  type: 'carRecovery',
-//                  yearMonth: obj.y + '-' + obj.M
-//              },
-//              isSearch: isSearch,
-//              show_page_number: 3,
-//              callback: function(data) {
-//                  return jh.utils.template('clear_content_template', data);
-//              }
-//          });
-//          page.init();
-//      };
+        window.initContent = function(obj, isSearch) {
+            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
 
-//      window.initEntrustSort = function(obj, isSearch) {
-//          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-//          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-//          jh.utils.ajax.send({
-//              method: 'post',
-//              url: '/statistics/entrust',
-//              contentType: 'application/json',
-//              data: {
-//                  yearMonth: obj.y + '-' + obj.M
-//              },
-//              isSearch: isSearch,
-//              done: function(returnData) {
-//                  var entrust = returnData.data;
-//                  var noResultBox = $('#entrustNoResultBox');
-//                  if (!entrust.length) {
-//                      noResultBox.removeClass('hide');
-//                      noResultBox.prev().addClass('hide');
-//                      return false;
-//                  } else {
-//                      noResultBox.addClass('hide');
-//                      noResultBox.prev().removeClass('hide');
-//                  }
-//                  var entrustContent = jh.utils.template('entrust_content_template', returnData);
-//                  $('#entrustResultBox').html(entrustContent);
-//                  
-//
-//              }
-//          });
-//      };
+            var page = new jh.ui.page({
+                data_container: $('#statistic_container'),
+                page_container: $('#page_container'),
+                method: 'post',
+                url: '/statistics/traceSort',
+                showPageTotal: false,
+                jump: false,
+                show_page_number: 3,
+                contentType: 'application/json',
+                data: {
+                    type: 'trace',
+                    pageSize: 5,
+                    yearMonth: obj.y + '-' + obj.M
+                },
+                isSearch: isSearch,
+                callback: function(data) {
+                    return jh.utils.template('statistic_content_template', data);
+                }
+            });
+            page.init();
+        };
+
+        window.initClear = function(obj, isSearch) {
+            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+
+            var page = new jh.ui.page({
+                data_container: $('#clear_info_container'),
+                page_container: $('#page_clear_container'),
+                method: 'post',
+                url: '/statistics/recoverySort',
+                contentType: 'application/json',
+                data: {
+                  pageSize: 5,
+                    type: 'carRecovery',
+                    yearMonth: obj.y + '-' + obj.M
+                },
+                isSearch: isSearch,
+                show_page_number: 3,
+                callback: function(data) {
+                    return jh.utils.template('clear_content_template', data);
+                }
+            });
+            page.init();
+        };
+
+        window.initEntrustSort = function(obj, isSearch) {
+            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+            jh.utils.ajax.send({
+                method: 'post',
+                url: '/statistics/entrust',
+                contentType: 'application/json',
+                data: {
+                    yearMonth: obj.y + '-' + obj.M
+                },
+                isSearch: isSearch,
+                done: function(returnData) {
+                    var entrust = returnData.data;
+                    var noResultBox = $('#entrustNoResultBox');
+                    if (!entrust.length) {
+                        noResultBox.removeClass('hide');
+                        noResultBox.prev().addClass('hide');
+                        return false;
+                    } else {
+                        noResultBox.addClass('hide');
+                        noResultBox.prev().removeClass('hide');
+                    }
+                    var entrustContent = jh.utils.template('entrust_content_template', returnData);
+                    $('#entrustResultBox').html(entrustContent);
+                    
+
+                }
+            });
+        };
 
         this.registerEvent = function() {
 
@@ -187,14 +210,14 @@ define(function(require, exports, module) {
     /**
      * 情报begin
      */
-//  window.statisticTraceMonthing = function() {
-//      var obj = $dp.cal.newdate;
-//      window.initContent(obj, true);
-//  };
-//  window.statisticTraceYearing = function() {
-//      var obj = $dp.cal.newdate;
-//      window.initContent(obj, true);
-//  };
+    window.statisticTraceMonthing = function() {
+        var obj = $dp.cal.newdate;
+        window.initContent(obj, true);
+    };
+    window.statisticTraceYearing = function() {
+        var obj = $dp.cal.newdate;
+        window.initContent(obj, true);
+    };
     /**
      * 情报end
      */
@@ -202,14 +225,14 @@ define(function(require, exports, module) {
     /**
      * 渠道委托begin
      */
-//  window.statisticEntrustMonthing = function() {
-//      var obj = $dp.cal.newdate;
-//      window.initEntrustSort(obj, true);
-//  };
-//  window.statisticEntrustYearing = function() {
-//      var obj = $dp.cal.newdate;
-//      window.initEntrustSort(obj, true);
-//  };
+    window.statisticEntrustMonthing = function() {
+        var obj = $dp.cal.newdate;
+        window.initEntrustSort(obj, true);
+    };
+    window.statisticEntrustYearing = function() {
+        var obj = $dp.cal.newdate;
+        window.initEntrustSort(obj, true);
+    };
     /**
      * 渠道委托end
      */
@@ -217,14 +240,14 @@ define(function(require, exports, module) {
     /**
      * 车辆清收begin
      */
-//  window.statisticRecoveryMonthing = function() {
-//      var obj = $dp.cal.newdate;
-//      window.initClear(obj, true);
-//  };
-//  window.statisticRecoveryYearing = function() {
-//      var obj = $dp.cal.newdate;
-//      window.initClear(obj, true);
-//  };
+    window.statisticRecoveryMonthing = function() {
+        var obj = $dp.cal.newdate;
+        window.initClear(obj, true);
+    };
+    window.statisticRecoveryYearing = function() {
+        var obj = $dp.cal.newdate;
+        window.initClear(obj, true);
+    };
     /**
      * 车辆清收end
      */

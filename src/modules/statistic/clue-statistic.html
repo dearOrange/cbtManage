@@ -2,15 +2,15 @@
   <div class="data-container colorbg">
     <ul id="clue-echarts-list"></ul>
     <div class="information">
-      <form id="information-form">
+      <form id="clueOne-information-form">
         <p class="title-style">
           <span class="span-style">线索统计</span>
-          <input type="hidden" name="type" value="trace" />
+          <input type="hidden" name="type" value="traceTotal" />
           <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
         </p>
       </form>
       <div>
-        <div id="mainInformate" class="mainInformate" style="width:70%;height:300px;"></div>
+        <div id="mainInformate" class="mainInformate" style="width:70%;height:400px;"></div>
         <div id="informateTable">
           <p>上传线索排行</p>
           <div class="data-container">
@@ -31,26 +31,27 @@
       </div>
     </div>
     <div class="information">
-      <form id="clear-info-form">
+      <form id="clueTwo-information-form">
         <p class="title-style">
-          <span class="span-style">渠道委托</span>
+          <span class="span-style">线索匹配统计</span>
+          <input type="hidden" name="type" value="traceMatch" />
           <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
         </p>
       </form>
       <div>
-        <div id="mainCarNum" class="mainInformate" style="width:100%;height:300px;"></div>
+        <div id="mainCarNum" class="mainInformate" style="width:100%;height:400px;"></div>
       </div>
     </div>
     <div class="information">
-      <form id="clear-info-form">
+      <form id="clueThree-information-form">
         <p class="title-style">
-          <span class="span-style">车辆清收数</span>
-          <input type="hidden" name="type" value="carRecovery" />
+          <span class="span-style">线索合规统计</span>
+          <input type="hidden" name="type" value="tracePass" />
           <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="carRecoveryInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticRecoveryMonthing,ychanging:statisticRecoveryYearing})">
         </p>
       </form>
       <div>
-        <div id="mainBarNum" class="mainInformate" style="width:70%;height:300px;"></div>
+        <div id="mainBarNum" class="mainInformate" style="width:70%;height:400px;"></div>
         <div id="informateTable">
           <p>发展下线排名</p>
           <div class="data-container">
@@ -71,16 +72,16 @@
     </div>
   </div>
 </div>
-<script type="text/template" id="statistic_first_template">
+<script type="text/template" id="statistic_clue_template">
   <li>
     <p>
       <span style="float:left;">
             <i>今日线索：</i>
-            <i>{{task.currentDayRecord}}</i>
+            <i>{{trace.dayAdded}}</i>
         </span>
       <span style="float:right;">
             <i>环比昨日</i>
-            <i>少{{task.currentMonthRecord}}个</i>
+            <i>{{trace.dayChainChange}}</i>
         </span>
     </p>
   </li>
@@ -88,11 +89,11 @@
     <p>
       <span style="float:left;">
             <i>本月线索：</i>
-            <i>{{upstream.allRecord}}</i>
+            <i>{{trace.monthAdded}}</i>
         </span>
       <span style="float:right;">
             <i>环比上月</i>
-            <i>多{{upstream.currentMonthRecord}}个</i>
+            <i>{{trace.monthChainChange}}</i>
         </span>
     </p>
   </li>
@@ -100,7 +101,7 @@
     <p>
       <span style="float:left;">
           <i>线索总数：</i>
-          <i>{{downstream.allRecord}}</i>
+          <i>{{trace.total}}</i>
         </span>
     </p>
   </li>
@@ -125,20 +126,7 @@
   </tr>
   {{/each}}
 </script>
-<script type="text/template" id="entrust_content_template">
-  <div class="channelInner">
-    {{ each data item index }}
-    <dl class="channelDistance">
-      <dd>
-        <p>{{item.channelName}}</p>
-        <p>委托数</p>
-        <p>{{item.countEach}}</p>
-      </dd>
-      <dt id="pie{{index}}"></dt>
-    </dl>
-    {{/each}}
-  </div>
-</script>
+
 <script type="text/javascript">
   seajs.use('modules/statistic/clue-statistic', function(ClueStatistic) {
     var ClueStatistic = new ClueStatistic();

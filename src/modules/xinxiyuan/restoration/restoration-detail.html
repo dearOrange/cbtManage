@@ -99,7 +99,7 @@
         </div>
         <div>
           <label>资产查找费:</label>
-          <input type="text" name="assetPrice" maxlength="11" class="OnlyPrice required" id="assetPrice" value="{{if data.infoMoneyStatus === 1}}{{data.assetPrice}}{{/if}}" {{if data.infoMoneyStatus===1 }}readonly="readonly"{{/if}}/>
+          <input type="text" name="assetPrice" maxlength="11" class="OnlyPrice required" id="assetPrice" value="{{data.assetPrice}}" {{if data.infoMoneyStatus===1 }}readonly="readonly"{{/if}}/>
         </div>
         <div>
           <label>第三方处置清收费:</label>
@@ -138,7 +138,7 @@
         </div>
         <div>
           <label>资产查找费:</label>
-          <input type="text" name="assetPrice" maxlength="11" class="OnlyPrice assetPrice required" id="assetPrice" value="{{data.assetPrice}}"/>
+          <input type="text" name="assetPrice" maxlength="11" class="OnlyPrice assetPrice required" id="assetPrice" value="{{data.assetPrice}}" {{if data.infoMoneyStatus===1 }}readonly="readonly"{{/if}}/>
         </div>
         <div>
           <label>第三方处置清收费:</label>

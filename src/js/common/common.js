@@ -817,7 +817,7 @@ define(function(require, exports, module) {
         if (!findFlag) {
           breadCrumb.text(txt);
         } else {
-          txt += activeFirst.text();
+          txt += activeFirst.children('span').text();
           txt = '首页 > ' + txt;
           breadCrumb.text(txt);
         }

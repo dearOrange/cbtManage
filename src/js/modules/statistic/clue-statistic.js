@@ -14,17 +14,18 @@ define(function(require, exports, module) {
             month: date.getMonth() + 1
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
-
-        _this.traceMonths = [];
-        _this.traceCount = [];
-        _this.carRecoveryMonths = [];
-        _this.carRecoveryCount = [];
-        _this.upstreamTrendMonths = [];
-        _this.traceTrendMonths = [];
-        _this.downstreamTrendMonths = [];
-        _this.upstreamTrendCount = [];
-        _this.traceTrendCount = [];
-        _this.downstreamTrendCount = [];
+//      线索统计
+        _this.trendDaysOne = [];
+        _this.trendCountOne = [];
+        _this.trendCountTwo = [];
+//      线索匹配统计
+        _this.carCountOne = [];
+        _this.carCountTwo = [];
+        _this.carDaysOne = [];
+//      线索合规统计
+        _this.downCountOne = [];
+        _this.downCountTwo = [];
+        _this.downDaysOne = [];
         _this.countRate = 0;
 
         this.init = function() {
@@ -41,60 +42,70 @@ define(function(require, exports, module) {
         //开头数据
         this.initHead = function() {
             jh.utils.ajax.send({
-                url: '/statistics/general',
+                url: '/statistics/trace/general',
                 done: function(returnData) {
-//                  var upstreamTrendList = returnData.data.upstream.trendList;
-//                  var traceTrendList = returnData.data.trace.trendList;
-//                  var downstreamTrendList = returnData.data.downstream.trendList;
-//                  for (var a = 0; a < upstreamTrendList.length; a++) {
-//                      _this.upstreamTrendMonths.push(upstreamTrendList[a].months);
-//                      _this.upstreamTrendCount.push(upstreamTrendList[a].count);
-//                  }
-//                  for (var b = 0; b < traceTrendList.length; b++) {
-//                      _this.traceTrendMonths.push(traceTrendList[b].months);
-//                      _this.traceTrendCount.push(traceTrendList[b].count);
-//                  }
-//                  for (var c = 0; c < downstreamTrendList.length; c++) {
-//                      _this.downstreamTrendMonths.push(downstreamTrendList[c].months);
-//                      _this.downstreamTrendCount.push(downstreamTrendList[c].count);
-//                  }
-                    var dataFirst = jh.utils.template('statistic_first_template', returnData.data);
-                    $('#clue-echarts-list').html(dataFirst);
-                    
+                  var dataFirst = jh.utils.template('statistic_clue_template', returnData.data);
+                  $('#clue-echarts-list').html(dataFirst);
                 }
             });
         };
         this.initSection = function() {
+            var clueOne = jh.utils.formToJson($('#clueOne-information-form'));
+            var clueTwo = jh.utils.formToJson($('#clueTwo-information-form'));
+            var clueThree = jh.utils.formToJson($('#clueThree-information-form'));
+//          one
             jh.utils.ajax.send({
                 method: 'post',
-                url: '/statistics/traceTrend',
+                url: '/statistics/trace/trend',
                 contentType: 'application/json',
-                data: {
-                    tabName: 'trace',
-                    limit: '12'
-                },
+                data: clueOne,
                 done: function(returnData) {
-                    var trace = returnData.data.trace;
-                    for (var i = 0; i < trace.length; i++) {
-                        _this.traceMonths.push(trace[i].months);
-                        _this.traceCount.push(trace[i].count);
+                  var traceOne = returnData.data.traceTrend.leftList;
+                  var traceTwo = returnData.data.traceTrend.rightList;
+                  for (var a = 0; a < traceOne.length; a++) {
+                      _this.trendDaysOne.push(traceOne[a].days);
+                      _this.trendCountOne.push(traceOne[a].count);
+                  }
+                  for (var b = 0; b < traceTwo.length; b++) {
+                      _this.trendCountTwo.push(trace[a].count);
+                  }
+                  _this.sectionTable();
+                }
+            });
+//          two
+            jh.utils.ajax.send({
+                method: 'post',
+                url: '/statistics/trace/trend',
+                contentType: 'application/json',
+                data: clueTwo,
+                done: function(returnData) {
+                    var carOne = returnData.data.traceTrend.leftList;
+                    var carTwo = returnData.data.traceTrend.rightList;
+                    for (var j = 0; j < carOne.length; j++) {
+                        _this.carDaysOne.push(carOne[j].days);
+                        _this.carCountOne.push(carOne[j].count);
+                    }
+                    for (var k = 0; k < carTwo.length; k++) {
+                        _this.carCountTwo.push(carTwo[k].count);
                     }
                     _this.sectionTable();
                 }
             });
+//          three
             jh.utils.ajax.send({
                 method: 'post',
-                url: '/statistics/recoveryTrend',
+                url: '/statistics/trace/trend',
                 contentType: 'application/json',
-                data: {
-                    tabName: 'task',
-                    limit: '12'
-                },
+                data: clueThree,
                 done: function(returnData) {
-                    var carRecovery = returnData.data.task;
-                    for (var j = 0; j < carRecovery.length; j++) {
-                        _this.carRecoveryMonths.push(carRecovery[j].months);
-                        _this.carRecoveryCount.push(carRecovery[j].count);
+                    var downOne = returnData.data.traceTrend.leftList;
+                    var downTwo = returnData.data.traceTrend.rightList;
+                    for (var c = 0; c < downOne.length; c++) {
+                        _this.downDaysOne.push(downOne[c].days);
+                        _this.downCountOne.push(downOne[c].count);
+                    }
+                    for (var d = 0; d < downTwo.length; d++) {
+                        _this.downCountTwo.push(downTwo[d].count);
                     }
                     _this.sectionTable();
                 }
@@ -115,7 +126,7 @@ define(function(require, exports, module) {
                 xAxis: [
                     {
                         type : 'category',
-                        data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月','1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                        data : _this.trendDaysOne
                     }
                 ],
                 yAxis: [
@@ -127,24 +138,14 @@ define(function(require, exports, module) {
                     {
                         name:'合规线索',
                         type:'bar',
-                        data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3,2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
-                        markPoint : {
-                            data : [
-                                {type : 'max', name: '最大值'},
-                                {type : 'min', name: '最小值'}
-                            ]
-                        }
+                        barWidth: '80%',
+                        data:_this.trendCountOne
                     },
                     {
                         name:'不合规线索',
                         type:'bar',
-                        data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3,2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
-                        markPoint : {
-                            data : [
-                                {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
-                                {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
-                            ]
-                        }
+                        barWidth: '80%',
+                        data:_this.trendCountTwo
                     }
                 ]
             });
@@ -159,7 +160,7 @@ define(function(require, exports, module) {
                 xAxis: [
                     {
                         type : 'category',
-                        data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月','1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                        data : _this.downDaysOne
                     }
                 ],
                 yAxis: [
@@ -171,51 +172,33 @@ define(function(require, exports, module) {
                     {
                         name:'合规线索',
                         type:'bar',
-                        data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3,2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
-                        markPoint : {
-                            data : [
-                                {type : 'max', name: '最大值'},
-                                {type : 'min', name: '最小值'}
-                            ]
-                        }
+                        barWidth: '80%',
+                        data:_this.downCountOne
                     },
                     {
                         name:'不合规线索',
                         type:'bar',
-                        data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3,2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
-                        markPoint : {
-                            data : [
-                                {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
-                                {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
-                            ]
-                        }
+                        barWidth: '80%',
+                        data:_this.downCountTwo
                     }
                 ]
             });
             mainCarNum.setOption({
-                title: {
-                    text: '线索匹配统计',
-                },
                 tooltip: {
                     trigger: 'axis',
                     axisPointer : {            // 坐标轴指示器，坐标轴触发有效
                         type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                    },
-                    formatter: function (params){
-                        return params[0].name + '<br/>'
-                               + params[0].seriesName + ' : ' + params[0].value + '<br/>'
-                               + params[1].seriesName + ' : ' + (params[1].value + params[0].value);
                     }
                 },
                 legend: {
                     selectedMode:false,
-                    data:['Acutal', 'Forecast']
+                    data:['匹配成功', '线索总数']
                 },
                 calculable: true,
                 xAxis: [
                     {
                         type : 'category',
-                        data : ['Cosco','CMA','APL','OOCL','Wanhai','Zim']
+                        data : _this.carDaysOne
                     }
                 ],
                 yAxis: [
@@ -226,33 +209,30 @@ define(function(require, exports, module) {
                 ],
                 series: [
                     {
-                        name:'Acutal',
+                        name:'匹配成功',
                         type:'bar',
                         stack: 'sum',
-                        barCategoryGap: '50%',
+                        barWidth: '80%',
                         itemStyle: {
                             normal: {
                                 color: 'tomato',
                                 barBorderColor: 'tomato',
-                                barBorderWidth: 6,
-                                barBorderRadius:0,
                                 label : {
                                     show: true, position: 'insideTop'
                                 }
                             }
                         },
-                        data:[260, 200, 220, 120, 100, 80]
+                        data:_this.carCountTwo
                     },
                     {
-                        name:'Forecast',
+                        name:'线索总数',
                         type:'bar',
                         stack: 'sum',
+                        barWidth: '80%',
                         itemStyle: {
                             normal: {
                                 color: '#f0f0f0',
                                 barBorderColor: 'tomato',
-                                barBorderWidth: 6,
-                                barBorderRadius:0,
                                 label : {
                                     show: true, 
                                     position: 'top',
@@ -262,7 +242,7 @@ define(function(require, exports, module) {
                                 }
                             }
                         },
-                        data:[40, 80, 50, 80,80, 70]
+                        data:_this.carCountOne
                     }
                 ]
             });
@@ -319,38 +299,38 @@ define(function(require, exports, module) {
             page.init();
         };
 
-        window.initEntrustSort = function(obj, isSearch) {
-            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-            jh.utils.ajax.send({
-                method: 'post',
-                url: '/statistics/entrust',
-                contentType: 'application/json',
-                data: {
-                    yearMonth: obj.y + '-' + obj.M
-                },
-                isSearch: isSearch,
-                done: function(returnData) {
-                    var entrust = returnData.data;
-                    var noResultBox = $('#entrustNoResultBox');
-                    if (!entrust.length) {
-                        noResultBox.removeClass('hide');
-                        noResultBox.prev().addClass('hide');
-                        return false;
-                    } else {
-                        noResultBox.addClass('hide');
-                        noResultBox.prev().removeClass('hide');
-                    }
-                    var entrustContent = jh.utils.template('entrust_content_template', returnData);
-                    $('#entrustResultBox').html(entrustContent);
-                    for (var k = 0; k < entrust.length; k++) {
-                        _this.countRate = entrust[k].countRate;
-                        _this.pieContent(k, _this.countRate);
-                    }
-
-                }
-            });
-        };
+//      window.initEntrustSort = function(obj, isSearch) {
+//          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+//          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+//          jh.utils.ajax.send({
+//              method: 'post',
+//              url: '/statistics/entrust',
+//              contentType: 'application/json',
+//              data: {
+//                  yearMonth: obj.y + '-' + obj.M
+//              },
+//              isSearch: isSearch,
+//              done: function(returnData) {
+//                  var entrust = returnData.data;
+//                  var noResultBox = $('#entrustNoResultBox');
+//                  if (!entrust.length) {
+//                      noResultBox.removeClass('hide');
+//                      noResultBox.prev().addClass('hide');
+//                      return false;
+//                  } else {
+//                      noResultBox.addClass('hide');
+//                      noResultBox.prev().removeClass('hide');
+//                  }
+//                  var entrustContent = jh.utils.template('entrust_content_template', returnData);
+//                  $('#entrustResultBox').html(entrustContent);
+//                  for (var k = 0; k < entrust.length; k++) {
+//                      _this.countRate = entrust[k].countRate;
+//                      _this.pieContent(k, _this.countRate);
+//                  }
+//
+//              }
+//          });
+//      };
 
         this.registerEvent = function() {
 
@@ -378,14 +358,14 @@ define(function(require, exports, module) {
     /**
      * 渠道委托begin
      */
-    window.statisticEntrustMonthing = function() {
-        var obj = $dp.cal.newdate;
-        window.initEntrustSort(obj, true);
-    };
-    window.statisticEntrustYearing = function() {
-        var obj = $dp.cal.newdate;
-        window.initEntrustSort(obj, true);
-    };
+//  window.statisticEntrustMonthing = function() {
+//      var obj = $dp.cal.newdate;
+//      window.initEntrustSort(obj, true);
+//  };
+//  window.statisticEntrustYearing = function() {
+//      var obj = $dp.cal.newdate;
+//      window.initEntrustSort(obj, true);
+//  };
     /**
      * 渠道委托end
      */

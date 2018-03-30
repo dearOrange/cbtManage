@@ -2,12 +2,13 @@
   <div class="data-container colorbg">
     <div class="clearfix">
       <div class="information business-information pull-left">
-        <form id="clear-info-form">
+        <form id="channel-list-form">
           <p class="title-style">
             <span class="span-style">渠道发展线人统计</span>
             <span class="pull-right">
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputStart" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">至
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputEnd" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+              <input type="hidden" name="role" value="type_A" />
+              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputStart" name="begin" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">至
+              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputEnd" name="end" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
             </span>
           </p>
         </form>
