@@ -28,12 +28,27 @@
       <form id="clear-info-form">
         <p class="title-style">
           <span class="span-style">捕头分布情况</span>
-          <input type="hidden" name="type" value="carRecovery" />
-          <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="carRecoveryInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticRecoveryMonthing,ychanging:statisticRecoveryYearing})">
         </p>
       </form>
       <div>
-        <div id="mainBarNum" class="mainInformate" style="width:100%;height:500px;"></div>
+        <div id="mainBarNum" class="mainInformate" style="width:70%;height:500px;"></div>
+        <div id="informateTable">
+          <p>广东省共有599个捕头</p>
+          <div class="data-container">
+            <table class="dataShow">
+              <thead>
+                <tr>
+                  <th width="8%">市级</th>
+                  <th width="8%">线人数量</th>
+                  <th width="8%">市级</th>
+                  <th width="8%">线人数量</th>
+                </tr>
+              </thead>
+              <tbody id="clear_info_container"></tbody>
+            </table>
+            <div class="page-box pagination" id="page_clear_container"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -79,6 +94,7 @@
     <td>{{item.rank}}</td>
     <td>{{item.dname}}</td>
     <td>{{item.countTrace}}</td>
+    <td>{{item.countTrace}}</td>
   </tr>
   {{/each}}
 </script>
@@ -88,6 +104,7 @@
   <tr>
     <td>{{index+1}}</td>
     <td>{{item.dname}}</td>
+    <td>{{item.countRecovery}}</td>
     <td>{{item.countRecovery}}</td>
   </tr>
   {{/each}}
