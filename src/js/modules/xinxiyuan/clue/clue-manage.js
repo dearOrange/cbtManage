@@ -91,74 +91,75 @@ define(function(require, exports, module) {
         return false;
       }
       var tip = state === 1 ? '通过' : '拒绝';
-        jh.utils.ajax.send({
-          url: '/trace/getRewardLevel',
-          data: {
-            traceIds: ids
-          },
-          done: function(returnData) {
-            /**
-             * 如果固定奖励金则直接进行提示信息并通过
-             * 如果是浮动奖励金则选择档位
-             */
-            var result = returnData.data;
-            if (result.kind === '0' || state != '1') {
-              contentStr = '确定' + tip + '吗？';
-            } else {
-              contentStr = '<div class="text-center"><span>确定' + tip + '吗？</span><br/>';
-              contentStr += '';
-              result.bounty = JSON.parse(result.bounty);
-              for (var i = 0, num = result.bounty.length; i < num; i++) {
-                var item = result.bounty[i];
-                var jsonStr = JSON.stringify(item);
-                contentStr += '<a href="javascript:void(0)" class="button white_btn mr10 activityItem" data-name="' + item.name + '" data-min="' + item.min + '" data-max="' + item.max + '">' + item.name + '</a>';
-              }
-              contentStr += '</div>';
+      jh.utils.ajax.send({
+        url: '/trace/getRewardLevel',
+        data: {
+          traceIds: ids
+        },
+        done: function(returnData) {
+          /**
+           * 如果固定奖励金则直接进行提示信息并通过
+           * 如果是浮动奖励金则选择档位
+           */
+          var result = returnData.data;
+          if (result.kind === '0' || state != '1') {
+            contentStr = '确定' + tip + '吗？';
+          } else {
+            contentStr = '<div class="text-center"><span>确定' + tip + '吗？</span><br/>';
+            contentStr += '';
+            result.bounty = JSON.parse(result.bounty);
+            for (var i = 0, num = result.bounty.length; i < num; i++) {
+              var item = result.bounty[i];
+              var jsonStr = JSON.stringify(item);
+              contentStr += '<a href="javascript:void(0)" class="button white_btn mr10 activityItem" data-name="' + item.name + '" data-min="' + item.min + '" data-max="' + item.max + '">' + item.name + '</a>';
             }
-
-            jh.utils.alert({
-              content: contentStr,
-              ok: function() {
-                var selectItem = $('.activityItem').filter('.active'),
-                  activityJson = '';
-                if (result.kind === "1") {
-                  if (selectItem.length === 0) {
-                    jh.utils.alert({
-                      content: '请选择相应奖励档位',
-                      ok: true
-                    });
-                    return false;
-                  }
-                  var jsons = {
-                    name: selectItem.data('name'),
-                    min: selectItem.data('min'),
-                    max: selectItem.data('max')
-                  };
-                  activityJson = JSON.stringify(jsons);
-                }
-                jh.utils.ajax.send({
-                  url: '/trace/check',
-                  method: 'post',
-                  data: {
-                    traceIds: ids,
-                    validState: state,
-                    kind: result.kind,
-                    activityJson: activityJson
-                  },
-                  done: function(returnData) {
-                    jh.utils.alert({
-                      content: '操作成功',
-                      ok: true,
-                      cancel: true
-                    });
-                    _this.initContent();
-                  }
-                });
-              },
-              cancel: true
-            });
+            contentStr += '</div>';
           }
-        });
+
+          jh.utils.alert({
+            content: contentStr,
+            ok: function() {
+              var selectItem = $('.activityItem').filter('.active'),
+                activityJson = '';
+              if (result.kind === "1") {
+                if (selectItem.length === 0) {
+                  jh.utils.alert({
+                    content: '请选择相应奖励档位',
+                    ok: true
+                  });
+                  return false;
+                }
+                var jsons = {
+                  name: selectItem.data('name'),
+                  min: selectItem.data('min'),
+                  max: selectItem.data('max')
+                };
+                console.log(jsons);
+                activityJson = JSON.stringify(jsons);
+              }
+              jh.utils.ajax.send({
+                url: '/trace/check',
+                method: 'post',
+                data: {
+                  traceIds: ids,
+                  validState: state,
+                  kind: result.kind,
+                  activityJson: activityJson
+                },
+                done: function(returnData) {
+                  jh.utils.alert({
+                    content: '操作成功',
+                    ok: true,
+                    cancel: true
+                  });
+                  _this.initContent();
+                }
+              });
+            },
+            cancel: true
+          });
+        }
+      });
     };
 
     this.registerEvent = function() {
