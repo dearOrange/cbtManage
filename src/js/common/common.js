@@ -1477,6 +1477,15 @@ define(function(require, exports, module) {
           } else {
             el.removeClass('red-border');
           }
+          if(el.get(0).type == 'radio'){
+              if (!isRight) {
+                  error.addClass('error');
+                  el.siblings('span.error').remove();
+                  el.parent().append(error);
+              } else {
+                  el.siblings('span.error').remove();
+              }
+          }
         },
         success: function(error, element) {
           $(element).removeClass('red-border');

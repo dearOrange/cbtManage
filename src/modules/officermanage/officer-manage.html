@@ -18,6 +18,15 @@
                         <input type="text" class="search-input" name="downstream" maxlength="20">
                     </td>
                     <td>
+                        <label class="label">认证状态：</label>
+                        <select name="state">
+                          <option value="">全部</option>
+                          <option value="unavailable">认证失败</option>
+                          <option value="available">已认证</option>
+                          <option value="wait">待认证</option>
+                        </select>
+                    </td>
+                    <td>
                         <input type="submit" value="查询" class="button search-button">
                     </td>
                 </tr>
