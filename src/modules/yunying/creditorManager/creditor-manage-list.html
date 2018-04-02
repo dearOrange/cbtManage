@@ -1,124 +1,121 @@
 <div class="dataContent">
-	<div class="search-container">
-        <form id="creditorManager-manage-form">
-            <table class="common_query textLeft search-content">
-                <tr class="new-style">
-                    <td>
-                        <label class="label">负责人：</label>
-                        <input type="text" class="search-input" name="linkman">
-                    </td>
-                    <td>
-                        <label class="label">主体类型：</label>
-                        <select name="type">
-                        	<option value="">全部</option>
-                            <option value="UPSTREAM_PERSONAL">个人</option>
-                            <option value="UPSTREAM_ENTERPRISE">企业</option>
-                        </select>
-                    </td>
-                    <td>
-                        <label class="label">债权方：</label>
-                        <input type="text" class="search-input" name="companyName">
-                    </td>
-                    <td>
-                        <label class="label">公司地址：</label>
-                        <input type="text" class="search-input" name="address">
-                    </td>
-                </tr>
-                <tr class="new-style">
-                    <td>
-                        <label class="label">通过认证时间：</label>
-                        <input type="text" class="search-input hand" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
-                        <input type="text" class="search-input hand" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
-                    </td>
-                    <td>
-                        <label class="label">运营经理：</label>
-                        <select name="businessManagerId" id="operateManage">
-                            <option value="">全部</option>
-                        </select>
-                    </td>
-                    <td>
-                        <label class="label">认证状态：</label>
-                        <select name="state">
-                            <option value="">全部</option>
-                            <option value="new">未初筛</option>
-                            <option value="sifte">已初筛</option>
-                            <option value="wait">待认证</option>
-                            <option value="unavailable">认证不通过</option>
-                            <option value="available">已认证</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="submit" value="查询" class="button search-button">
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-    <div class="data-container">
-        <table class="dataShow">
-            <thead>
-                <tr>
-                    <th width="4%">序号</th>
-                    <th width="18%">债权方</th>
-                    <th width="10%">主体类型</th>
-                    <th width="14%">法人</th>
-                    <th width="10%">负责人</th>
-                    <th width="8%">联系电话</th>
-                    <th width="8%">认证状态</th>
-                    <th width="10%">通过认证时间</th>
-                    <th width="6%">运营经理</th>
-                    <th width="10%">操作</th>
-                </tr>
-            </thead>
-            <tbody id="creditorManager_manage_container"></tbody>
-        </table>
-        <div class="page-box pagination" id="page_container"></div>
-    </div>
+  <div class="search-container">
+    <form id="creditorManager-manage-form">
+      <table class="common_query textLeft search-content">
+        <tr class="new-style">
+          <td>
+            <label class="label">负责人：</label>
+            <input type="text" class="search-input" name="linkman">
+          </td>
+          <td>
+            <label class="label">主体类型：</label>
+            <select name="type">
+              <option value="">全部</option>
+              <option value="UPSTREAM_PERSONAL">个人</option>
+              <option value="UPSTREAM_ENTERPRISE">企业</option>
+            </select>
+          </td>
+          <td>
+            <label class="label">债权方：</label>
+            <input type="text" class="search-input" name="companyName">
+          </td>
+          <td>
+            <label class="label">公司地址：</label>
+            <input type="text" class="search-input" name="address">
+          </td>
+        </tr>
+        <tr class="new-style">
+          <td>
+            <label class="label">通过认证时间：</label>
+            <input type="text" class="search-input hand begin-input" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
+            <input type="text" class="search-input hand end-input" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
+          </td>
+          <td>
+            <label class="label">运营经理：</label>
+            <select name="businessManagerId" id="operateManage">
+              <option value="">全部</option>
+            </select>
+          </td>
+          <td>
+            <label class="label">认证状态：</label>
+            <select name="state">
+              <option value="">全部</option>
+              <option value="new">未初筛</option>
+              <option value="sifte">已初筛</option>
+              <option value="wait">待认证</option>
+              <option value="unavailable">认证不通过</option>
+              <option value="available">已认证</option>
+            </select>
+          </td>
+          <td>
+            <input type="submit" value="查询" class="button search-button">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div class="data-container">
+    <table class="dataShow">
+      <thead>
+        <tr>
+          <th width="4%">序号</th>
+          <th width="16%">债权方</th>
+          <th width="7%">主体类型</th>
+          <th width="14%">法人</th>
+          <th width="10%">负责人</th>
+          <th width="10%">联系电话</th>
+          <th width="6%">认证状态</th>
+          <th width="10%">通过认证时间</th>
+          <th width="7%">运营经理</th>
+          <th width="16%">操作</th>
+        </tr>
+      </thead>
+      <tbody id="creditorManager_manage_container"></tbody>
+    </table>
+    <div class="page-box pagination" id="page_container"></div>
+  </div>
 </div>
-
 <script type="text/template" id="creditorManager_content_template">
-    {{ each list item index }}
-    <tr class="trData">
-        <td>{{index+1}}</td>
-        <td>{{item.companyName}}</td>
-        <td>{{menuState(item.type)}}</td>
-        <td>{{item.legalPerson}}</td>
-        <td>{{item.linkman}}</td>
-        <td>{{item.contactPhone}}</td>
-        <td>{{officerState(item.state)}}</td>
-        <td>{{item.passAt}}</td>
-        <td>{{item.businessManagerName}}</td>
-        <td>
-            <a data-id="{{item.id}}" class="admin-detail button">详情</a>
-            <a data-id="{{item.id}}" class="admin-distribution oneStyle button">分配</a>
-        </td>
-    </tr>
-    {{/each}}
+  {{ each list item index }}
+  <tr class="trData">
+    <td>{{index+1}}</td>
+    <td>{{item.companyName}}</td>
+    <td>{{menuState(item.type)}}</td>
+    <td>{{item.legalPerson}}</td>
+    <td>{{item.linkman}}</td>
+    <td>{{item.contactPhone}}</td>
+    <td>{{officerState(item.state)}}</td>
+    <td>{{item.passAt}}</td>
+    <td>{{item.businessManagerName}}</td>
+    <td>
+      <a data-id="{{item.id}}" class="admin-detail button">详情</a>
+      <a data-id="{{item.id}}" class="admin-distribution oneStyle button">分配</a>
+    </td>
+  </tr>
+  {{/each}}
 </script>
 <script type="text/template" id="creditorManage_content_template">
-    <div style="width:460px;">
-        <table>
-            <tr>
-                <td>
-                    <form id="creditorManager_list_distribution_form" style="text-align: left;min-height: 120px;max-height: 200px;overflow-y: auto;">
-                        {{each data item index}}
-                        {{if item.name}}
-                        <p>
-                            <label class="hand">
-                                <input type="radio" name="businessManagerId" value="{{item.id}}" data-name="{{item.name}}" class="hand" /> {{item.name}}
-                            </label>
-                        </p>
-                        {{/if}}
-                        {{/each}}
-                    </form>
-                </td>
-            </tr>
-        </table>
-    </div>
+  <div style="width:460px;">
+    <table>
+      <tr>
+        <td>
+          <form id="creditorManager_list_distribution_form" style="text-align: left;min-height: 120px;max-height: 200px;overflow-y: auto;">
+            {{each data item index}} {{if item.name}}
+            <p>
+              <label class="hand">
+                <input type="radio" name="businessManagerId" value="{{item.id}}" data-name="{{item.name}}" class="hand" /> {{item.name}}
+              </label>
+            </p>
+            {{/if}} {{/each}}
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
 </script>
 <script type="text/javascript">
 seajs.use('modules/yunying/creditorManager/creditor-manage-list', function(CreditorManage) {
-    var CreditorManage = new CreditorManage();
-    CreditorManage.init();
+  var CreditorManage = new CreditorManage();
+  CreditorManage.init();
 });
 </script>
