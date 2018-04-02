@@ -1,7 +1,25 @@
 <div class="dataContent">
+  <div class="clearfix">
+    <a href="javascript:;" class="button gobackPage goBack">返回</a>
+  </div>
+  <div class="search-container">
+    <form id="clue-manage-form">
+      <table class="common_query textLeft search-content">
+        <tr>
+          <td colspan="6">
+            <ol id="taskState" class="stateChange pull-left">
+              <li data-value="1" data-state="matched" class="taskState active">渠道发展线人统计</li>
+              <li data-value="0" data-state="unmatched" class="taskState">渠道发展捕头统计</li>
+              <input type="hidden" name="isMatch" id="state" value="1">
+            </ol>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
   <div class="data-container colorbg">
-    <div class="clearfix">
-      <div class="information business-information pull-left">
+    <div class="clue-left-layout pull-left">
+      <div class="information">
         <form id="channel-list-form">
           <p class="title-style">
             <span class="span-style">渠道发展线人统计</span>
@@ -12,120 +30,28 @@
             </span>
           </p>
         </form>
-        <div id="mainCarNum" class="mainInformate" style="width:70%;height:300px;"></div>
+        <div id="mainCarNum" class="mainInformate" style="width:100%;height:380px;"></div>
       </div>
-      <div class="information business-list-information pull-right">
-        <form id="clear-info-form">
-          <p class="title-style">
-            <span class="span-style">月度排名</span>
-            <span class="pull-right">
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
-            </span>
-          </p>
-        </form>
-        <div id="informateTable">
-          <div class="data-container">
-            <table class="dataShow">
-              <thead>
-                <tr>
-                  <th width="4%">排名</th>
-                  <th width="8%">名称</th>
-                  <th width="8%">数量</th>
-                </tr>
-              </thead>
-              <tbody id="statistic_container">
-              </tbody>
-            </table>
-            <div class="page-box pagination" id="page_container"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="information">
-      <div id="informateTable">
+      <div class="information">
         <div class="data-container">
           <table class="dataShow">
             <thead>
               <tr>
                 <th width="4%">序号</th>
-                <th width="8%">名称</th>
-                <th width="8%">债权方类型</th>
-                <th width="8%">联系人姓名</th>
+                <th width="8%">姓名</th>
+                <th width="8%">账号</th>
+                <th width="16%">区域</th>
                 <th width="8%">联系电话</th>
+                <th width="10%">最新线索上传地区</th>
                 <th width="15%">注册时间</th>
                 <th width="8%">下线</th>
               </tr>
             </thead>
-            <tbody id="business_statistic_container">
-            </tbody>
+            <tbody id="clear_info_container"></tbody>
           </table>
-          <div class="page-box pagination" id="page_container"></div>
+          <div class="page-box pagination" id="page_clear_container"></div>
         </div>
       </div>
-    </div>
-    <div class="clearfix">
-      <div class="information business-information pull-left">
-        <form id="clear-info-form">
-          <p class="title-style">
-            <span class="span-style">渠道发展捕头统计</span>
-            <span class="pull-right">
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputStart" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">至
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputEnd" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
-            </span>
-          </p>
-        </form>
-        <div id="mainCarNum" class="mainInformate" style="width:70%;height:300px;"></div>
-      </div>
-      <div class="information business-list-information pull-right">
-        <form id="clear-info-form">
-          <p class="title-style">
-            <span class="span-style">月度排名</span>
-            <span class="pull-right">
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
-            </span>
-          </p>
-        </form>
-        <div id="informateTable">
-          <div class="data-container">
-            <table class="dataShow">
-              <thead>
-                <tr>
-                  <th width="4%">排名</th>
-                  <th width="8%">名称</th>
-                  <th width="8%">数量</th>
-                </tr>
-              </thead>
-              <tbody id="statistic_container">
-              </tbody>
-            </table>
-            <div class="page-box pagination" id="page_container"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="information">
-      <div id="informateTable">
-        <div class="data-container">
-          <table class="dataShow">
-            <thead>
-              <tr>
-                <th width="4%">序号</th>
-                <th width="8%">名称</th>
-                <th width="8%">债权方类型</th>
-                <th width="8%">联系人姓名</th>
-                <th width="8%">联系电话</th>
-                <th width="15%">注册时间</th>
-                <th width="8%">下线</th>
-              </tr>
-            </thead>
-            <tbody id="business_statistic_container">
-            </tbody>
-          </table>
-          <div class="page-box pagination" id="page_container"></div>
-        </div>
-      </div>
-    </div>
-    <div class="">
       <div class="information">
         <form id="clear-info-form">
           <p class="title-style">
@@ -143,19 +69,42 @@
           <table class="dataShow">
             <thead>
               <tr>
-                <th width="4%">排名</th>
-                <th width="8%">名称</th>
-                <th width="8%">账号</th>
-                <th width="16%">区域</th>
-                <th width="8%">联系电话</th>
-                <th width="10%">最新线索上传地区</th>
-                <th width="15%">注册时间</th>
-                <th width="8%">任务数</th>
+                <th width="10%">渠道</th>
+                <th width="8%">出委托量</th>
+                <th width="8%">清收数量</th>
+                <th width="8%">总处置费</th>
+                <th width="8%">总服务费</th>
+                <th width="8%">信息费</th>
               </tr>
             </thead>
             <tbody id="clear_info_container"></tbody>
           </table>
           <div class="page-box pagination" id="page_clear_container"></div>
+        </div>
+      </div>
+    </div>
+    <div class="clue-right-layout pull-right">
+      <div class="informateTable">
+        <!--<form id="clear-info-form">-->
+          <p>
+            <span class="span-style">月度排名</span>
+            <input type="hidden" name="type" value="tracePass" />
+            <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+          </p>
+        <!--</form>-->
+        <div class="data-container">
+          <table class="dataShow">
+            <thead>
+              <tr>
+                <th width="4%">排名</th>
+                <th width="8%">名称</th>
+                <th width="8%">数量</th>
+              </tr>
+            </thead>
+            <tbody id="statistic_container">
+            </tbody>
+          </table>
+          <div class="page-box pagination" id="page_container"></div>
         </div>
       </div>
     </div>

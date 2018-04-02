@@ -60,6 +60,7 @@ define(function(require, exports, module) {
                 contentType: 'application/json',
                 data: clueOne,
                 done: function(returnData) {
+                  console.log(returnData)
                   var traceOne = returnData.data.traceTrend.leftList;
                   var traceTwo = returnData.data.traceTrend.rightList;
                   for (var a = 0; a < traceOne.length; a++) {

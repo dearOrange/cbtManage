@@ -321,14 +321,20 @@ p.closeStatus {
 
 
 /*业务统计*/
-
+.dataContent .data-container .clue-left-layout {
+  width:60%;
+  
+}
+.dataContent .data-container .clue-right-layout {
+  width:35%;
+}
 .dataContent .data-container ul.echarts-list {
     width: 100%;
     height: 220px;
     margin-top: 10px;
 }
 .dataContent .data-container ul#clue-echarts-list {
-  height:60px;
+  height:126px;
   margin-top: 10px;
 }
 
@@ -343,8 +349,8 @@ p.closeStatus {
 }
 
 .dataContent .data-container ul#clue-echarts-list li {
-  height:26px;
-  width: 20%;
+  height:86px;
+  width: 27.3%;
   float: left;
   background: #fff;
   margin: 20px 2% 0 0;
@@ -374,7 +380,7 @@ p.closeStatus {
 
 .dataContent .data-container .information,
 .dataContent .data-container .channelPie {
-    width: 96%;
+    width: 100%;
     height: 450px;
     margin: 30px 0;
     padding: 15px;
@@ -404,36 +410,26 @@ p.closeStatus {
     border-bottom: 4px solid #3398DB;
 }
 
-;
-
-.dataContent .data-container .information div {
-    padding: 5px;
-}
-
-.dataContent .data-container .information div .mainInformate {
-    float: left;
-    margin-top: 30px;
-}
-
-.dataContent .data-container .information div #informateTable {
-    float: right;
-    width: 28%;
+.dataContent .data-container .clue-right-layout div.informateTable {
+    width: 100%;
     height: 300px;
-    text-align: center;
-    margin-left: 10px;
+    background: #fff;
+    margin: 30px 2% 0 0;
+    padding: 10px 2%;
+    box-shadow: 0px -3px 18px -2px #b5b5b5;
 }
 
-.dataContent .data-container .information div #informateTable p {
+.dataContent .data-container .clue-right-layout div.informateTable p {
     font-weight: 900;
     margin: 10px 0;
 }
 
-.dataContent .data-container .information div #informateTable ul li {
+.dataContent .data-container .information div.informateTable ul li {
     width: 100%;
     height: 30px;
 }
 
-.dataContent .data-container .information div #informateTable ul li span {
+.dataContent .data-container .information div.informateTable ul li span {
     display: inline-block;
     width: 26%;
 }

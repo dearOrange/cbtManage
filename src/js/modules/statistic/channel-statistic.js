@@ -202,9 +202,19 @@ define(function(require, exports, module) {
 
         this.registerEvent = function() {
 
-            $('select').select2({
-                minimumResultsForSearch: Infinity
-            });
+//          $('select').select2({
+//              minimumResultsForSearch: Infinity
+//          });
+            //切换状态
+            $('body').off('click', '.taskState').on('click', '.taskState', function(event, param) {
+              $(this).addClass("active").siblings().removeClass("active");
+              $('#state').val($(this).data('value'));
+              if (param && param === 'autoClick') {
+      
+              } else {
+//              _this.initContent('tab');
+              }
+            })
         };
     }
     /**

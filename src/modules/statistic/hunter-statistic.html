@@ -1,52 +1,63 @@
 <div class="dataContent">
+  <div class="clearfix">
+    <a href="javascript:;" class="button gobackPage goBack">返回</a>
+  </div>
   <div class="data-container colorbg">
-    <ul id="clue-echarts-list"></ul>
-    <div class="information">
-      <form id="information-form">
-        <p class="title-style">
-          <span class="span-style">新增捕头</span>
-          <input type="hidden" name="type" value="trace" />
-          <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
-        </p>
-      </form>
-      <div>
-        <div id="mainInformate" class="mainInformate" style="width:100%;height:300px;"></div>
+    <div class="clearfix">
+      <div class="clue-left-layout pull-left">
+        <ul id="clue-echarts-list"></ul>
+        <div class="information">
+          <form id="information-form">
+            <p class="title-style">
+              <span class="span-style">新增捕头</span>
+              <input type="hidden" name="type" value="trace" />
+              <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
+            </p>
+          </form>
+          <div>
+            <div id="mainInformate" class="mainInformate" style="width:100%;height:300px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clue-right-layout pull-right">
+        <div class="information">
+          <form id="clear-info-form">
+            <p class="title-style">
+              <span class="span-style">发展捕头对应的渠道</span>
+              <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+            </p>
+          </form>
+          <div>
+            <div id="mainCarNum" class="mainInformate" style="width:100%;height:300px;"></div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="information">
-      <form id="clear-info-form">
-        <p class="title-style">
-          <span class="span-style">发展捕头对应的渠道</span>
-          <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
-        </p>
-      </form>
-      <div>
-        <div id="mainCarNum" class="mainInformate" style="width:100%;height:300px;"></div>
-      </div>
-    </div>
-    <div class="information" style="height:600px;">
-      <form id="clear-info-form">
-        <p class="title-style">
-          <span class="span-style">捕头分布情况</span>
-        </p>
-      </form>
-      <div>
-        <div id="mainBarNum" class="mainInformate" style="width:70%;height:500px;"></div>
-        <div id="informateTable">
-          <p>广东省共有599个捕头</p>
-          <div class="data-container">
-            <table class="dataShow">
-              <thead>
-                <tr>
-                  <th width="8%">市级</th>
-                  <th width="8%">线人数量</th>
-                  <th width="8%">市级</th>
-                  <th width="8%">线人数量</th>
-                </tr>
-              </thead>
-              <tbody id="clear_info_container"></tbody>
-            </table>
-            <div class="page-box pagination" id="page_clear_container"></div>
+    <div>
+      <div class="information" style="height:600px;">
+        <form id="clear-info-form">
+          <p class="title-style">
+            <span class="span-style">捕头分布情况</span>
+            <span>广东省共有599个捕头</span>
+          </p>
+        </form>
+        <div>
+          <div id="mainBarNum" class="pull-left" style="width:70%;height:500px;"></div>
+          <div class="informateTable pull-left" style="width:28%;">
+            <div class="data-container">
+              <table class="dataShow">
+                <thead>
+                  <tr>
+                    <th width="8%">市级</th>
+                    <th width="8%">线人数量</th>
+                    <th width="8%">市级</th>
+                    <th width="8%">线人数量</th>
+                  </tr>
+                </thead>
+                <tbody id="clear_info_container"></tbody>
+              </table>
+              <div class="page-box pagination" id="page_clear_container"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -55,36 +66,38 @@
 </div>
 <script type="text/template" id="statistic_first_template">
   <li>
-    <p>
-      <span style="float:left;">
-            <i>今日捕头：</i>
-            <i>{{task.currentDayRecord}}</i>
-        </span>
-      <span style="float:right;">
-            <i>环比昨日</i>
-            <i>少{{task.currentMonthRecord}}个</i>
-        </span>
-    </p>
+    <table>
+      <tr>
+        <th>今日捕头</th>
+        <th>环比昨日</th>
+      </tr>
+      <tr>
+        <td>{{task.currentDayRecord}}</td>
+        <td>{{task.currentMonthRecord}}</td>
+      </tr>
+    </table>
   </li>
   <li>
-    <p>
-      <span style="float:left;">
-            <i>本月捕头：</i>
-            <i>{{upstream.allRecord}}</i>
-        </span>
-      <span style="float:right;">
-            <i>环比上月</i>
-            <i>多{{upstream.currentMonthRecord}}个</i>
-        </span>
-    </p>
+    <table>
+      <tr>
+        <th>本月捕头</th>
+        <th>环比上月</th>
+      </tr>
+      <tr>
+        <td>{{upstream.allRecord}}</td>
+        <td>{{upstream.currentMonthRecord}}</td>
+      </tr>
+    </table>
   </li>
   <li>
-    <p>
-      <span style="float:left;">
-          <i>捕头总计：</i>
-          <i>{{downstream.allRecord}}</i>
-        </span>
-    </p>
+    <table>
+    	<tr>
+    	  <th>捕头总计</th>
+    	</tr>
+    	<tr>
+    	  <td>{{downstream.allRecord}}</td>
+    	</tr>
+    </table>
   </li>
 </script>
 
