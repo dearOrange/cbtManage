@@ -68,13 +68,14 @@ define(function(require, exports, module) {
           if (dataInfo.isActivity === false) {
             $('.activity-content').html('暂无活动');
           } else {
-            $('.title').html(dataInfo.title);
-            $('.activity').html(dataInfo.activity);
-            $('.reactivity').html(dataInfo.referrerTrace);
-            $('.endAt').html(dataInfo.endAt);
-            $('.startAt').html(dataInfo.startAt);
-            $('.newMoney').html(dataInfo.firstTrace);
-            $('.firstMoney').html(dataInfo.referrerFirstTrace);
+            var parentObj = $('#activity-content');
+            parentObj.find('.title').html(dataInfo.title);
+            parentObj.find('.activity').html(dataInfo.activity);
+            parentObj.find('.reactivity').html(dataInfo.referrerTrace);
+            parentObj.find('.endAt').html(dataInfo.endAt);
+            parentObj.find('.startAt').html(dataInfo.startAt);
+            parentObj.find('.newMoney').html(dataInfo.firstTrace);
+            parentObj.find('.firstMoney').html(dataInfo.referrerFirstTrace);
           }
         }
       });
