@@ -31,14 +31,14 @@ define(function(require, exports, module) {
         if(type === 'all'){
           thirdpartyPrice.addClass('required').parent().removeClass('hide');
           thirdpartyPrice.val('');
-          if(!_this.assetPrice) {
+          if(_this.assetPrice === '') {
             assetPrice.val('');
           }
           _this.allType();
         }else{
           thirdpartyPrice.removeClass('required').parent().addClass('hide');
           thirdpartyPrice.val(0);
-          if(!_this.assetPrice) {
+          if(_this.assetPrice === '') {
             assetPrice.val('');
           }
           _this.traceType();
@@ -61,7 +61,7 @@ define(function(require, exports, module) {
         _this.numPlus = _this.num - baileePrice.val();
         var assetPrice = _this.numPlus - $('#assetPrice').val();
         assetPrice = assetPrice < 0 ? 0 : assetPrice;
-        if(!_this.assetPrice) {
+        if(_this.assetPrice === '') {
           $('#assetPrice').change(function() {
             $('#thirdpartyPrice').val(assetPrice);
           })
@@ -71,7 +71,6 @@ define(function(require, exports, module) {
       });
     };
     this.traceType = function() {
-      
       $('body').off('change', '#finalPrice').on('change', '#finalPrice', function() {
         var me = $(this), baileePrice = $('#baileePrice');
         _this.num = parseFloat($.trim(me.val()));//总处置费
@@ -82,7 +81,7 @@ define(function(require, exports, module) {
           baileePrice.val('');
           return false;
         } else {
-          if(!_this.assetPrice) {
+          if(_this.assetPrice === '') {
             baileePrice.val((_this.num * 0.1).toFixed(2));//如果本身已经填写过费用，则不再重新计算，以填写的为准
             _this.numPlus = _this.num - baileePrice.val();
             $('#assetPrice').val(_this.numPlus);
