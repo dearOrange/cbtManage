@@ -219,9 +219,13 @@ define(function(require, exports, module) {
         $(this).addClass("active").siblings().removeClass("active");
         $('#state').val(mine.data('value'))
         if (state === 1) {
+          $('.second_activity').addClass('hide');
+          $('.first_activity').removeClass('hide');
           $('#increate-award').removeClass('hide');
           $('#increate-creditor-award').addClass('hide');
         } else {
+          $('.first_activity').addClass('hide');
+          $('.second_activity').removeClass('hide');
           $('#increate-award').addClass('hide');
           $('#increate-creditor-award').removeClass('hide');
         }
