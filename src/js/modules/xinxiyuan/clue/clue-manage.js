@@ -68,6 +68,13 @@ define(function(require, exports, module) {
           if (dataInfo.isActivity === false) {
             $('.activity-content').html('暂无活动');
           } else {
+            if(dataInfo.kind === '0') {
+              $('.fix_content').removeClass('hide');
+              $('.float_content').addClass('hide');
+            }else {
+              $('.fix_content').addClass('hide');
+              $('.float_content').removeClass('hide');
+            }
             var parentObj = $('#activity-content');
             parentObj.find('.title').html(dataInfo.title);
             parentObj.find('.activity').html(dataInfo.activity);

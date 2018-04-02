@@ -21,29 +21,29 @@ define(function(require, exports, module) {
       this.registerEvent();
     };
     this.registerEvent = function() {
+        //费用类型
+        $('body').off('change', '#unconfirmedType').on('change', '#unconfirmedType', function() {
+          var me = $(this);
+          var type = me.val(), thirdpartyPrice = $('#thirdpartyPrice'), assetPrice = $('#assetPrice');
+          $('#finalPrice').val('');
+          $('#baileePrice').val('');
+          if(type === 'all'){
+            thirdpartyPrice.addClass('required').parent().removeClass('hide');
+            thirdpartyPrice.val('');
+            if(_this.assetPrice === '') {
+              assetPrice.val('');
+            }
+            _this.allType();
+          }else{
+            thirdpartyPrice.removeClass('required').parent().addClass('hide');
+            thirdpartyPrice.val(0);
+            if(_this.assetPrice === '') {
+              assetPrice.val('');
+            }
+            _this.traceType();
+          }
+        });
       
-      //费用类型
-      $('body').off('change', '#unconfirmedType').on('change', '#unconfirmedType', function() {
-        var me = $(this);
-        var type = me.val(), thirdpartyPrice = $('#thirdpartyPrice'), assetPrice = $('#assetPrice');
-        $('#finalPrice').val('');
-        $('#baileePrice').val('');
-        if(type === 'all'){
-          thirdpartyPrice.addClass('required').parent().removeClass('hide');
-          thirdpartyPrice.val('');
-          if(_this.assetPrice === '') {
-            assetPrice.val('');
-          }
-          _this.allType();
-        }else{
-          thirdpartyPrice.removeClass('required').parent().addClass('hide');
-          thirdpartyPrice.val(0);
-          if(_this.assetPrice === '') {
-            assetPrice.val('');
-          }
-          _this.traceType();
-        }
-      });
     };
     this.allType = function() {
       $('body').off('change', '#finalPrice').on('change', '#finalPrice', function() {
@@ -126,13 +126,19 @@ define(function(require, exports, module) {
           taskId: args.id
         },
         done: function(returnData) {
+          _this.returnData = returnData.data;
           returnData.menuState = jh.utils.menuState;
           returnData.viewImgRoot = jh.config.viewImgRoot;
           returnData.taskId = args.id;
           returnData.baileePrice = (parseFloat(returnData.data.finalPrice) * 0.1).toFixed(2);
           var creditorStr = jh.utils.template('restoration_detail_template', returnData);
           $('.restorationContent').html(creditorStr);
-          
+          console.log(_this.returnData);
+          if(_this.returnData.entrust === 'trace') {
+            $('.thirdpartyPrice_box').addClass('hide');
+          } else {
+            $('.thirdpartyPrice_box').removeClass('hide');
+          }
           _this.baileePrice = returnData.baileePrice;
           _this.assetPrice = returnData.data.assetPrice;
           _this.num = parseFloat($.trim($('#finalPrice').val()));

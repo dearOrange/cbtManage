@@ -63,7 +63,7 @@
         	</div>
         	{{/each}} 
         </div>
-		<div class="hopeprice">
+		    <div class="hopeprice">
         	<p>预估费用</p>
         	<div>
         		<label>处置费用预估:</label>
@@ -73,35 +73,41 @@
         		<label>最终确认费用:</label>
         		<span>{{data.finalPrice}}</span>
         	</div>
-       </div>
-       <div class="mainfile">
-			<p>平台委托书</p>
-			<div class="upimg" style="width:740px;">
-                <div class="ordinary">
-                    <div id="entrustUrl" class="mt10">上传平台委托书</div>
-                    <br>
-                    <div class="upload-list uploaderRequired mt10">
-                    {{each data.plateEntrustVoList item index}}
-                        <div class="upfile-item">
-                            <img class="preview-img" src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" />
-                            <span class="delete-img"></span>
-                            <input type="hidden" name="entrustUrl" class="entrustUrl" value="{{item.url}}"/>
-                        </div>
-                    {{/each}}
-                    </div>
-                </div>
-            </div>
-		</div>
+        </div>
         <div class="mainfile">
-			<p>凭证审核</p>
-			<div class="upimg">
-                {{each data.voucherVoList item index}}
-                <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand pull-left ml10"/>
-                {{/each}}
-                <div class="clearfix"></div>
-			</div>
-			<a class="button search-button mt25 isSure" href="javascript:;">凭证审核</a>
-		</div>
+			    <p>平台委托书</p>
+			    <div class="upimg" style="width:740px;">
+              <div class="ordinary">
+                  <div id="entrustUrl" class="mt10">上传平台委托书</div>
+                  <br>
+                  <div class="upload-list uploaderRequired mt10">
+                  {{each data.plateEntrustVoList item index}}
+                      <div class="upfile-item">
+                          <img class="preview-img" src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" />
+                          <span class="delete-img"></span>
+                          <input type="hidden" name="entrustUrl" class="entrustUrl" value="{{item.url}}"/>
+                      </div>
+                  {{/each}}
+                  </div>
+              </div>
+          </div>
+		    </div>
+        <div class="mainfile">
+    			<p>凭证资料</p>
+    			<div class="upimg">
+    			  <span style="padding:0 17px;">委托书原件</span>
+            {{each data.entrustVoList item index}}
+            <img class="preview-img" src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" />
+            {{/each}}
+    			</div>
+    			<div class="upimg" style="margin-top:10px;">
+            <span style="padding:0 10px;">凭证资料清单</span>
+            {{each data.voucherVoList item index}}
+            <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'"/>
+            {{/each}}
+          </div>
+    			<a class="button search-button mt25 isSure" href="javascript:;">凭证审核</a>
+    		</div>
 		</form>
     </div>
 </script>
