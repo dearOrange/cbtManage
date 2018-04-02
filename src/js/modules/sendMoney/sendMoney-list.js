@@ -62,7 +62,7 @@ define(function(require, exports, module) {
         var mine = $(this);
         var val = mine.data('value');
         $(this).addClass("active").siblings().removeClass("active");
-        $('#state').val(val)
+        $('#tabType').val(val)
         if (param && param === 'autoClick') {
 
         } else {
