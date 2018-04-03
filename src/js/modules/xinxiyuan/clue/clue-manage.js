@@ -130,11 +130,13 @@ define(function(require, exports, module) {
                 activityJson = '';
               if (result.kind === "1") {
                 if (selectItem.length === 0) {
-                  jh.utils.alert({
-                    content: '请选择相应奖励档位',
-                    ok: true
-                  });
-                  return false;
+                  if(state == '1' ) {
+                    jh.utils.alert({
+                      content: '请选择相应奖励档位',
+                      ok: true
+                    });
+                    return false;
+                  }
                 }
                 var jsons = {
                   name: selectItem.data('name'),
