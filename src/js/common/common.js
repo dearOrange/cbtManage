@@ -1095,8 +1095,8 @@ define(function(require, exports, module) {
             log(e);
           }
           //如果数据超过 1 页则进行分页显示
+          s.page_container.html(m.makeHtml()); //如果分页容器未进行初始化，则进行初始化操作
           if (m.page_total > 1) {
-            s.page_container.html(m.makeHtml()); //如果分页容器未进行初始化，则进行初始化操作
             m.create(pageNum); //处理分页
             s.page_container.find('.jh_page_pageSize').val(s.data.pageSize);
             $('#jh_page_totalSize').html(' 总共: ' + response.total + ' 条');
