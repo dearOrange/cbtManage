@@ -87,6 +87,7 @@
           <select name="entrust" id="unconfirmedType" class="ml10">
             <option value="all">找车并拖车</option>
             <option value="trace">只找车</option>
+            <option value="recycle">只拖车</option>
           </select>
         </div>
         <div>
@@ -126,6 +127,7 @@
           <select name="entrust" id="unconfirmedType" class="ml10">
             <option {{if data.entrust === 'all'}}selected{{/if}} value="all">找车并拖车</option>
             <option {{if data.entrust === 'trace'}}selected{{/if}} value="trace">只找车</option>
+            <option {{if data.entrust === 'recycle'}}selected{{/if}} value="recycle">只拖车</option>
           </select>
         </div>
         <div>

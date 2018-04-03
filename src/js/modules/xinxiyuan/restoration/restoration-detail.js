@@ -27,7 +27,7 @@ define(function(require, exports, module) {
           var type = me.val(), thirdpartyPrice = $('#thirdpartyPrice'), assetPrice = $('#assetPrice');
           $('#finalPrice').val('');
           $('#baileePrice').val('');
-          if(type === 'all'){
+          if(type === 'all' || type === 'recycle'){
             thirdpartyPrice.addClass('required').parent().removeClass('hide');
             thirdpartyPrice.val('');
             if(_this.assetPrice === '') {
@@ -133,7 +133,6 @@ define(function(require, exports, module) {
           returnData.baileePrice = (parseFloat(returnData.data.finalPrice) * 0.1).toFixed(2);
           var creditorStr = jh.utils.template('restoration_detail_template', returnData);
           $('.restorationContent').html(creditorStr);
-          console.log(_this.returnData);
           if(_this.returnData.entrust === 'trace') {
             $('.thirdpartyPrice_box').addClass('hide');
           } else {
