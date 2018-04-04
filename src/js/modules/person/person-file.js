@@ -85,7 +85,7 @@ define(function(require, exports, module) {
                 var XToken = encodeURIComponent(sessionStorage.getItem('admin-X-Token'));
                 var erweimaStr = jh.utils.template('up_erweima_template', {
                     REQUESTROOT: REQUESTROOT,
-                    XToken: XToken
+                    token: XToken
                 });
                 jh.utils.alert({
                     content: erweimaStr,
