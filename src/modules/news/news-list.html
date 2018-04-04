@@ -64,6 +64,13 @@
           {{#select}}
         </select>
       </div>
+      <div class="mt25">
+        <label>公告应用位置</label>
+        <select name="type">
+          <option value="1" {{if type==1}}selected{{/if}}>捕头端</option>
+          <option value="3" {{if type==3}}selected{{/if}}>债权方端</option>
+        </select>
+      </div>
     </div>
   </form>
 </script>

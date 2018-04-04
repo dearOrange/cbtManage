@@ -41,25 +41,26 @@ define(function(require, exports, module) {
         //开头数据
         this.initHead = function() {
             jh.utils.ajax.send({
-                url: '/statistics/general',
+                url: '/statistics/downstream/general',
                 done: function(returnData) {
-                    var dataFirst = jh.utils.template('statistic_first_template', returnData.data);
+                    var dataFirst = jh.utils.template('statistic_informer_template', returnData.data);
                     $('#clue-echarts-list').html(dataFirst);
                     
                 }
             });
         };
         this.initSection = function() {
+            var informerOne = jh.utils.formToJson($('#informerOne-form'));
+//          var informerTwo = jh.utils.formToJson($('#clueTwo-information-form'));
+//          var informerThree = jh.utils.formToJson($('#clueThree-information-form'));
             jh.utils.ajax.send({
                 method: 'post',
-                url: '/statistics/traceTrend',
+                url: '/statistics/downstream/trend',
                 contentType: 'application/json',
-                data: {
-                    tabName: 'trace',
-                    limit: '12'
-                },
+                data: informerOne,
                 done: function(returnData) {
-                    var trace = returnData.data.trace;
+                  console.log(returnData)
+                    var trace = returnData.data.informer;
                     for (var i = 0; i < trace.length; i++) {
                         _this.traceMonths.push(trace[i].months);
                         _this.traceCount.push(trace[i].count);

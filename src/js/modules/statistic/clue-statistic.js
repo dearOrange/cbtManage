@@ -60,15 +60,10 @@ define(function(require, exports, module) {
                 contentType: 'application/json',
                 data: clueOne,
                 done: function(returnData) {
-                  console.log(returnData)
-                  var traceOne = returnData.data.traceTrend.leftList;
-                  var traceTwo = returnData.data.traceTrend.rightList;
+                  var traceOne = returnData.data.traceTotal;
                   for (var a = 0; a < traceOne.length; a++) {
                       _this.trendDaysOne.push(traceOne[a].days);
                       _this.trendCountOne.push(traceOne[a].count);
-                  }
-                  for (var b = 0; b < traceTwo.length; b++) {
-                      _this.trendCountTwo.push(trace[a].count);
                   }
                   _this.sectionTable();
                 }
@@ -80,8 +75,8 @@ define(function(require, exports, module) {
                 contentType: 'application/json',
                 data: clueTwo,
                 done: function(returnData) {
-                    var carOne = returnData.data.traceTrend.leftList;
-                    var carTwo = returnData.data.traceTrend.rightList;
+                    var carOne = returnData.data.traceMatch;
+                    var carTwo = returnData.data.traceWhole;
                     for (var j = 0; j < carOne.length; j++) {
                         _this.carDaysOne.push(carOne[j].days);
                         _this.carCountOne.push(carOne[j].count);
@@ -99,8 +94,8 @@ define(function(require, exports, module) {
                 contentType: 'application/json',
                 data: clueThree,
                 done: function(returnData) {
-                    var downOne = returnData.data.traceTrend.leftList;
-                    var downTwo = returnData.data.traceTrend.rightList;
+                    var downOne = returnData.data.passed;
+                    var downTwo = returnData.data.rejected;
                     for (var c = 0; c < downOne.length; c++) {
                         _this.downDaysOne.push(downOne[c].days);
                         _this.downCountOne.push(downOne[c].count);
@@ -121,7 +116,7 @@ define(function(require, exports, module) {
                     trigger: 'axis'
                 },
                 legend: {
-                    data:['合规线索','不合规线索']
+                    data:['线索']
                 },
                 calculable: true,
                 xAxis: [
@@ -137,16 +132,10 @@ define(function(require, exports, module) {
                 ],
                 series: [
                     {
-                        name:'合规线索',
+                        name:'线索',
                         type:'bar',
                         barWidth: '80%',
                         data:_this.trendCountOne
-                    },
-                    {
-                        name:'不合规线索',
-                        type:'bar',
-                        barWidth: '80%',
-                        data:_this.trendCountTwo
                     }
                 ]
             });

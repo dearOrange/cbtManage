@@ -42,7 +42,6 @@ define(function(require, exports, module) {
         //开头数据
         this.initHead = function() {
             var channelOne = jh.utils.formToJson($('#channel-list-form'));
-            console.log(channelOne)
             jh.utils.ajax.send({
                 method: 'post',
                 url: '/statistics/channel/recommendRatio',
@@ -57,7 +56,6 @@ define(function(require, exports, module) {
                       channelobj.name = channelOne[a].name;
                   }
                   _this.channelName.push(channelobj);
-                  console.log(_this.channelName);
 //                for (var b = 0; b < traceTwo.length; b++) {
 //                    _this.trendCountTwo.push(trace[a].count);
 //                }

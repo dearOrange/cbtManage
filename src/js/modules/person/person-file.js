@@ -82,7 +82,7 @@ define(function(require, exports, module) {
 
             //下载二维码
             $('body').off('click', '.upErweima').on('click', '.upErweima', function() {
-
+                
                 var erweimaStr = jh.utils.template('up_erweima_template', {
                     id: _this.userId,
                     REQUESTROOT: REQUESTROOT

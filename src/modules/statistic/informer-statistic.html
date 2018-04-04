@@ -7,10 +7,10 @@
       <div class="clue-left-layout pull-left">
         <ul id="clue-echarts-list"></ul>
         <div class="information">
-          <form id="information-form">
+          <form id="informerOne-form">
             <p class="title-style">
               <span class="span-style">新增线人</span>
-              <input type="hidden" name="type" value="trace" />
+              <input type="hidden" name="type" value="downstream" />
               <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
             </p>
           </form>
@@ -91,7 +91,7 @@
     </div>
   </div>
 </div>
-<script type="text/template" id="statistic_first_template">
+<script type="text/template" id="statistic_informer_template">
   <li>
     <table>
     	<tr>
@@ -99,8 +99,8 @@
     	  <th>环比昨日</th>
     	</tr>
     	<tr>
-    	  <td>{{task.currentDayRecord}}</td>
-    	  <td>{{task.currentMonthRecord}}</td>
+    	  <td>{{informer.dayAdded}}</td>
+    	  <td>{{informer.dayChainChange}}</td>
     	</tr>
     </table>
   </li>
@@ -111,8 +111,8 @@
         <th>环比上月</th>
       </tr>
       <tr>
-        <td>{{upstream.allRecord}}</td>
-        <td>{{upstream.currentMonthRecord}}</td>
+        <td>{{informer.monthAdded}}</td>
+        <td>{{informer.monthChainChange}}</td>
       </tr>
     </table>
   </li>
@@ -122,7 +122,7 @@
     	  <th>线索总计</th>
     	</tr>
     	<tr>
-    	  <td>{{downstream.allRecord}}</td>
+    	  <td>{{informer.total}}</td>
     	</tr>
     </table>
   </li>
