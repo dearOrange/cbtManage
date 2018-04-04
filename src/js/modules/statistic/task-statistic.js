@@ -221,6 +221,8 @@ define(function(require, exports, module) {
                     yearMonth: obj.y + '-' + obj.M
                 },
                 isSearch: isSearch,
+                showPageTotal: false,
+                jump: false,
                 show_page_number: 3,
                 callback: function(data) {
                     return jh.utils.template('clear_content_template', data);

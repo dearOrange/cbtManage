@@ -657,8 +657,25 @@ form#new-increate-award-form table input, form#increate-creditor-award-form tabl
   cursor: pointer;
   border-radius: 6px;
   font-weight: 900;
-  background-color: #20a0ff;
 }
 .statistic-list ul li span {
   color:#fff;  
+}
+.statistic-list ul li.taskInfoOne {
+  background-color: #b5b8ff;
+}
+.statistic-list ul li.taskInfoTwo {
+  background-color: #ffafba;
+}
+.statistic-list ul li.taskInfoThree {
+  background-color: #ffc5b5;
+}
+.statistic-list ul li.taskInfoFour {
+  background-color: #bde49e;
+}
+.statistic-list ul li.taskInfoFive {
+  background-color: #a4e4e9;
+}
+.statistic-list ul li.taskInfoSix {
+  background-color: #e3b5ff;
 }
