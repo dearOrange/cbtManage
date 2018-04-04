@@ -135,7 +135,7 @@
         	</div>
         </div>
         {{/if}}
-        {{if data.state === 'hunterUnreceive'}}
+        {{if data.state === 'hunterUnreceive' && trailer != 0}}
         <div class="mainfile">
         	<p>拖车失败记录</p>
         	{{each data.trailerFailList data index}}
