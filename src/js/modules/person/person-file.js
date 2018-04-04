@@ -30,11 +30,6 @@ define(function(require, exports, module) {
                         $('.channelArea').addClass('hide');
                     };
 
-                    if(_this.roleType === 'business' || _this.roleType === 'businessmanager') {
-                        $('.upErweima').removeClass('hide');
-                    } else {
-                        $('.upErweima').addClass('hide');
-                    }
                 }
             });
         };
