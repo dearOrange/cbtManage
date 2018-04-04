@@ -25,6 +25,7 @@ define(function(require, exports, module) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
                     returnData.taskId = args.id;
+                    returnData.trailer = returnData.data.trailerFailList.length;
                     var html = jh.utils.template('admin-qDDistributionDetail-template', returnData);
                     $('#admin-qDDistributionDetail-container').html(html);
                     _this.searchIllegalInfo();//查询违章信息

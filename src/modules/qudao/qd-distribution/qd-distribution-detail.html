@@ -64,7 +64,7 @@
             </div>
         </div>
         <div class="clearfix"></div>
-    	{{if data.state === 'tracing'}}
+    	{{if data.state === 'tracing' && trailer != 0}}
     	<p>拖车失败记录</p>
     	{{each data.trailerFailList data index}}
     	<div class="upimg">
