@@ -149,7 +149,7 @@ define(function(require, exports, module) {
                 var m = $(this);
                 var form = m.parents('form');
                 var datas = form.serialize();
-                var XToken = encodeURIComponent($.cookie('admin-X-Token'));
+                var XToken = encodeURIComponent(sessionStorage.getItem('admin-X-Token'));
                 window.location.href = REQUESTROOT + '/task/export' + '?' + datas + '&XToken=' + XToken;
             });
 
