@@ -82,10 +82,10 @@ define(function(require, exports, module) {
 
             //下载二维码
             $('body').off('click', '.upErweima').on('click', '.upErweima', function() {
-                var XToken = encodeURIComponent(sessionStorage.getItem('admin-X-Token'));
+                
                 var erweimaStr = jh.utils.template('up_erweima_template', {
                     REQUESTROOT: REQUESTROOT,
-                    XToken: XToken
+                    id: _this.userId
                 });
                 jh.utils.alert({
                     content: erweimaStr,
