@@ -80,7 +80,7 @@
     <td>{{item.startAt}}</td>
     <td>{{item.endAt}}</td>
     {{if item.type === 1}}<td>{{if item.bounty }}{{#showBounty(item.bounty)}}{{else}}{{item.activity}}{{/if}}</td>
-    <td>{{item.referrerTrace}}</td>
+    <td>{{if item.bounty}}-{{else}}{{item.referrerTrace}}{{/if}}</td>
     <td>{{item.firstTrace}}</td>
     <td>{{item.referrerFirstTrace}}</td>{{/if}}
     {{if item.type === 2}}
