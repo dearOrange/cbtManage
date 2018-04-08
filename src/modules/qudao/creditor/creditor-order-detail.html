@@ -47,9 +47,7 @@
         <div class="upmainfile">
             <div>
                 <span>违章信息</span>
-            </div>
-            <div>
-                <table class="pull-left" style="width: 90%;">
+                <table>
                     <thead>
                         <th></th>
                         <th>车牌号</th>
@@ -68,15 +66,15 @@
         	{{each data.traceVoList data index}}
         	<div class="upimg">
         		<dl>
-					<dt>
-						<div class="upfile-item">
-							<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
-						</div>
-	    			</dt>
-					<dd>全车背景照</dd>
-				</dl>
+    					<dt>
+    						<div class="upfile-item">
+    							<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100">
+    						</div>
+    	    			</dt>
+    					<dd>全车背景照</dd>
+    				</dl>
         	</div>
-        	<div style="margin:10px 0;">
+        	<div>
         		<p>线索上传时间：{{data.clueUploadAt}}</p>
         		<p>车架号后6位：{{data.carId}}</p>
         		<p>定位：{{data.location}}</p>

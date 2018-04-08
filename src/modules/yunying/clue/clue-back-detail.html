@@ -46,7 +46,7 @@
         <div class="mainfile">
         	<p>线索信息</p>
         	{{each data.traceVoList data index}}
-        	<div style="margin:10px 0;">线索上传时间：{{data.createAt}}</div>
+        	<div>线索上传时间：{{data.createAt}}</div>
         	{{/each}}
         </div>
         {{if data.state === "unvaluation"}}

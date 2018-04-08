@@ -14,7 +14,23 @@ define(function(require, exports, module) {
             month: date.getMonth() + 1
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
-
+        
+//      任务统计
+        _this.trendDaysAll = [];
+        _this.trendCountAll = [];
+        _this.trendCountTrace = [];
+        _this.trendCountRecycle = [];
+//      车牌比
+        _this.trendNameAll = [];
+        _this.countEachAll = [];
+        _this.countRateAll = [];
+        
+        _this.trendNameAll = [];
+        _this.trendNameAll = [];
+        _this.trendNameAll = [];
+        
+        
+        
         _this.traceMonths = [];
         _this.traceCount = [];
         _this.carRecoveryMonths = [];
@@ -34,69 +50,70 @@ define(function(require, exports, module) {
             this.initSection();
             window.initContent('2018-01', true);
             window.initClear('2018-01', true);
-            window.initEntrustSort('2018-01', true);
+//          window.initEntrustSort('2018-01', true);
             this.registerEvent();
         };
 
         //开头数据
         this.initHead = function() {
             jh.utils.ajax.send({
-                url: '/statistics/general',
+                url: '/statistics/task/general',
                 done: function(returnData) {
-                    var upstreamTrendList = returnData.data.upstream.trendList;
-                    var traceTrendList = returnData.data.trace.trendList;
-                    var downstreamTrendList = returnData.data.downstream.trendList;
-                    for (var a = 0; a < upstreamTrendList.length; a++) {
-                        _this.upstreamTrendMonths.push(upstreamTrendList[a].months);
-                        _this.upstreamTrendCount.push(upstreamTrendList[a].count);
-                    }
-                    for (var b = 0; b < traceTrendList.length; b++) {
-                        _this.traceTrendMonths.push(traceTrendList[b].months);
-                        _this.traceTrendCount.push(traceTrendList[b].count);
-                    }
-                    for (var c = 0; c < downstreamTrendList.length; c++) {
-                        _this.downstreamTrendMonths.push(downstreamTrendList[c].months);
-                        _this.downstreamTrendCount.push(downstreamTrendList[c].count);
-                    }
                     var dataFirst = jh.utils.template('statistic_first_template', returnData.data);
-                    $('.echarts-list').html(dataFirst);
-                    _this.headTable();
+                    $('#clue-echarts-list').html(dataFirst);
                 }
             });
         };
         this.initSection = function() {
+            var taskOne = jh.utils.formToJson($('#task-information-form'));
+//          任务统计
             jh.utils.ajax.send({
                 method: 'post',
-                url: '/statistics/traceTrend',
+                url: '/statistics/task/trend',
                 contentType: 'application/json',
-                data: {
-                    tabName: 'trace',
-                    limit: '12'
-                },
+                data: taskOne,
                 done: function(returnData) {
-                    var trace = returnData.data.trace;
-                    for (var i = 0; i < trace.length; i++) {
-                        _this.traceMonths.push(trace[i].months);
-                        _this.traceCount.push(trace[i].count);
-                    }
-                    _this.sectionTable();
+                  var traceAll = returnData.data.all;//找加拖
+                  var traceTrace = returnData.data.trace;//只找
+                  var traceRecycle = returnData.data.recycle;//只拖
+                  for (var a = 0; a < traceAll.length; a++) {
+                      _this.trendDaysAll.push(traceAll[a].days);
+                      _this.trendCountAll.push(traceAll[a].count);
+                  }
+                  for (var b = 0; b < traceTrace.length; b++) {
+                      _this.trendCountTrace.push(traceTrace[b].count);
+                  }
+                  for (var c = 0; c < traceRecycle.length; c++) {
+                      _this.trendCountRecycle.push(traceRecycle[c].count);
+                  }
+                  _this.sectionTable();
                 }
             });
+            
+//          车辆省份分配比
             jh.utils.ajax.send({
                 method: 'post',
-                url: '/statistics/recoveryTrend',
+                url: '/statistics/task/province',
                 contentType: 'application/json',
                 data: {
-                    tabName: 'task',
-                    limit: '12'
+                  entrust: 'trace',
+                  date: '2018-04-11'
                 },
                 done: function(returnData) {
-                    var carRecovery = returnData.data.task;
-                    for (var j = 0; j < carRecovery.length; j++) {
-                        _this.carRecoveryMonths.push(carRecovery[j].months);
-                        _this.carRecoveryCount.push(carRecovery[j].count);
-                    }
-                    _this.sectionTable();
+//                var traceAll = returnData.data.all;//找加拖
+//                var traceTrace = returnData.data.trace;//只找
+//                var traceRecycle = returnData.data.recycle;//只拖
+//                for (var a = 0; a < traceAll.length; a++) {
+//                    _this.trendDaysAll.push(traceAll[a].days);
+//                    _this.trendCountAll.push(traceAll[a].count);
+//                }
+//                for (var b = 0; b < traceTrace.length; b++) {
+//                    _this.trendCountTrace.push(traceTrace[b].count);
+//                }
+//                for (var c = 0; c < traceRecycle.length; c++) {
+//                    _this.trendCountRecycle.push(traceRecycle[c].count);
+//                }
+                  _this.sectionTable();
                 }
             });
         }
@@ -104,76 +121,74 @@ define(function(require, exports, module) {
             var mainInformate = echarts.init(document.getElementById('mainInformate'));
             var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
             mainInformate.setOption({
-                color: ['#3398DB'],
                 tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:['只找车','只拖车', '找车加拖车']
+                },
+                calculable: true,
+                xAxis: [
+                    {
+                        type : 'category',
+                        data : _this.trendDaysAll
                     }
-                },
-                title: {
-                    left: 'left',
-                    text: '情报数趋势',
-                },
-                grid: {
-                    left: '6%',
-                    right: '5%',
-                    bottom: '10%'
-                },
-                xAxis: [{
-                    type: 'category',
-                    data: _this.traceMonths
-                }],
-                yAxis: [{
-                    type: 'value'
-                }],
-                series: [{
-                    name: '情报数',
-                    type: 'bar',
-                    barWidth: '60%',
-                    data: _this.traceCount
-                }],
-                noDataLoadingOption: {
-                    text: '暂无数据',
-                    effect: 'bubble',
-                    effectOption: {
-                        effect: {
-                            n: 0
-                        }
+                ],
+                yAxis: [
+                    {
+                        type : 'value'
                     }
-                }
+                ],
+                series: [
+                    {
+                        name:'只找车',
+                        type:'bar',
+                        data:_this.trendCountTrace
+                    },
+                    {
+                        name:'只拖车',
+                        type:'bar',
+                        data:_this.trendCountRecycle
+                    },
+                    {
+                        name:'找车加拖车',
+                        type:'bar',
+                        data:_this.trendCountAll
+                    }
+                ]
             });
 
             mainCarNum.setOption({
-                color: ['#3398DB'],
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { // 坐标轴指示器，坐标轴触发有效
-                        type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-                    }
-                },
-                title: {
-                    left: 'left',
-                    text: '车辆清收趋势',
-                },
-                grid: {
-                    left: '6%',
-                    right: '5%',
-                    bottom: '10%'
-                },
-                xAxis: [{
-                    type: 'category',
-                    data: _this.carRecoveryMonths
-                }],
-                yAxis: [{
-                    type: 'value'
-                }],
-                series: [{
-                    name: '车辆清收数',
-                    type: 'bar',
-                    barWidth: '60%',
-                    data: _this.carRecoveryCount
-                }]
+              title : {
+                  text: '任务车牌省份分配比',
+                  x:'center'
+              },
+              tooltip : {
+                  trigger: 'item',
+                  formatter: "{a} <br/>{b} : {c} ({d}%)"
+              },
+              legend: {
+                  orient : 'vertical',
+                  x : 'left',
+                  data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+              },
+              
+              calculable : true,
+              series : [
+                  {
+                      name:'访问来源',
+                      type:'pie',
+                      radius : '55%',
+                      center: ['50%', '60%'],
+                      data:[
+                          {value:335, name:'直接访问'},
+                          {value:310, name:'邮件营销'},
+                          {value:234, name:'联盟广告'},
+                          {value:135, name:'视频广告'},
+                          {value:1548, name:'搜索引擎'}
+                      ]
+                  }
+              ]
             });
 
 
@@ -184,7 +199,7 @@ define(function(require, exports, module) {
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
 
             var page = new jh.ui.page({
-                data_container: $('#statistic_container'),
+                data_container: $('#task_statistic_container'),
                 page_container: $('#page_container'),
                 method: 'post',
                 url: '/statistics/traceSort',
@@ -199,7 +214,7 @@ define(function(require, exports, module) {
                 },
                 isSearch: isSearch,
                 callback: function(data) {
-                    return jh.utils.template('statistic_content_template', data);
+                    return jh.utils.template('task_statistic_content_template', data);
                 }
             });
             page.init();
@@ -345,38 +360,38 @@ define(function(require, exports, module) {
             });
         };
 
-        window.initEntrustSort = function(obj, isSearch) {
-            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-            jh.utils.ajax.send({
-                method: 'post',
-                url: '/statistics/entrust',
-                contentType: 'application/json',
-                data: {
-                    yearMonth: obj.y + '-' + obj.M
-                },
-                isSearch: isSearch,
-                done: function(returnData) {
-                    var entrust = returnData.data;
-                    var noResultBox = $('#entrustNoResultBox');
-                    if (!entrust.length) {
-                        noResultBox.removeClass('hide');
-                        noResultBox.prev().addClass('hide');
-                        return false;
-                    } else {
-                        noResultBox.addClass('hide');
-                        noResultBox.prev().removeClass('hide');
-                    }
-                    var entrustContent = jh.utils.template('entrust_content_template', returnData);
-                    $('#entrustResultBox').html(entrustContent);
-                    for (var k = 0; k < entrust.length; k++) {
-                        _this.countRate = entrust[k].countRate;
-                        _this.pieContent(k, _this.countRate);
-                    }
-
-                }
-            });
-        };
+//      window.initEntrustSort = function(obj, isSearch) {
+//          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+//          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+//          jh.utils.ajax.send({
+//              method: 'post',
+//              url: '/statistics/entrust',
+//              contentType: 'application/json',
+//              data: {
+//                  yearMonth: obj.y + '-' + obj.M
+//              },
+//              isSearch: isSearch,
+//              done: function(returnData) {
+//                  var entrust = returnData.data;
+//                  var noResultBox = $('#entrustNoResultBox');
+//                  if (!entrust.length) {
+//                      noResultBox.removeClass('hide');
+//                      noResultBox.prev().addClass('hide');
+//                      return false;
+//                  } else {
+//                      noResultBox.addClass('hide');
+//                      noResultBox.prev().removeClass('hide');
+//                  }
+//                  var entrustContent = jh.utils.template('entrust_content_template', returnData);
+//                  $('#entrustResultBox').html(entrustContent);
+//                  for (var k = 0; k < entrust.length; k++) {
+//                      _this.countRate = entrust[k].countRate;
+//                      _this.pieContent(k, _this.countRate);
+//                  }
+//
+//              }
+//          });
+//      };
 
         this.registerEvent = function() {
 

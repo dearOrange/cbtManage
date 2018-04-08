@@ -39,30 +39,30 @@
         	</tr>
         </table>
         <div class="remark">备注信息：{{data.remark}}</div>
+        {{if attachmentVoList != 0}}
         <div class="imgRecord">
             {{each data.attachmentVoList item index}}
             <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
             {{/each}}
         </div>
+        {{/if}}
         <div class="upmainfile">
             <div>
-                <span>违章信息</span>
-            </div>
-            <div>
-                <table class="pull-left" style="width: 99%;">
-                    <thead>
-                        <tr>
-                            <th width="5%">序号</th>
-                            <th width="10%">车牌号</th>
-                            <th width="40%">内容</th>
-                            <th width="20%">信息修复地点</th>
-                            <th width="8%">信息修复城市</th>
-                            <th width="15%">信息修复时间</th>
-                        </tr>
-                    </thead>
-                    <tbody id="distribution-illegalList-container"></tbody>
-                </table>
-                <div class="page-box pagination" id="page_container" style="width: 99%;"></div>
+              <span>违章信息</span>
+              <table>
+                  <thead>
+                      <tr>
+                          <th width="5%">序号</th>
+                          <th width="10%">车牌号</th>
+                          <th width="40%">内容</th>
+                          <th width="20%">信息修复地点</th>
+                          <th width="8%">信息修复城市</th>
+                          <th width="15%">信息修复时间</th>
+                      </tr>
+                  </thead>
+                  <tbody id="distribution-illegalList-container"></tbody>
+              </table>
+              <div class="page-box pagination" id="page_container" style="width: 99%;"></div>
             </div>
         </div>
         <div class="mainfile">
@@ -70,15 +70,15 @@
         	{{each data.traceVoList data index}}
         	<div class="upimg">
         		<dl>
-					<dt>
-						<div class="upfile-item">
-							<img class="preview-img hand" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'"/>
-						</div>
-	    			</dt>
-					<dd>全车背景照</dd>
-				</dl>
+    					<dt>
+    						<div class="upfile-item">
+    							<img class="preview-img hand" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'"/>
+    						</div>
+    	    			</dt>
+    					<dd>全车背景照</dd>
+    				</dl>
         	</div>
-        	<div style="margin:10px 0;">
+        	<div>
         		<p>线索上传时间：{{data.createAt}}</p>
         		<p>车架号后6位：{{data.carId}}</p>
         		<p>定位：{{data.location}}</p>

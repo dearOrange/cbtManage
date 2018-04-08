@@ -3,76 +3,44 @@
     <a href="javascript:;" class="button gobackPage goBack">返回</a>
   </div>
   <div class="data-container colorbg">
-    <ul class="echarts-list"></ul>
-    <div class="information">
-      <form id="information-form">
-        <p class="title-style">
-          <span class="span-style">情报数</span>
+    <div class="clue-left-layout pull-left">
+      <ul id="clue-echarts-list"></ul>
+      <div class="information">
+        <form id="task-information-form">
+          <p class="title-style">
+            <span class="span-style">任务统计</span>
+            <input type="hidden" name="type" value="task" />
+            <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
+          </p>
+        </form>
+        <div>
+          <div id="mainInformate" class="mainInformate" style="width:100%;height:380px;"></div>
+        </div>
+      </div>
+      <div>
+        <div id="mainCarNum" class="mainInformate" style="width:100%;height:380px;"></div>
+      </div>
+    </div>
+    <div class="clue-right-layout pull-right">
+      <div class="informateTable">
+        <p>
+          <span class="span-style">商务关联任务排名</span>
           <input type="hidden" name="type" value="trace" />
           <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
         </p>
-      </form>
-      <div>
-        <div id="mainInformate" class="pull-left" style="width:65%;height:300px;"></div>
-        <div class="informateTable pull-right" style="width:28%;">
-          <p>情报数统计</p>
-          <div class="data-container">
-            <table class="dataShow">
-              <thead>
-                <tr>
-                  <th width="4%">排名</th>
-                  <th width="8%">姓名</th>
-                  <th width="8%">情报数</th>
-                  <th width="8%">下线数</th>
-                </tr>
-              </thead>
-              <tbody id="statistic_container">
-              </tbody>
-            </table>
-            <div class="page-box pagination" id="page_container"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="channelPie information">
-      <form id="entrust-form">
-        <p class="title-style">
-          <span class="span-style">渠道委托</span>
-          <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
-        </p>
-      </form>
-      <div class="floatList mt10">
-        <div class="preBtn publicBtn hand">&lt;</div>
-        <div class="channelInfo" id="entrustResultBox"></div>
-        <div class="nextBtn publicBtn hand">&gt;</div>
-      </div>
-      <div class="mt10 hide" id="entrustNoResultBox" style="height: 166px;line-height: 166px;text-align: center;">暂无委托</div>
-    </div>
-    <div class="information">
-      <form id="clear-info-form">
-        <p class="title-style">
-          <span class="span-style">车辆清收数</span>
-          <input type="hidden" name="type" value="carRecovery" />
-          <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="carRecoveryInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticRecoveryMonthing,ychanging:statisticRecoveryYearing})">
-        </p>
-      </form>
-      <div>
-        <div id="mainCarNum" class="pull-left" style="width:65%;height:300px;"></div>
-        <div class="informateTable pull-right" style="width:28%;">
-          <p>清收数排名</p>
-          <div class="data-container">
-            <table class="dataShow">
-              <thead>
-                <tr>
-                  <th width="4%">排名</th>
-                  <th width="8%">名称</th>
-                  <th width="8%">数量</th>
-                </tr>
-              </thead>
-              <tbody id="clear_info_container"></tbody>
-            </table>
-            <div class="page-box pagination" id="page_clear_container"></div>
-          </div>
+        <div class="data-container">
+          <table class="dataShow">
+            <thead>
+              <tr>
+                <th width="4%">排名</th>
+                <th width="8%">名称</th>
+                <th width="8%">数量</th>
+              </tr>
+            </thead>
+            <tbody id="task_statistic_container">
+            </tbody>
+          </table>
+          <div class="page-box pagination" id="page_container"></div>
         </div>
       </div>
     </div>
@@ -81,87 +49,47 @@
 
 <script type="text/template" id="statistic_first_template">
   <li>
-    <p class="title-style">
-      <span>总任务数</span>
-      <i class="icon-img"></i>
-    </p>
-    <p class="font-style">{{task.allRecord}}</p>
-    <p style="overflow: hidden;width:100%;height:50px;line-height: 50px;">
-      <span style="float:left;">
-                <i>日增长</i>
-                <i>{{task.currentDayRecord}}</i>
-            </span>
-      <span style="float:right;">
-                <i>月累计</i>
-                <i>{{task.currentMonthRecord}}</i>
-            </span>
-    </p>
-    <hr />
-    <p>
-      <span>月均任务量</span>
-      <span>{{task.monthlyRecord}}</span>
-    </p>
+    <table>
+      <tr>
+        <th>今日任务</th>
+        <th>环比昨日</th>
+      </tr>
+      <tr>
+        <td>{{task.dayAdded}}</td>
+        <td>{{task.dayChainChange}}</td>
+      </tr>
+    </table>
   </li>
   <li>
-    <p class="title-style">
-      <span>债权方数</span>
-      <i class="icon-img"></i>
-    </p>
-    <p class="font-style">{{upstream.allRecord}}</p>
-    <p id="mainLine" style="width:100%;height:50px;">
-
-    </p>
-    <p>
-      <hr />
-      <span>月度增长量</span>
-      <span>{{upstream.currentMonthRecord}}</span>
-    </p>
+    <table>
+      <tr>
+        <th>本月任务</th>
+        <th>环比上月</th>
+      </tr>
+      <tr>
+        <td>{{task.monthAdded}}</td>
+        <td>{{task.monthChainChange}}</td>
+      </tr>
+    </table>
   </li>
   <li>
-    <p class="title-style">
-      <span>捕头(线人)数</span>
-      <i class="icon-img"></i>
-    </p>
-    <p class="font-style">{{downstream.allRecord}}</p>
-    <p id="mainBar" style="width:100%;height:50px;">
-
-    </p>
-    <p>
-      <hr />
-      <span>月度新增</span>
-      <span>{{downstream.currentMonthRecord}}</span>
-    </p>
-  </li>
-  <li>
-    <p class="title-style">
-      <span>情报数</span>
-      <i class="icon-img"></i>
-    </p>
-    <p class="font-style">{{trace.allRecord}}</p>
-    <p id="mainArea" style="width:100%;height:50px;">
-
-    </p>
-    <p>
-      <hr />
-      <span style="float:left;">
-                <i>今日情报</i>
-                <i>{{trace.currentDayRecord}}</i>
-            </span>
-      <span style="float:right;">
-                <i>匹配数</i>
-                <i>{{trace.matchedTrace}}</i>
-            </span>
-    </p>
+    <table>
+      <tr>
+        <th>任务总数</th>
+      </tr>
+      <tr>
+        <td>{{task.total}}</td>
+      </tr>
+    </table>
   </li>
 </script>
 
-<script type="text/template" id="statistic_content_template">
+<script type="text/template" id="task_statistic_content_template">
   {{ each list item index }}
   <tr>
     <td>{{item.rank}}</td>
     <td>{{item.dname}}</td>
     <td>{{item.countTrace}}</td>
-    <td>{{item.countDownline}}</td>
   </tr>
   {{/each}}
 </script>

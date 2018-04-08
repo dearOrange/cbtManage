@@ -899,6 +899,7 @@ input, select, textarea {
 	color: white;
 	text-align: center;
 	line-height: 34px;
+	border-radius: 3px;
 }
 
 .dialog-width ul {
