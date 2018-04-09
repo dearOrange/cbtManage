@@ -18,7 +18,7 @@ define(function(require, exports, module) {
         this.initYjList = function() {
             var page = new jh.ui.page({
                 data_container: $('#moneytotal_container'),
-                page_container: $('#page_container'),
+                page_container: $('#page_container1'),
                 method: 'post',
                 url: '/record/bargainList',
                 isSearch: true,

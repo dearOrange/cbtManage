@@ -8,9 +8,9 @@
         <tr>
           <td colspan="6">
             <ol id="taskState" class="stateChange pull-left">
-              <li data-value="1" data-state="matched" class="taskState active">渠道发展线人统计</li>
-              <li data-value="0" data-state="unmatched" class="taskState">渠道发展捕头统计</li>
-              <input type="hidden" name="isMatch" id="state" value="1">
+              <li data-value="type_A" data-state="matched" class="taskState active">渠道发展线人统计</li>
+              <li data-value="type_B" data-state="unmatched" class="taskState">渠道发展捕头统计</li>
+              <input type="hidden" name="isMatch" id="state" value="type_A">
             </ol>
           </td>
         </tr>
@@ -22,43 +22,23 @@
       <div class="information">
         <form id="channel-list-form">
           <p class="title-style">
-            <span class="span-style">渠道发展线人统计</span>
             <span class="pull-right">
-              <input type="hidden" name="role" value="type_A" />
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputStart" name="begin" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">至
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputEnd" name="end" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+              <input type="hidden" name="role" id="stateInput" value="type_A" />
+              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputStart" name="begin" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">至
+              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputEnd" name="end" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
             </span>
           </p>
         </form>
         <div id="mainCarNum" class="mainInformate" style="width:100%;height:380px;"></div>
       </div>
+      
       <div class="information">
-        <div class="data-container">
-          <table class="dataShow">
-            <thead>
-              <tr>
-                <th width="4%">序号</th>
-                <th width="8%">姓名</th>
-                <th width="8%">账号</th>
-                <th width="16%">区域</th>
-                <th width="8%">联系电话</th>
-                <th width="10%">最新线索上传地区</th>
-                <th width="15%">注册时间</th>
-                <th width="8%">下线</th>
-              </tr>
-            </thead>
-            <tbody id="clear_info_container"></tbody>
-          </table>
-          <div class="page-box pagination" id="page_clear_container"></div>
-        </div>
-      </div>
-      <div class="information">
-        <form id="clear-info-form">
+        <form id="channel-info-form">
           <p class="title-style">
             <span class="span-style">清收统计</span>
             <span>
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">至
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+              <input type="text" class="search-input hand begin-input" readonly="readonly" name="begin" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
+              <input type="text" class="search-input hand end-input" readonly="readonly" name="end" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
             </span>
             <span class="pull-right">
               <input type="submit" class="button" value="查询" />
@@ -77,9 +57,9 @@
                 <th width="8%">信息费</th>
               </tr>
             </thead>
-            <tbody id="clear_info_container"></tbody>
+            <tbody id="channel_statistic_container"></tbody>
           </table>
-          <div class="page-box pagination" id="page_clear_container"></div>
+          <div class="page-box pagination" id="page_clear_container1"></div>
         </div>
       </div>
     </div>
@@ -88,8 +68,7 @@
         <!--<form id="clear-info-form">-->
           <p>
             <span class="span-style">月度排名</span>
-            <input type="hidden" name="type" value="tracePass" />
-            <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+            <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
           </p>
         <!--</form>-->
         <div class="data-container">
@@ -101,26 +80,41 @@
                 <th width="8%">数量</th>
               </tr>
             </thead>
-            <tbody id="statistic_container">
+            <tbody id="rank_statistic_container">
             </tbody>
           </table>
-          <div class="page-box pagination" id="page_container"></div>
+          <div class="page-box pagination" id="page_container2"></div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<script type="text/template" id="statistic_content_template">
+
+<!--月度排名-->
+<script type="text/template" id="rank_content_template">
   {{ each list item index }}
   <tr>
     <td>{{item.rank}}</td>
     <td>{{item.dname}}</td>
-    <td>{{item.countTrace}}</td>
+    <td>{{item.downlineOrTaskCount}}</td>
   </tr>
   {{/each}}
 </script>
-
-<script type="text/template" id="business_statistic_content_template">
+<!--清收统计-->
+<script type="text/template" id="channel_content_template">
+  {{ each list item index }}
+  <tr>
+    <td>{{item.oname}}</td>
+    <td>{{item.countRecovery}}</td>
+    <td>{{item.countRecovery}}</td>
+    <td>{{item.sumFinal}}</td>
+    <td>{{item.sumBailee}}</td>
+    <td>{{item.sumAsset}}</td>
+  </tr>
+  {{/each}}
+</script>
+<!--下线-->
+<script type="text/template" id="channel_content_template">
   {{ each list item index }}
   <tr>
     <td>{{item.rank}}</td>
@@ -136,7 +130,6 @@
   </tr>
   {{/each}}
 </script>
-
 <script type="text/template" id="clear_content_template">
   {{ each list item index }}
   <tr>

@@ -7,10 +7,10 @@
       <div class="clue-left-layout pull-left">
         <ul id="clue-echarts-list"></ul>
         <div class="information">
-          <form id="information-form">
+          <form id="hunterOne-form">
             <p class="title-style">
-              <span class="span-style">新增捕头</span>
-              <input type="hidden" name="type" value="trace" />
+              <span class="span-style">新增捕头统计</span>
+              <input type="hidden" name="type" value="downstream" />
               <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
             </p>
           </form>
@@ -64,7 +64,7 @@
     </div>
   </div>
 </div>
-<script type="text/template" id="statistic_first_template">
+<script type="text/template" id="statistic_hunter_template">
   <li>
     <table>
       <tr>
@@ -72,8 +72,8 @@
         <th>环比昨日</th>
       </tr>
       <tr>
-        <td>{{task.currentDayRecord}}</td>
-        <td>{{task.currentMonthRecord}}</td>
+        <td>{{hunter.dayAdded}}</td>
+        <td>{{hunter.dayChainChange}}</td>
       </tr>
     </table>
   </li>
@@ -84,8 +84,8 @@
         <th>环比上月</th>
       </tr>
       <tr>
-        <td>{{upstream.allRecord}}</td>
-        <td>{{upstream.currentMonthRecord}}</td>
+        <td>{{hunter.monthAdded}}</td>
+        <td>{{hunter.monthChainChange}}</td>
       </tr>
     </table>
   </li>
@@ -95,7 +95,7 @@
     	  <th>捕头总计</th>
     	</tr>
     	<tr>
-    	  <td>{{downstream.allRecord}}</td>
+    	  <td>{{hunter.total}}</td>
     	</tr>
     </table>
   </li>

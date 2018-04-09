@@ -59,8 +59,22 @@ define(function(require, exports, module) {
               }
           });
         };
-        this.initSection = function() {
-            
+        this.initSection = function(isSearch) {
+          var businessTwo = jh.utils.formToJson($('#business-list-form'));
+          var page = new jh.ui.page({
+            data_container: $('#business_statistic_container'),
+            page_container: $('#page_container'),
+            method: 'post',
+            url: '/statistics/business/recommendTaskList',
+            contentType: 'application/json',
+            data: businessTwo,
+            isSearch: isSearch,
+            callback: function(data) {
+              console.log(data)
+              return jh.utils.template('business_content_template', data);
+            }
+          });
+          page.init();
         }
         this.sectionTable = function() {
             
@@ -100,16 +114,16 @@ define(function(require, exports, module) {
           });
 
         };
-
+//      月度排名2
         window.initContent = function(obj, isSearch) {
             obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
 
             var page = new jh.ui.page({
-                data_container: $('#statistic_container'),
+                data_container: $('#monthTwo_statistic_container'),
                 page_container: $('#page_container'),
                 method: 'post',
-                url: '/statistics/business/recommendSort',
+                url: '/statistics/business/recommendTaskSort',
                 showPageTotal: false,
                 jump: false,
                 show_page_number: 3,
@@ -121,31 +135,30 @@ define(function(require, exports, module) {
                 isSearch: isSearch,
                 callback: function(data) {
                   console.log(data);
-                  return jh.utils.template('statistic_content_template', data);
+                  return jh.utils.template('monthTwo_content_template', data);
                 }
             });
             page.init();
         };
-
+//      月度排名1
         window.initClear = function(obj, isSearch) {
             obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
 
             var page = new jh.ui.page({
-                data_container: $('#clear_info_container'),
+                data_container: $('#monthOne_statistic_container'),
                 page_container: $('#page_clear_container'),
                 method: 'post',
-                url: '/statistics/recoverySort',
+                url: '/statistics/business/recommendTaskSort',
                 contentType: 'application/json',
                 data: {
                   pageSize: 5,
-                    type: 'carRecovery',
-                    yearMonth: obj.y + '-' + obj.M
+                  yearMonth: obj.y + '-' + obj.M
                 },
                 isSearch: isSearch,
                 show_page_number: 3,
                 callback: function(data) {
-                    return jh.utils.template('clear_content_template', data);
+                    return jh.utils.template('monthOne_content_template', data);
                 }
             });
             page.init();
@@ -185,6 +198,15 @@ define(function(require, exports, module) {
 
             $('select').select2({
                 minimumResultsForSearch: Infinity
+            });
+            
+            // 搜索
+            jh.utils.validator.init({
+                id: 'business-list-form',
+                submitHandler: function(form) {
+                    _this.initSection(true);
+                    return false;
+                }
             });
         };
     }

@@ -53,7 +53,7 @@ define(function(require, exports, module) {
             var clueOne = jh.utils.formToJson($('#clueOne-information-form'));
             var clueTwo = jh.utils.formToJson($('#clueTwo-information-form'));
             var clueThree = jh.utils.formToJson($('#clueThree-information-form'));
-//          one
+//          线索统计
             jh.utils.ajax.send({
                 method: 'post',
                 url: '/statistics/trace/trend',
@@ -68,7 +68,7 @@ define(function(require, exports, module) {
                   _this.sectionTable();
                 }
             });
-//          two
+//          线索匹配统计
             jh.utils.ajax.send({
                 method: 'post',
                 url: '/statistics/trace/trend',
@@ -87,7 +87,7 @@ define(function(require, exports, module) {
                     _this.sectionTable();
                 }
             });
-//          three
+//          线索合规统计
             jh.utils.ajax.send({
                 method: 'post',
                 url: '/statistics/trace/trend',
@@ -238,54 +238,52 @@ define(function(require, exports, module) {
             });
 
         };
-
+//      上传线索
         window.initContent = function(obj, isSearch) {
             obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
 
             var page = new jh.ui.page({
-                data_container: $('#statistic_container'),
+                data_container: $('#upclue_statistic_container'),
                 page_container: $('#page_container'),
                 method: 'post',
-                url: '/statistics/traceSort',
+                url: '/statistics/downstream/plusSort',
                 showPageTotal: false,
                 jump: false,
                 show_page_number: 3,
                 contentType: 'application/json',
                 data: {
-                    type: 'trace',
                     pageSize: 5,
                     yearMonth: obj.y + '-' + obj.M
                 },
                 isSearch: isSearch,
                 callback: function(data) {
-                    return jh.utils.template('statistic_content_template', data);
+                    return jh.utils.template('upclue_content_template', data);
                 }
             });
             page.init();
         };
-
+//      发展下线
         window.initClear = function(obj, isSearch) {
             obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
 
             var page = new jh.ui.page({
-                data_container: $('#clear_info_container'),
+                data_container: $('#offline_info_container'),
                 page_container: $('#page_clear_container'),
                 method: 'post',
-                url: '/statistics/recoverySort',
+                url: '/statistics/downstream/plusSort',
                 contentType: 'application/json',
                 data: {
                   pageSize: 5,
-                    type: 'carRecovery',
-                    yearMonth: obj.y + '-' + obj.M
+                  yearMonth: obj.y + '-' + obj.M
                 },
                 isSearch: isSearch,
                 showPageTotal: false,
                 jump: false,
                 show_page_number: 3,
                 callback: function(data) {
-                    return jh.utils.template('clear_content_template', data);
+                    return jh.utils.template('offline_content_template', data);
                 }
             });
             page.init();

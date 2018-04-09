@@ -11,14 +11,23 @@ define(function(require, exports, module) {
         var date = new Date();
         var now = {
             year: date.getFullYear(),
-            month: date.getMonth() + 1
+            month: date.getMonth() + 1,
+            day: date.getDate()
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
-
-        _this.traceMonths = [];
-        _this.traceCount = [];
-        _this.carRecoveryMonths = [];
-        _this.carRecoveryCount = [];
+        now.day = now.day.toString().length === 1 ? '0' + now.day : now.day; //日期两位数
+//      线人趋势统计
+        _this.informerMonths = [];
+        _this.informerCount = [];
+//      扇形
+        _this.sectorName = [];
+        _this.sectorCount = [];
+        _this.sectorRate = [];
+//      省份
+        _this.provinceName = [];
+        _this.provinceCount = [];
+        
+        
         _this.upstreamTrendMonths = [];
         _this.traceTrendMonths = [];
         _this.downstreamTrendMonths = [];
@@ -45,7 +54,6 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     var dataFirst = jh.utils.template('statistic_informer_template', returnData.data);
                     $('#clue-echarts-list').html(dataFirst);
-                    
                 }
             });
         };
@@ -59,28 +67,58 @@ define(function(require, exports, module) {
                 contentType: 'application/json',
                 data: informerOne,
                 done: function(returnData) {
-                  console.log(returnData)
-                    var trace = returnData.data.informer;
-                    for (var i = 0; i < trace.length; i++) {
-                        _this.traceMonths.push(trace[i].months);
-                        _this.traceCount.push(trace[i].count);
+                    var informer = returnData.data.informer;
+                    for (var i = 0; i < informer.length; i++) {
+                        _this.informerMonths.push(informer[i].days);
+                        _this.informerCount.push(informer[i].count);
                     }
                     _this.sectionTable();
                 }
             });
+//          扇形图
+//          obj = typeof obj !== 'object' ? { y: now.year, M: now.month, d: now.day } : obj; //是否为第一次查询
+//          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+//          obj.d = obj.d.toString().length === 1 ? '0' + obj.d : obj.d; //日期两位数
             jh.utils.ajax.send({
                 method: 'post',
-                url: '/statistics/recoveryTrend',
+                url: '/statistics/downstream/sourceRatio',
                 contentType: 'application/json',
                 data: {
-                    tabName: 'task',
-                    limit: '12'
+                    role: 'type_A',
+                    date: '2018-04-01'
                 },
                 done: function(returnData) {
-                    var carRecovery = returnData.data.task;
-                    for (var j = 0; j < carRecovery.length; j++) {
-                        _this.carRecoveryMonths.push(carRecovery[j].months);
-                        _this.carRecoveryCount.push(carRecovery[j].count);
+                    var informerSector = returnData.data;
+                    for (var j = 0; j < informerSector.length; j++) {
+                        var sectorObj = {};
+                        _this.sectorName.push(informerSector[j].name);
+                        sectorObj.value = informerSector[j].countEach;
+                        sectorObj.name = informerSector[j].name;
+                        _this.sectorCount.push(sectorObj);
+                    
+                    }
+                    _this.sectionTable();
+                }
+            });
+            
+//          分布地区
+            jh.utils.ajax.send({
+                method: 'post',
+                url: '/statistics/downstream/distribution',
+                contentType: 'application/json',
+                data: {
+                    role: 'type_A',
+                    province: '山东%'
+                },
+                done: function(returnData) {
+                    var provinceSector = returnData.data.wide;
+                    for (var k = 0; k < provinceSector.length; k++) {
+                        var provinceObj = {};
+                        _this.provinceName.push(provinceSector[k].area);
+                        provinceObj.value = provinceSector[k].count;
+                        provinceObj.name = provinceSector[k].area;
+                        _this.provinceCount.push(provinceObj);
+                    
                     }
                     _this.sectionTable();
                 }
@@ -107,7 +145,7 @@ define(function(require, exports, module) {
                 xAxis : [
                     {
                         type : 'category',
-                        data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        data : _this.informerMonths,
                         axisTick: {
                             alignWithLabel: true
                         }
@@ -120,32 +158,21 @@ define(function(require, exports, module) {
                 ],
                 series : [
                     {
-                        name:'直接访问',
+                        name:'线索数量',
                         type:'bar',
                         barWidth: '60%',
-                        data:[10, 52, 200, 334, 390, 330, 220]
+                        data:_this.informerCount
                     }
                 ]
             });
             mainBarNum.setOption({
-                title : {
-                    text: '2011全国GDP（亿元）',
-                    subtext: '数据来自国家统计局'
-                },
                 tooltip : {
                     trigger: 'item'
                 },
                 legend: {
                     x:'right',
                     selectedMode:false,
-                    data:['北京','上海','广东']
-                },
-                dataRange: {
-                    orient: 'horizontal',
-                    min: 0,
-                    max: 55000,
-                    text:['高','低'],           // 文本，默认为数值文本
-                    splitNumber:0
+                    data:_this.provinceName
                 },
                 series : [
                     {
@@ -160,49 +187,12 @@ define(function(require, exports, module) {
                             normal:{label:{show:true}},
                             emphasis:{label:{show:true}}
                         },
-                        data:[
-                            {name:'西藏', value:605.83},
-                            {name:'青海', value:1670.44},
-                            {name:'宁夏', value:2102.21},
-                            {name:'海南', value:2522.66},
-                            {name:'甘肃', value:5020.37},
-                            {name:'贵州', value:5701.84},
-                            {name:'新疆', value:6610.05},
-                            {name:'云南', value:8893.12},
-                            {name:'重庆', value:10011.37},
-                            {name:'吉林', value:10568.83},
-                            {name:'山西', value:11237.55},
-                            {name:'天津', value:11307.28},
-                            {name:'江西', value:11702.82},
-                            {name:'广西', value:11720.87},
-                            {name:'陕西', value:12512.3},
-                            {name:'黑龙江', value:12582},
-                            {name:'内蒙古', value:14359.88},
-                            {name:'安徽', value:15300.65},
-                            {name:'北京', value:16251.93, selected:true},
-                            {name:'福建', value:17560.18},
-                            {name:'上海', value:19195.69, selected:true},
-                            {name:'湖北', value:19632.26},
-                            {name:'湖南', value:19669.56},
-                            {name:'四川', value:21026.68},
-                            {name:'辽宁', value:22226.7},
-                            {name:'河北', value:24515.76},
-                            {name:'河南', value:26931.03},
-                            {name:'浙江', value:32318.85},
-                            {name:'山东', value:45361.85},
-                            {name:'江苏', value:49110.27},
-                            {name:'广东', value:53210.28, selected:true}
-                        ]
+                        data:_this.provinceCount
                     }
                 ],
                 animation: false
             }, true);
             mainCarNum.setOption({
-              title : {
-                  text: '某站点用户访问来源',
-                  subtext: '纯属虚构',
-                  x:'center'
-              },
               tooltip : {
                   trigger: 'item',
                   formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -210,7 +200,7 @@ define(function(require, exports, module) {
               legend: {
                   orient : 'vertical',
                   x : 'left',
-                  data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+                  data:_this.sectorName
               },
               
               calculable : true,
@@ -220,64 +210,54 @@ define(function(require, exports, module) {
                       type:'pie',
                       radius : '55%',
                       center: ['50%', '60%'],
-                      data:[
-                          {value:335, name:'直接访问'},
-                          {value:310, name:'邮件营销'},
-                          {value:234, name:'联盟广告'},
-                          {value:135, name:'视频广告'},
-                          {value:1548, name:'搜索引擎'}
-                      ]
+                      data:_this.sectorCount
                   }
               ]
           });
 
         };
-
+//      活跃线人统计
         window.initContent = function(obj, isSearch) {
             obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
 
             var page = new jh.ui.page({
-                data_container: $('#statistic_container'),
+                data_container: $('#downstream_statistic_container'),
                 page_container: $('#page_container'),
                 method: 'post',
-                url: '/statistics/traceSort',
-                showPageTotal: false,
-                jump: false,
-                show_page_number: 3,
+                url: '/statistics/downstream/activeSort',
                 contentType: 'application/json',
                 data: {
-                    type: 'trace',
-                    pageSize: 5,
                     yearMonth: obj.y + '-' + obj.M
                 },
                 isSearch: isSearch,
                 callback: function(data) {
-                    return jh.utils.template('statistic_content_template', data);
+                    return jh.utils.template('downstream_content_template', data);
                 }
             });
             page.init();
         };
-
+        
+//      排名
         window.initClear = function(obj, isSearch) {
-            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+//          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+//          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
 
             var page = new jh.ui.page({
-                data_container: $('#clear_info_container'),
+                data_container: $('#ranking_info_container'),
                 page_container: $('#page_clear_container'),
                 method: 'post',
                 url: '/statistics/recoverySort',
                 contentType: 'application/json',
-                data: {
-                  pageSize: 5,
-                    type: 'carRecovery',
-                    yearMonth: obj.y + '-' + obj.M
-                },
-                isSearch: isSearch,
+//              data: {
+//                pageSize: 5,
+//                  type: 'carRecovery',
+//                  yearMonth: obj.y + '-' + obj.M
+//              },
+//              isSearch: isSearch,
                 show_page_number: 3,
                 callback: function(data) {
-                    return jh.utils.template('clear_content_template', data);
+                    return jh.utils.template('ranking_content_template', data);
                 }
             });
             page.init();

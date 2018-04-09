@@ -16,9 +16,13 @@ define(function(require, exports, module) {
     now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
 
     var emChart = null;
-
-    _this.traceMonths = [];
-    _this.traceCount = [];
+//  新增捕头统计
+    _this.hunterMonths = [];
+    _this.hunterCount = [];
+//  扇形
+    _this.sectorName = [];
+    _this.sectorCount = [];
+    
     _this.carRecoveryMonths = [];
     _this.carRecoveryCount = [];
     _this.upstreamTrendMonths = [];
@@ -42,48 +46,74 @@ define(function(require, exports, module) {
     //开头数据
     this.initHead = function() {
       jh.utils.ajax.send({
-        url: '/statistics/general',
+        url: '/statistics/downstream/general',
         done: function(returnData) {
-          var dataFirst = jh.utils.template('statistic_first_template', returnData.data);
+          var dataFirst = jh.utils.template('statistic_hunter_template', returnData.data);
           $('#clue-echarts-list').html(dataFirst);
 
         }
       });
     };
     this.initSection = function() {
+      var hunterOne = jh.utils.formToJson($('#hunterOne-form'));
+      
       jh.utils.ajax.send({
         method: 'post',
-        url: '/statistics/traceTrend',
+        url: '/statistics/downstream/trend',
         contentType: 'application/json',
-        data: {
-          tabName: 'trace',
-          limit: '12'
-        },
+        data: hunterOne,
         done: function(returnData) {
-          var trace = returnData.data.trace;
-          for (var i = 0; i < trace.length; i++) {
-            _this.traceMonths.push(trace[i].months);
-            _this.traceCount.push(trace[i].count);
+          var hunter = returnData.data.hunter;
+          for (var i = 0; i < hunter.length; i++) {
+            _this.hunterMonths.push(hunter[i].days);
+            _this.hunterCount.push(hunter[i].count);
           }
           _this.sectionTable();
         }
       });
+//    扇形
       jh.utils.ajax.send({
-        method: 'post',
-        url: '/statistics/recoveryTrend',
-        contentType: 'application/json',
-        data: {
-          tabName: 'task',
-          limit: '12'
-        },
-        done: function(returnData) {
-          var carRecovery = returnData.data.task;
-          for (var j = 0; j < carRecovery.length; j++) {
-            _this.carRecoveryMonths.push(carRecovery[j].months);
-            _this.carRecoveryCount.push(carRecovery[j].count);
+          method: 'post',
+          url: '/statistics/downstream/sourceRatio',
+          contentType: 'application/json',
+          data: {
+              role: 'type_B',
+              date: '2018-04-01'
+          },
+          done: function(returnData) {
+              var hunterSector = returnData.data;
+              for (var j = 0; j < hunterSector.length; j++) {
+                  var sectorObj = {};
+                  _this.sectorName.push(hunterSector[j].name);
+                  sectorObj.value = hunterSector[j].countEach;
+                  sectorObj.name = hunterSector[j].name;
+                  _this.sectorCount.push(sectorObj);
+              
+              }
+              _this.sectionTable();
           }
-          _this.sectionTable();
-        }
+      });
+//    分布地区
+      jh.utils.ajax.send({
+          method: 'post',
+          url: '/statistics/downstream/distribution',
+          contentType: 'application/json',
+          data: {
+              role: 'type_B',
+              province: '山东%'
+          },
+          done: function(returnData) {
+              var provinceSector = returnData.data.wide;
+              for (var k = 0; k < provinceSector.length; k++) {
+                  var provinceObj = {};
+                  _this.provinceName.push(provinceSector[k].area);
+                  provinceObj.value = provinceSector[k].count;
+                  provinceObj.name = provinceSector[k].area;
+                  _this.provinceCount.push(provinceObj);
+              
+              }
+              _this.sectionTable();
+          }
       });
     }
     this.sectionTable = function() {
@@ -91,94 +121,89 @@ define(function(require, exports, module) {
       var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
       var mainBarNum = echarts.init(document.getElementById('mainBarNum'));
       mainInformate.setOption({
-        tooltip: {
-          trigger: 'axis'
-        },
-        legend: {
-          data: ['合规线索', '不合规线索']
-        },
-        calculable: true,
-        xAxis: [{
-          type: 'category',
-          data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月', '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
-        }],
-        yAxis: [{
-          type: 'value'
-        }],
-        series: [{
-            name: '合规线索',
-            type: 'bar',
-            data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3, 2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
-            markPoint: {
-              data: [
-                { type: 'max', name: '最大值' },
-                { type: 'min', name: '最小值' }
-              ]
+        color: ['#3398DB'],
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
             }
-          },
-          {
-            name: '不合规线索',
-            type: 'bar',
-            data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3, 2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
-            markPoint: {
-              data: [
-                { name: '年最高', value: 182.2, xAxis: 7, yAxis: 183, symbolSize: 18 },
-                { name: '年最低', value: 2.3, xAxis: 11, yAxis: 3 }
-              ]
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis : [
+            {
+                type : 'category',
+                data : _this.hunterMonths,
+                axisTick: {
+                    alignWithLabel: true
+                }
             }
-          }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'线索数量',
+                type:'bar',
+                barWidth: '60%',
+                data:_this.hunterCount
+            }
         ]
       });
       mainBarNum.setOption({
-        title: {
-          text: '2011全国GDP（亿元）',
-          subtext: '数据来自国家统计局'
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '{b}'
-        },
-        series: [{
-          name: '中国',
-          type: 'map',
-          mapType: 'china',
-          itemStyle: {
-            normal: { label: { show: true } },
-            emphasis: { label: { show: true } }
+          tooltip : {
+              trigger: 'item'
           },
-          data: [{ "name": "河北"}, { "name": "天津" }, { "name": "北京" }, { "name": "山西" }, { "name": "内蒙古" }, { "name": "辽宁"}, { "name": "吉林"}, { "name": "黑龙江"}, { "name": "上海" }, { "name": "江苏" }, { "name": "浙江"}, { "name": "安徽"}, { "name": "福建" }, { "name": "江西" }, { "name": "山东" }, { "name": "河南" }, { "name": "湖北"}, { "name": "湖南" }, { "name": "广东"}, { "name": "广西" }, { "name": "海南" }, { "name": "四川" }, { "name": "重庆" }, { "name": "贵州"}, { "name": "云南" }, { "name": "西藏"}, { "name": "陕西" }, { "name": "甘肃"}, { "name": "青海" }, { "name": "宁夏" }, { "name": "新疆" }, { "name": "香港"}, { "name": "澳门"}, { "name": "台湾"}, { "name": "钓鱼岛"}, { "name": "三沙"}]
-        }]
-      });
+          legend: {
+              x:'right',
+              selectedMode:false,
+              data:_this.provinceName
+          },
+          series : [
+              {
+                  type: 'map',
+                  mapType: 'china',
+                  mapLocation: {
+                      x: 'left'
+                  },
+                  selectedMode : 'multiple',
+                  itemStyle:{
+                      normal:{label:{show:true}},
+                      emphasis:{label:{show:true}}
+                  },
+                  data:_this.provinceCount
+              }
+          ],
+          animation: false
+      }, true);
       mainCarNum.setOption({
-        title: {
-          text: '某站点用户访问来源',
-          subtext: '纯属虚构',
-          x: 'center'
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
         legend: {
-          orient: 'vertical',
-          x: 'left',
-          data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+            orient : 'vertical',
+            x : 'left',
+            data:_this.sectorName
         },
-
-        calculable: true,
-        series: [{
-          name: '访问来源',
-          type: 'pie',
-          radius: '55%',
-          center: ['50%', '60%'],
-          data: [
-            { value: 335, name: '直接访问' },
-            { value: 310, name: '邮件营销' },
-            { value: 234, name: '联盟广告' },
-            { value: 135, name: '视频广告' },
-            { value: 1548, name: '搜索引擎' }
-          ]
-        }]
+        
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:_this.sectorCount
+            }
+        ]
       });
       emChart = mainBarNum;
     };

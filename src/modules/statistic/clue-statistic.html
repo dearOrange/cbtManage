@@ -46,7 +46,6 @@
       <div class="informateTable">
         <p>
           <span class="span-style">上传线索排行</span>
-          <input type="hidden" name="type" value="tracePass" />
           <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="carRecoveryInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticRecoveryMonthing,ychanging:statisticRecoveryYearing})">
         </p>
         <div class="data-container">
@@ -58,7 +57,7 @@
                 <th width="8%">数量</th>
               </tr>
             </thead>
-            <tbody id="statistic_container">
+            <tbody id="upclue_statistic_container">
             </tbody>
           </table>
           <div class="page-box pagination" id="page_container"></div>
@@ -79,7 +78,7 @@
                 <th width="8%">数量</th>
               </tr>
             </thead>
-            <tbody id="clear_info_container"></tbody>
+            <tbody id="offline_info_container"></tbody>
           </table>
           <div class="page-box pagination" id="page_clear_container"></div>
         </div>
@@ -124,22 +123,22 @@
   </li>
 </script>
 
-<script type="text/template" id="statistic_content_template">
-  {{ each list item index }}
+<script type="text/template" id="upclue_content_template">
+  {{ each traceSort item index }}
   <tr>
     <td>{{item.rank}}</td>
     <td>{{item.dname}}</td>
-    <td>{{item.countTrace}}</td>
+    <td>{{item.countDownlineOrTask}}</td>
   </tr>
   {{/each}}
 </script>
 
-<script type="text/template" id="clear_content_template">
-  {{ each list item index }}
+<script type="text/template" id="offline_content_template">
+  {{ each downlineSort item index }}
   <tr>
     <td>{{index+1}}</td>
     <td>{{item.dname}}</td>
-    <td>{{item.countRecovery}}</td>
+    <td>{{item.countDownlineOrTask}}</td>
   </tr>
   {{/each}}
 </script>

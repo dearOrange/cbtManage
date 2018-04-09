@@ -90,7 +90,7 @@
         </div>
         <div class="hopeprice">
         	<p>预估费用</p>
-        	{{if data.state === "unconfirmed" || data.state === "unvaluation"}}
+        	{{if data.state === "unconfirmed" || data.state === "unvaluation" }}
         	<div>
         		<label>处置费用预估:</label>
         		<span>{{data.estimatedPrice}}</span>
@@ -134,7 +134,7 @@
 				</thead>
 				<tbody id="moneytotal_container"></tbody>
 			</table>
-			<div class="page-box pagination" id="page_container"></div>
+			<div class="page-box pagination" id="page_container1"></div>
 		</div>
 		{{/if}}
 		{{if data.state === "clueChecking"}}
@@ -150,7 +150,7 @@
     {{each list item index}}
     <tr>
         <td>{{index+1}}</td>
-    	<td>{{item.carNumber}}</td>
+    	  <td>{{item.carNumber}}</td>
         <td>{{item.desc}}</td>
         <td>{{item.site}}</td>
         <td>{{item.city}}</td>
