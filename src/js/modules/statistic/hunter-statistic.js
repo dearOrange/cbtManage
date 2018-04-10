@@ -16,6 +16,8 @@ define(function(require, exports, module) {
     now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
 
     var emChart = null;
+    _this.data = '';
+    _this.dataName = [];
 //  新增捕头统计
     _this.hunterMonths = [];
     _this.hunterCount = [];
@@ -38,6 +40,7 @@ define(function(require, exports, module) {
       this.initHead();
       this.sectionTable();
       this.initSection();
+      this.areaTable(_this.data);
       window.initContent('2018-01', true);
       window.initClear('2018-01', true);
       this.registerEvent();
@@ -93,29 +96,29 @@ define(function(require, exports, module) {
               _this.sectionTable();
           }
       });
-//    分布地区
-      jh.utils.ajax.send({
-          method: 'post',
-          url: '/statistics/downstream/distribution',
-          contentType: 'application/json',
-          data: {
-              role: 'type_B',
-              province: '山东%'
-          },
-          done: function(returnData) {
-              var provinceSector = returnData.data.wide;
-              for (var k = 0; k < provinceSector.length; k++) {
-                  var provinceObj = {};
-                  _this.provinceName.push(provinceSector[k].area);
-                  provinceObj.value = provinceSector[k].count;
-                  provinceObj.name = provinceSector[k].area;
-                  _this.provinceCount.push(provinceObj);
-              
-              }
-              _this.sectionTable();
-          }
-      });
     }
+    
+    this.areaTable = function(province) {
+//      分布地区
+        _this.sectionTable();
+        var page = new jh.ui.page({
+            data_container: $('#ranking_info_container'),
+            page_container: $('#page_clear_container'),
+            method: 'post',
+            url: '/statistics/downstream/distribution',
+            contentType: 'application/json',
+            data: {
+                role: 'type_B',
+                province: province
+            },
+            isSearch: true,
+            callback: function(data) {
+                return jh.utils.template('ranking_content_template', data);
+            }
+        });
+        page.init();
+    }
+    
     this.sectionTable = function() {
       var mainInformate = echarts.init(document.getElementById('mainInformate'));
       var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
@@ -164,7 +167,7 @@ define(function(require, exports, module) {
           legend: {
               x:'right',
               selectedMode:false,
-              data:_this.provinceName
+              data:[]
           },
           series : [
               {
@@ -178,7 +181,39 @@ define(function(require, exports, module) {
                       normal:{label:{show:true}},
                       emphasis:{label:{show:true}}
                   },
-                  data:_this.provinceCount
+                  data:[
+                      {name:'西藏'},
+                      {name:'青海'},
+                      {name:'宁夏'},
+                      {name:'海南'},
+                      {name:'甘肃'},
+                      {name:'贵州'},
+                      {name:'新疆'},
+                      {name:'云南'},
+                      {name:'重庆'},
+                      {name:'吉林'},
+                      {name:'山西'},
+                      {name:'天津'},
+                      {name:'江西'},
+                      {name:'广西'},
+                      {name:'陕西'},
+                      {name:'黑龙江'},
+                      {name:'内蒙古'},
+                      {name:'安徽'},
+                      {name:'北京'},
+                      {name:'福建'},
+                      {name:'上海'},
+                      {name:'湖北'},
+                      {name:'湖南'},
+                      {name:'四川'},
+                      {name:'辽宁'},
+                      {name:'河北'},
+                      {name:'河南'},
+                      {name:'浙江'},
+                      {name:'山东'},
+                      {name:'江苏'},
+                      {name:'广东'}
+                  ]
               }
           ],
           animation: false
@@ -228,7 +263,7 @@ define(function(require, exports, module) {
         },
         isSearch: isSearch,
         callback: function(data) {
-          return jh.utils.template('statistic_content_template', data);
+//        return jh.utils.template('statistic_content_template', data);
         }
       });
       page.init();
@@ -252,49 +287,20 @@ define(function(require, exports, module) {
         isSearch: isSearch,
         show_page_number: 3,
         callback: function(data) {
-          return jh.utils.template('clear_content_template', data);
+//        return jh.utils.template('clear_content_template', data);
         }
       });
       page.init();
     };
 
-    window.initEntrustSort = function(obj, isSearch) {
-      obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-      obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-      jh.utils.ajax.send({
-        method: 'post',
-        url: '/statistics/entrust',
-        contentType: 'application/json',
-        data: {
-          yearMonth: obj.y + '-' + obj.M
-        },
-        isSearch: isSearch,
-        done: function(returnData) {
-          var entrust = returnData.data;
-          var noResultBox = $('#entrustNoResultBox');
-          if (!entrust.length) {
-            noResultBox.removeClass('hide');
-            noResultBox.prev().addClass('hide');
-            return false;
-          } else {
-            noResultBox.addClass('hide');
-            noResultBox.prev().removeClass('hide');
-          }
-          var entrustContent = jh.utils.template('entrust_content_template', returnData);
-          $('#entrustResultBox').html(entrustContent);
-          for (var k = 0; k < entrust.length; k++) {
-            _this.countRate = entrust[k].countRate;
-            _this.pieContent(k, _this.countRate);
-          }
-
-        }
-      });
-    };
 
     this.registerEvent = function() {
 
       emChart.on('click', function(p) {
-        console.log(p.data);//p为点击的地图对象，p.data为传入地图的data数据
+        console.log(p.data.name);//p为点击的地图对象，p.data为传入地图的data数据
+        _this.dataName = p.data.name;
+        _this.data = p.data.name + '%';
+        _this.areaTable(_this.data);
       });
 
       $('select').select2({
@@ -316,21 +322,6 @@ define(function(require, exports, module) {
   };
   /**
    * 情报end
-   */
-
-  /**
-   * 渠道委托begin
-   */
-  window.statisticEntrustMonthing = function() {
-    var obj = $dp.cal.newdate;
-    window.initEntrustSort(obj, true);
-  };
-  window.statisticEntrustYearing = function() {
-    var obj = $dp.cal.newdate;
-    window.initEntrustSort(obj, true);
-  };
-  /**
-   * 渠道委托end
    */
 
   /**

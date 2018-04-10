@@ -48,9 +48,8 @@
               <table class="dataShow">
                 <thead>
                   <tr>
-                    <th width="4%">排名</th>
-                    <th width="8%">名称</th>
-                    <th width="8%">数量</th>
+                    <th width="8%">地区</th>
+                    <th width="8%">线人数量</th>
                   </tr>
                 </thead>
                 <tbody id="ranking_info_container"></tbody>
@@ -141,28 +140,14 @@
 </script>
 <!--排名-->
 <script type="text/template" id="ranking_content_template">
-  {{ each list item index }}
+  {{ each wide item index }}
   <tr>
-    <td>{{index+1}}</td>
-    <td>{{item.dname}}</td>
-    <td>{{item.countRecovery}}</td>
+    <td>{{item.area}}</td>
+    <td>{{item.count}}</td>
   </tr>
   {{/each}}
 </script>
-<script type="text/template" id="entrust_content_template">
-  <div class="channelInner">
-    {{ each data item index }}
-    <dl class="channelDistance">
-      <dd>
-        <p>{{item.channelName}}</p>
-        <p>委托数</p>
-        <p>{{item.countEach}}</p>
-      </dd>
-      <dt id="pie{{index}}"></dt>
-    </dl>
-    {{/each}}
-  </div>
-</script>
+
 <script type="text/javascript">
   seajs.use('modules/statistic/informer-statistic', function(InformerStatistic) {
     var InformerStatistic = new InformerStatistic();

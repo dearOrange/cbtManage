@@ -41,6 +41,7 @@ define(function(require, exports, module) {
             this.initHead();
             this.sectionTable();
             this.initSection();
+            this.areaTable();
             window.initContent('2018-01', true);
             window.initClear('2018-01', true);
 //          window.initEntrustSort('2018-01', true);
@@ -101,8 +102,14 @@ define(function(require, exports, module) {
                 }
             });
             
+        }
+        
+        this.areaTable = function() {
 //          分布地区
-            jh.utils.ajax.send({
+            _this.sectionTable();
+            var page = new jh.ui.page({
+                data_container: $('#ranking_info_container'),
+                page_container: $('#page_clear_container'),
                 method: 'post',
                 url: '/statistics/downstream/distribution',
                 contentType: 'application/json',
@@ -110,20 +117,14 @@ define(function(require, exports, module) {
                     role: 'type_A',
                     province: '山东%'
                 },
-                done: function(returnData) {
-                    var provinceSector = returnData.data.wide;
-                    for (var k = 0; k < provinceSector.length; k++) {
-                        var provinceObj = {};
-                        _this.provinceName.push(provinceSector[k].area);
-                        provinceObj.value = provinceSector[k].count;
-                        provinceObj.name = provinceSector[k].area;
-                        _this.provinceCount.push(provinceObj);
-                    
-                    }
-                    _this.sectionTable();
+                isSearch: true,
+                callback: function(data) {
+                    return jh.utils.template('ranking_content_template', data);
                 }
             });
+            page.init();
         }
+        
         this.sectionTable = function() {
             var mainInformate = echarts.init(document.getElementById('mainInformate'));
             var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
@@ -200,7 +201,7 @@ define(function(require, exports, module) {
               legend: {
                   orient : 'vertical',
                   x : 'left',
-                  data:_this.sectorName
+                  data:[]
               },
               
               calculable : true,
@@ -210,7 +211,7 @@ define(function(require, exports, module) {
                       type:'pie',
                       radius : '55%',
                       center: ['50%', '60%'],
-                      data:_this.sectorCount
+                      data:[]
                   }
               ]
           });

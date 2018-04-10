@@ -301,7 +301,9 @@ define(function(require, exports, module) {
           ok: function() {
             jh.utils.ajax.send({
               url: '/task/delTask',
-              data: taskIds,
+              data: {
+                taskIds: taskIds
+              },
               done: function(returnData) {
                 jh.utils.alert({
                   content: '任务关闭成功！',
