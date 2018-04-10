@@ -61,6 +61,13 @@ define(function(require, exports, module) {
                             content: rejectCon,
                             ok: function() {
                                 var throughState = $('.through').filter(':checked').val();
+                                if(!throughState){
+                                  jh.utils.alert({
+                                    content: '请先选择条件',
+                                    ok: true
+                                  })
+                                  return false;
+                                };
                                 var btn = $('[i-id="ok"]');
                                 $('<img src="/src/img/loading.gif" height="29"/>').insertAfter(btn);
                                 jh.utils.ajax.send({
