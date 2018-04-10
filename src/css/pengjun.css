@@ -213,7 +213,6 @@
 .public_css table.taskTable td {
     border: 1px solid #eef1f6;
     text-align: left;
-    min-width: 270px;
 }
 
 

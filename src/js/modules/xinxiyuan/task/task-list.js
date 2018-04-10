@@ -107,7 +107,8 @@ define(function(require, exports, module) {
           state = m.data('state'),
           stateValue = m.data('value'),
           batchOperater = $('#batchOperater'),
-          batchDistribute = $('#batchDistribute');
+          batchDistribute = $('#batchDistribute'),
+          closeTaskDistribute = $('#closeTaskDistribute');
         var textCon = $('.textCon'),
           matchTemplateName = '',
           matchForm = $('#match-container');
@@ -129,6 +130,13 @@ define(function(require, exports, module) {
         }
         if (stateValue === 1) {
           batchDistribute.removeClass('hide');
+        }else {
+          batchDistribute.addClass('hide');
+        }
+        if (stateValue === 1 || stateValue === 2) {
+          closeTaskDistribute.removeClass('hide');
+        }else {
+          closeTaskDistribute.addClass('hide');
         }
 
         var locationArr = ['京','粤','皖','闽','甘','桂','贵','琼','冀','豫','黑','鄂','湘','吉','苏','赣','辽','蒙','宁','青','鲁','晋','陕','陕','沪','川','津','藏','新','云','浙','渝','港','澳','台'];
@@ -274,7 +282,67 @@ define(function(require, exports, module) {
         }
         _this.initSheriff(taskIds);
       });
-
+      
+      //批量关闭
+      $('body').off('click', '.closeMoreTask').on('click', '.closeMoreTask', function() {
+        var me = $(this);
+        var taskIds = jh.utils.getCheckboxValue('task_list_container');
+        if (!taskIds) {
+          jh.utils.alert({
+            content: '请选择任务！',
+            ok: true,
+            cancel: false
+          });
+          return false;
+        };
+        jh.utils.alert({
+          title: '关闭任务',
+          content: '确定关闭所选的任务吗？关闭后任务将不可开启',
+          ok: function() {
+            jh.utils.ajax.send({
+              url: '/task/delTask',
+              data: taskIds,
+              done: function(returnData) {
+                jh.utils.alert({
+                  content: '任务关闭成功！',
+                  ok: function() {
+                    _this.initContent();
+                  },
+                  cancel: false
+                });
+              }
+            });
+          },
+          cancel: true
+        });
+      });
+      
+      //关闭任务
+      $('body').off('click', '.closeTask').on('click', '.closeTask', function() {
+        var taskId = $(this).data('id');
+        jh.utils.alert({
+          title: '关闭任务',
+          content: '确定关闭所选的任务吗？\n关闭后任务将不可开启',
+          ok: function() {
+            jh.utils.ajax.send({
+              url: '/task/delTask',
+              data: {
+                taskIds: taskId
+              },
+              done: function(returnData) {
+                jh.utils.alert({
+                  content: '任务关闭成功！',
+                  ok: function() {
+                    _this.initContent();
+                  },
+                  cancel: false
+                });
+              }
+            });
+          },
+          cancel: true
+        });
+      });
 
       //查看违章
       $('body').off('dblclick', '.showTr').on('dblclick', '.showTr', function() {

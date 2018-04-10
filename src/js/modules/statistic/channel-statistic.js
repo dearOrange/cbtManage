@@ -8,6 +8,7 @@
 define(function(require, exports, module) {
     function ChannelStatistic() {
         var _this = this;
+        _this.role = 'type_A';
         var date = new Date();
         var now = {
             year: date.getFullYear(),
@@ -143,7 +144,7 @@ define(function(require, exports, module) {
 //              show_page_number: 3,
                 contentType: 'application/json',
                 data: {
-                    role: 'type_A',
+                    role: _this.role,
                     pageSize: 5,
                     yearMonth: obj.y + '-' + obj.M
                 },
@@ -219,10 +220,12 @@ define(function(require, exports, module) {
               $(this).addClass("active").siblings().removeClass("active");
               $('#state').val($(this).data('value'));
               $('#stateInput').val($(this).data('value'));
+              _this.role = $(this).data('value');
               if (param && param === 'autoClick') {
       
               } else {
                 _this.initHead('tab');
+                window.initContent('2018-01', true);
               }
             })
             

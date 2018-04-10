@@ -14,8 +14,11 @@ define(function(require, exports, module) {
             month: date.getMonth() + 1
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
-
+//      扇形
         _this.businessName = [];
+        _this.businessCount = [];
+        
+        
         _this.traceCount = [];
         _this.carRecoveryMonths = [];
         _this.carRecoveryCount = [];
@@ -47,14 +50,15 @@ define(function(require, exports, module) {
               contentType: 'application/json',
               data: businessOne,
               done: function(returnData) {
-                var businessOne = returnData.data;
-                var businessobj = {};
-                for (var a = 0; a < businessOne.length; a++) {
-                    businessobj.value = businessOne[a].countEach;
-                    businessobj.name = businessOne[a].name;
-                    businessobj.id = businessOne[a].id;
+                var businessCount = returnData.data;
+                for (var a = 0; a < businessCount.length; a++) {
+                  var businessobj = {};
+                  _this.businessName.push(businessCount[a].name);
+                  businessobj.value = businessCount[a].countEach;
+                  businessobj.name = businessCount[a].name;
+                  businessobj.id = businessCount[a].id;
                 }
-                _this.businessName.push(businessobj);
+                _this.businessCount.push(businessobj);
                 _this.sectionTable();
               }
           });
@@ -77,14 +81,8 @@ define(function(require, exports, module) {
           page.init();
         }
         this.sectionTable = function() {
-            
             var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
             mainCarNum.setOption({
-              title : {
-                  text: '某站点用户访问来源',
-                  subtext: '纯属虚构',
-                  x:'center'
-              },
               tooltip : {
                   trigger: 'item',
                   formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -92,7 +90,7 @@ define(function(require, exports, module) {
               legend: {
                   orient : 'vertical',
                   x : 'left',
-                  data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+                  data:_this.businessName
               },
               
               calculable : true,
@@ -102,13 +100,7 @@ define(function(require, exports, module) {
                       type:'pie',
                       radius : '55%',
                       center: ['50%', '60%'],
-                      data:[
-                          {value:335, name:'直接访问'},
-                          {value:310, name:'邮件营销'},
-                          {value:234, name:'联盟广告'},
-                          {value:135, name:'视频广告'},
-                          {value:1548, name:'搜索引擎'}
-                      ]
+                      data:_this.businessCount
                   }
               ]
           });
@@ -124,7 +116,6 @@ define(function(require, exports, module) {
                 page_container: $('#page_container'),
                 method: 'post',
                 url: '/statistics/business/recommendTaskSort',
-                showPageTotal: false,
                 jump: false,
                 show_page_number: 3,
                 contentType: 'application/json',
@@ -134,7 +125,6 @@ define(function(require, exports, module) {
                 },
                 isSearch: isSearch,
                 callback: function(data) {
-                  console.log(data);
                   return jh.utils.template('monthTwo_content_template', data);
                 }
             });
@@ -149,13 +139,14 @@ define(function(require, exports, module) {
                 data_container: $('#monthOne_statistic_container'),
                 page_container: $('#page_clear_container'),
                 method: 'post',
-                url: '/statistics/business/recommendTaskSort',
+                url: '/statistics/business/recommendSort',
                 contentType: 'application/json',
                 data: {
                   pageSize: 5,
                   yearMonth: obj.y + '-' + obj.M
                 },
                 isSearch: isSearch,
+                jump: false,
                 show_page_number: 3,
                 callback: function(data) {
                     return jh.utils.template('monthOne_content_template', data);

@@ -43,6 +43,25 @@
 			{{/each}}
 		</div>
 		<br>
+		<div class="upmainfile">
+      <div>
+        <span>违章信息</span>
+        <table>
+            <thead>
+                <tr>
+                    <th width="5%">序号</th>
+                    <th width="10%">车牌号</th>
+                    <th width="40%">内容</th>
+                    <th width="20%">信息修复地点</th>
+                    <th width="8%">信息修复城市</th>
+                    <th width="15%">信息修复时间</th>
+                </tr>
+            </thead>
+            <tbody id="distribution-illegalList-container"></tbody>
+        </table>
+        <div class="page-box pagination" id="page_container" style="width: 99%;"></div>
+      </div>
+    </div>
 		{{if data.state === "clueChecking"}}
 		<div class="mainfile">
 			<p>线索信息</p>
@@ -237,6 +256,18 @@
 			</tr>
 		</table>
 	</div>
+</script>
+<script type="text/template" id="distribution-illegalList-template">
+    {{each list item index}}
+    <tr>
+        <td>{{index+1}}</td>
+        <td>{{item.carNumber}}</td>
+        <td>{{item.desc}}</td>
+        <td>{{item.site}}</td>
+        <td>{{item.city}}</td>
+        <td>{{item.occurAt}}</td>
+    </tr>
+    {{/each}}
 </script>
 <script type="text/javascript">
 	seajs.use('modules/xinxiyuan/task/task-list-detailTrcaing', function(TaskListDetailTrcaing) {

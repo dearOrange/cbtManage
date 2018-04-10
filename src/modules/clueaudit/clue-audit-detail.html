@@ -89,6 +89,7 @@
         	{{/each}}
         </div>
         <div class="hopeprice">
+          {{if data.role === 'type_B'}}
         	<p>预估费用</p>
         	{{if data.state === "unconfirmed" || data.state === "unvaluation" }}
         	<div>
@@ -102,6 +103,7 @@
         		<span>{{data.estimatedCost}}</span>
         		{{/each}}
         	</div>
+        	{{/if}}
         	{{if data.state === "unconfirmed"}}
         	<p>确认费用</p>
         	<div>

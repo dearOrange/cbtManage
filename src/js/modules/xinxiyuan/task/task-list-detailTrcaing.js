@@ -28,6 +28,8 @@ define(function(require, exports, module) {
                     returnData.getPositionByImage = jh.utils.getPositionByImage;
                     var html = jh.utils.template('task_list_detailTrcaing_template', returnData);
                     $('#task_list_detailTrcaing_content').html(html);
+                    _this.searchIllegalInfo();//违章信息
+                    
                     _this.initSheriff();
 
 
@@ -47,7 +49,25 @@ define(function(require, exports, module) {
                 }
             });
         };
-
+        
+        this.searchIllegalInfo = function() {
+            var page = new jh.ui.page({
+                data_container: $('#distribution-illegalList-container'),
+                page_container: $('#page_container'),
+                method: 'post',
+                isSearch: true,
+                url: '/clue/illegalList',
+                contentType: 'application/json',
+                data: {
+                    taskId: args.id
+                },
+                callback: function(data) {
+                    return jh.utils.template('distribution-illegalList-template', data);
+                }
+            });
+            page.init();
+        };
+        
         this.registerEvent = function() {
             //信息修复
             $('body').off('click', '.auditClue').on('click', '.auditClue', function() {

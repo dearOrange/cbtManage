@@ -23,6 +23,7 @@
             <td colspan="6">
               <a class="button search-button allrepair" href="javascript:;">一键信息修复更新</a>
               <a class="button search-button distributeTask hide" href="javascript:;" id="batchDistribute">批量分配</a>
+              <a class="button search-button closeMoreTask hide" href="javascript:;" id="closeTaskDistribute">批量关闭任务</a>
             </td>
           </tr>
         </tbody>
@@ -39,14 +40,14 @@
           </th>
           <th width="9%">任务号</th>
           <th width="6%">车牌号</th>
-          <th width="10%">品牌</th>
-          <th width="10%">车系</th>
+          <th width="6%">品牌</th>
+          <th width="8%">车系</th>
           <th width="10%">债权方</th>
           <th class="textCon" width="10%">匹配成功时间</th>
-          <th width="9%">任务状态</th>
+          <th width="6%">任务状态</th>
           <th width="10%">违章地区</th>
           <th width="10%">违章时间</th>
-          <th width="10%">操作</th>
+          <th width="15%">操作</th>
         </tr>
       </thead>
       <tbody id="task_list_container">
@@ -73,6 +74,9 @@
     <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.occurAt}}</td>
     <td>
       <a data-id="{{item.id}}" class="taskList-detail button">详情</a>
+      {{if passState =='1' || passState =='2' }}
+      <a data-id="{{item.id}}" class="closeTask oneStyle button">关闭任务</a>
+      {{/if}}
     </td>
   </tr>
   {{/each}}
