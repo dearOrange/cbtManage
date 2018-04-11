@@ -1087,6 +1087,7 @@ define(function(require, exports, module) {
           try {
             response.menuState = tammy.utils.menuState;
             response.officerClueState = tammy.utils.officerClueState;
+            response.officerState = tammy.utils.officerState;
             var viewStr = s.callback.call(null, response); //获取拼接后的展示数据，增加容错处理
             s.data_container.html(viewStr); //插入数据
             m.onload(returnData);
@@ -1845,16 +1846,16 @@ define(function(require, exports, module) {
     var officerState = function(state) {
       switch (state) {
         case "all":
-          state = "可找可拖";
+          state = "可找车可拖车";
           break;
         case "trace":
-          state = "只找";
+          state = "只找车";
           break;
         case "recycle":
-          state = "只拖";
+          state = "只拖车";
           break;
         case "tracerecycle":
-          state = "找加拖一体";
+          state = "拖车找车一体";
           break;
         case "new":
           state = "未初筛";

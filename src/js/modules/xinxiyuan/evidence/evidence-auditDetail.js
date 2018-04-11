@@ -53,6 +53,13 @@ define(function(require, exports, module) {
         content: contentTemplate,
         ok: function() {
           datas.checkingState = $('.auditThrough').filter(":checked").val();
+          if(!datas.checkingState) {
+            jh.utils.alert({
+              content: '请选择审核结果',
+              ok: true
+            })
+            return false;
+          };
           datas.taskId = args.id;
           datas.reason = $('.reason').val();
           var tipText = datas.checkingState ==  '1' ? '审核通过' : '审核未通过';

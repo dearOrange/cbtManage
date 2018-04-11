@@ -135,8 +135,12 @@ define(function(require, exports, module) {
         }
         if (stateValue === 1 || stateValue === 2) {
           closeTaskDistribute.removeClass('hide');
+          $('.taskContain').removeClass('hide');
+          $('.taskNumber').addClass('hide');
         }else {
           closeTaskDistribute.addClass('hide');
+          $('.taskContain').addClass('hide');
+          $('.taskNumber').removeClass('hide');
         }
 
         var locationArr = ['京','粤','皖','闽','甘','桂','贵','琼','冀','豫','黑','鄂','湘','吉','苏','赣','辽','蒙','宁','青','鲁','晋','陕','陕','沪','川','津','藏','新','云','浙','渝','港','澳','台'];

@@ -17,7 +17,8 @@ define(function(require, exports, module) {
 
     var emChart = null;
     _this.data = '';
-    _this.dataName = [];
+    _this.dataName = '';
+ 
 //  新增捕头统计
     _this.hunterMonths = [];
     _this.hunterCount = [];
@@ -100,7 +101,6 @@ define(function(require, exports, module) {
     
     this.areaTable = function(province) {
 //      分布地区
-        _this.sectionTable();
         var page = new jh.ui.page({
             data_container: $('#ranking_info_container'),
             page_container: $('#page_clear_container'),
@@ -167,7 +167,7 @@ define(function(require, exports, module) {
           legend: {
               x:'right',
               selectedMode:false,
-              data:[]
+              data:[_this.dataName]
           },
           series : [
               {
@@ -176,7 +176,7 @@ define(function(require, exports, module) {
                   mapLocation: {
                       x: 'left'
                   },
-                  selectedMode : 'multiple',
+                  selectedMode : 'single',
                   itemStyle:{
                       normal:{label:{show:true}},
                       emphasis:{label:{show:true}}
@@ -297,7 +297,7 @@ define(function(require, exports, module) {
     this.registerEvent = function() {
 
       emChart.on('click', function(p) {
-        console.log(p.data.name);//p为点击的地图对象，p.data为传入地图的data数据
+//      console.log(p.data.name);//p为点击的地图对象，p.data为传入地图的data数据
         _this.dataName = p.data.name;
         _this.data = p.data.name + '%';
         _this.areaTable(_this.data);

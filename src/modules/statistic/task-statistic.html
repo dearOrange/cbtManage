@@ -89,34 +89,11 @@
   <tr>
     <td>{{item.rank}}</td>
     <td>{{item.dname}}</td>
-    <td>{{item.countTrace}}</td>
+    <td>{{item.traceCount}}</td>
   </tr>
   {{/each}}
 </script>
 
-<script type="text/template" id="clear_content_template">
-  {{ each list item index }}
-  <tr>
-    <td>{{index+1}}</td>
-    <td>{{item.dname}}</td>
-    <td>{{item.countRecovery}}</td>
-  </tr>
-  {{/each}}
-</script>
-<script type="text/template" id="entrust_content_template">
-  <div class="channelInner">
-    {{ each data item index }}
-    <dl class="channelDistance">
-      <dd>
-        <p>{{item.channelName}}</p>
-        <p>委托数</p>
-        <p>{{item.countEach}}</p>
-      </dd>
-      <dt id="pie{{index}}"></dt>
-    </dl>
-    {{/each}}
-  </div>
-</script>
 <script type="text/javascript">
   seajs.use('modules/statistic/task-statistic', function(TaskStatistic) {
     var TaskStatistic = new TaskStatistic();

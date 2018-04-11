@@ -16,28 +16,7 @@
         </form>
         <div id="mainCarNum" class="mainInformate" style="width:70%;height:300px;"></div>
       </div>
-      <div class="information">
-        <div id="informateTable">
-          <div class="data-container">
-            <table class="dataShow">
-              <thead>
-                <tr>
-                  <th width="4%">序号</th>
-                  <th width="8%">名称</th>
-                  <th width="8%">债权方类型</th>
-                  <th width="8%">联系人姓名</th>
-                  <th width="8%">联系电话</th>
-                  <th width="15%">注册时间</th>
-                  <th width="8%">下线</th>
-                </tr>
-              </thead>
-              <tbody id="business_statistic_container">
-              </tbody>
-            </table>
-            <div class="page-box pagination" id="page_container"></div>
-          </div>
-        </div>
-      </div>
+      <div id="showTable"></div>
     </div>
     <div class="clue-right-layout pull-right">
       <div class="information">
@@ -62,7 +41,7 @@
               <tbody id="monthOne_statistic_container">
               </tbody>
             </table>
-            <div class="page-box pagination" id="page_container"></div>
+            <div class="page-box pagination" id="page_container_one"></div>
           </div>
         </div>
       </div>
@@ -73,10 +52,8 @@
           <p class="title-style">
             <span class="span-style">商务</span>
             <span>
-              <select name="name">
+              <select name="name" id="operateSta">
                 <option value="">所有商务</option>
-              	<option value="">1号</option>
-              	<option value="">2号</option>
               </select>
             </span>
             <span>
@@ -101,7 +78,7 @@
                 <th width="8%">任务数</th>
               </tr>
             </thead>
-            <tbody id="business_statistic_container"></tbody>
+            <tbody id="business_list_container"></tbody>
           </table>
           <div class="page-box pagination" id="page_clear_container"></div>
         </div>
@@ -128,7 +105,7 @@
               <tbody id="monthTwo_statistic_container">
               </tbody>
             </table>
-            <div class="page-box pagination" id="page_container"></div>
+            <div class="page-box pagination" id="page_container_two"></div>
           </div>
         </div>
       </div>
@@ -156,23 +133,70 @@
   </tr>
   {{/each}}
 </script>
-
-<script type="text/template" id="business_statistic_content_template">
-  {{ each list item index }}
-  <tr>
-    <td>{{item.rank}}</td>
-    <td>{{item.dname}}</td>
-    <td>{{item.countTrace}}</td>
-    <td>{{item.rank}}</td>
-    <td>{{item.dname}}</td>
-    <td>{{item.countTrace}}</td>
-    <td>
-      <a data-id="{{item.id}}" class="button">查看发展下线</a>
-    </td>
-  </tr>
-  {{/each}}
+<!--发展下线-->
+<script type="text/template" id="business_statistic_template">
+  <div class="information">
+    <div class="data-container">
+      <table class="dataShow">
+        <thead>
+          <tr>
+            <th width="4%">序号</th>
+            <th width="8%">名称</th>
+            <th width="8%">债权方类型</th>
+            <th width="8%">联系人姓名</th>
+            <th width="8%">联系电话</th>
+            <th width="15%">注册时间</th>
+            <th width="8%">下线</th>
+          </tr>
+        </thead>
+        <tbody id="business_statistic_container">
+          {{ each list item index }}
+          <tr>
+            <td>{{item.rank}}</td>
+            <td>{{item.name}}</td>
+            <td>{{menuState(item.type)}}</td>
+            <td>{{item.contact}}</td>
+            <td>{{item.phone}}</td>
+            <td>{{item.registerAt}}</td>
+            <td>
+              <a data-id="{{item.id}}" class="button find_develop_num">查看发展下线</a>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <div class="page-box pagination" id="page_container"></div>
+    </div>
+  </div>
 </script>
-
+<!--查看发展下线数-->
+<script type="text/template" id="develop_statistic_template">
+  <div class="data-container">
+    <table class="dataShow">
+      <thead>
+        <tr>
+          <th width="4%">序号</th>
+          <th width="8%">姓名</th>
+          <th width="8%">账号</th>
+          <th width="8%">联系电话</th>
+          <th width="15%">注册时间</th>
+        </tr>
+      </thead>
+      <tbody id="develop_statistic_container">
+        {{ each list item index }}
+        <tr>
+          <td>{{item.rank}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.contact}}</td>
+          <td>{{item.phone}}</td>
+          <td>{{item.registerAt}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <div class="page-box pagination" id="page_develop_container"></div>
+  </div>
+</script>
 <!--商务发展债权方发布任务列表统计-->
 <script type="text/template" id="business_content_template">
   {{ each list item index }}

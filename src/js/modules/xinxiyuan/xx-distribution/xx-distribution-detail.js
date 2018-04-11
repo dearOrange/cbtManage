@@ -115,7 +115,7 @@ define(function(require, exports, module) {
                     done: function(returnData) {
                         window.setTimeout(function() {
                             _this.searchIllegalInfo(me);
-                        }, 10000);
+                        }, 500);
                     }
                 });
 

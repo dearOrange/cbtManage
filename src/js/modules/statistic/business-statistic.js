@@ -8,6 +8,7 @@
 define(function(require, exports, module) {
     function BusinessStatistic() {
         var _this = this;
+        var pieCharts = null;
         var date = new Date();
         var now = {
             year: date.getFullYear(),
@@ -19,17 +20,10 @@ define(function(require, exports, module) {
         _this.businessCount = [];
         
         
-        _this.traceCount = [];
-        _this.carRecoveryMonths = [];
-        _this.carRecoveryCount = [];
-        _this.upstreamTrendMonths = [];
-        _this.traceTrendMonths = [];
-        _this.downstreamTrendMonths = [];
-        _this.upstreamTrendCount = [];
-        _this.traceTrendCount = [];
-        _this.downstreamTrendCount = [];
-        _this.countRate = 0;
-
+        _this.traceValue = '';
+        _this.traceName = '';
+        _this.traceId = '';
+        
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
             this.initHead();
@@ -37,7 +31,6 @@ define(function(require, exports, module) {
             this.initSection();
             window.initContent('2018-01', true);
             window.initClear('2018-01', true);
-            window.initEntrustSort('2018-01', true);
             this.registerEvent();
         };
 
@@ -57,29 +50,60 @@ define(function(require, exports, module) {
                   businessobj.value = businessCount[a].countEach;
                   businessobj.name = businessCount[a].name;
                   businessobj.id = businessCount[a].id;
+                  _this.businessCount.push(businessobj);
                 }
-                _this.businessCount.push(businessobj);
                 _this.sectionTable();
               }
           });
+//        商务经理
+          jh.utils.ajax.send({
+            url: '/operator/getAllBusiness',
+            done: function(returnData) {
+              var operateData = returnData.data;
+              var operateStr = "";
+              for (var i = 0; i < operateData.length; i++) {
+                  operateStr += '<option value="' + operateData[i].id + '">' + operateData[i].name + '</option>';
+              }
+              $('#operateSta').append(operateStr);
+              jh.utils.assignSelect('operateSta');
+            }
+          });
         };
+//      商务列表
         this.initSection = function(isSearch) {
           var businessTwo = jh.utils.formToJson($('#business-list-form'));
           var page = new jh.ui.page({
-            data_container: $('#business_statistic_container'),
-            page_container: $('#page_container'),
+            data_container: $('#business_list_container'),
+            page_container: $('#page_clear_container'),
             method: 'post',
             url: '/statistics/business/recommendTaskList',
             contentType: 'application/json',
             data: businessTwo,
             isSearch: isSearch,
             callback: function(data) {
-              console.log(data)
               return jh.utils.template('business_content_template', data);
             }
           });
           page.init();
         }
+//      下线列表
+        this.initOnline = function(id) {
+          var online = jh.utils.formToJson($('#business-info-form'));
+          online.id = id;
+          var page = new jh.ui.page({
+            data_container: $('#business_statistic_container'),
+            page_container: $('#page_container'),
+            method: 'post',
+            url: '/statistics/business/recommendTaskList',
+            contentType: 'application/json',
+            data: online,
+            callback: function(data) {
+              return jh.utils.template('business_statistic_template', data);
+            }
+          });
+          page.init();
+        }
+        
         this.sectionTable = function() {
             var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
             mainCarNum.setOption({
@@ -90,7 +114,7 @@ define(function(require, exports, module) {
               legend: {
                   orient : 'vertical',
                   x : 'left',
-                  data:_this.businessName
+                  data: _this.businessName
               },
               
               calculable : true,
@@ -100,10 +124,11 @@ define(function(require, exports, module) {
                       type:'pie',
                       radius : '55%',
                       center: ['50%', '60%'],
-                      data:_this.businessCount
+                      data: _this.businessCount
                   }
               ]
           });
+          pieCharts = mainCarNum;
 
         };
 //      月度排名2
@@ -113,7 +138,7 @@ define(function(require, exports, module) {
 
             var page = new jh.ui.page({
                 data_container: $('#monthTwo_statistic_container'),
-                page_container: $('#page_container'),
+                page_container: $('#page_container_two'),
                 method: 'post',
                 url: '/statistics/business/recommendTaskSort',
                 jump: false,
@@ -137,7 +162,7 @@ define(function(require, exports, module) {
 
             var page = new jh.ui.page({
                 data_container: $('#monthOne_statistic_container'),
-                page_container: $('#page_clear_container'),
+                page_container: $('#page_container_one'),
                 method: 'post',
                 url: '/statistics/business/recommendSort',
                 contentType: 'application/json',
@@ -155,38 +180,15 @@ define(function(require, exports, module) {
             page.init();
         };
 
-        window.initEntrustSort = function(obj, isSearch) {
-            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-            jh.utils.ajax.send({
-                method: 'post',
-                url: '/statistics/entrust',
-                contentType: 'application/json',
-                data: {
-                    yearMonth: obj.y + '-' + obj.M
-                },
-                isSearch: isSearch,
-                done: function(returnData) {
-//                  var entrust = returnData.data;
-//                  var noResultBox = $('#entrustNoResultBox');
-//                  if (!entrust.length) {
-//                      noResultBox.removeClass('hide');
-//                      noResultBox.prev().addClass('hide');
-//                      return false;
-//                  } else {
-//                      noResultBox.addClass('hide');
-//                      noResultBox.prev().removeClass('hide');
-//                  }
-//                  var entrustContent = jh.utils.template('entrust_content_template', returnData);
-//                  $('#entrustResultBox').html(entrustContent);
-                    
-
-                }
-            });
-        };
-
         this.registerEvent = function() {
-
+            
+            pieCharts.on('click', function(p) {
+//            console.log(p);//p为点击的地图对象，p.data为传入地图的data数据
+              var showOnline = jh.utils.template('business_statistic_template');
+              $('#showTable').html(showOnline);
+              _this.initOnline(p.data.id);
+            });
+            
             $('select').select2({
                 minimumResultsForSearch: Infinity
             });
@@ -199,6 +201,31 @@ define(function(require, exports, module) {
                     return false;
                 }
             });
+            
+//          查看下线数
+            $('body').off('click', '.find_develop_num').on('click', '.find_develop_num', function() {
+              var developId = $(this).data('id');
+              jh.utils.ajax.send({
+                method: 'post',
+                url: '/statistics/upstream/recommendList',
+                contentType: 'application/json',
+                data: {
+                  pageNum: 1,
+                  pageSize: 10,
+                  params: {
+                    id: developId
+                  }
+                },
+                done: function(data) {
+                  var developNum = jh.utils.template('develop_statistic_template', data);
+                  jh.utils.alert({
+                    title: '发展下线',
+                    content: developNum,
+                    ok: true
+                  });
+                }
+              })
+            })
         };
     }
     /**
@@ -214,21 +241,6 @@ define(function(require, exports, module) {
     };
     /**
      * 情报end
-     */
-
-    /**
-     * 渠道委托begin
-     */
-    window.statisticEntrustMonthing = function() {
-        var obj = $dp.cal.newdate;
-        window.initEntrustSort(obj, true);
-    };
-    window.statisticEntrustYearing = function() {
-        var obj = $dp.cal.newdate;
-        window.initEntrustSort(obj, true);
-    };
-    /**
-     * 渠道委托end
      */
 
     /**

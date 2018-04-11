@@ -16,6 +16,11 @@ define(function(require, exports, module) {
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
         now.day = now.day.toString().length === 1 ? '0' + now.day : now.day; //日期两位数
+        
+        var emChart = null;
+        _this.data = '';
+        _this.dataName = '';
+
 //      线人趋势统计
         _this.informerMonths = [];
         _this.informerCount = [];
@@ -41,7 +46,7 @@ define(function(require, exports, module) {
             this.initHead();
             this.sectionTable();
             this.initSection();
-            this.areaTable();
+            this.areaTable(_this.data);
             window.initContent('2018-01', true);
             window.initClear('2018-01', true);
 //          window.initEntrustSort('2018-01', true);
@@ -104,9 +109,9 @@ define(function(require, exports, module) {
             
         }
         
-        this.areaTable = function() {
+        this.areaTable = function(province) {
 //          分布地区
-            _this.sectionTable();
+//          _this.sectionTable();
             var page = new jh.ui.page({
                 data_container: $('#ranking_info_container'),
                 page_container: $('#page_clear_container'),
@@ -115,7 +120,7 @@ define(function(require, exports, module) {
                 contentType: 'application/json',
                 data: {
                     role: 'type_A',
-                    province: '山东%'
+                    province: province
                 },
                 isSearch: true,
                 callback: function(data) {
@@ -173,7 +178,7 @@ define(function(require, exports, module) {
                 legend: {
                     x:'right',
                     selectedMode:false,
-                    data:_this.provinceName
+                    data:[_this.dataName]
                 },
                 series : [
                     {
@@ -183,12 +188,44 @@ define(function(require, exports, module) {
                         mapLocation: {
                             x: 'left'
                         },
-                        selectedMode : 'multiple',
+                        selectedMode : 'single',
                         itemStyle:{
                             normal:{label:{show:true}},
                             emphasis:{label:{show:true}}
                         },
-                        data:_this.provinceCount
+                        data:[
+                            {name:'西藏'},
+                            {name:'青海'},
+                            {name:'宁夏'},
+                            {name:'海南'},
+                            {name:'甘肃'},
+                            {name:'贵州'},
+                            {name:'新疆'},
+                            {name:'云南'},
+                            {name:'重庆'},
+                            {name:'吉林'},
+                            {name:'山西'},
+                            {name:'天津'},
+                            {name:'江西'},
+                            {name:'广西'},
+                            {name:'陕西'},
+                            {name:'黑龙江'},
+                            {name:'内蒙古'},
+                            {name:'安徽'},
+                            {name:'北京'},
+                            {name:'福建'},
+                            {name:'上海'},
+                            {name:'湖北'},
+                            {name:'湖南'},
+                            {name:'四川'},
+                            {name:'辽宁'},
+                            {name:'河北'},
+                            {name:'河南'},
+                            {name:'浙江'},
+                            {name:'山东'},
+                            {name:'江苏'},
+                            {name:'广东'}
+                        ]
                     }
                 ],
                 animation: false
@@ -201,7 +238,7 @@ define(function(require, exports, module) {
               legend: {
                   orient : 'vertical',
                   x : 'left',
-                  data:[]
+                  data:_this.sectorName
               },
               
               calculable : true,
@@ -211,10 +248,11 @@ define(function(require, exports, module) {
                       type:'pie',
                       radius : '55%',
                       center: ['50%', '60%'],
-                      data:[]
+                      data:_this.sectorCount
                   }
               ]
           });
+          emChart = mainBarNum;
 
         };
 //      活跃线人统计
@@ -298,39 +336,19 @@ define(function(require, exports, module) {
         };
 
         this.registerEvent = function() {
-
+          
+          emChart.on('click', function(p) {
+//          console.log(p.data.name);//p为点击的地图对象，p.data为传入地图的data数据
+            _this.dataName = p.data.name;
+            _this.data = p.data.name + '%';
+            _this.areaTable(_this.data);
+          });
+          
             $('select').select2({
                 minimumResultsForSearch: Infinity
             });
 
         };
-//      this.pieContent = function(k, countRate) {
-//        radialIndicator('#pie' + k, {
-//        showPercentage : false, // option
-//        barColor: '#87CEEB',
-//          barWidth: 10,
-//          initValue: countRate,
-//          roundCorner : true,
-//          percentage: true
-//    });
-//    var aa = $('.channelDistance').width() * (k+1);
-//    $('.channelInner').width(aa);
-//    var cc = $('.channelInfo').width();
-//    if(aa > cc) {
-//          $('body').off('click', '.preBtn').on('click', '.preBtn', function() {
-//            $('.channelInner').animate({marginLeft:"0px"}, 500, function() {
-//              $(".channelInner dl").eq(k).prependTo($(".channelInner"));
-//              $('.channelInner').css('marginLeft','-240px');
-//            });
-//          });
-//          $('body').off('click', '.nextBtn').on('click', '.nextBtn', function() {
-//            $('.channelInner').animate({marginLeft:"-240px"},500, function(){
-//              $(".channelInner dl").eq(0).appendTo($(".channelInner"));
-//              $('.channelInner').css('marginLeft','0px');
-//            })
-//          })
-//        }
-//      };
     }
     /**
      * 情报begin
