@@ -82,14 +82,17 @@
         		<p>线索上传时间：{{data.createAt}}</p>
         		<p>车架号后6位：{{data.carId}}</p>
         		<p>定位：{{data.location}}</p>
+        		{{each data.traceVoList data index}}
         		{{if data.role === 'type_A'}}
-				<p>GPS:{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装(安装人员{{data.gpsPerson}}){{/if}}{{if data.gpsSource === 2}}未安装{{/if}}</p>
-				{{/if}}
+    				<p>GPS:{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装(安装人员{{data.gpsPerson}}){{/if}}{{if data.gpsSource === 2}}未安装{{/if}}</p>
+    				{{/if}}
+    				{{/each}}
         	</div>
         	{{/each}}
         </div>
         <div class="hopeprice">
-          {{if data.role === 'type_B'}}
+          {{each data.traceVoList item index}}
+          {{if item.role === 'type_B'}}
         	<p>预估费用</p>
         	{{if data.state === "unconfirmed" || data.state === "unvaluation" }}
         	<div>
@@ -99,11 +102,10 @@
         	{{/if}}
         	<div>
         		<label>捕头意愿处置费用:</label>
-        		{{each data.traceVoList data index}}
-        		<span>{{data.estimatedCost}}</span>
-        		{{/each}}
+        		<span>{{item.estimatedCost}}</span>
         	</div>
         	{{/if}}
+        	{{/each}}
         	{{if data.state === "unconfirmed"}}
         	<p>确认费用</p>
         	<div>
