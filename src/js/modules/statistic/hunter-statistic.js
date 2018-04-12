@@ -97,6 +97,9 @@ define(function(require, exports, module) {
     };
     
     this.areaTable = function(province) {
+        if(province == '') {
+          $('.infoHun_name').text('全国');
+        }
 //      分布地区
         var page = new jh.ui.page({
           data_container: $('#ranking_info_container'),
@@ -113,7 +116,8 @@ define(function(require, exports, module) {
           },
           isSearch: true,
           callback: function(data) {
-              return jh.utils.template('ranking_content_template', data);
+            $('.infoHun_sum').text(data.list[0].count);
+            return jh.utils.template('ranking_content_template', data);
           }
         });
         page.init();
@@ -141,6 +145,9 @@ define(function(require, exports, module) {
             {
                 type : 'category',
                 data : _this.hunterMonths,
+                axisLabel: {
+                  rotate: 60
+                },
                 axisTick: {
                     alignWithLabel: true
                 }
@@ -259,6 +266,7 @@ define(function(require, exports, module) {
       hunterChart.on('click', function(p) {
 //      console.log(p.data.name);//p为点击的地图对象，p.data为传入地图的data数据
         _this.data = p.data.name + '%';
+        $('.infoHun_name').text(p.data.name);
         _this.areaTable(_this.data);
       });
 

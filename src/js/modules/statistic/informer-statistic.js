@@ -95,26 +95,30 @@ define(function(require, exports, module) {
           });
         };
         this.areaTable = function(province) {
+          if(province == '') {
+            $('.infoHun_name').text('全国');
+          }
 //          分布地区
-            var page = new jh.ui.page({
-              data_container: $('#informer_ranking_container'),
-              page_container: $('#page_clear_container'),
-              method: 'post',
-              url: '/statistics/downstream/distribution',
-              contentType: 'application/json',
-              jump: false,
-              show_page_number: 3,
-              showPageTotal: false,
-              isSearch: true,
-              data: {
-                  role: 'type_A',
-                  province: province
-              },
-              callback: function(data) {
-                  return jh.utils.template('informer_ranking_template', data);
-              }
-            });
-            page.init();
+          var page = new jh.ui.page({
+            data_container: $('#informer_ranking_container'),
+            page_container: $('#page_clear_container'),
+            method: 'post',
+            url: '/statistics/downstream/distribution',
+            contentType: 'application/json',
+            jump: false,
+            show_page_number: 3,
+            showPageTotal: false,
+            isSearch: true,
+            data: {
+                role: 'type_A',
+                province: province
+            },
+            callback: function(data) {
+              $('.infoHun_sum').text(data.list[0].count);
+              return jh.utils.template('informer_ranking_template', data);
+            }
+          });
+          page.init();
         }
         
         this.sectionTable = function() {
@@ -139,6 +143,9 @@ define(function(require, exports, module) {
                     {
                         type : 'category',
                         data : _this.informerMonths,
+                        axisLabel: {
+                          rotate: 60
+                        },
                         axisTick: {
                             alignWithLabel: true
                         }
@@ -192,7 +199,7 @@ define(function(require, exports, module) {
                             emphasis:{label:{show:true}}
                         },
                         data:[
-                            {name:'西藏省', value: 1000},
+                            {name:'西藏', value: 1000},
                             {name:'青海', value: 800},
                             {name:'宁夏', value: 300},
                             {name:'海南'},
@@ -277,8 +284,9 @@ define(function(require, exports, module) {
         
         this.registerEvent = function() {
           infoChart.on('click', function(p) {
-//          console.log(p.data.name);//p为点击的地图对象，p.data为传入地图的data数据
+//          console.log(p);//p为点击的地图对象，p.data为传入地图的data数据
             _this.data = p.data.name + '%';
+            $('.infoHun_name').text(p.data.name);
             _this.areaTable(_this.data);
           });
           

@@ -114,6 +114,9 @@ define(function(require, exports, module) {
                 xAxis: [
                     {
                         type : 'category',
+                        axisLabel: {
+                          rotate: 60
+                        },
                         data : _this.trendDaysAll
                     }
                 ],
@@ -210,6 +213,7 @@ define(function(require, exports, module) {
                 _this.entrust = 'all';
               }
               _this.dates = p.name;
+              console.log(p);
               _this.headTable(_this.entrust, _this.dates);
             });
             

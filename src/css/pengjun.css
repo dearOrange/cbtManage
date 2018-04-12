@@ -678,3 +678,11 @@ form#new-increate-award-form table input, form#increate-creditor-award-form tabl
 .statistic-list ul li.taskInfoSix {
   background-color: #e3b5ff;
 }
+.informer_hunter {
+  width:30%;
+  text-align: center;
+}
+.informer_hunter i.infoHun_sum {
+  color:#f00;
+  font-size:18px;
+}

@@ -142,6 +142,9 @@ define(function(require, exports, module) {
                 xAxis: [
                     {
                         type : 'category',
+                        axisLabel: {
+                          rotate: 60
+                        },
                         data : _this.trendDaysOne
                     }
                 ],
@@ -170,6 +173,9 @@ define(function(require, exports, module) {
                 xAxis: [
                     {
                         type : 'category',
+                        axisLabel: {
+                          rotate: 60
+                        },
                         data : _this.downDaysOne
                     }
                 ],
@@ -208,6 +214,9 @@ define(function(require, exports, module) {
                 xAxis: [
                     {
                         type : 'category',
+                        axisLabel: {
+                          rotate: 60
+                        },
                         data : _this.carDaysOne
                     }
                 ],
