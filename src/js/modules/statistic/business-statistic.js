@@ -38,6 +38,13 @@ define(function(require, exports, module) {
           var businessOne = jh.utils.formToJson($('#business-info-form'));
           _this.businessName = [];
           _this.businessCount = [];
+          if(businessOne.begin == '' && businessOne.end != '' || businessOne.begin != '' && businessOne.end == '') {
+            jh.utils.alert({
+              content: '请将日期填写完整',
+              ok: true
+            })
+            return false;
+          }
           jh.utils.ajax.send({
               method: 'post',
               url: '/statistics/business/recommendRatio',
@@ -76,6 +83,13 @@ define(function(require, exports, module) {
 //      商务列表
         this.initSection = function(isSearch) {
           var businessTwo = jh.utils.formToJson($('#business-list-form'));
+          if(businessTwo.begin == '' && businessTwo.end != '' || businessTwo.begin != '' && businessTwo.end == '') {
+            jh.utils.alert({
+              content: '请将日期填写完整',
+              ok: true
+            })
+            return false;
+          }
           var page = new jh.ui.page({
             data_container: $('#business_list_container'),
             page_container: $('#page_clear_container'),

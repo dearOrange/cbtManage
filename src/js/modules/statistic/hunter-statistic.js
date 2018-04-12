@@ -169,16 +169,27 @@ define(function(require, exports, module) {
               selectedMode:false,
               data:[_this.dataName]
           },
+          visualMap: {
+              type: 'continuous',
+              min: 0,
+              max: 2000,
+              text:['High','Low'],
+              realtime: false,
+              calculable: true,
+              inRange: {
+                  color: ['lightskyblue','yellow', 'orangered']
+              }
+          },
           series : [
               {
                   type: 'map',
                   mapType: 'china',
-                  mapLocation: {
-                      x: 'left'
-                  },
                   selectedMode : 'single',
                   itemStyle:{
-                      normal:{label:{show:true}},
+                      normal:{
+                        label:{show:true},
+                        areaColor: '#ffeeff'
+                      },
                       emphasis:{label:{show:true}}
                   },
                   data:[

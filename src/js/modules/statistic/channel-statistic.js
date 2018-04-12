@@ -31,6 +31,13 @@ define(function(require, exports, module) {
           _this.channelInformerName = [];
           _this.channelInformerCount = [];
           var channelOne = jh.utils.formToJson($('#channel-list-form'));
+          if(channelOne.begin == '' && channelOne.end != '' || channelOne.begin != '' && channelOne.end == '') {
+            jh.utils.alert({
+              content: '请将日期填写完整',
+              ok: true
+            })
+            return false;
+          };
           jh.utils.ajax.send({
               method: 'post',
               url: '/statistics/channel/recommendRatio',
@@ -56,6 +63,13 @@ define(function(require, exports, module) {
 //      清收统计
         this.initSection = function(isSearch) {
           var channelTwo = jh.utils.formToJson($('#channel-info-form'));
+          if(channelTwo.begin == '' && channelTwo.end != '' || channelTwo.begin != '' && channelTwo.end == '') {
+            jh.utils.alert({
+              content: '请将日期填写完整',
+              ok: true
+            })
+            return false;
+          }
           var page = new jh.ui.page({
             data_container: $('#channel_statistic_container'),
             page_container: $('#page_clear_container1'),
@@ -225,7 +239,6 @@ define(function(require, exports, module) {
                 },
                 done: function(data) {
                   data.role = _this.role;
-                  console.log(data);
                   var developNum = jh.utils.template('develop_statistic_template', data);
                   jh.utils.alert({
                     title: '发展下线',
