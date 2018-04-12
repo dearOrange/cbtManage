@@ -1116,6 +1116,10 @@ define(function(require, exports, module) {
             $('#jh_page_totalSize').html(' 总共: ' + response.total + ' 条');
             s.page_container.find('.jh_pages').empty();
           }
+          var checkAll = $("#checkAll");
+          if(checkAll.is(':checked')) {
+            checkAll.prop('checked', false);
+          }
         }
       });
     };

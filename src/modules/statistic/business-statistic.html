@@ -9,8 +9,8 @@
           <p class="title-style">
             <span class="span-style">商务发展债权方统计</span>
             <span class="pull-right">
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputStart" name="begin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd', Mchanging:statisticRecoveryMonthing,ychanging:statisticRecoveryYearing})">至
-              <input type="text" class="search-input hand endTime" readonly="readonly" id="entrustTimeInputEnd" name="end" onclick="WdatePicker({dateFmt:'yyyy-MM-dd', Mchanging:statisticRecoveryMonthing,ychanging:statisticRecoveryYearing})">
+              <input type="text" class="search-input hand startTime" readonly="readonly" id="begin" name="begin" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'end\')}',dateFmt:'yyyy-MM-dd', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">至
+              <input type="text" class="search-input hand endTime" readonly="readonly" id="end" name="end" onclick="WdatePicker({minDate:'#F{$dp.$D(\'begin\')}',dateFmt:'yyyy-MM-dd', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
             </span>
           </p>
         </form>
@@ -118,8 +118,8 @@
   {{ each list item index }}
   <tr>
     <td>{{item.rank}}</td>
-    <td>{{item.dname}}</td>
-    <td>{{item.downlineOrTaskCount}}</td>
+    <td>{{item.name}}</td>
+    <td>{{item.count}}</td>
   </tr>
   {{/each}}
 </script>
@@ -128,8 +128,8 @@
   {{ each list item index }}
   <tr>
     <td>{{item.rank}}</td>
-    <td>{{item.dname}}</td>
-    <td>{{item.downlineOrTaskCount}}</td>
+    <td>{{item.name}}</td>
+    <td>{{item.count}}</td>
   </tr>
   {{/each}}
 </script>
@@ -201,13 +201,13 @@
 <script type="text/template" id="business_content_template">
   {{ each list item index }}
   <tr>
-    <td>{{index+1}}</td>
-    <td>{{item.dname}}</td>
-    <td>{{item.countRecovery}}</td>
-    <td>{{index+1}}</td>
-    <td>{{item.dname}}</td>
-    <td>{{item.countRecovery}}</td>
-    <td>{{item.countRecovery}}</td>
+    <td>{{item.rank}}</td>
+    <td>{{item.name}}</td>
+    <td>{{menuState(item.type)}}</td>
+    <td>{{item.contact}}</td>
+    <td>{{item.phone}}</td>
+    <td>{{item.registerAt}}</td>
+    <td>{{item.count}}</td>
   </tr>
   {{/each}}
 </script>

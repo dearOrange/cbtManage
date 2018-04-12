@@ -11,7 +11,7 @@
             <p class="title-style">
               <span class="span-style">新增捕头统计</span>
               <input type="hidden" name="type" value="downstream" />
-              <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
+              <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticRecoveryMonthing,ychanging:statisticRecoveryYearing})">
             </p>
           </form>
           <div>
@@ -24,7 +24,7 @@
           <form id="clear-info-form">
             <p class="title-style">
               <span class="span-style">发展捕头对应的渠道</span>
-              <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticRecoveryMonthing,ychanging:statisticRecoveryYearing})">
+              <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="entrustTimeInput" name="date" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
             </p>
           </form>
           <div>
@@ -101,7 +101,7 @@
 
 <!--排名-->
 <script type="text/template" id="ranking_content_template">
-  {{ each wide item index }}
+  {{ each list item index }}
   <tr>
     <td>{{item.area}}</td>
     <td>{{item.count}}</td>

@@ -11,9 +11,11 @@ define(function(require, exports, module) {
         var date = new Date();
         var now = {
             year: date.getFullYear(),
-            month: date.getMonth() + 1
+            month: date.getMonth() + 1,
+            day: date.getDate()
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
+        now.day = now.day.toString().length === 1 ? '0' + now.day : now.day; //日期两位数
 //      线索统计
         _this.trendDaysOne = [];
         _this.trendCountOne = [];
@@ -26,16 +28,16 @@ define(function(require, exports, module) {
         _this.downCountOne = [];
         _this.downCountTwo = [];
         _this.downDaysOne = [];
-        _this.countRate = 0;
 
         this.init = function() {
-            $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
+            $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput,#traceInput,#recoveryInput').val(now.year + '-' + now.month);
             this.initHead();
             this.sectionTable();
-            this.initSection();
             window.initContent('2018-01', true);
             window.initClear('2018-01', true);
-//          window.initEntrustSort('2018-01', true);
+            window.initEntrustSort('2018-01', true);
+            window.initClueSort('2018-01', true);
+            window.initPassSort('2018-01', true);
             this.registerEvent();
         };
 
@@ -49,16 +51,20 @@ define(function(require, exports, module) {
                 }
             });
         };
-        this.initSection = function() {
-            var clueOne = jh.utils.formToJson($('#clueOne-information-form'));
-            var clueTwo = jh.utils.formToJson($('#clueTwo-information-form'));
-            var clueThree = jh.utils.formToJson($('#clueThree-information-form'));
-//          线索统计
+        
+//      线索统计
+        window.initEntrustSort = function(obj, isSearch) {
+            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
             jh.utils.ajax.send({
                 method: 'post',
                 url: '/statistics/trace/trend',
                 contentType: 'application/json',
-                data: clueOne,
+                data: {
+                  type: 'traceTotal',
+                  yearMonth: obj.y + '-' + obj.M
+                },
+                isSearch: isSearch,
                 done: function(returnData) {
                   var traceOne = returnData.data.traceTotal;
                   for (var a = 0; a < traceOne.length; a++) {
@@ -68,45 +74,62 @@ define(function(require, exports, module) {
                   _this.sectionTable();
                 }
             });
-//          线索匹配统计
+        };
+//      线索匹配统计
+        window.initClueSort = function(obj, isSearch) {
+            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
             jh.utils.ajax.send({
                 method: 'post',
                 url: '/statistics/trace/trend',
                 contentType: 'application/json',
-                data: clueTwo,
+                data: {
+                  type: 'traceMatch',
+                  yearMonth: obj.y + '-' + obj.M
+                },
+                isSearch: isSearch,
                 done: function(returnData) {
-                    var carOne = returnData.data.traceMatch;
-                    var carTwo = returnData.data.traceWhole;
-                    for (var j = 0; j < carOne.length; j++) {
-                        _this.carDaysOne.push(carOne[j].days);
-                        _this.carCountOne.push(carOne[j].count);
-                    }
-                    for (var k = 0; k < carTwo.length; k++) {
-                        _this.carCountTwo.push(carTwo[k].count);
-                    }
-                    _this.sectionTable();
+                  var carOne = returnData.data.traceMatch;
+                  var carTwo = returnData.data.traceWhole;
+                  for (var j = 0; j < carOne.length; j++) {
+                      _this.carDaysOne.push(carOne[j].days);
+                      _this.carCountOne.push(carOne[j].count);
+                  }
+                  for (var k = 0; k < carTwo.length; k++) {
+                      _this.carCountTwo.push(carTwo[k].count);
+                  }
+                  _this.sectionTable();
                 }
             });
-//          线索合规统计
+        };        
+//      线索合规统计
+        window.initPassSort = function(obj, isSearch) {
+            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
             jh.utils.ajax.send({
                 method: 'post',
                 url: '/statistics/trace/trend',
                 contentType: 'application/json',
-                data: clueThree,
+                data: {
+                  type: 'tracePass',
+                  yearMonth: obj.y + '-' + obj.M
+                },
+                isSearch: isSearch,
                 done: function(returnData) {
-                    var downOne = returnData.data.passed;
-                    var downTwo = returnData.data.rejected;
-                    for (var c = 0; c < downOne.length; c++) {
-                        _this.downDaysOne.push(downOne[c].days);
-                        _this.downCountOne.push(downOne[c].count);
-                    }
-                    for (var d = 0; d < downTwo.length; d++) {
-                        _this.downCountTwo.push(downTwo[d].count);
-                    }
-                    _this.sectionTable();
+                  var downOne = returnData.data.passed;
+                  var downTwo = returnData.data.rejected;
+                  for (var c = 0; c < downOne.length; c++) {
+                      _this.downDaysOne.push(downOne[c].days);
+                      _this.downCountOne.push(downOne[c].count);
+                  }
+                  for (var d = 0; d < downTwo.length; d++) {
+                      _this.downCountTwo.push(downTwo[d].count);
+                  }
+                  _this.sectionTable();
                 }
             });
-        }
+        };  
+        
         this.sectionTable = function() {
             var mainInformate = echarts.init(document.getElementById('mainInformate'));
             var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
@@ -240,88 +263,46 @@ define(function(require, exports, module) {
         };
 //      上传线索
         window.initContent = function(obj, isSearch) {
-            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+            obj = typeof obj !== 'object' ? { y: now.year, M: now.month, d: now.day } : obj; //是否为第一次查询
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-
-            var page = new jh.ui.page({
-                data_container: $('#upclue_statistic_container'),
-                page_container: $('#page_container'),
-                method: 'post',
-                url: '/statistics/downstream/plusSort',
-                showPageTotal: false,
-                jump: false,
-                show_page_number: 3,
-                contentType: 'application/json',
-                data: {
-                    pageSize: 5,
-                    yearMonth: obj.y + '-' + obj.M
-                },
-                isSearch: isSearch,
-                callback: function(data) {
-                    return jh.utils.template('upclue_content_template', data);
-                }
+            obj.d = obj.d.toString().length === 1 ? '0' + obj.d : obj.d; //日期两位数
+            
+            jh.utils.ajax.send({
+              method: 'post',
+              url: '/statistics/downstream/upTraceSort',
+              contentType: 'application/json',
+              data: {
+                aim: 'traceSort',
+                yearMonth: obj.y + '-' + obj.M
+              },
+              isSearch: isSearch,
+              done: function(returnData) {
+                var upclueStr = jh.utils.template('upclue_content_template', returnData.data);
+                $('#upclue_statistic_container').html(upclueStr);
+              }
             });
-            page.init();
         };
 //      发展下线
         window.initClear = function(obj, isSearch) {
-            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-
-            var page = new jh.ui.page({
-                data_container: $('#offline_info_container'),
-                page_container: $('#page_clear_container'),
-                method: 'post',
-                url: '/statistics/downstream/plusSort',
-                contentType: 'application/json',
-                data: {
-                  pageSize: 5,
-                  yearMonth: obj.y + '-' + obj.M
-                },
-                isSearch: isSearch,
-                showPageTotal: false,
-                jump: false,
-                show_page_number: 3,
-                callback: function(data) {
-                    return jh.utils.template('offline_content_template', data);
-                }
-            });
-            page.init();
+          obj = typeof obj !== 'object' ? { y: now.year, M: now.month, d: now.day } : obj; //是否为第一次查询
+          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+          obj.d = obj.d.toString().length === 1 ? '0' + obj.d : obj.d; //日期两位数
+          
+          jh.utils.ajax.send({
+              method: 'post',
+              url: '/statistics/downstream/downlineSort',
+              contentType: 'application/json',
+              data: {
+                aim: 'downlineSort',
+                yearMonth: obj.y + '-' + obj.M
+              },
+              isSearch: isSearch,
+              done: function(returnData) {
+                var downline = jh.utils.template('offline_content_template', returnData.data);
+                $('#offline_info_container').html(downline);
+              }
+          });
         };
-
-//      window.initEntrustSort = function(obj, isSearch) {
-//          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-//          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-//          jh.utils.ajax.send({
-//              method: 'post',
-//              url: '/statistics/entrust',
-//              contentType: 'application/json',
-//              data: {
-//                  yearMonth: obj.y + '-' + obj.M
-//              },
-//              isSearch: isSearch,
-//              done: function(returnData) {
-//                  var entrust = returnData.data;
-//                  var noResultBox = $('#entrustNoResultBox');
-//                  if (!entrust.length) {
-//                      noResultBox.removeClass('hide');
-//                      noResultBox.prev().addClass('hide');
-//                      return false;
-//                  } else {
-//                      noResultBox.addClass('hide');
-//                      noResultBox.prev().removeClass('hide');
-//                  }
-//                  var entrustContent = jh.utils.template('entrust_content_template', returnData);
-//                  $('#entrustResultBox').html(entrustContent);
-//                  for (var k = 0; k < entrust.length; k++) {
-//                      _this.countRate = entrust[k].countRate;
-//                      _this.pieContent(k, _this.countRate);
-//                  }
-//
-//              }
-//          });
-//      };
-
         this.registerEvent = function() {
 
             $('select').select2({
@@ -346,21 +327,6 @@ define(function(require, exports, module) {
      */
 
     /**
-     * 渠道委托begin
-     */
-//  window.statisticEntrustMonthing = function() {
-//      var obj = $dp.cal.newdate;
-//      window.initEntrustSort(obj, true);
-//  };
-//  window.statisticEntrustYearing = function() {
-//      var obj = $dp.cal.newdate;
-//      window.initEntrustSort(obj, true);
-//  };
-    /**
-     * 渠道委托end
-     */
-
-    /**
      * 车辆清收begin
      */
     window.statisticRecoveryMonthing = function() {
@@ -374,6 +340,50 @@ define(function(require, exports, module) {
     /**
      * 车辆清收end
      */
-
+    
+    /**
+     * 线索统计begin
+     */
+    window.statisticEntrustMonthing = function() {
+        var obj = $dp.cal.newdate;
+        window.initEntrustSort(obj, true);
+    };
+    window.statisticEntrustYearing = function() {
+        var obj = $dp.cal.newdate;
+        window.initEntrustSort(obj, true);
+    };
+    /**
+     * 线索统计end
+     */
+     
+    /**
+     * 线索匹配统计begin
+     */
+    window.statisticClueMonthing = function() {
+        var obj = $dp.cal.newdate;
+        window.initClueSort(obj, true);
+    };
+    window.statisticClueYearing = function() {
+        var obj = $dp.cal.newdate;
+        window.initClueSort(obj, true);
+    };
+    /**
+     * 线索匹配统计end
+     */
+     
+    /**
+     * 线索合规统计begin
+     */
+    window.statisticPassMonthing = function() {
+        var obj = $dp.cal.newdate;
+        window.initPassSort(obj, true);
+    };
+    window.statisticPassYearing = function() {
+        var obj = $dp.cal.newdate;
+        window.initPassSort(obj, true);
+    };
+    /**
+     * 线索合规统计end
+     */
     module.exports = ClueStatistic;
 });

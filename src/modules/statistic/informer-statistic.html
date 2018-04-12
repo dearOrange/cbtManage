@@ -11,7 +11,7 @@
             <p class="title-style">
               <span class="span-style">新增线人</span>
               <input type="hidden" name="type" value="downstream" />
-              <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
+              <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticRecoveryMonthing,ychanging:statisticRecoveryYearing})">
             </p>
           </form>
           <div>
@@ -52,7 +52,7 @@
                     <th width="8%">线人数量</th>
                   </tr>
                 </thead>
-                <tbody id="ranking_info_container"></tbody>
+                <tbody id="informer_ranking_container"></tbody>
               </table>
               <div class="page-box pagination" id="page_clear_container"></div>
             </div>
@@ -64,7 +64,7 @@
       <form id="downstream-info-form">
         <p class="title-style">
           <span class="span-style">活跃线人统计</span>
-          <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="carRecoveryInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticRecoveryMonthing,ychanging:statisticRecoveryYearing})">
+          <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="carRecoveryInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceMonthing})">
         </p>
       </form>
       <div class="informateTable">
@@ -125,7 +125,7 @@
     </table>
   </li>
 </script>
-
+<!--活跃线人统计-->
 <script type="text/template" id="downstream_content_template">
   {{ each list item index }}
   <tr>
@@ -134,13 +134,13 @@
     <td>{{item.account}}</td>
     <td>{{item.phone}}</td>
     <td>{{item.registerAt}}</td>
-    <td>{{item.taskOrTraceCount}}</td>
+    <td>{{item.count}}</td>
   </tr>
   {{/each}}
 </script>
 <!--排名-->
-<script type="text/template" id="ranking_content_template">
-  {{ each wide item index }}
+<script type="text/template" id="informer_ranking_template">
+  {{ each list item index }}
   <tr>
     <td>{{item.area}}</td>
     <td>{{item.count}}</td>

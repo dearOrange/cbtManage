@@ -17,9 +17,8 @@ define(function(require, exports, module) {
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
         now.day = now.day.toString().length === 1 ? '0' + now.day : now.day; //日期两位数
         
-        var emChart = null;
+        var infoChart = null;
         _this.data = '';
-        _this.dataName = '';
 
 //      线人趋势统计
         _this.informerMonths = [];
@@ -28,28 +27,15 @@ define(function(require, exports, module) {
         _this.sectorName = [];
         _this.sectorCount = [];
         _this.sectorRate = [];
-//      省份
-        _this.provinceName = [];
-        _this.provinceCount = [];
         
-        
-        _this.upstreamTrendMonths = [];
-        _this.traceTrendMonths = [];
-        _this.downstreamTrendMonths = [];
-        _this.upstreamTrendCount = [];
-        _this.traceTrendCount = [];
-        _this.downstreamTrendCount = [];
-        _this.countRate = 0;
-
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
             this.initHead();
             this.sectionTable();
-            this.initSection();
             this.areaTable(_this.data);
             window.initContent('2018-01', true);
             window.initClear('2018-01', true);
-//          window.initEntrustSort('2018-01', true);
+            window.initEntrustSort('2018-01', true);
             this.registerEvent();
         };
 
@@ -63,69 +49,74 @@ define(function(require, exports, module) {
                 }
             });
         };
-        this.initSection = function() {
-            var informerOne = jh.utils.formToJson($('#informerOne-form'));
-//          var informerTwo = jh.utils.formToJson($('#clueTwo-information-form'));
-//          var informerThree = jh.utils.formToJson($('#clueThree-information-form'));
-            jh.utils.ajax.send({
-                method: 'post',
-                url: '/statistics/downstream/trend',
-                contentType: 'application/json',
-                data: informerOne,
-                done: function(returnData) {
-                    var informer = returnData.data.informer;
-                    for (var i = 0; i < informer.length; i++) {
-                        _this.informerMonths.push(informer[i].days);
-                        _this.informerCount.push(informer[i].count);
-                    }
-                    _this.sectionTable();
+//      新增线人统计
+        window.initClear = function(obj, isSearch) {
+          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+          jh.utils.ajax.send({
+            method: 'post',
+            url: '/statistics/downstream/trend',
+            contentType: 'application/json',
+            data: {
+                type: 'downstream',
+                yearMonth: obj.y + '-' + obj.M
+            },
+            done: function(returnData) {
+                var informer = returnData.data.informer;
+                for (var i = 0; i < informer.length; i++) {
+                    _this.informerMonths.push(informer[i].days);
+                    _this.informerCount.push(informer[i].count);
                 }
-            });
-//          扇形图
-//          obj = typeof obj !== 'object' ? { y: now.year, M: now.month, d: now.day } : obj; //是否为第一次查询
-//          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-//          obj.d = obj.d.toString().length === 1 ? '0' + obj.d : obj.d; //日期两位数
-            jh.utils.ajax.send({
-                method: 'post',
-                url: '/statistics/downstream/sourceRatio',
-                contentType: 'application/json',
-                data: {
-                    role: 'type_A',
-                    date: '2018-04-01'
-                },
-                done: function(returnData) {
-                    var informerSector = returnData.data;
-                    for (var j = 0; j < informerSector.length; j++) {
-                        var sectorObj = {};
-                        _this.sectorName.push(informerSector[j].name);
-                        sectorObj.value = informerSector[j].countEach;
-                        sectorObj.name = informerSector[j].name;
-                        _this.sectorCount.push(sectorObj);
-                    
-                    }
-                    _this.sectionTable();
-                }
-            });
-            
-        }
+                _this.sectionTable();
+            }
+          });
+        };
         
+//      发展线人对应渠道
+        window.initEntrustSort = function(obj, isSearch) {
+          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+          jh.utils.ajax.send({
+            method: 'post',
+            url: '/statistics/downstream/sourceRatio',
+            contentType: 'application/json',
+            data: {
+                role: 'type_A',
+                date: obj.y + '-' + obj.M
+            },
+            done: function(returnData) {
+                var informerSector = returnData.data;
+                for (var j = 0; j < informerSector.length; j++) {
+                    var sectorObj = {};
+                    _this.sectorName.push(informerSector[j].name);
+                    sectorObj.value = informerSector[j].countEach;
+                    sectorObj.name = informerSector[j].name;
+                    _this.sectorCount.push(sectorObj);
+                
+                }
+                _this.sectionTable();
+            }
+          });
+        };
         this.areaTable = function(province) {
 //          分布地区
-//          _this.sectionTable();
             var page = new jh.ui.page({
-                data_container: $('#ranking_info_container'),
-                page_container: $('#page_clear_container'),
-                method: 'post',
-                url: '/statistics/downstream/distribution',
-                contentType: 'application/json',
-                data: {
-                    role: 'type_A',
-                    province: province
-                },
-                isSearch: true,
-                callback: function(data) {
-                    return jh.utils.template('ranking_content_template', data);
-                }
+              data_container: $('#informer_ranking_container'),
+              page_container: $('#page_clear_container'),
+              method: 'post',
+              url: '/statistics/downstream/distribution',
+              contentType: 'application/json',
+              jump: false,
+              show_page_number: 3,
+              showPageTotal: false,
+              isSearch: true,
+              data: {
+                  role: 'type_A',
+                  province: province
+              },
+              callback: function(data) {
+                  return jh.utils.template('informer_ranking_template', data);
+              }
             });
             page.init();
         }
@@ -252,7 +243,7 @@ define(function(require, exports, module) {
                   }
               ]
           });
-          emChart = mainBarNum;
+          infoChart = mainBarNum;
 
         };
 //      活跃线人统计
@@ -277,69 +268,10 @@ define(function(require, exports, module) {
             page.init();
         };
         
-//      排名
-        window.initClear = function(obj, isSearch) {
-//          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-//          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-
-            var page = new jh.ui.page({
-                data_container: $('#ranking_info_container'),
-                page_container: $('#page_clear_container'),
-                method: 'post',
-                url: '/statistics/recoverySort',
-                contentType: 'application/json',
-//              data: {
-//                pageSize: 5,
-//                  type: 'carRecovery',
-//                  yearMonth: obj.y + '-' + obj.M
-//              },
-//              isSearch: isSearch,
-                show_page_number: 3,
-                callback: function(data) {
-                    return jh.utils.template('ranking_content_template', data);
-                }
-            });
-            page.init();
-        };
-
-        window.initEntrustSort = function(obj, isSearch) {
-            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-            jh.utils.ajax.send({
-                method: 'post',
-                url: '/statistics/entrust',
-                contentType: 'application/json',
-                data: {
-                    yearMonth: obj.y + '-' + obj.M
-                },
-                isSearch: isSearch,
-                done: function(returnData) {
-                    var entrust = returnData.data;
-                    var noResultBox = $('#entrustNoResultBox');
-                    if (!entrust.length) {
-                        noResultBox.removeClass('hide');
-                        noResultBox.prev().addClass('hide');
-                        return false;
-                    } else {
-                        noResultBox.addClass('hide');
-                        noResultBox.prev().removeClass('hide');
-                    }
-                    var entrustContent = jh.utils.template('entrust_content_template', returnData);
-                    $('#entrustResultBox').html(entrustContent);
-                    for (var k = 0; k < entrust.length; k++) {
-                        _this.countRate = entrust[k].countRate;
-                        _this.pieContent(k, _this.countRate);
-                    }
-
-                }
-            });
-        };
-
         this.registerEvent = function() {
           
-          emChart.on('click', function(p) {
+          infoChart.on('click', function(p) {
 //          console.log(p.data.name);//p为点击的地图对象，p.data为传入地图的data数据
-            _this.dataName = p.data.name;
             _this.data = p.data.name + '%';
             _this.areaTable(_this.data);
           });
@@ -351,22 +283,22 @@ define(function(require, exports, module) {
         };
     }
     /**
-     * 情报begin
+     * 活跃线人统计begin
      */
     window.statisticTraceMonthing = function() {
         var obj = $dp.cal.newdate;
         window.initContent(obj, true);
     };
-    window.statisticTraceYearing = function() {
+    window.statisticTraceMonthing = function() {
         var obj = $dp.cal.newdate;
         window.initContent(obj, true);
     };
     /**
-     * 情报end
+     * 活跃线人统计end
      */
 
     /**
-     * 渠道委托begin
+     * 发展线人对应渠道begin
      */
     window.statisticEntrustMonthing = function() {
         var obj = $dp.cal.newdate;
@@ -377,11 +309,11 @@ define(function(require, exports, module) {
         window.initEntrustSort(obj, true);
     };
     /**
-     * 渠道委托end
+     * 发展线人对应渠道end
      */
 
     /**
-     * 车辆清收begin
+     * 线人统计begin
      */
     window.statisticRecoveryMonthing = function() {
         var obj = $dp.cal.newdate;
@@ -392,7 +324,7 @@ define(function(require, exports, module) {
         window.initClear(obj, true);
     };
     /**
-     * 车辆清收end
+     * 线人统计end
      */
 
     module.exports = InformerStatistic;

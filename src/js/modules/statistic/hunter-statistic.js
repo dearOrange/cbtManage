@@ -11,13 +11,14 @@ define(function(require, exports, module) {
     var date = new Date();
     var now = {
       year: date.getFullYear(),
-      month: date.getMonth() + 1
+      month: date.getMonth() + 1,
+      day: date.getDate()
     };
     now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
-
-    var emChart = null;
+    now.day = now.day.toString().length === 1 ? '0' + now.day : now.day; //日期两位数
+    
+    var hunterChart = null;
     _this.data = '';
-    _this.dataName = '';
  
 //  新增捕头统计
     _this.hunterMonths = [];
@@ -26,24 +27,13 @@ define(function(require, exports, module) {
     _this.sectorName = [];
     _this.sectorCount = [];
     
-    _this.carRecoveryMonths = [];
-    _this.carRecoveryCount = [];
-    _this.upstreamTrendMonths = [];
-    _this.traceTrendMonths = [];
-    _this.downstreamTrendMonths = [];
-    _this.upstreamTrendCount = [];
-    _this.traceTrendCount = [];
-    _this.downstreamTrendCount = [];
-    _this.countRate = 0;
-
     this.init = function() {
       $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
       this.initHead();
       this.sectionTable();
-      this.initSection();
       this.areaTable(_this.data);
-      window.initContent('2018-01', true);
       window.initClear('2018-01', true);
+      window.initContent('2018-01', true);
       this.registerEvent();
     };
 
@@ -58,14 +48,19 @@ define(function(require, exports, module) {
         }
       });
     };
-    this.initSection = function() {
-      var hunterOne = jh.utils.formToJson($('#hunterOne-form'));
+//  新增捕头统计
+    window.initClear = function(obj, isSearch) {
+      obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+      obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
       
       jh.utils.ajax.send({
         method: 'post',
         url: '/statistics/downstream/trend',
         contentType: 'application/json',
-        data: hunterOne,
+        data: {
+            type: 'downstream',
+            yearMonth: obj.y + '-' + obj.M
+        },
         done: function(returnData) {
           var hunter = returnData.data.hunter;
           for (var i = 0; i < hunter.length; i++) {
@@ -75,46 +70,54 @@ define(function(require, exports, module) {
           _this.sectionTable();
         }
       });
-//    扇形
+    };
+//  发展捕头对应渠道
+    window.initContent = function(obj, isSearch) {
+      obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+      obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+      
       jh.utils.ajax.send({
           method: 'post',
           url: '/statistics/downstream/sourceRatio',
           contentType: 'application/json',
           data: {
-              role: 'type_B',
-              date: '2018-04-01'
+            role: 'type_B',
+            date: obj.y + '-' + obj.M
           },
           done: function(returnData) {
-              var hunterSector = returnData.data;
-              for (var j = 0; j < hunterSector.length; j++) {
-                  var sectorObj = {};
-                  _this.sectorName.push(hunterSector[j].name);
-                  sectorObj.value = hunterSector[j].countEach;
-                  sectorObj.name = hunterSector[j].name;
-                  _this.sectorCount.push(sectorObj);
-              
-              }
-              _this.sectionTable();
+            var hunterSector = returnData.data;
+            for (var j = 0; j < hunterSector.length; j++) {
+                var sectorObj = {};
+                _this.sectorName.push(hunterSector[j].name);
+                sectorObj.value = hunterSector[j].countEach;
+                sectorObj.name = hunterSector[j].name;
+                _this.sectorCount.push(sectorObj);
+            
+            }
+            _this.sectionTable();
           }
       });
-    }
+    };
     
     this.areaTable = function(province) {
 //      分布地区
         var page = new jh.ui.page({
-            data_container: $('#ranking_info_container'),
-            page_container: $('#page_clear_container'),
-            method: 'post',
-            url: '/statistics/downstream/distribution',
-            contentType: 'application/json',
-            data: {
-                role: 'type_B',
-                province: province
-            },
-            isSearch: true,
-            callback: function(data) {
-                return jh.utils.template('ranking_content_template', data);
-            }
+          data_container: $('#ranking_info_container'),
+          page_container: $('#page_clear_container'),
+          method: 'post',
+          url: '/statistics/downstream/distribution',
+          contentType: 'application/json',
+          jump: false,
+          show_page_number: 3,
+          showPageTotal: false,
+          data: {
+              role: 'type_B',
+              province: province
+          },
+          isSearch: true,
+          callback: function(data) {
+              return jh.utils.template('ranking_content_template', data);
+          }
         });
         page.init();
     }
@@ -240,65 +243,13 @@ define(function(require, exports, module) {
             }
         ]
       });
-      emChart = mainBarNum;
+      hunterChart = mainBarNum;
     };
-
-    window.initContent = function(obj, isSearch) {
-      obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-      obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-
-      var page = new jh.ui.page({
-        data_container: $('#statistic_container'),
-        page_container: $('#page_container'),
-        method: 'post',
-        url: '/statistics/traceSort',
-        showPageTotal: false,
-        jump: false,
-        show_page_number: 3,
-        contentType: 'application/json',
-        data: {
-          type: 'trace',
-          pageSize: 5,
-          yearMonth: obj.y + '-' + obj.M
-        },
-        isSearch: isSearch,
-        callback: function(data) {
-//        return jh.utils.template('statistic_content_template', data);
-        }
-      });
-      page.init();
-    };
-
-    window.initClear = function(obj, isSearch) {
-      obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-      obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-
-      var page = new jh.ui.page({
-        data_container: $('#clear_info_container'),
-        page_container: $('#page_clear_container'),
-        method: 'post',
-        url: '/statistics/recoverySort',
-        contentType: 'application/json',
-        data: {
-          pageSize: 5,
-          type: 'carRecovery',
-          yearMonth: obj.y + '-' + obj.M
-        },
-        isSearch: isSearch,
-        show_page_number: 3,
-        callback: function(data) {
-//        return jh.utils.template('clear_content_template', data);
-        }
-      });
-      page.init();
-    };
-
 
     this.registerEvent = function() {
 
-      emChart.on('click', function(p) {
+      hunterChart.on('click', function(p) {
 //      console.log(p.data.name);//p为点击的地图对象，p.data为传入地图的data数据
-        _this.dataName = p.data.name;
         _this.data = p.data.name + '%';
         _this.areaTable(_this.data);
       });

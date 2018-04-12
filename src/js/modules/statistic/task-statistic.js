@@ -30,10 +30,11 @@ define(function(require, exports, module) {
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
             this.initHead();
-            this.initSection();
             this.sectionTableBar();
-            this.headTable('all', '20180403');
+            _this.sectionTablePie();
             window.initContent('2018-01', true);
+            window.initPassSort('2018-01', true);
+            this.headTable('all', '20180403');
             this.registerEvent();
         };
 
@@ -47,14 +48,19 @@ define(function(require, exports, module) {
             }
           });
         };
-        this.initSection = function() {
-            var taskOne = jh.utils.formToJson($('#task-information-form'));
-//          任务统计
+//      任务统计
+        window.initPassSort = function(obj, isSearch) {
+            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
             jh.utils.ajax.send({
                 method: 'post',
-                url: '/statistics/task/trend',
+                url: '/statistics/trace/trend',
                 contentType: 'application/json',
-                data: taskOne,
+                data: {
+                  type: 'task',
+                  yearMonth: obj.y + '-' + obj.M
+                },
+                isSearch: isSearch,
                 done: function(returnData) {
                   var traceAll = returnData.data.all;//找加拖
                   var traceTrace = returnData.data.trace;//只找
@@ -72,8 +78,7 @@ define(function(require, exports, module) {
                   _this.sectionTableBar();
                 }
             });
-            
-        }
+        }; 
         this.headTable = function(entrust, dates) {
 //          车辆省份分配比
             jh.utils.ajax.send({
@@ -88,9 +93,9 @@ define(function(require, exports, module) {
                   var provinceData = returnData.data;
                   for (var i = 0; i < provinceData.length; i++) {
                     var proObj = {};
-                    _this.trendName.push(traceAll[i].name);
-                    proObj.value = traceAll[i].countEach;
-                    proObj.name = traceAll[i].name;
+                    _this.trendName.push(provinceData[i].name);
+                    proObj.value = provinceData[i].countEach;
+                    proObj.name = provinceData[i].name;
                     _this.countEach.push(proObj);
                   }
                   _this.sectionTablePie();
@@ -232,6 +237,19 @@ define(function(require, exports, module) {
     /**
      * 情报end
      */
-
+    /**
+     * 线索合规统计begin
+     */
+    window.statisticPassMonthing = function() {
+        var obj = $dp.cal.newdate;
+        window.initPassSort(obj, true);
+    };
+    window.statisticPassYearing = function() {
+        var obj = $dp.cal.newdate;
+        window.initPassSort(obj, true);
+    };
+    /**
+     * 线索合规统计end
+     */
     module.exports = TaskStatistic;
 });
