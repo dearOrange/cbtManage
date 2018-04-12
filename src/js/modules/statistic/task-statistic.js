@@ -16,14 +16,6 @@ define(function(require, exports, module) {
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
         
-//      任务统计
-        _this.trendDaysAll = [];
-        _this.trendCountAll = [];
-        _this.trendCountTrace = [];
-        _this.trendCountRecycle = [];
-//      车牌比
-        _this.trendName = [];
-        _this.countEach = [];
         _this.entrust = '';
         _this.dates = '';
         
@@ -50,37 +42,43 @@ define(function(require, exports, module) {
         };
 //      任务统计
         window.initPassSort = function(obj, isSearch) {
-            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-            jh.utils.ajax.send({
-                method: 'post',
-                url: '/statistics/trace/trend',
-                contentType: 'application/json',
-                data: {
-                  type: 'task',
-                  yearMonth: obj.y + '-' + obj.M
-                },
-                isSearch: isSearch,
-                done: function(returnData) {
-                  var traceAll = returnData.data.all;//找加拖
-                  var traceTrace = returnData.data.trace;//只找
-                  var traceRecycle = returnData.data.recycle;//只拖
-                  for (var a = 0; a < traceAll.length; a++) {
-                      _this.trendDaysAll.push(traceAll[a].days);
-                      _this.trendCountAll.push(traceAll[a].count);
-                  }
-                  for (var b = 0; b < traceTrace.length; b++) {
-                      _this.trendCountTrace.push(traceTrace[b].count);
-                  }
-                  for (var c = 0; c < traceRecycle.length; c++) {
-                      _this.trendCountRecycle.push(traceRecycle[c].count);
-                  }
-                  _this.sectionTableBar();
+          _this.trendDaysAll = [];
+          _this.trendCountAll = [];
+          _this.trendCountTrace = [];
+          _this.trendCountRecycle = [];
+          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+          jh.utils.ajax.send({
+              method: 'post',
+              url: '/statistics/trace/trend',
+              contentType: 'application/json',
+              data: {
+                type: 'task',
+                yearMonth: obj.y + '-' + obj.M
+              },
+              isSearch: isSearch,
+              done: function(returnData) {
+                var traceAll = returnData.data.all;//找加拖
+                var traceTrace = returnData.data.trace;//只找
+                var traceRecycle = returnData.data.recycle;//只拖
+                for (var a = 0; a < traceAll.length; a++) {
+                    _this.trendDaysAll.push(traceAll[a].days);
+                    _this.trendCountAll.push(traceAll[a].count);
                 }
-            });
+                for (var b = 0; b < traceTrace.length; b++) {
+                    _this.trendCountTrace.push(traceTrace[b].count);
+                }
+                for (var c = 0; c < traceRecycle.length; c++) {
+                    _this.trendCountRecycle.push(traceRecycle[c].count);
+                }
+                _this.sectionTableBar();
+              }
+          });
         }; 
         this.headTable = function(entrust, dates) {
 //          车辆省份分配比
+            _this.trendName = [];
+            _this.countEach = [];
             jh.utils.ajax.send({
                 method: 'post',
                 url: '/statistics/task/province',

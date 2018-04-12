@@ -20,14 +20,6 @@ define(function(require, exports, module) {
         var infoChart = null;
         _this.data = '';
 
-//      线人趋势统计
-        _this.informerMonths = [];
-        _this.informerCount = [];
-//      扇形
-        _this.sectorName = [];
-        _this.sectorCount = [];
-        _this.sectorRate = [];
-        
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
             this.initHead();
@@ -51,6 +43,8 @@ define(function(require, exports, module) {
         };
 //      新增线人统计
         window.initClear = function(obj, isSearch) {
+          _this.informerMonths = [];
+          _this.informerCount = [];
           obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
           obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
           jh.utils.ajax.send({
@@ -74,6 +68,8 @@ define(function(require, exports, module) {
         
 //      发展线人对应渠道
         window.initEntrustSort = function(obj, isSearch) {
+          _this.sectorName = [];
+          _this.sectorCount = [];
           obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
           obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
           jh.utils.ajax.send({
@@ -171,23 +167,31 @@ define(function(require, exports, module) {
                     selectedMode:false,
                     data:[_this.dataName]
                 },
+                visualMap: {
+                    type: 'continuous',
+                    min: 0,
+                    max: 2000,
+                    text:['High','Low'],
+                    realtime: false,
+                    calculable: true,
+                    inRange: {
+                        color: ['lightskyblue','yellow', 'orangered']
+                    }
+                },
                 series : [
                     {
                         name: '2011全国GDP分布',
                         type: 'map',
                         mapType: 'china',
-                        mapLocation: {
-                            x: 'left'
-                        },
                         selectedMode : 'single',
                         itemStyle:{
                             normal:{label:{show:true}},
                             emphasis:{label:{show:true}}
                         },
                         data:[
-                            {name:'西藏'},
-                            {name:'青海'},
-                            {name:'宁夏'},
+                            {name:'西藏省', value: 1000},
+                            {name:'青海', value: 800},
+                            {name:'宁夏', value: 300},
                             {name:'海南'},
                             {name:'甘肃'},
                             {name:'贵州'},

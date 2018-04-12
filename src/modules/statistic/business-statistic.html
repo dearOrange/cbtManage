@@ -182,17 +182,19 @@
       <thead>
         <tr>
           <th width="4%">序号</th>
-          <th width="8%">姓名</th>
-          <th width="8%">账号</th>
+          <th width="8%">名称</th>
+          <th width="8%">债权方类型</th>
+          <th width="8%">联系人姓名</th>
           <th width="8%">联系电话</th>
           <th width="15%">注册时间</th>
         </tr>
       </thead>
       <tbody id="develop_statistic_container">
-        {{ each list item index }}
+        {{ each data.list item index }}
         <tr>
           <td>{{item.rank}}</td>
           <td>{{item.name}}</td>
+          <td>{{item.type}}</td>
           <td>{{item.contact}}</td>
           <td>{{item.phone}}</td>
           <td>{{item.registerAt}}</td>

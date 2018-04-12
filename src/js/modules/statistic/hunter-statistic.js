@@ -20,13 +20,6 @@ define(function(require, exports, module) {
     var hunterChart = null;
     _this.data = '';
  
-//  新增捕头统计
-    _this.hunterMonths = [];
-    _this.hunterCount = [];
-//  扇形
-    _this.sectorName = [];
-    _this.sectorCount = [];
-    
     this.init = function() {
       $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
       this.initHead();
@@ -50,6 +43,8 @@ define(function(require, exports, module) {
     };
 //  新增捕头统计
     window.initClear = function(obj, isSearch) {
+      _this.hunterMonths = [];
+      _this.hunterCount = [];
       obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
       obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
       
@@ -73,6 +68,8 @@ define(function(require, exports, module) {
     };
 //  发展捕头对应渠道
     window.initContent = function(obj, isSearch) {
+      _this.sectorName = [];
+      _this.sectorCount = [];
       obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
       obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
       

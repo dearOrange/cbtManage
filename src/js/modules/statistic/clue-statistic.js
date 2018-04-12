@@ -16,18 +16,6 @@ define(function(require, exports, module) {
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
         now.day = now.day.toString().length === 1 ? '0' + now.day : now.day; //日期两位数
-//      线索统计
-        _this.trendDaysOne = [];
-        _this.trendCountOne = [];
-        _this.trendCountTwo = [];
-//      线索匹配统计
-        _this.carCountOne = [];
-        _this.carCountTwo = [];
-        _this.carDaysOne = [];
-//      线索合规统计
-        _this.downCountOne = [];
-        _this.downCountTwo = [];
-        _this.downDaysOne = [];
 
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput,#traceInput,#recoveryInput').val(now.year + '-' + now.month);
@@ -54,80 +42,89 @@ define(function(require, exports, module) {
         
 //      线索统计
         window.initEntrustSort = function(obj, isSearch) {
-            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-            jh.utils.ajax.send({
-                method: 'post',
-                url: '/statistics/trace/trend',
-                contentType: 'application/json',
-                data: {
-                  type: 'traceTotal',
-                  yearMonth: obj.y + '-' + obj.M
-                },
-                isSearch: isSearch,
-                done: function(returnData) {
-                  var traceOne = returnData.data.traceTotal;
-                  for (var a = 0; a < traceOne.length; a++) {
-                      _this.trendDaysOne.push(traceOne[a].days);
-                      _this.trendCountOne.push(traceOne[a].count);
-                  }
-                  _this.sectionTable();
+          _this.trendDaysOne = [];
+          _this.trendCountOne = [];
+          _this.trendCountTwo = [];
+          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+          jh.utils.ajax.send({
+              method: 'post',
+              url: '/statistics/trace/trend',
+              contentType: 'application/json',
+              data: {
+                type: 'traceTotal',
+                yearMonth: obj.y + '-' + obj.M
+              },
+              isSearch: isSearch,
+              done: function(returnData) {
+                var traceOne = returnData.data.traceTotal;
+                for (var a = 0; a < traceOne.length; a++) {
+                    _this.trendDaysOne.push(traceOne[a].days);
+                    _this.trendCountOne.push(traceOne[a].count);
                 }
-            });
+                _this.sectionTable();
+              }
+          });
         };
 //      线索匹配统计
         window.initClueSort = function(obj, isSearch) {
-            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-            jh.utils.ajax.send({
-                method: 'post',
-                url: '/statistics/trace/trend',
-                contentType: 'application/json',
-                data: {
-                  type: 'traceMatch',
-                  yearMonth: obj.y + '-' + obj.M
-                },
-                isSearch: isSearch,
-                done: function(returnData) {
-                  var carOne = returnData.data.traceMatch;
-                  var carTwo = returnData.data.traceWhole;
-                  for (var j = 0; j < carOne.length; j++) {
-                      _this.carDaysOne.push(carOne[j].days);
-                      _this.carCountOne.push(carOne[j].count);
-                  }
-                  for (var k = 0; k < carTwo.length; k++) {
-                      _this.carCountTwo.push(carTwo[k].count);
-                  }
-                  _this.sectionTable();
+          _this.carCountOne = [];
+          _this.carCountTwo = [];
+          _this.carDaysOne = [];
+          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+          jh.utils.ajax.send({
+              method: 'post',
+              url: '/statistics/trace/trend',
+              contentType: 'application/json',
+              data: {
+                type: 'traceMatch',
+                yearMonth: obj.y + '-' + obj.M
+              },
+              isSearch: isSearch,
+              done: function(returnData) {
+                var carOne = returnData.data.traceMatch;
+                var carTwo = returnData.data.traceWhole;
+                for (var j = 0; j < carOne.length; j++) {
+                    _this.carDaysOne.push(carOne[j].days);
+                    _this.carCountOne.push(carOne[j].count);
                 }
-            });
+                for (var k = 0; k < carTwo.length; k++) {
+                    _this.carCountTwo.push(carTwo[k].count);
+                }
+                _this.sectionTable();
+              }
+          });
         };        
 //      线索合规统计
         window.initPassSort = function(obj, isSearch) {
-            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-            jh.utils.ajax.send({
-                method: 'post',
-                url: '/statistics/trace/trend',
-                contentType: 'application/json',
-                data: {
-                  type: 'tracePass',
-                  yearMonth: obj.y + '-' + obj.M
-                },
-                isSearch: isSearch,
-                done: function(returnData) {
-                  var downOne = returnData.data.passed;
-                  var downTwo = returnData.data.rejected;
-                  for (var c = 0; c < downOne.length; c++) {
-                      _this.downDaysOne.push(downOne[c].days);
-                      _this.downCountOne.push(downOne[c].count);
-                  }
-                  for (var d = 0; d < downTwo.length; d++) {
-                      _this.downCountTwo.push(downTwo[d].count);
-                  }
-                  _this.sectionTable();
+          _this.downCountOne = [];
+          _this.downCountTwo = [];
+          _this.downDaysOne = [];
+          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+          jh.utils.ajax.send({
+              method: 'post',
+              url: '/statistics/trace/trend',
+              contentType: 'application/json',
+              data: {
+                type: 'tracePass',
+                yearMonth: obj.y + '-' + obj.M
+              },
+              isSearch: isSearch,
+              done: function(returnData) {
+                var downOne = returnData.data.passed;
+                var downTwo = returnData.data.rejected;
+                for (var c = 0; c < downOne.length; c++) {
+                    _this.downDaysOne.push(downOne[c].days);
+                    _this.downCountOne.push(downOne[c].count);
                 }
-            });
+                for (var d = 0; d < downTwo.length; d++) {
+                    _this.downCountTwo.push(downTwo[d].count);
+                }
+                _this.sectionTable();
+              }
+          });
         };  
         
         this.sectionTable = function() {

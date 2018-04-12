@@ -9,11 +9,11 @@ define(function(require, exports, module) {
     function ChannelStatistic() {
         var _this = this;
         _this.role = 'type_A';
+        var pieCharts = null;
         var date = new Date();
         var now = {
             year: date.getFullYear(),
-            month: date.getMonth() + 1,
-            day: date.getDay()
+            month: date.getMonth() + 1
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
 //      线人扇形
@@ -23,36 +23,24 @@ define(function(require, exports, module) {
         _this.channelHunterName = [];
         _this.channelHunterCount = [];
         
-        _this.traceCount = [];
-        _this.carRecoveryMonths = [];
-        _this.carRecoveryCount = [];
-        _this.upstreamTrendMonths = [];
-        _this.traceTrendMonths = [];
-        _this.downstreamTrendMonths = [];
-        _this.upstreamTrendCount = [];
-        _this.traceTrendCount = [];
-        _this.downstreamTrendCount = [];
-        _this.countRate = 0;
-
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
             this.initHead();
             this.sectionTable();
             this.initSection();
             window.initContent('2018-01', true);
-            window.initClear('2018-01', true);
-//          window.initEntrustSort('2018-01', true);
             this.registerEvent();
         };
 
         //开头数据
-        this.initHead = function() {
+        this.initHead = function(isSearch) {
             var channelOne = jh.utils.formToJson($('#channel-list-form'));
             jh.utils.ajax.send({
                 method: 'post',
                 url: '/statistics/channel/recommendRatio',
                 contentType: 'application/json',
                 data: channelOne,
+                isSearch: isSearch,
                 done: function(returnData) {
                   var channelOne = returnData.data;
                   for (var a = 0; a < channelOne.length; a++) {
@@ -60,6 +48,7 @@ define(function(require, exports, module) {
                     _this.channelInformerName.push(channelOne[a].name);
                     channelobj.value = channelOne[a].countEach;
                     channelobj.name = channelOne[a].name;
+                    channelobj.id = channelOne[a].id;
                     _this.channelInformerCount.push(channelobj);
                   }
                   _this.sectionTable();
@@ -86,49 +75,68 @@ define(function(require, exports, module) {
           });
           page.init();
         }
+        
+//      下线列表
+        this.initOnline = function(id) {
+          var online = jh.utils.formToJson($('#channel-list-form'));
+          online.id = id;
+          var page = new jh.ui.page({
+            data_container: $('#channelDown_statistic_container'),
+            page_container: $('#page_container'),
+            method: 'post',
+            url: '/statistics/channel/recommendList',
+            contentType: 'application/json',
+            data: online,
+            callback: function(data) {
+              return jh.utils.template('channelDown_content_template', data);
+            }
+          });
+          page.init();
+        }
+        
         this.sectionTable = function() {
-            
-            var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
-            mainCarNum.setOption({
-                tooltip : {
-                    trigger: 'item',
-                    formatter: "{a} <br/>{b} : {c} ({d}%)"
-                },
-                legend: {
-                    orient : 'vertical',
-                    x : 'left',
-                    data:_this.channelInformerName
-                },
-                calculable : true,
-                series : [
-                    {
-                        name:'访问来源',
-                        type:'pie',
-                        radius : ['50%', '70%'],
-                        itemStyle : {
-                            normal : {
-                                label : {
-                                    show : false
-                                },
-                                labelLine : {
-                                    show : false
-                                }
-                            },
-                            emphasis : {
-                                label : {
-                                    show : true,
-                                    position : 'center',
-                                    textStyle : {
-                                        fontSize : '30',
-                                        fontWeight : 'bold'
-                                    }
-                                }
-                            }
-                        },
-                        data:_this.channelInformerCount
-                    }
-                ]
-            });
+          var mainCarNum = echarts.init(document.getElementById('mainCarNum'));
+          mainCarNum.setOption({
+              tooltip : {
+                  trigger: 'item',
+                  formatter: "{a} <br/>{b} : {c} ({d}%)"
+              },
+              legend: {
+                  orient : 'vertical',
+                  x : 'left',
+                  data:_this.channelInformerName
+              },
+              calculable : true,
+              series : [
+                  {
+                      name:'访问来源',
+                      type:'pie',
+                      radius : ['50%', '70%'],
+                      itemStyle : {
+                          normal : {
+                              label : {
+                                  show : false
+                              },
+                              labelLine : {
+                                  show : false
+                              }
+                          },
+                          emphasis : {
+                              label : {
+                                  show : true,
+                                  position : 'center',
+                                  textStyle : {
+                                      fontSize : '30',
+                                      fontWeight : 'bold'
+                                  }
+                              }
+                          }
+                      },
+                      data:_this.channelInformerCount
+                  }
+              ]
+          });
+          pieCharts = mainCarNum;
 
         };
         
@@ -157,60 +165,6 @@ define(function(require, exports, module) {
             page.init();
         };
 
-        window.initClear = function(obj, isSearch) {
-            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-
-            var page = new jh.ui.page({
-                data_container: $('#clear_info_container'),
-                page_container: $('#page_clear_container'),
-                method: 'post',
-                url: '/statistics/recoverySort',
-                contentType: 'application/json',
-                data: {
-                  pageSize: 5,
-                    type: 'carRecovery',
-                    yearMonth: obj.y + '-' + obj.M
-                },
-                isSearch: isSearch,
-                show_page_number: 3,
-                callback: function(data) {
-                    return jh.utils.template('clear_content_template', data);
-                }
-            });
-            page.init();
-        };
-
-//      window.initEntrustSort = function(obj, isSearch) {
-//          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-//          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-//          jh.utils.ajax.send({
-//              method: 'post',
-//              url: '/statistics/entrust',
-//              contentType: 'application/json',
-//              data: {
-//                  yearMonth: obj.y + '-' + obj.M
-//              },
-//              isSearch: isSearch,
-//              done: function(returnData) {
-//                  var entrust = returnData.data;
-//                  var noResultBox = $('#entrustNoResultBox');
-//                  if (!entrust.length) {
-//                      noResultBox.removeClass('hide');
-//                      noResultBox.prev().addClass('hide');
-//                      return false;
-//                  } else {
-//                      noResultBox.addClass('hide');
-//                      noResultBox.prev().removeClass('hide');
-//                  }
-//                  var entrustContent = jh.utils.template('entrust_content_template', returnData);
-//                  $('#entrustResultBox').html(entrustContent);
-//                  
-//
-//              }
-//          });
-//      };
-
         this.registerEvent = function() {
 
             $('select').select2({
@@ -222,14 +176,21 @@ define(function(require, exports, module) {
               $('#state').val($(this).data('value'));
               $('#stateInput').val($(this).data('value'));
               _this.role = $(this).data('value');
+              _this.channelInformerName=[];
+              _this.channelInformerCount=[];
+              window.initContent('2018-01', true);
               if (param && param === 'autoClick') {
       
               } else {
                 _this.initHead('tab');
-                window.initContent('2018-01', true);
               }
             })
-            
+            pieCharts.on('click', function(p) {
+//            console.log(p);//p为点击的地图对象，p.data为传入地图的data数据
+              var showOnline = jh.utils.template('channel_statistic_template', {roles: _this.role});
+              $('#showTable').html(showOnline);
+              _this.initOnline(p.data.id);
+            });
             // 搜索
             jh.utils.validator.init({
                 id: 'channel-info-form',
@@ -238,6 +199,41 @@ define(function(require, exports, module) {
                     return false;
                 }
             });
+            // 搜索
+            jh.utils.validator.init({
+              id: 'channel-list-form',
+              submitHandler: function(form) {
+                _this.initHead(true);
+                return false;
+              }
+            });
+            
+//          查看下线数
+            $('body').off('click', '.find_develop_num').on('click', '.find_develop_num', function() {
+              var developId = $(this).data('id');
+              jh.utils.ajax.send({
+                method: 'post',
+                url: '/statistics/downstream/recommendList',
+                contentType: 'application/json',
+                data: {
+                  pageNum: 1,
+                  pageSize: 10,
+                  params: {
+                    id: 259//developId
+                  }
+                },
+                done: function(data) {
+                  data.role = _this.role;
+                  console.log(data);
+                  var developNum = jh.utils.template('develop_statistic_template', data);
+                  jh.utils.alert({
+                    title: '发展下线',
+                    content: developNum,
+                    ok: true
+                  });
+                }
+              })
+            })
         };
     }
     /**
@@ -253,36 +249,6 @@ define(function(require, exports, module) {
     };
     /**
      * 排名end
-     */
-
-    /**
-     * 渠道委托begin
-     */
-//  window.statisticEntrustMonthing = function() {
-//      var obj = $dp.cal.newdate;
-//      window.initEntrustSort(obj, true);
-//  };
-//  window.statisticEntrustYearing = function() {
-//      var obj = $dp.cal.newdate;
-//      window.initEntrustSort(obj, true);
-//  };
-    /**
-     * 渠道委托end
-     */
-
-    /**
-     * 车辆清收begin
-     */
-    window.statisticRecoveryMonthing = function() {
-        var obj = $dp.cal.newdate;
-        window.initClear(obj, true);
-    };
-    window.statisticRecoveryYearing = function() {
-        var obj = $dp.cal.newdate;
-        window.initClear(obj, true);
-    };
-    /**
-     * 车辆清收end
      */
 
     module.exports = ChannelStatistic;

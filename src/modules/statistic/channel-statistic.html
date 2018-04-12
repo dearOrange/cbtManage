@@ -23,15 +23,18 @@
         <form id="channel-list-form">
           <p class="title-style">
             <span class="pull-right">
+              <input type="submit" class="button" value="查询" />
+            </span>
+            <span class="pull-right">
               <input type="hidden" name="role" id="stateInput" value="type_A" />
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputStart" name="begin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">至
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="entrustTimeInputEnd" name="end" onclick="WdatePicker({dateFmt:'yyyy-MM-dd', Mchanging:statisticTraceMonthing,ychanging:statisticTraceYearing})">
+              <input type="text" class="search-input hand begin-input" readonly="readonly" name="begin" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
+              <input type="text" class="search-input hand end-input" readonly="readonly" name="end" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
             </span>
           </p>
         </form>
         <div id="mainCarNum" class="mainInformate" style="width:100%;height:380px;"></div>
       </div>
-      
+      <div id="showTable"></div>
       <div class="information" style="height:500px;">
         <form id="channel-info-form">
           <p class="title-style">
@@ -113,19 +116,68 @@
   </tr>
   {{/each}}
 </script>
+<!--发展下线-->
+<script type="text/template" id="channel_statistic_template">
+  <div class="information">
+    <div class="data-container">
+      <table class="dataShow">
+        <thead>
+          {{if roles === 'type_A'}}
+          <tr>
+            <th width="4%">序号</th>
+            <th width="8%">姓名</th>
+            <th width="8%">账号</th>
+            <th width="8%">区域</th>
+            <th width="8%">联系电话</th>
+            <th width="8%">最新线索上传地区</th>
+            <th width="15%">注册时间</th>
+            <th width="8%">下线</th>
+          </tr>
+          {{else}}
+          <tr>
+            <th width="4%">序号</th>
+            <th width="8%">主体名称</th>
+            <th width="8%">捕头类型</th>
+            <th width="8%">区域</th>
+            <th width="8%">联系电话</th>
+            <th width="8%">通过认证时间</th>
+            <th width="8%">最新线索上传地区</th>
+            <th width="15%">认证状态</th>
+            <th width="8%">下线</th>
+          </tr>
+          {{/if}}
+        </thead>
+        <tbody id="channelDown_statistic_container">
+          
+        </tbody>
+      </table>
+      <div class="page-box pagination" id="page_container"></div>
+    </div>
+  </div>
+</script>
 <!--下线-->
-<script type="text/template" id="channel_content_template">
+<script type="text/template" id="channelDown_content_template">
   {{ each list item index }}
   <tr>
     <td>{{item.rank}}</td>
-    <td>{{item.dname}}</td>
-    <td>{{item.countTrace}}</td>
-    <td>{{item.rank}}</td>
-    <td>{{item.dname}}</td>
-    <td>{{item.dname}}</td>
-    <td>{{item.countTrace}}</td>
+    {{if item.role === 'type_A'}}
+    <td>{{item.name}}</td>
+    <td>{{item.account}}</td>
+    <td>{{ each item.area items index }}{{items.index}}{{/each}}</td>
+    <td>{{item.phone}}</td>
+    <td>{{item.location}}</td>
+    <td>{{item.registerAt}}</td>
+    {{else}}
+    <td>{{item.company}}</td>
+    <td>{{item.type}}</td>
+    <td>{{item.area}}</td>
+    <td>{{item.phone}}</td>
+    <td>{{item.passAt}}</td>
+    <td>{{item.location}}</td>
+    <td>{{item.isCertified}}</td>
+    {{/if}}
     <td>
-      <a data-id="{{item.id}}" class="button">查看发展下线</a>
+      <a data-id="{{item.id}}" class="button find_develop_num">查看发展下线</a>
     </td>
   </tr>
   {{/each}}
@@ -139,7 +191,46 @@
   </tr>
   {{/each}}
 </script>
-
+<!--查看发展下线数-->
+<script type="text/template" id="develop_statistic_template">
+  <div class="data-container">
+    <table class="dataShow">
+      <thead>
+        <tr>
+          <th width="4%">序号</th>
+          {{if role === 'type_B'}}
+          <th width="8%">姓名</th>
+          <th width="8%">账号</th>
+          {{else}}
+          <th width="8%">名称</th>
+          <th width="8%">债权方类型</th>
+          <th width="8%">联系人姓名</th>
+          {{/if}}
+          <th width="8%">联系电话</th>
+          <th width="15%">注册时间</th>
+        </tr>
+      </thead>
+      <tbody id="develop_statistic_container">
+        {{ each data.list item index }}
+        <tr>
+          <td>{{item.rank}}</td>
+          {{if item.role === 'type_B'}}
+          <td>{{item.name}}</td>
+          <td>{{item.account}}</td>
+          {{else}}
+          <td>{{item.company}}</td>
+          <td>{{item.type}}</td>
+          <td>{{item.company}}</td>
+          {{/if}}
+          <td>{{item.phone}}</td>
+          <td>{{item.registerAt}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <div class="page-box pagination" id="page_develop_container"></div>
+  </div>
+</script>
 <script type="text/javascript">
   seajs.use('modules/statistic/channel-statistic', function(ChannelStatistic) {
     var ChannelStatistic = new ChannelStatistic();

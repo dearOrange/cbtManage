@@ -40,6 +40,8 @@ define(function(require, exports, module) {
 //      商务发展债权方统计  
         this.initHead = function(isSearch) {
           var businessOne = jh.utils.formToJson($('#business-info-form'));
+          _this.businessName = [];
+          _this.businessCount = [];
           jh.utils.ajax.send({
               method: 'post',
               url: '/statistics/business/recommendRatio',
@@ -223,7 +225,7 @@ define(function(require, exports, module) {
                   pageNum: 1,
                   pageSize: 10,
                   params: {
-                    id: 259//developId
+                    id: developId
                   }
                 },
                 done: function(data) {
