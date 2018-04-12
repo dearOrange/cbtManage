@@ -8,9 +8,12 @@
         <form id="business-info-form">
           <p class="title-style">
             <span class="span-style">商务发展债权方统计</span>
+            <span>
+              <input type="text" class="search-input hand begin-input" readonly="readonly" name="begin" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
+              <input type="text" class="search-input hand end-input" readonly="readonly" name="end" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
+            </span>
             <span class="pull-right">
-              <input type="text" class="search-input hand startTime" readonly="readonly" id="begin" name="begin" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'end\')}',dateFmt:'yyyy-MM-dd', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">至
-              <input type="text" class="search-input hand endTime" readonly="readonly" id="end" name="end" onclick="WdatePicker({minDate:'#F{$dp.$D(\'begin\')}',dateFmt:'yyyy-MM-dd', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+              <input type="submit" class="button" value="查询" />
             </span>
           </p>
         </form>
@@ -150,24 +153,27 @@
           </tr>
         </thead>
         <tbody id="business_statistic_container">
-          {{ each list item index }}
-          <tr>
-            <td>{{item.rank}}</td>
-            <td>{{item.name}}</td>
-            <td>{{menuState(item.type)}}</td>
-            <td>{{item.contact}}</td>
-            <td>{{item.phone}}</td>
-            <td>{{item.registerAt}}</td>
-            <td>
-              <a data-id="{{item.id}}" class="button find_develop_num">查看发展下线</a>
-            </td>
-          </tr>
-          {{/each}}
+          
         </tbody>
       </table>
       <div class="page-box pagination" id="page_container"></div>
     </div>
   </div>
+</script>
+<script type="text/template" id="businessTr_statistic_template">
+	{{ each list item index }}
+  <tr>
+    <td>{{item.rank}}</td>
+    <td>{{item.name}}</td>
+    <td>{{menuState(item.type)}}</td>
+    <td>{{item.contact}}</td>
+    <td>{{item.phone}}</td>
+    <td>{{item.registerAt}}</td>
+    <td>
+      <a data-id="{{item.id}}" class="button find_develop_num">查看发展下线</a>
+    </td>
+  </tr>
+  {{/each}}
 </script>
 <!--查看发展下线数-->
 <script type="text/template" id="develop_statistic_template">

@@ -32,19 +32,19 @@ define(function(require, exports, module) {
             this.initHead();
             this.sectionTable();
             this.initSection();
-//          window.initEntrustSort('2018-01-13', true);
             window.initContent('2018-01', true);
             window.initClear('2018-01', true);
             this.registerEvent();
         };
-
-        //开头数据
-        this.initHead = function() {
+        
+//      商务发展债权方统计  
+        this.initHead = function(isSearch) {
           var businessOne = jh.utils.formToJson($('#business-info-form'));
           jh.utils.ajax.send({
               method: 'post',
               url: '/statistics/business/recommendRatio',
               contentType: 'application/json',
+              isSearch: isSearch,
               data: businessOne,
               done: function(returnData) {
                 var businessCount = returnData.data;
@@ -59,35 +59,6 @@ define(function(require, exports, module) {
                 _this.sectionTable();
               }
           });
-//      商务发展债权方统计  
-//      window.initEntrustSort = function(obj, isSearch) {
-//        obj = typeof obj !== 'object' ? { y: now.year, M: now.month, d: now.day } : obj; //是否为第一次查询
-//        obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
-//        obj.d = obj.d.toString().length === 1 ? '0' + obj.d : obj.d; //日期两位数
-//          
-//        jh.utils.ajax.send({
-//            method: 'post',
-//            url: '/statistics/business/recommendRatio',
-//            contentType: 'application/json',
-//            data: {
-//              begin: obj.y + '-' + obj.M + '-' + obj.d,
-//              end: obj.y + '-' + obj.M + '-' + obj.d
-//            },
-//            isSearch: isSearch,
-//            done: function(returnData) {
-//              var businessCount = returnData.data;
-//              for (var a = 0; a < businessCount.length; a++) {
-//                var businessobj = {};
-//                _this.businessName.push(businessCount[a].name);
-//                businessobj.value = businessCount[a].countEach;
-//                businessobj.name = businessCount[a].name;
-//                businessobj.id = businessCount[a].id;
-//                _this.businessCount.push(businessobj);
-//              }
-//              _this.sectionTable();
-//            }
-//        });
-//      };
           
 //        商务经理
           jh.utils.ajax.send({
@@ -128,11 +99,11 @@ define(function(require, exports, module) {
             data_container: $('#business_statistic_container'),
             page_container: $('#page_container'),
             method: 'post',
-            url: '/statistics/business/recommendTaskList',
+            url: '/statistics/business/recommendList',
             contentType: 'application/json',
             data: online,
             callback: function(data) {
-              return jh.utils.template('business_statistic_template', data);
+              return jh.utils.template('businessTr_statistic_template', data);
             }
           });
           page.init();
@@ -233,7 +204,14 @@ define(function(require, exports, module) {
                     return false;
                 }
             });
-            
+            // 搜索
+            jh.utils.validator.init({
+                id: 'business-info-form',
+                submitHandler: function(form) {
+                    _this.initHead(true);
+                    return false;
+                }
+            });
 //          查看下线数
             $('body').off('click', '.find_develop_num').on('click', '.find_develop_num', function() {
               var developId = $(this).data('id');
@@ -245,7 +223,7 @@ define(function(require, exports, module) {
                   pageNum: 1,
                   pageSize: 10,
                   params: {
-                    id: developId
+                    id: 259//developId
                   }
                 },
                 done: function(data) {
@@ -289,20 +267,5 @@ define(function(require, exports, module) {
     /**
      * 车辆清收end
      */
-    /**
-     * 线索统计begin
-     */
-    window.statisticEntrustMonthing = function() {
-        var obj = $dp.cal.newdate;
-        window.initEntrustSort(obj, true);
-    };
-    window.statisticEntrustYearing = function() {
-        var obj = $dp.cal.newdate;
-        window.initEntrustSort(obj, true);
-    };
-    /**
-     * 线索统计end
-     */
-     
     module.exports = BusinessStatistic;
 });

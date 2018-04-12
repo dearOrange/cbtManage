@@ -380,7 +380,7 @@ p.closeStatus {
 .dataContent .data-container .information,
 .dataContent .data-container .channelPie {
     width: 100%;
-    height: 450px;
+    /*height: 450px;*/
     margin: 30px 0;
     padding: 15px;
     box-shadow: 0px -3px 18px -2px #b5b5b5;

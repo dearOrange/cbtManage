@@ -72,10 +72,12 @@ define(function(require, exports, module) {
           var channelTwo = jh.utils.formToJson($('#channel-info-form'));
           var page = new jh.ui.page({
             data_container: $('#channel_statistic_container'),
-            page_container: $('#page_container1'),
+            page_container: $('#page_clear_container1'),
             method: 'post',
             url: '/statistics/channel/recoveryList',
             contentType: 'application/json',
+            jump: false,
+            show_page_number: 3,
             data: channelTwo,
             isSearch: isSearch,
             callback: function(data) {
@@ -140,12 +142,11 @@ define(function(require, exports, module) {
                 page_container: $('#page_container2'),
                 method: 'post',
                 url: '/statistics/channel/recommendSort',
-//              jump: false,
-//              show_page_number: 3,
+                jump: false,
+                show_page_number: 3,
                 contentType: 'application/json',
                 data: {
                     role: _this.role,
-                    pageSize: 5,
                     yearMonth: obj.y + '-' + obj.M
                 },
                 isSearch: isSearch,
