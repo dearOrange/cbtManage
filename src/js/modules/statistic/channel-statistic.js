@@ -16,13 +16,7 @@ define(function(require, exports, module) {
             month: date.getMonth() + 1
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
-//      线人扇形
-        _this.channelInformerName = [];
-        _this.channelInformerCount = [];
-//      捕头扇形        
-        _this.channelHunterName = [];
-        _this.channelHunterCount = [];
-        
+      
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
             this.initHead();
@@ -34,26 +28,29 @@ define(function(require, exports, module) {
 
         //开头数据
         this.initHead = function(isSearch) {
-            var channelOne = jh.utils.formToJson($('#channel-list-form'));
-            jh.utils.ajax.send({
-                method: 'post',
-                url: '/statistics/channel/recommendRatio',
-                contentType: 'application/json',
-                data: channelOne,
-                isSearch: isSearch,
-                done: function(returnData) {
-                  var channelOne = returnData.data;
-                  for (var a = 0; a < channelOne.length; a++) {
-                    var channelobj = {};
-                    _this.channelInformerName.push(channelOne[a].name);
-                    channelobj.value = channelOne[a].countEach;
-                    channelobj.name = channelOne[a].name;
-                    channelobj.id = channelOne[a].id;
-                    _this.channelInformerCount.push(channelobj);
-                  }
-                  _this.sectionTable();
+          _this.channelInformerName = [];
+          _this.channelInformerCount = [];
+          var channelOne = jh.utils.formToJson($('#channel-list-form'));
+          jh.utils.ajax.send({
+              method: 'post',
+              url: '/statistics/channel/recommendRatio',
+              contentType: 'application/json',
+              data: channelOne,
+              isSearch: isSearch,
+              done: function(returnData) {
+                $('#showTable').html('');
+                var channelOne = returnData.data;
+                for (var a = 0; a < channelOne.length; a++) {
+                  var channelobj = {};
+                  _this.channelInformerName.push(channelOne[a].name);
+                  channelobj.value = channelOne[a].countEach;
+                  channelobj.name = channelOne[a].name;
+                  channelobj.id = channelOne[a].id;
+                  _this.channelInformerCount.push(channelobj);
                 }
-            });
+                _this.sectionTable();
+              }
+          });
         };
         
 //      清收统计
@@ -80,6 +77,8 @@ define(function(require, exports, module) {
         this.initOnline = function(id) {
           var online = jh.utils.formToJson($('#channel-list-form'));
           online.id = id;
+          online.role = _this.role;
+          console.log(online);
           var page = new jh.ui.page({
             data_container: $('#channelDown_statistic_container'),
             page_container: $('#page_container'),
@@ -87,6 +86,7 @@ define(function(require, exports, module) {
             url: '/statistics/channel/recommendList',
             contentType: 'application/json',
             data: online,
+            isSearch: true,
             callback: function(data) {
               return jh.utils.template('channelDown_content_template', data);
             }
@@ -178,6 +178,7 @@ define(function(require, exports, module) {
               _this.role = $(this).data('value');
               _this.channelInformerName=[];
               _this.channelInformerCount=[];
+              $('#showTable').html('');
               window.initContent('2018-01', true);
               if (param && param === 'autoClick') {
       

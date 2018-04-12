@@ -17,11 +17,7 @@ define(function(require, exports, module) {
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
         now.day = now.day.toString().length === 1 ? '0' + now.day : now.day; //日期两位数
-//      扇形
-        _this.businessName = [];
-        _this.businessCount = [];
-        
-        
+     
         _this.traceValue = '';
         _this.traceName = '';
         _this.traceId = '';
@@ -49,6 +45,7 @@ define(function(require, exports, module) {
               isSearch: isSearch,
               data: businessOne,
               done: function(returnData) {
+                $('#showTable').html('');
                 var businessCount = returnData.data;
                 for (var a = 0; a < businessCount.length; a++) {
                   var businessobj = {};
@@ -86,6 +83,7 @@ define(function(require, exports, module) {
             url: '/statistics/business/recommendTaskList',
             contentType: 'application/json',
             data: businessTwo,
+            jump: false,
             isSearch: isSearch,
             callback: function(data) {
               return jh.utils.template('business_content_template', data);
@@ -104,6 +102,7 @@ define(function(require, exports, module) {
             url: '/statistics/business/recommendList',
             contentType: 'application/json',
             data: online,
+            isSearch: true,
             callback: function(data) {
               return jh.utils.template('businessTr_statistic_template', data);
             }

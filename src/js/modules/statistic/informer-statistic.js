@@ -255,28 +255,27 @@ define(function(require, exports, module) {
         };
 //      活跃线人统计
         window.initContent = function(obj, isSearch) {
-            obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
-            obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+          obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
 
-            var page = new jh.ui.page({
-                data_container: $('#downstream_statistic_container'),
-                page_container: $('#page_container'),
-                method: 'post',
-                url: '/statistics/downstream/activeSort',
-                contentType: 'application/json',
-                data: {
-                    yearMonth: obj.y + '-' + obj.M
-                },
-                isSearch: isSearch,
-                callback: function(data) {
-                    return jh.utils.template('downstream_content_template', data);
-                }
-            });
-            page.init();
+          var page = new jh.ui.page({
+              data_container: $('#downstream_statistic_container'),
+              page_container: $('#page_container'),
+              method: 'post',
+              url: '/statistics/downstream/activeSort',
+              contentType: 'application/json',
+              data: {
+                  yearMonth: obj.y + '-' + obj.M
+              },
+              isSearch: isSearch,
+              callback: function(data) {
+                  return jh.utils.template('downstream_content_template', data);
+              }
+          });
+          page.init();
         };
         
         this.registerEvent = function() {
-          
           infoChart.on('click', function(p) {
 //          console.log(p.data.name);//p为点击的地图对象，p.data为传入地图的data数据
             _this.data = p.data.name + '%';

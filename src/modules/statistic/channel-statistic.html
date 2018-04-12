@@ -163,14 +163,14 @@
     {{if item.role === 'type_A'}}
     <td>{{item.name}}</td>
     <td>{{item.account}}</td>
-    <td>{{ each item.area items index }}{{items.index}}{{/each}}</td>
+    <td>{{ each item.area items index }}{{items.provinceName}}{{/each}}</td>
     <td>{{item.phone}}</td>
     <td>{{item.location}}</td>
     <td>{{item.registerAt}}</td>
     {{else}}
     <td>{{item.company}}</td>
     <td>{{item.type}}</td>
-    <td>{{item.area}}</td>
+    <td>{{ each item.area items index }}{{items.provinceName}}{{/each}}</td>
     <td>{{item.phone}}</td>
     <td>{{item.passAt}}</td>
     <td>{{item.location}}</td>
