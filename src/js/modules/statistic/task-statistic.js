@@ -182,15 +182,13 @@ define(function(require, exports, module) {
                 data_container: $('#task_statistic_container'),
                 page_container: $('#page_container'),
                 method: 'post',
-                url: '/statistics/traceSort',
+                url: '/statistics/business/recommendTaskSort',
                 showPageTotal: false,
                 jump: false,
                 show_page_number: 2,
                 contentType: 'application/json',
                 data: {
-                    type: 'trace',
-                    pageSize: 5,
-                    yearMonth: obj.y + '-' + obj.M
+                  yearMonth: obj.y + '-' + obj.M
                 },
                 isSearch: isSearch,
                 callback: function(data) {

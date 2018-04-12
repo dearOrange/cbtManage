@@ -22,13 +22,13 @@
       <div class="information">
         <form id="channel-list-form">
           <p class="title-style">
-            <span class="pull-right">
-              <input type="submit" class="button" value="查询" />
-            </span>
-            <span class="pull-right">
+            <span class="pull-left">
               <input type="hidden" name="role" id="stateInput" value="type_A" />
               <input type="text" class="search-input hand begin-input" readonly="readonly" name="begin" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
               <input type="text" class="search-input hand end-input" readonly="readonly" name="end" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
+            </span>
+            <span class="pull-right">
+              <input type="submit" class="button" value="查询" />
             </span>
           </p>
         </form>

@@ -185,7 +185,10 @@ define(function(require, exports, module) {
                         mapType: 'china',
                         selectedMode : 'single',
                         itemStyle:{
-                            normal:{label:{show:true}},
+                            normal:{
+                              label:{show:true},
+                              areaColor: '#ffeeff'
+                            },
                             emphasis:{label:{show:true}}
                         },
                         data:[
