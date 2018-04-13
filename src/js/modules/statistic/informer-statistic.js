@@ -21,7 +21,8 @@ define(function(require, exports, module) {
         _this.data = '';
 
         this.init = function() {
-            $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
+            $('#infoTimeInput,#carRecoveryInput').val(now.year + '-' + now.month);
+            $('#entrustTimeInput').val(now.year + '-' + now.month + '-' + now.day);
             this.initHead();
             this.sectionTable();
             this.areaTable(_this.data);
@@ -70,15 +71,16 @@ define(function(require, exports, module) {
         window.initEntrustSort = function(obj, isSearch) {
           _this.sectorName = [];
           _this.sectorCount = [];
-          obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
+          obj = typeof obj !== 'object' ? { y: now.year, M: now.month, d: now.day } : obj; //是否为第一次查询
           obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+          obj.d = obj.d.toString().length === 1 ? '0' + obj.d : obj.d; //月份两位数
           jh.utils.ajax.send({
             method: 'post',
             url: '/statistics/downstream/sourceRatio',
             contentType: 'application/json',
             data: {
                 role: 'type_A',
-                date: obj.y + '-' + obj.M
+                date: obj.y + '-' + obj.M + '-' + obj.d
             },
             done: function(returnData) {
                 var informerSector = returnData.data;
@@ -314,6 +316,10 @@ define(function(require, exports, module) {
     /**
      * 发展线人对应渠道begin
      */
+    window.statisticEntrustDaying = function() {
+        var obj = $dp.cal.newdate;
+        window.initEntrustSort(obj, true);
+    };
     window.statisticEntrustMonthing = function() {
         var obj = $dp.cal.newdate;
         window.initEntrustSort(obj, true);

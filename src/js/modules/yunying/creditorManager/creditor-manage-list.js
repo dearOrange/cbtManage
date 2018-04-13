@@ -94,7 +94,7 @@ define(function(require, exports, module) {
                                         jh.utils.alert({
                                             content: '运营经理分配成功！',
                                             ok: function(){
-                                            	window.location.reload();
+                                            	_this.initContent();
                                             },
                                             cancel: false
                                         });

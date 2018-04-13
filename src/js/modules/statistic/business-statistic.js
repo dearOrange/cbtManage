@@ -162,7 +162,6 @@ define(function(require, exports, module) {
                 method: 'post',
                 url: '/statistics/business/recommendTaskSort',
                 jump: false,
-                show_page_number: 3,
                 contentType: 'application/json',
                 data: {
                     yearMonth: obj.y + '-' + obj.M
@@ -190,7 +189,6 @@ define(function(require, exports, module) {
                 },
                 isSearch: isSearch,
                 jump: false,
-                show_page_number: 3,
                 callback: function(data) {
                     return jh.utils.template('monthOne_content_template', data);
                 }

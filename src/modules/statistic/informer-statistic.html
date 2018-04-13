@@ -11,7 +11,7 @@
             <p class="title-style">
               <span class="span-style">新增线人</span>
               <input type="hidden" name="type" value="downstream" />
-              <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticRecoveryMonthing,ychanging:statisticRecoveryYearing})">
+              <input type="text" class="search-input hand startTime pull-right" readonly="readonly" name="yearMonth" id="infoTimeInput" onclick="WdatePicker({startDate:'%y',maxDate:'%y-%M',dateFmt:'yyyy-MM', Mchanging:statisticRecoveryMonthing,ychanging:statisticRecoveryYearing,isShowClear:true})">
             </p>
           </form>
           <div>
@@ -24,7 +24,7 @@
           <form id="clear-info-form">
             <p class="title-style">
               <span class="span-style">发展线人对应渠道</span>
-              <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing})">
+              <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="entrustTimeInput" name="yearMonth" onclick="WdatePicker({startDate:'%y',maxDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd', dchanging:statisticEntrustDaying, Mchanging:statisticEntrustMonthing,ychanging:statisticEntrustYearing,isShowClear:true})">
             </p>
           </form>
           <div>
@@ -64,7 +64,7 @@
       <form id="downstream-info-form">
         <p class="title-style">
           <span class="span-style">活跃线人统计</span>
-          <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="carRecoveryInput" name="yearMonth" onclick="WdatePicker({dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceMonthing})">
+          <input type="text" class="search-input hand startTime pull-right" readonly="readonly" id="carRecoveryInput" name="yearMonth" onclick="WdatePicker({startDate:'%y',maxDate:'%y-%M',dateFmt:'yyyy-MM', Mchanging:statisticTraceMonthing,ychanging:statisticTraceMonthing,isShowClear:true})">
         </p>
       </form>
       <div class="informateTable">
