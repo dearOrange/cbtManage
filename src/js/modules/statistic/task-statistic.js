@@ -111,12 +111,6 @@ define(function(require, exports, module) {
                   selectedMode: false,
                   data:['只找车','只拖车', '找车加拖车']
                 },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
                 calculable: true,
                 xAxis: [
                     {
@@ -136,19 +130,16 @@ define(function(require, exports, module) {
                     {
                         name:'只找车',
                         type:'bar',
-                        barWidth: '80%',
                         data:_this.trendCountTrace
                     },
                     {
                         name:'只拖车',
                         type:'bar',
-                        barWidth: '80%',
                         data:_this.trendCountRecycle
                     },
                     {
                         name:'找车加拖车',
                         type:'bar',
-                        barWidth: '80%',
                         data:_this.trendCountAll
                     }
                 ]
