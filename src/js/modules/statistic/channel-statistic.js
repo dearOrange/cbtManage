@@ -13,12 +13,17 @@ define(function(require, exports, module) {
         var date = new Date();
         var now = {
             year: date.getFullYear(),
-            month: date.getMonth() + 1
+            month: date.getMonth() + 1,
+            pmonth: date.getMonth(),
+            day: date.getDate()
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
+        now.day = now.day.toString().length === 1 ? '0' + now.day : now.day; //日期两位数
       
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
+            $('.end-input').val(now.year + '-' + now.month + '-' + now.day);
+            $('.begin-input').val(now.year + '-' + now.pmonth + '-' + now.day);
             this.initHead();
             this.sectionTable();
             this.initSection();
@@ -92,7 +97,6 @@ define(function(require, exports, module) {
           var online = jh.utils.formToJson($('#channel-list-form'));
           online.id = id;
           online.role = _this.role;
-          console.log(online);
           var page = new jh.ui.page({
             data_container: $('#channelDown_statistic_container'),
             page_container: $('#page_container'),

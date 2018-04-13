@@ -214,7 +214,7 @@
         {{ each data.list item index }}
         <tr>
           <td>{{item.rank}}</td>
-          {{if item.role === 'type_B'}}
+          {{if role === 'type_B'}}
           <td>{{item.name}}</td>
           <td>{{item.account}}</td>
           {{else}}

@@ -1100,7 +1100,7 @@ define(function(require, exports, module) {
           if (m.page_total > 1) {
             m.create(pageNum); //处理分页
             s.page_container.find('.jh_page_pageSize').val(s.data.pageSize);
-            $('#jh_page_totalSize').html(' 总共: ' + response.total + ' 条');
+            s.page_container.find('#jh_page_totalSize').html(' 总共: ' + response.total + ' 条');
             if (pageNum === 1) {
               s.page_container.find('.jh_page_pre').html('<span class="jh_pre_page">' + s.preText + '</span>');
               s.page_container.find('.jh_page_next').html('<a class="jh_next_page" href="#page-' + m.page_total + '">' + s.nextText + '</a>');
@@ -1113,7 +1113,7 @@ define(function(require, exports, module) {
             }
           } else {
             s.page_container.find('.jh_page_pageSize').val(s.data.pageSize);
-            $('#jh_page_totalSize').html(' 总共: ' + response.total + ' 条');
+            s.page_container.find('#jh_page_totalSize').html(' 总共: ' + response.total + ' 条');
             s.page_container.find('.jh_pages').empty();
           }
           var checkAll = $("#checkAll");

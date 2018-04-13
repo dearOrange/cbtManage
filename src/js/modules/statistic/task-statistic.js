@@ -48,6 +48,7 @@ define(function(require, exports, module) {
           _this.trendCountRecycle = [];
           obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
           obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
+          _this.datas = obj.y +  obj.M;
           jh.utils.ajax.send({
               method: 'post',
               url: '/statistics/trace/trend',
@@ -187,7 +188,7 @@ define(function(require, exports, module) {
                 page_container: $('#page_container'),
                 method: 'post',
                 url: '/statistics/business/recommendTaskSort',
-                showPageTotal: false,
+//              showPageTotal: false,
                 jump: false,
                 show_page_number: 2,
                 contentType: 'application/json',
@@ -203,7 +204,6 @@ define(function(require, exports, module) {
         };
 
         this.registerEvent = function() {
-            
             barCharts.on('click', function(p) {
 //            console.log(p);//p为点击的地图对象，p.data为传入地图的data数据
               if(p.seriesName === '只找车') {
@@ -213,8 +213,7 @@ define(function(require, exports, module) {
               }else {
                 _this.entrust = 'all';
               }
-              _this.dates = p.name;
-              console.log(p);
+              _this.dates = _this.datas + p.name;
               _this.headTable(_this.entrust, _this.dates);
             });
             

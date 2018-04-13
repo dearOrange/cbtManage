@@ -13,6 +13,7 @@ define(function(require, exports, module) {
         var now = {
             year: date.getFullYear(),
             month: date.getMonth() + 1,
+            pmonth: date.getMonth(),
             day: date.getDate()
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
@@ -24,7 +25,8 @@ define(function(require, exports, module) {
         
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
-            $('#begin,#end').val(now.year + '-' + now.month + '-' + now.day);
+            $('.end-input').val(now.year + '-' + now.month + '-' + now.day);
+            $('.begin-input').val(now.year + '-' + now.pmonth + '-' + now.day);
             this.initHead();
             this.sectionTable();
             this.initSection();
@@ -92,7 +94,7 @@ define(function(require, exports, module) {
           }
           var page = new jh.ui.page({
             data_container: $('#business_list_container'),
-            page_container: $('#page_clear_container'),
+            page_container: $('#page_business_container'),
             method: 'post',
             url: '/statistics/business/recommendTaskList',
             contentType: 'application/json',
