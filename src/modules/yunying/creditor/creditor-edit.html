@@ -1,0 +1,121 @@
+<div class="dataContent taskEditContent">
+  <div class="increated">
+    <form id="customer-editTask-form">
+    </form>
+  </div>
+</div>
+
+<script type="text/template" id="customer-editTask-template">
+  <div class="dialog-width officer-width">
+  <p class="pull-left detail_css">
+      任务记录编辑
+    </p>
+    <a href="javascript:;" class="button gobackPage goBack">返回</a>
+  <div class="clearfix"></div>
+  <hr /><br />
+  <div class="taskpull">
+    <p class="pull-left" style="border-right:1px dashed #ccc;width: 40%;">
+      <label class="big-label">任务类型</label><br /><br />
+      <select name="entrust" class="search-select required" style="border-color:#eee;outline: 0;" id="taskTypeFlags">
+        <option {{if data.entrust==='all' }}selected{{/if}} value="all">无定位需找+拖</option>
+        <option {{if data.entrust==='trace' }}selected{{/if}} value="trace">无定位只需找车</option>
+        <option {{if data.entrust==='recycle' }}selected{{/if}} value="recycle">有定位只需拖车</option>
+      </select>
+    </p>
+    <p class="pull-left" style="padding-left:50px;">
+      <sub style="font-size:24px;color:red;">*</sub><label class="big-label">债务人(车主)姓名</label>
+      <input type="text" style="width:220px;" class="search-input required" name="debtor" maxlength="10" placeholder="请输入债务人姓名" value="{{data.debtor}}"><br />
+      <label class="big-label">债务人(车主)身份证号</label>
+      <input type="text" style="width:220px;" class="search-input isIdCard" name="debtorIdNumber" maxlength="18" placeholder="请输入债务人身份证号" value="{{data.debtorIdNumber}}">
+    </p>
+  </div>
+  <div class="increateNewInfo">
+    <p class="carsInfo">车辆信息</p>
+    <div>
+      <label class="newlabel">车辆信息：</label>
+      <select name="carBrand" class="search-select public-select" id="customer-editTask-carBrand">
+        <option value="" data-id="">请选择品牌</option>
+      </select>
+      <input type="hidden" name="carBrandId" id="carBrandIds">
+      <select name="carSeries" class="search-select public-select" id="customer-editTask-carSeries">
+        <option value="" data-id="">请选择车系</option>
+      </select>
+      <input type="hidden" name="carSeriesId" id="carSeriesIds">
+      <select name="carModel" class="search-select public-select" id="customer-editTask-carModel">
+        <option value="" data-id="">请选择车型</option>
+      </select>
+      <input type="hidden" name="carModelId" id="carModelIds">
+    </div>
+    <div>
+      <label class="newlabel">车身颜色：</label>
+      <input type="text" class="search-input" name="carColor" maxlength="10" placeholder="请输入车辆颜色" value="{{data.carColor}}">
+      <label class="newlabel" style="margin-left:20px;width:70px;">定位区域：</label>
+      <input type="text" id="dwLocations" class="search-input" name="location" placeholder="请输入定位" value="{{data.location}}">
+    </div>
+    <div>
+      <label class="newlabel">车辆识别号：</label>
+      <input type="text" class="search-input" name="carId" minlength="6" maxlength="17" placeholder="请输入车辆识别号" value="{{data.carId}}">
+      <span style="color:#ffa500;">温馨提示：输入车架号，车辆被找回的可能性会大幅增加</span>
+    </div>
+
+    <div>
+      <label class="newlabel">车辆发动机号：</label>
+      <input type="text" class="search-input" name="engineId" minlength="6" maxlength="8" placeholder="请输入发动机号" value="{{data.engineId}}">
+      <span style="color:#ffa500;">温馨提示：输入发动机号，车辆被找回的可能性会大幅增加</span>
+    </div>
+    <div>
+      <sub style="font-size:24px;color:red;">*</sub><label>诉讼状态：</label>
+      <div>
+        <label for="">法院是否已立案</label>
+        <input type="radio" name="isFiling" value="1" {{if data.isFiling===1 }}checked{{/if}} />是
+        <input type="radio" name="isFiling" value="0" {{if data.isFiling===0 }}checked{{/if}} />否
+        <label style="margin-left:100px;">财产是否已保全</label>
+        <input type="radio" name="isPreser" value="1" {{if data.isPreser===1 }}checked{{/if}} />是
+        <input type="radio" name="isPreser" value="0" {{if data.isPreser===0 }}checked{{/if}} />否
+      </div>
+      <div>
+        <label for="">判决是否已生效</label>
+        <input type="radio" name="isEffect" value="1" {{if data.isEffect===1 }}checked{{/if}} />是
+        <input type="radio" name="isEffect" value="0" {{if data.isEffect===0 }}checked{{/if}} />否
+        <label style="margin-left:100px;">案件是否已执行</label>
+        <input type="radio" name="isExecute" value="1" {{if data.isExecute===1 }}checked{{/if}} />是
+        <input type="radio" name="isExecute" value="0" {{if data.isExecute===0 }}checked{{/if}} />否
+      </div>
+    </div>
+    <textarea name="remark" style="width:800px;height:80px;resize:none;" placeholder="此处填写您需要特别说明的备注信息" maxlength="50">{{data.remark}}</textarea>
+  </div>
+  <div class="upimg ordinary">
+    <div id="attachment">上传催收记录资料</div>
+    <br><br>
+    <div class="upload-list mt10">
+      {{each data.attachmentVoList item index}}
+      <div class="upfile-item">
+        <img class="preview-img" src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" />
+        <span class="delete-img"></span>
+        <input type="hidden" name="attachment" value="{{item.url}}" />
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  <div class="upimg ordinary courtDecision">
+    <div id="courtDecision">上传法院判决书</div>
+    <br><br>
+    <div class="upload-list">
+      {{each data.voucherVoList item index}}
+      <div class="upfile-item">
+        <img class="preview-img" src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" />
+        <span class="delete-img"></span>
+        <input type="hidden" name="courtDecision" value="{{item.url}}" />
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  </div>
+  <input type="submit" class="button" value="保存" />
+</script>
+<script type="text/javascript">
+  seajs.use('modules/yunying/creditor/creditor-edit', function(CreditorEdit) {
+    var CreditorEdit = new CreditorEdit();
+    CreditorEdit.init();
+  });
+</script>

@@ -1,0 +1,84 @@
+<div class="dataContent creditorTaskContent">
+  <div class="increated">
+    <form id="creditor-task-form">
+    </form>
+  </div>
+</div>
+
+<script type="text/template" id="creditor-taskDetail-template">
+  <div class="dialog-width officer-width">
+    <p class="pull-left detail_css">
+      任务记录详情
+    </p>
+    <a href="javascript:;" class="button gobackPage goBack">返回</a>
+    <p class="pull-right showTaskState">{{menuState(data.state)}}</p>
+    <div class="clearfix"></div>
+    <hr />
+    <br />
+    <p>基本信息</p>
+    <br />
+    <table>
+      <tr>
+        <th>任务号：</th>
+        <td>{{data.taskNo}}</td>
+        <th>任务类型：</th>
+        <td>{{menuState(data.entrust)}}</td>
+        <th>任务发起：</th>
+        <td>{{data.upstreamName}}</td>
+      </tr>
+      <tr>
+        <th>任务发布时间：</th>
+        <td>{{data.createAt}}</td>
+        <th>车牌号：</th>
+        <td>{{data.carNumber}}</td>
+        <th>车型：</th>
+        <td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+      </tr>
+      <tr>
+        <th>颜色：</th>
+        <td>{{data.carColor}}</td>
+        <th>车辆识别号：</th>
+        <td>{{data.carId}}</td>
+        <th>车辆发动机号：</th>
+        <td>{{data.engineId}}</td>
+      </tr>
+    </table>
+    <div>
+      <label>诉讼状态：</label>
+      <table>
+        <tr>
+          <th>法院是否已立案：</th>
+          <td>{{if data.isFiling === 1}}是{{else}}否{{/if}}</td>
+          <th>财产是否已保全：</th>
+          <td>{{if data.isPreser === 1}}是{{else}}否{{/if}}</td>
+        </tr>
+        <tr>
+          <th>判决是否已生效：</th>
+          <td>{{if data.isEffect === 1}}是{{else}}否{{/if}}</td>
+          <th>案件是否已执行：</th>
+          <td>{{if data.isExecute === 1}}是{{else}}否{{/if}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="remark">备注信息：{{data.remark}}</div>
+    {{if data.attachmentVoList.length!==0 }}
+    <div class="imgRecord" style="border:0;">
+      <p>催收记录资料</p>
+      {{each data.attachmentVoList item index}}
+      <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img"> {{/each}}
+    </div>
+    {{/if}} {{if data.voucherVoList.length!==0 }}
+    <div class="imgRecord" style="border:0;">
+      <p>凭证类资料</p>
+      {{each data.voucherVoList item index}}
+      <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img"> {{/each}}
+    </div>
+    {{/if}}
+  </div>
+</script>
+<script type="text/javascript">
+  seajs.use('modules/yunying/creditor/creditor-task-detail', function(CreditorTask) {
+    var CreditorTask = new CreditorTask();
+    CreditorTask.init();
+  });
+</script>

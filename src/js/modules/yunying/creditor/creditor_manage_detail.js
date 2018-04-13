@@ -341,6 +341,21 @@ define(function(require, exports, module) {
         var id = me.find('option:selected').data('id');
         $('#carModelId').val(id);
       });
+      
+//    任务记录详情
+      $('body').off('click', '.record-detail').on('click', '.record-detail', function() {
+        var tid = $(this).data('id');
+        jh.utils.load("/src/modules/yunying/creditorManager/creditor-task-detail", {
+            id: tid
+        })
+      });
+      //    任务记录编辑
+      $('body').off('click', '.record-distribution').on('click', '.record-distribution', function() {
+        var eid = $(this).data('id');
+        jh.utils.load("/src/modules/yunying/creditorManager/creditor-edit", {
+            id: eid
+        })
+      });
     };
   }
   module.exports = CreditorManageDetail;
