@@ -97,8 +97,8 @@ define(function(require, exports, module) {
             url: '/statistics/business/recommendTaskList',
             contentType: 'application/json',
             data: businessTwo,
-            jump: false,
             isSearch: isSearch,
+            jump: false,
             callback: function(data) {
               return jh.utils.template('business_content_template', data);
             }
@@ -161,12 +161,12 @@ define(function(require, exports, module) {
                 page_container: $('#page_container_two'),
                 method: 'post',
                 url: '/statistics/business/recommendTaskSort',
-                jump: false,
                 contentType: 'application/json',
                 data: {
                     yearMonth: obj.y + '-' + obj.M
                 },
                 isSearch: isSearch,
+                jump: false,
                 callback: function(data) {
                   return jh.utils.template('monthTwo_content_template', data);
                 }
