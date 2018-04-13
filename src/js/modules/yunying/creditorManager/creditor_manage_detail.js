@@ -201,23 +201,15 @@ define(function(require, exports, module) {
             var datas = jh.utils.formToJson(form);
             datas.carNumber = datas.carNumber_province + datas.add_carNumber;
 
-            //如果是个人则必须上传法院判决书
-            if (_this.userInfo.type === 'UPSTREAM_PERSONAL' && !datas.courtDecision) {
-              jh.utils.confirm({
-                content: '请上传法院判决书',
-              });
-              $(form).removeClass('disabled');
-              return false;
-            }
-
             if (!datas.attachment) {
               datas.attachment = [];
             }
+            if (!datas.courtDecision) {
+              datas.courtDecision = [];
+            }
 
             datas.attachment = jh.utils.isArray(datas.attachment) ? datas.attachment : [datas.attachment];
-            if (_this.userInfo.type === 'UPSTREAM_PERSONAL') {
-              datas.courtDecision = jh.utils.isArray(datas.courtDecision) ? datas.courtDecision : [datas.courtDecision];
-            }
+            datas.courtDecision = jh.utils.isArray(datas.courtDecision) ? datas.courtDecision : [datas.courtDecision];
 
 
             datas.upstreamId = args.id;
@@ -349,6 +341,21 @@ define(function(require, exports, module) {
         var me = $(this);
         var id = me.find('option:selected').data('id');
         $('#carModelId').val(id);
+      });
+      
+//    任务记录详情
+      $('body').off('click', '.record-detail').on('click', '.record-detail', function() {
+        var tid = $(this).data('id');
+        jh.utils.load("/src/modules/yunying/creditorManager/creditor-task-detail", {
+            id: tid
+        })
+      });
+      //    任务记录编辑
+      $('body').off('click', '.record-distribution').on('click', '.record-distribution', function() {
+        var eid = $(this).data('id');
+        jh.utils.load("/src/modules/yunying/creditorManager/creditor-edit", {
+            id: eid
+        })
       });
     };
   }
