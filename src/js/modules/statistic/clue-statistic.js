@@ -16,7 +16,7 @@ define(function(require, exports, module) {
     };
     now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
     now.day = now.day.toString().length === 1 ? '0' + now.day : now.day; //日期两位数
-
+    $('#breadCrumb').text('首页>业务管理>线索管理');
     this.init = function() {
       $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput,#traceInput,#recoveryInput').val(now.year + '-' + now.month);
       this.initHead();

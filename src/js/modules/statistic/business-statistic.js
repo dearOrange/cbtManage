@@ -22,7 +22,7 @@ define(function(require, exports, module) {
         _this.traceValue = '';
         _this.traceName = '';
         _this.traceId = '';
-        
+        $('#breadCrumb').text('首页 > 业务管理 > 商务统计');
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
             $('.end-input').val(now.year + '-' + now.month + '-' + now.day);
@@ -60,7 +60,8 @@ define(function(require, exports, module) {
                   var businessobj = {};
                   _this.businessName.push(businessCount[a].name);
                   businessobj.value = businessCount[a].countEach;
-                  businessobj.name = businessCount[a].name;
+                  _this.value = businessCount[a].countEach;
+                  businessobj.name = businessCount[a].name + ' （商务）';
                   businessobj.id = businessCount[a].id;
                   _this.businessCount.push(businessobj);
                 }
@@ -142,7 +143,7 @@ define(function(require, exports, module) {
               calculable : true,
               series : [
                   {
-                      name:'发展债权方数量',
+                      name:'发展债权方数量：' + _this.value,
                       type:'pie',
                       radius : '55%',
                       center: ['50%', '60%'],

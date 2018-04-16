@@ -18,7 +18,7 @@ define(function(require, exports, module) {
         
         _this.entrust = '';
         _this.dates = '';
-        
+        $('#breadCrumb').text('首页>业务管理>任务统计');
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
             this.initHead();

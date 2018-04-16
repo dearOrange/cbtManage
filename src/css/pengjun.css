@@ -199,7 +199,37 @@
     background: url(../img/changepwd.png) no-repeat center;
     background-size: cover;
 }
-
+.icontis {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.icontis.icon-business {
+  background: url(../img/business.png) no-repeat center;
+  background-size: cover;
+}
+.icontis.icon-task {
+  background: url(../img/task.png) no-repeat center;
+  background-size: cover;
+}
+.icontis.icon-channel {
+  background: url(../img/channel.png) no-repeat center;
+  background-size: cover;
+}
+.icontis.icon-clues {
+  background: url(../img/clues.png) no-repeat center;
+  background-size: cover;
+}
+.icontis.icon-hunter {
+  background: url(../img/hunter.png) no-repeat center;
+  background-size: cover;
+}
+.icontis.icon-informer {
+  background: url(../img/informer.png) no-repeat center;
+  background-size: cover;
+}
 
 /*任务详情*/
 
@@ -327,26 +357,10 @@ p.closeStatus {
 .dataContent .data-container .clue-right-layout {
   width:35%;
 }
-.dataContent .data-container ul.echarts-list {
-    width: 100%;
-    height: 220px;
-    margin-top: 10px;
-}
 .dataContent .data-container ul#clue-echarts-list {
   height:126px;
   margin-top: 10px;
 }
-
-.dataContent .data-container ul.echarts-list li {
-    width: 19%;
-    float: left;
-    height: 168px;
-    background: #fff;
-    margin: 20px 2% 0 0;
-    padding: 10px 2%;
-    box-shadow: 0px -3px 18px -2px #b5b5b5;
-}
-
 .dataContent .data-container ul#clue-echarts-list li {
   height:86px;
   width: 27.3%;
@@ -355,6 +369,32 @@ p.closeStatus {
   margin: 20px 2% 0 0;
   padding: 10px 2%;
   box-shadow: 0px -3px 18px -2px #b5b5b5;
+}
+.total_task_statistic {
+  display: inline-block;
+  width:4px;
+  height:12px;
+  margin-right:4px;
+}
+.day_number {
+  background:greenyellow;
+}
+.month_number {
+  background:red;
+}
+.total_monthNum {
+  display: inline-block;
+  width:12px;
+  height:12px;
+  margin-left:4px;
+}
+.month_upnumber {
+  background: url(../img/upjian.png) no-repeat center;
+  background-size: cover;
+}
+.month_downnumber {
+  background: url(../img/downjian.png) no-repeat center;
+  background-size: cover;
 }
 .dataContent .data-container ul.echarts-list li p {
     margin-top: 10px;
@@ -679,4 +719,7 @@ form#new-increate-award-form table input, form#increate-creditor-award-form tabl
 .informer_hunter i.infoHun_sum {
   color:#f00;
   font-size:18px;
+}
+.hunter_name {
+  margin-left:150px;
 }

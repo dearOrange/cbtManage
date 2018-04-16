@@ -19,7 +19,7 @@ define(function(require, exports, module) {
         
         var infoChart = null;
         _this.data = '';
-
+        $('#breadCrumb').text('首页>业务管理>线人统计');
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput').val(now.year + '-' + now.month);
             $('#entrustTimeInput').val(now.year + '-' + now.month + '-' + now.day);
@@ -192,7 +192,7 @@ define(function(require, exports, module) {
                     type: 'continuous',
                     min: 0,
                     max: 10000,
-                    text:['High','Low'],
+                    text:['高','低'],
                     realtime: false,
                     calculable: true,
                     inRange: {
@@ -263,7 +263,7 @@ define(function(require, exports, module) {
               calculable : true,
               series : [
                   {
-                      name:'访问来源',
+                      name:'发展线人数',
                       type:'pie',
                       radius : '55%',
                       center: ['50%', '60%'],

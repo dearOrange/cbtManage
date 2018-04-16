@@ -50,8 +50,8 @@
   <li>
     <table>
       <tr>
-        <th>今日任务</th>
-        <th>环比昨日</th>
+        <th><span class="total_task_statistic day_number"></span>今日任务</th>
+        <th>环比昨日<span class="total_monthNum {{if task.dayChainChange < 0}}month_downnumber{{else}}month_upnumber{{/if}}"></span></th>
       </tr>
       <tr>
         <td>{{task.dayAdded}}</td>
@@ -62,8 +62,8 @@
   <li>
     <table>
       <tr>
-        <th>本月任务</th>
-        <th>环比上月</th>
+        <th><span class="total_task_statistic month_number"></span>本月任务</th>
+        <th></span>环比上月<span class="total_monthNum  {{if task.monthChainChange < 0}}month_downnumber{{else}}month_upnumber{{/if}}"></th>
       </tr>
       <tr>
         <td>{{task.monthAdded}}</td>

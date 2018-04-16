@@ -19,7 +19,7 @@ define(function(require, exports, module) {
     
     var hunterChart = null;
     _this.data = '';
- 
+    $('#breadCrumb').text('首页>业务管理>捕头统计');
     this.init = function() {
       $('#infoTimeInput').val(now.year + '-' + now.month);
       $('#entrustTimeInput').val(now.year + '-' + now.month + '-' + now.day);
@@ -193,7 +193,7 @@ define(function(require, exports, module) {
               type: 'continuous',
               min: 0,
               max: 10000,
-              text:['High','Low'],
+              text:['高','低'],
               realtime: false,
               calculable: true,
               inRange: {
