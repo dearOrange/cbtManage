@@ -55,9 +55,9 @@ define(function(require, exports, module) {
                 var channelOne = returnData.data;
                 for (var a = 0; a < channelOne.length; a++) {
                   var channelobj = {};
-                  _this.channelInformerName.push(channelOne[a].name);
+                  _this.channelInformerName.push(channelOne[a].name + '(渠道名称)');
                   channelobj.value = channelOne[a].countEach;
-                  channelobj.name = channelOne[a].name;
+                  channelobj.name = channelOne[a].name + '(渠道名称)';
                   channelobj.id = channelOne[a].id;
                   _this.channelInformerCount.push(channelobj);
                 }

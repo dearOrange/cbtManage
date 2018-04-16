@@ -58,10 +58,10 @@ define(function(require, exports, module) {
                 var businessCount = returnData.data;
                 for (var a = 0; a < businessCount.length; a++) {
                   var businessobj = {};
-                  _this.businessName.push(businessCount[a].name);
+                  _this.businessName.push(businessCount[a].name + ' （商务名称）');
                   businessobj.value = businessCount[a].countEach;
                   _this.value = businessCount[a].countEach;
-                  businessobj.name = businessCount[a].name + ' （商务）';
+                  businessobj.name = businessCount[a].name + ' （商务名称）';
                   businessobj.id = businessCount[a].id;
                   _this.businessCount.push(businessobj);
                 }
