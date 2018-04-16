@@ -122,6 +122,19 @@ define(function(require, exports, module) {
           }
         });
         page.init();
+        
+        jh.utils.ajax.send({
+          method: 'post',
+          url: '/statistics/downstream/distributionTotal',
+          contentType: 'application/json',
+          data: {
+              role: 'type_B',
+              province: province
+          },
+          done: function(returnData) {
+              $('infoHun_sum').html(returnData.data.rangeTotal);
+          }
+        });
     }
     
     this.sectionTable = function() {
@@ -146,9 +159,9 @@ define(function(require, exports, module) {
             {
                 type : 'category',
                 data : _this.hunterMonths,
-                axisLabel: {
-                  rotate: 60
-                },
+//              axisLabel: {
+//                rotate: 60
+//              },
                 axisTick: {
                     alignWithLabel: true
                 }

@@ -68,7 +68,7 @@
 					<th width="10%">全车背景照</th>
 					<th width="6%">姓名</th>
 					<th width="6%">类型</th>
-					<th width="8%">所属公司</th>
+					<th width="8%">联系电话</th>
 					<th width="12%">GPS定位</th>
 					<th width="12%">线索照片拍摄地/时间</th>
 					<th class="clueMatch" width="8%">匹配任务号</th>
@@ -95,7 +95,7 @@
 		</td>
 		<td>{{item.name}}</td>
 		<td>{{if item.role === 'type_A'}}线人{{else}}捕头{{/if}}</td>
-		<td>{{item.company}}</td>
+		<td>{{item.phone}}</td>
 		<td>{{item.location}}</td>
 		<td>
 			<p id="{{item.carPhoto}}">{{getPositionByImage(item.carPhoto)}}</p>

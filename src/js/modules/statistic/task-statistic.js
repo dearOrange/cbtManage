@@ -116,9 +116,9 @@ define(function(require, exports, module) {
                 xAxis: [
                     {
                         type : 'category',
-                        axisLabel: {
-                          rotate: 60
-                        },
+//                      axisLabel: {
+//                        rotate: 60
+//                      },
                         data : _this.trendDaysAll
                     }
                 ],

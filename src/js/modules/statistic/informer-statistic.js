@@ -116,11 +116,23 @@ define(function(require, exports, module) {
                 province: province
             },
             callback: function(data) {
-              $('.infoHun_sum').text(data.list[0].count);
               return jh.utils.template('informer_ranking_template', data);
             }
           });
           page.init();
+          
+          jh.utils.ajax.send({
+            method: 'post',
+            url: '/statistics/downstream/distributionTotal',
+            contentType: 'application/json',
+            data: {
+                role: 'type_A',
+                province: province
+            },
+            done: function(returnData) {
+                $('infoHun_sum').html(returnData.data.rangeTotal);
+            }
+          });
         }
         
         this.sectionTable = function() {
@@ -145,9 +157,9 @@ define(function(require, exports, module) {
                     {
                         type : 'category',
                         data : _this.informerMonths,
-                        axisLabel: {
-                          rotate: 60
-                        },
+//                      axisLabel: {
+//                        rotate: 60
+//                      },
                         axisTick: {
                             alignWithLabel: true
                         }
@@ -179,7 +191,7 @@ define(function(require, exports, module) {
                 visualMap: {
                     type: 'continuous',
                     min: 0,
-                    max: 2000,
+                    max: 10000,
                     text:['High','Low'],
                     realtime: false,
                     calculable: true,
@@ -189,7 +201,7 @@ define(function(require, exports, module) {
                 },
                 series : [
                     {
-                        name: '2011全国GDP分布',
+                        name: '线人数量',
                         type: 'map',
                         mapType: 'china',
                         selectedMode : 'single',
@@ -201,37 +213,37 @@ define(function(require, exports, module) {
                             emphasis:{label:{show:true}}
                         },
                         data:[
-                            {name:'西藏', value: 1000},
-                            {name:'青海', value: 800},
-                            {name:'宁夏', value: 300},
-                            {name:'海南'},
-                            {name:'甘肃'},
-                            {name:'贵州'},
-                            {name:'新疆'},
-                            {name:'云南'},
-                            {name:'重庆'},
-                            {name:'吉林'},
-                            {name:'山西'},
-                            {name:'天津'},
-                            {name:'江西'},
-                            {name:'广西'},
-                            {name:'陕西'},
-                            {name:'黑龙江'},
-                            {name:'内蒙古'},
-                            {name:'安徽'},
-                            {name:'北京'},
-                            {name:'福建'},
-                            {name:'上海'},
-                            {name:'湖北'},
-                            {name:'湖南'},
-                            {name:'四川'},
-                            {name:'辽宁'},
-                            {name:'河北'},
-                            {name:'河南'},
-                            {name:'浙江'},
-                            {name:'山东'},
-                            {name:'江苏'},
-                            {name:'广东'}
+                          {name:'西藏', value:60},
+                          {name:'青海', value:167},
+                          {name:'宁夏', value:210},
+                          {name:'海南', value:252},
+                          {name:'甘肃', value:502},
+                          {name:'贵州', value:570},
+                          {name:'新疆', value:661},
+                          {name:'云南', value:889},
+                          {name:'重庆', value:1001},
+                          {name:'吉林', value:1056},
+                          {name:'山西', value:1123},
+                          {name:'天津', value:1130},
+                          {name:'江西', value:1170},
+                          {name:'广西', value:1172},
+                          {name:'陕西', value:1251},
+                          {name:'黑龙江', value:1258},
+                          {name:'内蒙古', value:1435},
+                          {name:'安徽', value:1530},
+                          {name:'北京', value:1625},
+                          {name:'福建', value:1756},
+                          {name:'上海', value:1919},
+                          {name:'湖北', value:1963},
+                          {name:'湖南', value:1966},
+                          {name:'四川', value:2102},
+                          {name:'辽宁', value:2222},
+                          {name:'河北', value:2451},
+                          {name:'河南', value:2693},
+                          {name:'浙江', value:3231},
+                          {name:'山东', value:4536},
+                          {name:'江苏', value:4911},
+                          {name:'广东', value:5321}
                         ]
                     }
                 ],

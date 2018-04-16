@@ -151,9 +151,9 @@ define(function(require, exports, module) {
         calculable: true,
         xAxis: [{
           type: 'category',
-          axisLabel: {
-            rotate: 60
-          },
+//        axisLabel: {
+//          margin: 25
+//        },
           data: _this.trendDaysOne
         }],
         yAxis: [{
@@ -177,9 +177,9 @@ define(function(require, exports, module) {
         calculable: true,
         xAxis: [{
           type: 'category',
-          axisLabel: {
-            rotate: 60
-          },
+//        axisLabel: {
+//          margin: 25
+//        },
           data: _this.downDaysOne
         }],
         yAxis: [{
@@ -212,7 +212,7 @@ define(function(require, exports, module) {
         xAxis: [{
           type: 'category',
           axisLabel: {
-            rotate: 60
+            margin: 25
           },
           data: _this.carDaysOne
         }],
@@ -235,7 +235,7 @@ define(function(require, exports, module) {
                 }
               }
             },
-            data: _this.carCountTwo
+            data: _this.carCountOne
           },
           {
             name: '线索总数',
@@ -255,7 +255,7 @@ define(function(require, exports, module) {
                 }
               }
             },
-            data: _this.carCountOne
+            data: _this.carCountTwo
           }
         ]
       });

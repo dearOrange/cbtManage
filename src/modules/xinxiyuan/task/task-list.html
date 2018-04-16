@@ -31,63 +31,77 @@
     </form>
   </div>
   <div class="data-container">
-    <table class="dataShow">
-      <thead>
-        <tr>
-          <th width="4%">序号</th>
-          <th width="2%">
-            <input type="checkbox" id="checkAll" />
-          </th>
-          <th class="taskNumber" width="9%">任务号</th>
-          <th width="6%">车牌号</th>
-          <th width="6%">品牌</th>
-          <th width="8%">车系</th>
-          <th width="10%">债权方</th>
-          <th class="textCon" width="10%">匹配成功时间</th>
-          <th width="6%">任务状态</th>
-          <th class="taskContain hide" width="8%">残值</th>
-          <th class="taskContain hide" width="8%">任务类型</th>
-          <th class="taskContain hide" width="10%">违章地区</th>
-          <th class="taskContain hide" width="10%">违章时间</th>
-          <th width="15%">操作</th>
-        </tr>
-      </thead>
-      <tbody id="task_list_container">
-      </tbody>
+    <table class="dataShow" id='taskTableCon'>
+      <tr>
+        <td><img src="/src/img/loading.gif" alt="拼命加载数据中..." class="loading-img"/></td>
+      </tr>
     </table>
     <div class="page-box pagination" id="page_container"></div>
   </div>
 </div>
 <script type="text/template" id="taskList_content_template">
-  {{ each list item index }}
-  <tr class="trData">
-    <td>{{index+1}}</td>
-    <td>
-      <input type="checkbox" value="{{item.id}}" data-id="{{item.id}}" name="taskIds" />
-    </td>
-    {{if passState !='1' && passState !='2'}}
-    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.taskNo}}</td>
-    {{/if}}
-    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.carNumber}}</td>
-    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.carBrand}}</td>
-    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.carSeries}}</td>
-    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.upstreamName}}</td>
-    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{if passState === '6'}}{{item.matchAt}}{{else}}{{item.createAt}}{{/if}}</td>
-    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{menuState(item.state)}}</td>
-    {{if passState == '1' || passState == '2'}}
-    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.carPrice}}</td>
-    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{menuState(item.entrust)}}</td>
-    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.city}}</td>
-    <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.occurAt}}</td>
-    {{/if}}
-    <td>
-      <a data-id="{{item.id}}" class="taskList-detail button">详情</a>
-      {{if passState =='1' || passState =='2' }}
-      <a data-id="{{item.id}}" class="closeTask oneStyle button">关闭任务</a>
+  <thead>
+    <tr>
+      <th width="4%">序号</th>
+      <th width="2%">
+        <input type="checkbox" id="checkAll" />
+      </th>
+      {{if passState !='1' && passState !='2'}}
+      <th width="9%">任务号</th>
       {{/if}}
-    </td>
-  </tr>
-  {{/each}}
+      <th width="6%">车牌号</th>
+      <th width="6%">品牌</th>
+      <th width="8%">车系</th>
+      <th width="10%">债权方</th>
+      {{if passState == '7' }}
+      <th width="6%">任务发布时间</th>
+      {{else}}
+      <th class="textCon" width="10%">匹配成功时间</th>
+      <th width="6%">任务状态</th>
+      {{/if}} {{if passState == '1' || passState == '2'}}
+      <th width="8%">残值</th>
+      <th width="8%">任务类型</th>
+      <th width="10%">违章地区</th>
+      <th width="10%">违章时间</th>
+      {{/if}}
+      <th width="15%">操作</th>
+    </tr>
+  </thead>
+  <tbody id="task_list_container">
+    {{ each list item index }}
+    <tr class="trData">
+      <td>{{index+1}}</td>
+      <td>
+        <input type="checkbox" value="{{item.id}}" data-id="{{item.id}}" name="taskIds" />
+      </td>
+      {{if passState !='1' && passState !='2'}}
+      <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.taskNo}}</td>
+      {{/if}}
+      <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.carNumber}}</td>
+      <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.carBrand}}</td>
+      <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.carSeries}}</td>
+      <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.upstreamName}}</td>
+      {{if passState=='7' }}
+      <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.createAt}}</td>
+      {{else}}
+      <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{if passState === '6'}}{{item.matchAt}}{{else}}{{item.createAt}}{{/if}}</td>
+      <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{menuState(item.state)}}</td>
+      {{/if}} {{if passState == '1' || passState == '2'}}
+      <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.carPrice}}</td>
+      <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{menuState(item.entrust)}}</td>
+      <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.city}}</td>
+      <td {{if passState=='1' }}class="showTr" {{/if}} data-info="{{item}}">{{item.occurAt}}</td>
+      {{/if}}
+      <td>
+        <a data-id="{{item.id}}" class="taskList-detail button">详情</a>
+        {{if passState =='1' || passState =='2' }}
+        <a data-id="{{item.id}}" class="closeTask oneStyle button">关闭任务</a>
+        {{/if}}
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+
 </script>
 <script type="text/template" id="searchIllegalInfo-template">
   <div>
@@ -139,19 +153,19 @@
 </script>
 <!-- 未审核筛选 -->
 <script type="text/template" id="unAudit-template">
-<tr class="new-style">
-  <td class="newTaskTd">
-    <label class="label">债权方：</label>
-    <input type="text" class="search-input" name="companyName">
-  </td>
-  <td>
-    <label class="label">车牌号：</label>
-    <input type="text" class="search-input" name="carNumber" maxlength="7">
-  </td>
-  <td>
-    <input type="submit" value="查询" class="button search-button">
-  </td>
-</tr>
+  <tr class="new-style">
+    <td class="newTaskTd">
+      <label class="label">债权方：</label>
+      <input type="text" class="search-input" name="companyName">
+    </td>
+    <td>
+      <label class="label">车牌号：</label>
+      <input type="text" class="search-input" name="carNumber" maxlength="7">
+    </td>
+    <td>
+      <input type="submit" value="查询" class="button search-button">
+    </td>
+  </tr>
 </script>
 <!-- 其他筛选 -->
 <script type="text/template" id="otherMatch-template">
@@ -211,8 +225,8 @@
   </tr>
 </script>
 <script type="text/javascript">
-seajs.use('modules/xinxiyuan/task/task-list', function(TaskList) {
-  var taskList = new TaskList();
-  taskList.init();
-});
+  seajs.use('modules/xinxiyuan/task/task-list', function(TaskList) {
+    var taskList = new TaskList();
+    taskList.init();
+  });
 </script>
