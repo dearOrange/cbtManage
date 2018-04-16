@@ -130,7 +130,7 @@ define(function(require, exports, module) {
                 province: province
             },
             done: function(returnData) {
-                $('infoHun_sum').html(returnData.data.rangeTotal);
+                $('.infoHun_sum').html(returnData.data.rangeTotal);
             }
           });
         }

@@ -142,7 +142,7 @@ define(function(require, exports, module) {
               calculable : true,
               series : [
                   {
-                      name:'访问来源',
+                      name:'发展债权方数量',
                       type:'pie',
                       radius : '55%',
                       center: ['50%', '60%'],

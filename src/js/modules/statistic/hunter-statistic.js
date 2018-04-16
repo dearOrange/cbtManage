@@ -117,7 +117,6 @@ define(function(require, exports, module) {
           },
           isSearch: true,
           callback: function(data) {
-            $('.infoHun_sum').text(data.list[0].count);
             return jh.utils.template('ranking_content_template', data);
           }
         });
@@ -132,7 +131,7 @@ define(function(require, exports, module) {
               province: province
           },
           done: function(returnData) {
-              $('infoHun_sum').html(returnData.data.rangeTotal);
+              $('.infoHun_sum').html(returnData.data.rangeTotal);
           }
         });
     }
@@ -203,6 +202,7 @@ define(function(require, exports, module) {
           },
           series : [
               {
+                  name: '捕头数量',
                   type: 'map',
                   mapType: 'china',
                   selectedMode : 'single',

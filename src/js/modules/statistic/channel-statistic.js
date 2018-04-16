@@ -9,6 +9,7 @@ define(function(require, exports, module) {
     function ChannelStatistic() {
         var _this = this;
         _this.role = 'type_A';
+        _this.name = '发展线人数量';
         var pieCharts = null;
         var date = new Date();
         var now = {
@@ -127,7 +128,7 @@ define(function(require, exports, module) {
               calculable : true,
               series : [
                   {
-                      name:'访问来源',
+                      name:_this.name,
                       type:'pie',
                       radius : ['50%', '70%'],
                       itemStyle : {
@@ -202,6 +203,13 @@ define(function(require, exports, module) {
       
               } else {
                 _this.initHead('tab');
+              }
+              if(_this.role === 'type_A') {
+                _this.name = "发展线人数量";
+                $('.developPeople').html('发展线人数月度排名');
+              }else {
+                _this.name = "发展捕头数量";
+                $('.developPeople').html('发展捕头数月度排名');
               }
             })
             pieCharts.on('click', function(p) {
