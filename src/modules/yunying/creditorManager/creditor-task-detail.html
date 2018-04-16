@@ -61,6 +61,23 @@
       </table>
     </div>
     <div class="remark">备注信息：{{data.remark}}</div>
+    <div class="upmainfile">
+      <p>违章信息修复</p>
+      <div>
+        <table class="pull-left">
+          <thead>
+            <th>序号</th>
+            <th>车牌号</th>
+            <th>内容</th>
+            <th>修复地点</th>
+            <th>修复城市</th>
+            <th>信息修复时间</th>
+          </thead>
+          <tbody id="task_detail_wzInfoList"></tbody>
+        </table>
+        <div class="page-box pagination" id="page_container"></div>
+      </div>
+    </div>
     {{if data.attachmentVoList.length!==0 }}
     <div class="imgRecord" style="border:0;">
       <p>催收记录资料</p>
@@ -75,6 +92,18 @@
     </div>
     {{/if}}
   </div>
+</script>
+<script type="text/template" id="task_detail_wzInfoTemplate">
+  {{each list item index}}
+  <tr>
+    <td>{{index+1}}</td>
+    <td>{{item.carNumber}}</td>
+    <td>{{item.desc}}</td>
+    <td>{{item.site}}</td>
+    <td>{{item.city}}</td>
+    <td>{{item.occurAt}}</td>
+  </tr>
+  {{/each}}
 </script>
 <script type="text/javascript">
   seajs.use('modules/yunying/creditorManager/creditor-task-detail', function(CreditorTask) {
