@@ -22,24 +22,28 @@ define(function(require, exports, module) {
         _this.traceValue = '';
         _this.traceName = '';
         _this.traceId = '';
-        $('#breadCrumb').text('首页 > 业务管理 > 商务统计');
+        
         this.init = function() {
-            $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
-            $('.end-input').val(now.year + '-' + now.month + '-' + now.day);
-            $('.begin-input').val(now.year + '-' + now.pmonth + '-' + now.day);
-            this.initHead();
-            this.sectionTable();
-            this.initSection();
-            window.initContent('2018-01', true);
-            window.initClear('2018-01', true);
-            this.registerEvent();
+          $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
+          $('.end-input').val(now.year + '-' + now.month + '-' + now.day);
+          $('.begin-input').val(now.year + '-' + now.pmonth + '-' + now.day);
+          this.initHead();
+          this.sectionTable();
+          this.initSection();
+          window.initContent('2018-01', true);
+          window.initClear('2018-01', true);
+          this.registerEvent();
+          setTimeout(function(){
+            jh.utils.changeText($('#breadCrumb'),'首页 > 业务统计 > 商务统计');
+          },0)
         };
         
-//      商务发展债权方统计  
+        //      商务发展债权方统计  
         this.initHead = function(isSearch) {
           var businessOne = jh.utils.formToJson($('#business-info-form'));
           _this.businessName = [];
           _this.businessCount = [];
+          _this.flag = true;
           if(businessOne.begin == '' && businessOne.end != '' || businessOne.begin != '' && businessOne.end == '') {
             jh.utils.alert({
               content: '请将日期填写完整',
@@ -64,12 +68,17 @@ define(function(require, exports, module) {
                   businessobj.name = businessCount[a].name + ' （商务名称）';
                   businessobj.id = businessCount[a].id;
                   _this.businessCount.push(businessobj);
+                  if (businessCount.length == 1 && businessobj.value == 0) {
+                    _this.flag = false;
+                  }else {
+                    _this.flag = true;
+                  }
                 }
                 _this.sectionTable();
               }
           });
           
-//        商务经理
+          //        商务经理
           jh.utils.ajax.send({
             url: '/operator/getAllBusiness',
             done: function(returnData) {
@@ -83,7 +92,7 @@ define(function(require, exports, module) {
             }
           });
         };
-//      商务列表
+        //      商务列表
         this.initSection = function(isSearch) {
           var businessTwo = jh.utils.formToJson($('#business-list-form'));
           if(businessTwo.begin == '' && businessTwo.end != '' || businessTwo.begin != '' && businessTwo.end == '') {
@@ -108,7 +117,7 @@ define(function(require, exports, module) {
           });
           page.init();
         }
-//      下线列表
+        //      下线列表
         this.initOnline = function(id) {
           var online = jh.utils.formToJson($('#business-info-form'));
           online.id = id;
@@ -135,26 +144,41 @@ define(function(require, exports, module) {
                   formatter: "{a} <br/>{b} : {c} ({d}%)"
               },
               legend: {
-                  orient : 'vertical',
-                  x : 'left',
-                  data: _this.businessName
+                orient : 'vertical',
+                x : 'left',
+                selectedMode: false,
+                data: _this.businessName
               },
               
               calculable : true,
               series : [
                   {
-                      name:'发展债权方数量：' + _this.value,
-                      type:'pie',
-                      radius : '55%',
-                      center: ['50%', '60%'],
-                      data: _this.businessCount
+                    name:'发展债权方数量：' + _this.value,
+                    type:'pie',
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    stillShowZeroSum: _this.flag,
+                    itemStyle : {
+                      normal : {
+                        label : {
+                            show : _this.flag
+                        },
+                        labelLine : {
+                            show : _this.flag
+                        }
+                      }
+                    },
+                    data: _this.businessCount
                   }
-              ]
+              ],
+              noDataLoadingOption: {
+                text: '暂无数据'
+              }
           });
           pieCharts = mainCarNum;
 
         };
-//      月度排名2
+        //      月度排名2
         window.initContent = function(obj, isSearch) {
             obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
@@ -176,7 +200,7 @@ define(function(require, exports, module) {
             });
             page.init();
         };
-//      月度排名1
+        //      月度排名1
         window.initClear = function(obj, isSearch) {
             obj = typeof obj !== 'object' ? { y: now.year, M: now.month } : obj; //是否为第一次查询
             obj.M = obj.M.toString().length === 1 ? '0' + obj.M : obj.M; //月份两位数
@@ -202,7 +226,7 @@ define(function(require, exports, module) {
         this.registerEvent = function() {
             
             pieCharts.on('click', function(p) {
-//            console.log(p);//p为点击的地图对象，p.data为传入地图的data数据
+            //            console.log(p);//p为点击的地图对象，p.data为传入地图的data数据
               var showOnline = jh.utils.template('business_statistic_template');
               $('#showTable').html(showOnline);
               _this.initOnline(p.data.id);
@@ -228,7 +252,7 @@ define(function(require, exports, module) {
                     return false;
                 }
             });
-//          查看下线数
+            //          查看下线数
             $('body').off('click', '.find_develop_num').on('click', '.find_develop_num', function() {
               var developId = $(this).data('id');
               jh.utils.ajax.send({

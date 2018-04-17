@@ -10,6 +10,7 @@ define(function(require, exports, module) {
         var _this = this;
         _this.role = 'type_A';
         _this.name = '发展线人数量';
+        _this.flag = true;
         var pieCharts = null;
         var date = new Date();
         var now = {
@@ -20,7 +21,7 @@ define(function(require, exports, module) {
         };
         now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
         now.day = now.day.toString().length === 1 ? '0' + now.day : now.day; //日期两位数
-        $('#breadCrumb').text('首页>业务管理>渠道统计');
+      
         this.init = function() {
             $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput').val(now.year + '-' + now.month);
             $('.end-input').val(now.year + '-' + now.month + '-' + now.day);
@@ -30,6 +31,9 @@ define(function(require, exports, module) {
             this.initSection();
             window.initContent('2018-01', true);
             this.registerEvent();
+            setTimeout(function(){
+              jh.utils.changeText($('#breadCrumb'),'首页>业务统计>渠道统计');
+            },0)
         };
 
         //开头数据
@@ -60,6 +64,11 @@ define(function(require, exports, module) {
                   channelobj.name = channelOne[a].name + '(渠道名称)';
                   channelobj.id = channelOne[a].id;
                   _this.channelInformerCount.push(channelobj);
+                  if (channelOne.length == 1 && channelobj.value == 0) {
+                    _this.flag = false;
+                  }else {
+                    _this.flag = true;
+                  }
                 }
                 _this.sectionTable();
               }
@@ -123,6 +132,7 @@ define(function(require, exports, module) {
               legend: {
                   orient : 'vertical',
                   x : 'left',
+                  selectedMode: false,
                   data:_this.channelInformerName
               },
               calculable : true,
@@ -131,13 +141,24 @@ define(function(require, exports, module) {
                       name:_this.name,
                       type:'pie',
                       radius : ['50%', '70%'],
+                      stillShowZeroSum: _this.flag,
+                      itemStyle : {
+                        normal : {
+                          label : {
+                              show : _this.flag
+                          },
+                          labelLine : {
+                              show : _this.flag
+                          }
+                        }
+                      },
                       itemStyle : {
                           normal : {
                               label : {
-                                  show : false
+                                  show : _this.flag
                               },
                               labelLine : {
-                                  show : false
+                                  show : _this.flag
                               }
                           },
                           emphasis : {

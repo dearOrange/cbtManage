@@ -10,7 +10,7 @@ define(function(require, exports, module) {
         var _this = this;
         
         this.init = function() {
-            this.initHead();
+          this.initHead();
         };
 
         //开头数据

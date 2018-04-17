@@ -716,6 +716,7 @@ define(function(require, exports, module) {
           }
           txt = '首页 > ' + txt;
           breadCrumb.text(txt);
+          
           if (!breadParnet.is(':visible')) {
             breadParnet.show();
           }
@@ -725,6 +726,14 @@ define(function(require, exports, module) {
     };
     tammy.utils.showHTML = showHTML;
   })();
+  
+(function() {
+  var breadCrumb = function(obj, str) {
+    obj.text(str)
+  }
+  tammy.utils.changeText = breadCrumb;
+})();
+  
 
   /**
    * 加载页面

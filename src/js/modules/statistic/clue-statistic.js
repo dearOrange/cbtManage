@@ -16,7 +16,7 @@ define(function(require, exports, module) {
     };
     now.month = now.month.toString().length === 1 ? '0' + now.month : now.month; //月份两位数
     now.day = now.day.toString().length === 1 ? '0' + now.day : now.day; //日期两位数
-    $('#breadCrumb').text('首页>业务管理>线索管理');
+
     this.init = function() {
       $('#infoTimeInput,#carRecoveryInput,#entrustTimeInput,#traceInput,#recoveryInput').val(now.year + '-' + now.month);
       this.initHead();
@@ -27,6 +27,9 @@ define(function(require, exports, module) {
       window.initClueSort('2018-01', true);
       window.initPassSort('2018-01', true);
       this.registerEvent();
+      setTimeout(function(){
+        jh.utils.changeText($('#breadCrumb'),'首页>业务统计>线索管理');
+      },0)
     };
 
     //开头数据
@@ -68,6 +71,20 @@ define(function(require, exports, module) {
           _this.sectionTable();
         }
       });
+      
+      jh.utils.ajax.send({
+        method: 'post',
+        url: '/statistics/general/total',
+        contentType: 'application/json',
+        data: {
+          type: 'traceTotal',
+          yearMonth: obj.y + '-' + obj.M
+        },
+        isSearch: isSearch,
+        done: function(returnData) {
+          $('.clue_statistic_sum').html(returnData.data.traceTotal)
+        }
+      });
     };
     //      线索匹配统计
     window.initClueSort = function(obj, isSearch) {
@@ -99,6 +116,20 @@ define(function(require, exports, module) {
             _this.carCountTwo.push(carTwo[k].count);
           }
           _this.sectionTable();
+        }
+      });
+      
+      jh.utils.ajax.send({
+        method: 'post',
+        url: '/statistics/general/total',
+        contentType: 'application/json',
+        data: {
+          type: 'traceMatch',
+          yearMonth: obj.y + '-' + obj.M
+        },
+        isSearch: isSearch,
+        done: function(returnData) {
+          $('.clue_match_sum').html(returnData.data.traceMatch)
         }
       });
     };
@@ -134,6 +165,19 @@ define(function(require, exports, module) {
           _this.sectionTable();
         }
       });
+      jh.utils.ajax.send({
+        method: 'post',
+        url: '/statistics/general/total',
+        contentType: 'application/json',
+        data: {
+          type: 'tracePass',
+          yearMonth: obj.y + '-' + obj.M
+        },
+        isSearch: isSearch,
+        done: function(returnData) {
+          $('.clue_hege_sum').html(returnData.data.tracePass)
+        }
+      });
     };
 
     this.sectionTable = function() {
@@ -157,7 +201,9 @@ define(function(require, exports, module) {
           data: _this.trendDaysOne
         }],
         yAxis: [{
-          type: 'value'
+          type: 'value',
+          minInterval: 1,
+          boundaryGap: [ 0, 0.1 ]
         }],
         series: [{
           name: '线索',
@@ -183,7 +229,9 @@ define(function(require, exports, module) {
           data: _this.downDaysOne
         }],
         yAxis: [{
-          type: 'value'
+          type: 'value',
+          minInterval: 1,
+          boundaryGap: [ 0, 0.1 ]
         }],
         series: [{
             name: '合规线索',
@@ -218,6 +266,7 @@ define(function(require, exports, module) {
         }],
         yAxis: [{
           type: 'value',
+          minInterval: 1,
           boundaryGap: [0, 0.1]
         }],
         series: [{
