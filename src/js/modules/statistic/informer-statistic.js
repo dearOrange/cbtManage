@@ -337,6 +337,7 @@ define(function(require, exports, module) {
     this.registerEvent = function() {
       infoChart.on('click', function(p) {
         //console.log(p);//p为点击的地图对象，p.data为传入地图的data数据
+        $('.informerArea').text('市级');
         _this.data = p.data.name + '%';
         $('.infoHun_name').text(p.data.name);
         _this.areaTable(_this.data);
@@ -347,6 +348,7 @@ define(function(require, exports, module) {
       });
       $('#informerWorld').click(function(){
         _this.areaTable();
+        $('.informerArea').text('地区');
       })
 
     };

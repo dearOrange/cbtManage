@@ -315,6 +315,7 @@ define(function(require, exports, module) {
 
       hunterChart.on('click', function(p) {
         //console.log(p.data.name);//p为点击的地图对象，p.data为传入地图的data数据
+        $('.hunterArea').text('市级');
         _this.data = p.data.name + '%';
         $('.infoHun_name').text(p.data.name);
         _this.areaTable(_this.data);
@@ -324,6 +325,7 @@ define(function(require, exports, module) {
         minimumResultsForSearch: Infinity
       });
       $('#hunterWorld').click(function(){
+        $('.hunterArea').text('地区');
         _this.areaTable();
       })
     };
