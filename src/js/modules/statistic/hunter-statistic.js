@@ -323,7 +323,9 @@ define(function(require, exports, module) {
       $('select').select2({
         minimumResultsForSearch: Infinity
       });
-
+      $('#hunterWorld').click(function(){
+        _this.areaTable();
+      })
     };
   }
   /**

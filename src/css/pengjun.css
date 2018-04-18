@@ -410,7 +410,9 @@ p.closeStatus {
 .dataContent .data-container ul.echarts-list li p.title-style {
     overflow: hidden;
 }
-
+.findWorld {
+  margin-left:30%;
+}
 .dataContent .data-container ul.echarts-list li p.title-style span {
     float: left;
 }
