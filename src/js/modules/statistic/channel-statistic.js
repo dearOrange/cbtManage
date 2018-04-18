@@ -211,7 +211,7 @@ define(function(require, exports, module) {
                 minimumResultsForSearch: Infinity
             });
             //切换状态
-            $('body').off('click', '.taskState').on('click', '.taskState', function(event, param) {
+            $('body').off('click', '.channelState').on('click', '.channelState', function(event, param) {
               $(this).addClass("active").siblings().removeClass("active");
               $('#state').val($(this).data('value'));
               $('#stateInput').val($(this).data('value'));

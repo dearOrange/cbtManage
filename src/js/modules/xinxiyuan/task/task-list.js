@@ -104,6 +104,7 @@ define(function(require, exports, module) {
       $('body').off('click', '#taskState>li').on('click', '#taskState>li', function(event, param) {
         //当前元素、任务状态state、批量匹配容器
         //表头：时间、匹配模板名称、匹配表单容器
+//      debugger
         var m = $(this),
           state = m.data('state'),
           stateValue = m.data('value'),
