@@ -213,7 +213,7 @@ define(function(require, exports, module) {
       })
 
       //切换状态
-      $('body').off('click', '.taskState').on('click', '.taskState', function(event, param) {
+      $('body').off('click', '.informState').on('click', '.informState', function(event, param) {
         var mine = $(this);
         var state = mine.data('state');
         $(this).addClass("active").siblings().removeClass("active");
