@@ -108,7 +108,7 @@
             <td colspan="3">
               <select name="payWay" id="selectPay">
                 <option value="1">支付宝</option>
-                <option value="2">银行卡</option>
+                <option value="2" {{if alipay === ''}}selected{{/if}}>银行卡</option>
               </select>
             </td>
           </tr>
