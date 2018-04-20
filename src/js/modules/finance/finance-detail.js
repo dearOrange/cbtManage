@@ -50,6 +50,20 @@ define(function(require, exports, module) {
 							})
 							return false;
 						};
+						if(!datas.payer) {
+              jh.utils.alert({
+                content: '请输入打款人姓名',
+                ok: true
+              })
+              return false;
+            };
+						if(!datas.payee) {
+              jh.utils.alert({
+                content: '请输入收款人姓名',
+                ok: true
+              })
+              return false;
+            };
 						if(!datas.amount) {
 							jh.utils.alert({
 								content: '请输入金额',
