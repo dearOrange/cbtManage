@@ -100,6 +100,20 @@ define(function(require, exports, module) {
         submitHandler: function(form) {
           form = $(form);
           var datas = jh.utils.formToJson(form);
+          if(datas.carPrice == 0) {
+            jh.utils.alert({
+              content: '残值不能为0',
+              ok: true
+            })
+            return false;
+          }
+          if(datas.estimatedMinPrice == 0 || datas.estimatedMaxPrice == 0) {
+            jh.utils.alert({
+              content: '处置费用不能为0',
+              ok: true
+            })
+            return false;
+          }
           var submit = form.find('input[type="submit"]');
           var arr = submit.hasClass('priceStorage') ? '/task/estimate,价格预估完毕' : '/task/fixPrice,价格确认完毕';
           arr = arr.split(',');
