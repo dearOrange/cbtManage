@@ -85,12 +85,14 @@
         	{{/each}}
         </div>
         <div class="hopeprice">
-        	<p>预估费用</p>
+        	<p>处置费用</p>
         	{{each data.traceVoList data index}}
+        	{{if data.role === 'type_B'}}
         	<div>
         		<label>意愿处置费用:</label>
         		<span>{{data.estimatedCost}}</span>
         	</div>
+        	{{/if}}
         	{{/each}}
         	<div>
         		<label>处置费用预估:</label>
