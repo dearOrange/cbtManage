@@ -1,0 +1,17 @@
+<div class="dataContent">
+  <div class="clearfix">
+    <a href="javascript:;" class="button gobackPage goBack">返回</a>
+  </div>
+  <div class="search-container">
+      <div id="map_container" style="height:730px;"></div>
+      <div style="display:none">
+        <div id="myIcon"></div>
+      </div>
+  </div>
+</div>
+<script type="text/javascript">
+seajs.use('modules/statistic/map-list', function(MapList) {
+    var MapList = new MapList();
+    MapList.init();
+});
+</script>

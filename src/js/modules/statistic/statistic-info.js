@@ -32,7 +32,10 @@ define(function(require, exports, module) {
             });
             $('.taskInfoSix').click(function() {
               jh.utils.load('/src/modules/statistic/hunter-statistic', {});
-            })
+            });
+            $('.taskInfoSeven').click(function() {
+              jh.utils.load('/src/modules/statistic/map-list', {});
+            });
         };
     }
     module.exports = StatisticInfo;
