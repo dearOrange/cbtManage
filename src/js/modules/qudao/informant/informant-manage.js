@@ -15,7 +15,7 @@ define(function(require, exports, module) {
             this.registerEvent();
         };
 
-        this.initContent = function() {
+        this.initContent = function(isSearch) {
             var page = new jh.ui.page({
                 data_container: $('#informant_manage_container'),
                 page_container: $('#page_container'),
@@ -23,6 +23,7 @@ define(function(require, exports, module) {
                 url: '/downstreams/channel/informerlist',
                 contentType: 'application/json',
                 data: jh.utils.formToJson($('#informant-manage-form')),
+                isSearch: isSearch,
                 callback: function(data) {
                 	data.officerClueState = jh.utils.officerClueState;
                   return jh.utils.template('informantManage_content_template', data);
@@ -35,7 +36,14 @@ define(function(require, exports, module) {
             $('select').select2({
                 minimumResultsForSearch: Infinity
             });
-
+            //查询
+            jh.utils.validator.init({
+                id: 'informant-manage-form',
+                submitHandler: function(form) {
+                    _this.initContent(true);
+                    return false;
+                }
+            });
             //认证成为捕头
             $('body').off('click', '.changeOfficer').on('click', '.changeOfficer', function() {
             	var id = $(this).data('id');

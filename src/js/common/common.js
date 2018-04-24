@@ -29,7 +29,7 @@ define(function(require, exports, module) {
   require('plugin/radial/radialIndicator.min');
   require('http://webapi.amap.com/maps?v=1.4.0&key=316c31848ab9d39c729461358c3dc7d4&&plugin=AMap.Scale,AMap.MarkerClusterer,AMap.OverView,AMap.ToolBar');
   require('http://webapi.amap.com/ui/1.0/main.js?v=1.0.11');
-  require('https://webapi.amap.com/js/marker2.js');
+  require('https://webapi.amap.com/js/marker.js');
   
   var FINAL_OPTIONS = {
     viewImgRoot: viewImageRoot,

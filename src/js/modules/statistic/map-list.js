@@ -63,13 +63,13 @@ define(function(require, exports, module) {
           position: data.center.split(','),
           title: data.name,
           map: map,
-          offset: new AMap.Pixel(0, 0),
+          offset: new AMap.Pixel(-36, -76),
           content: '<div class="area_color"><p>内蒙古</p><p><span style="font-size:16px;">1432</span><span>人</span></p><p><span style="font-size:16px;">532</span><span>车</span></p></div>',
         });
         marker.subMarkers = [];
 //      if(data.name==='北京市'||data.name==='河南省'){
-          marker.setLabel({content:'&larr;请点击',offset:new AMap.Pixel(45,0)})
-          map.setCenter(marker.getPosition());
+//        marker.setLabel({content:'&larr;请点击',offset:new AMap.Pixel(45,0)})
+//        map.setCenter(marker.getPosition());
 //      }
         if(!hide){
           marker.setMap(map)
@@ -102,20 +102,6 @@ define(function(require, exports, module) {
         markers.push(marker);
         AMap.event.addListener(marker, 'click', _onClick);
       }
-//    
-//    var markers = [];
-//        for (var i = 0; i < provinces.length; i += 1) {
-//          var marker = new AMap.Marker({
-//            position: provinces[i].center.split(','),
-//            title: provinces[i].name,
-//            map: map,
-//            offset: new AMap.Pixel(0, 0),
-//            content: '<div class="area_color"><p>内蒙古</p><p><span style="font-size:16px;">1432</span><span>人</span></p><p><span style="font-size:16px;">532</span><span>车</span></p></div>',
-//          });
-//          markers.push(marker);
-//        }
-//    
-      //map.setFitView();
       AMap.event.addListener(map, 'zoomend', _onZoomEnd);
       
         };
