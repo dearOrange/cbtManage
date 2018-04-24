@@ -27,8 +27,10 @@ define(function(require, exports, module) {
   require('plugin/scrollbar/scrollbar'); //scrollbar
   require('plugin/echarts/echarts.min'); //echarts
   require('plugin/radial/radialIndicator.min');
-  require('http://webapi.amap.com/maps?v=1.4.0&key=316c31848ab9d39c729461358c3dc7d4&&plugin=AMap.Scale,AMap.OverView,AMap.ToolBar');
+  require('http://webapi.amap.com/maps?v=1.4.0&key=316c31848ab9d39c729461358c3dc7d4&&plugin=AMap.Scale,AMap.MarkerClusterer,AMap.OverView,AMap.ToolBar');
   require('http://webapi.amap.com/ui/1.0/main.js?v=1.0.11');
+  require('http://a.amap.com/jsapi_demos/static/china.js');
+  
   var FINAL_OPTIONS = {
     viewImgRoot: viewImageRoot,
     imageScale: '?imageMogr2/auto-orient/thumbnail/100x100',

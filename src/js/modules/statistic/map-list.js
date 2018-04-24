@@ -16,7 +16,7 @@ define(function(require, exports, module) {
               jh.utils.changeText($('#breadCrumb'), '首页>业务统计>雷达显示');
             }, 0)
         };
-        this.initContent = function(isSearch) {
+        this.initContent = function() {
             var scale = new AMap.Scale({
               visible: true
             }),
@@ -59,29 +59,86 @@ define(function(require, exports, module) {
 //            });
 //          });
             
-             AMapUI.loadUI(['overlay/SvgMarker'], function(SvgMarker) {
-              
-              if (!SvgMarker.supportSvg) {
-                  //当前环境并不支持SVG，此时SvgMarker会回退到父类，即SimpleMarker
-                   alert('当前环境不支持SVG');
-              }
-              var shap = new SvgMarker.Shape.WaterDrop({
-                  height: 100, //高度
-                  fillColor: _this.fillColor
-              });
-              //另外一个SvgMarker
-              var svgMarker = new SvgMarker(shap, {
-                  iconLabel: '<div class="area_color"><p>内蒙古</p><p><span style="font-size:16px;">1432</span><span>人</span></p><p><span style="font-size:16px;">532</span><span>车</span></p></div>',
-                  zIndex: 110,
-                  map: map,
-                  position: map.getCenter(),
-                  showPositionPoint: true
-              });
-              svgMarker.on('click', function(e){
-//              var fillColor = e.target.opts.svgShape.opts.fillColor;
-//              _this.fillColor = '#FF9100';
-              });
-          });
+//           AMapUI.loadUI(['overlay/SvgMarker'], function(SvgMarker) {
+//            var lngLats = getGridLngLats(map.getCenter(), 4, 4);
+//            if (!SvgMarker.supportSvg) {
+//                //当前环境并不支持SVG，此时SvgMarker会回退到父类，即SimpleMarker
+//                 alert('当前环境不支持SVG');
+//            }
+//            var shap = new SvgMarker.Shape.WaterDrop({
+//                height: 100, //高度
+//                fillColor: _this.fillColor
+//            });
+//            //另外一个SvgMarker
+//            var svgMarker = new SvgMarker(shap, {
+//                iconLabel: '<div class="area_color"><p>内蒙古</p><p><span style="font-size:16px;">1432</span><span>人</span></p><p><span style="font-size:16px;">532</span><span>车</span></p></div>',
+//                zIndex: 110,
+//                map: map,
+//                position: map.getCenter(),
+//                showPositionPoint: true
+//            });
+//            svgMarker.on('click', function(e){
+////              var fillColor = e.target.opts.svgShape.opts.fillColor;
+////              _this.fillColor = '#FF9100';
+//            });
+//        });
+   
+    var cluster, markers = [];
+    
+    for(var i=0;i<points.length;i+=1){
+        markers.push(new AMap.Marker({
+          position:points[i]['lnglat'],
+          content: '<div></div>',
+          offset: new AMap.Pixel(-15,-15)
+        }))
+    }
+    var count  = markers.length;
+    var _renderCluserMarker = function (context) {
+        var factor = Math.pow(context.count/count,1/18)
+        var div = document.createElement('div');
+        var Hue = 180 - factor* 180;
+        var bgColor = 'hsla('+Hue+',100%,50%,0.7)';
+        var fontColor = 'hsla('+Hue+',100%,20%,1)';
+        var borderColor = 'hsla('+Hue+',100%,40%,1)';
+        var shadowColor = 'hsla('+Hue+',100%,50%,1)';
+        div.style.backgroundColor = bgColor
+        var size = Math.round(30 + Math.pow(context.count/count,1/5) * 20);
+        div.style.width = div.style.height = size+'px';
+        div.style.border = 'solid 1px '+ borderColor;
+        div.style.borderRadius = size/2 + 'px';
+        div.style.boxShadow = '0 0 1px '+ shadowColor;
+        div.innerHTML = context.count;
+        div.style.lineHeight = size+'px';
+        div.style.color = fontColor;
+        div.style.fontSize = '14px';
+        div.style.textAlign = 'center';
+        context.marker.setOffset(new AMap.Pixel(-size/2,-size/2));
+        context.marker.setContent(div)
+     }
+    addCluster(1);
+
+    function addCluster(tag) {
+        if (cluster) {
+            cluster.setMap(null);
+        }
+        if (tag == 2) {//完全自定义
+            cluster = new AMap.MarkerClusterer(map,markers,{
+                gridSize:80,
+                renderCluserMarker:_renderCluserMarker
+            });
+        } else if (tag == 1) {//自定义图标
+            cluster = new AMap.MarkerClusterer(map, markers, {
+                styles: {
+                  url: "/src/img/blue.png",
+                  size: new AMap.Size(70, 76),
+                  offset: new AMap.Pixel(0, -31)
+                },
+                gridSize:80
+            });
+        } else {//默认样式
+            cluster = new AMap.MarkerClusterer(map, markers,{gridSize:80});
+        }
+    }
         };
         this.registerEvent = function() {
 

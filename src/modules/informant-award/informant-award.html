@@ -60,7 +60,7 @@
           <th width="12%">开始时间</th>
           <th width="12%">停止时间</th>
           <th width="8%">推荐债权方任务奖励金（元）</th>
-          <th width="8%">推荐债权方清收奖励金（元）</th>
+          <th width="8%">推荐债权方清收奖励金（%）</th>
           <th width="6%">活动状态</th>
           <th width="8%">操作</th>
         </tr>
@@ -84,8 +84,8 @@
     <td>{{item.firstTrace}}</td>
     <td>{{item.referrerFirstTrace}}</td>{{/if}}
     {{if item.type === 2}}
-    <td>{{item.referrerLoaner}}</td>
-    <td>{{item.loanerClean}}</td>
+    <td>{{item.referrerLoaner}}元</td>
+    <td>{{item.loanerClean}}%</td>
     {{/if}}
     <td>{{if item.state === 0}}停止{{else}}开启{{/if}}</td>
     <td>
