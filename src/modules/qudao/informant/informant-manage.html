@@ -43,8 +43,8 @@
         <td>{{item.phone}}</td>
         <td>{{each item.area data index}}{{data.provinceName}}{{/each}}</td>
         <td>
-          {{if item.role === 'type_A'}}自有线人{{/if}}
-          {{if item.role === 'type_C'}}兼职线人{{/if}}
+          {{if item.role === 'type_C'}}自有线人{{/if}}
+          {{if item.role === 'type_A'}}兼职线人{{/if}}
         </td>
         <td>{{item.phone}}</td>
         <td>{{item.createAt}}</td>
@@ -52,7 +52,7 @@
         	{{if item.state === "wait"}}
           <a data-id="{{item.id}}" class="changeOfficer button">审核线人为捕头</a>
           {{/if}}
-          <a data-info="{{item}}" class="editOfficer oneStyle button">编辑</a>
+          <a data-info="{{item}}" class="editOfficer oneStyle button">线人切换</a>
         </td>
     </tr>
     {{/each}}

@@ -28,8 +28,7 @@ define(function(require, exports, module) {
             }),
             map = new AMap.Map('map_container', {
               resizeEnable: true,
-              zoom:5,
-//            center: [116.397428, 39.90923]
+              zoom:5
             });
             map.addControl(scale);
             map.addControl(toolBar);
@@ -58,87 +57,67 @@ define(function(require, exports, module) {
 //                openInfoWin();
 //            });
 //          });
-            
-//           AMapUI.loadUI(['overlay/SvgMarker'], function(SvgMarker) {
-//            var lngLats = getGridLngLats(map.getCenter(), 4, 4);
-//            if (!SvgMarker.supportSvg) {
-//                //当前环境并不支持SVG，此时SvgMarker会回退到父类，即SimpleMarker
-//                 alert('当前环境不支持SVG');
-//            }
-//            var shap = new SvgMarker.Shape.WaterDrop({
-//                height: 100, //高度
-//                fillColor: _this.fillColor
-//            });
-//            //另外一个SvgMarker
-//            var svgMarker = new SvgMarker(shap, {
-//                iconLabel: '<div class="area_color"><p>内蒙古</p><p><span style="font-size:16px;">1432</span><span>人</span></p><p><span style="font-size:16px;">532</span><span>车</span></p></div>',
-//                zIndex: 110,
-//                map: map,
-//                position: map.getCenter(),
-//                showPositionPoint: true
-//            });
-//            svgMarker.on('click', function(e){
-////              var fillColor = e.target.opts.svgShape.opts.fillColor;
-////              _this.fillColor = '#FF9100';
-//            });
-//        });
-   
-    var cluster, markers = [];
-    
-    for(var i=0;i<points.length;i+=1){
-        markers.push(new AMap.Marker({
-          position:points[i]['lnglat'],
-          content: '<div></div>',
-          offset: new AMap.Pixel(-15,-15)
-        }))
-    }
-    var count  = markers.length;
-    var _renderCluserMarker = function (context) {
-        var factor = Math.pow(context.count/count,1/18)
-        var div = document.createElement('div');
-        var Hue = 180 - factor* 180;
-        var bgColor = 'hsla('+Hue+',100%,50%,0.7)';
-        var fontColor = 'hsla('+Hue+',100%,20%,1)';
-        var borderColor = 'hsla('+Hue+',100%,40%,1)';
-        var shadowColor = 'hsla('+Hue+',100%,50%,1)';
-        div.style.backgroundColor = bgColor
-        var size = Math.round(30 + Math.pow(context.count/count,1/5) * 20);
-        div.style.width = div.style.height = size+'px';
-        div.style.border = 'solid 1px '+ borderColor;
-        div.style.borderRadius = size/2 + 'px';
-        div.style.boxShadow = '0 0 1px '+ shadowColor;
-        div.innerHTML = context.count;
-        div.style.lineHeight = size+'px';
-        div.style.color = fontColor;
-        div.style.fontSize = '14px';
-        div.style.textAlign = 'center';
-        context.marker.setOffset(new AMap.Pixel(-size/2,-size/2));
-        context.marker.setContent(div)
-     }
-    addCluster(1);
 
-    function addCluster(tag) {
-        if (cluster) {
-            cluster.setMap(null);
+      var createMarker = function(data,hide) {
+        var marker = new AMap.Marker({
+          position: data.center.split(','),
+          title: data.name,
+          map: map,
+          offset: new AMap.Pixel(0, 0),
+          content: '<div class="area_color"><p>内蒙古</p><p><span style="font-size:16px;">1432</span><span>人</span></p><p><span style="font-size:16px;">532</span><span>车</span></p></div>',
+        });
+        marker.subMarkers = [];
+//      if(data.name==='北京市'||data.name==='河南省'){
+          marker.setLabel({content:'&larr;请点击',offset:new AMap.Pixel(45,0)})
+          map.setCenter(marker.getPosition());
+//      }
+        if(!hide){
+          marker.setMap(map)
         }
-        if (tag == 2) {//完全自定义
-            cluster = new AMap.MarkerClusterer(map,markers,{
-                gridSize:80,
-                renderCluserMarker:_renderCluserMarker
-            });
-        } else if (tag == 1) {//自定义图标
-            cluster = new AMap.MarkerClusterer(map, markers, {
-                styles: {
-                  url: "/src/img/blue.png",
-                  size: new AMap.Size(70, 76),
-                  offset: new AMap.Pixel(0, -31)
-                },
-                gridSize:80
-            });
-        } else {//默认样式
-            cluster = new AMap.MarkerClusterer(map, markers,{gridSize:80});
+        if(data.subDistricts&&data.subDistricts.length){
+          for(var i = 0 ; i<data.subDistricts.length;i+=1){
+            marker.subMarkers.push(createMarker(data.subDistricts[i],true));
+          }
         }
-    }
+        return marker;
+      }
+      var _onZoomEnd = function(e) {
+        if (map.getZoom() < 6) {
+          for (var i = 0; i < markers.length; i += 1) {
+            map.remove(markers[i].subMarkers)
+          }
+          map.add(markers);
+        }
+      }
+      var _onClick = function(e) {
+        if(e.target.subMarkers.length){
+          map.add(e.target.subMarkers);
+          map.setFitView(e.target.subMarkers);
+          map.remove(markers)
+        }
+      }
+      var markers = []; //province见Demo引用的JS文件
+      for (var i = 0; i < provinces.length; i += 1) {
+        var marker = createMarker(provinces[i]);
+        markers.push(marker);
+        AMap.event.addListener(marker, 'click', _onClick);
+      }
+//    
+//    var markers = [];
+//        for (var i = 0; i < provinces.length; i += 1) {
+//          var marker = new AMap.Marker({
+//            position: provinces[i].center.split(','),
+//            title: provinces[i].name,
+//            map: map,
+//            offset: new AMap.Pixel(0, 0),
+//            content: '<div class="area_color"><p>内蒙古</p><p><span style="font-size:16px;">1432</span><span>人</span></p><p><span style="font-size:16px;">532</span><span>车</span></p></div>',
+//          });
+//          markers.push(marker);
+//        }
+//    
+      //map.setFitView();
+      AMap.event.addListener(map, 'zoomend', _onZoomEnd);
+      
         };
         this.registerEvent = function() {
 

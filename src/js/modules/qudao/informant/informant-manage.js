@@ -47,7 +47,7 @@ define(function(require, exports, module) {
             //认证成为捕头
             $('body').off('click', '.editOfficer').on('click', '.editOfficer', function() {
               var info = $(this).data('info');
-              var rolesName = info.role === 'type_A' ? '兼职线人' : '自有线人';
+              var rolesName = info.role === 'type_C' ? '兼职线人' : '自有线人';
               var roles = info.role === 'type_A' ? 'type_C' : 'type_A';
               jh.utils.alert({
                 title: '成为'+rolesName,
