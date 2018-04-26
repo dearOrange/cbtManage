@@ -764,3 +764,27 @@ ul.position_info li span:first-child{
 .area_color p span{
   color:#fff;
 }
+.area_img {
+  width:70px;
+  height:84px;
+}
+.task_car_img {
+  background: url(../img/taskCar.png) no-repeat center;
+  background-size:100% 100%;
+}
+.yellow_car_img {
+  background: url(../img/yellow.png) no-repeat center;
+  background-size:100% 100%;
+}
+.hunters_img {
+  background: url(../img/hunter_img.png) no-repeat center;
+  background-size:100% 100%;
+}
+.informers_img {
+  background: url(../img/informer_img.png) no-repeat center;
+  background-size:100% 100%;
+}
+.workers_img {
+  background: url(../img/worker.png) no-repeat center;
+  background-size:100% 100%;
+}
