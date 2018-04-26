@@ -38,6 +38,7 @@ define(function(require, exports, module) {
                 page_container: $('#page_container'),
                 form_container: _this.form,
                 method: 'post',
+                show_page_number:3,
                 url: '/task/taskList',
                 contentType: 'application/json',
                 data: jh.utils.formToJson(_this.form),

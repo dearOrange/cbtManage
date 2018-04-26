@@ -84,7 +84,8 @@
     <td>{{item.amount}}</td>
     <td>{{item.actualAmount}}</td>
     <td>
-      {{if item.payWay === 2}} 银行卡 {{else}} 支付宝 {{/if}}
+      {{if item.payWay === 2 }} 银行卡号  {{/if}}
+      {{if item.payWay === 1}} 支付宝 {{/if}}
     </td>
     <td>{{menuState(item.state)}}</td>
     <td>{{item.createAt}}</td>

@@ -27,7 +27,7 @@ define(function(require, exports, module) {
   require('plugin/scrollbar/scrollbar'); //scrollbar
   require('plugin/echarts/echarts.min'); //echarts
   require('plugin/radial/radialIndicator.min');
-  require('http://webapi.amap.com/maps?v=1.4.0&key=316c31848ab9d39c729461358c3dc7d4&&plugin=AMap.Scale,AMap.MarkerClusterer,AMap.OverView,AMap.ToolBar,AMap.Geocoder');
+  require('http://webapi.amap.com/maps?v=1.4.0&key=316c31848ab9d39c729461358c3dc7d4&&plugin=AMap.Scale,AMap.ToolBar,AMap.Geocoder');
   require('http://webapi.amap.com/ui/1.0/main.js?v=1.0.11');
   
   var FINAL_OPTIONS = {
@@ -870,7 +870,7 @@ define(function(require, exports, module) {
       m.settings = {
         url: '',
         method: 'GET',
-        show_page_number: 5,
+        show_page_number: 3,
         contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
         jump: true,
         noData: '',
@@ -966,7 +966,7 @@ define(function(require, exports, module) {
         } else {
           var j = Math.floor(s.show_page_number / 2);
           if (num >= half) {
-            arr.push('<a href="#page-1">1</a><a href="#page-2">2</a><span class="ellipsis">...</span>');
+            arr.push('<a href="#page-1">1</a><span class="ellipsis">...</span>');
             var start = m.page_total - s.show_page_number;
             if (num > start) {
               if (start < 4) {
@@ -983,6 +983,7 @@ define(function(require, exports, module) {
               half = tammy.utils.string.isOdd(s.show_page_number) ? j : (j - 1);
               for (var i = num - half; i <= num + j; i++) {
                 if (i !== num) {
+
                   arr.push('<a href="#page- ' + i + '">' + i + '</a>');
                 } else {
                   arr.push('<span class="jh_current_page">' + i + '</span>');

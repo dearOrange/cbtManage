@@ -58,7 +58,11 @@
         <td>{{item.carBrand}}</td>
         <td>{{item.carSeries}}</td>
         <td>{{item.carColor}}</td>
-        <td>{{if item.role === 'type_A'}}线人{{else}}捕头{{/if}}</td>
+        <td>
+          {{if item.role === 'type_A'}}兼职线人{{/if}}
+          {{if item.role === 'type_B'}}捕头{{/if}}
+          {{if item.role === 'type_C'}}自有线人{{/if}}
+        </td>
         <td>{{menuState(item.taskState)}}</td>
         <td>{{item.createAt}}</td>
         <td>

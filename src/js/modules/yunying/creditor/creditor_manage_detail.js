@@ -128,6 +128,27 @@ define(function(require, exports, module) {
           id: 'creditor-customer-form',
           submitHandler: function(form) {
             var dataForm = jh.utils.formToJson(form);
+            if(!dataForm.contacts){
+              jh.utils.alert({
+                content: '请输入联系对象',
+                ok: true
+              })
+              return false;
+            }
+            if(!dataForm.contactPhone){
+              jh.utils.alert({
+                content: '请输入联系方式',
+                ok: true
+              })
+              return false;
+            }
+            if(!dataForm.content){
+              jh.utils.alert({
+                content: '联系内容',
+                ok: true
+              })
+              return false;
+            }
             dataForm.upstreamId = args.id;
             jh.utils.ajax.send({
               url: '/record/addContact',
@@ -269,14 +290,14 @@ define(function(require, exports, module) {
         var removeId = jh.utils.getCheckboxValue('subTask_container', "value");
         if (!removeId) {
           jh.utils.alert({
-            content: '请选择需要删除的任务！',
+            content: '请选择需要关闭的任务！',
             ok: true,
             cancel: false
           });
           return false;
         }
         jh.utils.alert({
-          content: '确定删除吗？',
+          content: '确定关闭吗？',
           ok: function() {
             jh.utils.ajax.send({
               url: '/task/helpDel',
@@ -285,7 +306,7 @@ define(function(require, exports, module) {
               },
               done: function(returnData) {
                 jh.utils.alert({
-                  content: '已删除',
+                  content: '已关闭',
                   ok: function() {
                     _this.initTaskList();
                   }

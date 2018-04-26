@@ -203,7 +203,7 @@ define(function(require, exports, module) {
       });
 
       //切换状态
-      $('body').off('click', '.taskState').on('click', '.taskState', function(event, param) {
+      $('body').off('click', '.clueState').on('click', '.clueState', function(event, param) {
         $(this).addClass("active").siblings().removeClass("active");
         $('select').select2();
         $('#state').val($(this).data('value'));

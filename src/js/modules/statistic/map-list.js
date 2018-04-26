@@ -21,16 +21,12 @@ define(function(require, exports, module) {
           toolBar = new AMap.ToolBar({
             visible: true
           }),
-          overView = new AMap.OverView({
-            visible: true
-          }),
           map = new AMap.Map('map_container', {
             resizeEnable: true,
             zoom:6
           });
           map.addControl(scale);
           map.addControl(toolBar);
-          map.addControl(overView);
             
           var createMarker = function(data,hide) {
             var marker = new AMap.Marker({
@@ -110,13 +106,10 @@ define(function(require, exports, module) {
               });
             }
             
-            
-            
             return markerFinger;
           }
           
           var createPersonMarker = function(data,hide) {
-            
             var content, role;
             if(data.role === 'type_A') {
               content = '<div class="area_img informers_img"></div>';
@@ -157,7 +150,6 @@ define(function(require, exports, module) {
             
             function geocoder_CallBack(res) {
                 data.address = res.regeocode.formattedAddress; //返回地址描述
-//              
                 var infoWindow = new AMap.InfoWindow({
                 //基点指向marker的头部位置
                 content: '<ul class="position_info"><li><span>姓名：</span><span>'+data.name+'</span></li><li><span>类型：</span><span>'+role+'</span></li><li><span>联系方式：</span><span>'+data.phone+'</span></li><li><span>位置：</span><span>'+data.address+'</span></li></ul>',
@@ -227,7 +219,6 @@ define(function(require, exports, module) {
                   map.add(_this.markersPerson);
                   map.setFitView(_this.markersPerson);
                   map.remove(_this.markersCity);
-                  
                 }
               }
             })
@@ -258,7 +249,7 @@ define(function(require, exports, module) {
             AMap.event.addListener(map, 'zoomend', _onZoomOne);
           } 
 //        一级
-          _this.markers = [];//province见Demo引用的JS文件
+          _this.markers = [];
           jh.utils.ajax.send({
             url: '/location/getNationwide',
             done: function(returnData) {
@@ -270,7 +261,6 @@ define(function(require, exports, module) {
               }
             }
           })
-          
         };
     }
     module.exports = MapList;

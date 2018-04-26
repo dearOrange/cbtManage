@@ -18,6 +18,7 @@ define(function(require, exports, module) {
         data_container: $('#news_list_container'),
         page_container: $('#page_container'),
         method: 'post',
+        show_page_number:3,
         url: '/content/getNotice',
         contentType: 'application/json',
         callback: function(returnData) {

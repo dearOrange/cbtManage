@@ -5,8 +5,8 @@
 				<tr>
 					<td colspan="6">
 						<ol id="taskState" class="stateChange pull-left">
-							<li data-value="1" data-state="matched" class="taskState active">已匹配成功线索</li>
-							<li data-value="0" data-state="unmatched" class="taskState">未匹配成功线索</li>
+							<li data-value="1" data-state="matched" class="clueState active">已匹配成功线索</li>
+							<li data-value="0" data-state="unmatched" class="clueState">未匹配成功线索</li>
 							<input type="hidden" name="isMatch" id="state" value="1">
 						</ol>
 					</td>
@@ -24,8 +24,9 @@
 						<label class="label">类型：</label>
 						<select name="role">
 							<option value="">全部</option>
-							<option value="type_A">线人</option>
+							<option value="type_A">兼职线人</option>
 							<option value="type_B">捕头</option>
+							<option value="type_C">自有线人</option>
 						</select>
 					</td>
 					<td>
@@ -94,7 +95,11 @@
 			<img src="{{viewImgRoot}}{{item.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand" />
 		</td>
 		<td>{{item.name}}</td>
-		<td>{{if item.role === 'type_A'}}线人{{else}}捕头{{/if}}</td>
+		<td>
+		  {{if item.role === 'type_A'}}兼职线人{{/if}}
+		  {{if item.role === 'type_B'}}捕头{{/if}}
+		  {{if item.role === 'type_C'}}自有线人{{/if}}
+		</td>
 		<td>{{item.phone}}</td>
 		<td>{{item.location}}</td>
 		<td>
