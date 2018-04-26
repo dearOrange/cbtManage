@@ -26,7 +26,7 @@ define(function(require, exports, module) {
           }),
           map = new AMap.Map('map_container', {
             resizeEnable: true,
-            zoom:5
+            zoom:6
           });
           map.addControl(scale);
           map.addControl(toolBar);
@@ -175,14 +175,25 @@ define(function(require, exports, module) {
           
 //        三级
           var _onZoomEnd = function(e) {
-            if (map.getZoom() < 7) {
+            if (map.getZoom() < 9) {
               map.remove(_this.markersFiger);
               map.remove(_this.markersPerson);
               map.add(_this.markersCity);
-              if (map.getZoom() < 6) {
+              map.remove(_this.markers);
+              if (map.getZoom() < 7) {
                 map.remove(_this.markersCity);
                 map.add(_this.markers);
               }
+            }else if (map.getZoom() > 9) {
+              map.add(_this.markersFiger);
+              map.add(_this.markersPerson);
+              map.remove(_this.markersCity);
+            }
+          }
+          var _onZoomOne = function(e) {
+            if (map.getZoom() < 7) {
+              map.remove(_this.markersCity);
+              map.add(_this.markers);
             }
           }
 //        三级
@@ -220,6 +231,7 @@ define(function(require, exports, module) {
                 }
               }
             })
+            AMap.event.addListener(map, 'zoomend', _onZoomEnd);
           } 
 //        二级
           var _onClick = function(e) {
@@ -243,6 +255,7 @@ define(function(require, exports, module) {
                 }
               }
             })
+            AMap.event.addListener(map, 'zoomend', _onZoomOne);
           } 
 //        一级
           _this.markers = [];//province见Demo引用的JS文件
@@ -257,12 +270,8 @@ define(function(require, exports, module) {
               }
             }
           })
-          AMap.event.addListener(map, 'zoomend', _onZoomEnd);
+          
         };
-//      this.registerEvent = function(lnglatXY) {
-//       
-//        
-//      };
     }
     module.exports = MapList;
 });

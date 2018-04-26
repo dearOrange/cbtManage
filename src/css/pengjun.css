@@ -760,6 +760,12 @@ ul.position_info li span:first-child{
 .area_color p {
   color:#fff;
   font-size:14px;
+  width:60px;
+  margin-left:6px;
+  white-space:nowrap; 
+  text-overflow:ellipsis; 
+  -o-text-overflow:ellipsis; 
+  overflow: hidden; 
 }
 .area_color p span{
   color:#fff;
