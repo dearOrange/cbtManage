@@ -37,7 +37,7 @@ define(function(require, exports, module) {
                     urlStr = '/src/modules/yunying/task/task-audit';
                     break;
                 case 8: 
-                    urlStr = '/src/modules/xinxiyuan/creditor/creditor-identify';
+                    urlStr = '/src/modules/xinxiyuan/evidence/evidence-audit';
                     break;
             }
             return urlStr;
