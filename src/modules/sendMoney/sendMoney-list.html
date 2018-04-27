@@ -113,12 +113,14 @@
               </select>
             </td>
           </tr>
+          {{if alipay !== ''}}
           <tr class="changePaystyle" id="payStyle">
             <td>支付宝账号</td>
             <td colspan="3">
               <input type="text" value="{{alipay}}" />
             </td>
           </tr>
+          {{else}}
           <tr class="changePaystyle">
             <td>银行卡账号</td>
             <td>
@@ -129,6 +131,7 @@
               <input type="text" value="{{bankName}}" />
             </td>
           </tr>
+          {{/if}}
           <tr>
             <td>申请提现金额</td>
             <td>
