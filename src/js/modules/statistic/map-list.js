@@ -96,7 +96,7 @@ define(function(require, exports, module) {
 //              
                 var infoWindow = new AMap.InfoWindow({
                 //基点指向marker的头部位置
-                content: '<ul class="position_info"><li><span>车牌号：</span><span>'+data.carNumber+'</span></li><li><span>颜色：</span><span>'+data.carColor+'</span></li><li><span>车型车系：</span><span>'+data.carBrand+'-'+data.carModel+'-'+data.carSeries+'</span></li><li><span>时间：</span><span>'+data.carBrand+'</span></li><li><span>位置：</span><span>'+data.address+'</span></li></ul>',
+                content: '<ul class="position_info"><li><span>车牌号：</span><span>'+data.carNumber+'</span></li><li><span>颜色：</span><span>'+data.carColor+'</span></li><li><span>车型车系：</span><span>'+data.carBrand+'-'+data.carModel+'-'+data.carSeries+'</span></li><li><span>时间：</span><span>'+data.occurAt+'</span></li><li><span>位置：</span><span>'+data.address+'</span></li></ul>',
                 offset: new AMap.Pixel(0, -31)
               });
               
@@ -152,7 +152,7 @@ define(function(require, exports, module) {
                 data.address = res.regeocode.formattedAddress; //返回地址描述
                 var infoWindow = new AMap.InfoWindow({
                 //基点指向marker的头部位置
-                content: '<ul class="position_info"><li><span>姓名：</span><span>'+data.name+'</span></li><li><span>类型：</span><span>'+role+'</span></li><li><span>联系方式：</span><span>'+data.phone+'</span></li><li><span>位置：</span><span>'+data.address+'</span></li></ul>',
+                content: '<ul class="position_info"><li><span>姓名：</span><span>'+data.name+'</span></li><li><span>类型：</span><span>'+role+'</span></li><li><span>联系方式：</span><span>'+data.phone+'</span></li><li><span>时间：</span><span>'+data.occurAt+'</span></li><li><span>位置：</span><span>'+data.address+'</span></li></ul>',
                 offset: new AMap.Pixel(0, -31)
               });
               
