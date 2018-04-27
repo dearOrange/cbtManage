@@ -94,7 +94,7 @@ define(function(require, exports, module) {
                 jh.utils.alert({
                   content: '已打款',
                   ok: function() {
-                    window.location.reload();
+                    _this.initContent();
                   }
                 })
               }
