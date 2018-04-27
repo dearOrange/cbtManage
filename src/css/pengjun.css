@@ -794,3 +794,19 @@ ul.position_info li span:first-child{
   background: url(../img/worker.png) no-repeat center;
   background-size:100% 100%;
 }
+#little_map{
+  width:200px;
+  height:130px;
+  background:#fff;
+  border-radius: 3px;
+  box-shadow: 0px -3px 18px -2px #b5b5b5;
+  position:absolute;
+  right:10px;
+  bottom:30px;
+}
+#little_map ul li{
+  float:left;
+}
+#little_map ul li p {
+  padding: 10px;
+}

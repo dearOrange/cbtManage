@@ -96,7 +96,7 @@ define(function(require, exports, module) {
 //              
                 var infoWindow = new AMap.InfoWindow({
                 //基点指向marker的头部位置
-                content: '<ul class="position_info"><li><span>车牌号：</span><span>'+data.carNumber+'</span></li><li><span>颜色：</span><span>'+data.carColor+'</span></li><li><span>车型车系：</span><span>'+data.carBrand+'-'+data.carModel+'-'+data.carSeries+'</span></li><li><span>时间：</span><span>'+data.occurAt+'</span></li><li><span>位置：</span><span>'+data.address+'</span></li></ul>',
+                content: '<ul class="position_info"><li><span>车牌号：</span><span>'+data.carNumber+'</span></li><li><span>颜色：</span><span>'+data.carColor+'</span></li><li><span>车型车系：</span><span>'+data.carBrand+'-'+data.carSeries+'-'+data.carModel+'</span></li><li><span>时间：</span><span>'+data.occurAt+'</span></li><li><span>位置：</span><span>'+data.address+'</span></li></ul>',
                 offset: new AMap.Pixel(0, -31)
               });
               
@@ -167,7 +167,7 @@ define(function(require, exports, module) {
           
 //        三级
           var _onZoomEnd = function(e) {
-            if (map.getZoom() < 7) {
+            if (map.getZoom() < 8) {
               map.remove(_this.markersFiger);
               map.remove(_this.markersPerson);
               map.add(_this.markersCity);
@@ -176,14 +176,14 @@ define(function(require, exports, module) {
                 map.remove(_this.markersCity);
                 map.add(_this.markers);
               }
-            }else if (map.getZoom() > 7) {
+            }else if (map.getZoom() > 8) {
               map.add(_this.markersFiger);
               map.add(_this.markersPerson);
               map.remove(_this.markersCity);
             }
           }
           var _onZoomOne = function(e) {
-            if (map.getZoom() < 7) {
+            if (map.getZoom() < 6) {
               map.remove(_this.markersCity);
               map.add(_this.markers);
             }
