@@ -75,11 +75,11 @@
     <td>{{item.name}}</td>
     <td>{{item.company}}</td>
     {{if searchType !== "loaner"}}
-      {{if item.role === "type_A"}}
-      <td>线人</td>
-      {{else}}
-      <td>捕头</td>
-      {{/if}}
+      <td>
+        {{if item.role === "type_A"}}兼职线人{{/if}}
+        {{if item.role === "type_B"}}捕头{{/if}}
+        {{if item.role === "type_C"}}自有线人{{/if}}
+      </td>
     {{/if}}
     <td>{{item.amount}}</td>
     <td>{{item.actualAmount}}</td>
