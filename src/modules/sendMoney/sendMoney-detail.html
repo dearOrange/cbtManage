@@ -16,8 +16,12 @@
 			<tr>
 				<th>账号</th>
 				<td>{{data.downStreamVo.phone}}</td>
-				<th>微信账号</th>
-				<td>{{data.downStreamVo.wechat}}</td>
+				<th>角色</th>
+				<td>
+				  {{if data.downStreamVo.role === 'type_A'}}线人{{/if}}
+				  {{if data.downStreamVo.role === 'type_B'}}捕头{{/if}}
+				  {{if data.downStreamVo.role === 'type_C'}}合作方{{/if}}
+				</td>
 			</tr>
 			<tr>
 				<th>负责人</th>

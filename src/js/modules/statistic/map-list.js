@@ -23,7 +23,7 @@ define(function(require, exports, module) {
           }),
           map = new AMap.Map('map_container', {
             resizeEnable: true,
-            zoom:6
+            zoom:5
           });
           map.addControl(scale);
           map.addControl(toolBar);
@@ -167,16 +167,16 @@ define(function(require, exports, module) {
           
 //        三级
           var _onZoomEnd = function(e) {
-            if (map.getZoom() < 9) {
+            if (map.getZoom() < 7) {
               map.remove(_this.markersFiger);
               map.remove(_this.markersPerson);
               map.add(_this.markersCity);
               map.remove(_this.markers);
-              if (map.getZoom() < 7) {
+              if (map.getZoom() < 6) {
                 map.remove(_this.markersCity);
                 map.add(_this.markers);
               }
-            }else if (map.getZoom() > 9) {
+            }else if (map.getZoom() > 7) {
               map.add(_this.markersFiger);
               map.add(_this.markersPerson);
               map.remove(_this.markersCity);
