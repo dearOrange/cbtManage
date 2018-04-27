@@ -156,7 +156,7 @@ define(function(require, exports, module) {
                           jh.utils.alert({
                               content: '任务编辑成功！',
                               ok: function() {
-                                window.location.reload();
+                                window.history.go(-1);
                               },
                               cancel: false
                           });
