@@ -190,7 +190,8 @@ define(function(require, exports, module) {
           }
 //        三级
           var _fingerClick = function(e) {
-            var fingerprint = e.lnglat.lng +','+ e.lnglat.lat;
+            console.log(e)
+            var fingerprint = e.target.F.position.lng +','+ e.target.F.position.lat;
             _this.markersFiger=[];
             _this.markersPerson=[];
             jh.utils.ajax.send({
