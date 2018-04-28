@@ -137,15 +137,15 @@ define(function(require, exports, module) {
                     });
                     return false;
                 }
-                if (!managerId || !$.trim(managerId.val())) {
-                    jh.utils.confirm({
-                        content: '请选择相应渠道经理！'
-                    });
-                    return false;
-                }
                 if (!carPrice || !estimatedMinPrice || !estimatedMaxPrice) {
                     jh.utils.confirm({
                         content: '请预估费用！'
+                    });
+                    return false;
+                }
+                if (!managerId || !$.trim(managerId.val())) {
+                    jh.utils.confirm({
+                        content: '请选择相应渠道经理！'
                     });
                     return false;
                 }
