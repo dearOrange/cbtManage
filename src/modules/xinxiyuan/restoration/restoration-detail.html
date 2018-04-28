@@ -56,7 +56,11 @@
           <dd>全车背景照</dd>
         </dl>
       </div>
-      <div>线索上传时间：{{item.createAt}}</div>
+      <div>
+        <p>线索上传时间：{{item.createAt}}</p>
+        <p>车架号后6位：{{item.carId}}</p>
+        <p>定位：{{item.location}}</p>
+      </div>
       {{/each}}
     </div>
     <form id="restoration-detail-form">
