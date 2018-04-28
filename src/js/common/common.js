@@ -870,7 +870,7 @@ define(function(require, exports, module) {
       m.settings = {
         url: '',
         method: 'GET',
-        show_page_number: 3,
+        show_page_number: 5,
         contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
         jump: true,
         noData: '',
@@ -950,7 +950,7 @@ define(function(require, exports, module) {
           }
         }
       } else {
-        half = tammy.utils.string.isOdd(s.show_page_number) ? Math.ceil(s.show_page_number / 2) : s.show_page_number / 2;
+        half = tammy.utils.string.isOdd(s.show_page_number) ? Math.ceil(s.show_page_number / 2)+1 : s.show_page_number / 2;
         var lastPage = '<span class="ellipsis">...</span>'; //中间省略号部分
         lastPage += '<a href="#page-' + m.page_last_second + '">' + m.page_last_second + '</a>'; //倒数第二页
         lastPage += '<a href="#page-' + m.page_total + '">' + m.page_total + '</a>'; //最后一页
