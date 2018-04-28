@@ -92,9 +92,8 @@ define(function(require, exports, module) {
             });
             
             function geocoder_CallBack(res) {
-                data.address = res.regeocode.formattedAddress; //返回地址描述
-//              
-                var infoWindow = new AMap.InfoWindow({
+              data.address = res.regeocode.formattedAddress; //返回地址描述
+              var infoWindow = new AMap.InfoWindow({
                 //基点指向marker的头部位置
                 content: '<ul class="position_info"><li><span>车牌号：</span><span>'+data.carNumber+'</span></li><li><span>颜色：</span><span>'+data.carColor+'</span></li><li><span>车型车系：</span><span>'+data.carBrand+'-'+data.carSeries+'-'+data.carModel+'</span></li><li><span>时间：</span><span>'+data.occurAt+'</span></li><li><span>位置：</span><span>'+data.address+'</span></li></ul>',
                 offset: new AMap.Pixel(0, -31)
@@ -103,6 +102,11 @@ define(function(require, exports, module) {
               //marker 点击时打开
               AMap.event.addListener(markerFinger, 'click', function() {
                 infoWindow.open(map, markerFinger.getPosition());
+              });
+              AMap.event.addListener(map, 'zoomend', function(){
+                if (map.getZoom() < 8) {
+                  infoWindow.close();
+                }
               });
             }
             
@@ -149,8 +153,8 @@ define(function(require, exports, module) {
             });
             
             function geocoder_CallBack(res) {
-                data.address = res.regeocode.formattedAddress; //返回地址描述
-                var infoWindow = new AMap.InfoWindow({
+              data.address = res.regeocode.formattedAddress; //返回地址描述
+              var infoWindow = new AMap.InfoWindow({
                 //基点指向marker的头部位置
                 content: '<ul class="position_info"><li><span>姓名：</span><span>'+data.name+'</span></li><li><span>类型：</span><span>'+role+'</span></li><li><span>联系方式：</span><span>'+data.phone+'</span></li><li><span>时间：</span><span>'+data.occurAt+'</span></li><li><span>位置：</span><span>'+data.address+'</span></li></ul>',
                 offset: new AMap.Pixel(0, -31)
@@ -159,6 +163,12 @@ define(function(require, exports, module) {
               //marker 点击时打开
               AMap.event.addListener(markerPerson, 'click', function() {
                 infoWindow.open(map, markerPerson.getPosition());
+              });
+              
+              AMap.event.addListener(map, 'zoomend', function(){
+                if (map.getZoom() < 8) {
+                  infoWindow.close();
+                }
               });
             }
             
