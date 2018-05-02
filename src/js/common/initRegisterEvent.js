@@ -39,6 +39,9 @@ define(function(require, exports, module) {
                 case 8: 
                     urlStr = '/src/modules/xinxiyuan/evidence/evidence-audit';
                     break;
+                case 9: 
+                    urlStr = '/src/modules/yunying/creditor-filter/creditor-filter';
+                    break;
             }
             return urlStr;
         };
