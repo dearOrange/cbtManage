@@ -57,9 +57,10 @@ define(function(require, exports, module) {
               var info = $(this).data('info');
               var rolesName = info.role === 'type_C' ? '兼职线人' : '自有线人';
               var roles = info.role === 'type_A' ? 'type_C' : 'type_A';
+              var roleContent = info.role === 'type_C' ? '兼职线人有找车费，匹配线索红包，推荐奖金' : '自有线人有基本工资和绩效，无其他奖励';
               jh.utils.alert({
-                title: '成为'+rolesName,
-                content: '确定要成为' + rolesName,
+                title:'切换为'+rolesName,
+                content: roleContent,
                 ok: function(){
                   jh.utils.ajax.send({
                     method: 'post',
