@@ -16,8 +16,12 @@
                         </select>
                     </td>
                     <td>
-                        <label class="label">债权方：</label>
+                        <label class="label">债权方名称：</label>
                         <input type="text" class="search-input" name="companyName">
+                    </td>
+                    <td>
+                        <label class="label">债权方账号：</label>
+                        <input type="text" class="search-input" name="username">
                     </td>
                     <td>
                         <label class="label">认证状态：</label>
@@ -40,7 +44,8 @@
             <thead>
                 <tr>
                     <th width="4%">序号</th>
-                    <th width="20%">债权方</th>
+                    <th width="20%">债权方名称</th>
+                    <th width="10%">债权方账号</th>
                     <th width="8%">主体类型</th>
                     <th width="18%">法人</th>
                     <th width="18%">负责人</th>
@@ -62,6 +67,7 @@
     <tr class="trData">
         <td>{{index+1}}</td>
         <td>{{item.companyName}}</td>
+        <td>{{item.username}}</td>
         <td>{{menuState(item.type)}}</td>
         <td>{{item.legalPerson}}</td>
         <td>{{item.linkman}}</td>
