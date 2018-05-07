@@ -2,15 +2,6 @@
   <div class="search-container">
     <form id="informant-award-form">
       <table class="common_query textLeft search-content">
-        <tr>
-          <td colspan="4">
-            <ol id="taskState" class="stateChange pull-left">
-              <li data-value="1" data-state="1" class="informState active">线人奖励活动</li>
-              <li data-value="2" data-state="2" class="informState">推荐债权方奖励活动</li>
-              <input type="hidden" name="tabType" id="state" value="1">
-            </ol>
-          </td>
-        </tr>
         <tr class="new-style">
           <td>
             <label class="label">活动名称：</label>
@@ -41,7 +32,7 @@
   <div class="data-container mt25">
     <table class="dataShow">
       <thead>
-        <tr class="first_activity">
+        <tr>
           <th width="4%">序号</th>
           <th width="8%">活动名称</th>
           <th width="8%">活动奖励金类型</th>
@@ -51,16 +42,6 @@
           <th width="8%">关联活动奖励金（元）</th>
           <th width="8%">首线索奖励金（元）</th>
           <th class="clueMatch" width="8%">关联首线索奖励金（元）</th>
-          <th width="6%">活动状态</th>
-          <th width="8%">操作</th>
-        </tr>
-        <tr class="second_activity hide">
-          <th width="4%">序号</th>
-          <th width="8%">活动名称</th>
-          <th width="12%">开始时间</th>
-          <th width="12%">停止时间</th>
-          <th width="8%">推荐债权方任务奖励金（元）</th>
-          <th width="8%">推荐债权方清收奖励金（%）</th>
           <th width="6%">活动状态</th>
           <th width="8%">操作</th>
         </tr>
@@ -83,10 +64,6 @@
     <td>{{if item.bounty}}-{{else}}{{item.referrerTrace}}{{/if}}</td>
     <td>{{item.firstTrace}}</td>
     <td>{{item.referrerFirstTrace}}</td>{{/if}}
-    {{if item.type === 2}}
-    <td>{{item.referrerLoaner}}元</td>
-    <td>{{item.loanerClean}}%</td>
-    {{/if}}
     <td>{{if item.state === 0}}停止{{else}}开启{{/if}}</td>
     <td>
       {{if item.state === 1}}
@@ -170,40 +147,6 @@
                 </tbody>
               </table>
             </div>
-          </td>
-        </tr>
-      </table>
-    </form>
-  </div>
-</script>
-<script type="text/template" id="increate-creditor-award-template">
-  <div>
-    <form id="increate-creditor-award-form">
-      <table>
-        <tr>
-          <th>活动名称</th>
-          <td colspan="3">
-            <input type="text" class="search-input" name="title">
-          </td>
-        </tr>
-        <tr>
-          <th>活动开始时间</th>
-          <td>
-            <input type="text" class="search-input required hand" readonly="readonly" name="startAt" id="startAt" onclick="WdatePicker({minDate:'%y-%M-%d',maxDate:'#F{$dp.$D(\'endAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})">
-          </td>
-          <th>活动结束时间</th>
-          <td>
-            <input type="text" class="search-input required hand" readonly="readonly" name="endAt" id="endAt" onclick="WdatePicker({minDate:'#F{$dp.$D(\'startAt\')}',startDate:'#F{$dp.$D(\'startAt\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})">
-          </td>
-        </tr>
-        <tr>
-          <th>推荐债权方任务奖励金</th>
-          <td>
-            <input type="text" class="search-input required digits" name="referrerLoaner" value="0">
-          </td>
-          <th>推荐债权方清收奖励金</th>
-          <td>
-            <input type="text" class="search-input required digits" name="loanerClean" value="0">
           </td>
         </tr>
       </table>

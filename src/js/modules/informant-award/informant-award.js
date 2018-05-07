@@ -15,6 +15,8 @@ define(function(require, exports, module) {
     };
 
     this.initContent = function(isSearch) {
+      var dataForm = jh.utils.formToJson(_this.form);
+      dataForm.tabType = '1';
       var page = new jh.ui.page({
         data_container: $('#informant_award_container'),
         page_container: $('#page_container'),
@@ -22,7 +24,7 @@ define(function(require, exports, module) {
         method: 'post',
         url: '/activity/list',
         contentType: 'application/json',
-        data: jh.utils.formToJson(_this.form),
+        data: dataForm,
         isSearch: isSearch,
         callback: function(data) {
           data.showBounty = function(jsons){
@@ -43,21 +45,6 @@ define(function(require, exports, module) {
     };
 
     this.registerEvent = function() {
-      //活动形式切换
-      $('body').off('change', '.activeTypeChange').on('change', '.activeTypeChange', function() {
-        var m = $(this);
-        var type = m.val();
-        var gdActiveSet = $('#gdActiveSet'),
-          fdActiveSet = $('#fdActiveSet');
-        if (type === "2") {
-          gdActiveSet.removeClass('hide');
-          fdActiveSet.addClass('hide');
-        } else {
-          gdActiveSet.addClass('hide');
-          fdActiveSet.removeClass('hide');
-        }
-      })
-
       //新增档位
       $('body').off('click', '.add_dangwei').on('click', '.add_dangwei', function() {
         var m = $(this);
@@ -145,44 +132,6 @@ define(function(require, exports, module) {
         });
       })
 
-      //新建债权方
-      $('body').off('click', '#increate-creditor-award').on('click', '#increate-creditor-award', function() {
-        var creditorAward = jh.utils.template('increate-creditor-award-template', {});
-        jh.utils.alert({
-          title: '新建债权方奖励活动',
-          content: creditorAward,
-          ok: function() {
-            $('#increate-creditor-award-form').submit();
-            return false;
-          },
-          okValue: '新建',
-          cancel: true
-        })
-
-        jh.utils.validator.init({
-          id: 'increate-creditor-award-form',
-          submitHandler: function(form) {
-            var creditorData = jh.utils.formToJson(form);
-            creditorData.type = 2;
-            jh.utils.ajax.send({
-              method: 'post',
-              url: '/activity/create',
-              data: creditorData,
-              done: function(returnData) {
-                jh.utils.alert({
-                  content: '新增活动成功',
-                  ok: function() {
-                    _this.initContent();
-                  }
-                })
-              }
-            });
-            return false;
-          }
-        });
-      })
-
-
       //停止活动
       $('body').off('click', '.stopAward').on('click', '.stopAward', function() {
         var awardsId = $(this).data('id');
@@ -210,30 +159,6 @@ define(function(require, exports, module) {
           },
           cancel: true
         })
-      })
-
-      //切换状态
-      $('body').off('click', '.informState').on('click', '.informState', function(event, param) {
-        var mine = $(this);
-        var state = mine.data('state');
-        $(this).addClass("active").siblings().removeClass("active");
-        $('#state').val(mine.data('value'))
-        if (state === 1) {
-          $('.second_activity').addClass('hide');
-          $('.first_activity').removeClass('hide');
-          $('#increate-award').removeClass('hide');
-          $('#increate-creditor-award').addClass('hide');
-        } else {
-          $('.first_activity').addClass('hide');
-          $('.second_activity').removeClass('hide');
-          $('#increate-award').addClass('hide');
-          $('#increate-creditor-award').removeClass('hide');
-        }
-        if (param && param === 'autoClick') {
-
-        } else {
-          _this.initContent('tab');
-        }
       })
     };
   }
