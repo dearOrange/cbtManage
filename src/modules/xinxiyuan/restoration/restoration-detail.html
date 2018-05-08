@@ -71,7 +71,7 @@
         <div>
           <label>车辆残值估算:</label>
           {{if data.estimatedMaxPrice && data.estimatedMinPrice}}
-          <span>{{data.carPrice}}</span> {{else}}
+          <span class="dataCar">{{data.carPrice}}</span> {{else}}
           <input type="text" name="carPrice" maxlength="11" class="OnlyPrice required" id="salvage" value="{{data.carPrice}}" /> 
           {{/if}}
         </div>
@@ -119,7 +119,7 @@
         <p>预估费用</p>
         <div>
           <label>车辆残值估算:</label>
-          <span>{{data.finalPrice}}</span>
+          <span class="dataCar">{{data.finalPrice}}</span>
         </div>
         <div>
           <label>处置费用估算:</label>

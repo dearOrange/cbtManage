@@ -121,6 +121,14 @@ define(function(require, exports, module) {
             })
             return false;
           }
+          var dataCar = $('.dataCar').text();
+          if(parseInt(datas.finalPrice) > parseInt(dataCar)) {
+            jh.utils.alert({
+              content: '最终处置费用不能大于残值！',
+              ok: true
+            })
+            return false;
+          }
           var submit = form.find('input[type="submit"]');
           var arr = submit.hasClass('priceStorage') ? '/task/estimate,价格预估完毕' : '/task/fixPrice,价格确认完毕';
           arr = arr.split(',');
