@@ -149,7 +149,12 @@ define(function(require, exports, module) {
                     });
                     return false;
                 }
-
+                if (estimatedMaxPrice > carPrice) {
+                    jh.utils.confirm({
+                        content: '估算值不能大于残值！'
+                    });
+                    return false;
+                }
                 jh.utils.alert({
                     content: strPay,
                     ok: function() {
