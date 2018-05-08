@@ -114,7 +114,7 @@ define(function(require, exports, module) {
             })
             return false;
           }
-          if(datas.estimatedMaxPrice > datas.carPrice) {
+          if(parseInt(datas.estimatedMaxPrice) > parseInt(datas.carPrice)) {
             jh.utils.alert({
               content: '处置费用不能大于残值！',
               ok: true

@@ -149,7 +149,7 @@ define(function(require, exports, module) {
                     });
                     return false;
                 }
-                if (estimatedMaxPrice > carPrice) {
+                if (parseInt(estimatedMaxPrice) > parseInt(carPrice)) {
                     jh.utils.confirm({
                         content: '估算值不能大于残值！'
                     });
