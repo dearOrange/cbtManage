@@ -1,0 +1,203 @@
+<div class="dataContent">
+  <div class="search-container">
+    <form id="sendMoney-list-form">
+      <table class="common_query textLeft search-content">
+        <tr>
+          <td colspan="5">
+            <ol id="" class="stateChange pull-left">
+              <li data-value="1" class="taskState active">放款工单</li>
+              <li data-value="2" class="taskState">收款工单</li>
+              <input type="hidden" name="tabType" id="tabType" value="1">
+            </ol>
+          </td>
+        </tr>
+        <tr class="new-style">
+          <td>
+            <label class="label">车牌：</label>
+            <input type="text" class="search-input" name="carNumber">
+          </td>
+          <td>
+            <label class="label">费用类别：</label>
+            <select name="state">
+              <option value="">全部</option>
+              <option value="withdrawing">查找费</option>
+              <option value="completed">GPS安装费</option>
+              <option value="rejected">关联资产查找费</option>
+              <option value="rejected">清收费</option>
+            </select>
+          </td>
+          <td>
+            <label class="label">债权方名称：</label>
+            <input type="text" class="search-input" name="company">
+          </td>
+          <td class="bill-state">
+            <label class="label">放款状态：</label>
+            <select name="state">
+              <option value="">全部</option>
+              <option value="withdrawing">未打款</option>
+              <option value="completed">已打款</option>
+              <option value="rejected">已取消</option>
+            </select>
+          </td>
+          <td class="bills-state hide">
+            <label class="label">收款状态：</label>
+            <select name="state">
+              <option value="">全部</option>
+              <option value="withdrawing">未到账</option>
+              <option value="completed">已到账</option>
+            </select>
+          </td>
+          <td>
+            <input type="submit" value="查询" class="button search-button">
+          </td>
+          <td>
+            <a href="javascript:void(0)" class="button" id="exportSendMoney">导出</a>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div class="data-container">
+    <table class="dataShow" id="sendMoney_list_container"></table>
+    <div class="page-box pagination" id="page_container"></div>
+  </div>
+</div>
+<script type="text/template" id="sendMoney-list-template">
+  <thead>
+    <tr>
+      <th width="4%">序号</th>
+      <th width="8%">车牌号</th>
+      <th width="8">金额</th>
+      <th width="12%">生成时间</th>
+      <th width="8%">费用类别</th>
+      <th width="8%">债权方名称</th>
+      <th width="8%">联系方式</th>
+      <th width="8%">状态</th>
+      <th width="15%">放款时间</th>
+      <th width="6%">操作</th>
+    </tr>
+  </thead>
+  {{ each list item index }}
+  <tr class="{{if item.isRead === 0}}bgc_blue{{/if}}">
+    <td>{{index+1}}</td>
+    <td>{{item.name}}</td>
+    <td>{{item.company}}</td>
+    <td>{{item.amount}}</td>
+    <td>{{item.actualAmount}}</td>
+    <td>
+      {{if item.payWay === 2 }} 银行卡号  {{/if}}
+      {{if item.payWay === 1}} 支付宝 {{/if}}
+    </td>
+    <td>{{menuState(item.state)}}</td>
+    <td>{{item.createAt}}</td>
+    <td>
+      <a data-id="{{item.id}}" class="sendMoney-detail button">详情</a>
+    </td>
+    <td>
+      {{if item.state === "withdrawing"}}
+      <a data-id="{{item.id}}" data-infos="{{item}}" class="sendMoney oneStyle button">放款</a> {{else}} — — {{/if}}
+    </td>
+  </tr>
+  {{/each}}
+</script>
+<script type="text/template" id="sendMoneyList_sure_template">
+  <div class="officer-width">
+    <form id="play-money-form">
+      <table class="noboder">
+        <tbody>
+          <tr>
+            <td>发放类型</td>
+            <td colspan="3">
+              <select name="payWay" id="selectPay">
+                <option value="1">支付宝</option>
+                <option value="2">银行卡</option>
+              </select>
+            </td>
+          </tr>
+          <tr class="changePaystyle" id="payStyle">
+            <td>支付宝账号</td>
+            <td colspan="3">
+              <input type="text" value="{{alipay}}" />
+            </td>
+          </tr>
+          <tr class="changePaystyle">
+            <td>银行卡账号</td>
+            <td>
+              <input type="text" value="{{bankCard}}" />
+            </td>
+            <td>开户支行</td>
+            <td>
+              <input type="text" value="{{bankName}}" />
+            </td>
+          </tr>
+          <tr>
+            <td>申请提现金额</td>
+            <td>
+              <input type="text" value="{{amount}}" placeholder="请填写申请金额" />
+            </td>
+            <td>实际发放金额</td>
+            <td>
+              <input type="text" value="{{amount}}" name="actualAmount" placeholder="请填写发放金额" />
+            </td>
+          </tr>
+          <tr>
+            <td>上传打款凭证</td>
+            <td colspan="3">
+              <div class="upimg" style="height:120px;width:116px;float:left;">
+                <dl>
+                  <dt class="upload-pa">
+                    <div id="voucher1"></div>
+                    <div class="upload-list">
+                      <div class="upfile-item">
+                        {{if voucher1}}
+                        <img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{voucher1}}?imageMogr2/auto-orient/thumbnail/100x100">
+                        <span class="delete-img"></span>
+                        <input type="hidden" name="voucher1" value="{{voucher1}}"> {{/if}}
+                      </div>
+                    </div>
+                  </dt>
+                </dl>
+              </div>
+              <div class="upimg" style="height:120px;width:116px;float:left;">
+                <dl>
+                  <dt class="upload-pa">
+                    <div id="voucher2"></div>
+                    <div class="upload-list">
+                      <div class="upfile-item">
+                        {{if voucher2}}
+                        <img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{voucher2}}?imageMogr2/auto-orient/thumbnail/100x100">
+                        <span class="delete-img"></span>
+                        <input type="hidden" name="voucher2" value="{{voucher2}}"> {{/if}}
+                      </div>
+                    </div>
+                  </dt>
+                </dl>
+              </div>
+              <div class="upimg" style="height:120px;width:116px;float:left;">
+                <dl>
+                  <dt class="upload-pa">
+                    <div id="voucher3"></div>
+                    <div class="upload-list">
+                      <div class="upfile-item">
+                        {{if voucher3}}
+                        <img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" src="{{viewImgRoot}}{{voucher3}}?imageMogr2/auto-orient/thumbnail/100x100">
+                        <span class="delete-img"></span>
+                        <input type="hidden" name="voucher3" value="{{voucher3}}"> {{/if}}
+                      </div>
+                    </div>
+                  </dt>
+                </dl>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</script>
+<script type="text/javascript">
+seajs.use('modules/billwork/billwork', function(BillWork) {
+  var BillWork = new BillWork();
+  BillWork.init();
+});
+</script>
