@@ -63,7 +63,7 @@
         <tr>
           <th width="4%">序号</th>
           <th width="8%">车牌号</th>
-          <th width="8">金额</th>
+          <th width="8%">金额</th>
           <th width="12%">生成时间</th>
           <th width="8%">费用类别</th>
           <th width="8%">债权方名称</th>
@@ -91,7 +91,7 @@
     <td>{{menuState(item.state)}}</td>
     <td>{{item.dealTime}}</td>
     <td>
-      {{if item.state === "withdrawing"}}
+      {{if item.state === "wait"}}
       <a data-id="{{item.id}}" data-infos="{{item}}" class="sendMoney oneStyle button">放款</a> {{else}} — — {{/if}}
     </td>
   </tr>
