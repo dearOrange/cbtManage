@@ -1813,6 +1813,21 @@ define(function(require, exports, module) {
         case "unverified":
           state = "未验";
           break;
+        case "info":
+          state = "资产查找费";
+          break;
+        case "referrer":
+          state = "关联资产查找费";
+          break;
+        case "location":
+          state = "GPS安装费";
+          break;
+        case "trailer":
+          state = "资产清收费";
+          break;
+        case "wait":
+          state = "审核中";
+          break;
       }
       return state;
     }

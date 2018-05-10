@@ -8,7 +8,7 @@
 define(function(require, exports, module) {
   function BillWork() {
     var _this = this;
-    _this.form = $('#sendMoney-list-form');
+    _this.form = $('#billWork-list-form');
     var searchType = 'loaner';
     this.init = function() {
       this.initContent();
@@ -16,17 +16,16 @@ define(function(require, exports, module) {
     };
     this.initContent = function(isSearch) {
       var page = new jh.ui.page({
-        data_container: $('#sendMoney_list_container'),
+        data_container: $('#billWork_list_container'),
         page_container: $('#page_container'),
         form_container: _this.form,
         method: 'post',
-        url: '/withdraw/list',
+        url: '/workorder/list',
         contentType: 'application/json',
         data: jh.utils.formToJson(_this.form),
         isSearch: isSearch,
         callback: function(data) {
-          data.searchType = searchType;
-          return jh.utils.template('sendMoney-list-template', data);
+          return jh.utils.template('billWork-list-template', data);
         }
       });
       page.init();
@@ -34,7 +33,7 @@ define(function(require, exports, module) {
     this.registerEvent = function() {
       // 搜索
       jh.utils.validator.init({
-        id: 'sendMoney-list-form',
+        id: 'billWork-list-form',
         submitHandler: function(form) {
           _this.initContent(true);
           return false;
@@ -46,15 +45,6 @@ define(function(require, exports, module) {
         var XToken = encodeURIComponent(sessionStorage.getItem('admin-X-Token'));
         var url = REQUESTROOT + '/withdraw/export' + '?' + datas + '&token=' + XToken;
         window.location.href = url;
-      });
-
-      //查看任务详情
-      $('.dataShow').off('click', '.sendMoney-detail').on('click', '.sendMoney-detail', function() {
-        var id = $(this).data('id');
-        var state = $(this).data('state');
-        jh.utils.load("/src/modules/sendMoney/sendMoney-detail", {
-          id: id
-        })
       });
 
       //切换状态
@@ -71,11 +61,9 @@ define(function(require, exports, module) {
         if(val === 2){
           $('.bill-state').addClass('hide');
           $('.bills-state').removeClass('hide');
-          searchType = 'hunter';
         }else{
           $('.bill-state').removeClass('hide');
           $('.bills-state').addClass('hide');
-          searchType = 'loaner';
         }
       })
 
@@ -84,7 +72,7 @@ define(function(require, exports, module) {
         var me = $(this);
         var data = me.data('infos');
         data.viewImgRoot = jh.config.viewImgRoot;
-        var alertContent = jh.utils.template('sendMoneyList_sure_template', data);
+        var alertContent = jh.utils.template('billWork_sure_template', data);
         var id = $(this).data('id');
         jh.utils.alert({
           content: alertContent,
