@@ -107,21 +107,14 @@
           <tr>
           
           
-           <!--  <td>
-              <select name="payWay" id="selectPay">
-                <option value="1">支付宝</option>
-                <option value="2">银行卡</option>
-              </select>
-            </td> -->
           </tr>
           <tr>
                 <td>账号</td>
                 <td>{{phone}}</td>
                 <td>角色</td>
-                {{if role=="type_A"}}
-                <td>线人111</td>
+               
+                <td>线人</td>
                 
-                {{/if}}
           </tr>
           <tr>
                 <td>姓名</td>
@@ -211,7 +204,7 @@
     </div>
       <div class="loan-type">
            <span>打款方式</span>
-           <span><input type="radio" value='1' class="pay-type">支付宝 </span>
+           <span><input type="radio" value='1' class="pay-type" checked="checked">支付宝 </span>
            <span><input type="radio" value='2' class="pay-type">银行卡</span>
        </div>
     <div class="loan_detail">
@@ -221,20 +214,26 @@
                  <td>债权方付款状态</td>
                  <td colspan="3">{{loanerMoneyStatus}}</td>
                </tr>
-               <tr>
+               <tr class="">
                   <td>付款工单号</td>
                   <td>{{orderNo}}</td>
                   <td>打款金额</td>
                   <td> {{amount}}</td>
               </tr>
-              <tr>
-                  <td>账号</td>
-                  <td></td>
+              
+              <tr class="changePaystyle payStyle">
+                  <td>支付宝账号</td>
+                  <td>{{alipayName}}</td>
                   <td>姓名</td>
-                  <td> </td>
+                  <td>{{alipayName}}</td>
               </tr>
-             
-              <tr>
+              <tr class="changePaystyle">
+                  <td>银行卡账号</td>
+                  <td>{{bankCard}}</td>
+                  <td>姓名</td>
+                  <td>{{payeeName}}</td>
+              </tr>
+              <tr class="changePaystyle">
                 <td>开户行</td>
                 <td colspan="3">{{bankName}}</td>
               </tr>

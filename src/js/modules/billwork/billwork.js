@@ -68,68 +68,11 @@ define(function(require, exports, module) {
       })
 
       //打款
-      var selectVal;
-      // $('body').off('click', '.sendMoney').on('click', '.sendMoney', function() {
-      //   var me = $(this);
-      //   var data = me.data('infos');
-      //   data.viewImgRoot = jh.config.viewImgRoot;
-        
-      //   var id = $(this).data('id');
-         
-      //     $.ajax({
-      //        type:'get',
-      //        url:'http://javadev:8080/adminServer/workorder/loanDetail',
-      //        data:{workorderId:id},
-      //        dataType:'json',
-      //         beforeSend: function (xhr) {
-      //          var token = sessionStorage.getItem('admin-X-Token');
-      //             xhr.setRequestHeader("X-Token", token);
-      //           },
-      //        success:function(res){
-      //           var res=res.data;
-      //           var alertContent = jh.utils.template('billWork_sure_template', res);
-      //         jh.utils.alert({
-      //           content: alertContent,
-      //           ok: function() {
-      //             var datas = jh.utils.formToJson($('#play-money-form'));
-      //             datas.drawId = id;
-      //             jh.utils.ajax.send({
-      //               url: '/workorder/loan',
-      //               data:{workorderId:id,payType:selectVal},
-      //               done: function(returnData) {
-      //                 console.log(returnData);
-      //                 jh.utils.alert({
-      //                   content: '已打款',
-      //                   ok: function() {
-      //                     _this.initContent();
-      //                   }
-      //                 })
-      //               }
-      //       });
-      //     },
-      //     cancel: true
-      //   });
-      //        },
-      //        error:function(res){
-
-      //        }
-      //     })
-       
-      //   var picArr = ['voucher1', 'voucher2', 'voucher3'];
-      //   for (var i = 0; i < 3; i++) {
-      //     jh.utils.uploader.init({
-      //       isAppend: false,
-      //       pick: {
-      //         id: '#' + picArr[i]
-      //       }
-      //     });
-      //   };
-      // });
+      var selectVal=1;
       $('body').off('click', '.sendMoney').on('click', '.sendMoney', function() {
         var me = $(this);
         var data = me.data('infos');
         data.viewImgRoot = jh.config.viewImgRoot;
-        
         var id = $(this).data('id');
         jh.utils.ajax.send({
           url: '/workorder/loanDetail',
@@ -174,19 +117,15 @@ define(function(require, exports, module) {
       });
 
       $('body').off('click', '.pay-type').on('click', '.pay-type', function() {
-            // if($(this).prop('checked')){
-            //     $(this).prop('checked',false);
-            //      return false;
-            // }else{
-            //    $('.pay-type').prop('checked',false);
-            //    $(this).prop('checked',true);
-            //     return false;
-            // }
-              
         $(this).prop('checked',true).parent().siblings().children().prop('checked',false);
         selectVal = $(this).val();
-        console.log(selectVal);
-        // $('.changePaystyle').eq(selectVal - 1).attr("id", "payStyle").siblings().removeAttr("id");
+        if(selectVal==1){
+          $('.changePaystyle').eq(selectVal - 1).addClass("payStyle").siblings().removeClass("payStyle");
+        }else{
+          $('.changePaystyle').eq(selectVal - 1).addClass("payStyle");
+          $('.changePaystyle').eq(selectVal).addClass("payStyle");
+          $('.changePaystyle').eq(selectVal - 2).removeClass("payStyle");
+        }
       });
     };
   }
