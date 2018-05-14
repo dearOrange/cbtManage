@@ -838,3 +838,32 @@ table.loanTab td:nth-child(odd){
   display:inline-block;
   width:100px;
 }
+a.abate{
+  background-color:#bbb!important;
+  border-color:#bbb!important;
+}
+.ab_tip{
+  margin-bottom:7px;
+}
+.abate_tip{
+  text-align:center;
+   
+  font-size:16px;
+}
+.abate_input{
+  height:19px;
+  border: 1px solid #bbb;
+  padding:4px 0;
+  text-indent: 10px;
+  width:210px;
+  border-radius:3px;
+}
+.abate_warn{
+ color:red;
+}
+input[type=text].search-del{
+  width:150px;
+}
+.begin-input, .end-input{
+  width:120px !important;
+}

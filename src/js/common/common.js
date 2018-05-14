@@ -1097,6 +1097,7 @@ define(function(require, exports, module) {
 
           try {
             response.menuState = tammy.utils.menuState;
+             response.changer = tammy.utils.changer;
             response.officerClueState = tammy.utils.officerClueState;
             response.officerState = tammy.utils.officerState;
             var viewStr = s.callback.call(null, response); //获取拼接后的展示数据，增加容错处理
@@ -1707,8 +1708,23 @@ define(function(require, exports, module) {
     }
     tammy.utils.getCheckboxValue = getCheckboxValueById;
   })();
-
-  (function() {
+ (function(){
+   var changer=function(state){
+     switch (state){
+       case "wait":
+        state = "等待兑换";
+        break;
+       case "completed":
+        state = "兑换成功";
+        break;  
+        case "rejected":
+        state = "兑换作废";
+        break;  
+     }  
+      tammy.utils.changer = changer;
+   }
+ })();
+  (function(){
     var menuState = function(state) {
       switch (state) {
         case "new":

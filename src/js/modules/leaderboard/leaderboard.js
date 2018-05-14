@@ -6,9 +6,9 @@
  */
 'use strict';
 define(function(require, exports, module) {
-  function BillWork() {
+  function Leaderboard() {
     var _this = this;
-    _this.form = $('#billWork-list-form');
+    _this.form = $('#leaderboard-list-form');
     var searchType = 'loaner';
     this.init = function() {
       this.initContent();
@@ -16,16 +16,16 @@ define(function(require, exports, module) {
     };
     this.initContent = function(isSearch) {
       var page = new jh.ui.page({
-        data_container: $('#billWork_list_container'),
+        data_container: $('#leaderboard_list_container'),
         page_container: $('#page_container'),
         form_container: _this.form,
         method: 'post',
-        url: '/workorder/list',
+        url: '/exchange/list',
         contentType: 'application/json',
         data: jh.utils.formToJson(_this.form),
         isSearch: isSearch,
         callback: function(data) {
-          return jh.utils.template('billWork-list-template', data);
+          return jh.utils.template('leaderboard-list-template', data);
         }
       });
       page.init();
@@ -33,7 +33,7 @@ define(function(require, exports, module) {
     this.registerEvent = function() {
       // 搜索
       jh.utils.validator.init({
-        id: 'billWork-list-form',
+        id: 'leaderboard-list-form',
         submitHandler: function(form) {
           _this.initContent(true);
           return false;
@@ -58,59 +58,54 @@ define(function(require, exports, module) {
         } else {
           _this.initContent('tab');
         }
-        if(val === 2){
-          $('.bill-state').addClass('hide');
-          $('.bills-state').removeClass('hide');
-        }else{
-          $('.bill-state').removeClass('hide');
-          $('.bills-state').addClass('hide');
-        }
+        
       })
 
-      //打款
+      //充值
       var selectVal=1;
-      $('body').off('click', '.sendMoney').on('click', '.sendMoney', function() {
+      $('body').off('click', '.changer').on('click', '.changer', function() {
         var me = $(this);
         var data = me.data('infos');
         data.viewImgRoot = jh.config.viewImgRoot;
         var id = $(this).data('id');
-        jh.utils.ajax.send({
-          url: '/workorder/loanDetail',
-          data:{workorderId:id},
-          done:function(res){
-             var res=res.data;
-             console.log(res);
-             if(res.role=="type_A"){
-               res.role='线人';
-             }else if(res.role=="type_B"){
-                 res.role='捕头';
-             }else{
-               res.role='自有线人';
-             }
-             var alertContent = jh.utils.template('billWork_sure_template', res);
-             jh.utils.alert({
-          content: alertContent,
-          ok: function() {
-            var datas = jh.utils.formToJson($('#play-money-form'));
-            datas.drawId = id;
-            jh.utils.ajax.send({
-              url: '/workorder/loan',
-              data:{workorderId:id,payType:selectVal},
-              done: function(returnData) {
-                console.log(returnData);
-                jh.utils.alert({
-                  content: '已打款',
-                  ok: function() {
-                    _this.initContent();
-                  }
-                })
-              }
-            });
-          },
-          cancel: true
-        });
-          }
-        })
+        var 
+        // jh.utils.ajax.send({
+        //   url: '/workorder/loanDetail',
+        //   data:{workorderId:id},
+        //   done:function(res){
+        //      var res=res.data;
+        //      console.log(res);
+        //      if(res.role=="type_A"){
+        //        res.role='线人';
+        //      }else if(res.role=="type_B"){
+        //          res.role='捕头';
+        //      }else{
+        //        res.role='自有线人';
+        //      }
+        //      var alertContent = jh.utils.template('billWork_sure_template', res);
+        //      jh.utils.alert({
+        //   content: alertContent,
+        //   ok: function() {
+        //     var datas = jh.utils.formToJson($('#play-money-form'));
+        //     datas.drawId = id;
+        //     jh.utils.ajax.send({
+        //       url: '/workorder/loan',
+        //       data:{workorderId:id,payType:selectVal},
+        //       done: function(returnData) {
+        //         console.log(returnData);
+        //         jh.utils.alert({
+        //           content: '已打款',
+        //           ok: function() {
+        //             _this.initContent();
+        //           }
+        //         })
+        //       }
+        //     });
+        //   },
+        //   cancel: true
+        // });
+        //   }
+        // })
         
         var picArr = ['voucher1', 'voucher2', 'voucher3'];
         for (var i = 0; i < 3; i++) {
@@ -163,5 +158,5 @@ define(function(require, exports, module) {
       });
     };
   }
-  module.exports = BillWork;
+  module.exports = Leaderboard;
 });

@@ -1,51 +1,42 @@
 <div class="dataContent">
   <div class="search-container">
-    <form id="billWork-list-form">
+    <form id="leaderboard-list-form">
       <table class="common_query textLeft search-content">
         <tr>
           <td colspan="6">
             <ol id="" class="stateChange pull-left">
-              <li data-value="1" class="taskState active">放款工单</li>
-              <li data-value="2" class="taskState">收款工单</li>
+              <li data-value="1" class="taskState active">兑换话费</li>
+              <li data-value="2" class="taskState">兑换物品</li>
               <input type="hidden" name="tabType" id="tabType" value="1">
             </ol>
           </td>
         </tr>
         <tr class="new-style">
           <td>
-            <label class="label">车牌：</label>
-            <input type="text" class="search-input" name="carNumber">
+            <label class="label">兑换人：</label>
+            <input type="text" class="search-input search-del" name="changer">
           </td>
           <td>
-            <label class="label">费用类别：</label>
-            <select name="source">
-              <option value="">全部</option>
-              <option value="info">资产查找费</option>
-              <option value="location">GPS安装费</option>
-              <option value="referrer">关联资产查找费</option>
-              <option value="trailer">资产清收费</option>
-            </select>
+            <label class="label">充值号码：</label>
+            <input type="text" class="search-input search-del" name="chargeNum">
           </td>
-          <td>
-            <label class="label">债权方名称：</label>
-            <input type="text" class="search-input" name="companyName">
+          <td class="hide">
+            <label class="label">兑换号码：</label>
+            <input type="text" class="search-input search-del" name="chargeNum">
           </td>
           <td class="bill-state">
-            <label class="label">放款状态：</label>
+            <label class="label">兑换状态：</label>
             <select name="state">
               <option value="">全部</option>
-              <option value="wait">未打款</option>
-              <option value="completed">已打款</option>
-              <option value="rejected">已取消</option>
+              <option value="wait">等待兑换</option>
+              <option value="completed">兑换成功</option>
+              <option value="rejected">兑换作废</option>
             </select>
           </td>
-          <td class="bills-state hide">
-            <label class="label">收款状态：</label>
-            <select name="state2">
-              <option value="">全部</option>
-              <option value="withdrawing">未到账</option>
-              <option value="completed">已到账</option>
-            </select>
+          <td>
+            <label class="label">充值日期：</label>
+            <input type="text" class="search-input hand begin-input" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
+            <input type="text" class="search-input hand end-input" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
           </td>
           <td>
             <input type="submit" value="查询" class="button search-button">
@@ -62,37 +53,37 @@
       <thead>
         <tr>
           <th width="4%">序号</th>
-          <th width="8%">车牌号</th>
-          <th width="8%">金额</th>
-          <th width="12%">生成时间</th>
-          <th width="8%">费用类别</th>
-          <th width="8%">债权方名称</th>
-          <th width="8%">联系方式</th>
+          <th width="8%">兑换人</th>
+          <th width="8%">兑换账户</th>
+          <th width="12%">金币消耗</th>
+          <th width="8%">兑换时间</th>
+          <th width="8%">充值号码</th>
+          <th width="8%">充值金额/元</th>
           <th width="8%">状态</th>
-          <th width="15%">放款时间</th>
+          <th width="15%">充值时间</th>
           <th width="10%">操作</t10h>
         </tr>
       </thead>
-      <tbody id="billWork_list_container"></tbody>
+      <tbody id="leaderboard_list_container"></tbody>
     </table>
     <div class="page-box pagination" id="page_container"></div>
   </div>
 </div>
-<script type="text/template" id="billWork-list-template">
+<script type="text/template" id="leaderboard-list-template">
   {{ each list item index }}
   <tr>
     <td>{{index+1}}</td>
-    <td>{{item.carNumber}}</td>
-    <td>{{item.amount}}</td>
+    <td>{{item.exchanger}}</td>
+    <td>{{item.exchangerPhone}}</td>
+    <td>{{item.coin}}</td>
     <td>{{item.createAt}}</td>
-    <td>{{menuState(item.source)}}</td>
-    <td>{{item.companyName}}</td>
-    <td>{{item.companyName}}</td>
-    <td>{{menuState(item.state)}}</td>
-    <td>{{item.dealTime}}</td>
+    <td>{{item.mobile}}</td>
+    <td>{{item.coin/100}}</td>
+    <td>{{item.state}}</td>
+    <td>{{item.rechargeAt}}</td>
     <td>
       {{if item.state === "wait"}}
-      <a data-id="{{item.id}}" data-infos="{{item}}" class="sendMoney button">放款</a> 
+      <a data-id="{{item.id}}" data-infos="{{item}}" class="changer button">充值</a> 
       <a class="abate button" data-id="{{item.id}}" data-infos="{{item}}">作废</a>
       {{else}}
        — — 
@@ -173,8 +164,8 @@
     <p class="ab_tip abate_warn">注 : 作废之后放款工单将不可恢复,请谨慎操作！</p>
 </script>
 <script type="text/javascript">
-seajs.use('modules/billwork/billwork', function(BillWork) {
-  var BillWork = new BillWork();
-  BillWork.init();
+seajs.use('modules/leaderboard/leaderboard', function(Leaderboard) {
+  var Leaderboard = new Leaderboard();
+  Leaderboard.init();
 });
 </script>
