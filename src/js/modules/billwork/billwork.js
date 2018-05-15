@@ -34,7 +34,7 @@ define(function(require, exports, module) {
       // 搜索
       jh.utils.validator.init({
         id: 'billWork-list-form',
-        submitHandler: function(form) {
+        submitHandler: function(form){
           _this.initContent(true);
           return false;
         }
