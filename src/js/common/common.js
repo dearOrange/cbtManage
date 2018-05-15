@@ -1100,6 +1100,7 @@ define(function(require, exports, module) {
              response.changer = tammy.utils.changer;
               response.moneyType = tammy.utils.moneyType;
               response.creditorState = tammy.utils.creditorState;
+               response.loanState = tammy.utils.loanState;
             response.officerClueState = tammy.utils.officerClueState;
             response.officerState = tammy.utils.officerState;
             var viewStr = s.callback.call(null, response); //获取拼接后的展示数据，增加容错处理
@@ -1728,6 +1729,7 @@ define(function(require, exports, module) {
    }
     tammy.utils.changer = changer;
  })();
+ //放款状态
   (function(){
     var menuState = function(state) {
       switch (state) {
@@ -1877,10 +1879,28 @@ define(function(require, exports, module) {
      }
       tammy.utils.moneyType = moneyType;
   })();
+  //打款工单放款状态
+  (function(){
+     var loanState=function(state){
+        switch (state){
+          case "withdrawing":
+          state='未打款';
+          break;
+          case "completed":
+          state='已打款';
+          break;
+          case "rejected":
+          state='已拒绝';
+          break;
+        }
+        return state;
+     }
+  tammy.utils.loanState = loanState;
+  })();
   // 放款工单债权方付款状态
   (function(){
     var creditorState=function(state){
-      switch (state){
+      switch (state) {
          case '0':
          state='未到账';
          break;
@@ -1889,7 +1909,7 @@ define(function(require, exports, module) {
          break;
       } 
     return state;
-    }
+    } 
     tammy.utils.creditorState = creditorState;
   })();
   (function() {
