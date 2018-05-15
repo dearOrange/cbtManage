@@ -1098,6 +1098,8 @@ define(function(require, exports, module) {
           try {
             response.menuState = tammy.utils.menuState;
              response.changer = tammy.utils.changer;
+              response.moneyType = tammy.utils.moneyType;
+              response.creditorState = tammy.utils.creditorState;
             response.officerClueState = tammy.utils.officerClueState;
             response.officerState = tammy.utils.officerState;
             var viewStr = s.callback.call(null, response); //获取拼接后的展示数据，增加容错处理
@@ -1708,6 +1710,7 @@ define(function(require, exports, module) {
     }
     tammy.utils.getCheckboxValue = getCheckboxValueById;
   })();
+  // 积分兑换
  (function(){
    var changer=function(state){
      switch (state){
@@ -1721,8 +1724,9 @@ define(function(require, exports, module) {
         state = "兑换作废";
         break;  
      }  
-      tammy.utils.changer = changer;
+     return state;
    }
+    tammy.utils.changer = changer;
  })();
   (function(){
     var menuState = function(state) {
@@ -1849,8 +1853,47 @@ define(function(require, exports, module) {
     }
     tammy.utils.menuState = menuState;
   })();
+  // 放款工单费用类别
+  (function(){
+     var moneyType=function(type){
+      switch (type) {
+         case 'info':
+         type='资产查找费';
+         break;
+         case 'referrer':
+         type='关联资产查找费';
+         break;
+         case 'location':
+         type='GPS安装费';
+         break;
+         case 'trailer':
+         type='资产清收费';
+         break;
+         case 'entrust':
+         type='委托费';
+         break;
+      }
+      return type;
+     }
+      tammy.utils.moneyType = moneyType;
+  })();
+  // 放款工单债权方付款状态
+  (function(){
+    var creditorState=function(state){
+      switch (state){
+         case '0':
+         state='未到账';
+         break;
+         case '1':
+         state='已到账';
+         break;
+      } 
+    return state;
+    }
+    tammy.utils.creditorState = creditorState;
+  })();
   (function() {
-    function getCountNewByType(type) {
+    function getCountNewByType(type){
       var urlStr = '';
       switch (type) {
         case '203':

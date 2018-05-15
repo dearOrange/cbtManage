@@ -22,7 +22,7 @@
           </td>
           <td class="hide">
             <label class="label">兑换号码：</label>
-            <input type="text" class="search-input search-del" name="chargeNum">
+            <input type="text" class="search-input search-del" name="changeNum">
           </td>
           <td class="bill-state">
             <label class="label">兑换状态：</label>
@@ -51,16 +51,29 @@
   <div class="data-container">
     <table class="dataShow">
       <thead>
-        <tr>
-          <th width="4%">序号</th>
-          <th width="8%">兑换人</th>
+        <tr class="charge_title">
+          <th width="3%">序号</th>
+          <th width="6%">兑换人</th>
           <th width="8%">兑换账户</th>
-          <th width="12%">金币消耗</th>
+          <th width="8%">金币消耗</th>
           <th width="8%">兑换时间</th>
           <th width="8%">充值号码</th>
           <th width="8%">充值金额/元</th>
           <th width="8%">状态</th>
-          <th width="15%">充值时间</th>
+          <th width="10%">充值时间</th>
+          <th width="10%">操作</t10h>
+        </tr>
+        <tr class="charge_titles hide">
+          <th width="3%">序号</th>
+          <th width="6%">兑换人</th>
+          <th width="8%">兑换账户</th>
+          <th width="8%">金币消耗</th>
+          <th width="8%">兑换时间</th>
+          <th width="8%">兑换物品</th>
+          <th width="8%">金额/元</th>
+          <th width="12%">收货人/收货地址</th>
+          <th width="6%">状态</th>
+          <th width="10%">完成时间</th>
           <th width="10%">操作</t10h>
         </tr>
       </thead>
@@ -79,6 +92,35 @@
     <td>{{item.createAt}}</td>
     <td>{{item.mobile}}</td>
     <td>{{item.coin/100}}</td>
+    <td>{{item.state}}</td>
+    <td>{{item.rechargeAt}}</td>
+    <td>
+      {{if item.state === "wait"}}
+      <a data-id="{{item.id}}" data-infos="{{item}}" class="changer button">充值</a>
+      <a class="abate button" data-id="{{item.id}}" data-infos="{{item}}">作废</a>
+      {{else}}
+       — — 
+      {{/if}}
+    </td>
+  </tr>
+  {{/each}}
+</script>
+<script type="text/template" id="leaderboard-list-template1">
+  {{ each list item index }}
+  <tr>
+    <td>{{index+1}}</td>
+    <td>{{item.exchanger}}</td>
+    <td>{{item.exchangerPhone}}</td>
+    <td>{{item.coin}}</td>
+    <td>{{item.createAt}}</td>
+    {{if item.val==1}}
+    <td>{{item.mobile}}</td>
+    <td>{{item.coin/100}}</td>
+    {{else}}
+    <td><img src={{item.goodsImg}} alt=""></td>
+    <td>{{item.coin/100}}</td>
+    <td>{{item.name}}/{{item.address}}</td>
+    {{/if}}
     <td>{{item.state}}</td>
     <td>{{item.rechargeAt}}</td>
     <td>
@@ -132,19 +174,19 @@
                   <td> {{amount}}</td>
               </tr>
               
-              <tr class="changePaystyle payStyle">
+              <tr  >
                   <td>支付宝账号</td>
-                  <td>{{alipayName}}</td>
+                  <td>{{id}}</td>
                   <td>姓名</td>
                   <td>{{alipayName}}</td>
               </tr>
-              <tr class="changePaystyle">
+              <tr  >
                   <td>银行卡账号</td>
                   <td>{{bankCard}}</td>
                   <td>姓名</td>
                   <td>{{payeeName}}</td>
               </tr>
-              <tr class="changePaystyle">
+              <tr  >
                 <td>开户行</td>
                 <td colspan="3">{{bankName}}</td>
               </tr>
@@ -155,13 +197,17 @@
     </form>
   </div>
 </script>
-<script type="text/template" id="billWork_abate_template">
-    <p class="abate_tip ab_tip">确定作废此单吗？</p>
+<script type="text/template" id="leaderboard_abate_template">
+    <p class="abate_tip ab_tip">确定作废此兑换申请吗？</p>
     <div class="abate_detail ab_tip">
        <span class="abate_cause">作废原因 : </span>
        <input type="text" placeholder="请输入作废原因" class="abate_input">
     </div>
-    <p class="ab_tip abate_warn">注 : 作废之后放款工单将不可恢复,请谨慎操作！</p>
+    <p class="ab_tip abate_warn">注 : 作废之后积分将原路返还原有账号！</p>
+</script>
+<script type="text/template" id="leaderboard_charge_template">
+   <p class="charge_del">充值号码：<span>{{mobile}}</span></p>
+   <p  class="charge_del">充值金额：<span >{{goods}}</span></p>
 </script>
 <script type="text/javascript">
 seajs.use('modules/leaderboard/leaderboard', function(Leaderboard) {

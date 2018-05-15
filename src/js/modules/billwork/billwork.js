@@ -43,7 +43,7 @@ define(function(require, exports, module) {
       $('.dataContent').off('click', '#exportSendMoney').on('click', '#exportSendMoney', function() {
         var datas = _this.form.serialize();
         var XToken = encodeURIComponent(sessionStorage.getItem('admin-X-Token'));
-        var url = REQUESTROOT + '/withdraw/export' + '?' + datas + '&token=' + XToken;
+        var url = REQUESTROOT + '/workorder/export' + '?' + datas + '&token=' + XToken;
         window.location.href = url;
       });
 

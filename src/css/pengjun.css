@@ -867,3 +867,9 @@ input[type=text].search-del{
 .begin-input, .end-input{
   width:120px !important;
 }
+.charge_del{
+  margin-bottom:6px;
+}
+.charge_del span{
+  color:red;
+}

@@ -14,8 +14,9 @@ define(function(require, exports, module) {
       this.initContent();
       this.registerEvent();
     };
+   
     this.initContent = function(isSearch) {
-      var page = new jh.ui.page({
+        var page = new jh.ui.page({
         data_container: $('#leaderboard_list_container'),
         page_container: $('#page_container'),
         form_container: _this.form,
@@ -24,8 +25,8 @@ define(function(require, exports, module) {
         contentType: 'application/json',
         data: jh.utils.formToJson(_this.form),
         isSearch: isSearch,
-        callback: function(data) {
-          return jh.utils.template('leaderboard-list-template', data);
+        callback: function(data) { 
+          return   jh.utils.template('leaderboard-list-template', data);    
         }
       });
       page.init();
@@ -43,7 +44,7 @@ define(function(require, exports, module) {
       $('.dataContent').off('click', '#exportSendMoney').on('click', '#exportSendMoney', function() {
         var datas = _this.form.serialize();
         var XToken = encodeURIComponent(sessionStorage.getItem('admin-X-Token'));
-        var url = REQUESTROOT + '/withdraw/export' + '?' + datas + '&token=' + XToken;
+        var url = REQUESTROOT + '/exchange/export' + '?' + datas + '&token=' + XToken;
         window.location.href = url;
       });
 
@@ -52,13 +53,21 @@ define(function(require, exports, module) {
         var mine = $(this);
         var val = mine.data('value');
         $(this).addClass("active").siblings().removeClass("active");
-        $('#tabType').val(val)
+        $('#tabType').val(val);
         if (param && param === 'autoClick') {
 
         } else {
           _this.initContent('tab');
         }
-        
+        if(val==1){
+           $('.charge_title').removeClass('hide');
+           $('.charge_titles').addClass('hide');
+           
+        }else{
+           $('.charge_title').addClass('hide');
+           $('.charge_titles').removeClass('hide');
+            
+        }
       })
 
       //充值
@@ -66,46 +75,31 @@ define(function(require, exports, module) {
       $('body').off('click', '.changer').on('click', '.changer', function() {
         var me = $(this);
         var data = me.data('infos');
+        console.log(data);
         data.viewImgRoot = jh.config.viewImgRoot;
         var id = $(this).data('id');
-        var 
-        // jh.utils.ajax.send({
-        //   url: '/workorder/loanDetail',
-        //   data:{workorderId:id},
-        //   done:function(res){
-        //      var res=res.data;
-        //      console.log(res);
-        //      if(res.role=="type_A"){
-        //        res.role='线人';
-        //      }else if(res.role=="type_B"){
-        //          res.role='捕头';
-        //      }else{
-        //        res.role='自有线人';
-        //      }
-        //      var alertContent = jh.utils.template('billWork_sure_template', res);
-        //      jh.utils.alert({
-        //   content: alertContent,
-        //   ok: function() {
-        //     var datas = jh.utils.formToJson($('#play-money-form'));
-        //     datas.drawId = id;
-        //     jh.utils.ajax.send({
-        //       url: '/workorder/loan',
-        //       data:{workorderId:id,payType:selectVal},
-        //       done: function(returnData) {
-        //         console.log(returnData);
-        //         jh.utils.alert({
-        //           content: '已打款',
-        //           ok: function() {
-        //             _this.initContent();
-        //           }
-        //         })
-        //       }
-        //     });
-        //   },
-        //   cancel: true
-        // });
-        //   }
-        // })
+        
+      
+        var alertContent = jh.utils.template('leaderboard_charge_template', data);
+        jh.utils.alert({
+              content:alertContent,
+              ok: function() {
+                 jh.utils.ajax.send({
+                    url: '/exchange/sure',
+                    data:{exchangeId:id},
+                    done:function(res){
+                       jh.utils.alert({
+                        content: '充值成功',
+                        ok: function() {
+                          _this.initContent();
+                        }
+                      })
+                    }
+                 })
+              },
+              cancel: true
+          })
+        
         
         var picArr = ['voucher1', 'voucher2', 'voucher3'];
         for (var i = 0; i < 3; i++) {
@@ -117,21 +111,21 @@ define(function(require, exports, module) {
           });
         };
       });
-      // 放款作废
+      // 充值作废
       $('body').off('click','.abate').on('click','.abate',function(){
         var me=$(this);
         var data = me.data('infos');
         var id = $(this).data('id');
         console.log(id);
-        var alertContent=jh.utils.template('billWork_abate_template',data)
+        var alertContent=jh.utils.template('leaderboard_abate_template',data)
            jh.utils.alert({
              content:alertContent,
              ok:function(){
               var reason=$('.abate_input').val()?$('.abate_input').val():'';
               console.log(reason);
                 jh.utils.ajax.send({
-                   url:'/workorder/loanCancel',
-                   data:{workorderId:id,reason:reason},
+                   url:'/exchange/cancel',
+                   data:{exchangeId:id,reason:reason},
                    done:function(res){
                  jh.utils.alert({
                   content: '此单已作废',
@@ -145,18 +139,9 @@ define(function(require, exports, module) {
              cancel: true
            })
       })
-      $('body').off('click', '.pay-type').on('click', '.pay-type', function() {
-        $(this).prop('checked',true).parent().siblings().children().prop('checked',false);
-        selectVal = $(this).val();
-        if(selectVal==1){
-          $('.changePaystyle').eq(selectVal - 1).addClass("payStyle").siblings().removeClass("payStyle");
-        }else{
-          $('.changePaystyle').eq(selectVal - 1).addClass("payStyle");
-          $('.changePaystyle').eq(selectVal).addClass("payStyle");
-          $('.changePaystyle').eq(selectVal - 2).removeClass("payStyle");
-        }
-      });
-    };
+      
+      
+    }
   }
   module.exports = Leaderboard;
 });
