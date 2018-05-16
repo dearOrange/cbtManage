@@ -113,9 +113,13 @@ define(function(require, exports, module) {
             contentStr = '确定' + tip + '吗？';
             if(state == '2') {
               contentStr = '<div class="text-center"><span>确定' + tip + '吗？</span><br/>';
-              contentStr += '<label>请选择拒绝原因：</label><br/>';
-              contentStr += '<select style="width:300px;"><option value="">线索模糊不清</option><option value="">照片拍摄时间或位置信息缺失</option><option value="">照片拍摄位置与GPS定位不符</option><option value="">GPS定位信息缺失</option><option value="">线索重复上传</option><option value="">此线索已先有其他线人上传</option><option value="">其他</option></select>';
-              contentStr += '</div>';
+              contentStr += '<label>请选择拒绝原因：</label><br/><select class="rejectReason" style="width:210px;">';
+              var optionArr = ['线索模糊不清','照片拍摄时间或位置信息缺失','照片拍摄位置与GPS定位不符','GPS定位信息缺失','线索重复上传','此线索已先有其他线人上传','其他'];
+              for(var j=0;j<optionArr.length;j++){
+                var optionItem = optionArr[j];
+                contentStr += '<option value="'+optionItem+'">'+optionItem+'</option>';
+              }
+              contentStr += '</select></div>';
             }
           } else {
             contentStr = '<div class="text-center"><span>确定' + tip + '吗？</span><br/>';
@@ -149,7 +153,6 @@ define(function(require, exports, module) {
                   min: selectItem.data('min'),
                   max: selectItem.data('max')
                 };
-                console.log(jsons);
                 activityJson = JSON.stringify(jsons);
               }
               jh.utils.ajax.send({
@@ -159,7 +162,8 @@ define(function(require, exports, module) {
                   traceIds: ids,
                   validState: state,
                   kind: result.kind,
-                  activityJson: activityJson
+                  activityJson: activityJson,
+                  reason: $('.rejectReason').val()
                 },
                 done: function(returnData) {
                   jh.utils.alert({
