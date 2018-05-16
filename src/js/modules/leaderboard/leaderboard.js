@@ -9,7 +9,6 @@ define(function(require, exports, module) {
   function Leaderboard() {
     var _this = this;
     _this.form = $('#leaderboard-list-form');
-    var searchType = 'loaner';
     this.init = function() {
       this.initContent();
       this.registerEvent();

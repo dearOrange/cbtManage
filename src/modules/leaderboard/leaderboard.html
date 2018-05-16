@@ -14,15 +14,15 @@
         <tr class="new-style">
           <td>
             <label class="label">兑换人：</label>
-            <input type="text" class="search-input search-del" name="changer">
+            <input type="text" class="search-input search-del" name="exchanger">
           </td>
           <td class="labelNum">
             <label class="label">充值号码：</label>
-            <input type="text" class="search-input search-del" name="chargeNum">
+            <input type="text" class="search-input search-del" name="exchangerPhone">
           </td>
           <td class="labelNum hide">
             <label class="label">兑换号码：</label>
-            <input type="text" class="search-input search-del" name="changeNum">
+            <input type="text" class="search-input search-del" name="mobile">
           </td>
           <td class="bill-state">
             <label class="label">兑换状态：</label>
@@ -34,16 +34,11 @@
             </select>
           </td>
           <td class="changerTime">
-            <label class="labelTime">充值时间：</label>
-            <label class="labelTimes hide">兑换时间：</label>
+            <label class="label labelTime">充值时间：</label>
+            <label class="label labelTimes hide">兑换时间：</label>
             <input type="text" class="search-input hand begin-input" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
             <input type="text" class="search-input hand end-input" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
           </td>
-        <!--   <td class="changerTime1 hide">
-            <label class="label">兑换时间：</label>
-            <input type="text" class="search-input hand begin-input" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
-            <input type="text" class="search-input hand end-input" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
-          </td> -->
           <td>
             <input type="submit" value="查询" class="button search-button">
           </td>
