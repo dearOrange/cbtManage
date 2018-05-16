@@ -15,12 +15,6 @@ define(function(require, exports, module) {
       this.registerEvent();
     };
     this.initContent = function(isSearch) {
-<<<<<<< HEAD
-      var dataform = jh.utils.formToJson(_this.form);
-      console.log(dataform.state[0])
-      dataform.state = dataform.state[0];
-=======
->>>>>>> 339daccebadb08fdf61ddd2fe13332ef0ecdaa8e
       var page = new jh.ui.page({
         data_container: $('#billWork_list_container'),
         page_container: $('#page_container'),

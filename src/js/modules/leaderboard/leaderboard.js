@@ -64,11 +64,14 @@ define(function(require, exports, module) {
         if(val==2){
            $('.charge_title').addClass('hide');
            $('.charge_titles').removeClass('hide');
-            $('.labelNum').eq(1).removeClass('hide').siblings().addClass('hide');
+           $('.labelTime').addClass('hide');
+           $('.labelTimes').removeClass('hide');
         }else{  
             $('.charge_title').removeClass('hide');
             $('.charge_titles').addClass('hide');
-            $('.labelNum').eq(0).removeClass('hide').siblings().addClass('hide');
+            $('.labelTime').removeClass('hide');
+            $('.labelTimes').addClass('hide');
+           
         }
       })
 
