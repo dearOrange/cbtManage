@@ -62,11 +62,19 @@ define(function(require, exports, module) {
         if(val==1){
            $('.charge_title').removeClass('hide');
            $('.charge_titles').addClass('hide');
-           
-        }else{
+           $('.labelNum').removeClass('hide');
+           $('.labelNum1').addClass('hide');
+           $('.labelTime').removeClass('hide');
+           $('.labelTime1').addClass('hide');
+           // $('.labelNum').eq(0).removeClass('hide').siblings().addClass('hide');
+        }else{  
            $('.charge_title').addClass('hide');
-           $('.charge_titles').removeClass('hide');
-            
+            $('.charge_titles').removeClass('hide');
+            // $('.labelNum').eq(1).removeClass('hide').siblings().addClass('hide');
+           $('.labelNum').addClass('hide');
+           $('.labelNum1').removeClass('hide');
+           $('.labelTime').addClass('hide');
+           $('.labelTime1').removeClass('hide');
         }
       })
 

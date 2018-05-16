@@ -16,11 +16,11 @@
             <label class="label">兑换人：</label>
             <input type="text" class="search-input search-del" name="changer">
           </td>
-          <td>
+          <td class="labelNum">
             <label class="label">充值号码：</label>
             <input type="text" class="search-input search-del" name="chargeNum">
           </td>
-          <td class="hide">
+          <td class="labelNum1 hide">
             <label class="label">兑换号码：</label>
             <input type="text" class="search-input search-del" name="changeNum">
           </td>
@@ -33,8 +33,14 @@
               <option value="rejected">兑换作废</option>
             </select>
           </td>
-          <td>
-            <label class="label">充值日期：</label>
+          <td class="changerTime">
+            <label class="labelTime">充值时间：</label>
+            <label class="labelTime1 hide">兑换时间：</label>
+            <input type="text" class="search-input hand begin-input" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
+            <input type="text" class="search-input hand end-input" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
+          </td>
+          <td class="changerTime1 hide">
+            <label class="label">兑换时间：</label>
             <input type="text" class="search-input hand begin-input" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
             <input type="text" class="search-input hand end-input" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
           </td>
