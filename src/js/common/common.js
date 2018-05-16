@@ -1099,6 +1099,7 @@ define(function(require, exports, module) {
             response.menuState = tammy.utils.menuState;
              response.changer = tammy.utils.changer;
               response.moneyType = tammy.utils.moneyType;
+              response.doState = tammy.utils.doState;
               response.creditorState = tammy.utils.creditorState;
                response.loanState = tammy.utils.loanState;
             response.officerClueState = tammy.utils.officerClueState;
@@ -1911,6 +1912,21 @@ define(function(require, exports, module) {
     return state;
     } 
     tammy.utils.creditorState = creditorState;
+  })();
+  // 可执行软任务状态
+(function(){
+    var doState=function(state){
+      switch (state) {
+         case '0':
+         state='不可执行';
+         break;
+         case '1':
+         state='可执行';
+         break;
+      } 
+    return state;
+    } 
+    tammy.utils.doState = doState;
   })();
   (function() {
     function getCountNewByType(type){

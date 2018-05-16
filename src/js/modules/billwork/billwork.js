@@ -17,7 +17,7 @@ define(function(require, exports, module) {
     this.initContent = function(isSearch) {
       var dataform = jh.utils.formToJson(_this.form);
       console.log(dataform.state[0])
-      dataform.state = dataform.state[0]
+      dataform.state = dataform.state[0];
       var page = new jh.ui.page({
         data_container: $('#billWork_list_container'),
         page_container: $('#page_container'),
