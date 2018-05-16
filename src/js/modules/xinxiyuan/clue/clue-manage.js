@@ -111,6 +111,12 @@ define(function(require, exports, module) {
           var result = returnData.data;
           if (result.kind === '0' || state != '1') {
             contentStr = '确定' + tip + '吗？';
+            if(state == '2') {
+              contentStr = '<div class="text-center"><span>确定' + tip + '吗？</span><br/>';
+              contentStr += '<label>请选择拒绝原因：</label><br/>';
+              contentStr += '<select style="width:300px;"><option value="">线索模糊不清</option><option value="">照片拍摄时间或位置信息缺失</option><option value="">照片拍摄位置与GPS定位不符</option><option value="">GPS定位信息缺失</option><option value="">线索重复上传</option><option value="">此线索已先有其他线人上传</option><option value="">其他</option></select>';
+              contentStr += '</div>';
+            }
           } else {
             contentStr = '<div class="text-center"><span>确定' + tip + '吗？</span><br/>';
             contentStr += '';
