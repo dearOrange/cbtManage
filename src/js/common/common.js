@@ -1100,6 +1100,7 @@ define(function(require, exports, module) {
              response.changer = tammy.utils.changer;
               response.moneyType = tammy.utils.moneyType;
               response.doState = tammy.utils.doState;
+               response.isDetail = tammy.utils.isDetail;
               response.creditorState = tammy.utils.creditorState;
                response.loanState = tammy.utils.loanState;
             response.officerClueState = tammy.utils.officerClueState;
@@ -1898,6 +1899,37 @@ define(function(require, exports, module) {
      }
   tammy.utils.loanState = loanState;
   })();
+// 可执行软任务状态
+(function(){
+    var doState=function(state){
+      switch (state) {
+         case 0:
+         state='不可执行';
+         break;
+         case 1:
+         state='可执行';
+         break;
+      } 
+    return state;
+    } 
+    tammy.utils.doState = doState;
+  })();
+  // 法院是否立案 财产是否保全 判决是否已生效 案件是否执行
+(function(){
+    var isDetail=function(state){
+      switch (state) {
+         case 0:
+         state='否';
+         break;
+         case 1:
+         state='是';
+         break;
+      } 
+    return state;
+    }  
+    tammy.utils.isDetail = isDetail;
+  })();
+  
   // 放款工单债权方付款状态
   (function(){
     var creditorState=function(state){
@@ -1913,21 +1945,7 @@ define(function(require, exports, module) {
     } 
     tammy.utils.creditorState = creditorState;
   })();
-  // 可执行软任务状态
-(function(){
-    var doState=function(state){
-      switch (state) {
-         case '0':
-         state='不可执行';
-         break;
-         case '1':
-         state='可执行';
-         break;
-      } 
-    return state;
-    } 
-    tammy.utils.doState = doState;
-  })();
+  
   (function() {
     function getCountNewByType(type){
       var urlStr = '';

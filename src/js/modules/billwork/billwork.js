@@ -15,9 +15,12 @@ define(function(require, exports, module) {
       this.registerEvent();
     };
     this.initContent = function(isSearch) {
+<<<<<<< HEAD
       var dataform = jh.utils.formToJson(_this.form);
       console.log(dataform.state[0])
       dataform.state = dataform.state[0];
+=======
+>>>>>>> 339daccebadb08fdf61ddd2fe13332ef0ecdaa8e
       var page = new jh.ui.page({
         data_container: $('#billWork_list_container'),
         page_container: $('#page_container'),
@@ -25,9 +28,10 @@ define(function(require, exports, module) {
         method: 'post',
         url: '/workorder/list',
         contentType: 'application/json',
-        data: dataform,
+        data: jh.utils.formToJson(_this.form),
         isSearch: isSearch,
         callback: function(data) {
+          data.tabVal = $('#tabType').val();
           return jh.utils.template('billWork-list-template', data);
         }
       });
@@ -55,18 +59,26 @@ define(function(require, exports, module) {
         var mine = $(this);
         var val = mine.data('value');
         $(this).addClass("active").siblings().removeClass("active");
-        $('#tabType').val(val)
+        $('#tabType').val(val);
+        var str1 = '<option value="">全部</option><option value="wait">未打款</option><option value="completed">已打款</option><option value="rejected">已拒绝</option>';
+        var str2 = '<option value="">全部</option><option value="withdrawing">未到账</option><option value="completed">已到账</option>';
+        
+              
         if (param && param === 'autoClick') {
 
         } else {
           _this.initContent('tab');
         }
         if(val === 2){
+          $('.timeMoney').html('收款时间');
           $('.bill-state').addClass('hide');
           $('.bills-state').removeClass('hide');
+          $('#bill-state').html(str2);
         }else{
-          $('.bill-state').removeClass('hide');
+          $('.timeMoney').html('放款时间');
           $('.bills-state').addClass('hide');
+          $('.bill-state').removeClass('hide');
+          $('#bill-state').html(str1);
         }
       })
 

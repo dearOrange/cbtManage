@@ -36,6 +36,18 @@
         		<th>任务发布时间：</th>
         		<td>{{data.createAt}}</td>
         	</tr>
+            <tr>
+                <th>法院立案：</th>
+                <td>{{isDetail(data.isFiling)}}</td>
+                <th>财产保全：</th>
+                <td>{{isDetail(data.isPreser)}}</td>
+                <td>判决生效：</td>
+                <td>{{isDetail(data.isEffect)}}</td>
+            </tr>
+            <tr>
+                <th>案件执行：</th>
+                <td>{{isDetail(data.isExecute)}}</td>
+            </tr>
         </table>
         <div class="remark">备注信息：{{data.remark}}</div>
         <div class="imgRecord">

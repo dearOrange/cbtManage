@@ -30,6 +30,7 @@
             <label class="label">债权方名称：</label>
             <input type="text" class="search-input" name="companyName">
           </td>
+<<<<<<< HEAD
           <td class="bill-state">
             <label class="label">放款状态：</label>
             <select name="state">
@@ -37,14 +38,16 @@
               <option value="wait">审核中</option>
               <option value="completed">放款中</option>
               <option value="rejected">已失效</option>
-            </select>
-          </td>
-          <td class="bills-state hide">
-            <label class="label">收款状态：</label>
-            <select name="state">
-              <!--<option value="">全部</option>-->
-              <option value="withdrawing">未到账</option>
-              <option value="completed">已到账</option>
+=======
+          <td>
+            <label class="label bill-state">放款状态：</label>
+            <label class="label bills-state hide">收款状态：</label>
+            <select name="state" id="bill-state">
+              <option value="">全部</option>
+              <option value="wait">未打款</option>
+              <option value="completed">已打款</option>
+              <option value="rejected">已拒绝</option>
+>>>>>>> 339daccebadb08fdf61ddd2fe13332ef0ecdaa8e
             </select>
           </td>
           <td>
@@ -69,7 +72,7 @@
           <th width="8%">债权方名称</th>
           <th width="8%">联系方式</th>
           <th width="8%">状态</th>
-          <th width="15%">放款时间</th>
+          <th width="15%" class="timeMoney">放款时间</th>
           <th width="10%">操作</t10h>
         </tr>
       </thead>
@@ -92,8 +95,9 @@
     <td>{{item.dealTime}}</td>
     <td>
       {{if item.state === "wait"}}
-      <a data-id="{{item.id}}" data-infos="{{item}}" class="sendMoney button">放款</a> 
-      <a class="abate button" data-id="{{item.id}}" data-infos="{{item}}">作废</a>
+      <a data-id="{{item.id}}" data-infos="{{item}}" class="sendMoney button">{{if tabVal == 1}}放款{{else}}收款{{/if}}</a>
+      {{if tabVal == 1}}
+      <a class="abate button" data-id="{{item.id}}" data-infos="{{item}}">作废</a>{{/if}}
       {{else}}
        — — 
       {{/if}}
