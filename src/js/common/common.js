@@ -1883,14 +1883,14 @@ define(function(require, exports, module) {
   (function(){
      var loanState=function(state){
         switch (state){
-          case "withdrawing":
-          state='未打款';
+          case "wait":
+          state='审核中';
           break;
           case "completed":
-          state='已打款';
+          state='已放款';
           break;
           case "rejected":
-          state='已拒绝';
+          state='已失效';
           break;
         }
         return state;

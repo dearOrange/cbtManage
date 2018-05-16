@@ -26,7 +26,9 @@ define(function(require, exports, module) {
         data: jh.utils.formToJson(_this.form),
         isSearch: isSearch,
         callback: function(data) { 
-          return   jh.utils.template('leaderboard-list-template', data);    
+          data.viewImgRoot = jh.config.viewImgRoot;
+          data.dataVal = $('#tabType').val();
+          return jh.utils.template('leaderboard-list-template', data);    
         }
       });
       page.init();
