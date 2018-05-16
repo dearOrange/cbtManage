@@ -77,12 +77,12 @@ define(function(require, exports, module) {
       })
 
       //打款
-      var selectVal=1;
+      var selectVal;
       $('body').off('click', '.sendMoney').on('click', '.sendMoney', function() {
         var me = $(this);
         var data = me.data('infos');
         data.viewImgRoot = jh.config.viewImgRoot;
-        console.log(data);
+        selectVal=1;
         var id = $(this).data('id');
          var val=$('#tabType').val();
         jh.utils.ajax.send({
@@ -181,7 +181,7 @@ define(function(require, exports, module) {
       })
       
       
-      $('body').off('click', '.pay-type').on('click', '.pay-type', function() {
+      $('body').off('click', '.pay-type').on('click', '.pay-type', function(event, param) {
         $(this).prop('checked',true).parent().siblings().children().prop('checked',false);
         selectVal = $(this).val();
         if(selectVal==1){

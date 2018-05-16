@@ -82,8 +82,6 @@ define(function(require, exports, module) {
         console.log(data);
         data.viewImgRoot = jh.config.viewImgRoot;
         var id = $(this).data('id');
-        
-      
         var alertContent = jh.utils.template('leaderboard_charge_template', data);
         jh.utils.alert({
               content:alertContent,
