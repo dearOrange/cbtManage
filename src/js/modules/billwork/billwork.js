@@ -82,42 +82,53 @@ define(function(require, exports, module) {
         var me = $(this);
         var data = me.data('infos');
         data.viewImgRoot = jh.config.viewImgRoot;
+        console.log(data);
         var id = $(this).data('id');
+         var val=$('#tabType').val();
         jh.utils.ajax.send({
           url: '/workorder/loanDetail',
           data:{workorderId:id},
           done:function(res){
              var res=res.data;
-             console.log(res);
-             if(res.role=="type_A"){
-               res.role='线人';
-             }else if(res.role=="type_B"){
-                 res.role='捕头';
-             }else{
-               res.role='自有线人';
-             }
+           
              var alertContent = jh.utils.template('billWork_sure_template', res);
-             jh.utils.alert({
-          content: alertContent,
-          ok: function() {
-            var datas = jh.utils.formToJson($('#play-money-form'));
-            datas.drawId = id;
-            jh.utils.ajax.send({
-              url: '/workorder/loan',
-              data:{workorderId:id,payType:selectVal},
-              done: function(returnData) {
-                console.log(returnData);
-                jh.utils.alert({
-                  content: '已打款',
+             if(val==1){
+                  jh.utils.alert({
+                  content: alertContent,
                   ok: function() {
-                    _this.initContent();
-                  }
-                })
-              }
-            });
-          },
-          cancel: true
-        });
+                    var datas = jh.utils.formToJson($('#play-money-form'));
+                    datas.drawId = id;
+                    jh.utils.ajax.send({
+                      url: '/workorder/loan',
+                      data:{workorderId:id,payType:selectVal},
+                      done: function(returnData) {
+                        console.log(returnData);
+                        jh.utils.alert({
+                          content: '已打款',
+                          ok: function() {
+                            _this.initContent();
+                          }
+                        })
+                      }
+                    });
+                  },
+                  cancel: true
+                });
+             }else{
+                  jh.utils.alert({
+                    content:'您所收款项金额为<span style="color:red">'+res.amount+'</span>元',
+                     ok:function(){
+                         jh.utils.alert({
+                          content: '已收款',
+                          ok: function() {
+                            _this.initContent();
+                          }
+                        })
+                     },
+                    cancel:true
+                  })
+             }
+           
           }
         })
         
