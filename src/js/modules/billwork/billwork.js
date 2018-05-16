@@ -116,17 +116,26 @@ define(function(require, exports, module) {
                 });
              }else{
                   jh.utils.alert({
-                    content:'您所收款项金额为<span style="color:red">'+res.amount+'</span>元',
-                     ok:function(){
-                         jh.utils.alert({
+                  content:'您所收款项金额为<span style="color:red">'+res.amount+'</span>元',
+                  ok: function() {
+                    var datas = jh.utils.formToJson($('#play-money-form'));
+                    datas.drawId = id;
+                    jh.utils.ajax.send({
+                      url: '/workorder/loanerMoneySure',
+                      data:{workorderId:id},
+                      done: function(returnData) {
+                        console.log(returnData);
+                        jh.utils.alert({
                           content: '已收款',
                           ok: function() {
                             _this.initContent();
                           }
                         })
-                     },
-                    cancel:true
-                  })
+                      }
+                    });
+                  },
+                  cancel: true
+                }); 
              }
            
           }
@@ -170,6 +179,8 @@ define(function(require, exports, module) {
              cancel: true
            })
       })
+      
+      
       $('body').off('click', '.pay-type').on('click', '.pay-type', function() {
         $(this).prop('checked',true).parent().siblings().children().prop('checked',false);
         selectVal = $(this).val();
