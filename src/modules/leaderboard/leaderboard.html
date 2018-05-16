@@ -90,42 +90,22 @@
     <td>{{item.exchangerPhone}}</td>
     <td>{{item.coin}}</td>
     <td>{{item.createAt}}</td>
+    {{if dataVal==1}}
     <td>{{item.mobile}}</td>
+    {{else}}
+    <td class="imgWidth">
+      <img src="{{viewImgRoot}}{{item.goodsImg}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" class="preview-img hand" />
+    </td>
+    {{/if}}
     <td>{{item.coin/100}}</td>
-    <td>{{item.state}}</td>
+    {{if dataVal==2}}
+    <td>{{item.name}}/{{item.address}}</td>
+    {{/if}}
+    <td>{{changer(item.state)}}</td>
     <td>{{item.rechargeAt}}</td>
     <td>
       {{if item.state === "wait"}}
       <a data-id="{{item.id}}" data-infos="{{item}}" class="changer button">充值</a>
-      <a class="abate button" data-id="{{item.id}}" data-infos="{{item}}">作废</a>
-      {{else}}
-       — — 
-      {{/if}}
-    </td>
-  </tr>
-  {{/each}}
-</script>
-<script type="text/template" id="leaderboard-list-template1">
-  {{ each list item index }}
-  <tr>
-    <td>{{index+1}}</td>
-    <td>{{item.exchanger}}</td>
-    <td>{{item.exchangerPhone}}</td>
-    <td>{{item.coin}}</td>
-    <td>{{item.createAt}}</td>
-    {{if item.val==1}}
-    <td>{{item.mobile}}</td>
-    <td>{{item.coin/100}}</td>
-    {{else}}
-    <td><img src={{item.goodsImg}} alt=""></td>
-    <td>{{item.coin/100}}</td>
-    <td>{{item.name}}/{{item.address}}</td>
-    {{/if}}
-    <td>{{item.state}}</td>
-    <td>{{item.rechargeAt}}</td>
-    <td>
-      {{if item.state === "wait"}}
-      <a data-id="{{item.id}}" data-infos="{{item}}" class="changer button">充值</a> 
       <a class="abate button" data-id="{{item.id}}" data-infos="{{item}}">作废</a>
       {{else}}
        — — 

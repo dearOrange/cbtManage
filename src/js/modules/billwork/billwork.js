@@ -15,6 +15,9 @@ define(function(require, exports, module) {
       this.registerEvent();
     };
     this.initContent = function(isSearch) {
+      var dataform = jh.utils.formToJson(_this.form);
+      console.log(dataform.state[0])
+      dataform.state = dataform.state[0]
       var page = new jh.ui.page({
         data_container: $('#billWork_list_container'),
         page_container: $('#page_container'),
@@ -22,7 +25,7 @@ define(function(require, exports, module) {
         method: 'post',
         url: '/workorder/list',
         contentType: 'application/json',
-        data: jh.utils.formToJson(_this.form),
+        data: dataform,
         isSearch: isSearch,
         callback: function(data) {
           return jh.utils.template('billWork-list-template', data);
