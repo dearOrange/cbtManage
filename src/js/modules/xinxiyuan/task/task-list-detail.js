@@ -22,6 +22,7 @@ define(function(require, exports, module) {
                     taskId: args.id
                 },
                 done: function(returnData) {
+                    returnData.state = args.state;
                     returnData.menuState = jh.utils.menuState;
                     returnData.officerState = jh.utils.officerState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
@@ -125,32 +126,10 @@ define(function(require, exports, module) {
 
             //采纳情报
             $('body').off('click', '.adopteInfo').on('click', '.adopteInfo', function() {
-                var managerId = $(".managerId").filter(":checked");
                 var checkId = $.trim($(".checkId").filter(":checked").val());
-                var carPrice = $.trim($("#salvage").val());
-                var estimatedMinPrice = $.trim($("#minMoney").val());
-                var estimatedMaxPrice = $.trim($("#maxMoney").val());
                 if (!checkId) {
                     jh.utils.confirm({
                         content: '请选择具体线索！'
-                    });
-                    return false;
-                }
-                if (!carPrice || !estimatedMinPrice || !estimatedMaxPrice) {
-                    jh.utils.confirm({
-                        content: '请预估费用！'
-                    });
-                    return false;
-                }
-                if (!managerId || !$.trim(managerId.val())) {
-                    jh.utils.confirm({
-                        content: '请选择相应渠道经理！'
-                    });
-                    return false;
-                }
-                if (parseInt(estimatedMaxPrice) > parseInt(carPrice)) {
-                    jh.utils.confirm({
-                        content: '估算值不能大于残值！'
                     });
                     return false;
                 }
@@ -159,12 +138,7 @@ define(function(require, exports, module) {
                     ok: function() {
                         var adoptData = {
                             taskId: args.id,
-                            traceId: checkId,
-                            carPrice: carPrice,
-                            estimatedMinPrice: estimatedMinPrice,
-                            estimatedMaxPrice: estimatedMaxPrice,
-                            channelManagerId: managerId.val(),
-                            channelManagerName: managerId.data('name')
+                            traceId: checkId
                         };
                         jh.utils.ajax.send({
                             url: '/task/adopt',

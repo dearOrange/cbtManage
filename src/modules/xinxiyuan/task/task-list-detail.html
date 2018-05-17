@@ -115,54 +115,21 @@
 			</div>
 			{{/each}}
 		</div>
-		<div class="hopeprice">
-			<p>预估费用</p>
-			<div>
-				<label>车辆残值估算:</label>
-				<input type="text" class="OnlyPrice" maxlength="11" id="salvage" value="{{data.carPrice}}" />
-			</div>
-			<div>
-				<label>处置费用估算:</label>
-				<input type="text" maxlength="11" class="OnlyPrice" id="minMoney" value="{{data.estimatedMinPrice}}" />至<input type="text" class="OnlyPrice" maxlength="11" id="maxMoney" value="{{data.estimatedMaxPrice}}" />
-			</div>
-		</div>
 		{{/if}}
+		{{if state === '1'}}
 		<div class="upmainfile">
-			<p style="margin:20px 0;">分配渠道</p>
-			<div class="task-content">
-
-			</div>
-		</div>
+      <p style="margin:20px 0;">分配渠道</p>
+      <div class="task-content">
+  
+      </div>
+    </div>
+    {{/if}}
 		{{if data.state === "clueChecking"}}
 		<input type="submit" value="保存" class="button adopteInfo" /> {{else}}
 		<input type="submit" value="确定" class="button clueInfo" /> {{/if}}
 	</div>
 </script>
-<script type="text/template" id="xx_task_list">
-	<div style="width:460px;">
-		<table>
-			<tr>
-				<td>
-					<form id="task_adopt_form">
-						<div id="qd-distribution-tab0" class="divied-type" style="max-height: 300px;overflow-y: auto;text-align: left;">
-							{{each data item index}}
-							<div>
-								<input type="radio" name="managerId" value="{{item.id}}" data-name="{{item.name}}" class="managerId" />
-								<span>{{item.name}}</span>
-								<span>
-                                {{each item.operatorProvinceVoList temp i}}
-                                     - {{temp.provinceName}},
-                                {{/each}}
-                                </span>
-							</div>
-							{{/each}}
-						</div>
-					</form>
-				</td>
-			</tr>
-		</table>
-	</div>
-</script>
+
 <script type="text/template" id="task_detail_wzInfoTemplate">
 	{{each list item index}}
 	<tr>
@@ -174,6 +141,31 @@
 		<td>{{item.occurAt}}</td>
 	</tr>
 	{{/each}}
+</script>
+<script type="text/template" id="xx_task_list">
+  <div style="width:460px;">
+    <table>
+      <tr>
+        <td>
+          <form id="task_adopt_form">
+            <div id="qd-distribution-tab0" class="divied-type" style="max-height: 300px;overflow-y: auto;text-align: left;">
+              {{each data item index}}
+              <div>
+                <input type="radio" name="managerId" value="{{item.id}}" data-name="{{item.name}}" class="managerId" />
+                <span>{{item.name}}</span>
+                <span>
+                {{each item.operatorProvinceVoList temp i}}
+                     - {{temp.provinceName}},
+                {{/each}}
+                </span>
+              </div>
+              {{/each}}
+            </div>
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
 </script>
 <script type="text/javascript">
 	seajs.use('modules/xinxiyuan/task/task-list-detail', function(TaskListDetail) {
