@@ -112,19 +112,9 @@ define(function(require, exports, module) {
       jh.utils.validator.init({
         id: 'restoration-detail-form',
         submitHandler: function(form) {
+          debugger
           form = $(form);
           var datas = jh.utils.formToJson(form);
-          if(submit.hasClass('priceStorage')){
-            var managerId = $(".managerId").filter(":checked");
-            datas.channelManagerId = managerId.val();
-            datas.channelManagerName = managerId.data('name');
-            if (!managerId || !$.trim(managerId.val())) {
-                jh.utils.confirm({
-                    content: '请选择相应渠道经理！'
-                });
-                return false;
-            }
-          }
           if(datas.carPrice == 0) {
             jh.utils.alert({
               content: '残值不能为0',
@@ -155,6 +145,17 @@ define(function(require, exports, module) {
             return false;
           }
           var submit = form.find('input[type="submit"]');
+          if(submit.hasClass('priceStorage')){
+            var managerId = $(".managerId").filter(":checked");
+            datas.channelManagerId = managerId.val();
+            datas.channelManagerName = managerId.data('name');
+            if (!managerId || !$.trim(managerId.val())) {
+                jh.utils.confirm({
+                    content: '请选择相应渠道经理！'
+                });
+                return false;
+            }
+          }
           var arr = submit.hasClass('priceStorage') ? '/task/estimate,价格预估完毕' : '/task/fixPrice,价格确认完毕';
           arr = arr.split(',');
           jh.utils.ajax.send({
