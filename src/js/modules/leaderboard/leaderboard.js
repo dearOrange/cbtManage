@@ -142,7 +142,7 @@ define(function(require, exports, module) {
                   content: '此单已作废',
                   ok: function(){
                     _this.initContent();
-                    
+
                   }
                 })
                    }
