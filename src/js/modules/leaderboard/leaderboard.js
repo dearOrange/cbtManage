@@ -26,6 +26,7 @@ define(function(require, exports, module) {
         isSearch: isSearch,
         callback: function(data) { 
           data.viewImgRoot = jh.config.viewImgRoot;
+          console.log(jh.config.viewImgRoot);
           data.dataVal = $('#tabType').val();
           return jh.utils.template('leaderboard-list-template', data);    
         }
@@ -65,12 +66,15 @@ define(function(require, exports, module) {
            $('.charge_titles').removeClass('hide');
            $('.labelTime').addClass('hide');
            $('.labelTimes').removeClass('hide');
+           $('.labelNum').addClass('hide');
+            $('.labelNums').removeClass('hide');
         }else{  
             $('.charge_title').removeClass('hide');
             $('.charge_titles').addClass('hide');
             $('.labelTime').removeClass('hide');
             $('.labelTimes').addClass('hide');
-           
+            $('.labelNum').removeClass('hide');
+            $('.labelNums').addClass('hide');
         }
       })
 
@@ -80,9 +84,14 @@ define(function(require, exports, module) {
         var me = $(this);
         var data = me.data('infos');
          var val = me.data('value');
+        var index=$('#tabType').val();
         data.viewImgRoot = jh.config.viewImgRoot;
         var id = $(this).data('id');
-        var alertContent = jh.utils.template('leaderboard_charge_template', data);
+           var alertContent = jh.utils.template('leaderboard_charge_template', data);
+         if(index==2){
+           var alertContent = jh.utils.template('leaderboard_charge_template1', data);
+         }
+        
         jh.utils.alert({
               content:alertContent,
               ok: function() {
@@ -133,6 +142,7 @@ define(function(require, exports, module) {
                   content: '此单已作废',
                   ok: function(){
                     _this.initContent();
+
                   }
                 })
                    }
