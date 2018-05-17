@@ -124,6 +124,7 @@
             <th width="8%">任务状态</th>
             <th width="8%">违章地区</th>
             <th>违章时间</th>
+            <th>可执行状态</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -174,6 +175,7 @@
     <td>{{menuState(item.state)}}</td>
     <td>{{item.city}}</td>
     <td>{{item.occurAt}}</td>
+    <td>{{doState(item.canExecute)}}</td>
     <td>
       <a data-id="{{item.id}}" class="record-detail button">详情</a>
       <a data-id="{{item.id}}" class="record-distribution oneStyle button">编辑</a>

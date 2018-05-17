@@ -127,7 +127,6 @@ define(function(require, exports, module) {
             $('body').off('click', '.adopteInfo').on('click', '.adopteInfo', function() {
                 var managerId = $(".managerId").filter(":checked");
                 var checkId = $.trim($(".checkId").filter(":checked").val());
-                var strPay = $(".checkId").filter(":checked").data('type') === 'type_A' ? '确定采纳吗？本条线索为线人上传，如果采纳将给线人发放线索费' : '确定采纳吗？';
                 var carPrice = $.trim($("#salvage").val());
                 var estimatedMinPrice = $.trim($("#minMoney").val());
                 var estimatedMaxPrice = $.trim($("#maxMoney").val());
@@ -149,14 +148,14 @@ define(function(require, exports, module) {
                     });
                     return false;
                 }
-                if (estimatedMaxPrice > carPrice) {
+                if (parseInt(estimatedMaxPrice) > parseInt(carPrice)) {
                     jh.utils.confirm({
                         content: '估算值不能大于残值！'
                     });
                     return false;
                 }
                 jh.utils.alert({
-                    content: strPay,
+                    content: '确定采纳吗？',
                     ok: function() {
                         var adoptData = {
                             taskId: args.id,

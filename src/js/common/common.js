@@ -1097,6 +1097,12 @@ define(function(require, exports, module) {
 
           try {
             response.menuState = tammy.utils.menuState;
+             response.changer = tammy.utils.changer;
+              response.moneyType = tammy.utils.moneyType;
+              response.doState = tammy.utils.doState;
+               response.isDetail = tammy.utils.isDetail;
+              response.creditorState = tammy.utils.creditorState;
+               response.loanState = tammy.utils.loanState;
             response.officerClueState = tammy.utils.officerClueState;
             response.officerState = tammy.utils.officerState;
             var viewStr = s.callback.call(null, response); //获取拼接后的展示数据，增加容错处理
@@ -1707,8 +1713,26 @@ define(function(require, exports, module) {
     }
     tammy.utils.getCheckboxValue = getCheckboxValueById;
   })();
-
-  (function() {
+  // 积分兑换
+ (function(){
+   var changer=function(state){
+     switch (state){
+       case "wait":
+        state = "等待兑换";
+        break;
+       case "completed":
+        state = "兑换成功";
+        break;  
+        case "rejected":
+        state = "兑换作废";
+        break;  
+     }  
+     return state;
+   }
+    tammy.utils.changer = changer;
+ })();
+ //放款状态
+  (function(){
     var menuState = function(state) {
       switch (state) {
         case "new":
@@ -1813,13 +1837,134 @@ define(function(require, exports, module) {
         case "unverified":
           state = "未验";
           break;
+        case "info":
+          state = "资产查找费";
+          break;
+        case "referrer":
+          state = "关联资产查找费";
+          break;
+        case "location":
+          state = "GPS安装费";
+          break;
+        case "trailer":
+          state = "资产清收费";
+          break;
+        case "wait":
+          state = "审核中";
+          break;
       }
       return state;
     }
     tammy.utils.menuState = menuState;
   })();
+  // 放款工单费用类别
+  (function(){
+     var moneyType=function(type){
+      switch (type) {
+         case 'info':
+         type='资产查找费';
+         break;
+         case 'referrer':
+         type='关联资产查找费';
+         break;
+         case 'location':
+         type='GPS安装费';
+         break;
+         case 'trailer':
+         type='资产清收费';
+         break;
+         case 'entrust':
+         type='委托费';
+         break;
+      }
+      return type;
+     }
+      tammy.utils.moneyType = moneyType;
+  })();
+  //打款工单放款状态
+  (function(){
+     var loanState=function(state){
+        switch (state){
+          case "wait":
+          state='审核中';
+          break;
+          case "completed":
+          state='已放款';
+          break;
+          case "rejected":
+          state='已失效';
+          break;
+        }
+        return state;
+     }
+  tammy.utils.loanState = loanState;
+  })();
+// 可执行软任务状态
+(function(){
+    var doState=function(state){
+      switch (state) {
+         case 0:
+         state='不可执行';
+         break;
+         case 1:
+         state='可执行';
+         break;
+      } 
+    return state;
+    } 
+    tammy.utils.doState = doState;
+  })();
+  // 法院是否立案 财产是否保全 判决是否已生效 案件是否执行
+(function(){
+    var isDetail=function(state){
+      switch (state) {
+         case 0:
+         state='否';
+         break;
+         case 1:
+         state='是';
+         break;
+      } 
+    return state;
+    }  
+    tammy.utils.isDetail = isDetail;
+  })();
+  
+  // 放款工单债权方付款状态
+  (function(){
+    var creditorState=function(state){
+      switch (state) {
+         case 0:
+         state='未到账';
+         break;
+         case 1:
+         state='已到账';
+         break;
+      } 
+    return state;
+    } 
+    tammy.utils.creditorState = creditorState;
+  })();
+  //放款对象角色
+(function(){
+    var typeName=function(type){
+      switch (state) {
+         case 'type_A':
+         type='线人';
+         break;
+         case 'type_B':
+         type='捕头';
+         break;
+         case 'type_C':
+         type='自有线人';
+         break;
+      } 
+    return type;
+    } 
+    tammy.utils.typeName= typeName;
+  })();
   (function() {
-    function getCountNewByType(type) {
+    function getCountNewByType(type){
       var urlStr = '';
       switch (type) {
         case '203':

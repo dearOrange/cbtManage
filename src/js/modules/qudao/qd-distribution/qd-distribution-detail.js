@@ -24,6 +24,7 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
+                     returnData.isDetail = jh.utils.isDetail;
                     returnData.taskId = args.id;
                     returnData.trailer = returnData.data.trailerFailList.length;
                     var html = jh.utils.template('admin-qDDistributionDetail-template', returnData);

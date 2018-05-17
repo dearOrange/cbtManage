@@ -9,6 +9,7 @@ define(function(require, exports, module) {
   function CreditorManageDetail() {
     var _this = this;
     var args = jh.utils.getURLValue().args;
+     
     _this.userInfo = null;
     this.init = function() {
       this.initContent();
@@ -104,7 +105,7 @@ define(function(require, exports, module) {
             }
           }, {
             uploadAccept: function(file, response) {
-              alert(response.data)
+              // alert(response.data);
             }
           });
 
@@ -384,8 +385,9 @@ define(function(require, exports, module) {
         })
       });
       //    任务记录编辑
-      $('body').off('click', '.record-distribution').on('click', '.record-distribution', function() {
+      $('body').off('click', '.record-distribution').delegate('.record-distribution', 'click', function() {
         var eid = $(this).data('id');
+
         jh.utils.load("/src/modules/yunying/creditorManager/creditor-edit", {
             id: eid
         })

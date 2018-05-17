@@ -153,7 +153,7 @@
     display: none;
 }
 
-#payStyle {
+.payStyle {
     display: table-row;
 }
 
@@ -809,4 +809,67 @@ ul.position_info li span:first-child{
 }
 #little_map ul li p {
   padding: 10px;
+}
+
+/*放款信息*/
+table.loanTab{
+  border:1px solid #ccc;
+   
+}
+
+ table.loanTab td{
+  border:1px solid #ccc;
+  width:25%;
+  text-align:center!important;
+  padding:6px 4px!important;
+}
+table.loanTab td:nth-child(odd){
+  background:#eee;
+ 
+}
+.loan_detail span{
+  display:block;
+  margin-bottom:6px;
+}
+ .loan-type{
+  margin:13px 0;
+}
+.loan-type span{
+  display:inline-block;
+  width:100px;
+}
+a.abate{
+  background-color:#bbb!important;
+  border-color:#bbb!important;
+}
+.ab_tip{
+  margin-bottom:7px;
+}
+.abate_tip{
+  text-align:center;
+   
+  font-size:16px;
+}
+.abate_input{
+  height:19px;
+  border: 1px solid #bbb;
+  padding:4px 0;
+  text-indent: 10px;
+  width:210px;
+  border-radius:3px;
+}
+.abate_warn{
+ color:red;
+}
+input[type=text].search-del{
+  width:150px;
+}
+.begin-input, .end-input{
+  width:120px !important;
+}
+.charge_del{
+  margin-bottom:6px;
+}
+.charge_del span{
+  color:red;
 }

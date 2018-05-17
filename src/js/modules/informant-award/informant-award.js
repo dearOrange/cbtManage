@@ -45,6 +45,20 @@ define(function(require, exports, module) {
     };
 
     this.registerEvent = function() {
+      //活动形式切换
+      $('body').off('change', '.activeTypeChange').on('change', '.activeTypeChange', function() {
+        var m = $(this);
+        var type = m.val();
+        var gdActiveSet = $('#gdActiveSet'),
+          fdActiveSet = $('#fdActiveSet');
+        if (type === "2") {
+          gdActiveSet.removeClass('hide');
+          fdActiveSet.addClass('hide');
+        } else {
+          gdActiveSet.addClass('hide');
+          fdActiveSet.removeClass('hide');
+        }
+      })
       //新增档位
       $('body').off('click', '.add_dangwei').on('click', '.add_dangwei', function() {
         var m = $(this);

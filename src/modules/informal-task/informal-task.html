@@ -30,6 +30,8 @@
                     <th width="10%">车牌号</th>
                     <th width="10%">车型</th>
                     <th width="10%">来源</th>
+                    <th width="10%">匹配状态</th>
+                    <th width="10%">匹配时间</th>
                     <th width="12%">录入时间</th>
                     <th width="10%">操作</th>
                 </tr>
@@ -49,6 +51,8 @@
         <td>{{item.carNumber}}</td>
         <td>{{item.carBrand}}</td>
         <td>{{item.source}}</td>
+        <td>{{if item.match === true}}匹配成功{{/if}}</td>
+        <td>{{item.matchTime}}</td>
         <td>{{item.createAt}}</td>
         <td>
             <a data-id="{{item.id}}" class="informal-task-detail button">详情</a>

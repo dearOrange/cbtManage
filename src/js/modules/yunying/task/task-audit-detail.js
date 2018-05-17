@@ -23,6 +23,7 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
+                     returnData.isDetail = jh.utils.isDetail;
                     var taskStr = jh.utils.template('task_detail_template', returnData);
                     $('.task-detail-content').html(taskStr);
                 }
