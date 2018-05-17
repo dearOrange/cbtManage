@@ -112,8 +112,8 @@ define(function(require, exports, module) {
           if (result.kind === '0' || state != '1') {
             contentStr = '确定' + tip + '吗？';
             if(state == '2') {
-              contentStr = '<div class="text-center"><span>确定' + tip + '吗？</span><br/>';
-              contentStr += '<label>请选择拒绝原因：</label><br/><select class="rejectReason" style="width:210px;">';
+              contentStr = '<div class="text-center"><span style="font-size:18px;">确定' + tip + '吗？</span><br/><br/>';
+              contentStr += '<label style="color:#ccc;">请选择拒绝原因：</label><select class="rejectReason" style="width:210px;">';
               var optionArr = ['线索模糊不清','照片拍摄时间或位置信息缺失','照片拍摄位置与GPS定位不符','GPS定位信息缺失','线索重复上传','此线索已先有其他线人上传','其他'];
               for(var j=0;j<optionArr.length;j++){
                 var optionItem = optionArr[j];
