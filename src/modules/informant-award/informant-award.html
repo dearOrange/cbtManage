@@ -95,11 +95,11 @@
         <tr class="textLeft">
           <th>首线索奖励金</th>
           <td>
-            <input type="text" class="search-input required digits" name="firstTrace" value="0">
+            <input type="text" class="search-input required onlyZeroNumber" name="firstTrace" value="0">
           </td>
           <th>关联首线索奖励金</th>
           <td>
-            <input type="text" class="search-input digits" name="referrerFirstTrace" value="0">
+            <input type="text" class="search-input onlyZeroNumber" name="referrerFirstTrace" value="0">
           </td>
         </tr>
         <tr class="textLeft">
@@ -114,11 +114,11 @@
         <tr id="gdActiveSet">
           <th>活动奖励金</th>
           <td>
-            <input type="text" class="search-input required digits" name="activity" value="0">
+            <input type="text" class="search-input required onlyZeroNumber" name="activity" value="0">
           </td>
           <th>关联活动奖励金</th>
           <td>
-            <input type="text" class="search-input digits" name="referrerTrace" value="0">
+            <input type="text" class="search-input onlyZeroNumber" name="referrerTrace" value="0">
           </td>
         </tr>
         <tr id="fdActiveSet" class="hide">
@@ -139,8 +139,8 @@
                     </td>
                     <th>金额</th>
                     <td>
-                      <input type="text" name="min" class="required"> -
-                      <input type="text" name="max" class="required">
+                      <input type="text" name="min" class="required onlyZeroNumber"> -
+                      <input type="text" name="max" class="required onlyZeroNumber">
                     </td>
                     <td>&nbsp;</td>
                   </tr>
