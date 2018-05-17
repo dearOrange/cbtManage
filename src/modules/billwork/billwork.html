@@ -59,10 +59,11 @@
           <th width="8%">金额</th>
           <th width="12%">生成时间</th>
           <th width="8%">费用类别</th>
+          <th width="6%">线人姓名</th>
+          <th width='8%'>线人联系方式</th>
           <th width="8%">债权方名称</th>
-          <th width="8%">联系方式</th>
           <th width="8%">状态</th>
-          <th width="15%" class="timeMoney">放款时间</th>
+          <th width="12%" class="timeMoney">放款时间</th>
           <th width="10%">操作</t10h>
         </tr>
       </thead>
@@ -79,8 +80,9 @@
     <td>{{item.amount}}</td>
     <td>{{item.createAt}}</td>
     <td>{{moneyType(item.source)}}</td>
+    <td>{{item.payee}}</td>
+    <td>{{item.contactPhone}}</td>
     <td>{{item.companyName}}</td>
-    <td>{{item.telephone}}</td>
     <td>{{loanState(item.state)}}</td>
     <td>{{item.dealTime}}</td>
     <td>
