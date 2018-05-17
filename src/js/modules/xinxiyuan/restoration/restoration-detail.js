@@ -112,7 +112,6 @@ define(function(require, exports, module) {
       jh.utils.validator.init({
         id: 'restoration-detail-form',
         submitHandler: function(form) {
-          debugger
           form = $(form);
           var datas = jh.utils.formToJson(form);
           if(datas.carPrice == 0) {
