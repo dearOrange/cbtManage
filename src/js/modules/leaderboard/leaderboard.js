@@ -79,11 +79,9 @@ define(function(require, exports, module) {
       $('body').off('click', '.changer').on('click', '.changer', function() {
         var me = $(this);
         var data = me.data('infos');
-        console.log(data);
+         var val = me.data('value');
         data.viewImgRoot = jh.config.viewImgRoot;
         var id = $(this).data('id');
-        
-      
         var alertContent = jh.utils.template('leaderboard_charge_template', data);
         jh.utils.alert({
               content:alertContent,

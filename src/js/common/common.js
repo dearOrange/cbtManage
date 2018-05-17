@@ -1934,10 +1934,10 @@ define(function(require, exports, module) {
   (function(){
     var creditorState=function(state){
       switch (state) {
-         case '0':
+         case 0:
          state='未到账';
          break;
-         case '1':
+         case 1:
          state='已到账';
          break;
       } 
@@ -1945,7 +1945,24 @@ define(function(require, exports, module) {
     } 
     tammy.utils.creditorState = creditorState;
   })();
-  
+  //放款对象角色
+(function(){
+    var typeName=function(type){
+      switch (state) {
+         case 'type_A':
+         type='线人';
+         break;
+         case 'type_B':
+         type='捕头';
+         break;
+         case 'type_C':
+         type='自有线人';
+         break;
+      } 
+    return type;
+    } 
+    tammy.utils.typeName= typeName;
+  })();
   (function() {
     function getCountNewByType(type){
       var urlStr = '';

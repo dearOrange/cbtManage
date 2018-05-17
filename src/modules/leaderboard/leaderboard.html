@@ -106,7 +106,7 @@
     <td>{{item.rechargeAt}}</td>
     <td>
       {{if item.state === "wait"}}
-      <a data-id="{{item.id}}" data-infos="{{item}}" class="changer button">充值</a>
+      <a data-id="{{item.id}}" data-infos="{{item}}" class="changer button">{{if dataVal==1}}充值{{else}}兑换{{/if}}</a>
       <a class="abate button" data-id="{{item.id}}" data-infos="{{item}}">作废</a>
       {{else}}
        — — 
@@ -188,7 +188,7 @@
 </script>
 <script type="text/template" id="leaderboard_charge_template">
    <p class="charge_del">充值号码：<span>{{mobile}}</span></p>
-   <p  class="charge_del">充值金额：<span >{{goods}}</span></p>
+   <p  class="charge_del">充值金额：<span>{{goods}}</span></p>
 </script>
 <script type="text/javascript">
 seajs.use('modules/leaderboard/leaderboard', function(Leaderboard) {
