@@ -26,6 +26,7 @@ define(function(require, exports, module) {
         isSearch: isSearch,
         callback: function(data) { 
           data.viewImgRoot = jh.config.viewImgRoot;
+          console.log(jh.config.viewImgRoot);
           data.dataVal = $('#tabType').val();
           return jh.utils.template('leaderboard-list-template', data);    
         }
@@ -65,12 +66,15 @@ define(function(require, exports, module) {
            $('.charge_titles').removeClass('hide');
            $('.labelTime').addClass('hide');
            $('.labelTimes').removeClass('hide');
+           $('.labelNum').addClass('hide');
+            $('.labelNums').removeClass('hide');
         }else{  
             $('.charge_title').removeClass('hide');
             $('.charge_titles').addClass('hide');
             $('.labelTime').removeClass('hide');
             $('.labelTimes').addClass('hide');
-           
+            $('.labelNum').removeClass('hide');
+            $('.labelNums').addClass('hide');
         }
       })
 

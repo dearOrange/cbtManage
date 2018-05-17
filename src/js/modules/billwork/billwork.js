@@ -84,13 +84,12 @@ define(function(require, exports, module) {
         data.viewImgRoot = jh.config.viewImgRoot;
         selectVal=1;
         var id = $(this).data('id');
-         var val=$('#tabType').val();
+        var val=$('#tabType').val();
         jh.utils.ajax.send({
           url: '/workorder/loanDetail',
           data:{workorderId:id},
           done:function(res){
              var res=res.data;
-           
              var alertContent = jh.utils.template('billWork_sure_template', res);
              if(val==1){
                   jh.utils.alert({
