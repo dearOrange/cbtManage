@@ -100,7 +100,7 @@
     {{/if}}
     <td>{{item.coin/100}}</td>
     {{if dataVal==2}}
-    <td>{{item.name}}/{{item.address}}</td>
+    <td>{{item.name}}/{{item.address}} ({{item.mobile}})</td>
     {{/if}}
     <td>{{changer(item.state)}}</td>
     <td>{{item.rechargeAt}}</td>
@@ -189,6 +189,10 @@
 <script type="text/template" id="leaderboard_charge_template">
    <p class="charge_del">充值号码：<span>{{mobile}}</span></p>
    <p  class="charge_del">充值金额：<span>{{goods}}</span></p>
+</script>
+<script type="text/template" id="leaderboard_charge_template1">
+   <p class="charge_del">兑换号码：<span>{{mobile}}</span></p>
+   <p  class="charge_del">兑换物品：<span>{{goods}}</span></p>
 </script>
 <script type="text/javascript">
 seajs.use('modules/leaderboard/leaderboard', function(Leaderboard) {

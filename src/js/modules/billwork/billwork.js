@@ -54,7 +54,7 @@ define(function(require, exports, module) {
         var val = mine.data('value');
         $(this).addClass("active").siblings().removeClass("active");
         $('#tabType').val(val);
-        var str1 = '<option value="">全部</option><option value="wait">未打款</option><option value="completed">已打款</option><option value="rejected">已拒绝</option>';
+        var str1 = '<option value="">全部</option><option value="wait">未打款</option><option value="completed">已打款</option><option value="rejected">已取消</option>';
         var str2 = '<option value="">全部</option><option value="withdrawing">未到账</option><option value="completed">已到账</option>';
         
               
@@ -68,11 +68,13 @@ define(function(require, exports, module) {
           $('.bill-state').addClass('hide');
           $('.bills-state').removeClass('hide');
           $('#bill-state').html(str2);
+          $('#otherSale').addClass('hide');
         }else{
           $('.timeMoney').html('放款时间');
           $('.bills-state').addClass('hide');
           $('.bill-state').removeClass('hide');
           $('#bill-state').html(str1);
+          $('#otherSale').removeClass('hide');
         }
       })
 
