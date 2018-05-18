@@ -25,8 +25,8 @@ define(function(require, exports, module) {
         data: jh.utils.formToJson(_this.form),
         isSearch: isSearch,
         callback: function(data) { 
+           data.dataVal = $('#tabType').val();
           data.viewImgRoot = jh.config.viewImgRoot;
-          console.log(data);
           return jh.utils.template('leaderboard-list-template', data);    
         }
       });
