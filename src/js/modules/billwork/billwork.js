@@ -69,12 +69,16 @@ define(function(require, exports, module) {
           $('.bills-state').removeClass('hide');
           $('#bill-state').html(str2);
           $('#otherSale').addClass('hide');
+          $('.lineDetail').addClass('hide');
+          $('.loanConType').removeClass('hide');
         }else{
           $('.timeMoney').html('放款时间');
           $('.bills-state').addClass('hide');
           $('.bill-state').removeClass('hide');
           $('#bill-state').html(str1);
           $('#otherSale').removeClass('hide');
+           $('.lineDetail').removeClass('hide');
+            $('.loanConType').addClass('hide');
         }
       })
 
