@@ -873,3 +873,14 @@ input[type=text].search-del{
 .charge_del span{
   color:red;
 }
+.replyState{
+  width:100px;
+  height:36px;
+  background:#aaa;
+  color:#fff;
+  text-align:center;
+  line-height:34px;
+  display:inline-block;
+  margin-right:20px;
+  cursor:pointer;
+}
