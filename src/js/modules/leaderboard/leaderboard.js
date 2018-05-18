@@ -26,8 +26,7 @@ define(function(require, exports, module) {
         isSearch: isSearch,
         callback: function(data) { 
           data.viewImgRoot = jh.config.viewImgRoot;
-          console.log(jh.config.viewImgRoot);
-          data.dataVal = $('#tabType').val();
+          console.log(data);
           return jh.utils.template('leaderboard-list-template', data);    
         }
       });
