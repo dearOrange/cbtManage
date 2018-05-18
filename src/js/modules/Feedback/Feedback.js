@@ -25,7 +25,6 @@ define(function(require, exports, module) {
         data: jh.utils.formToJson(_this.form),
         isSearch: true,
         callback: function(data) {
-          console.log(data);
           data.viewImgRoot = jh.config.viewImgRoot;
           data.status = $('#status').val();
           return jh.utils.template('Feedback-list-template', data);
@@ -61,7 +60,6 @@ define(function(require, exports, module) {
                     url: '/content/updateAnswer',
                     data:{id:id,content:$('#talkDatail').val()},
                     done:function(res){
-                      console.log(res);
                        jh.utils.alert({
                         content: '上传意见成功',
                         ok: function() {
