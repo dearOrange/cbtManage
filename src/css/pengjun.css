@@ -884,15 +884,17 @@ input[type=text].search-del{
   margin-right:20px;
   cursor:pointer;
 }
-.talkCon{
-  text-align:center;
-  line-height:156px;
-}
+ 
 .talkCon span{
  float:left;
+ margin-left:3px;
+ line-height:110px;
+  font-size:14px;
 }
 .talkCon textarea{
   float:left;
-  text-indent:-22px;
+  text-indent:2px !important;
+  line-height:20px;
+  font-size:14px;
 }
  
