@@ -94,7 +94,7 @@
 						<table class="taskTable">
 							<tr>
 								<th>上传人员</th>
-								<td>{{data.name}}----{{if data.role === 'type_A'}}线人{{else}}捕头----{{officerState(data.downstreamType)}}{{/if}}</td>
+								<td>{{data.name}}----{{if data.role === 'type_A'}}线人{{/if}}{{if data.role === 'type_B'}}捕头----{{officerState(data.downstreamType)}}{{/if}}{{if data.role === 'type_C'}}自有线人{{/if}}</td>
 								<th>联系电话</th>
 								<td>{{data.phone}}</td>
 							</tr>
@@ -106,7 +106,7 @@
 								<th>定位</th>
 								<td colspan="3" id="{{data.carPhoto}}">{{getPositionByImage(data.carPhoto)}}</td>
 							</tr>
-							{{if data.role === 'type_A'}}
+							{{if data.role === 'type_A' || data.role === 'type_C'}}
 							<tr>
 								<th>GPS</th>
 								<td {{if data.gpsSource !== 1}}colspan="3"{{/if}}>{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装{{/if}}{{if data.gpsSource === 2}}未安装{{/if}}</td>
