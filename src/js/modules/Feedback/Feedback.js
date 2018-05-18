@@ -20,18 +20,31 @@ define(function(require, exports, module) {
         page_container: $('#page_container'),
         form_container: _this.form,
         method: 'post',
-        url: '/workorder/list',
+        url: '/content/getProblemLis',
         contentType: 'application/json',
         data: jh.utils.formToJson(_this.form),
         isSearch: isSearch,
         callback: function(data) {
+          console.log(data);
+          data.viewImgRoot = jh.config.viewImgRoot;
+          data.status = $('#status').val();
           return jh.utils.template('Feedback-list-template', data);
         }
       });
       page.init();
     };
     this.registerEvent = function() {
-           
+      // 切换状态
+        $('body').off('click','.replyState').on('click','.replyState',function(event,param){
+              var me=$(this);
+              var val=me.data('value');
+              $('#status').val(val);
+             if (param && param === 'autoClick') {
+
+              } else {
+                _this.initContent('tab');
+              }
+       })
     };
   }
   module.exports = Feedback;
