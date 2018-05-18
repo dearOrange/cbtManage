@@ -36,6 +36,14 @@
 				<th>任务发布时间：</th>
 				<td>{{data.createAt}}</td>
 			</tr>
+			<tr>
+        <th>商务姓名：</th>
+        <td>{{data.businessManager}}</td>
+        <th>商务电话：</th>
+        <td>{{data.businessManagerMobile}}</td>
+        <th>&nbsp;&nbsp;</th>
+        <td>&nbsp;&nbsp;</td>
+      </tr>
 		</table>
 		<div class="remark">{{data.remark}}</div>
 		<div class="imgRecord">
@@ -71,7 +79,7 @@
 			{{/if}} {{ each data.traceVoList data index }}
 			<div class="mt25">
 				<input type="radio" value="{{data.id}}" data-type="{{data.role}}" name="traceId" class="pull-left checkId" style="margin:80px 10px;cursor: pointer;" />
-				<div class="pull-left" {{if data.type===0 }}style="width:70%;height:100%;border:1px solid #ccc;padding: 20px 10px;"  {{else}}style="width:74%;" {{/if}}>
+				<div class="pull-left" {{if data.type===0 }}style="width:90%;height:100%;border:1px solid #ccc;padding: 20px 10px;"  {{else}}style="width:74%;" {{/if}}>
 					<div class="upimg pull-left" style="margin-top:0px;">
 						<dl>
 							<dt>
