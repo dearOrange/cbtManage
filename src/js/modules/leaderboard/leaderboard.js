@@ -99,7 +99,7 @@ define(function(require, exports, module) {
                     data:{exchangeId:id},
                     done:function(res){
                        jh.utils.alert({
-                        content: '充值成功',
+                        content: '兑换成功',
                         ok: function() {
                           _this.initContent();
                         }
