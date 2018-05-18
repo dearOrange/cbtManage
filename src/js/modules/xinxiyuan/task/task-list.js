@@ -83,7 +83,8 @@ define(function(require, exports, module) {
         var state = $('#state').val();
         if (state === '1' || state === '6') {
           jh.utils.load("/src/modules/xinxiyuan/task/task-list-detail", {
-            id: id
+            id: id,
+            state:state
           });
         } else if (state === '2') {
           jh.utils.load("/src/modules/xinxiyuan/task/task-list-detailTrcaing", {

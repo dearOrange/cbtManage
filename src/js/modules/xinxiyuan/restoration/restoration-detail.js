@@ -93,6 +93,20 @@ define(function(require, exports, module) {
         
       });
     };
+    this.initSheriff = function(data) {
+      jh.utils.ajax.send({
+        url: '/operator/getAllChannel',
+        done: function(returnData) {
+          returnData.channelManagerId = data.channelManagerId;
+          returnData.channelManager = data.channelManager;
+          var strTemplate = jh.utils.template('xx_task_list', returnData);
+          $('.task-content').html(strTemplate);
+          $('body').off('click', '.checkId').on('click', '.checkId', function() {
+              var checks = jh.utils.getURLValue().args;
+          })
+        }
+      });
+    };
     this.initValidator = function() {
       // 表单绑定
       jh.utils.validator.init({
@@ -130,6 +144,17 @@ define(function(require, exports, module) {
             return false;
           }
           var submit = form.find('input[type="submit"]');
+          if(submit.hasClass('priceStorage')){
+            var managerId = $(".managerId").filter(":checked");
+            datas.channelManagerId = managerId.val();
+            datas.channelManagerName = managerId.data('name');
+            if (!managerId || !$.trim(managerId.val())) {
+                jh.utils.confirm({
+                    content: '请选择相应渠道经理！'
+                });
+                return false;
+            }
+          }
           var arr = submit.hasClass('priceStorage') ? '/task/estimate,价格预估完毕' : '/task/fixPrice,价格确认完毕';
           arr = arr.split(',');
           jh.utils.ajax.send({
@@ -161,6 +186,7 @@ define(function(require, exports, module) {
           returnData.taskId = args.id;
           returnData.baileePrice = (parseFloat(returnData.data.finalPrice) * 0.1).toFixed(2);
           var creditorStr = jh.utils.template('restoration_detail_template', returnData);
+          _this.initSheriff(returnData.data);
           $('.restorationContent').html(creditorStr);
           if(_this.returnData.entrust === 'trace') {
             $('.thirdpartyPrice_box').addClass('hide');
