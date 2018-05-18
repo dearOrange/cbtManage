@@ -22,7 +22,6 @@ define(function(require, exports, module) {
                     taskId: args.id
                 },
                 done: function(returnData) {
-                    console.log(returnData);
                     returnData.state = args.state;
                     returnData.menuState = jh.utils.menuState;
                     returnData.officerState = jh.utils.officerState;
