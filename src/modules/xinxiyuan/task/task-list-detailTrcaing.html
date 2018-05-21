@@ -112,7 +112,7 @@
 								<td {{if data.gpsSource !== 1}}colspan="3"{{/if}}>{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装{{/if}}{{if data.gpsSource === 2}}未安装{{/if}}</td>
 								{{if data.gpsSource === 1}}
 								<th>安装人员</th>
-								<td>{{data.gpsPerson}}</td>
+								<td>{{data.gpsPerson}}({{data.contactPhone}})</td>
 								{{/if}}
 							</tr>
 							{{/if}}
