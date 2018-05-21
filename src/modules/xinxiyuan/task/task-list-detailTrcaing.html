@@ -109,10 +109,10 @@
 							{{if data.role === 'type_A' || data.role === 'type_C'}}
 							<tr>
 								<th>GPS</th>
-								<td {{if data.gpsSource !== 1}}colspan="3"{{/if}}>{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装{{/if}}{{if data.gpsSource === 2}}未安装{{/if}}</td>
+								<td {{if data.gpsSource !== 1}}colspan="3"{{/if}}>{{if typeof data.gpsSource ==='number' }}{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装{{/if}}{{if data.gpsSource === 2}}未安装{{/if}}{{else}}未安装{{/if}}</td>
 								{{if data.gpsSource === 1}}
 								<th>安装人员</th>
-								<td>{{data.gpsPerson}}({{data.contactPhone}})</td>
+								<td>{{data.gpsPerson}}</td>
 								{{/if}}
 							</tr>
 							{{/if}}
