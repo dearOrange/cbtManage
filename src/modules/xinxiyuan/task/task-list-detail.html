@@ -1,7 +1,7 @@
 <div class="dataContent taskListContent">
 
 </div>
-<script type="text/template" id="task_detail_template">
+<script type="text/html" id="task_detail_template">
 	<div class="dialog-width public_css">
 		<p class="pull-left detail_css">
 			任务详情
@@ -110,6 +110,7 @@
 							<tr>
 								<th>GPS</th>
 								<td {{if data.gpsSource !== 1}}colspan="3"{{/if}}  id="install">{{if typeof data.gpsSource ==='number' }}{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装{{/if}}{{if data.gpsSource === 2}}未安装{{/if}}{{else}}未安装{{/if}}</td>
+								 
 								{{if data.gpsSource === 1}}
 								<th>安装人员</th>
 								<td>{{data.gpsPerson}}</td>
