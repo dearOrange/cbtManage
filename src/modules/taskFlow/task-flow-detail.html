@@ -1,0 +1,31 @@
+<div class="dataContent flowDetailContent">
+    
+</div>
+<script type="text/template" id="task_flow_detail_template">
+    <div class="dialog-width public_css">
+        <p class="pull-left detail_css">
+            流程详情
+        </p>
+        <a href="javascript:;" class="button gobackPage goBack">返回</a>
+        <div class="clearfix"></div>
+        <hr />
+        <p>基本信息</p>
+        <div>
+          <span>债权方：某某公司</span>
+          <span>车牌：123456</span>
+          <span>残值：100万</span>
+          <span>车型：别克君威</span>
+          <span>总留转时间：5天13小时</span>
+        </div>
+        <p>流程图</p>
+        <div>
+          
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+seajs.use('modules/taskFlow/task-flow-detail', function(TaskFlowDetail) {
+    var TaskFlowDetail = new TaskFlowDetail();
+    TaskFlowDetail.init();
+});
+</script>
