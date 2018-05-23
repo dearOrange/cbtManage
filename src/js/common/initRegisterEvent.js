@@ -237,6 +237,12 @@ define(function(require, exports, module) {
                     theme: "minimal-dark"
                 });
             });
+            
+            $('#getFlowNotion').on('click', function() {
+              $('#unreadBorder').removeClass('hide');
+                var noticeCon = jh.utils.template('unread_info_template', {});
+                $('#unreadBorder').html(noticeCon);
+            });
 
         };
     }

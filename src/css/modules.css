@@ -827,7 +827,7 @@ input, select, textarea {
 #leftMenu-box li {
 	position: relative;
 }
-#leftMenu-box li sup{
+#leftMenu-box li sup, #getFlowNotion sup{
 	color: #fff;
 	height: 14px;
 	line-height: 14px;
