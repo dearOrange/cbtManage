@@ -14,7 +14,6 @@ define(function(require, exports, module) {
   tammy.ui = tammy.ui || {}; //公共UI函数及插件
 
   var basePath = ROOTURL + '/src/'; //基础根路径
-  console.log(ROOTURL);
   //加载插件
   require('plugin/imageZoom/imageZoom'); //图片放大镜
   require('jquery.validate'); //表单验证
