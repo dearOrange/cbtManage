@@ -34,6 +34,7 @@ define(function(require, exports, module) {
          $('body').off('click','.addCon').on('click','.addCon',function(){
             var index=$(this).index();
             console.log(index);
+             
              var alertContent=jh.utils.template('addRemark', {});
              var list=jh.utils.template('addList', {});
                    jh.utils.alert({
