@@ -33,16 +33,58 @@
         <hr/>
         <p class="titleD">流程图</p>
         <!-- 任务录入 start-->
-        <div class="baseCon">
  
-          <div class="arrow unComplate unComplate1">
-            <span class="arrowNum">1</span>
-            <h4 class="stateName">{{menuState(data.state)}}</h4>
-            <div class="timeCon">
-                <p>流转时间</p>
-                <p>13小时45分钟</p>
+        <div id="taskProgram">
+          
+        </div>
+    </div>
+</script>
+<script type="text/template" id="addRemark_template">
+  <form id="remark-content-form">
+    <textarea name="remark" id="remarkContent" cols="50" rows="8" placeholder="请输入您想添加的备注信息,最多100字" maxlength="100"  style="resize:none;padding:10px;line-height:20px;text-indent:0;outline:none"></textarea>
+  </form>
+</script>
+<script type="text/template" id="task_programOne_template">
+  <div class="baseCon">
+    <div class="arrow unComplate1">
+      <span class="arrowNum">1</span>
+      <h4>任务录入</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>{{switchTime(data.createAt)}}</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        <div class="arrowConTop">
+            <dl>
+              <dd>负责人：</dd>
+              <dt>{{data.charger}}</dt>
+          </dl>
+           <dl>
+              <dd>开始时间：：</dd>
+              <dt>{{data.createAt}}</dt>
+          </dl>
+           <dl class="addCon" data-state="{{data.treeState}}">
+              <dd><i class="iconfont">&#xe660;</i></dd>
+              <dt >添备注加</dt>
+          </dl>
+           <dl class="sureCom">
+              <dd><i class="iconfont">&#xe632;</i></dd>
+              <dt>确认完成</dt>
+          </dl>
+          <div class="clearfix"></div>
+        </div>
+        <div class="arrowConBottom">
+          {{each data.remarkList item index}}
+          <div class="conList">
+            <div class="headCon">
+              <span>{{item.createAt}}</span>
+              <span>{{item.operator}}</span>
+>>>>>>> 810dc93df1c7b379a230983d28dc061b70dc49d6
             </div>
+            <div class="conDetail">{{item.remark}}</div>
           </div>
+<<<<<<< HEAD
           <div class="arrowCon">
               <div class="arrowConTop">
                   <dl>
@@ -121,6 +163,9 @@
                 <div class="clearfix"></div>
               </div>
           </div>
+=======
+          {{/each}}
+>>>>>>> 810dc93df1c7b379a230983d28dc061b70dc49d6
           <div class="clearfix"></div>
  
         </div>
@@ -252,8 +297,8 @@
           </div>
           <div class="clearfix"></div>
         </div>
-        <!-- 任务录入 end-->
     </div>
+<<<<<<< HEAD
 </script>
 <script type="text/template" id="addRemark">
   <textarea name="remark" class="remark" cols="50" rows="8" placeholder="请输入您想添加的备注信息,最多100字" maxlength="100"  style="resize:none;padding:10px;line-height:20px;text-indent:0;outline:none"></textarea>
@@ -268,24 +313,137 @@
             jog jog让姐姐偶然金融工具工具软件公司软件服务即可解决粉丝根据附件开始放假就发生纠纷及时交付时间放假
             
        </div>
+=======
+    <div class="clearfix"></div>
+  </div>
+  <div class="baseCon">
+    <div class="arrow unComplate2">
+      <span class="arrowNum">2</span>
+      <h4>违章初筛</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>{{switchTime(data.createAt)}}</p>
+      </div>
+>>>>>>> 810dc93df1c7b379a230983d28dc061b70dc49d6
     </div>
-</script>
-<script>
-var colorArr=['#E5E2FF','#DFFFE8','#C9FFD8','#BCFFCF','#96FFB3','#FEFFBA','#FFED86','#FFB8B8','#FF9090'];
-// function color(baseCon,index){
-//    var arrow=$(baseCon).find('.arrow');
-//    var list=$(baseCon).find('.conList');
-//    arr.style.background="colorArr[index]";
-//    for(var j=0;j<list.length;j++){
-//       var headCon=list[j].find('.headCon');
-//       headCon.style.background=colorArr[index];
-//    }
-// }
-var baseCon=$('.baseCon');
- 
-// for(var i=0;i<baseCon.length;i++){
-//     color(baseCon[i],i);
-// }
+    <div class="arrowCon">
+        
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <!-- 任务录入 end-->
+  <!-- 任务录入 start-->
+  <div class="baseCon">
+    <div class="arrow unComplate3">
+      <span class="arrowNum">3</span>
+      <h4>信息修复</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>13小时45分钟</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <!-- 任务录入 end-->
+  <!-- 任务录入 start-->
+  <div class="baseCon">
+    <div class="arrow unComplate4">
+      <span class="arrowNum">4</span>
+      <h4>现场查找</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>13小时45分钟</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <!-- 任务录入 end-->
+  <!-- 任务录入 start-->
+  <div class="baseCon">
+    <div class="arrow unComplate5">
+      <span class="arrowNum">5</span>
+      <h4>任务锁定</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>13小时45分钟</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <!-- 任务录入 end-->
+  <!-- 任务录入 start-->
+  <div class="baseCon">
+    <div class="arrow unComplate6">
+      <span class="arrowNum">6</span>
+      <h4>执行任务分配</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>13小时45分钟</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <!-- 任务录入 end-->
+  <!-- 任务录入 start-->
+  <div class="baseCon">
+    <div class="arrow unComplate7">
+      <span class="arrowNum">7</span>
+      <h4>执行任务完成</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>13小时45分钟</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <!-- 任务录入 end-->
+  <!-- 任务录入 start-->
+  <div class="baseCon">
+    <div class="arrow unComplate8">
+      <span class="arrowNum">8</span>
+      <h4>物流运输</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>13小时45分钟</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <!-- 任务录入 end-->
+  <!-- 任务录入 start-->
+  <div class="baseCon">
+    <div class="arrow unComplate9">
+      <span class="arrowNum">9</span>
+      <h4>交付车辆</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>13小时45分钟</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <!-- 任务录入 end-->
 </script>
 <script type="text/javascript">
 seajs.use('modules/taskFlow/task-flow-detail', function(TaskFlowDetail) {

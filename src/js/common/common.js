@@ -11904,6 +11904,9 @@ define(function(require, exports, module) {
         case "deliver":
           state = "交付车辆";
           break;
+        case "complete":
+          state = "确认完成";
+          break;
       }
       return state;
     }
