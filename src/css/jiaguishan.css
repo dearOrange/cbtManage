@@ -134,7 +134,7 @@
 
 #base-detail dl {
   float: left;
-  width: 17%;
+  width: 20%;
   color: #797979;
   font-size: 15px;
 }
@@ -156,6 +156,7 @@ hr {
   margin:-20px 0;
   padding:20px 0;
   position: relative;
+  min-height:210px;
 }
 
 .arrow {

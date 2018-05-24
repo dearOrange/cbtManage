@@ -21,12 +21,21 @@ define(function(require, exports, module) {
                     treeId: args.id
                 },
                 done: function(returnData) {
+                    returnData.menuState = jh.utils.menuState;
                     var informalStr = jh.utils.template('task_flow_detail_template', returnData);
                     $('.flowDetailContent').html(informalStr);
-                    
-                    
                 }
             });
+//          jh.utils.ajax.send({
+//              url: '/tree/flowDetail',
+//              data: {
+//                treeId: args.id
+//              },
+//              done: function(returnData) {
+//                  var informalStr = jh.utils.template('task_flow_detail_template', returnData);
+//                  $('.flowDetailContent').html(informalStr);
+//              }
+//          });
             
         };
         this.addRemark=function(){
@@ -41,7 +50,7 @@ define(function(require, exports, module) {
                       okValue:'保存',
                      content:alertContent,
                      ok:function(){
-                          $(list).appendTo($('.arrowConBottom'));
+                        $(list).appendTo($('.arrowConBottom'));
                      },
                      cancel: true
 
