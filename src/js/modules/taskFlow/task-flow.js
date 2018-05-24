@@ -9,7 +9,6 @@ define(function(require, exports, module) {
     function TaskFlow() {
         var _this = this;
         _this.form = $('#task-flow-form');
-
         this.init = function() {
             this.initContent();
             this.registerEvent();
@@ -20,7 +19,7 @@ define(function(require, exports, module) {
                 page_container: $('#page_container'),
                 form_container: _this.form,
                 method: 'post',
-                url: '/thirdTask/list',
+                url: '/tree/list',
                 contentType: 'application/json',
                 data: jh.utils.formToJson(_this.form),
                 isSearch: isSearch,

@@ -238,7 +238,7 @@ define(function(require, exports, module) {
                 });
             });
 //          (new jh.ui.shadow()).init();
-//          $('#kyPoupshadow').css('marginTop','70px')
+//          $('#kyPoupshadow').css('marginTop','70px');
 //          $('.loading-img').addClass('hide');
 //          var divYun = '<div class="coudyImg">您有新的消息，请注意查看</div>'
 //          $('#kyPoupshadow').html(divYun);
