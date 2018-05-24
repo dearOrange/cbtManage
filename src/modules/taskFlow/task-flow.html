@@ -12,6 +12,21 @@
                       <input type="text" class="search-input" name="companyName">
                     </td>
                     <td>
+                        <label class="label">流程状态：</label>
+                        <select name="state">
+                          <option value="">全部</option>
+                          <option value="cluesifte">违章初筛</option>
+                          <option value="repairinfo">信息修复</option>
+                          <option value="scene">现场查找</option>
+                          <option value="lock">任务锁定</option>
+                          <option value="allocation">执行分配</option>
+                          <option value="execution">执行完成</option>
+                          <option value="transport">交付车辆</option>
+                          <option value="deliver">全部</option>
+                          <option value="complete">确认完成</option>
+                        </select>
+                    </td>
+                    <td>
                       <label class="label">时间：</label>
                       <input type="text" class="search-input hand begin-input" readonly="readonly" name="beginTime" id="beginTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})"> 至
                       <input type="text" class="search-input hand end-input" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'beginTime\')}',dateFmt:'yyyy-MM-dd',isShowClear:true})">
