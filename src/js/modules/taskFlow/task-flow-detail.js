@@ -27,11 +27,6 @@ define(function(require, exports, module) {
                     $('.flowDetailContent').html(informalStr);
                 }
             });
-<<<<<<< HEAD
- 
-            
-=======
->>>>>>> 810dc93df1c7b379a230983d28dc061b70dc49d6
         };
         this.taskProgramOne = function(){
           jh.utils.ajax.send({
@@ -63,28 +58,6 @@ define(function(require, exports, module) {
 //      };
         this.addRemark=function(){
             // 添加备注
-<<<<<<< HEAD
-         $('body').off('click','.addCon').on('click','.addCon',function(){
-             var alertContent=jh.utils.template('addRemark', {});
-             var list=jh.utils.template('addList', {});
-                   jh.utils.alert({
-                      title: '添加备注',
-                      okValue:'保存',
-                     content:alertContent,
-                     ok:function(){
-                         jh.utils.ajax.send({
-                            url:'/tree/remark',
-                            data:{treeId:args.id,remark:$('.remark').val(),state:$('.stateName').val()},
-                            done:function(res){
-                                console.log(1);
-                            }
-                         })
-                     },
-                     cancel: true
-
-                   }) 
-         })
-=======
             $('body').off('click','.addCon').on('click','.addCon',function(){
               var index=$(this).index();
               var treeState = $(this).data('state');
@@ -109,7 +82,6 @@ define(function(require, exports, module) {
                 cancel: true
               }) 
             })
->>>>>>> 810dc93df1c7b379a230983d28dc061b70dc49d6
         };
 
     }
