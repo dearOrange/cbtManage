@@ -952,39 +952,46 @@ input[type=text].search-del{
   width:70px;
   height:70px;
   text-align: center;
-  line-height: 70px;
+  margin:auto;
+}
+.percentImg span{
+  display: block;
+  width:40px;
+  height:40px;
+  line-height: 16px;
+  padding:18px;
 }
 .percentOne{
-  background:url(../img/blue.png) no-repeat center;
+  background:url(../img/2.png) no-repeat center;
   background-size:100% 100%;
 }
 .percentTwo{
-  background:url(../img/blue.png) no-repeat center;
+  background:url(../img/3.png) no-repeat center;
   background-size:100% 100%;
 }
 .percentThree{
-  background:url(../img/blue.png) no-repeat center;
+  background:url(../img/4.png) no-repeat center;
   background-size:100% 100%;
 }
 .percentFour{
-  background:url(../img/blue.png) no-repeat center;
+  background:url(../img/5.png) no-repeat center;
   background-size:100% 100%;
 }
 .percentFive{
-  background:url(../img/blue.png) no-repeat center;
+  background:url(../img/6.png) no-repeat center;
   background-size:100% 100%;
 }
 .percentSix{
-  background:url(../img/blue.png) no-repeat center;
+  background:url(../img/7.png) no-repeat center;
   background-size:100% 100%;
 }
 .percentSeven{
-  background:url(../img/blue.png) no-repeat center;
+  background:url(../img/8.png) no-repeat center;
   background-size:100% 100%;
 }.percentEight{
-  background:url(../img/blue.png) no-repeat center;
+  background:url(../img/9.png) no-repeat center;
   background-size:100% 100%;
 }.percentNine{
-  background:url(../img/blue.png) no-repeat center;
+  background:url(../img/10.png) no-repeat center;
   background-size:100% 100%;
 }
