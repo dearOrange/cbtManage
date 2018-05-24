@@ -9,7 +9,6 @@ define(function(require, exports, module) {
     function TaskFlowDetail() {
         var _this = this;
         var args = jh.utils.getURLValue().args;
-
         this.init = function() {
             this.initContent();
             this.addRemark();
@@ -21,20 +20,17 @@ define(function(require, exports, module) {
                     treeId: args.id
                 },
                 done: function(returnData) {
+                    returnData.menuState = jh.utils.menuState;
                     var informalStr = jh.utils.template('task_flow_detail_template', returnData);
                     $('.flowDetailContent').html(informalStr);
-                    
-                    
                 }
             });
+ 
             
         };
         this.addRemark=function(){
             // 添加备注
          $('body').off('click','.addCon').on('click','.addCon',function(){
-            var index=$(this).index();
-            console.log(index);
-             
              var alertContent=jh.utils.template('addRemark', {});
              var list=jh.utils.template('addList', {});
                    jh.utils.alert({
@@ -42,7 +38,13 @@ define(function(require, exports, module) {
                       okValue:'保存',
                      content:alertContent,
                      ok:function(){
-                          $(list).appendTo($('.arrowConBottom'));
+                         jh.utils.ajax.send({
+                            url:'/tree/remark',
+                            data:{treeId:args.id,remark:$('.remark').val(),state:$('.stateName').val()},
+                            done:function(res){
+                                console.log(1);
+                            }
+                         })
                      },
                      cancel: true
 
