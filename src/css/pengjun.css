@@ -948,11 +948,43 @@ input[type=text].search-del{
   right:258px;
   top:-15px;
 }
-.percentState{
+.percentImg{
   width:70px;
   height:70px;
-  background:url(../img/blue.png) no-repeat center;
-  background-size:100% 100%;
   text-align: center;
   line-height: 70px;
+}
+.percentOne{
+  background:url(../img/blue.png) no-repeat center;
+  background-size:100% 100%;
+}
+.percentTwo{
+  background:url(../img/blue.png) no-repeat center;
+  background-size:100% 100%;
+}
+.percentThree{
+  background:url(../img/blue.png) no-repeat center;
+  background-size:100% 100%;
+}
+.percentFour{
+  background:url(../img/blue.png) no-repeat center;
+  background-size:100% 100%;
+}
+.percentFive{
+  background:url(../img/blue.png) no-repeat center;
+  background-size:100% 100%;
+}
+.percentSix{
+  background:url(../img/blue.png) no-repeat center;
+  background-size:100% 100%;
+}
+.percentSeven{
+  background:url(../img/blue.png) no-repeat center;
+  background-size:100% 100%;
+}.percentEight{
+  background:url(../img/blue.png) no-repeat center;
+  background-size:100% 100%;
+}.percentNine{
+  background:url(../img/blue.png) no-repeat center;
+  background-size:100% 100%;
 }

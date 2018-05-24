@@ -52,7 +52,7 @@
         <td>{{item.carNumber}}</td>
         <td>{{item.upstreamName}}</td>
         <td>{{item.carBrand}}</td>
-        <td><p class="percentState">{{menuState(item.state)}}</p></td>
+        <td><p class="percentImg {{if item.state === 'issue'}}percentOne{{/if}}{{if item.state === 'cluesifte'}}percentTwo{{/if}}{{if item.state === 'repairinfo'}}percentThree{{/if}}{{if item.state === 'scene'}}percentFour{{/if}}{{if item.state === 'lock'}}percentFive{{/if}}{{if item.state === 'allocation'}}percentSix{{/if}}{{if item.state === 'execution'}}percentSeven{{/if}}{{if item.state === 'transport'}}percentEight{{/if}}{{if item.state === 'deliver'}}percentNine{{/if}}">{{menuState(item.state)}}</p></td>
         <td>{{item.currentCharger}}</td>
         <td>{{switchTime(item.currentStartAt)}}</td>
         <td>
