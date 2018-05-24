@@ -205,6 +205,9 @@ line-height:58px;
  .arrowConTop dl{
  	margin-right:30px;
  }
+ .arrowConTop dl.addCon, .arrowConTop dl.sureCom{
+ 	cursor:pointer;
+ }
  .addCon dt,.addCon dd i{
  	color:#F6B242;
  }

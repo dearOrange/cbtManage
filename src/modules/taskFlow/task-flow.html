@@ -27,7 +27,7 @@
         <table class="dataShow">
             <thead>
                 <tr>
-                    <th width="3%">录入时间</th>
+                    <th width="15%">录入时间</th>
                     <th width="10%">车牌号</th>
                     <th width="10%">债权方名称</th>
                     <th width="10%">车型</th>
@@ -48,13 +48,13 @@
 <script type="text/template" id="task-flow-template">
     {{ each list item index }}
     <tr>
-        <td>{{index+1}}</td>
-        <td>{{item.carNumber}}</td>
-        <td>{{item.carBrand}}</td>
-        <td>{{item.source}}</td>
-        <td>{{if item.match === true}}匹配成功{{/if}}</td>
-        <td>{{item.matchTime}}</td>
         <td>{{item.createAt}}</td>
+        <td>{{item.carNumber}}</td>
+        <td>{{item.upstreamName}}</td>
+        <td>{{item.carBrand}}</td>
+        <td><p class="percentState">{{menuState(item.state)}}</p></td>
+        <td>{{item.currentCharger}}</td>
+        <td>{{switchTime(item.currentStartAt)}}</td>
         <td>
             <a data-id="{{item.id}}" class="task-flow-detail button">查看流程</a>
         </td>
