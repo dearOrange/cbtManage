@@ -12,8 +12,9 @@ define(function(require, exports, module) {
 
         this.init = function() {
             this.initContent();
+            this.addRemark();
         };
-        this.initContent = function() {
+        this.initContent = function(){
             jh.utils.ajax.send({
                 url: '/tree/treeDetail',
                 data: {
@@ -28,6 +29,42 @@ define(function(require, exports, module) {
             });
             
         };
+        this.addRemark=function(){
+            // 添加备注
+         $('body').off('click','.addCon').on('click','.addCon',function(){
+            var index=$(this).index();
+            console.log(index);
+             var alertContent=jh.utils.template('addRemark', {});
+             var list=jh.utils.template('addList', {});
+                   jh.utils.alert({
+                      title: '添加备注',
+                      okValue:'保存',
+                     content:alertContent,
+                     ok:function(){
+                          $(list).appendTo($('.arrowConBottom'));
+                     },
+                     cancel: true
+
+                   }) 
+         })
+        };
+        // 点击确认
+       $('body').off('click','.sureCom').on('click','.sureCom',function(){
+             jh.utils.alert({
+                     content:"<span style='margin:10x 0;display:block'>是否确认次任务流程已完成？</span>",
+                     ok:function(){
+                        // console.log(this);
+                           // this.style.color="#000";
+                           console.log(1);
+
+
+                     },
+                     cancel: true
+
+                   }) 
+
+       })
+
     }
     module.exports = TaskFlowDetail;
 });
