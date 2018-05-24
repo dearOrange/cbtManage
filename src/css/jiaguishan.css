@@ -1,247 +1,292 @@
 .sidebar-menu li.active {
-	background-color: #2e303c;
+  background-color: #2e303c;
 }
 
 .sidebar-menu li.active>a>span {
-	color: #20a0ff;
+  color: #20a0ff;
 }
 
 .search-container .submit {
-	padding: 10px 40px;
+  padding: 10px 40px;
 }
 
-.pagination select, .pagination .select2-container {
-	margin: 0;
-	width: 80px;
-	text-align: left;
+.pagination select,
+.pagination .select2-container {
+  margin: 0;
+  width: 80px;
+  text-align: left;
 }
 
-.qd-distribution-tab {
-}
+.qd-distribution-tab {}
 
 .qd-distribution-tab li {
-	float: left;
-	text-align: center;
-	line-height: 36px;
-	padding: 5px 20px;
-	cursor: pointer;
-	border: 1px solid #3fa1f4;
+  float: left;
+  text-align: center;
+  line-height: 36px;
+  padding: 5px 20px;
+  cursor: pointer;
+  border: 1px solid #3fa1f4;
 }
 
 .qd-distribution-tab li.active {
-	background-color: #3fa1f4;
-	color: #fff;
+  background-color: #3fa1f4;
+  color: #fff;
 }
 
 .red-border {
-	border: 1px solid red !important;
+  border: 1px solid red !important;
 }
 
 .hand {
-	cursor: pointer !important;
+  cursor: pointer !important;
 }
 
 .ml10 {
-	margin-left: 10px;
+  margin-left: 10px;
 }
 
 .zoomIcon {
-	width: 33px;
-	height: 33px;
-	position: absolute;
-	top: 0;
-	right: 0;
-	background: url(icon.png);
+  width: 33px;
+  height: 33px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: url(icon.png);
 }
 
+
 /* these styles are for the demo, and are not required for the plugin */
+
 .zoom {
-	display: inline-block;
-	position: relative;
+  display: inline-block;
+  position: relative;
 }
 
 .zoom img {
-	display: block;
+  display: block;
 }
 
 .zoom img::selection {
-	background-color: transparent;
+  background-color: transparent;
 }
 
 .new-message {
-	position: fixed;
-	right: 5px;
-	bottom: 5px;
-	border: 1px solid #ddd;
-	background-color: #f7f7f7;
-	z-index: 99;
+  position: fixed;
+  right: 5px;
+  bottom: 5px;
+  border: 1px solid #ddd;
+  background-color: #f7f7f7;
+  z-index: 99;
 }
 
 .new-message .title {
-	height: 40px;
-	line-height: 40px;
-	padding: 0 10px 0 10px;
-	border-bottom: 1px solid #3a79f3;
-	background:#3a79f3;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px 0 10px;
+  border-bottom: 1px solid #3a79f3;
+  background: #3a79f3;
 }
 
-.new-message .title span{
-	color:#fff;
+.new-message .title span {
+  color: #fff;
 }
 
 .new-message .content {
-	width: 280px;
-	height: 100px;
-	text-align: center;
+  width: 280px;
+  height: 100px;
+  text-align: center;
 }
 
 .new-message .content p {
-	color:#3a79f3;	
+  color: #3a79f3;
 }
 
 #poster_manage_addBannerForm {
-
-	/*width: 700px;*/
+  /*width: 700px;*/
 }
 
 #poster_manage_addBannerForm .img-preview-content {
-	width: 608px;
-	height: 304px;
-	border: 1px solid #ddd;
+  width: 608px;
+  height: 304px;
+  border: 1px solid #ddd;
 }
 
 #poster_manage_addBannerForm input[type="text"] {
-	width: 520px;
-	height: 30px;
-	border: 1px solid #ddd;
+  width: 520px;
+  height: 30px;
+  border: 1px solid #ddd;
 }
 
-.dynamic-form table th{
-	width: 7%;
-	text-align: right;
-}
-.dynamic-form table td{
-	text-align: left;
-}
-.dynamic-form .form-input{
-	width: 99%;
-	line-height: 40px;
-	border: 1px solid #ddd;
+.dynamic-form table th {
+  width: 7%;
+  text-align: right;
 }
 
-#base-detail dl{
-	float:left;
-	width:17%;
-	color:#797979;
-	font-size:15px;
+.dynamic-form table td {
+  text-align: left;
 }
-#base-detail dt,#base-detail dd{
-	float:left;
+
+.dynamic-form .form-input {
+  width: 99%;
+  line-height: 40px;
+  border: 1px solid #ddd;
 }
+
+#base-detail dl {
+  float: left;
+  width: 17%;
+  color: #797979;
+  font-size: 15px;
+}
+
+#base-detail dt,
+#base-detail dd {
+  float: left;
+}
+
 p.titleD {
-	/*font-size:16px;*/
+  /*font-size:16px;*/
 }
-hr{
-	color:#eee;
-}
-.dialog-width .baseCon{
-	margin-top:15px;
-	margin-bottom:0;
-}
-.arrow{
-	width:70px;
-	/*min-height:230px;*/
-	float:left;
-	position:relative;
-	background:#E5E2FF;
-	padding:5px 10px;
-	text-align:center;
 
+hr {
+  color: #eee;
 }
- .arrow:after{
-	display:block;
-	content:'';
-	border-left:45px solid transparent;
-	border-right:45px solid transparent;
-	border-top:20px solid #E5E2FF;
-	position:absolute;
-	left:0;
-	bottom:-20px;
+
+.dialog-width .baseCon {
+  margin:-20px 0;
+  padding:20px 0;
+  position: relative;
 }
-.arrowNum{
-display:block;
-width:18px;
-height:48px; 
-font-size:48px;
-font-family:DINCondensed-Bold;
-color:rgba(0,0,0,0.2);
-line-height:58px;
+
+.arrow {
+  width: 70px;
+  /*min-height:230px;*/
+  float: left;
+  position: absolute;
+  background: #E5E2FF;
+  top: 0;
+  bottom: 0;
+  padding: 5px 10px;
+  text-align: center;
 }
-.arrow h4{
-	font-size:15px;
-	margin:12px 0;
+
+.arrow:after {
+  display: block;
+  content: '';
+  border-left: 45px solid transparent;
+  border-right: 45px solid transparent;
+  border-top: 20px solid #E5E2FF;
+  position: absolute;
+  left: 0;
+  bottom: -20px;
 }
-.timeCon{
-	margin-top:50px;
+.arrow.unComplate1{
+  background-color:#ccc;
+  z-index:2;
 }
-.arrow .timeCon p{
-	margin:5px 0;
+.arrow.unComplate1:after{
+  border-top: 20px solid #ccc;
 }
-.arrowCon{
-	float:left;
-	width:86%;
-	margin-left:30px;
+.arrowNum {
+  display: block;
+  width: 18px;
+  height: 48px;
+  font-size: 48px;
+  font-family: DINCondensed-Bold;
+  color: rgba(0, 0, 0, 0.2);
+  line-height: 58px;
+  padding:30px 0 0;
 }
-.arrowConTop,.arrowConBottom{
-	width:100%;
+.arrow.unComplate1 .arrowNum{
+  padding:0;
 }
-.arrowConBottom{
-	border-bottom:1px dashed rgba(0,0,0,0.3);
-	min-height:140px;
-	padding:15px 0;
+.arrow h4 {
+  font-size: 15px;
+  margin: 12px 0;
 }
-.arrowConTop dl,.arrowConTop dt,.arrowConTop dd{
-	float:left;
+
+.timeCon {
+  margin-top: 50px;
 }
- .arrowConTop dl{
- 	margin-right:30px;
- }
- .arrowConTop dl.addCon, .arrowConTop dl.sureCom{
- 	cursor:pointer;
- }
- .addCon dt,.addCon dd i{
- 	color:#F6B242;
- }
- .sureCom dt,.sureCom dd i{
-  color:#FF6D6D;
- }
- .addCon dt,.sureCom dt{
- 	margin-left:3px;
- }
- .dialog-width{
- 	width:92%;
- }
- .conList{
- width:240px;
-height:140px; 
-background:rgba(255,255,255,1);
-box-shadow: 2px 3px 3px 0px rgba(0,0,0,0.15);
-margin-right:17px;
-margin-bottom:20px;
-float:left;
- }
- .headCon{
- width:230px;
-height:30px; 
-background:rgba(229,226,255,1);
-line-height:30px;
-padding:0 5px;
-display:flex;
-justify-content:space-between;
- }
- .conDetail{
- 	padding:5px;
- 	height:100px;
- 	overflow:auto;
- 	width:230px;
- }
+
+.arrow .timeCon p {
+  margin: 5px 0;
+}
+
+.arrowCon {
+  float: left;
+  width: 86%;
+  margin-left: 100px;
+}
+
+.arrowConTop,
+.arrowConBottom {
+  width: 100%;
+}
+
+.arrowConBottom {
+  margin-top: 15px;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.3)
+}
+
+.arrowConTop dl,
+.arrowConTop dt,
+.arrowConTop dd {
+  float: left;
+}
+
+.arrowConTop dl {
+  margin-right: 30px;
+}
+
+.arrowConTop dl.addCon,
+.arrowConTop dl.sureCom {
+  cursor: pointer;
+}
+
+.addCon dt,
+.addCon dd i {
+  color: #F6B242;
+}
+
+.sureCom dt,
+.sureCom dd i {
+  color: #FF6D6D;
+}
+
+.addCon dt,
+.sureCom dt {
+  margin-left: 3px;
+}
+
+.dialog-width {
+  width: 92%;
+}
+
+.conList {
+  width: 240px;
+  height: 140px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 2px 3px 3px 0px rgba(0, 0, 0, 0.15);
+  margin-right: 17px;
+  margin-bottom: 20px;
+  float: left;
+}
+
+.headCon {
+  width: 230px;
+  height: 30px;
+  background: rgba(229, 226, 255, 1);
+  line-height: 30px;
+  padding: 0 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.conDetail {
+  padding: 5px;
+  height: 100px;
+  overflow: auto;
+  width: 230px;
+}
+

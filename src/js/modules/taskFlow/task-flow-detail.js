@@ -16,9 +16,9 @@ define(function(require, exports, module) {
         };
         this.initContent = function(){
             jh.utils.ajax.send({
-                url: '/thirdTask/taskDetail',
+                url: '/tree/treeDetail',
                 data: {
-                    taskId: args.id
+                    treeId: args.id
                 },
                 done: function(returnData) {
                     var informalStr = jh.utils.template('task_flow_detail_template', returnData);
