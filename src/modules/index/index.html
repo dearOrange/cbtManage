@@ -18,6 +18,8 @@
     <link href="../../css/scrollbar.css?version=20170720" rel="stylesheet" />
     <link href="../../css/jiaguishan.css?version=20170720" rel="stylesheet" />
     <link href="../../css/pengjun.css?version=20170720" rel="stylesheet" />
+    <link href="../../css/icon/iconfont.css?version=20170720" rel="stylesheet" />
+    
 </head>
 
 <body>
@@ -28,6 +30,9 @@
             <div class="pull-right">
                 <ul class="navbar-nav">
                     <li class="user-menu">
+                        <a href="javascript:;" class="pull-left" id="getFlowNotion">
+                            <i class="icon icon-qd_tcdfp"></i><sup>123</sup>
+                        </a>
                         <a href="javascript:;" class="pull-left" id="userCenterLink">
                             <i class="icon icon-qd_btgl" id="userIsPassState"></i>
                             <span id="usernameText"></span>
@@ -41,9 +46,10 @@
             </div>
         </nav>
     </header>
+    <div id="unreadBorder" class="hide"></div>
     <aside class="left-side" id="menusBar">
         <section class="sidebar">
-            <ul class="sidebar-menu" id="leftMenu-box"></ul>
+          <ul class="sidebar-menu" id="leftMenu-box"></ul>
         </section>
         <span class="icon icon-icon_closeMenu pull-left hand" id="toggleMenu"></span>
     </aside>
@@ -51,9 +57,9 @@
         <aside class="right-side">
         	<div class="side-content">
         		<section class="content-header">
-	                <a href="javascript:;" id="breadCrumb"></a>
-	            </section>
-	            <section class="content" id="content-container"></section>
+              <a href="javascript:;" id="breadCrumb"></a>
+            </section>
+            <section class="content" id="content-container"></section>
         	</div>
         </aside>
     </article>
@@ -79,6 +85,37 @@
         </a>
     </li>
     {{/each}}
+</script>
+<script type="text/template" id="unread_info_template">
+    <div class="bianjiao"></div>
+    <div class="checkNews">
+      <table>
+        <tr>
+          <td><input type="checkbox" name="" id="checkAll" value="" /></td>
+          <td colspan="2"><span style="color:#68c8f8;">标记全读</span></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" name="" id="" value="" /></td>
+          <td><span>车牌号为浙A88888的任务等待您前去处理</span></td>
+          <td><span class="lastSpan"></span></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" name="" id="" value="" /></td>
+          <td><span>车牌号为浙A88888的任务等待您前去处理</span></td>
+          <td><span class="lastSpan"></span></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" name="" id="" value="" /></td>
+          <td><span>车牌号为浙A88888的任务等待您前去处理</span></td>
+          <td><span class="lastSpan"></span></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" name="" id="" value="" /></td>
+          <td><span>车牌号为浙A88888的任务等待您前去处理</span></td>
+          <td><span class="lastSpan"></span></td>
+        </tr>
+      </table>
+    </div>
 </script>
 <script type="text/javascript" src="../../js/lib/seajs/3.0.1/sea.js?version=20170721"></script>
 <script type="text/javascript">

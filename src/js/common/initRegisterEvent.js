@@ -237,6 +237,17 @@ define(function(require, exports, module) {
                     theme: "minimal-dark"
                 });
             });
+//          (new jh.ui.shadow()).init();
+//          $('#kyPoupshadow').css('marginTop','70px');
+//          $('.loading-img').addClass('hide');
+//          var divYun = '<div class="coudyImg">您有新的消息，请注意查看</div>'
+//          $('#kyPoupshadow').html(divYun);
+            $('#getFlowNotion').on('click', function() {
+              (new jh.ui.shadow()).close();
+              $('#unreadBorder').removeClass('hide');
+                var noticeCon = jh.utils.template('unread_info_template', {});
+                $('#unreadBorder').html(noticeCon);
+            });
 
         };
     }
