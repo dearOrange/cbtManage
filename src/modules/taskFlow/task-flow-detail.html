@@ -3,18 +3,18 @@
 </div>
 <script type="text/template" id="task_flow_detail_template">
     <div class="dialog-width public_css">
-       <!--  <p class="pull-left detail_css">
+        <p class="pull-left detail_css">
             流程详情
         </p>
         <a href="javascript:;" class="button gobackPage goBack">返回</a>
-        <div class="clearfix"></div> -->
+        <div class="clearfix"></div>
         <!-- <hr /> -->
         <p class="titleD">任务信息</p>
 
         <div id="base-detail">
           <dl>
               <dd>债权方：</dd>
-              <dt>某某公司</dt>
+              <dt>{{}}</dt>
           </dl>
           <dl>
               <dd>车牌：</dd>
@@ -25,7 +25,7 @@
               <dt>某某公司</dt>
           </dl>
            <dl>
-              <dd>总留转时间</dd>
+              <dd>总留转时间：</dd>
               <dt>5天13小时</dt>
           </dl>
           <div class="clearfix"></div>
@@ -64,95 +64,7 @@
                       <div class="clearfix"></div>
                     </div>
                     <div class="arrowConBottom">
-                            <div class="conList">
-                                 <div class="headCon">
-                                    <span>2013-20-08 13:20:30</span>
-                                    <span>张三</span>
-                                 </div>
-                                <div class="conDetail">
-                                  jog jog让姐姐偶然金融工具工具软件公司软件服务即可解决粉丝根据附件开始放假就发生纠纷及时交付时间放假
-                                </div>
-                            </div>
-                            <div class="conList">
-                                 <div class="headCon">
-                                    <span>2013-20-08 13:20:30</span>
-                                    <span>张三</span>
-                                 </div>
-                                <div class="conDetail">
-                                  jog jog让姐姐偶然金融工具工具软件公司软件服务即可解决粉丝根据附件开始放假就发生纠纷及时交付时间放假
-                                  
-                                </div>
-                            </div>
-                            <div class="conList">
-                                 <div class="headCon">
-                                    <span>2013-20-08 13:20:30</span>
-                                    <span>张三</span>
-                                 </div>
-                                <div class="conDetail">
-                                  jog jog让姐姐偶然金融工具工具软件公司软件服务即可解决粉丝根据附件开始放假就发生纠纷及时交付时间放假
-                                  
-                                </div>
-                            </div>
-                            <div class="conList">
-                                 <div class="headCon">
-                                    <span>2013-20-08 13:20:30</span>
-                                    <span>张三</span>
-                                 </div>
-                                <div class="conDetail">
-                                  jog jog让姐姐偶然金融工具工具软件公司软件服务即可解决粉丝根据附件开始放假就发生纠纷及时交付时间放假
-                                  
-                                </div>
-                            </div>
-                            <div class="conList">
-                                 <div class="headCon">
-                                    <span>2013-20-08 13:20:30</span>
-                                    <span>张三</span>
-                                 </div>
-                                <div class="conDetail">
-                                  jog jog让姐姐偶然金融工具工具软件公司软件服务即可解决粉丝根据附件开始放假就发生纠纷及时交付时间放假
-                                  
-                                </div>
-                            </div>
-                            <div class="conList">
-                                 <div class="headCon">
-                                    <span>2013-20-08 13:20:30</span>
-                                    <span>张三</span>
-                                 </div>
-                                <div class="conDetail">
-                                  jog jog让姐姐偶然金融工具工具软件公司软件服务即可解决粉丝根据附件开始放假就发生纠纷及时交付时间放假
-                                  
-                                </div>
-                            </div>
-                            <div class="conList">
-                                 <div class="headCon">
-                                    <span>2013-20-08 13:20:30</span>
-                                    <span>张三</span>
-                                 </div>
-                                <div class="conDetail">
-                                  jog jog让姐姐偶然金融工具工具软件公司软件服务即可解决粉丝根据附件开始放假就发生纠纷及时交付时间放假
-                                  
-                                </div>
-                            </div>
-                            <div class="conList">
-                                 <div class="headCon">
-                                    <span>2013-20-08 13:20:30</span>
-                                    <span>张三</span>
-                                 </div>
-                                <div class="conDetail">
-                                  jog jog让姐姐偶然金融工具工具软件公司软件服务即可解决粉丝根据附件开始放假就发生纠纷及时交付时间放假
-                                  
-                                </div>
-                            </div>
-                            <div class="conList">
-                                 <div class="headCon">
-                                    <span>2013-20-08 13:20:30</span>
-                                    <span>张三</span>
-                                 </div>
-                                <div class="conDetail">
-                                  jog jog让姐姐偶然金融工具工具软件公司软件服务即可解决粉丝根据附件开始放假就发生纠纷及时交付时间放假
-                                  
-                                </div>
-                            </div>
+                    
 
                             <div class="clearfix"></div>
                     </div>
@@ -1068,9 +980,21 @@
         </div>
     </div>
 </script>
-<style>
- 
-</style>
+<script type="text/template" id="addRemark">
+  <textarea name="" id="" cols="50" rows="8" placeholder="请输入您想添加的备注信息,最多100字" maxlength="100"  style="resize:none;padding:10px;line-height:20px;text-indent:0;outline:none"></textarea>
+</script>
+<script type="text/template" id="addList">
+   <div class="conList">
+       <div class="headCon">
+              <span>2013-20-08 13:20:30</span>
+              <span>张三</span>
+       </div>
+       <div class="conDetail">
+            jog jog让姐姐偶然金融工具工具软件公司软件服务即可解决粉丝根据附件开始放假就发生纠纷及时交付时间放假
+            
+       </div>
+    </div>
+</script>
 <script>
 var colorArr=['#E5E2FF','#DFFFE8','#C9FFD8','#BCFFCF','#96FFB3','#FEFFBA','#FFED86','#FFB8B8','#FF9090'];
 // function color(baseCon,index){
