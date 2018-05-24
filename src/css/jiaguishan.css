@@ -128,3 +128,116 @@
 	line-height: 40px;
 	border: 1px solid #ddd;
 }
+
+#base-detail dl{
+	float:left;
+	width:17%;
+	color:#797979;
+	font-size:15px;
+}
+#base-detail dt,#base-detail dd{
+	float:left;
+}
+p.titleD {
+	/*font-size:16px;*/
+}
+hr{
+	color:#eee;
+}
+.dialog-width .baseCon{
+	margin-top:15px;
+	margin-bottom:0;
+}
+.arrow{
+	width:70px;
+	/*min-height:230px;*/
+	float:left;
+	position:relative;
+	background:#E5E2FF;
+	padding:5px 10px;
+	text-align:center;
+
+}
+ .arrow:after{
+	display:block;
+	content:'';
+	border-left:45px solid transparent;
+	border-right:45px solid transparent;
+	border-top:20px solid #E5E2FF;
+	position:absolute;
+	left:0;
+	bottom:-20px;
+}
+.arrowNum{
+display:block;
+width:18px;
+height:48px; 
+font-size:48px;
+font-family:DINCondensed-Bold;
+color:rgba(0,0,0,0.2);
+line-height:58px;
+}
+.arrow h4{
+	font-size:15px;
+	margin:12px 0;
+}
+.timeCon{
+	margin-top:50px;
+}
+.arrow .timeCon p{
+	margin:5px 0;
+}
+.arrowCon{
+	float:left;
+	width:90%;
+	margin-left:30px;
+}
+.arrowConTop,.arrowConBottom{
+	width:100%;
+}
+.arrowConBottom{
+	margin-top:15px;
+	border-bottom:1px dashed rgba(0,0,0,0.3)
+}
+.arrowConTop dl,.arrowConTop dt,.arrowConTop dd{
+	float:left;
+}
+ .arrowConTop dl{
+ 	margin-right:30px;
+ }
+ .addCon dt,.addCon dd i{
+ 	color:#F6B242;
+ }
+ .sureCom dt,.sureCom dd i{
+  color:#FF6D6D;
+ }
+ .addCon dt,.sureCom dt{
+ 	margin-left:3px;
+ }
+ .dialog-width{
+ 	width:92%;
+ }
+ .conList{
+ width:240px;
+height:140px; 
+background:rgba(255,255,255,1);
+box-shadow: 2px 3px 3px 0px rgba(0,0,0,0.15);
+margin-right:17px;
+margin-bottom:20px;
+float:left;
+ }
+ .headCon{
+ width:230px;
+height:30px; 
+background:rgba(229,226,255,1);
+line-height:30px;
+padding:0 5px;
+display:flex;
+justify-content:space-between;
+ }
+ .conDetail{
+ 	padding:5px;
+ 	height:100px;
+ 	overflow:auto;
+ 	width:230px;
+ }
