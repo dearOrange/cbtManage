@@ -145,7 +145,7 @@
 }
 
 p.titleD {
-  /*font-size:16px;*/
+   display:block;
 }
 
 hr {
@@ -161,7 +161,7 @@ hr {
 
 .arrow {
   width: 70px;
-  /*min-height:230px;*/
+  height:230px;
   float: left;
   position: absolute;
   background:#eee;
@@ -181,12 +181,12 @@ hr {
   left: 0;
   bottom: -20px;
 }
-.arrow.unComplate{
+/*.arrow.unComplate{
   background-color:#ccc;
 }
 .arrow.unComplate1{
 	z-index:2;
-}
+}*/
 .arrowNum {
   display: block;
   width: 18px;
@@ -216,8 +216,8 @@ hr {
 
 .arrowCon {
   float: left;
-  width: 86%;
-  margin-left: 100px;
+  width: 100%;
+  margin-top:10px;
 }
 
 .arrowConTop,
@@ -227,7 +227,8 @@ hr {
 
 .arrowConBottom {
   margin-top: 15px;
-  border-bottom: 1px dashed rgba(0, 0, 0, 0.3)
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.3);
+  min-height:140px;
 }
 
 .arrowConTop dl,
@@ -288,5 +289,16 @@ hr {
   overflow: auto;
   width: 230px;
 }
+#streamList{
+  width:70px;
+  float:left;
+  height:100%;
+}
+#taskProgram{
+  float:left;
+   margin-left:100px;
+   width:80%;
+}
+
  
 
