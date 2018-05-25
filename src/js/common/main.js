@@ -23,6 +23,7 @@ define(function(require, exports, module) {
       //启动未读消息和数量统计
       _this.initUnReadMessage();
       _this.requestCountNew();
+      _this.clickUnread();
 
       //第一次加载页面时请求未读消息
       _this.requestUnReadMessage();
@@ -64,6 +65,30 @@ define(function(require, exports, module) {
           jh.utils.defaultPage(moduleInfo.module);
         }
       });
+      //单个消息阅读
+      $('body').off('click','.remarkRead').on('click','.remarkRead',function(){
+        var msgId = $(this).data('value');
+        jh.utils.ajax.send({
+          url: '/message/read',
+          data:{
+            msgId: msgId
+          },
+          done: function(returnData) {
+            _this.singleRemark();
+            _this.clickUnread();
+          }
+        });
+      })
+      //多个消息阅读
+      $('body').off('click','.multipleRemark').on('click','.multipleRemark',function(){
+        jh.utils.ajax.send({
+          url: '/message/readAll',
+          done: function(returnData) {
+            _this.singleRemark();
+            _this.clickUnread();
+          }
+        });
+      })
     };
 
     this.initUnReadMessage = function() {
@@ -73,6 +98,8 @@ define(function(require, exports, module) {
         _this.requestUnReadMessage();
 
         _this.requestCountNew();
+        
+        _this.clickUnread();
 
       }, _this.requestDate);
     };
@@ -93,8 +120,7 @@ define(function(require, exports, module) {
           }
         }
       });
-    };
-
+    }
     this.requestCountNew = function() {
       jh.utils.ajax.send({
         url: '/message/countNew',
@@ -117,7 +143,51 @@ define(function(require, exports, module) {
         }
       });
     };
-
+    
+    this.clickUnread = function(){
+      //获取流程未读消息数量
+      jh.utils.ajax.send({
+        url: '/message/countTree',
+        done: function(returnData) {
+          var remarkCount = returnData.data.count;
+          if (remarkCount > 0) {
+            (new jh.ui.shadow()).init();
+            $('#kyPoupshadow').css('marginTop','70px');
+            $('.loading-img').addClass('hide');
+            var divYun = '<div class="coudyImg">您有新的消息，请注意查看</div>'
+            $('#kyPoupshadow').html(divYun);
+            var supNum = '<sup>' + remarkCount + '</sup>';
+            $('#getFlowNotion').children('sup').remove().end().append(supNum);
+            $('#getFlowNotion').on('click', function() {
+              _this.singleRemark();
+            });
+          }else{
+            (new jh.ui.shadow()).close();
+          }
+        }
+      });
+    }
+    //    获取流程未读消息列表
+    this.singleRemark = function(){
+      jh.utils.ajax.send({
+        method: 'post',
+        url: '/message/treeMsg',
+        contentType: 'application/json',
+        data: {
+          pageNum: 1,
+          pageSize: 10
+        },
+        done: function(data) {
+          var dataList = data.data.list;
+          if(dataList.length > 0){
+            var noticeCon = jh.utils.template('unread_info_template', data.data);
+            $('#unreadBorder').html(noticeCon);
+          }else{
+            $('#unreadBorder').html('');
+          }
+        }
+      })
+    }
     this.registerEvent = function() {
       var InitRegisterEvent = require('common/initRegisterEvent');
       var register = new InitRegisterEvent();

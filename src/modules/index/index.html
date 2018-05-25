@@ -31,7 +31,7 @@
                 <ul class="navbar-nav">
                     <li class="user-menu">
                         <a href="javascript:;" class="pull-left" id="getFlowNotion">
-                            <i class="icon icon-qd_tcdfp"></i><sup>123</sup>
+                            <i class="icon icon_em"></i>
                         </a>
                         <a href="javascript:;" class="pull-left" id="userCenterLink">
                             <i class="icon icon-qd_btgl" id="userIsPassState"></i>
@@ -46,7 +46,7 @@
             </div>
         </nav>
     </header>
-    <div id="unreadBorder" class="hide"></div>
+    <div id="unreadBorder"></div>
     <aside class="left-side" id="menusBar">
         <section class="sidebar">
           <ul class="sidebar-menu" id="leftMenu-box"></ul>
@@ -87,35 +87,24 @@
     {{/each}}
 </script>
 <script type="text/template" id="unread_info_template">
+  <div id="unreadMiddle">
     <div class="bianjiao"></div>
     <div class="checkNews">
       <table>
         <tr>
-          <td><input type="checkbox" name="" id="checkAll" value="" /></td>
+          <td><input type="checkbox" class="multipleRemark" id="checkAll" /></td>
           <td colspan="2"><span style="color:#68c8f8;">标记全读</span></td>
         </tr>
+         {{each list item index}} 
         <tr>
-          <td><input type="checkbox" name="" id="" value="" /></td>
-          <td><span>车牌号为浙A88888的任务等待您前去处理</span></td>
-          <td><span class="lastSpan"></span></td>
+          <td><input type="checkbox" name="msgId" class="remarkRead" data-value="{{item.id}}" /></td>
+          <td><span>{{item.content}}</span></td>
+          <td><span class="lastSpan"></span></td> 
         </tr>
-        <tr>
-          <td><input type="checkbox" name="" id="" value="" /></td>
-          <td><span>车牌号为浙A88888的任务等待您前去处理</span></td>
-          <td><span class="lastSpan"></span></td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" name="" id="" value="" /></td>
-          <td><span>车牌号为浙A88888的任务等待您前去处理</span></td>
-          <td><span class="lastSpan"></span></td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" name="" id="" value="" /></td>
-          <td><span>车牌号为浙A88888的任务等待您前去处理</span></td>
-          <td><span class="lastSpan"></span></td>
-        </tr>
+        {{/each}}
       </table>
     </div>
+  </div>
 </script>
 <script type="text/javascript" src="../../js/lib/seajs/3.0.1/sea.js?version=20170721"></script>
 <script type="text/javascript">

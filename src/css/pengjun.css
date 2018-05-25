@@ -900,7 +900,8 @@ input[type=text].search-del{
 #getFlowNotion{
   margin-right:10px;
 }
-#unreadBorder{
+
+#unreadMiddle{
   width:340px;
   height:240px;
   box-shadow: 0px -3px 18px -2px #b5b5b5;
@@ -908,7 +909,7 @@ input[type=text].search-del{
   background:#fff;
   top:60px;
   right:20px;
-  z-index:99;
+  z-index:10001;
 }
 .bianjiao{
   width: 0; 
@@ -918,7 +919,11 @@ input[type=text].search-del{
   border-bottom: 20px solid #fff;
   position:absolute;
   top:-12px;
-  left:63px;
+  left:78px;
+}
+.checkNews{ 
+  height:240px;
+  overflow: auto;
 }
 .checkNews table tr{
   border-bottom:1px dashed #ccc;
@@ -945,7 +950,7 @@ input[type=text].search-del{
   font-size:18px;
   color:#fff;
   position:absolute;
-  right:258px;
+  right:240px;
   top:-15px;
 }
 .percentImg{
@@ -988,10 +993,12 @@ input[type=text].search-del{
 .percentSeven{
   background:url(../img/8.png) no-repeat center;
   background-size:100% 100%;
-}.percentEight{
+}
+.percentEight{
   background:url(../img/9.png) no-repeat center;
   background-size:100% 100%;
-}.percentNine{
+}
+.percentNine{
   background:url(../img/10.png) no-repeat center;
   background-size:100% 100%;
 }
