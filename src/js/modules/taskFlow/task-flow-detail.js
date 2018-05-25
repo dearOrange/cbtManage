@@ -8,11 +8,11 @@
 define(function(require, exports, module) {
     function TaskFlowDetail() {
         var _this = this;
+        var brr=[];
         var args = jh.utils.getURLValue().args;
         this.init = function() {
             this.initContent();
             this.taskProgramOne();
-//          this.taskProgramTwo();
             this.addRemark();
             this.surecom();
         };
@@ -41,7 +41,10 @@ define(function(require, exports, module) {
             done: function(returnData) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programOne_template', returnData);
-              $('#taskProgram').html(informalStr);
+              $('#taskProgram').find('.itemList').eq(0).html(informalStr);
+              if(returnData.data.isComplete == 1){
+                _this.taskProgramTwo();
+              }
             }
           });
           
@@ -57,7 +60,10 @@ define(function(require, exports, module) {
             done: function(returnData) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programTwo_template', returnData);
-              $('#taskProgram').html(informalStr);
+              $('#taskProgram').find('.itemList').eq(1).html(informalStr);
+              if(returnData.data.isComplete == 1){
+                _this.taskProgramThree();
+              }
             }
           });  
         }
@@ -72,7 +78,10 @@ define(function(require, exports, module) {
             done: function(returnData) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programThree_template', returnData);
-              $('#taskProgram').html(informalStr);
+              $('#taskProgram').find('.itemList').eq(2).html(informalStr);
+              if(returnData.data.isComplete == 1){
+                _this.taskProgramFour();
+              }
             }
           });  
         }
@@ -86,8 +95,11 @@ define(function(require, exports, module) {
             },
             done: function(returnData) {
               returnData.switchTime = jh.utils.switchTime;
-              var informalStr = jh.utils.template('task_programFour_template', returnData);
-              $('#taskProgram').html(informalStr);
+              var informalStr1 = jh.utils.template('task_programFour_template', returnData);
+              $('#taskProgram').find('.itemList').eq(3).html(informalStr1);
+              if(returnData.data.isComplete == 1){
+                _this.taskProgramFive();
+              }
             }
           });  
         }
@@ -102,7 +114,10 @@ define(function(require, exports, module) {
             done: function(returnData) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programFive_template', returnData);
-              $('#taskProgram').html(informalStr);
+              $('#taskProgram').find('.itemList').eq(4).html(informalStr);
+              if(returnData.data.isComplete == 1){
+                _this.taskProgramSix();
+              }
             }
           });  
         }
@@ -117,7 +132,10 @@ define(function(require, exports, module) {
             done: function(returnData) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programSix_template', returnData);
-              $('#taskProgram').html(informalStr);
+              $('#taskProgram').find('.itemList').eq(5).html(informalStr);
+              if(returnData.data.isComplete == 1){
+                _this.taskProgramSeven();
+              }
             }
           });  
         }
@@ -132,7 +150,10 @@ define(function(require, exports, module) {
             done: function(returnData) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programSeven_template', returnData);
-              $('#taskProgram').html(informalStr);
+             $('#taskProgram').find('.itemList').eq(6).html(informalStr);
+             if(returnData.data.isComplete == 1){
+                _this.taskProgramEight();
+              }
             }
           });  
         }
@@ -147,7 +168,10 @@ define(function(require, exports, module) {
             done: function(returnData) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programEight_template', returnData);
-              $('#taskProgram').html(informalStr);
+              $('#taskProgram').find('.itemList').eq(7).html(informalStr);
+              if(returnData.data.isComplete == 1){
+                _this.taskProgramNine();
+              }
             }
           });  
         }
@@ -162,7 +186,9 @@ define(function(require, exports, module) {
             done: function(returnData) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programNine_template', returnData);
-              $('#taskProgram').html(informalStr);
+             $('#taskProgram').find('.itemList').eq(8).html(informalStr);
+             if(returnData.data.isComplete == 1){
+              }
             }
           });  
         }
@@ -170,7 +196,6 @@ define(function(require, exports, module) {
         this.addRemark=function(){
             // 添加备注
             $('body').off('click','.addCon').on('click','.addCon',function(){
-              var index=$(this).index();
               var treeState = $(this).data('state');
               var alertContent=jh.utils.template('addRemark_template', {});
               jh.utils.alert({
@@ -186,7 +211,25 @@ define(function(require, exports, module) {
                     url: '/tree/remark',
                     data: remarkData,
                     done: function(returnData) {
-                      _this.taskProgramOne();
+                       if(treeState=="issue"){
+                           _this.taskProgramOne();
+                       }else if(treeState=="cluesifte"){
+                            _this.taskProgramTwo();
+                       }else if(treeState=="repairinfo"){
+                          _this.taskProgramThree();
+                       }else if(treeState=="scene"){
+                          _this.taskProgramFour();
+                       }else if(treeState=="lock"){
+                          _this.taskProgramFive();
+                       }else if(treeState=="allocation"){
+                          _this.taskProgramSix();
+                       }else if(treeState=="execution"){
+                          _this.taskProgramSeven();
+                       }else if(treeState=="transport"){
+                          _this.taskProgramEight();
+                       }else if(treeState=="deliver"){
+                          _this.taskProgramNine();
+                       }
                     }
                   });
                 },
@@ -194,6 +237,7 @@ define(function(require, exports, module) {
               }) 
             })
         };
+        //确认完成
         this.surecom=function(){
            $('body').off('click','.sureCom').on('click','.sureCom',function(){
             var me=$(this);
@@ -206,14 +250,25 @@ define(function(require, exports, module) {
                         jh.utils.alert({
                           content:'<span style="margin:20px 0">是否确定此流程已经完成？</span>',
                           ok:function(){
-                              $(this).find('button').css({disabled:'disabled'});
-                              var index;
-                                for(var i=0;i<arr.lenght;i++){
-                                   if(arr[i]==treeState){
-
-                                   }
-                                }
-                          }
+                       if(treeState=="issue"){
+                           _this.taskProgramTwo();
+                       }else if(treeState=="cluesifte"){
+                            _this.taskProgramThree();
+                       }else if(treeState=="repairinfo"){
+                          _this.taskProgramFour();
+                       }else if(treeState=="scene"){
+                          _this.taskProgramFive();
+                       }else if(treeState=="lock"){
+                          _this.taskProgramSix();
+                       }else if(treeState=="allocation"){
+                          _this.taskProgramSeven();
+                       }else if(treeState=="execution"){
+                          _this.taskProgramEight();
+                       }else if(treeState=="transport"){
+                          _this.taskProgramNine();
+                       }
+                        
+                       }
                       })
                    }
               });
