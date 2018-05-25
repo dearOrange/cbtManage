@@ -46,6 +46,7 @@
 </script>
 
 <script type="text/template" id="task_programOne_template">
+<!-- 任务录入 -->
   <div class="baseCon">
     <div class="arrow unComplate1">
       <span class="arrowNum">1</span>
@@ -69,7 +70,7 @@
               <dd><i class="iconfont">&#xe660;</i></dd>
               <dt >添备注加</dt>
           </dl>
-           <dl class="sureCom">
+           <dl class="sureCom" data-state="{{data.treeState}}">
               <dd><i class="iconfont">&#xe632;</i></dd>
               <dt>确认完成</dt>
           </dl>
