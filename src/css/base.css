@@ -360,6 +360,16 @@ label.error {
     background: url(../img/icon/icon-openMenu.png) no-repeat -14px 0;
     background-size: cover;
 }
+.icon.icon_em {
+    width: 30px;
+    height: 18px;
+    background: url(../img/icon/em.png) no-repeat -14px 0;
+    background-size: 100% 100%;
+}
+
+.icon.icon_em {
+  background-position: 0px 0px;
+}
 
 .icon.icon-icon_pass {
     background-position: -114px -50px;
