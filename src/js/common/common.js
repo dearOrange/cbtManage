@@ -11877,35 +11877,35 @@ define(function(require, exports, module) {
         case "wait":
           state = "审核中";
           break;
-        case "任务录入":
-          state = "issue";
+        case "issue":
+          state = "任务录入";
           break;
-        case "违章初筛": 
-          state = "cluesifte";
+        case "cluesifte": 
+          state = "违章初筛";
           break;
-        case "信息修复":
-          state = "repairinfo";
+        case "repairinfo":
+          state = "信息修复";
           break;
-        case "现场查找":
-          state = "scene";
+        case "scene":
+          state = "现场查找";
           break;
-        case "任务锁定":
-          state = "lock";
+        case "lock":
+          state = "任务锁定";
           break;
-        case "执行分配":
-          state = "allocation";
+        case "allocation":
+          state = "执行分配";
           break;
-        case "执行完成":
-          state = "execution";
+        case "execution":
+          state = "执行完成";
           break;
-        case "物流运输":
-          state = "transport";
+        case "transport":
+          state = "物流运输";
           break;
-        case "交付车辆":
-          state = "deliver";
+        case "deliver":
+          state = "交付车辆";
           break;
-        case "确认完成":
-          state = "complete";
+        case "complete":
+          state = "确认完成";
           break;
       }
       return state;
