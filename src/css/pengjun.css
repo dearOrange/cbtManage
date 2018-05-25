@@ -993,10 +993,12 @@ input[type=text].search-del{
 .percentSeven{
   background:url(../img/8.png) no-repeat center;
   background-size:100% 100%;
-}.percentEight{
+}
+.percentEight{
   background:url(../img/9.png) no-repeat center;
   background-size:100% 100%;
-}.percentNine{
+}
+.percentNine{
   background:url(../img/10.png) no-repeat center;
   background-size:100% 100%;
 }
