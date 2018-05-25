@@ -14,6 +14,7 @@ define(function(require, exports, module) {
             this.taskProgramOne();
 //          this.taskProgramTwo();
             this.addRemark();
+            this.surecom();
         };
         this.initContent = function(){
             jh.utils.ajax.send({
@@ -42,20 +43,7 @@ define(function(require, exports, module) {
             }
           });
         }
-//      this.taskProgramTwo = function(){
-//        jh.utils.ajax.send({
-//          url: '/tree/flowDetail',
-//          data: {
-//            treeId: args.id,
-//            state:'cluesifte'
-//          },
-//          done: function(returnData) {
-//            returnData.switchTime = jh.utils.switchTime;
-//            var informalStr = jh.utils.template('task_programOne_template', returnData);
-//            $('#taskProgram').html(informalStr);
-//          }
-//        });
-//      };
+ 
         this.addRemark=function(){
             // 添加备注
             $('body').off('click','.addCon').on('click','.addCon',function(){
@@ -75,7 +63,7 @@ define(function(require, exports, module) {
                     url: '/tree/remark',
                     data: remarkData,
                     done: function(returnData) {
-                      _this.initContent();
+                      _this.taskProgramOne();
                     }
                   });
                 },
@@ -83,6 +71,26 @@ define(function(require, exports, module) {
               }) 
             })
         };
+        this.surecom=function(){
+           $('body').off('click','.sureCom').on('click','.sureCom',function(){
+             var treeState = $(this).data('state');
+             console.log(treeState);
+              jh.utils.ajax.send({
+                  url:'/tree/complete',
+                  data:{treeId:args.id,state:treeState},
+                   done:function(redData){
+                        jh.utils.alert({
+                          content:'<span style="margin:20px 0">是否确定此流程已经完成？</span>',
+                          ok:function(){
+                             $(this).addClass('sureState');
+                          }
+                      })
+                   }
+              });
+           })
+             
+             
+        }
 
     }
     module.exports = TaskFlowDetail;
