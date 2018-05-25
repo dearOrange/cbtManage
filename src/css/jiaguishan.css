@@ -153,10 +153,11 @@ hr {
 }
 .arrowItem{
   width:70px;
-  min-height:190px;
+  min-height:200px;
   background:#eee;
   padding: 5px 10px;
   text-align: center;
+  position:relative;
 }
 .arrowItem:nth-child(odd){
   background:#bbb;
@@ -166,13 +167,89 @@ hr {
   content: '';
   border-left: 45px solid transparent;
   border-right: 45px solid transparent;
-  border-top: 20px solid #eee;
+  border-top: 20px solid #bbb;
   position: absolute;
   left: 0;
   bottom: -20px;
 }
-.arrowItem1{
-  z-index:2;
+.arrowItem.arrowItem1{
+  z-index:999;
+  background:#E5E2FF;
+}
+.arrowItem.arrowItem1:after{
+  border-top: 20px solid #E5E2FF; 
+}
+.arrowItem2{
+   z-index:998;
+}
+.arrowItem3{
+   z-index:997;
+}
+.arrowItem4{
+   z-index:996;
+}
+.arrowItem5{
+   z-index:995;
+}
+.arrowItem6{
+   z-index:994;
+}
+.arrowItem7{
+   z-index:993;
+}
+.arrowItem8{
+   z-index:992;
+}
+.arrowItem.listItemNum2{
+   background:#DFFFE8;
+}
+.arrowItem.listItemNum2:after{
+  border-top: 20px solid #DFFFE8; 
+}
+.arrowItem.listItemNum3{
+   background:#C9FFD8;
+}
+.arrowItem.listItemNum3:after{
+  border-top: 20px solid #C9FFD8; 
+}
+.arrowItem.listItemNum4{
+   background:#BCFFCF;
+}
+.arrowItem.listItemNum4:after{
+  border-top: 20px solid #BCFFCF; 
+}
+.arrowItem.listItemNum5{
+   background:#96FFB3;
+}
+.arrowItem.listItemNum5:after{
+  border-top: 20px solid #96FFB3; 
+}
+.arrowItem.listItemNum6{
+   background:#FEFFBA;
+}
+.arrowItem.listItemNum6:after{
+  border-top: 20px solid #FEFFBA; 
+}
+.arrowItem.listItemNum7{
+   background:#FFED86;
+}
+.arrowItem.listItemNum7:after{
+  border-top: 20px solid #FFED86; 
+}
+.arrowItem.listItemNum8{
+   background:#FFB8B8;
+}
+.arrowItem.listItemNum8:after{
+  border-top: 20px solid #FFB8B8; 
+}
+.arrowItem.listItemNum9{
+   background:#FF9090;
+}
+.arrowItem.listItemNum9:after{
+  border-top: 20px solid #FF9090; 
+}
+.arrowItem2:after,.arrowItem4:after,.arrowItem6:after,.arrowItem8:after{
+  border-top: 20px solid #eee;
 }
 .arrowNum {
   display: block;
@@ -181,7 +258,7 @@ hr {
   font-size: 48px;
   font-family: DINCondensed-Bold;
   color: rgba(0, 0, 0, 0.2);
-  line-height: 58px;
+  line-height:66px;
   
 }
  
@@ -212,7 +289,7 @@ hr {
 .arrowConBottom {
   margin-top: 15px;
   border-bottom: 1px dashed rgba(0, 0, 0, 0.3);
-  min-height:150px;
+  min-height:163px;
 }
 
 .arrowConTop dl,

@@ -65,6 +65,9 @@ define(function(require, exports, module) {
           jh.utils.defaultPage(moduleInfo.module);
         }
       });
+      $('#getFlowNotion').on('click', function() {
+        _this.singleRemark();
+      });
       //单个消息阅读
       $('body').off('click','.remarkRead').on('click','.remarkRead',function(){
         var msgId = $(this).data('value');
@@ -158,9 +161,6 @@ define(function(require, exports, module) {
             $('#kyPoupshadow').html(divYun);
             var supNum = '<sup>' + remarkCount + '</sup>';
             $('#getFlowNotion').children('sup').remove().end().append(supNum);
-            $('#getFlowNotion').on('click', function() {
-              _this.singleRemark();
-            });
           }else{
             (new jh.ui.shadow()).close();
           }

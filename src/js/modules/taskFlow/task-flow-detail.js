@@ -42,13 +42,15 @@ define(function(require, exports, module) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programOne_template', returnData);
               $('#taskProgram').find('.itemList').eq(0).html(informalStr);
+              var height=$('#taskProgram').find('.itemList').eq(0).find('.arrowCon').height();
+              $('.arrowItem1').height(height);
               if(returnData.data.isComplete == 1){
                 _this.taskProgramTwo();
               }
             }
-          });
-          
+          });  
         }
+          
         //违章初筛
         this.taskProgramTwo = function(){
            jh.utils.ajax.send({
@@ -61,6 +63,13 @@ define(function(require, exports, module) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programTwo_template', returnData);
               $('#taskProgram').find('.itemList').eq(1).html(informalStr);
+              $('.arrowItem.arrowItem2').addClass('listItemNum2');
+              var list=$('#taskProgram').find('.itemList').eq(1).find('.conList');
+              for(var i=0;i<list.length;i++){
+                   $(list[i]).find('.headCon').css('background','#DFFFE8');
+              }
+              var height=$('#taskProgram').find('.itemList').eq(1).find('.arrowCon').height();
+              $('.arrowItem2').height(height);
               if(returnData.data.isComplete == 1){
                 _this.taskProgramThree();
               }
@@ -79,6 +88,13 @@ define(function(require, exports, module) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programThree_template', returnData);
               $('#taskProgram').find('.itemList').eq(2).html(informalStr);
+               $('.arrowItem.arrowItem3').addClass('listItemNum3');
+              var list=$('#taskProgram').find('.itemList').eq(2).find('.conList');
+              for(var i=0;i<list.length;i++){
+                   $(list[i]).find('.headCon').css('background','#C9FFD8');
+              }
+               var height=$('#taskProgram').find('.itemList').eq(2).find('.arrowCon').height();
+              $('.arrowItem3').height(height);
               if(returnData.data.isComplete == 1){
                 _this.taskProgramFour();
               }
@@ -97,6 +113,13 @@ define(function(require, exports, module) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr1 = jh.utils.template('task_programFour_template', returnData);
               $('#taskProgram').find('.itemList').eq(3).html(informalStr1);
+              $('.arrowItem.arrowItem4').addClass('listItemNum4');
+              var list=$('#taskProgram').find('.itemList').eq(3).find('.conList');
+              for(var i=0;i<list.length;i++){
+                   $(list[i]).find('.headCon').css('background','#BCFFCF');
+              }
+                var height=$('#taskProgram').find('.itemList').eq(3).find('.arrowCon').height();
+              $('.arrowItem4').height(height);
               if(returnData.data.isComplete == 1){
                 _this.taskProgramFive();
               }
@@ -115,6 +138,14 @@ define(function(require, exports, module) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programFive_template', returnData);
               $('#taskProgram').find('.itemList').eq(4).html(informalStr);
+               // $('.headCon').eq(4).css('background','#96FFB3');
+               var list=$('#taskProgram').find('.itemList').eq(4).find('.conList');
+              for(var i=0;i<list.length;i++){
+                   $(list[i]).find('.headCon').css('background','#96FFB3');
+              }
+               $('.arrowItem.arrowItem5').addClass('listItemNum5');
+               var height=$('#taskProgram').find('.itemList').eq(4).find('.arrowCon').height();
+              $('.arrowItem5').height(height);
               if(returnData.data.isComplete == 1){
                 _this.taskProgramSix();
               }
@@ -133,6 +164,14 @@ define(function(require, exports, module) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programSix_template', returnData);
               $('#taskProgram').find('.itemList').eq(5).html(informalStr);
+              // $('.headCon').eq(5).css('background','#FEFFBA');
+                var list=$('#taskProgram').find('.itemList').eq(5).find('.conList');
+              for(var i=0;i<list.length;i++){
+                   $(list[i]).find('.headCon').css('background','#FEFFBA');
+              }
+              $('.arrowItem.arrowItem6').addClass('listItemNum6');
+                var height=$('#taskProgram').find('.itemList').eq(5).find('.arrowCon').height();
+              $('.arrowItem6').height(height);
               if(returnData.data.isComplete == 1){
                 _this.taskProgramSeven();
               }
@@ -151,6 +190,14 @@ define(function(require, exports, module) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programSeven_template', returnData);
              $('#taskProgram').find('.itemList').eq(6).html(informalStr);
+             // $('.headCon').eq(6).css('background','#FFED86');
+            var list=$('#taskProgram').find('.itemList').eq(6).find('.conList');
+              for(var i=0;i<list.length;i++){
+                   $(list[i]).find('.headCon').css('background','#FFED86');
+              }
+             $('.arrowItem.arrowItem7').addClass('listItemNum7');
+              var height=$('#taskProgram').find('.itemList').eq(6).find('.arrowCon').height();
+              $('.arrowItem7').height(height);
              if(returnData.data.isComplete == 1){
                 _this.taskProgramEight();
               }
@@ -169,6 +216,14 @@ define(function(require, exports, module) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programEight_template', returnData);
               $('#taskProgram').find('.itemList').eq(7).html(informalStr);
+               // $('.headCon').eq(7).css('background','#FFB8B8');
+               var list=$('#taskProgram').find('.itemList').eq(7).find('.conList');
+              for(var i=0;i<list.length;i++){
+                   $(list[i]).find('.headCon').css('background','#FFB8B8');
+              }
+              $('.arrowItem.arrowItem8').addClass('listItemNum8');
+               var height=$('#taskProgram').find('.itemList').eq(7).find('.arrowCon').height();
+              $('.arrowItem8').height(height);
               if(returnData.data.isComplete == 1){
                 _this.taskProgramNine();
               }
@@ -187,6 +242,13 @@ define(function(require, exports, module) {
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programNine_template', returnData);
              $('#taskProgram').find('.itemList').eq(8).html(informalStr);
+             var list=$('#taskProgram').find('.itemList').eq(8).find('.conList');
+              for(var i=0;i<list.length;i++){
+                   $(list[i]).find('.headCon').css('background','#FF9090');
+              }
+              $('.arrowItem.arrowItem9').addClass('listItemNum9');
+               var height=$('#taskProgram').find('.itemList').eq(8).find('.arrowCon').height();
+              $('.arrowItem9').height(height);
              if(returnData.data.isComplete == 1){
               }
             }
@@ -246,7 +308,7 @@ define(function(require, exports, module) {
                   url:'/tree/complete',
                   data:{treeId:args.id,state:treeState},
                    done:function(redData){
-                    console.log(redData);
+                    $(this).find('button').css('disabled',"disabled");
                         jh.utils.alert({
                           content:'<span style="margin:20px 0">是否确定此流程已经完成？</span>',
                           ok:function(){
