@@ -43,12 +43,12 @@
     <textarea name="remark" id="remarkContent" cols="50" rows="8" placeholder="请输入您想添加的备注信息,最多100字" maxlength="100"  style="resize:none;padding:10px;line-height:20px;text-indent:0;outline:none"></textarea>
   </form>
 </script>
-<script type="text/template" id="task_programOne_template">
 <!-- 任务录入 -->
+<script type="text/template" id="task_programOne_template">
   <div class="baseCon">
     <div class="arrow unComplate1">
       <span class="arrowNum">1</span>
-      <h4>任务录入</h4>
+      <h4 class="stateName">任务录入</h4>
       <div class="timeCon">
           <p>流转时间</p>
           <p>{{switchTime(data.createAt)}}</p>
@@ -61,7 +61,7 @@
               <dt>{{data.charger}}</dt>
           </dl>
            <dl>
-              <dd>开始时间：：</dd>
+              <dd>开始时间：</dd>
               <dt>{{data.createAt}}</dt>
           </dl>
            <dl class="addCon" data-state="{{data.treeState}}">
@@ -69,8 +69,10 @@
               <dt >添备注加</dt>
           </dl>
            <dl class="sureCom" data-state="{{data.treeState}}">
-              <dd><i class="iconfont">&#xe632;</i></dd>
-              <dt>确认完成</dt>
+            <button style="border:0;outline:none;background:transparent;color:#FF6D6D">
+              <i class="iconfont" style="color:#FF6D6D;margin-right:5px">&#xe632;</i>确认完成
+            </button>
+              
           </dl>
           <div class="clearfix"></div>
         </div>
@@ -89,134 +91,408 @@
     </div>
     <div class="clearfix"></div>
   </div>
+</script>
+<!-- 任务录入 -->
+<!-- 违章初筛-->
+<script type="text/template" id="task_programTwo_template">
   <div class="baseCon">
-    <div class="arrow unComplate2">
-      <span class="arrowNum">2</span>
-      <h4>违章初筛</h4>
+    <div class="arrow unComplate1">
+      <span class="arrowNum">1</span>
+      <h4 class="stateName">违章初筛</h4>
       <div class="timeCon">
           <p>流转时间</p>
           <p>{{switchTime(data.createAt)}}</p>
       </div>
     </div>
     <div class="arrowCon">
-        
+        <div class="arrowConTop">
+            <dl>
+              <dd>负责人：</dd>
+              <dt>{{data.charger}}</dt>
+          </dl>
+           <dl>
+              <dd>开始时间：</dd>
+              <dt>{{data.createAt}}</dt>
+          </dl>
+           <dl class="addCon" data-state="{{data.treeState}}">
+              <dd><i class="iconfont">&#xe660;</i></dd>
+              <dt >添备注加</dt>
+          </dl>
+           <dl class="sureCom" data-state="{{data.treeState}}">
+            <button style="border:0;outline:none;background:transparent;color:#FF6D6D">
+              <i class="iconfont" style="color:#FF6D6D;margin-right:5px">&#xe632;</i>确认完成
+            </button>
+              
+          </dl>
+          <div class="clearfix"></div>
+        </div>
+        <div class="arrowConBottom">
+          {{each data.remarkList item index}}
+          <div class="conList">
+            <div class="headCon">
+              <span>{{item.createAt}}</span>
+              <span>{{item.operator}}</span>
+            </div>
+            <div class="conDetail">{{item.remark}}</div>
+          </div>
+          {{/each}}
+          <div class="clearfix"></div>
+        </div>
     </div>
     <div class="clearfix"></div>
   </div>
-  <!-- 任务录入 end-->
-  <!-- 任务录入 start-->
-  <div class="baseCon">
-    <div class="arrow unComplate3">
-      <span class="arrowNum">3</span>
-      <h4>信息修复</h4>
-      <div class="timeCon">
-          <p>流转时间</p>
-          <p>13小时45分钟</p>
-      </div>
-    </div>
-    <div class="arrowCon">
-        
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <!-- 任务录入 end-->
-  <!-- 任务录入 start-->
-  <div class="baseCon">
-    <div class="arrow unComplate4">
-      <span class="arrowNum">4</span>
-      <h4>现场查找</h4>
-      <div class="timeCon">
-          <p>流转时间</p>
-          <p>13小时45分钟</p>
-      </div>
-    </div>
-    <div class="arrowCon">
-        
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <!-- 任务录入 end-->
-  <!-- 任务录入 start-->
-  <div class="baseCon">
-    <div class="arrow unComplate5">
-      <span class="arrowNum">5</span>
-      <h4>任务锁定</h4>
-      <div class="timeCon">
-          <p>流转时间</p>
-          <p>13小时45分钟</p>
-      </div>
-    </div>
-    <div class="arrowCon">
-        
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <!-- 任务录入 end-->
-  <!-- 任务录入 start-->
-  <div class="baseCon">
-    <div class="arrow unComplate6">
-      <span class="arrowNum">6</span>
-      <h4>执行任务分配</h4>
-      <div class="timeCon">
-          <p>流转时间</p>
-          <p>13小时45分钟</p>
-      </div>
-    </div>
-    <div class="arrowCon">
-        
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <!-- 任务录入 end-->
-  <!-- 任务录入 start-->
-  <div class="baseCon">
-    <div class="arrow unComplate7">
-      <span class="arrowNum">7</span>
-      <h4>执行任务完成</h4>
-      <div class="timeCon">
-          <p>流转时间</p>
-          <p>13小时45分钟</p>
-      </div>
-    </div>
-    <div class="arrowCon">
-        
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <!-- 任务录入 end-->
-  <!-- 任务录入 start-->
-  <div class="baseCon">
-    <div class="arrow unComplate8">
-      <span class="arrowNum">8</span>
-      <h4>物流运输</h4>
-      <div class="timeCon">
-          <p>流转时间</p>
-          <p>13小时45分钟</p>
-      </div>
-    </div>
-    <div class="arrowCon">
-        
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <!-- 任务录入 end-->
-  <!-- 任务录入 start-->
-  <div class="baseCon">
-    <div class="arrow unComplate9">
-      <span class="arrowNum">9</span>
-      <h4>交付车辆</h4>
-      <div class="timeCon">
-          <p>流转时间</p>
-          <p>13小时45分钟</p>
-      </div>
-    </div>
-    <div class="arrowCon">
-        
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <!-- 任务录入 end-->
 </script>
+<!-- 违章初筛-->
+<!-- 信息修复-->
+<script type="text/template" id="task_programThree_template">
+  <div class="baseCon">
+    <div class="arrow unComplate1">
+      <span class="arrowNum">1</span>
+      <h4 class="stateName">信息修复</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>{{switchTime(data.createAt)}}</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        <div class="arrowConTop">
+            <dl>
+              <dd>负责人：</dd>
+              <dt>{{data.charger}}</dt>
+          </dl>
+           <dl>
+              <dd>开始时间：</dd>
+              <dt>{{data.createAt}}</dt>
+          </dl>
+           <dl class="addCon" data-state="{{data.treeState}}">
+              <dd><i class="iconfont">&#xe660;</i></dd>
+              <dt >添备注加</dt>
+          </dl>
+           <dl class="sureCom" data-state="{{data.treeState}}">
+            <button style="border:0;outline:none;background:transparent;color:#FF6D6D">
+              <i class="iconfont" style="color:#FF6D6D;margin-right:5px">&#xe632;</i>确认完成
+            </button>
+              
+          </dl>
+          <div class="clearfix"></div>
+        </div>
+        <div class="arrowConBottom">
+          {{each data.remarkList item index}}
+          <div class="conList">
+            <div class="headCon">
+              <span>{{item.createAt}}</span>
+              <span>{{item.operator}}</span>
+            </div>
+            <div class="conDetail">{{item.remark}}</div>
+          </div>
+          {{/each}}
+          <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</script>
+<!-- 信息修复-->
+<!-- 现场查找-->
+<script type="text/template" id="task_programFour_template">
+  <div class="baseCon">
+    <div class="arrow unComplate1">
+      <span class="arrowNum">1</span>
+      <h4 class="stateName">现场查找</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>{{switchTime(data.createAt)}}</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        <div class="arrowConTop">
+            <dl>
+              <dd>负责人：</dd>
+              <dt>{{data.charger}}</dt>
+          </dl>
+           <dl>
+              <dd>开始时间：</dd>
+              <dt>{{data.createAt}}</dt>
+          </dl>
+           <dl class="addCon" data-state="{{data.treeState}}">
+              <dd><i class="iconfont">&#xe660;</i></dd>
+              <dt >添备注加</dt>
+          </dl>
+           <dl class="sureCom" data-state="{{data.treeState}}">
+            <button style="border:0;outline:none;background:transparent;color:#FF6D6D">
+              <i class="iconfont" style="color:#FF6D6D;margin-right:5px">&#xe632;</i>确认完成
+            </button>
+              
+          </dl>
+          <div class="clearfix"></div>
+        </div>
+        <div class="arrowConBottom">
+          {{each data.remarkList item index}}
+          <div class="conList">
+            <div class="headCon">
+              <span>{{item.createAt}}</span>
+              <span>{{item.operator}}</span>
+            </div>
+            <div class="conDetail">{{item.remark}}</div>
+          </div>
+          {{/each}}
+          <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</script>
+<!-- 现场查找-->
+<!-- 任务锁定-->
+<script type="text/template" id="task_programFive_template">
+  <div class="baseCon">
+    <div class="arrow unComplate1">
+      <span class="arrowNum">1</span>
+      <h4 class="stateName">任务锁定</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>{{switchTime(data.createAt)}}</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        <div class="arrowConTop">
+            <dl>
+              <dd>负责人：</dd>
+              <dt>{{data.charger}}</dt>
+          </dl>
+           <dl>
+              <dd>开始时间：</dd>
+              <dt>{{data.createAt}}</dt>
+          </dl>
+           <dl class="addCon" data-state="{{data.treeState}}">
+              <dd><i class="iconfont">&#xe660;</i></dd>
+              <dt >添备注加</dt>
+          </dl>
+           <dl class="sureCom" data-state="{{data.treeState}}">
+            <button style="border:0;outline:none;background:transparent;color:#FF6D6D">
+              <i class="iconfont" style="color:#FF6D6D;margin-right:5px">&#xe632;</i>确认完成
+            </button>
+              
+          </dl>
+          <div class="clearfix"></div>
+        </div>
+        <div class="arrowConBottom">
+          {{each data.remarkList item index}}
+          <div class="conList">
+            <div class="headCon">
+              <span>{{item.createAt}}</span>
+              <span>{{item.operator}}</span>
+            </div>
+            <div class="conDetail">{{item.remark}}</div>
+          </div>
+          {{/each}}
+          <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</script>
+<!-- 任务锁定-->
+<!-- 执行任务分配-->
+<script type="text/template" id="task_programSix_template">
+  <div class="baseCon">
+    <div class="arrow unComplate1">
+      <span class="arrowNum">1</span>
+      <h4 class="stateName">执行任务分配</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>{{switchTime(data.createAt)}}</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        <div class="arrowConTop">
+            <dl>
+              <dd>负责人：</dd>
+              <dt>{{data.charger}}</dt>
+          </dl>
+           <dl>
+              <dd>开始时间：</dd>
+              <dt>{{data.createAt}}</dt>
+          </dl>
+           <dl class="addCon" data-state="{{data.treeState}}">
+              <dd><i class="iconfont">&#xe660;</i></dd>
+              <dt >添备注加</dt>
+          </dl>
+           <dl class="sureCom" data-state="{{data.treeState}}">
+            <button style="border:0;outline:none;background:transparent;color:#FF6D6D">
+              <i class="iconfont" style="color:#FF6D6D;margin-right:5px">&#xe632;</i>确认完成
+            </button>
+              
+          </dl>
+          <div class="clearfix"></div>
+        </div>
+        <div class="arrowConBottom">
+          {{each data.remarkList item index}}
+          <div class="conList">
+            <div class="headCon">
+              <span>{{item.createAt}}</span>
+              <span>{{item.operator}}</span>
+            </div>
+            <div class="conDetail">{{item.remark}}</div>
+          </div>
+          {{/each}}
+          <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</script>
+<!-- 执行任务分配-->
+<!-- 执行任务完成-->
+<script type="text/template" id="task_programSeven_template">
+  <div class="baseCon">
+    <div class="arrow unComplate1">
+      <span class="arrowNum">1</span>
+      <h4 class="stateName">执行任务完成</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>{{switchTime(data.createAt)}}</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        <div class="arrowConTop">
+            <dl>
+              <dd>负责人：</dd>
+              <dt>{{data.charger}}</dt>
+          </dl>
+           <dl>
+              <dd>开始时间：</dd>
+              <dt>{{data.createAt}}</dt>
+          </dl>
+           <dl class="addCon" data-state="{{data.treeState}}">
+              <dd><i class="iconfont">&#xe660;</i></dd>
+              <dt >添备注加</dt>
+          </dl>
+           <dl class="sureCom" data-state="{{data.treeState}}">
+            <button style="border:0;outline:none;background:transparent;color:#FF6D6D">
+              <i class="iconfont" style="color:#FF6D6D;margin-right:5px">&#xe632;</i>确认完成
+            </button>
+              
+          </dl>
+          <div class="clearfix"></div>
+        </div>
+        <div class="arrowConBottom">
+          {{each data.remarkList item index}}
+          <div class="conList">
+            <div class="headCon">
+              <span>{{item.createAt}}</span>
+              <span>{{item.operator}}</span>
+            </div>
+            <div class="conDetail">{{item.remark}}</div>
+          </div>
+          {{/each}}
+          <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</script>
+<!-- 执行任务完成-->
+<!-- 物流运输-->
+<script type="text/template" id="task_programEight_template">
+  <div class="baseCon">
+    <div class="arrow unComplate1">
+      <span class="arrowNum">1</span>
+      <h4 class="stateName">物流运输</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>{{switchTime(data.createAt)}}</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        <div class="arrowConTop">
+            <dl>
+              <dd>负责人：</dd>
+              <dt>{{data.charger}}</dt>
+          </dl>
+           <dl>
+              <dd>开始时间：</dd>
+              <dt>{{data.createAt}}</dt>
+          </dl>
+           <dl class="addCon" data-state="{{data.treeState}}">
+              <dd><i class="iconfont">&#xe660;</i></dd>
+              <dt >添备注加</dt>
+          </dl>
+           <dl class="sureCom" data-state="{{data.treeState}}">
+            <button style="border:0;outline:none;background:transparent;color:#FF6D6D">
+              <i class="iconfont" style="color:#FF6D6D;margin-right:5px">&#xe632;</i>确认完成
+            </button>
+              
+          </dl>
+          <div class="clearfix"></div>
+        </div>
+        <div class="arrowConBottom">
+          {{each data.remarkList item index}}
+          <div class="conList">
+            <div class="headCon">
+              <span>{{item.createAt}}</span>
+              <span>{{item.operator}}</span>
+            </div>
+            <div class="conDetail">{{item.remark}}</div>
+          </div>
+          {{/each}}
+          <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</script>
+<!-- 物流运输-->
+<!-- 交付车辆-->
+<script type="text/template" id="task_programNine_template">
+  <div class="baseCon">
+    <div class="arrow unComplate1">
+      <span class="arrowNum">1</span>
+      <h4 class="stateName">交付车辆</h4>
+      <div class="timeCon">
+          <p>流转时间</p>
+          <p>{{switchTime(data.createAt)}}</p>
+      </div>
+    </div>
+    <div class="arrowCon">
+        <div class="arrowConTop">
+            <dl>
+              <dd>负责人：</dd>
+              <dt>{{data.charger}}</dt>
+          </dl>
+           <dl>
+              <dd>开始时间：</dd>
+              <dt>{{data.createAt}}</dt>
+          </dl>
+           <dl class="addCon" data-state="{{data.treeState}}">
+              <dd><i class="iconfont">&#xe660;</i></dd>
+              <dt >添备注加</dt>
+          </dl>
+           <dl class="sureCom" data-state="{{data.treeState}}">
+            <button style="border:0;outline:none;background:transparent;color:#FF6D6D">
+              <i class="iconfont" style="color:#FF6D6D;margin-right:5px">&#xe632;</i>确认完成
+            </button>
+              
+          </dl>
+          <div class="clearfix"></div>
+        </div>
+        <div class="arrowConBottom">
+          {{each data.remarkList item index}}
+          <div class="conList">
+            <div class="headCon">
+              <span>{{item.createAt}}</span>
+              <span>{{item.operator}}</span>
+            </div>
+            <div class="conDetail">{{item.remark}}</div>
+          </div>
+          {{/each}}
+          <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</script>
+<!-- 交付车辆-->
 <script type="text/javascript">
 seajs.use('modules/taskFlow/task-flow-detail', function(TaskFlowDetail) {
     var TaskFlowDetail = new TaskFlowDetail();

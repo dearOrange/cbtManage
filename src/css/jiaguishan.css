@@ -250,13 +250,11 @@ hr {
   color: #F6B242;
 }
 
-.sureCom dt,
-.sureCom dd i {
+.sureCom button{
   color: #FF6D6D;
 }
 
-.addCon dt,
-.sureCom dt {
+.addCon dt{
   margin-left: 3px;
 }
 
@@ -290,7 +288,5 @@ hr {
   overflow: auto;
   width: 230px;
 }
-.sureState{
-  color:#ccc;
-}
+ 
 
