@@ -95,15 +95,13 @@
           <td><input type="checkbox" class="multipleRemark" id="checkAll" /></td>
           <td colspan="2"><span style="color:#68c8f8;">标记全读</span></td>
         </tr>
-        <form id="remark_read_form">
          {{each list item index}} 
         <tr>
           <td><input type="checkbox" name="msgId" class="remarkRead" data-value="{{item.id}}" /></td>
           <td><span>{{item.content}}</span></td>
-          <td><span class="lastSpan"></span></td>
+          <td><span class="lastSpan"></span></td> 
         </tr>
         {{/each}}
-        </form>
       </table>
     </div>
   </div>

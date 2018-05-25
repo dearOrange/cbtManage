@@ -900,6 +900,7 @@ input[type=text].search-del{
 #getFlowNotion{
   margin-right:10px;
 }
+
 #unreadMiddle{
   width:340px;
   height:240px;
@@ -909,7 +910,6 @@ input[type=text].search-del{
   top:60px;
   right:20px;
   z-index:10001;
-  overflow: auto;
 }
 .bianjiao{
   width: 0; 
@@ -919,7 +919,11 @@ input[type=text].search-del{
   border-bottom: 20px solid #fff;
   position:absolute;
   top:-12px;
-  left:63px;
+  left:78px;
+}
+.checkNews{ 
+  height:240px;
+  overflow: auto;
 }
 .checkNews table tr{
   border-bottom:1px dashed #ccc;
