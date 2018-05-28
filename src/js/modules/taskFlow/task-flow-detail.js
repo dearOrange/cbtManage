@@ -117,7 +117,7 @@ define(function(require, exports, module) {
               $('.arrowItem2').height(height);
               _this.clearTime();
               if(returnData.data.isComplete == 1){
-                  $('#state-2').html('流转完成');
+                $('#state-2').html('流转完成');
                 $('#roam-2').html(returnData.data.consumeTime);
                 _this.taskProgramThree();
               }else{
@@ -280,8 +280,7 @@ define(function(require, exports, module) {
              if(returnData.data.isComplete == 1){
                 $('#state-7').html('流转完成');
                 $('#roam-7').html(returnData.data.consumeTime);
-                _this.taskProgramEight();
-               
+                _this.taskProgramEight();              
               }else{
                 $('#state-7').html('正在进行');
                 _this.setTime(createAt,'#roam-7'); 
@@ -409,7 +408,7 @@ define(function(require, exports, module) {
                           content:'<span style="margin:20px 0">是否确定此流程已经完成？</span>',
                           ok:function(){
                        if(treeState=="issue"){
-                           _this.taskProgramTwo();
+                          _this.taskProgramTwo();
                          _this.taskProgramOne();
                        }else if(treeState=="cluesifte"){
                          _this.taskProgramTwo();
