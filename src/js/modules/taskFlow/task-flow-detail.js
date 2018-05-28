@@ -88,6 +88,8 @@ define(function(require, exports, module) {
                $('#roam-1').html(returnData.data.consumeTime);
                $('#state-1').html('流转完成');
                 _this.taskProgramTwo();
+                $('#button-1').css('color',"#ccc");
+                $('#button-1').find('i').css('color',"#ccc");
               }else{
                 $('#state-1').html('正在进行');
                 _this.setTime(createAt,'#roam-1'); 
@@ -120,6 +122,8 @@ define(function(require, exports, module) {
                 $('#state-2').html('流转完成');
                 $('#roam-2').html(returnData.data.consumeTime);
                 _this.taskProgramThree();
+                 $('#button-2').css('color',"#ccc");
+                $('#button-2').find('i').css('color',"#ccc");
               }else{
                 $('#state-2').html('正在进行');
                 _this.setTime(createAt,'#roam-2');
@@ -151,6 +155,8 @@ define(function(require, exports, module) {
                 $('#state-3').html('流转完成');
                 $('#roam-3').html(returnData.data.consumeTime);
                 _this.taskProgramFour();
+                 $('#button-3').css('color',"#ccc");
+                $('#button-3').find('i').css('color',"#ccc");
               }else{
                 $('#state-3').html('正在进行');
                 _this.setTime(createAt,'#roam-3'); 
@@ -182,7 +188,8 @@ define(function(require, exports, module) {
                   $('#state-4').html('流转完成');
                   $('#roam-4').html(returnData.data.consumeTime);
                 _this.taskProgramFive();
-               
+                 $('#button-4').css('color',"#ccc");
+                 $('#button-4').find('i').css('color',"#ccc");
               }else{
                 $('#state-4').html('正在进行');
                 _this.setTime(createAt,'#roam-4'); 
@@ -215,7 +222,8 @@ define(function(require, exports, module) {
                   $('#state-5').html('流转完成');
                  $('#roam-5').html(returnData.data.consumeTime);
                 _this.taskProgramSix();
-                 
+                $('#button-5').css('color',"#ccc");
+                $('#button-5').find('i').css('color',"#ccc");
               }else{
                 $('#state-5').html('正在进行');
                 _this.setTime(createAt,'#roam-5'); 
@@ -248,6 +256,8 @@ define(function(require, exports, module) {
                   $('#state-6').html('流转完成');
                 $('#roam-6').html(returnData.data.consumeTime);
                 _this.taskProgramSeven();
+                 $('#button-6').css('color',"#ccc");
+                $('#button-6').find('i').css('color',"#ccc");
               
               }else{
                 $('#state-6').html('正在进行');
@@ -280,7 +290,9 @@ define(function(require, exports, module) {
              if(returnData.data.isComplete == 1){
                 $('#state-7').html('流转完成');
                 $('#roam-7').html(returnData.data.consumeTime);
-                _this.taskProgramEight();              
+                _this.taskProgramEight(); 
+                 $('#button-7').css('color',"#ccc");
+                $('#button-7').find('i').css('color',"#ccc");             
               }else{
                 $('#state-7').html('正在进行');
                 _this.setTime(createAt,'#roam-7'); 
@@ -313,6 +325,8 @@ define(function(require, exports, module) {
                   $('#state-8').html('流转完成');
                   $('#roam-8').html(returnData.data.consumeTime);
                  _this.taskProgramNine();
+                  $('#button-8').css('color',"#ccc");
+                $('#button-8').find('i').css('color',"#ccc");
               }else{
                 $('#state-8').html('正在进行');
                 _this.setTime(createAt,'#roam-8'); 
@@ -345,6 +359,8 @@ define(function(require, exports, module) {
               $('#roam-9').html(returnData.data.consumeTime);
               $('#comTip').css('display','block');
               $('#comTipTime').html(returnData.data.completeAt);
+               $('#button-9').css('color',"#ccc");
+                $('#button-9').find('i').css('color',"#ccc");
               }else{
                 $('#state-9').html('正在进行');
                 _this.setTime(createAt,'#roam-9'); 
@@ -399,44 +415,47 @@ define(function(require, exports, module) {
            $('body').off('click','.sureCom').on('click','.sureCom',function(){
             var me=$(this);
              var treeState = $(this).data('state');
-              jh.utils.ajax.send({
-                  url:'/tree/complete',
+              jh.utils.alert({
+                  content:'<span style="margin:20px 0">是否确定此流程已经完成？</span>',
+                  ok:function(){
+                 jh.utils.ajax.send({
+                  url:'/tree/complete', 
                   data:{treeId:args.id,state:treeState},
                    done:function(redData){
-                    $(this).find('button').css('disabled',"disabled");
-                        jh.utils.alert({
-                          content:'<span style="margin:20px 0">是否确定此流程已经完成？</span>',
-                          ok:function(){
-                       if(treeState=="issue"){
-                          _this.taskProgramTwo();
-                         _this.taskProgramOne();
-                       }else if(treeState=="cluesifte"){
-                         _this.taskProgramTwo();
-                            _this.taskProgramThree();
-                       }else if(treeState=="repairinfo"){
-                         _this.taskProgramThree();
-                          _this.taskProgramFour();
-                       }else if(treeState=="scene"){
-                         _this.taskProgramFour();
-                          _this.taskProgramFive();
-                       }else if(treeState=="lock"){
-                         _this.taskProgramFive();
-                          _this.taskProgramSix();
-                       }else if(treeState=="allocation"){
-                         _this.taskProgramSix();
-                          _this.taskProgramSeven();
-                       }else if(treeState=="execution"){
-                         _this.taskProgramSeven();
-                          _this.taskProgramEight();
-                       }else if(treeState=="transport"){
-                         _this.taskProgramEight();
-                          _this.taskProgramNine();
-                       }else if(treeState=="deliver")
-                          _this.taskProgramNine();
-                       }
-                      })
+                     if(treeState=="issue"){
+                        _this.taskProgramTwo();
+                       _this.taskProgramOne();
+                     }else if(treeState=="cluesifte"){
+                       _this.taskProgramTwo();
+                          _this.taskProgramThree();
+                     }else if(treeState=="repairinfo"){
+                       _this.taskProgramThree();
+                        _this.taskProgramFour();
+                     }else if(treeState=="scene"){
+                       _this.taskProgramFour();
+                        _this.taskProgramFive();
+                     }else if(treeState=="lock"){
+                       _this.taskProgramFive();
+                        _this.taskProgramSix();
+                     }else if(treeState=="allocation"){
+                       _this.taskProgramSix();
+                        _this.taskProgramSeven();
+                     }else if(treeState=="execution"){
+                       _this.taskProgramSeven();
+                        _this.taskProgramEight();
+                     }else if(treeState=="transport"){
+                       _this.taskProgramEight();
+                        _this.taskProgramNine();
+                     }else if(treeState=="deliver"){
+                        _this.taskProgramNine();
+                      }
                    }
-              });
+               });  
+             },
+             cancel: true
+
+            })
+             
            })
         }    
 
