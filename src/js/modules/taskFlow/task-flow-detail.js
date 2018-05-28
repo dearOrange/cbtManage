@@ -360,8 +360,8 @@ define(function(require, exports, module) {
                           content:'<span style="margin:20px 0">是否确定此流程已经完成？</span>',
                           ok:function(){
                        if(treeState=="issue"){
-                         _this.taskProgramOne();
                            _this.taskProgramTwo();
+                         _this.taskProgramOne();
                        }else if(treeState=="cluesifte"){
                          _this.taskProgramTwo();
                             _this.taskProgramThree();
