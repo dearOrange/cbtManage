@@ -79,7 +79,6 @@ define(function(require, exports, module) {
               state:'issue'
             },
             done: function(returnData) {
-              console.log(returnData);
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programOne_template', returnData);
               $('#taskProgram').find('.itemList').eq(0).html(informalStr);
@@ -87,8 +86,9 @@ define(function(require, exports, module) {
               $('.arrowItem1').height(height);
               $('#roam-1').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
+               $('#roam-1').html(returnData.data.consumeTime);
                 _this.taskProgramTwo();
-                $('#roam-1').html(returnData.data.consumeTime);
+               
               }
             }
           });  
@@ -115,8 +115,8 @@ define(function(require, exports, module) {
               $('.arrowItem2').height(height);
                $('#roam-2').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
+                $('#roam-2').html(returnData.data.consumeTime);
                 _this.taskProgramThree();
-                 $('#roam-2').html(returnData.data.consumeTime);
               }
             }
           });  
@@ -142,8 +142,9 @@ define(function(require, exports, module) {
               $('.arrowItem3').height(height);
                 $('#roam-3').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
+                 $('#roam-3').html(returnData.data.consumeTime);
                 _this.taskProgramFour();
-                  $('#roam-3').html(returnData.data.consumeTime);
+                 
               }
             }
           });  
@@ -169,8 +170,9 @@ define(function(require, exports, module) {
               $('.arrowItem4').height(height);
                $('#roam-4').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
+                  $('#roam-4').html(returnData.data.consumeTime);
                 _this.taskProgramFive();
-                 $('#roam-4').html(returnData.data.consumeTime);
+               
               }
             }
           });  
@@ -197,8 +199,9 @@ define(function(require, exports, module) {
               $('.arrowItem5').height(height);
                 $('#roam-5').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
+                 $('#roam-5').html(returnData.data.consumeTime);
                 _this.taskProgramSix();
-                  $('#roam-5').html(returnData.data.consumeTime);
+                 
               }
             }
           });  
@@ -225,8 +228,9 @@ define(function(require, exports, module) {
               $('.arrowItem6').height(height);
                $('#roam-6').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
+                $('#roam-6').html(returnData.data.consumeTime);
                 _this.taskProgramSeven();
-              $('#roam-6').html(returnData.data.consumeTime);
+              
               }
             }
           });  
@@ -253,8 +257,9 @@ define(function(require, exports, module) {
               $('.arrowItem7').height(height);
               $('#roam-7').html(_this.switchTime(returnData.data.createAt));
              if(returnData.data.isComplete == 1){
+                $('#roam-7').html(returnData.data.consumeTime);
                 _this.taskProgramEight();
-                 $('#roam-7').html(returnData.data.consumeTime);
+               
               }
             }
           });  
@@ -268,6 +273,7 @@ define(function(require, exports, module) {
               state:'transport'
             },
             done: function(returnData) {
+              console.log(returnData);
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programEight_template', returnData);
               $('#taskProgram').find('.itemList').eq(7).html(informalStr);
@@ -281,8 +287,10 @@ define(function(require, exports, module) {
               $('.arrowItem8').height(height);
                $('#roam-8').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
+                  $('#roam-8').html(returnData.data.consumeTime);
+
                 _this.taskProgramNine();
-                $('#roam-8').html(returnData.data.consumeTime);
+              
               }
             }
           });  
@@ -297,6 +305,7 @@ define(function(require, exports, module) {
             },
             done: function(returnData) {
               returnData.switchTime = jh.utils.switchTime;
+              console.log(returnData);
               var informalStr = jh.utils.template('task_programNine_template', returnData);
              $('#taskProgram').find('.itemList').eq(8).html(informalStr);
              var list=$('#taskProgram').find('.itemList').eq(8).find('.conList');
@@ -309,6 +318,8 @@ define(function(require, exports, module) {
               $('#roam-9').html(_this.switchTime(returnData.data.createAt));
              if(returnData.data.isComplete == 1){
               $('#roam-9').html(returnData.data.consumeTime);
+              $('#comTip').css('display','block');
+              $('#comTipTime').html(returnData.data.completeAt);
               }
             }
           });  
@@ -387,8 +398,8 @@ define(function(require, exports, module) {
                           _this.taskProgramEight();
                        }else if(treeState=="transport"){
                           _this.taskProgramNine();
-                       }
-                        
+                       }else if(treeState=="deliver")
+                          _this.taskProgramNine();
                        }
                       })
                    }
