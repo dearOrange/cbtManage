@@ -29,7 +29,47 @@ define(function(require, exports, module) {
                 }
             });
         };
-      var arr=['issue','cluesifte','repairinfo','scene','lock','allocation','execution','transport','deliver','complete'];
+    this.switchTime=function(time){
+      var diff = '';
+      var time_diff = new Date().getTime() - new Date(time).getTime();
+      // 计算相差天数  
+      var days = Math.floor(time_diff / (24 * 3600 * 1000));
+      if(days > 0) {
+        diff += days + '天';
+      }
+      // 计算相差小时数  
+      var leave1 = time_diff % (24 * 3600 * 1000);
+      var hours = Math.floor(leave1 / (3600 * 1000));
+      if(hours > 0) {
+        diff += hours + '小时';
+      } else {
+        if(diff !== '') {
+          diff += hours + '小时';
+        }
+      }
+      // 计算相差分钟数  
+      var leave2 = leave1 % (3600 * 1000);
+      var minutes = Math.floor(leave2 / (60 * 1000));
+      if(minutes > 0) {
+        diff += minutes + '分';
+      } else {
+        if(diff !== '') {
+          diff += minutes + '分';
+        }
+      }
+      // 计算相差秒数  
+//    var leave3 = leave2 % (60 * 1000);
+//    var seconds = Math.round(leave3 / 1000);
+//    if(seconds > 0) {
+//      diff += seconds + '秒';
+//    } else {
+//      if(diff !== '') {
+//        diff += seconds + '秒';
+//      }
+//    }
+
+      return diff;
+        };
        //任务录入
         this.taskProgramOne = function(){
            jh.utils.ajax.send({
@@ -39,13 +79,16 @@ define(function(require, exports, module) {
               state:'issue'
             },
             done: function(returnData) {
+              console.log(returnData);
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programOne_template', returnData);
               $('#taskProgram').find('.itemList').eq(0).html(informalStr);
               var height=$('#taskProgram').find('.itemList').eq(0).find('.arrowCon').height();
               $('.arrowItem1').height(height);
+              $('#roam-1').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                 _this.taskProgramTwo();
+                $('#roam-1').html(returnData.data.consumeTime);
               }
             }
           });  
@@ -70,8 +113,10 @@ define(function(require, exports, module) {
               }
               var height=$('#taskProgram').find('.itemList').eq(1).find('.arrowCon').height();
               $('.arrowItem2').height(height);
+               $('#roam-2').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                 _this.taskProgramThree();
+                 $('#roam-2').html(returnData.data.consumeTime);
               }
             }
           });  
@@ -95,8 +140,10 @@ define(function(require, exports, module) {
               }
                var height=$('#taskProgram').find('.itemList').eq(2).find('.arrowCon').height();
               $('.arrowItem3').height(height);
+                $('#roam-3').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                 _this.taskProgramFour();
+                  $('#roam-3').html(returnData.data.consumeTime);
               }
             }
           });  
@@ -120,8 +167,10 @@ define(function(require, exports, module) {
               }
                 var height=$('#taskProgram').find('.itemList').eq(3).find('.arrowCon').height();
               $('.arrowItem4').height(height);
+               $('#roam-4').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                 _this.taskProgramFive();
+                 $('#roam-4').html(returnData.data.consumeTime);
               }
             }
           });  
@@ -146,8 +195,10 @@ define(function(require, exports, module) {
                $('.arrowItem.arrowItem5').addClass('listItemNum5');
                var height=$('#taskProgram').find('.itemList').eq(4).find('.arrowCon').height();
               $('.arrowItem5').height(height);
+                $('#roam-5').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                 _this.taskProgramSix();
+                  $('#roam-5').html(returnData.data.consumeTime);
               }
             }
           });  
@@ -172,8 +223,10 @@ define(function(require, exports, module) {
               $('.arrowItem.arrowItem6').addClass('listItemNum6');
                 var height=$('#taskProgram').find('.itemList').eq(5).find('.arrowCon').height();
               $('.arrowItem6').height(height);
+               $('#roam-6').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                 _this.taskProgramSeven();
+              $('#roam-6').html(returnData.data.consumeTime);
               }
             }
           });  
@@ -198,8 +251,10 @@ define(function(require, exports, module) {
              $('.arrowItem.arrowItem7').addClass('listItemNum7');
               var height=$('#taskProgram').find('.itemList').eq(6).find('.arrowCon').height();
               $('.arrowItem7').height(height);
+              $('#roam-7').html(_this.switchTime(returnData.data.createAt));
              if(returnData.data.isComplete == 1){
                 _this.taskProgramEight();
+                 $('#roam-7').html(returnData.data.consumeTime);
               }
             }
           });  
@@ -224,8 +279,10 @@ define(function(require, exports, module) {
               $('.arrowItem.arrowItem8').addClass('listItemNum8');
                var height=$('#taskProgram').find('.itemList').eq(7).find('.arrowCon').height();
               $('.arrowItem8').height(height);
+               $('#roam-8').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                 _this.taskProgramNine();
+                $('#roam-8').html(returnData.data.consumeTime);
               }
             }
           });  
@@ -249,7 +306,9 @@ define(function(require, exports, module) {
               $('.arrowItem.arrowItem9').addClass('listItemNum9');
                var height=$('#taskProgram').find('.itemList').eq(8).find('.arrowCon').height();
               $('.arrowItem9').height(height);
+              $('#roam-9').html(_this.switchTime(returnData.data.createAt));
              if(returnData.data.isComplete == 1){
+              $('#roam-9').html(returnData.data.consumeTime);
               }
             }
           });  
