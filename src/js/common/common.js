@@ -12253,7 +12253,7 @@ define(function(require, exports, module) {
 
   (function(){
   function setTime(time,obj){
- window.setInterval(function(){
+ window.setTimeout(function(){
       var time_start = new Date(time).getTime();//设定开始时间 
     var time_end = new Date().getTime(); //设定结束时间(等于系统当前时间) 
     //计算时间差 
