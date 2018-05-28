@@ -163,6 +163,7 @@ define(function(require, exports, module) {
             $('#getFlowNotion').children('sup').remove().end().append(supNum);
           }else{
             (new jh.ui.shadow()).close();
+            $('#getFlowNotion').children('sup').remove()
           }
         }
       });
