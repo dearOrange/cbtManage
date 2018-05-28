@@ -176,7 +176,7 @@ define(function(require, exports, module) {
         contentType: 'application/json',
         data: {
           pageNum: 1,
-          pageSize: 10
+          pageSize: 300
         },
         done: function(data) {
           var dataList = data.data.list;
@@ -188,7 +188,9 @@ define(function(require, exports, module) {
           }
         }
       })
+      
     }
+    
     this.registerEvent = function() {
       var InitRegisterEvent = require('common/initRegisterEvent');
       var register = new InitRegisterEvent();
