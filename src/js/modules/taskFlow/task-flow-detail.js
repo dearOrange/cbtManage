@@ -13,8 +13,7 @@ define(function(require, exports, module) {
         this.init = function() {
             this.initContent();
             this.taskProgramOne();
-            this.addRemark();
-            this.surecom();
+            this.registerInit();
         };
         this.initContent = function(){
             jh.utils.ajax.send({
@@ -29,7 +28,48 @@ define(function(require, exports, module) {
                 }
             });
         };
+this.time=function (time,obj){
+  // debugger
+    window.setInterval(function(){
+      var time_start = new Date(time).getTime();//设定开始时间 
+    var time_end = new Date().getTime(); //设定结束时间(等于系统当前时间) 
+    //计算时间差 
+    var time_distance = time_end - time_start; 
+    if(time_distance > 0){ 
+    // 天时分秒换算 
+    var int_day = Math.floor(time_distance/86400000) 
+    time_distance -= int_day * 86400000; 
     
+    var int_hour = Math.floor(time_distance/3600000) 
+    time_distance -= int_hour * 3600000; 
+    
+    var int_minute = Math.floor(time_distance/60000) 
+    time_distance -= int_minute * 60000; 
+    
+    var int_second = Math.floor(time_distance/1000) 
+    // 时分秒为单数时、前面加零 
+    if(int_day < 10){ 
+    int_day = "0" + int_day; 
+    } 
+    if(int_hour < 10){ 
+    int_hour = "0" + int_hour; 
+    } 
+    if(int_minute < 10){ 
+    int_minute = "0" + int_minute; 
+    } 
+    if(int_second < 10){ 
+    int_second = "0" + int_second; 
+    } 
+    // 显示时间 
+    $(obj).html(int_day+"天"+int_hour+"时"+int_minute+"分"+int_second+"秒")
+  }else{ 
+    $(obj).html("00天00时00分00秒")
+    }
+    },1000)
+}
+
+ 
+   
        //任务录入
         this.taskProgramOne = function(){
            jh.utils.ajax.send({
@@ -50,6 +90,7 @@ define(function(require, exports, module) {
                 _this.taskProgramTwo();
               }else{
                 $('#state-1').html('正在进行');
+
               }
             }
           });  
@@ -64,7 +105,7 @@ define(function(require, exports, module) {
               state:'cluesifte'
             },
             done: function(returnData) {
-              returnData.switchTime = jh.utils.switchTime;
+            var createAt=returnData.data.createAt;
               var informalStr = jh.utils.template('task_programTwo_template', returnData);
               $('#taskProgram').find('.itemList').eq(1).html(informalStr);
               $('.arrowItem.arrowItem2').addClass('listItemNum2');
@@ -80,6 +121,7 @@ define(function(require, exports, module) {
                 _this.taskProgramThree();
               }else{
                 $('#state-2').html('正在进行');
+                _this.time(createAt,'#roam-2');
               }
             }
           });  
@@ -299,9 +341,8 @@ define(function(require, exports, module) {
             }
           });  
         }
-
-        this.addRemark=function(){
-            // 添加备注
+        this.registerInit = function(){
+          // 添加备注
             $('body').off('click','.addCon').on('click','.addCon',function(){
               var treeState = $(this).data('state');
               var alertContent=jh.utils.template('addRemark_template', {});
@@ -343,9 +384,7 @@ define(function(require, exports, module) {
                 cancel: true
               }) 
             })
-        };
         //确认完成
-        this.surecom=function(){
            $('body').off('click','.sureCom').on('click','.sureCom',function(){
             var me=$(this);
              var treeState = $(this).data('state');
@@ -388,9 +427,7 @@ define(function(require, exports, module) {
                    }
               });
            })
-             
-             
-        }
+        }    
 
     }
     module.exports = TaskFlowDetail;
