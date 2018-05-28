@@ -12248,7 +12248,6 @@ define(function(require, exports, module) {
 
       return diff;
     }
-
     tammy.utils.switchTime = switchTime;
   })();
 
