@@ -12252,6 +12252,7 @@ define(function(require, exports, module) {
     tammy.utils.switchTime = switchTime;
   })();
 
+<<<<<<< HEAD
   (function(){
   function setTime(time,obj){
   window.setInterval(function(){
@@ -12294,5 +12295,7 @@ define(function(require, exports, module) {
 tammy.utils.setTime = setTime;
 })()
 
+=======
+>>>>>>> 1b8073e93601f3c9d521552ea580d7e01970d166
   module.exports = tammy;
 });
