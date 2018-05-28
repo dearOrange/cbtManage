@@ -12248,12 +12248,13 @@ define(function(require, exports, module) {
 
       return diff;
     }
+
     tammy.utils.switchTime = switchTime;
   })();
 
   (function(){
   function setTime(time,obj){
- window.setTimeout(function(){
+  window.setInterval(function(){
       var time_start = new Date(time).getTime();//设定开始时间 
     var time_end = new Date().getTime(); //设定结束时间(等于系统当前时间) 
     //计算时间差 
@@ -12288,7 +12289,7 @@ define(function(require, exports, module) {
   }else{ 
     $(obj).html("00天00时00分00秒")
     }
-    },1000)
+    },1000);
 }
 tammy.utils.setTime = setTime;
 })()
