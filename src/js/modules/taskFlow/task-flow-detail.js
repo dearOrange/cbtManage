@@ -28,7 +28,47 @@ define(function(require, exports, module) {
                 }
             });
         };
- 
+        this.setTime = function(time,obj){
+          _this.timeInter = window.setInterval(function(){
+            var time_start = new Date(time).getTime();//设定开始时间 
+            var time_end = new Date().getTime(); //设定结束时间(等于系统当前时间) 
+            //计算时间差 
+            var time_distance = time_end - time_start; 
+            if(time_distance > 0){ 
+            // 天时分秒换算 
+            var int_day = Math.floor(time_distance/86400000) 
+            time_distance -= int_day * 86400000; 
+            
+            var int_hour = Math.floor(time_distance/3600000) 
+            time_distance -= int_hour * 3600000; 
+            
+            var int_minute = Math.floor(time_distance/60000) 
+            time_distance -= int_minute * 60000; 
+            
+            var int_second = Math.floor(time_distance/1000) 
+            // 时分秒为单数时、前面加零 
+            if(int_day < 10){ 
+            int_day = "0" + int_day; 
+            } 
+            if(int_hour < 10){ 
+            int_hour = "0" + int_hour; 
+            } 
+            if(int_minute < 10){ 
+            int_minute = "0" + int_minute; 
+            } 
+            if(int_second < 10){ 
+            int_second = "0" + int_second; 
+            } 
+            // 显示时间 
+            $(obj).html(int_day+"天"+int_hour+"时"+int_minute+"分"+int_second+"秒")
+            }else{ 
+            $(obj).html("00天00时00分00秒")
+            }
+          },1000)
+        }
+        this.clearTime = function(){
+          clearInterval(_this.timeInter);
+        }
        //任务录入
         this.taskProgramOne = function(){
            jh.utils.ajax.send({
@@ -43,13 +83,14 @@ define(function(require, exports, module) {
               $('#taskProgram').find('.itemList').eq(0).html(informalStr);
               var height=$('#taskProgram').find('.itemList').eq(0).find('.arrowCon').height();
               $('.arrowItem1').height(height);
+              _this.clearTime();
               if(returnData.data.isComplete == 1){
                $('#roam-1').html(returnData.data.consumeTime);
                $('#state-1').html('流转完成');
                 _this.taskProgramTwo();
               }else{
                 $('#state-1').html('正在进行');
-                jh.utils.setTime(createAt,'#roam-1'); 
+                _this.setTime(createAt,'#roam-1'); 
               }
             }
           });  
@@ -74,13 +115,14 @@ define(function(require, exports, module) {
               }
               var height=$('#taskProgram').find('.itemList').eq(1).find('.arrowCon').height();
               $('.arrowItem2').height(height);
+              _this.clearTime();
               if(returnData.data.isComplete == 1){
                   $('#state-2').html('流转完成');
                 $('#roam-2').html(returnData.data.consumeTime);
                 _this.taskProgramThree();
               }else{
                 $('#state-2').html('正在进行');
-                jh.utils.setTime(createAt,'#roam-2');
+                _this.setTime(createAt,'#roam-2');
               }
             }
           });  
@@ -104,13 +146,14 @@ define(function(require, exports, module) {
               }
                var height=$('#taskProgram').find('.itemList').eq(2).find('.arrowCon').height();
               $('.arrowItem3').height(height);
+              _this.clearTime();
               if(returnData.data.isComplete == 1){
                 $('#state-3').html('流转完成');
                 $('#roam-3').html(returnData.data.consumeTime);
                 _this.taskProgramFour();
               }else{
                 $('#state-3').html('正在进行');
-                jh.utils.setTime(createAt,'#roam-3'); 
+                _this.setTime(createAt,'#roam-3'); 
               }
             }
           });  
@@ -132,8 +175,9 @@ define(function(require, exports, module) {
               for(var i=0;i<list.length;i++){
                    $(list[i]).find('.headCon').css('background','#BCFFCF');
               }
-                var height=$('#taskProgram').find('.itemList').eq(3).find('.arrowCon').height();
+              var height=$('#taskProgram').find('.itemList').eq(3).find('.arrowCon').height();
               $('.arrowItem4').height(height);
+              _this.clearTime();
               if(returnData.data.isComplete == 1){
                   $('#state-4').html('流转完成');
                   $('#roam-4').html(returnData.data.consumeTime);
@@ -141,7 +185,7 @@ define(function(require, exports, module) {
                
               }else{
                 $('#state-4').html('正在进行');
-                jh.utils.setTime(createAt,'#roam-4'); 
+                _this.setTime(createAt,'#roam-4'); 
               }
             }
           });  
@@ -166,6 +210,7 @@ define(function(require, exports, module) {
                $('.arrowItem.arrowItem5').addClass('listItemNum5');
                var height=$('#taskProgram').find('.itemList').eq(4).find('.arrowCon').height();
               $('.arrowItem5').height(height);
+              _this.clearTime();
               if(returnData.data.isComplete == 1){
                   $('#state-5').html('流转完成');
                  $('#roam-5').html(returnData.data.consumeTime);
@@ -173,7 +218,7 @@ define(function(require, exports, module) {
                  
               }else{
                 $('#state-5').html('正在进行');
-                jh.utils.setTime(createAt,'#roam-5'); 
+                _this.setTime(createAt,'#roam-5'); 
               }
             }
           });  
@@ -198,6 +243,7 @@ define(function(require, exports, module) {
               $('.arrowItem.arrowItem6').addClass('listItemNum6');
                 var height=$('#taskProgram').find('.itemList').eq(5).find('.arrowCon').height();
               $('.arrowItem6').height(height);
+              _this.clearTime();
               if(returnData.data.isComplete == 1){
                   $('#state-6').html('流转完成');
                 $('#roam-6').html(returnData.data.consumeTime);
@@ -205,7 +251,7 @@ define(function(require, exports, module) {
               
               }else{
                 $('#state-6').html('正在进行');
-                jh.utils.setTime(createAt,'#roam-6'); 
+                _this.setTime(createAt,'#roam-6'); 
               }
             }
           });  
@@ -230,6 +276,7 @@ define(function(require, exports, module) {
              $('.arrowItem.arrowItem7').addClass('listItemNum7');
               var height=$('#taskProgram').find('.itemList').eq(6).find('.arrowCon').height();
               $('.arrowItem7').height(height);
+              _this.clearTime();
              if(returnData.data.isComplete == 1){
                 $('#state-7').html('流转完成');
                 $('#roam-7').html(returnData.data.consumeTime);
@@ -237,7 +284,7 @@ define(function(require, exports, module) {
                
               }else{
                 $('#state-7').html('正在进行');
-                jh.utils.setTime(createAt,'#roam-7'); 
+                _this.setTime(createAt,'#roam-7'); 
               }
             }
           });  
@@ -262,13 +309,14 @@ define(function(require, exports, module) {
               $('.arrowItem.arrowItem8').addClass('listItemNum8');
                var height=$('#taskProgram').find('.itemList').eq(7).find('.arrowCon').height();
               $('.arrowItem8').height(height);
+              _this.clearTime();
               if(returnData.data.isComplete == 1){
                   $('#state-8').html('流转完成');
                   $('#roam-8').html(returnData.data.consumeTime);
                  _this.taskProgramNine();
               }else{
                 $('#state-8').html('正在进行');
-                jh.utils.setTime(createAt,'#roam-8'); 
+                _this.setTime(createAt,'#roam-8'); 
               }
             }
           });  
@@ -292,6 +340,7 @@ define(function(require, exports, module) {
               $('.arrowItem.arrowItem9').addClass('listItemNum9');
                var height=$('#taskProgram').find('.itemList').eq(8).find('.arrowCon').height();
               $('.arrowItem9').height(height);
+              _this.clearTime();
              if(returnData.data.isComplete == 1){
               $('#state-9').html('流转完成');
               $('#roam-9').html(returnData.data.consumeTime);
@@ -299,7 +348,7 @@ define(function(require, exports, module) {
               $('#comTipTime').html(returnData.data.completeAt);
               }else{
                 $('#state-9').html('正在进行');
-                jh.utils.setTime(createAt,'#roam-9'); 
+                _this.setTime(createAt,'#roam-9'); 
               }
             }
           });  
