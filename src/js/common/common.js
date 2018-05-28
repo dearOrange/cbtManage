@@ -12253,9 +12253,9 @@ define(function(require, exports, module) {
   })();
 
   (function(){
-    function setTime(time,obj){
-  // debugger
-    var time_start = new Date(time).getTime();//设定开始时间 
+  function setTime(time,obj){
+ window.setInterval(function(){
+      var time_start = new Date(time).getTime();//设定开始时间 
     var time_end = new Date().getTime(); //设定结束时间(等于系统当前时间) 
     //计算时间差 
     var time_distance = time_end - time_start; 
@@ -12285,15 +12285,14 @@ define(function(require, exports, module) {
     int_second = "0" + int_second; 
     } 
     // 显示时间 
-   
     $(obj).html(int_day+"天"+int_hour+"时"+int_minute+"分"+int_second+"秒")
-    setInterval(setTime(),1000); 
-    }else{ 
+  }else{ 
     $(obj).html("00天00时00分00秒")
     }
+    },1000)
 }
 tammy.utils.setTime = setTime;
-  })()
+})()
 
   module.exports = tammy;
 });

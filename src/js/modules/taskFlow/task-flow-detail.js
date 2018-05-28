@@ -28,48 +28,7 @@ define(function(require, exports, module) {
                 }
             });
         };
-this.time=function (time,obj){
-  // debugger
-    window.setInterval(function(){
-      var time_start = new Date(time).getTime();//设定开始时间 
-    var time_end = new Date().getTime(); //设定结束时间(等于系统当前时间) 
-    //计算时间差 
-    var time_distance = time_end - time_start; 
-    if(time_distance > 0){ 
-    // 天时分秒换算 
-    var int_day = Math.floor(time_distance/86400000) 
-    time_distance -= int_day * 86400000; 
-    
-    var int_hour = Math.floor(time_distance/3600000) 
-    time_distance -= int_hour * 3600000; 
-    
-    var int_minute = Math.floor(time_distance/60000) 
-    time_distance -= int_minute * 60000; 
-    
-    var int_second = Math.floor(time_distance/1000) 
-    // 时分秒为单数时、前面加零 
-    if(int_day < 10){ 
-    int_day = "0" + int_day; 
-    } 
-    if(int_hour < 10){ 
-    int_hour = "0" + int_hour; 
-    } 
-    if(int_minute < 10){ 
-    int_minute = "0" + int_minute; 
-    } 
-    if(int_second < 10){ 
-    int_second = "0" + int_second; 
-    } 
-    // 显示时间 
-    $(obj).html(int_day+"天"+int_hour+"时"+int_minute+"分"+int_second+"秒")
-  }else{ 
-    $(obj).html("00天00时00分00秒")
-    }
-    },1000)
-}
-
  
-   
        //任务录入
         this.taskProgramOne = function(){
            jh.utils.ajax.send({
@@ -79,7 +38,7 @@ this.time=function (time,obj){
               state:'issue'
             },
             done: function(returnData) {
-              returnData.switchTime = jh.utils.switchTime;
+             var createAt=returnData.data.createAt;
               var informalStr = jh.utils.template('task_programOne_template', returnData);
               $('#taskProgram').find('.itemList').eq(0).html(informalStr);
               var height=$('#taskProgram').find('.itemList').eq(0).find('.arrowCon').height();
@@ -90,7 +49,7 @@ this.time=function (time,obj){
                 _this.taskProgramTwo();
               }else{
                 $('#state-1').html('正在进行');
-
+                jh.utils.setTime(createAt,'#roam-1'); 
               }
             }
           });  
@@ -121,7 +80,7 @@ this.time=function (time,obj){
                 _this.taskProgramThree();
               }else{
                 $('#state-2').html('正在进行');
-                _this.time(createAt,'#roam-2');
+                jh.utils.setTime(createAt,'#roam-2');
               }
             }
           });  
@@ -135,7 +94,7 @@ this.time=function (time,obj){
               state:'repairinfo'
             },
             done: function(returnData) {
-              returnData.switchTime = jh.utils.switchTime;
+               var createAt=returnData.data.createAt;
               var informalStr = jh.utils.template('task_programThree_template', returnData);
               $('#taskProgram').find('.itemList').eq(2).html(informalStr);
                $('.arrowItem.arrowItem3').addClass('listItemNum3');
@@ -151,6 +110,7 @@ this.time=function (time,obj){
                 _this.taskProgramFour();
               }else{
                 $('#state-3').html('正在进行');
+                jh.utils.setTime(createAt,'#roam-3'); 
               }
             }
           });  
@@ -164,7 +124,7 @@ this.time=function (time,obj){
               state:'scene'
             },
             done: function(returnData) {
-              returnData.switchTime = jh.utils.switchTime;
+               var createAt=returnData.data.createAt;
               var informalStr1 = jh.utils.template('task_programFour_template', returnData);
               $('#taskProgram').find('.itemList').eq(3).html(informalStr1);
               $('.arrowItem.arrowItem4').addClass('listItemNum4');
@@ -181,6 +141,7 @@ this.time=function (time,obj){
                
               }else{
                 $('#state-4').html('正在进行');
+                jh.utils.setTime(createAt,'#roam-4'); 
               }
             }
           });  
@@ -194,8 +155,7 @@ this.time=function (time,obj){
               state:'lock'
             },
             done: function(returnData) {
-
-              returnData.switchTime = jh.utils.switchTime;
+               var createAt=returnData.data.createAt;
               var informalStr = jh.utils.template('task_programFive_template', returnData);
               $('#taskProgram').find('.itemList').eq(4).html(informalStr);
                // $('.headCon').eq(4).css('background','#96FFB3');
@@ -213,6 +173,7 @@ this.time=function (time,obj){
                  
               }else{
                 $('#state-5').html('正在进行');
+                jh.utils.setTime(createAt,'#roam-5'); 
               }
             }
           });  
@@ -226,7 +187,7 @@ this.time=function (time,obj){
               state:'allocation'
             },
             done: function(returnData) {
-              returnData.switchTime = jh.utils.switchTime;
+               var createAt=returnData.data.createAt;
               var informalStr = jh.utils.template('task_programSix_template', returnData);
               $('#taskProgram').find('.itemList').eq(5).html(informalStr);
               // $('.headCon').eq(5).css('background','#FEFFBA');
@@ -244,6 +205,7 @@ this.time=function (time,obj){
               
               }else{
                 $('#state-6').html('正在进行');
+                jh.utils.setTime(createAt,'#roam-6'); 
               }
             }
           });  
@@ -257,7 +219,7 @@ this.time=function (time,obj){
               state:'execution'
             },
             done: function(returnData) {
-              returnData.switchTime = jh.utils.switchTime;
+              var createAt=returnData.data.createAt;
               var informalStr = jh.utils.template('task_programSeven_template', returnData);
              $('#taskProgram').find('.itemList').eq(6).html(informalStr);
              // $('.headCon').eq(6).css('background','#FFED86');
@@ -275,6 +237,7 @@ this.time=function (time,obj){
                
               }else{
                 $('#state-7').html('正在进行');
+                jh.utils.setTime(createAt,'#roam-7'); 
               }
             }
           });  
@@ -288,7 +251,7 @@ this.time=function (time,obj){
               state:'transport'
             },
             done: function(returnData) {
-              returnData.switchTime = jh.utils.switchTime;
+            var createAt=returnData.data.createAt;
               var informalStr = jh.utils.template('task_programEight_template', returnData);
               $('#taskProgram').find('.itemList').eq(7).html(informalStr);
                // $('.headCon').eq(7).css('background','#FFB8B8');
@@ -302,11 +265,10 @@ this.time=function (time,obj){
               if(returnData.data.isComplete == 1){
                   $('#state-8').html('流转完成');
                   $('#roam-8').html(returnData.data.consumeTime);
-
-                _this.taskProgramNine();
-              
+                 _this.taskProgramNine();
               }else{
                 $('#state-8').html('正在进行');
+                jh.utils.setTime(createAt,'#roam-8'); 
               }
             }
           });  
@@ -320,7 +282,7 @@ this.time=function (time,obj){
               state:'deliver'
             },
             done: function(returnData) {
-              returnData.switchTime = jh.utils.switchTime;
+              var createAt=returnData.data.createAt;
               var informalStr = jh.utils.template('task_programNine_template', returnData);
               $('#taskProgram').find('.itemList').eq(8).html(informalStr);
               var list=$('#taskProgram').find('.itemList').eq(8).find('.conList');
@@ -337,6 +299,7 @@ this.time=function (time,obj){
               $('#comTipTime').html(returnData.data.completeAt);
               }else{
                 $('#state-9').html('正在进行');
+                jh.utils.setTime(createAt,'#roam-9'); 
               }
             }
           });  
