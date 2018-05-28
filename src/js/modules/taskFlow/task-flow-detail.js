@@ -150,6 +150,7 @@ define(function(require, exports, module) {
               if(returnData.data.isComplete == 1){
                 $('#state-3').html('流转完成');
                 $('#roam-3').html(returnData.data.consumeTime);
+                _this.taskProgramFour();
               }else{
                 $('#state-3').html('正在进行');
                 _this.setTime(createAt,'#roam-3'); 
@@ -407,7 +408,7 @@ define(function(require, exports, module) {
                           content:'<span style="margin:20px 0">是否确定此流程已经完成？</span>',
                           ok:function(){
                        if(treeState=="issue"){
-                           _this.taskProgramTwo();
+                          _this.taskProgramTwo();
                          _this.taskProgramOne();
                        }else if(treeState=="cluesifte"){
                          _this.taskProgramTwo();
