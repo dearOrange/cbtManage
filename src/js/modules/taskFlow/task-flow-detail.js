@@ -58,15 +58,15 @@ define(function(require, exports, module) {
         }
       }
       // 计算相差秒数  
-//    var leave3 = leave2 % (60 * 1000);
-//    var seconds = Math.round(leave3 / 1000);
-//    if(seconds > 0) {
-//      diff += seconds + '秒';
-//    } else {
-//      if(diff !== '') {
-//        diff += seconds + '秒';
-//      }
-//    }
+   var leave3 = leave2 % (60 * 1000);
+   var seconds = Math.round(leave3 / 1000);
+   if(seconds > 0) {
+     diff += seconds + '秒';
+   } else {
+     if(diff !== '') {
+       diff += seconds + '秒';
+     }
+   }
 
       return diff;
         };
@@ -87,6 +87,7 @@ define(function(require, exports, module) {
               $('#roam-1').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                $('#roam-1').html(returnData.data.consumeTime);
+               $('#state-1').html('流转完成');
                 _this.taskProgramTwo();
                
               }
@@ -115,6 +116,7 @@ define(function(require, exports, module) {
               $('.arrowItem2').height(height);
                $('#roam-2').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
+                  $('#state-2').html('流转完成');
                 $('#roam-2').html(returnData.data.consumeTime);
                 _this.taskProgramThree();
               }
@@ -140,8 +142,10 @@ define(function(require, exports, module) {
               }
                var height=$('#taskProgram').find('.itemList').eq(2).find('.arrowCon').height();
               $('.arrowItem3').height(height);
-                $('#roam-3').html(_this.switchTime(returnData.data.createAt));
+              console.log(_this.switchTime(returnData.data.createAt));
+              $('#roam-3').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
+                  $('#state-3').html('流转完成');
                  $('#roam-3').html(returnData.data.consumeTime);
                 _this.taskProgramFour();
                  
@@ -170,6 +174,7 @@ define(function(require, exports, module) {
               $('.arrowItem4').height(height);
                $('#roam-4').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
+                  $('#state-4').html('流转完成');
                   $('#roam-4').html(returnData.data.consumeTime);
                 _this.taskProgramFive();
                
@@ -186,6 +191,7 @@ define(function(require, exports, module) {
               state:'lock'
             },
             done: function(returnData) {
+
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programFive_template', returnData);
               $('#taskProgram').find('.itemList').eq(4).html(informalStr);
@@ -197,8 +203,10 @@ define(function(require, exports, module) {
                $('.arrowItem.arrowItem5').addClass('listItemNum5');
                var height=$('#taskProgram').find('.itemList').eq(4).find('.arrowCon').height();
               $('.arrowItem5').height(height);
+               console.log(_this.switchTime(returnData.data.createAt));
                 $('#roam-5').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
+                  $('#state-5').html('流转完成');
                  $('#roam-5').html(returnData.data.consumeTime);
                 _this.taskProgramSix();
                  
@@ -215,6 +223,7 @@ define(function(require, exports, module) {
               state:'allocation'
             },
             done: function(returnData) {
+              console.log(returnData);
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programSix_template', returnData);
               $('#taskProgram').find('.itemList').eq(5).html(informalStr);
@@ -226,8 +235,13 @@ define(function(require, exports, module) {
               $('.arrowItem.arrowItem6').addClass('listItemNum6');
                 var height=$('#taskProgram').find('.itemList').eq(5).find('.arrowCon').height();
               $('.arrowItem6').height(height);
+               console.log(_this.switchTime(returnData.data.createAt));
+               if(_this.switchTime(returnData.data.createAt)==_this.switchTime(new Date())){
+                    $('#roam-6').html('0分钟');
+               }
                $('#roam-6').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
+                  $('#state-6').html('流转完成');
                 $('#roam-6').html(returnData.data.consumeTime);
                 _this.taskProgramSeven();
               
@@ -255,8 +269,12 @@ define(function(require, exports, module) {
              $('.arrowItem.arrowItem7').addClass('listItemNum7');
               var height=$('#taskProgram').find('.itemList').eq(6).find('.arrowCon').height();
               $('.arrowItem7').height(height);
+              if(_this.switchTime(returnData.data.createAt)==_this.switchTime(new Date())){
+                    $('#roam-7').html('0分钟');
+               }
               $('#roam-7').html(_this.switchTime(returnData.data.createAt));
              if(returnData.data.isComplete == 1){
+                $('#state-7').html('流转完成');
                 $('#roam-7').html(returnData.data.consumeTime);
                 _this.taskProgramEight();
                
@@ -287,6 +305,7 @@ define(function(require, exports, module) {
               $('.arrowItem8').height(height);
                $('#roam-8').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
+                  $('#state-8').html('流转完成');
                   $('#roam-8').html(returnData.data.consumeTime);
 
                 _this.taskProgramNine();
@@ -317,6 +336,7 @@ define(function(require, exports, module) {
               $('.arrowItem9').height(height);
               $('#roam-9').html(_this.switchTime(returnData.data.createAt));
              if(returnData.data.isComplete == 1){
+              $('#state-9').html('流转完成');
               $('#roam-9').html(returnData.data.consumeTime);
               $('#comTip').css('display','block');
               $('#comTipTime').html(returnData.data.completeAt);
