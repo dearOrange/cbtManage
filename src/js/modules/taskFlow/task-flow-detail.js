@@ -29,47 +29,7 @@ define(function(require, exports, module) {
                 }
             });
         };
-    this.switchTime=function(time){
-      var diff = '';
-      var time_diff = new Date().getTime() - new Date(time).getTime();
-      // 计算相差天数  
-      var days = Math.floor(time_diff / (24 * 3600 * 1000));
-      if(days > 0) {
-        diff += days + '天';
-      }
-      // 计算相差小时数  
-      var leave1 = time_diff % (24 * 3600 * 1000);
-      var hours = Math.floor(leave1 / (3600 * 1000));
-      if(hours > 0) {
-        diff += hours + '小时';
-      } else {
-        if(diff !== '') {
-          diff += hours + '小时';
-        }
-      }
-      // 计算相差分钟数  
-      var leave2 = leave1 % (3600 * 1000);
-      var minutes = Math.floor(leave2 / (60 * 1000));
-      if(minutes > 0) {
-        diff += minutes + '分';
-      } else {
-        if(diff !== '') {
-          diff += minutes + '分';
-        }
-      }
-      // 计算相差秒数  
-   var leave3 = leave2 % (60 * 1000);
-   var seconds = Math.round(leave3 / 1000);
-   if(seconds > 0) {
-     diff += seconds + '秒';
-   } else {
-     if(diff !== '') {
-       diff += seconds + '秒';
-     }
-   }
-
-      return diff;
-        };
+    
        //任务录入
         this.taskProgramOne = function(){
            jh.utils.ajax.send({
@@ -84,12 +44,12 @@ define(function(require, exports, module) {
               $('#taskProgram').find('.itemList').eq(0).html(informalStr);
               var height=$('#taskProgram').find('.itemList').eq(0).find('.arrowCon').height();
               $('.arrowItem1').height(height);
-              $('#roam-1').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                $('#roam-1').html(returnData.data.consumeTime);
                $('#state-1').html('流转完成');
                 _this.taskProgramTwo();
-               
+              }else{
+                $('#state-1').html('正在进行');
               }
             }
           });  
@@ -114,11 +74,12 @@ define(function(require, exports, module) {
               }
               var height=$('#taskProgram').find('.itemList').eq(1).find('.arrowCon').height();
               $('.arrowItem2').height(height);
-               $('#roam-2').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                   $('#state-2').html('流转完成');
                 $('#roam-2').html(returnData.data.consumeTime);
                 _this.taskProgramThree();
+              }else{
+                $('#state-2').html('正在进行');
               }
             }
           });  
@@ -142,13 +103,12 @@ define(function(require, exports, module) {
               }
                var height=$('#taskProgram').find('.itemList').eq(2).find('.arrowCon').height();
               $('.arrowItem3').height(height);
-              console.log(_this.switchTime(returnData.data.createAt));
-              $('#roam-3').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
-                  $('#state-3').html('流转完成');
-                 $('#roam-3').html(returnData.data.consumeTime);
+                $('#state-3').html('流转完成');
+                $('#roam-3').html(returnData.data.consumeTime);
                 _this.taskProgramFour();
-                 
+              }else{
+                $('#state-3').html('正在进行');
               }
             }
           });  
@@ -172,12 +132,13 @@ define(function(require, exports, module) {
               }
                 var height=$('#taskProgram').find('.itemList').eq(3).find('.arrowCon').height();
               $('.arrowItem4').height(height);
-               $('#roam-4').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                   $('#state-4').html('流转完成');
                   $('#roam-4').html(returnData.data.consumeTime);
                 _this.taskProgramFive();
                
+              }else{
+                $('#state-4').html('正在进行');
               }
             }
           });  
@@ -203,13 +164,13 @@ define(function(require, exports, module) {
                $('.arrowItem.arrowItem5').addClass('listItemNum5');
                var height=$('#taskProgram').find('.itemList').eq(4).find('.arrowCon').height();
               $('.arrowItem5').height(height);
-               console.log(_this.switchTime(returnData.data.createAt));
-                $('#roam-5').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                   $('#state-5').html('流转完成');
                  $('#roam-5').html(returnData.data.consumeTime);
                 _this.taskProgramSix();
                  
+              }else{
+                $('#state-5').html('正在进行');
               }
             }
           });  
@@ -223,7 +184,6 @@ define(function(require, exports, module) {
               state:'allocation'
             },
             done: function(returnData) {
-              console.log(returnData);
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programSix_template', returnData);
               $('#taskProgram').find('.itemList').eq(5).html(informalStr);
@@ -235,16 +195,13 @@ define(function(require, exports, module) {
               $('.arrowItem.arrowItem6').addClass('listItemNum6');
                 var height=$('#taskProgram').find('.itemList').eq(5).find('.arrowCon').height();
               $('.arrowItem6').height(height);
-               console.log(_this.switchTime(returnData.data.createAt));
-               if(_this.switchTime(returnData.data.createAt)==_this.switchTime(new Date())){
-                    $('#roam-6').html('0分钟');
-               }
-               $('#roam-6').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                   $('#state-6').html('流转完成');
                 $('#roam-6').html(returnData.data.consumeTime);
                 _this.taskProgramSeven();
               
+              }else{
+                $('#state-6').html('正在进行');
               }
             }
           });  
@@ -269,15 +226,13 @@ define(function(require, exports, module) {
              $('.arrowItem.arrowItem7').addClass('listItemNum7');
               var height=$('#taskProgram').find('.itemList').eq(6).find('.arrowCon').height();
               $('.arrowItem7').height(height);
-              if(_this.switchTime(returnData.data.createAt)==_this.switchTime(new Date())){
-                    $('#roam-7').html('0分钟');
-               }
-              $('#roam-7').html(_this.switchTime(returnData.data.createAt));
              if(returnData.data.isComplete == 1){
                 $('#state-7').html('流转完成');
                 $('#roam-7').html(returnData.data.consumeTime);
                 _this.taskProgramEight();
                
+              }else{
+                $('#state-7').html('正在进行');
               }
             }
           });  
@@ -291,7 +246,6 @@ define(function(require, exports, module) {
               state:'transport'
             },
             done: function(returnData) {
-              console.log(returnData);
               returnData.switchTime = jh.utils.switchTime;
               var informalStr = jh.utils.template('task_programEight_template', returnData);
               $('#taskProgram').find('.itemList').eq(7).html(informalStr);
@@ -303,13 +257,14 @@ define(function(require, exports, module) {
               $('.arrowItem.arrowItem8').addClass('listItemNum8');
                var height=$('#taskProgram').find('.itemList').eq(7).find('.arrowCon').height();
               $('.arrowItem8').height(height);
-               $('#roam-8').html(_this.switchTime(returnData.data.createAt));
               if(returnData.data.isComplete == 1){
                   $('#state-8').html('流转完成');
                   $('#roam-8').html(returnData.data.consumeTime);
 
                 _this.taskProgramNine();
               
+              }else{
+                $('#state-8').html('正在进行');
               }
             }
           });  
@@ -324,22 +279,22 @@ define(function(require, exports, module) {
             },
             done: function(returnData) {
               returnData.switchTime = jh.utils.switchTime;
-              console.log(returnData);
               var informalStr = jh.utils.template('task_programNine_template', returnData);
-             $('#taskProgram').find('.itemList').eq(8).html(informalStr);
-             var list=$('#taskProgram').find('.itemList').eq(8).find('.conList');
+              $('#taskProgram').find('.itemList').eq(8).html(informalStr);
+              var list=$('#taskProgram').find('.itemList').eq(8).find('.conList');
               for(var i=0;i<list.length;i++){
                    $(list[i]).find('.headCon').css('background','#FF9090');
               }
               $('.arrowItem.arrowItem9').addClass('listItemNum9');
                var height=$('#taskProgram').find('.itemList').eq(8).find('.arrowCon').height();
               $('.arrowItem9').height(height);
-              $('#roam-9').html(_this.switchTime(returnData.data.createAt));
              if(returnData.data.isComplete == 1){
               $('#state-9').html('流转完成');
               $('#roam-9').html(returnData.data.consumeTime);
               $('#comTip').css('display','block');
               $('#comTipTime').html(returnData.data.completeAt);
+              }else{
+                $('#state-9').html('正在进行');
               }
             }
           });  
@@ -403,20 +358,28 @@ define(function(require, exports, module) {
                           content:'<span style="margin:20px 0">是否确定此流程已经完成？</span>',
                           ok:function(){
                        if(treeState=="issue"){
+                         _this.taskProgramOne();
                            _this.taskProgramTwo();
                        }else if(treeState=="cluesifte"){
+                         _this.taskProgramTwo();
                             _this.taskProgramThree();
                        }else if(treeState=="repairinfo"){
+                         _this.taskProgramThree();
                           _this.taskProgramFour();
                        }else if(treeState=="scene"){
+                         _this.taskProgramFour();
                           _this.taskProgramFive();
                        }else if(treeState=="lock"){
+                         _this.taskProgramFive();
                           _this.taskProgramSix();
                        }else if(treeState=="allocation"){
+                         _this.taskProgramSix();
                           _this.taskProgramSeven();
                        }else if(treeState=="execution"){
+                         _this.taskProgramSeven();
                           _this.taskProgramEight();
                        }else if(treeState=="transport"){
+                         _this.taskProgramEight();
                           _this.taskProgramNine();
                        }else if(treeState=="deliver")
                           _this.taskProgramNine();
