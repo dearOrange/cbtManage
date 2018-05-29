@@ -76,9 +76,11 @@ define(function(require, exports, module) {
                 page--;
                 if(page < 1){
                   page = 1;
+                  flag = true;
                   return false;
+                }else{
+                  _this.mouseWheelRemark(page);
                 }
-                _this.mouseWheelRemark(page);
               }
             }
           }else{
@@ -185,8 +187,15 @@ define(function(require, exports, module) {
             $('.loading-img').addClass('hide');
             var divYun = '<div class="coudyImg">您有新的消息，请注意查看</div>'
             $('#kyPoupshadow').html(divYun);
+            
             var supNum = '<sup>' + remarkCount + '</sup>';
             $('#getFlowNotion').children('sup').remove().end().append(supNum);
+            var posRight = $('#userCenterLink').width() + $('#logoutLink').width() + $('#getFlowNotion').width() + 'px';
+            $('.coudyImg').css({
+              'position':'absolute',
+              'right':posRight,
+              'top':'-10px'
+            });
           }else{
             (new jh.ui.shadow()).close();
             $('#getFlowNotion').children('sup').remove()
