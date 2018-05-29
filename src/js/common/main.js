@@ -188,6 +188,12 @@ define(function(require, exports, module) {
             $('.loading-img').addClass('hide');
             var divYun = '<div class="coudyImg">您有新的消息，请注意查看</div>'
             $('#kyPoupshadow').html(divYun);
+            var posRight = $('#userCenterLink').width() + $('#logoutLink').width() + $('#getFlowNotion').width() + 'px';
+            $('.coudyImg').css({
+              'position':'absolute',
+              'right':posRight,
+              'top':'-10px'
+            });
             var supNum = '<sup>' + remarkCount + '</sup>';
             $('#getFlowNotion').children('sup').remove().end().append(supNum);
           }else{
