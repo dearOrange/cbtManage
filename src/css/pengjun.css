@@ -899,6 +899,7 @@ input[type=text].search-del{
 }
 #getFlowNotion{
   margin-right:10px;
+  position:relative;
 }
 
 #unreadMiddle{
@@ -918,8 +919,8 @@ input[type=text].search-del{
   border-right: 20px solid transparent; 
   border-bottom: 20px solid #fff;
   position:absolute;
-  top:-12px;
-  left:78px;
+  top:50px;
+  left:-6px;
 }
 .checkNews{ 
   height:240px;
