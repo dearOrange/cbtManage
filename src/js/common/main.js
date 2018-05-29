@@ -77,9 +77,11 @@ define(function(require, exports, module) {
                 page--;
                 if(page < 1){
                   page = 1;
+                  flag = true;
                   return false;
+                }else{
+                  _this.mouseWheelRemark(page);
                 }
-                _this.mouseWheelRemark(page);
               }
             }
           }else{
