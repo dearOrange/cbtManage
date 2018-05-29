@@ -86,18 +86,17 @@ define(function(require, exports, module) {
               $('.arrowItem1').height(height);
               _this.clearTime();
               if(returnData.data.isComplete == 1){
-                flag=false;
+                
                $('#roam-1').html(returnData.data.consumeTime);
                $('#state-1').html('流转完成');
                 _this.taskProgramTwo();
                 $('#button-1').css({
-                  color:'#ccc',
-                  disabled:'disabled'
+                  color:'#ccc'
                 });
                 $('#button-1').find('i').css('color',"#ccc");
-                flag=false;
+                $('#button-1').attr('disabled','disabled');
               }else{
-                flag=true;
+               
                 $('#state-1').html('正在进行');
                 _this.setTime(createAt,'#roam-1'); 
               }
@@ -126,17 +125,17 @@ define(function(require, exports, module) {
               $('.arrowItem2').height(height);
               _this.clearTime();
               if(returnData.data.isComplete == 1){
-                 flag=false;
+                
                 $('#state-2').html('流转完成');
                 $('#roam-2').html(returnData.data.consumeTime);
                 _this.taskProgramThree();
                  $('#button-2').css({
-                  color:'#ccc',
-                  disabled:'disabled'
+                  color:'#ccc'
                 });
                 $('#button-2').find('i').css('color',"#ccc");
+                $('#button-2').attr('disabled','disabled');
               }else{
-                flag=true;
+             
                 $('#state-2').html('正在进行');
                 _this.setTime(createAt,'#roam-2');
               }
@@ -164,17 +163,17 @@ define(function(require, exports, module) {
               $('.arrowItem3').height(height);
               _this.clearTime();
               if(returnData.data.isComplete == 1){
-                flag=false;
+               
                 $('#state-3').html('流转完成');
                 $('#roam-3').html(returnData.data.consumeTime);
                 _this.taskProgramFour();
                 $('#button-3').css({
-                  color:'#ccc',
-                  disabled:'disabled'
+                  color:'#ccc'
                 });
                 $('#button-3').find('i').css('color',"#ccc");
+                 $('#button-3').attr('disabled','disabled');
               }else{
-                flag=true;
+              
                 $('#state-3').html('正在进行');
                 _this.setTime(createAt,'#roam-3'); 
               }
@@ -202,17 +201,17 @@ define(function(require, exports, module) {
               $('.arrowItem4').height(height);
               _this.clearTime();
               if(returnData.data.isComplete == 1){
-                 flag=false;
+               
                   $('#state-4').html('流转完成');
                   $('#roam-4').html(returnData.data.consumeTime);
                 _this.taskProgramFive();
                  $('#button-4').css({
-                  color:'#ccc',
-                  disabled:'disabled'
+                  color:'#ccc'
                 });
                  $('#button-4').find('i').css('color',"#ccc");
+                  $('#button-4').attr('disabled','disabled');
               }else{
-                flag=true;
+               
                 $('#state-4').html('正在进行');
                 _this.setTime(createAt,'#roam-4'); 
               }
@@ -241,17 +240,17 @@ define(function(require, exports, module) {
               $('.arrowItem5').height(height);
               _this.clearTime();
               if(returnData.data.isComplete == 1){
-                flag=false;
+               
                   $('#state-5').html('流转完成');
                  $('#roam-5').html(returnData.data.consumeTime);
                 _this.taskProgramSix();
                 $('#button-5').css({
-                  color:'#ccc',
-                  disabled:'disabled'
+                  color:'#ccc'
                 });
                 $('#button-5').find('i').css('color',"#ccc");
+                 $('#button-5').attr('disabled','disabled');
               }else{
-                flag=true;
+                
                 $('#state-5').html('正在进行');
                 _this.setTime(createAt,'#roam-5'); 
               }
@@ -280,17 +279,17 @@ define(function(require, exports, module) {
               $('.arrowItem6').height(height);
               _this.clearTime();
               if(returnData.data.isComplete == 1){
-                flag=false;
+               
                   $('#state-6').html('流转完成');
                 $('#roam-6').html(returnData.data.consumeTime);
                 _this.taskProgramSeven();
                  $('#button-6').css({
-                  color:'#ccc',
-                  disabled:'disabled'
+                  color:'#ccc'
                 });
                 $('#button-6').find('i').css('color',"#ccc");
+                 $('#button-6').attr('disabled','disabled');
               }else{
-                flag=true;
+              
                 $('#state-6').html('正在进行');
                 _this.setTime(createAt,'#roam-6'); 
               }
@@ -319,17 +318,17 @@ define(function(require, exports, module) {
               $('.arrowItem7').height(height);
               _this.clearTime();
              if(returnData.data.isComplete == 1){
-               flag=false;
+              
                 $('#state-7').html('流转完成');
                 $('#roam-7').html(returnData.data.consumeTime);
                 _this.taskProgramEight(); 
                  $('#button-7').css({
-                  color:'#ccc',
-                  disabled:'disabled'
+                  color:'#ccc'
                 });
-                $('#button-7').find('i').css('color',"#ccc");           
+                $('#button-7').find('i').css('color',"#ccc");
+                 $('#button-7').attr('disabled','disabled');        
               }else{
-                flag=true;
+                
                 $('#state-7').html('正在进行');
                 _this.setTime(createAt,'#roam-7'); 
               }
@@ -358,17 +357,17 @@ define(function(require, exports, module) {
               $('.arrowItem8').height(height);
               _this.clearTime();
               if(returnData.data.isComplete == 1){
-                flag=false;
+               
                   $('#state-8').html('流转完成');
                   $('#roam-8').html(returnData.data.consumeTime);
                  _this.taskProgramNine();
                   $('#button-8').css({
-                  color:'#ccc',
-                  disabled:'disabled'
+                  color:'#ccc'
                 });
                 $('#button-8').find('i').css('color',"#ccc");
+                 $('#button-8').attr('disabled','disabled');
               }else{
-                flag=true;
+               
                 $('#state-8').html('正在进行');
                 _this.setTime(createAt,'#roam-8'); 
               }
@@ -396,18 +395,18 @@ define(function(require, exports, module) {
               $('.arrowItem9').height(height);
               _this.clearTime();
              if(returnData.data.isComplete == 1){
-              flag=false;
+            
               $('#state-9').html('流转完成');
               $('#roam-9').html(returnData.data.consumeTime);
               $('#comTip').css('display','block');
               $('#comTipTime').html(returnData.data.completeAt);
                $('#button-9').css({
-                  color:'#ccc',
-                  disabled:'disabled'
+                  color:'#ccc'
                 });
                 $('#button-9').find('i').css('color',"#ccc");
+                 $('#button-9').attr('disabled','disabled');
               }else{
-                flag=true;
+              
                 $('#state-9').html('正在进行');
                 _this.setTime(createAt,'#roam-9'); 
               }
@@ -458,8 +457,7 @@ define(function(require, exports, module) {
               }) 
             })
          //确认完成
-         if(flag){
-           $('body').off('click','.sureCom').on('click','.sureCom',function(){
+           $('body').off('click','.sureCom button').on('click','.sureCom button',function(){
             var me=$(this);
              var treeState = $(this).data('state');
               jh.utils.alert({
@@ -504,7 +502,7 @@ define(function(require, exports, module) {
             })
               
            })
-          }
+           
             
         }    
 
