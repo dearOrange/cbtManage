@@ -17,7 +17,6 @@ define(function(require, exports, module) {
       this.initLogin();
       _this.initMenu();
       _this.registerEvent();
-
       var username = sessionStorage.getItem('admin-username');
       $('#usernameText').text(username);
       $('#index_logo').attr('href', ROOTURL);

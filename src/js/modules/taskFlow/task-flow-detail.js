@@ -77,6 +77,7 @@ define(function(require, exports, module) {
               state:'issue'
             },
             done: function(returnData) {
+              console.log()
              var createAt=returnData.data.createAt;
               var informalStr = jh.utils.template('task_programOne_template', returnData);
               $('#taskProgram').find('.itemList').eq(0).html(informalStr);
