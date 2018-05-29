@@ -180,6 +180,8 @@ define(function(require, exports, module) {
           var remarkCount = returnData.data.count;
           if (remarkCount > 0) {
             (new jh.ui.shadow()).init();
+            var audioLi = '<audio src="../../img/listen.mp3" autoplay></audio>';
+            $('#audioDiv').html(audioLi);
             $('#kyPoupshadow').css('marginTop','70px');
             $('.loading-img').addClass('hide');
             var divYun = '<div class="coudyImg">您有新的消息，请注意查看</div>'
@@ -209,6 +211,7 @@ define(function(require, exports, module) {
           if(pageList.length > 0){
             var pageCon = jh.utils.template('unread_info_template', data.data);
             $('#unreadBorder').html(pageCon);
+            $('.bianjiao').removeClass('hide');
             if(pageList.length < 10){
               flag = false;
               $('#moreData').html('没有更多数据了');
