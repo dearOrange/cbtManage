@@ -411,10 +411,12 @@ define(function(require, exports, module) {
                 cancel: true
               }) 
             })
-        //确认完成
+         //确认完成
+         var flag=true;
            $('body').off('click','.sureCom').on('click','.sureCom',function(){
             var me=$(this);
              var treeState = $(this).data('state');
+             if(flag){
               jh.utils.alert({
                   content:'<span style="margin:20px 0">是否确定此流程已经完成？</span>',
                   ok:function(){
@@ -423,8 +425,9 @@ define(function(require, exports, module) {
                   data:{treeId:args.id,state:treeState},
                    done:function(redData){
                      if(treeState=="issue"){
-                        _this.taskProgramTwo();
+                       _this.taskProgramTwo();
                        _this.taskProgramOne();
+                        flag=false;
                      }else if(treeState=="cluesifte"){
                        _this.taskProgramTwo();
                           _this.taskProgramThree();
@@ -455,6 +458,8 @@ define(function(require, exports, module) {
              cancel: true
 
             })
+              
+           }
              
            })
         }    
