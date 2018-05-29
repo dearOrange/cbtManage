@@ -211,10 +211,7 @@ define(function(require, exports, module) {
           if(pageList.length > 0){
             var pageCon = jh.utils.template('unread_info_template', data.data);
             $('#unreadBorder').html(pageCon);
-<<<<<<< HEAD
-=======
             $('.bianjiao').removeClass('hide');
->>>>>>> fdf03c237b3a198c9c69aedde0776743d66ac7be
             if(pageList.length < 10){
               flag = false;
               $('#moreData').html('没有更多数据了');
