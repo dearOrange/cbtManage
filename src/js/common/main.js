@@ -7,6 +7,8 @@
 define(function(require, exports, module) {
   function Main() {
     var _this = this;
+    var page = 1;
+    var flag = true;
     _this.roleType = sessionStorage.getItem('admin-roleType');
     _this.requestDate = 1000;
     _this.requestInterId = null;
@@ -66,7 +68,30 @@ define(function(require, exports, module) {
         }
       });
       $('#getFlowNotion').on('click', function() {
-        _this.singleRemark();
+        _this.mouseWheelRemark(page);
+        $('body').on('mousewheel','.checkNews',function(e,delta){
+          if(delta>0){
+            if($(this).scrollTop() == 0) {
+              if(flag){
+                flag = false;
+                page--;
+                if(page < 1){
+                  page = 1;
+                  return false;
+                }
+                _this.mouseWheelRemark(page);
+              }
+            }
+          }else{
+            if(($(this).scrollTop() + $(this).height()) == $(this)[0].scrollHeight) {
+              if(flag){
+                flag = false;
+                page++;
+                _this.mouseWheelRemark(page);
+              }
+            }
+          }
+        })
       });
       //单个消息阅读
       $('body').off('click','.remarkRead').on('click','.remarkRead',function(){
@@ -77,7 +102,7 @@ define(function(require, exports, module) {
             msgId: msgId
           },
           done: function(returnData) {
-            _this.singleRemark();
+            _this.mouseWheelRemark(page);
             _this.clickUnread();
           }
         });
@@ -87,7 +112,7 @@ define(function(require, exports, module) {
         jh.utils.ajax.send({
           url: '/message/readAll',
           done: function(returnData) {
-            _this.singleRemark();
+            _this.mouseWheelRemark(page);
             _this.clickUnread();
           }
         });
@@ -169,26 +194,33 @@ define(function(require, exports, module) {
       });
     }
     //    获取流程未读消息列表
-    this.singleRemark = function(){
+    this.mouseWheelRemark = function(page){
       jh.utils.ajax.send({
         method: 'post',
         url: '/message/treeMsg',
         contentType: 'application/json',
         data: {
-          pageNum: 1,
+          pageNum: page,
           pageSize: 10
         },
         done: function(data) {
-          var dataList = data.data.list;
-          if(dataList.length > 0){
-            var noticeCon = jh.utils.template('unread_info_template', data.data);
-            $('#unreadBorder').html(noticeCon);
+          flag = true;
+          var pageList = data.data.list;
+          if(pageList.length > 0){
+            var pageCon = jh.utils.template('unread_info_template', data.data);
+            $('#unreadBorder').html(pageCon);
+            if(pageList.length < 10){
+              flag = false;
+              $('#moreData').html('没有更多数据了');
+            }
           }else{
             $('#unreadBorder').html('');
           }
         }
       })
+      
     }
+    
     this.registerEvent = function() {
       var InitRegisterEvent = require('common/initRegisterEvent');
       var register = new InitRegisterEvent();
