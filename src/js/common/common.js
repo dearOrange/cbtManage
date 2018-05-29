@@ -12236,15 +12236,15 @@ define(function(require, exports, module) {
         }
       }
       // 计算相差秒数  
-//    var leave3 = leave2 % (60 * 1000);
-//    var seconds = Math.round(leave3 / 1000);
-//    if(seconds > 0) {
-//      diff += seconds + '秒';
-//    } else {
-//      if(diff !== '') {
-//        diff += seconds + '秒';
-//      }
-//    }
+   var leave3 = leave2 % (60 * 1000);
+   var seconds = Math.round(leave3 / 1000);
+   if(seconds > 0) {
+     diff += seconds + '秒';
+   } else {
+     if(diff !== '') {
+       diff += seconds + '秒';
+     }
+   }
 
       return diff;
     }
