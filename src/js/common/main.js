@@ -68,7 +68,7 @@ define(function(require, exports, module) {
         }
       });
       $('#getFlowNotion').on('click', function() {
-        _this.singleRemark();
+        _this.mouseWheelRemark(page);
         $('body').on('mousewheel','.checkNews',function(e,delta){
           if(delta>0){
             if($(this).scrollTop() == 0) {
@@ -102,7 +102,7 @@ define(function(require, exports, module) {
             msgId: msgId
           },
           done: function(returnData) {
-            _this.singleRemark();
+            _this.mouseWheelRemark(page);
             _this.clickUnread();
           }
         });
@@ -112,7 +112,7 @@ define(function(require, exports, module) {
         jh.utils.ajax.send({
           url: '/message/readAll',
           done: function(returnData) {
-            _this.singleRemark();
+            _this.mouseWheelRemark(page);
             _this.clickUnread();
           }
         });
@@ -194,28 +194,6 @@ define(function(require, exports, module) {
       });
     }
     //    获取流程未读消息列表
-    this.singleRemark = function(){
-      jh.utils.ajax.send({
-        method: 'post',
-        url: '/message/treeMsg',
-        contentType: 'application/json',
-        data: {
-          pageNum: 1,
-          pageSize: 10
-        },
-        done: function(data) {
-          var dataList = data.data.list;
-          if(dataList.length > 0){
-            var noticeCon = jh.utils.template('unread_info_template', data.data);
-            $('#unreadBorder').html(noticeCon);
-          }else{
-            $('#unreadBorder').html('');
-          }
-        }
-      })
-      
-    }
-    
     this.mouseWheelRemark = function(page){
       jh.utils.ajax.send({
         method: 'post',
@@ -231,9 +209,12 @@ define(function(require, exports, module) {
           if(pageList.length > 0){
             var pageCon = jh.utils.template('unread_info_template', data.data);
             $('#unreadBorder').html(pageCon);
-            if(pageList.length <= 10){
+            if(pageList.length < 10){
+              flag = false;
               $('#moreData').html('没有更多数据了');
             }
+          }else{
+            $('#unreadBorder').html('');
           }
         }
       })
