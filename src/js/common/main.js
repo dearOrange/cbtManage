@@ -218,6 +218,7 @@ define(function(require, exports, module) {
             }
           }else{
             $('#unreadBorder').html('');
+            $('.bianjiao').addClass('hide');
           }
         }
       })
