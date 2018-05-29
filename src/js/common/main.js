@@ -7,6 +7,8 @@
 define(function(require, exports, module) {
   function Main() {
     var _this = this;
+    var page = 1;
+    var flag = true;
     _this.roleType = sessionStorage.getItem('admin-roleType');
     _this.requestDate = 1000;
     _this.requestInterId = null;
@@ -67,6 +69,29 @@ define(function(require, exports, module) {
       });
       $('#getFlowNotion').on('click', function() {
         _this.singleRemark();
+        $('body').on('mousewheel','.checkNews',function(e,delta){
+          if(delta>0){
+            if($(this).scrollTop() == 0) {
+              if(flag){
+                flag = false;
+                page--;
+                if(page < 1){
+                  page = 1;
+                  return false;
+                }
+                _this.mouseWheelRemark(page);
+              }
+            }
+          }else{
+            if(($(this).scrollTop() + $(this).height()) == $(this)[0].scrollHeight) {
+              if(flag){
+                flag = false;
+                page++;
+                _this.mouseWheelRemark(page);
+              }
+            }
+          }
+        })
       });
       //单个消息阅读
       $('body').off('click','.remarkRead').on('click','.remarkRead',function(){
@@ -176,7 +201,7 @@ define(function(require, exports, module) {
         contentType: 'application/json',
         data: {
           pageNum: 1,
-          pageSize: 300
+          pageSize: 10
         },
         done: function(data) {
           var dataList = data.data.list;
@@ -185,6 +210,30 @@ define(function(require, exports, module) {
             $('#unreadBorder').html(noticeCon);
           }else{
             $('#unreadBorder').html('');
+          }
+        }
+      })
+      
+    }
+    
+    this.mouseWheelRemark = function(page){
+      jh.utils.ajax.send({
+        method: 'post',
+        url: '/message/treeMsg',
+        contentType: 'application/json',
+        data: {
+          pageNum: page,
+          pageSize: 10
+        },
+        done: function(data) {
+          flag = true;
+          var pageList = data.data.list;
+          if(pageList.length > 0){
+            var pageCon = jh.utils.template('unread_info_template', data.data);
+            $('#unreadBorder').html(pageCon);
+            if(pageList.length <= 10){
+              $('#moreData').html('没有更多数据了');
+            }
           }
         }
       })
