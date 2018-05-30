@@ -28,9 +28,8 @@ define(function(require, exports, module) {
                 }
             });
         };
-        this.setTime = function(time,obj){
-           timeInter = window.setInterval(function(){
-            var time_start = new Date(time).getTime();//设定开始时间 
+        this.setTime = function(time,obj){ 
+            var time_start = new Date(time).getTime();//设定开始时间
             var time_end = new Date().getTime(); //设定结束时间(等于系统当前时间) 
             //计算时间差 
             var time_distance = time_end - time_start; 
@@ -59,12 +58,15 @@ define(function(require, exports, module) {
             if(int_second < 10){ 
             int_second = "0" + int_second; 
             } 
-            // 显示时间 
+            // 显示时间
+             timeInter=setInterval(function(){
+               this.setTime(_this.setTime(time,obj));
+            },1000)
             $(obj).html(int_day+"天"+int_hour+"时"+int_minute+"分"+int_second+"秒")
             }else{ 
-            $(obj).html("00天00时00分00秒")
+            $(obj).html("00天00时00分00秒");
             }
-          },1000)
+          
         }
         this.clearTime = function(){
           clearInterval(timeInter);
@@ -85,6 +87,7 @@ define(function(require, exports, module) {
               $('.arrowItem1').height(height);
               _this.clearTime();
               if(returnData.data.isComplete == 1){
+
                $('#roam-1').html(returnData.data.consumeTime);
                $('#state-1').html('流转完成');
                 _this.taskProgramTwo();
@@ -268,14 +271,14 @@ define(function(require, exports, module) {
               $('.arrowItem6').height(height);
               _this.clearTime();
               if(returnData.data.isComplete == 1){
-                  $('#state-6').html('流转完成');
+                $('#state-6').html('流转完成');
                 $('#roam-6').html(returnData.data.consumeTime);
                 _this.taskProgramSeven();
                  $('#button-6').css({
                   color:'#ccc'
                 });
                 $('#button-6').find('i').css('color',"#ccc");
-                 $('#button-6').attr('disabled','disabled');
+                $('#button-6').attr('disabled','disabled');
               }else{
                 $('#state-6').html('正在进行');
                 _this.setTime(createAt,'#roam-6'); 
