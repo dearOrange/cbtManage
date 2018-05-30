@@ -8,12 +8,13 @@
 define(function(require, exports, module) {
     function TaskFlowDetail() {
         var _this = this;
-        var args = jh.utils.getURLValue().args;
         var timeInter;
+        var args = jh.utils.getURLValue().args;
         this.init = function() {
             this.initContent();
             this.taskProgramOne();
             this.registerInit();
+            this.clearTime();
         };
         this.initContent = function(){
             jh.utils.ajax.send({
@@ -29,7 +30,7 @@ define(function(require, exports, module) {
             });
         };
         this.setTime = function(time,obj){
-            timeInter = window.setInterval(function(){
+             timeInter = setInterval(function(){
             var time_start = new Date(time).getTime();//设定开始时间
             var time_end = new Date().getTime(); //设定结束时间(等于系统当前时间) 
             //计算时间差 
@@ -60,15 +61,12 @@ define(function(require, exports, module) {
             int_second = "0" + int_second; 
             } 
             // 显示时间
-            $(obj).html(int_day+"天"+int_hour+"时"+int_minute+"分"+int_second+"秒")
-            }
-            else{ 
-              $(obj).html("00天00时00分00秒");
+             obj.html(int_day+"天"+int_hour+"时"+int_minute+"分"+int_second+"秒")
             }
            },1000);
         }
-        this.clearTime = function(time,obj){
-           window.clearInterval(timeInter);
+        this.clearTime = function(){
+            clearInterval(timeInter);
         }
        //任务录入
         this.taskProgramOne = function(){
@@ -96,7 +94,7 @@ define(function(require, exports, module) {
                  _this.taskProgramTwo();
               }else{
                 $('#state-1').html('正在进行');
-                _this.setTime(createAt,'#roam-1'); 
+                _this.setTime(createAt,$('#roam-1')); 
               }
             } 
           });  
@@ -133,7 +131,7 @@ define(function(require, exports, module) {
                 _this.taskProgramThree();
               }else{
                 $('#state-2').html('正在进行');
-                _this.setTime(createAt,'#roam-2');
+                _this.setTime(createAt,$('#roam-2'));
               }
             }
           });  
@@ -169,7 +167,7 @@ define(function(require, exports, module) {
                  _this.taskProgramFour();
               }else{
                 $('#state-3').html('正在进行');
-                _this.setTime(createAt,'#roam-3'); 
+                _this.setTime(createAt,$('#roam-3')); 
               }
             }
           });  
@@ -205,7 +203,7 @@ define(function(require, exports, module) {
                    _this.taskProgramFive();
               }else{
                 $('#state-4').html('正在进行');
-                _this.setTime(createAt,'#roam-4'); 
+                _this.setTime(createAt,$('#roam-4')); 
               }
             }
           });  
@@ -242,7 +240,7 @@ define(function(require, exports, module) {
                   _this.taskProgramSix();
               }else{
                 $('#state-5').html('正在进行');
-                _this.setTime(createAt,'#roam-5'); 
+                _this.setTime(createAt,$('#roam-5')); 
               }
             }
           });  
@@ -279,7 +277,7 @@ define(function(require, exports, module) {
                   _this.taskProgramSeven();
               }else{
                 $('#state-6').html('正在进行');
-                _this.setTime(createAt,'#roam-6'); 
+                _this.setTime(createAt,$('#roam-6')); 
               }
             }
           });  
@@ -317,7 +315,7 @@ define(function(require, exports, module) {
                   _this.taskProgramEight();       
               }else{
                 $('#state-7').html('正在进行');
-                _this.setTime(createAt,'#roam-7'); 
+                _this.setTime(createAt,$('#roam-7')); 
               }
             }
           });  
@@ -354,7 +352,7 @@ define(function(require, exports, module) {
                  _this.taskProgramNine();
               }else{
                 $('#state-8').html('正在进行');
-                _this.setTime(createAt,'#roam-8'); 
+                _this.setTime(createAt,$('#roam-8')); 
               }
             }
           });  
@@ -391,7 +389,7 @@ define(function(require, exports, module) {
                  $('#button-9').attr('disabled','disabled');
               }else{
                 $('#state-9').html('正在进行');
-                _this.setTime(createAt,'#roam-9'); 
+                _this.setTime(createAt,$('#roam-9')); 
               }
             }
           });  
