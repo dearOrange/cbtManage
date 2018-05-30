@@ -909,7 +909,7 @@ input[type=text].search-del{
   position:absolute;
   background:#fff;
   top:60px;
-  right:20px;
+  right:50px;
   z-index:10001;
 }
 .bianjiao{
@@ -919,8 +919,7 @@ input[type=text].search-del{
   border-right: 20px solid transparent; 
   border-bottom: 20px solid #fff;
   position:absolute;
-  top:50px;
-  left:-6px;
+  top:-10px;
 }
 .checkNews{ 
   height:420px;

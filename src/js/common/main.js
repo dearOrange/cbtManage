@@ -219,14 +219,14 @@ define(function(require, exports, module) {
           if(pageList.length > 0){
             var pageCon = jh.utils.template('unread_info_template', data.data);
             $('#unreadBorder').html(pageCon);
-            $('.bianjiao').removeClass('hide');
+            var posLeft = $('#userCenterLink').width() + $('#logoutLink').width() + $('#getFlowNotion').width()-56 + 'px';
+            $('.bianjiao').css({'right':posLeft});
             if(pageList.length < 10){
               flag = false;
               $('#moreData').html('没有更多数据了');
             }
           }else{
             $('#unreadBorder').html('');
-            $('.bianjiao').addClass('hide');
           }
         }
       })
