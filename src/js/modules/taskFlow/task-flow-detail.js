@@ -28,7 +28,8 @@ define(function(require, exports, module) {
                 }
             });
         };
-        this.setTime = function(time,obj){ 
+        this.setTime = function(time,obj){
+            timeInter = window.setInterval(function(){
             var time_start = new Date(time).getTime();//设定开始时间
             var time_end = new Date().getTime(); //设定结束时间(等于系统当前时间) 
             //计算时间差 
@@ -59,17 +60,14 @@ define(function(require, exports, module) {
             int_second = "0" + int_second; 
             } 
             // 显示时间
-             timeInter=setInterval(function(){
-               this.setTime(_this.setTime(time,obj));
-            },1000)
             $(obj).html(int_day+"天"+int_hour+"时"+int_minute+"分"+int_second+"秒")
             }else{ 
-            $(obj).html("00天00时00分00秒");
+            $(obj).html("00天00时00分00秒")
             }
-          
+          },1000)
         }
         this.clearTime = function(){
-          clearInterval(timeInter);
+           clearInterval(timeInter);
         }
        //任务录入
         this.taskProgramOne = function(){
