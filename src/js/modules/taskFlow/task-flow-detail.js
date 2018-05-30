@@ -124,7 +124,7 @@ define(function(require, exports, module) {
                 $('#state-2').html('流转完成');
                 $('#roam-2').html(returnData.data.consumeTime);
                  $('#button-2').css({
-                  color:'#ccc'
+                  color:'#ccc' 
                 });
                 $('#button-2').find('i').css('color',"#ccc");
                 $('#button-2').attr('disabled','disabled');
