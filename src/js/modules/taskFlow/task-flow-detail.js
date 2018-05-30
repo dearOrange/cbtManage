@@ -29,7 +29,7 @@ define(function(require, exports, module) {
             });
         };
         this.setTime = function(time,obj){
-            timeInter = window.setInterval(function(time,obj){
+            timeInter = window.setInterval(function(){
             var time_start = new Date(time).getTime();//设定开始时间
             var time_end = new Date().getTime(); //设定结束时间(等于系统当前时间) 
             //计算时间差 
@@ -61,13 +61,14 @@ define(function(require, exports, module) {
             } 
             // 显示时间
             $(obj).html(int_day+"天"+int_hour+"时"+int_minute+"分"+int_second+"秒")
-            }else{ 
-            $(obj).html("00天00时00分00秒")
             }
-          },1000)
+            else{ 
+              $(obj).html("00天00时00分00秒");
+            }
+           },1000);
         }
         this.clearTime = function(time,obj){
-           clearInterval(timeInter());
+           window.clearInterval(timeInter);
         }
        //任务录入
         this.taskProgramOne = function(){
@@ -83,16 +84,16 @@ define(function(require, exports, module) {
               $('#taskProgram').find('.itemList').eq(0).html(informalStr);
               var height=$('#taskProgram').find('.itemList').eq(0).find('.arrowCon').height();
               $('.arrowItem1').height(height);
-              _this.clearTime(createAt,'#roam-1');
+              _this.clearTime();
               if(returnData.data.isComplete == 1){
                $('#roam-1').html(returnData.data.consumeTime);
                $('#state-1').html('流转完成');
-                _this.taskProgramTwo();
                 $('#button-1').css({
                   color:'#ccc'
                 });
                 $('#button-1').find('i').css('color',"#ccc");
                 $('#button-1').attr('disabled','disabled');
+                 _this.taskProgramTwo();
               }else{
                 $('#state-1').html('正在进行');
                 _this.setTime(createAt,'#roam-1'); 
@@ -120,16 +121,16 @@ define(function(require, exports, module) {
               }
               var height=$('#taskProgram').find('.itemList').eq(1).find('.arrowCon').height();
               $('.arrowItem2').height(height);
-              _this.clearTime(createAt,'#roam-2');
+              _this.clearTime();
               if(returnData.data.isComplete == 1){
                 $('#state-2').html('流转完成');
                 $('#roam-2').html(returnData.data.consumeTime);
-                _this.taskProgramThree();
                  $('#button-2').css({
                   color:'#ccc'
                 });
                 $('#button-2').find('i').css('color',"#ccc");
                 $('#button-2').attr('disabled','disabled');
+                _this.taskProgramThree();
               }else{
                 $('#state-2').html('正在进行');
                 _this.setTime(createAt,'#roam-2');
@@ -156,16 +157,16 @@ define(function(require, exports, module) {
               }
                var height=$('#taskProgram').find('.itemList').eq(2).find('.arrowCon').height();
               $('.arrowItem3').height(height);
-              _this.clearTime(createAt,'#roam-3');
+              _this.clearTime();
               if(returnData.data.isComplete == 1){
                 $('#state-3').html('流转完成');
                 $('#roam-3').html(returnData.data.consumeTime);
-                _this.taskProgramFour();
                 $('#button-3').css({
                   color:'#ccc'
                 });
                 $('#button-3').find('i').css('color',"#ccc");
                  $('#button-3').attr('disabled','disabled');
+                 _this.taskProgramFour();
               }else{
                 $('#state-3').html('正在进行');
                 _this.setTime(createAt,'#roam-3'); 
@@ -192,16 +193,16 @@ define(function(require, exports, module) {
               }
               var height=$('#taskProgram').find('.itemList').eq(3).find('.arrowCon').height();
               $('.arrowItem4').height(height);
-              _this.clearTime(createAt,'#roam-4');
+             _this.clearTime();
               if(returnData.data.isComplete == 1){
                   $('#state-4').html('流转完成');
                   $('#roam-4').html(returnData.data.consumeTime);
-                _this.taskProgramFive();
                  $('#button-4').css({
                   color:'#ccc'
                 });
                  $('#button-4').find('i').css('color',"#ccc");
                   $('#button-4').attr('disabled','disabled');
+                   _this.taskProgramFive();
               }else{
                 $('#state-4').html('正在进行');
                 _this.setTime(createAt,'#roam-4'); 
@@ -229,16 +230,16 @@ define(function(require, exports, module) {
                $('.arrowItem.arrowItem5').addClass('listItemNum5');
                var height=$('#taskProgram').find('.itemList').eq(4).find('.arrowCon').height();
               $('.arrowItem5').height(height);
-              _this.clearTime(createAt,'#roam-5');
+              _this.clearTime();
               if(returnData.data.isComplete == 1){
                   $('#state-5').html('流转完成');
                  $('#roam-5').html(returnData.data.consumeTime);
-                _this.taskProgramSix();
                 $('#button-5').css({
                   color:'#ccc'
                 });
                 $('#button-5').find('i').css('color',"#ccc");
                  $('#button-5').attr('disabled','disabled');
+                  _this.taskProgramSix();
               }else{
                 $('#state-5').html('正在进行');
                 _this.setTime(createAt,'#roam-5'); 
@@ -266,16 +267,16 @@ define(function(require, exports, module) {
               $('.arrowItem.arrowItem6').addClass('listItemNum6');
                 var height=$('#taskProgram').find('.itemList').eq(5).find('.arrowCon').height();
               $('.arrowItem6').height(height);
-              _this.clearTime(createAt,'#roam-6');
+             _this.clearTime();
               if(returnData.data.isComplete == 1){
                 $('#state-6').html('流转完成');
                 $('#roam-6').html(returnData.data.consumeTime);
-                _this.taskProgramSeven();
                  $('#button-6').css({
                   color:'#ccc'
                 });
                 $('#button-6').find('i').css('color',"#ccc");
                 $('#button-6').attr('disabled','disabled');
+                  _this.taskProgramSeven();
               }else{
                 $('#state-6').html('正在进行');
                 _this.setTime(createAt,'#roam-6'); 
@@ -303,16 +304,17 @@ define(function(require, exports, module) {
              $('.arrowItem.arrowItem7').addClass('listItemNum7');
               var height=$('#taskProgram').find('.itemList').eq(6).find('.arrowCon').height();
               $('.arrowItem7').height(height);
-              _this.clearTime(createAt,'#roam-7');
+              _this.clearTime();
              if(returnData.data.isComplete == 1){
+              _this.clearTime();
                 $('#state-7').html('流转完成');
                 $('#roam-7').html(returnData.data.consumeTime);
-                _this.taskProgramEight(); 
                  $('#button-7').css({
                   color:'#ccc'
                 });
                 $('#button-7').find('i').css('color',"#ccc");
-                 $('#button-7').attr('disabled','disabled');        
+                 $('#button-7').attr('disabled','disabled'); 
+                  _this.taskProgramEight();       
               }else{
                 $('#state-7').html('正在进行');
                 _this.setTime(createAt,'#roam-7'); 
@@ -340,16 +342,16 @@ define(function(require, exports, module) {
               $('.arrowItem.arrowItem8').addClass('listItemNum8');
                var height=$('#taskProgram').find('.itemList').eq(7).find('.arrowCon').height();
               $('.arrowItem8').height(height);
-              _this.clearTime(createAt,'#roam-8');
+             _this.clearTime();
               if(returnData.data.isComplete == 1){
                   $('#state-8').html('流转完成');
                   $('#roam-8').html(returnData.data.consumeTime);
-                 _this.taskProgramNine();
                   $('#button-8').css({
                   color:'#ccc'
                 });
                 $('#button-8').find('i').css('color',"#ccc");
                  $('#button-8').attr('disabled','disabled');
+                 _this.taskProgramNine();
               }else{
                 $('#state-8').html('正在进行');
                 _this.setTime(createAt,'#roam-8'); 
@@ -376,7 +378,7 @@ define(function(require, exports, module) {
               $('.arrowItem.arrowItem9').addClass('listItemNum9');
                var height=$('#taskProgram').find('.itemList').eq(8).find('.arrowCon').height();
               $('.arrowItem9').height(height);
-              _this.clearTime(createAt,'#roam-9');
+              _this.clearTime();
              if(returnData.data.isComplete == 1){
               $('#state-9').html('流转完成');
               $('#roam-9').html(returnData.data.consumeTime);
@@ -449,30 +451,39 @@ define(function(require, exports, module) {
                   data:{treeId:args.id,state:treeState},
                    done:function(redData){
                      if(treeState=="issue"){
-                       _this.taskProgramTwo();
+                       _this.clearTime();
                        _this.taskProgramOne();
+                       _this.taskProgramTwo();
                      }else if(treeState=="cluesifte"){
+                         _this.clearTime();
                           _this.taskProgramTwo();
                           _this.taskProgramThree();
                      }else if(treeState=="repairinfo"){
+                       _this.clearTime();
                        _this.taskProgramThree();
                         _this.taskProgramFour();
                      }else if(treeState=="scene"){
+                       _this.clearTime();
                        _this.taskProgramFour();
                         _this.taskProgramFive();
                      }else if(treeState=="lock"){
+                       _this.clearTime();
                        _this.taskProgramFive();
                         _this.taskProgramSix();
                      }else if(treeState=="allocation"){
+                       _this.clearTime();
                         _this.taskProgramSix();
                         _this.taskProgramSeven();
                      }else if(treeState=="execution"){
+                       _this.clearTime();
                        _this.taskProgramSeven();
                         _this.taskProgramEight();
                      }else if(treeState=="transport"){
+                       _this.clearTime();
                        _this.taskProgramEight();
                         _this.taskProgramNine();
                      }else if(treeState=="deliver"){
+                       _this.clearTime();
                         _this.taskProgramNine();
                       }
                    }
