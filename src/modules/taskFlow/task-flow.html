@@ -42,12 +42,12 @@
         <table class="dataShow">
             <thead>
                 <tr>
-                    <th width="15%">录入时间</th>
                     <th width="10%">车牌号</th>
                     <th width="10%">债权方名称</th>
                     <th width="10%">车型</th>
                     <th width="10%">流程完成度</th>
                     <th width="10%">当前负责人</th>
+                    <th width="15%">录入时间</th>
                     <th width="12%">当前流转时间</th>
                     <th width="10%">操作</th>
                 </tr>
@@ -63,12 +63,12 @@
 <script type="text/template" id="task-flow-template">
     {{ each list item index }}
     <tr>
-        <td>{{item.createAt}}</td>
         <td>{{item.carNumber}}</td>
         <td>{{item.upstreamName}}</td>
         <td>{{item.carBrand}}</td>
         <td><p class="percentImg {{if item.state === 'issue'}}percentZero{{/if}}{{if item.state === 'cluesifte'}}percentOne{{/if}}{{if item.state === 'repairinfo'}}percentTwo{{/if}}{{if item.state === 'scene'}}percentThree{{/if}}{{if item.state === 'lock'}}percentFour{{/if}}{{if item.state === 'allocation'}}percentFive{{/if}}{{if item.state === 'execution'}}percentSix{{/if}}{{if item.state === 'transport'}}percentSeven{{/if}}{{if item.state === 'deliver'}}percentEight{{/if}}{{if item.state === 'complete'}}percentNine{{/if}}"><span>{{menuState(item.state)}}</span></p></td>
         <td>{{item.currentCharger}}</td>
+        <td>{{item.createAt}}</td>
         <td>{{switchTime(item.currentStartAt)}}</td>
         <td>
             <a data-id="{{item.id}}" class="task-flow-detail button">查看流程</a>
