@@ -71,6 +71,7 @@ define(function(require, exports, module) {
         $('body').on('mousewheel','.checkNews',function(e,delta){
           if(delta>0){
             if($(this).scrollTop() == 0) {
+              flag = true;
               if(flag){
                 flag = false;
                 page--;
