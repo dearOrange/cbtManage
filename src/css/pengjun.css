@@ -1004,3 +1004,25 @@ input[type=text].search-del{
   background:url(../img/10.png) no-repeat center;
   background-size:100% 100%;
 }
+/*客户跟踪*/
+#increate-track-form th {
+  background-color:transparent;
+}
+#increate-track-form td {
+  border:0;
+}
+#increate-track-form input {
+  border:1px solid #ccc;
+  height:28px;
+}
+#increate-track-form textarea {
+  width:430px;
+  height:130px;
+  outline: initial;
+}
+.color_red{
+  background-color:#f5b4b4;
+}
+.color_green{
+  background-color:#b7eab7;
+}
