@@ -61,10 +61,6 @@ define(function(require, exports, module) {
                   id: 'increate-track-form',
                   submitHandler: function(form) {
                     var increateForm = jh.utils.formToJson(form);
-<<<<<<< HEAD
-                    console.log(increateForm);
-=======
->>>>>>> 3aa14f72a7ec0b71af6d90cc9258b7fab98c48e8
                     if(!increateForm.upstreamName){
                       jh.utils.alert({
                         content: '请输入债权方名称',
