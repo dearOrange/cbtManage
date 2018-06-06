@@ -98,8 +98,8 @@ define(function(require, exports, module) {
               if(flag){
                 flag = false;
                 page++;
-                if(_this.total < 11){
-                  page = _this.page;
+                if(_this.pages < page){
+                  page = _this.pages;
                   flag = true;
                 }else{
                   _this.mouseWheelRemark(page,_this.index);
@@ -248,9 +248,8 @@ define(function(require, exports, module) {
             $('#unreadBorder').html(pageCon);
             var posLeft = $('#userCenterLink').width() + $('#logoutLink').width() + $('#getFlowNotion').width()-56 + 'px';
             $('.bianjiao').css({'right':posLeft});
-            if(pageList.length < 11){
-              _this.page = data.data.pageNum;
-              _this.total = data.data.total;
+            _this.pages = data.data.pages;
+            if(pageList.length < 10){
               flag = false;
               $('#moreData').html('没有更多数据了');
             }
