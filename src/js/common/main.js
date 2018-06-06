@@ -29,6 +29,9 @@ define(function(require, exports, module) {
 
       //第一次加载页面时请求未读消息
       _this.requestUnReadMessage();
+      
+      _this.mouseWheelRemark(page,0);
+      _this.allReadMessage();
     };
     this.initLogin = function() {
       jh.utils.ajax.send({
@@ -47,7 +50,12 @@ define(function(require, exports, module) {
       window.jh = require('common'); //自定义对象
       jh.utils.template = require('template'); //为自定义函数
     };
-
+    this.stopPropagationOne = function(e) {
+      if (e.stopPropagation) 
+        e.stopPropagation();//停止冒泡  非ie
+      else
+        e.cancelBubble = true;//停止冒泡 ie
+    };
     this.initMenu = function(res) {
       jh.utils.ajax.send({
         url: '/operator/getUserPermission',
@@ -70,44 +78,14 @@ define(function(require, exports, module) {
       
       $('#getFlowNotion').on('click', function() {
         $('#unreadBorder').slideToggle();
-        _this.mouseWheelRemark(page,0);
-        
-        $('body').off('click', '.isReadTab').on('click', '.isReadTab', function() {
-          var mine = $(this);
-          _this.index = mine.index();
-          _this.mouseWheelRemark(1,_this.index);
-        });
-        
-        $('body').on('mousewheel','.checkNews',function(e,delta){
-          if(delta>0){
-            if($(this).scrollTop() == 0) {
-              flag = true;
-              if(flag){
-                flag = false;
-                page--;
-                if(page < 1){
-                  page = 1;
-                  flag = true;
-                }else{
-                  _this.mouseWheelRemark(page,_this.index);
-                }
-              }
-            }
-          }else{
-            if(($(this).scrollTop() + $(this).height()) == $(this)[0].scrollHeight) {
-              if(flag){
-                flag = false;
-                page++;
-                if(_this.pages < page){
-                  page = _this.pages;
-                  flag = true;
-                }else{
-                  _this.mouseWheelRemark(page,_this.index);
-                }
-              }
-            }
-          }
-        })
+      });
+      $('body').bind('click',function(e){
+        if(!e.target.closest('#unreadBorder')){
+          $('#unreadBorder').css('display','none');
+        }
+      });
+      $('#getFlowNotion').bind('click',function(e){
+        _this.stopPropagationOne(e);//调用停止冒泡方法,阻止document方法的执行
       });
       
       //单个消息阅读
@@ -197,6 +175,44 @@ define(function(require, exports, module) {
           }
         }
       });
+    };
+    this.allReadMessage = function(){
+      $('body').off('click', '.isReadTab').on('click', '.isReadTab', function() {
+        var mine = $(this);
+        _this.index = mine.index();
+        _this.mouseWheelRemark(1,_this.index);
+      });
+      
+      $('body').on('mousewheel','.checkNews',function(e,delta){
+        if(delta>0){
+          if($(this).scrollTop() == 0) {
+            flag = true;
+            if(flag){
+              flag = false;
+              page--;
+              if(page < 1){
+                page = 1;
+                flag = true;
+              }else{
+                _this.mouseWheelRemark(page,_this.index);
+              }
+            }
+          }
+        }else{
+          if(($(this).scrollTop() + $(this).height()) == $(this)[0].scrollHeight) {
+            if(flag){
+              flag = false;
+              page++;
+              if(_this.pages < page){
+                page = _this.pages;
+                flag = true;
+              }else{
+                _this.mouseWheelRemark(page,_this.index);
+              }
+            }
+          }
+        }
+      })
     };
     
     this.clickUnread = function(){
