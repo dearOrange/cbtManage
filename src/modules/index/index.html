@@ -47,7 +47,8 @@
         </nav>
     </header>
     <div id="audioDiv"></div>
-    <div id="unreadBorder"></div>
+    <div id="unreadBorder" style="display:none;"></div>
+    <div id="ImgDiv"></div>
     <aside class="left-side" id="menusBar">
         <section class="sidebar">
           <ul class="sidebar-menu" id="leftMenu-box"></ul>
@@ -90,21 +91,34 @@
 <script type="text/template" id="unread_info_template">
   <div id="unreadMiddle">
     <div class="bianjiao"></div>
-    <div class="checkNews">
-      <table>
-        <tr>
-          <td><input type="checkbox" class="multipleRemark" id="checkAll" /></td>
-          <td colspan="2"><span style="color:#68c8f8;">标记全读</span></td>
-        </tr>
-         {{each list item index}} 
-        <tr>
-          <td><input type="checkbox" name="msgId" class="remarkRead" data-value="{{item.id}}" /></td>
-          <td><span>{{item.content}}</span></td>
-          <td><span class="lastSpan"></span></td> 
-        </tr>
-        {{/each}}
-      </table>
-      <p id="moreData" style="text-align: center;"></p>
+    <ul>
+    	<li class="isReadTab {{if isRead == '0'}}readActive{{/if}}">未读</li>
+    	<li class="isReadTab {{if isRead == '1'}}readActive{{/if}}">已读</li>
+    </ul>
+    <div>
+      <div class="checkNews">
+        <table> 
+          {{if isRead == '0'}}
+          <tr>
+            <td><input type="checkbox" class="multipleRemark" id="checkAll" /></td>
+            <td colspan="2"><span style="color:#68c8f8;">标记全读</span></td>
+          </tr>
+          {{/if}}
+           {{each list item index}} 
+          <tr>
+            {{if isRead == '0'}}
+            <td><input type="checkbox" name="msgId" class="remarkRead" data-value="{{item.id}}" /></td>
+            {{/if}}
+            <td class="readDetail" data-id="{{item.treeId}}"><span>{{item.content}}</span></td>
+            {{if isRead == '0'}}
+            <td><span class="lastSpan"></span></td> 
+            {{/if}}
+          </tr>
+          {{/each}}
+        </table>
+        <p id="moreData" style="text-align: center;"></p>
+      </div>
+      
     </div>
   </div>
 </script>

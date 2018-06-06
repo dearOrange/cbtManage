@@ -9,6 +9,7 @@ define(function(require, exports, module) {
     var _this = this;
     var page = 1;
     var flag = true;
+    _this.index = 0;
     _this.roleType = sessionStorage.getItem('admin-roleType');
     _this.requestDate = 1000;
     _this.requestInterId = null;
@@ -66,8 +67,17 @@ define(function(require, exports, module) {
           jh.utils.defaultPage(moduleInfo.module);
         }
       });
+      
       $('#getFlowNotion').on('click', function() {
-        _this.mouseWheelRemark(page);
+        $('#unreadBorder').slideToggle();
+        _this.mouseWheelRemark(page,0);
+        
+        $('body').off('click', '.isReadTab').on('click', '.isReadTab', function() {
+          var mine = $(this);
+          _this.index = mine.index();
+          _this.mouseWheelRemark(1,_this.index);
+        });
+        
         $('body').on('mousewheel','.checkNews',function(e,delta){
           if(delta>0){
             if($(this).scrollTop() == 0) {
@@ -78,9 +88,8 @@ define(function(require, exports, module) {
                 if(page < 1){
                   page = 1;
                   flag = true;
-                  return false;
                 }else{
-                  _this.mouseWheelRemark(page);
+                  _this.mouseWheelRemark(page,_this.index);
                 }
               }
             }
@@ -89,12 +98,18 @@ define(function(require, exports, module) {
               if(flag){
                 flag = false;
                 page++;
-                _this.mouseWheelRemark(page);
+                if(_this.total < 11){
+                  page = _this.page;
+                  flag = true;
+                }else{
+                  _this.mouseWheelRemark(page,_this.index);
+                }
               }
             }
           }
         })
       });
+      
       //单个消息阅读
       $('body').off('click','.remarkRead').on('click','.remarkRead',function(){
         var msgId = $(this).data('value');
@@ -104,7 +119,7 @@ define(function(require, exports, module) {
             msgId: msgId
           },
           done: function(returnData) {
-            _this.mouseWheelRemark(page);
+            _this.mouseWheelRemark(page,0);
             _this.clickUnread();
           }
         });
@@ -114,10 +129,20 @@ define(function(require, exports, module) {
         jh.utils.ajax.send({
           url: '/message/readAll',
           done: function(returnData) {
-            _this.mouseWheelRemark(page);
+            _this.mouseWheelRemark(page,0);
             _this.clickUnread();
           }
         });
+      })
+      
+      //消息详情
+      $('body').off('click','.readDetail').on('click','.readDetail',function(){
+        var id = $(this).data('id');
+        if(id){
+          jh.utils.load("/src/modules/taskFlow/task-flow-detail", {
+              id: id
+          })
+        }
       })
     };
 
@@ -181,47 +206,51 @@ define(function(require, exports, module) {
         done: function(returnData) {
           var remarkCount = returnData.data.count;
           if (remarkCount > 0) {
-            (new jh.ui.shadow()).init();
             var audioLi = '<audio src="../../img/listen.mp3" autoplay></audio>';
             $('#audioDiv').html(audioLi);
-            $('#kyPoupshadow').css('marginTop','70px');
             $('.loading-img').addClass('hide');
             var divYun = '<div class="coudyImg">您有新的消息，请注意查看</div>'
-            $('#kyPoupshadow').html(divYun);
+            $('#ImgDiv').html(divYun);
             var supNum = '<sup>' + remarkCount + '</sup>';
             $('#getFlowNotion').children('sup').remove().end().append(supNum);
             var posRight = $('#userCenterLink').width() + $('#logoutLink').width() + $('#getFlowNotion').width() + 'px';
-            $('.coudyImg').css({
+            $('#ImgDiv').css({
               'position':'absolute',
               'right':posRight,
-              'top':'-10px'
+              'top':'44px'
             });
           }else{
-            (new jh.ui.shadow()).close();
+            $('#ImgDiv').html('');
             $('#getFlowNotion').children('sup').remove()
           }
         }
       });
     }
     //    获取流程未读消息列表
-    this.mouseWheelRemark = function(page){
+    this.mouseWheelRemark = function(page,read){
       jh.utils.ajax.send({
         method: 'post',
         url: '/message/treeMsg',
         contentType: 'application/json',
         data: {
           pageNum: page,
-          pageSize: 10
+          pageSize: 10,
+          params:{
+            isRead: read
+          }
         },
         done: function(data) {
           flag = true;
           var pageList = data.data.list;
+          data.data.isRead = read;
           if(pageList.length > 0){
             var pageCon = jh.utils.template('unread_info_template', data.data);
             $('#unreadBorder').html(pageCon);
             var posLeft = $('#userCenterLink').width() + $('#logoutLink').width() + $('#getFlowNotion').width()-56 + 'px';
             $('.bianjiao').css({'right':posLeft});
-            if(pageList.length < 10){
+            if(pageList.length < 11){
+              _this.page = data.data.pageNum;
+              _this.total = data.data.total;
               flag = false;
               $('#moreData').html('没有更多数据了');
             }
