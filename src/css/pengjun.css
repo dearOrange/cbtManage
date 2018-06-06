@@ -1048,3 +1048,20 @@ input[type=text].search-del{
 .color_green{
   background-color:#b7eab7;
 }
+/*流程详情*/
+.sureCom button {
+  border:0;
+  outline:none;
+  background:transparent;
+  color:#FF6D6D;
+}
+.sureCom i{
+  color:#FF6D6D;
+  margin-right:5px;
+}
+#comTip{
+  display:none;
+  text-align:center;
+  margin-top:15px;
+  font-size:16px;
+}

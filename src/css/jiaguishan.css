@@ -347,7 +347,8 @@ hr {
 .conDetail {
   padding: 5px;
   height: 100px;
-  overflow: auto;
+  overflow-y: auto;
+  word-wrap:break-word; 
   width: 230px;
 }
 #streamList{

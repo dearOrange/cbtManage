@@ -395,6 +395,10 @@ define(function(require, exports, module) {
           });  
         }
         this.registerInit = function(){
+          //返回列表
+          $('body').off('click','.goBackList').on('click','.goBackList',function(){
+            jh.utils.load("/src/modules/taskFlow/task-flow");
+          })
           // 添加备注
             $('body').off('click','.addCon').on('click','.addCon',function(){
               var treeState = $(this).data('state');

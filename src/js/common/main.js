@@ -208,7 +208,6 @@ define(function(require, exports, module) {
           if (remarkCount > 0) {
             var audioLi = '<audio src="../../img/listen.mp3" autoplay></audio>';
             $('#audioDiv').html(audioLi);
-            $('.loading-img').addClass('hide');
             var divYun = '<div class="coudyImg">您有新的消息，请注意查看</div>'
             $('#ImgDiv').html(divYun);
             var supNum = '<sup>' + remarkCount + '</sup>';
@@ -242,12 +241,11 @@ define(function(require, exports, module) {
         done: function(data) {
           flag = true;
           var pageList = data.data.list;
-          data.data.isRead = read;
+          data.data.isRead = read;var pageCon = jh.utils.template('unread_info_template', data.data);
+          $('#unreadBorder').html(pageCon);
+          var posLeft = $('#userCenterLink').width() + $('#logoutLink').width() + $('#getFlowNotion').width()-56 + 'px';
+          $('.bianjiao').css({'right':posLeft});
           if(pageList.length > 0){
-            var pageCon = jh.utils.template('unread_info_template', data.data);
-            $('#unreadBorder').html(pageCon);
-            var posLeft = $('#userCenterLink').width() + $('#logoutLink').width() + $('#getFlowNotion').width()-56 + 'px';
-            $('.bianjiao').css({'right':posLeft});
             _this.pages = data.data.pages;
             if(pageList.length < 10){
               flag = false;
