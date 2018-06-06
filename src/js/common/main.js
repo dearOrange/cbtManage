@@ -255,7 +255,7 @@ define(function(require, exports, module) {
               $('#moreData').html('没有更多数据了');
             }
           }else{
-            $('#unreadBorder').html('');
+            $('.checkNews').html('暂无消息');
           }
         }
       })

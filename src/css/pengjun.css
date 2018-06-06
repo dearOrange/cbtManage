@@ -940,6 +940,7 @@ input[type=text].search-del{
 .checkNews{ 
   height:420px;
   overflow: auto;
+  text-align: center;
 }
 .checkNews table tr{
   border-bottom:1px dashed #ccc;
