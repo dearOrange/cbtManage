@@ -132,18 +132,14 @@
   border: 1px solid #ddd;
 }
 
-#base-detail dl {
-  float: left;
-  width: 20%;
-  color: #797979;
-  font-size: 15px;
+#base-detail th{
+  background-color:transparent;
+  text-align: right;
 }
-
-#base-detail dt,
-#base-detail dd {
-  float: left;
+#base-detail td{
+  border:0;
+  text-align: left;
 }
-
 p.titleD {
    display:block;
 }

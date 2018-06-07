@@ -12,23 +12,30 @@
         <p class="titleD">任务信息</p>
 
         <div id="base-detail">
-          <dl>
-              <dd>债权方：</dd>
-              <dt>{{data.upstreamName}}</dt>
-          </dl>
-          <dl>
-              <dd>车牌：</dd>
-              <dt>{{data.carNumber}}</dt>
-          </dl>
-           <dl>
-              <dd>车型：</dd>
-              <dt>{{data.carModel}}</dt>
-          </dl>
-           <dl>
-              <dd>总流转时间：</dd>
-              <dt>{{data.consumeTime}}</dt>
-          </dl>
-          <div class="clearfix"></div>
+          <table>
+            <tr>
+              <th>债权方：</th>
+              <td>{{data.upstreamName}}</td>
+              <th>车牌：</th>
+              <td>{{data.carNumber}}</td>
+              <th>车型：</th>
+              <td>{{data.carModel}}</td>
+            </tr>
+            <tr>
+              <th>车架号：</th>
+              <td>{{data.carId}}</td>
+              <th>发动机号：</th>
+              <td>{{data.engineId}}</td>
+              <th>车主姓名：</th>
+              <td>{{data.debtor}}</td>
+            </tr>
+            <tr>
+              <th>身份证号码：</th>
+              <td>{{data.debtorIdNumber}}</td>
+              <th>总流转时间：</th>
+              <td colspan="3">{{data.consumeTime}}</td>
+            </tr>
+          </table>
         </div>
         <hr/>
         <p class="titleD">流程图</p>
