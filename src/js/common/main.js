@@ -30,7 +30,7 @@ define(function(require, exports, module) {
       //第一次加载页面时请求未读消息
       _this.requestUnReadMessage();
       
-      _this.mouseWheelRemark(page,1);
+      _this.mouseWheelRemark(page,0);
       _this.allReadMessage();
     };
     this.initLogin = function() {
@@ -129,6 +129,8 @@ define(function(require, exports, module) {
       _this.requestInterId = window.setInterval(function() {
         //每15秒请求一次未读消息
         _this.requestUnReadMessage();
+        
+        _this.mouseWheelRemark(page,0);
 
         _this.requestCountNew();
         
