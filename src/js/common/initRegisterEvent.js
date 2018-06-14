@@ -42,6 +42,9 @@ define(function(require, exports, module) {
                 case 9: 
                     urlStr = '/src/modules/yunying/creditor-filter/creditor-filter';
                     break;
+                case 10: 
+                    urlStr = '/src/modules/qudao/informant/informant-manage';
+                    break;
             }
             return urlStr;
         };
