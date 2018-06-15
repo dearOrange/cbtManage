@@ -96,6 +96,27 @@ define(function(require, exports, module) {
               alert(response.data)
             }
           });
+          
+          //任务校验
+          jh.utils.uploader.init({
+            server: REQUESTROOT + '/task/excelCheck',
+            pick: {
+              id: '#task_yanzheng'
+            },
+            formData: {
+              upstreamId: args.id,
+              token: sessionStorage.getItem('admin-X-Token')
+            },
+            accept: {
+              title: 'Applications',
+              extensions: 'xls,xlsx',
+              mimeTypes: 'application/xls,application/xlsx'
+            }
+          }, {
+            uploadAccept: function(file, response) {
+              alert(response.data)
+            }
+          });
 
           _this.initLinkList();
           _this.initTaskList();

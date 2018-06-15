@@ -11767,40 +11767,40 @@ define(function(require, exports, module) {
           state = "审核未通过";
           break;
         case "undistributed":
-          state = "信息员未分配";
+          state = "待分发";
           break;
         case "unarrange":
-          state = "渠道经理未分配";
+          state = "待分配";
           break;
         case "tracing":
-          state = "线索未提交";
+          state = "查找中";
           break;
         case "clueChecking":
-          state = "线索审核中";
+          state = "已发现";
           break;
         case "unvaluation":
           state = "待估价";
           break;
         case "unconfirmed":
-          state = "待确认";
+          state = "待出委托";
           break;
         case "voucherChecking":
-          state = "凭证审核中";
+          state = "委托审核中";
           break;
         case "voucherInvalid":
           state = "凭证审核未通过";
           break;
         case "hunterUnreceive":
-          state = "捕头未接受";
+          state = "捕头待确认";
           break;
         case "hunterReceive":
-          state = "捕头已接受";
+          state = "捕头已确认";
           break;
         case "platReceive":
-          state = "平台已接收";
+          state = "平台已收车";
           break;
         case "upstreamReceive":
-          state = "债权方已收车";
+          state = "已完成";
           break;
         case "all":
           state = "无定位需找车并拖车";

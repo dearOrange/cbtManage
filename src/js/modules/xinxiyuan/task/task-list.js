@@ -150,7 +150,7 @@ define(function(require, exports, module) {
 
         //任务状态数组
         var taskStateKeyArr = ['unarrange', 'tracing', 'clueChecking', 'unvaluation', 'unconfirmed', 'voucherChecking', 'voucherInvalid', 'hunterUnreceive', 'hunterReceive', 'platReceive', 'upstreamReceive', 'closed'];
-        var taskStateValueArr = ['渠道经理未分配', '线索未提交', '线索审核中', '待估价', '待债权方确认', '凭证审核中', '凭证审核未通过', '捕头未接受', '捕头已接受', '平台已收车', '债权方已收车', '已失效'];
+        var taskStateValueArr = ['待分配', '查找中', '已发现', '待估价', '待出委托', '委托审核中', '凭证审核未通过', '捕头待确认', '捕头已确认', '平台已收车', '已完成', '已关闭'];
 
 
         var str = '<option value="">全部</option>';

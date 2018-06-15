@@ -1065,3 +1065,53 @@ input[type=text].search-del{
   margin-top:15px;
   font-size:16px;
 }
+.remark_position{
+  position:relative;
+}
+.isOptionRemark{
+  width:0;
+  height:0;
+  border-width:30px 30px 0 0;
+  border-style:solid;
+  border-color:greenyellow transparent transparent transparent;
+  position:absolute;
+  top:0;
+  left:0;
+}
+#span_remark{
+  position: absolute;
+  top:0;
+  left:0;
+  color:#fff;
+}
+.add_illegal form table th{
+  background: transparent;
+  text-align: left;
+}
+.add_illegal form table td{
+  border:0;
+  text-align: left;
+}
+.add_illegal form table .totle_input{
+  width:86%;
+}
+.add_illegal form table textarea{
+  height:125px;
+}
+.isYellow{
+  background-color:lightgoldenrodyellow;
+}
+.isRed{
+  background-color:palevioletred;
+}
+.isGrey{
+  background-color:gainsboro;
+}
+li.occurAtState{
+  border:1px solid #ccc;
+  margin:6px;
+}
+li.occurAtState.occurAtActive{
+  background-color:#ff8812;
+  color:#fff;
+}

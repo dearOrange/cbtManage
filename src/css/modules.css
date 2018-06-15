@@ -846,8 +846,13 @@ input, select, textarea {
 	border: 1px solid #68C8F8;
 	border-bottom: 0;
 }
-
-.search-container .stateChange li sup {
+.search-container .ol_change li,.search-container .all_state_change li{
+  cursor: pointer;
+  float: left;
+  padding: 5px 26px;
+  position: relative;
+}
+.search-container .stateChange li sup, .search-container .all_state_change li sup {
 	position: absolute;
 	top: -10px;
 	right: -5px;
