@@ -250,20 +250,20 @@ define(function(require, exports, module) {
         m.addClass('occurAtActive').siblings().removeClass('occurAtActive'); //tab状态切换
         $('#canExecute').val(m.data('value'));
       })
-      $('#taskState>li').each(function(index, item){
-        var state = [];
-        $(item).click(function(){
-          if($(item).is(".occurAtActive")){
-            $(this).removeClass("occurAtActive");
-            state.remove($(this).data('value'))
-          }else{
-            $(this).addClass("occurAtActive");
-            state.push($(this).data('value'));
-            state = state.join(',')
-          }
-        console.log(state)
-        });
-      })
+//    $('#taskState>li').map(function(index, item){
+//      var state = [];
+//      $(item).click(function(){
+//        if($(item).is(".occurAtActive")){
+//          $(this).removeClass("occurAtActive");
+//          state.remove($(this).data('value'))
+//        }else{
+//          $(this).addClass("occurAtActive");
+//          state.push($(this).data('value'));
+//          state = state.join(',')
+//        }
+//      console.log(state)
+//      });
+//    })
 //    $('body').off('click', '#taskState>li').on('click', '#taskState>li', function() {
 //      var m = $(this), state;
 //      if(m.hasClass('occurAtActive')){
