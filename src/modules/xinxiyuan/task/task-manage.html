@@ -51,13 +51,12 @@
             <td colspan="7">
               <ol id="taskOccurAt" class="ol_change">
                 <li>违章地区：</li>
-                <li data-value="" data-state="" class="occurAtState">全部</li>
-                <li data-value="7" data-state="" class="occurAtState">一周内</li>
-                <li data-value="30" data-state="" class="occurAtState">一月内</li>
-                <li data-value="90" data-state="" class="occurAtState">三月内</li>
-                <li data-value="185" data-state="" class="occurAtState">半年内</li>
-                <li data-value="365" data-state="" class="occurAtState">一年内</li>
-                <input type="hidden" name="occurAt" id="occurAt" value="7">
+                <li data-value="" class="occurAtState occurAtActive">全部</li>
+                <li data-value="7" class="occurAtState">一周内</li>
+                <li data-value="30" class="occurAtState">一月内</li>
+                <li data-value="90" class="occurAtState">三月内</li>
+                <li data-value="185" class="occurAtState">半年内</li>
+                <li data-value="365" class="occurAtState">一年内</li>
               </ol>
             </td>
           </tr>
@@ -67,10 +66,9 @@
             <td colspan="7">
               <ol id="taskCanExecute" class="ol_change">
                 <li>违章地区：</li>
-                <li data-value="" data-state="" class="occurAtState">全部</li>
-                <li data-value="1" data-state="" class="occurAtState">可执行</li>
-                <li data-value="0" data-state="" class="occurAtState">不可执行</li>
-                <input type="hidden" name="canExecute" id="canExecute" value="1">
+                <li data-value="" class="occurAtState occurAtActive">全部</li>
+                <li data-value="1" class="occurAtState">可执行</li>
+                <li data-value="0" class="occurAtState">不可执行</li>
               </ol>
             </td>
           </tr>
@@ -80,7 +78,7 @@
             <td colspan="7">
               <ol id="taskState" class="all_state_change">
                 <li>状态：</li>
-                <li data-value="" data-state="all" class="occurAtState">全部</li>
+                <li data-value="" data-state="all" class="occurAtState occurAtStateAll occurAtActive">全部</li>
                 <li data-value="new" data-state="new" class="occurAtState">待审核</li>
                 <li data-value="undistributed" data-state="undistributed" class="occurAtState">待分发</li>
                 <li data-value="unarrange" data-state="unarrange" class="occurAtState">待分配</li>
@@ -94,7 +92,6 @@
                 <li data-value="platReceive" data-state="platReceive" class="occurAtState">平台已收车</li>
                 <li data-value="upstreamReceive" data-state="upstreamReceive" class="occurAtState">已完成</li>
                 <li data-value="closed" data-state="closed" class="occurAtState">已关闭</li>
-                <input type="hidden" name="state" id="state" value="new">
               </ol>
             </td>
           </tr>

@@ -7,7 +7,7 @@
 'use strict';
 define(function(require, exports, module) {
   function TaskManage() {
-    var _this = this;
+    var _this = this, stateStr = '', canExecute = '', occurAtStr = '';
     _this.id = 0;
     _this.form = $('#task-manage-form');
     this.init = function() {
@@ -17,6 +17,10 @@ define(function(require, exports, module) {
     };
 
     this.initContent = function(isSearch) {
+      var dataForm = jh.utils.formToJson(_this.form);
+      dataForm.state = stateStr;
+      dataForm.canExecute = canExecute;
+      dataForm.occurAt = occurAtStr;
       var page = new jh.ui.page({
         data_container: $('#task-manage-container'),
         page_container: $('#page_container'),
@@ -24,7 +28,7 @@ define(function(require, exports, module) {
         method: 'post',
         url: '/task/taskList',
         contentType: 'application/json',
-        data: jh.utils.formToJson(_this.form),
+        data: dataForm,
         isSearch: isSearch,
         callback: function(data) {
           return jh.utils.template('task-manage-template', data);
@@ -243,42 +247,38 @@ define(function(require, exports, module) {
       $('body').off('click', '#taskOccurAt>li.occurAtState').on('click', '#taskOccurAt>li.occurAtState', function() {
         var m = $(this);
         m.addClass('occurAtActive').siblings().removeClass('occurAtActive'); //tab状态切换
-        $('#occurAt').val(m.data('value'));
+        occurAtStr = m.data('value').toString();
       })
+      
       $('body').off('click', '#taskCanExecute>li.occurAtState').on('click', '#taskCanExecute>li.occurAtState', function() {
         var m = $(this);
         m.addClass('occurAtActive').siblings().removeClass('occurAtActive'); //tab状态切换
-        $('#canExecute').val(m.data('value'));
+        canExecute = m.data('value').toString();
       })
-//    $('#taskState>li').map(function(index, item){
-//      var state = [];
-//      $(item).click(function(){
-//        if($(item).is(".occurAtActive")){
-//          $(this).removeClass("occurAtActive");
-//          state.remove($(this).data('value'))
-//        }else{
-//          $(this).addClass("occurAtActive");
-//          state.push($(this).data('value'));
-//          state = state.join(',')
-//        }
-//      console.log(state)
-//      });
-//    })
-//    $('body').off('click', '#taskState>li').on('click', '#taskState>li', function() {
-//      var m = $(this), state;
-//      if(m.hasClass('occurAtActive')){
-//        m.removeClass('occurAtActive'); //tab状态切换
-////        state = [];
-////        state.push(m.data('value'));
-////        state = state.join(',')
-//      }else{
-//        m.addClass('occurAtActive'); //tab状态切换
-//      }
-//      if(m.data('value') === ''){
-//        m.addClass('occurAtActive').siblings().removeClass('occurAtActive');
-//      }
-//      $('#state').val(state);
-//    })
+      var state = [];
+      $('#taskState>li').each(function(index, item){  
+        
+        $(item).click(function(){  
+          var aaa = $(this).data('value');
+          if(aaa === ''){
+            $(this).addClass("occurAtActive").siblings().removeClass('occurAtActive');
+            stateStr = '';
+          }else{
+            $('.occurAtStateAll').removeClass('occurAtActive');
+            if(state.indexOf(aaa) == -1){
+              state.push(aaa);
+            }
+            if($(this).is(".occurAtActive")){
+              $(this).removeClass("occurAtActive");
+              state.remove(aaa);
+            }else{
+              $(this).addClass("occurAtActive");
+            }
+            stateStr = state.join(',');
+          }
+        })
+      })
+      
     };
 
     //查询违章信息列表
