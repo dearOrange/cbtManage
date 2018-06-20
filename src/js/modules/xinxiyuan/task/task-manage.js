@@ -20,10 +20,10 @@ define(function(require, exports, module) {
       }else{
         $('#taskDistribution').removeClass('hide');
       }
-      if(_this.roleType !== 'business'){
-        $('#taskCheckout').addClass('hide');
-      }else{
+      if(_this.roleType === 'business' || _this.roleType === 'businessmanager'){
         $('#taskCheckout').removeClass('hide');
+      }else{
+        $('#taskCheckout').addClass('hide');
       }
     };
 

@@ -82,21 +82,19 @@ define(function(require, exports, module) {
                     }
                 });
             });
-            
+//    切换城市      
       var largeCity = jh.config.citylist;
       $('body').off('change', '#changeProvince').on('change', '#changeProvince', function() {
-        var changeCity = $(this).siblings()[0];
-        console.log(changeCity)
+        var changeCity = $(this).siblings();
         $(changeCity).empty();
-        var val=this.value;
+        var val = this.value;
         $.each(largeCity,function(index,item){
-          $(changeCity).prop("length",1);//清空原有的数据  
-          var str = '<option value="">请选择城市</option>', itemCity = largeCity[index].city;
-          if(val == item.pid){
+          var str = '', itemCity = largeCity[index].city;
+          if(val == item.p){
             for(var i = 0;i<itemCity.length;i++){
-              str += '<option value="' + itemCity[i].cid + '">' + itemCity[i].c + '</option>';
-              $(changeCity).html(str);  
+              str += '<option value="' + itemCity[i].c + '">' + itemCity[i].c + '</option>';
             }
+            $(changeCity).append(str); 
           }
         })
       })

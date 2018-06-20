@@ -41,12 +41,12 @@
         <th>商务电话：</th>
         <td>{{data.businessManagerMobile}}</td>
         <th>渠道经理：</th>
-        <td>{{data.businessManagerMobile}}</td>
+        <td>{{data.channelManager}}</td>
       </tr>
     </table>
     <p>备注信息</p>
     <div class="remark">{{data.remark}}</div>
-    {{if data.url}}
+    {{if data.attachmentVoList.length != 0}}
     <div class="imgRecord">
       <p>催收资料</p>
       {{each data.attachmentVoList data index}}
@@ -182,16 +182,16 @@
             <select name="province" id="changeProvince">
               <option value="">请选择省份</option>
               {{each cityList list index}}
-              <option value="{{list.pid}}">{{list.p}}</option>
+              <option value="{{list.p}}">{{list.p}}</option>
               {{/each}}
+            </select>
+            <select name="town" id="changeCity">
+              <option value="">请选择城市</option>
             </select>
           </td>
           <th>城市：</th>
           <td>
             
-            <select name="town" id="changeCity">
-              <option value="">请选择城市</option>
-            </select>
           </td>
         </tr>
         <tr>
@@ -225,33 +225,33 @@
         <tr>
           <th>保险公司：</th>
           <td>
-            <input type="text" name="insurer" id="" value="{{insurance.insurer}}" />
+            <input type="text" name="insurer" id="" value="{{if insurance}}{{insurance.insurer}}{{/if}}" />
           </td>
           <th>被保险人：</th>
           <td>
-            <input type="text" name="insurant" id="" value="{{insurance.insurant}}" />
+            <input type="text" name="insurant" id="" value="{{if insurance}}{{insurance.insurant}}{{/if}}" />
           </td>
         </tr>
         <tr>
           <th>身份号码：</th>
           <td>
-            <input type="text" name="idNumber" maxlength="18" id="" value="{{insurance.idNumber}}" />
+            <input type="text" name="idNumber" maxlength="18" id="" value="{{if insurance}}{{insurance.idNumber}}{{/if}}" />
           </td>
           <th>联系号码：</th>
           <td>
-            <input type="text" name="contactPhone" maxlength="11" id="" value="{{insurance.contactPhone}}" />
+            <input type="text" name="contactPhone" maxlength="11" id="" value="{{if insurance}}{{insurance.contactPhone}}{{/if}}" />
           </td>
         </tr>
         <tr>
           <th>户籍地址：</th>
           <td colspan="3">
-            <textarea name="domicileAddress" class="totle_input">{{insurance.domicileAddress}}</textarea>
+            <textarea name="domicileAddress" class="totle_input">{{if insurance}}{{insurance.domicileAddress}}{{/if}}</textarea>
           </td>
         </tr>
         <tr>
           <th>快递地址：</th>
           <td colspan="3">
-            <textarea name="receiveAddress" class="totle_input">{{insurance.receiveAddress}}</textarea>
+            <textarea name="receiveAddress" class="totle_input">{{if insurance}}{{insurance.receiveAddress}}{{/if}}</textarea>
           </td>
         </tr>
       </table>
