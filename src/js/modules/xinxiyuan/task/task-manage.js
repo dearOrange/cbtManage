@@ -244,20 +244,30 @@ define(function(require, exports, module) {
       });
       
       //任务状态tab切换
-      $('body').off('click', '#taskOccurAt>li.occurAtState').on('click', '#taskOccurAt>li.occurAtState', function() {
+      $('body').off('click', '#taskOccurAt>li.occurAtState').on('click', '#taskOccurAt>li.occurAtState', function(event, param) {
         var m = $(this);
         m.addClass('occurAtActive').siblings().removeClass('occurAtActive'); //tab状态切换
         occurAtStr = m.data('value').toString();
+        if (param && param === 'autoClick') {
+          //自动触发则不进行处理
+        } else {
+          _this.initContent('tab'); //手动点击则进行列表查询
+        }
       })
       
-      $('body').off('click', '#taskCanExecute>li.occurAtState').on('click', '#taskCanExecute>li.occurAtState', function() {
+      $('body').off('click', '#taskCanExecute>li.occurAtState').on('click', '#taskCanExecute>li.occurAtState', function(event, param) {
         var m = $(this);
         m.addClass('occurAtActive').siblings().removeClass('occurAtActive'); //tab状态切换
         canExecute = m.data('value').toString();
+        if (param && param === 'autoClick') {
+          //自动触发则不进行处理
+        } else {
+          _this.initContent('tab'); //手动点击则进行列表查询
+        }
       })
       var state = [];
       $('#taskState>li').each(function(index, item){
-        $(item).click(function(){  
+        $(item).click(function(event, param){  
           var aaa = $(this).data('value');
           if(aaa === ''){
             $(this).addClass("occurAtActive").siblings().removeClass('occurAtActive');
@@ -274,6 +284,11 @@ define(function(require, exports, module) {
               $(this).addClass("occurAtActive");
             }
             stateStr = state.join(',');
+          }
+          if (param && param === 'autoClick') {
+            //自动触发则不进行处理
+          } else {
+            _this.initContent('tab'); //手动点击则进行列表查询
           }
         })
       })
