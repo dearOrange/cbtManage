@@ -115,6 +115,7 @@ define(function(require, exports, module) {
             content: '任务分配成功！',
             ok: function() {
               _this.initContent();
+              _this.initTaskTotalCount();
             },
             cancel: false
           });
@@ -208,6 +209,7 @@ define(function(require, exports, module) {
                     content: "信息已修复",
                     ok: function() {
                       _this.initContent();
+                      _this.initTaskTotalCount();
                     }
                   })
                 }, 10000);
@@ -244,6 +246,7 @@ define(function(require, exports, module) {
                   content: '任务关闭成功！',
                   ok: function() {
                     _this.initContent();
+                    _this.initTaskTotalCount();
                   },
                   cancel: false
                 });
@@ -340,9 +343,10 @@ define(function(require, exports, module) {
               },
               done: function(returnData) {
                 jh.utils.alert({
-                  content: '任务审核成功！',
+                  content: '操作成功！',
                   ok: function() {
                     _this.initContent();
+                    _this.initTaskTotalCount();
                   },
                   cancel: false
                 });
