@@ -271,6 +271,7 @@ define(function(require, exports, module) {
           var aaa = $(this).data('value');
           if(aaa === ''){
             $(this).addClass("occurAtActive").siblings().removeClass('occurAtActive');
+            state = [];
             stateStr = '';
           }else{
             $('.occurAtStateAll').removeClass('occurAtActive');
