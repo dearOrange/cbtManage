@@ -74,6 +74,7 @@
     <div>
       <a href="javascript:;" class="button" id="updateInsurance" data-id="{{taskId}}">更新保险</a>
     </div>
+    {{if data.insurance}}
     <table class="taskTable">
       <tr>
         <th>保险公司：</th>
@@ -92,6 +93,7 @@
         <td>{{data.insurance.receiveAddress}}</td>
       </tr>
     </table>
+    {{/if}}
   </div>
 </script>
 
