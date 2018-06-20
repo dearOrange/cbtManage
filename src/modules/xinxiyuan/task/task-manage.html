@@ -86,7 +86,7 @@
                 <li data-value="clueChecking" data-state="clueChecking" class="occurAtState">已发现</li>
                 <li data-value="unvaluation" data-state="unvaluation" class="occurAtState">待估价</li>
                 <li data-value="unconfirmed" data-state="unconfirmed" class="occurAtState">待出委托</li>
-                <li data-value="voucherChecking" data-state="voucherChecking" class="occurAtState">凭证审核中</li>
+                <li data-value="voucherChecking" data-state="voucherChecking" class="occurAtState">委托审核中</li>
                 <li data-value="hunterUnreceive" data-state="hunterUnreceive" class="occurAtState">捕头待确认</li>
                 <li data-value="hunterReceive" data-state="hunterReceive" class="occurAtState">捕头已确认</li>
                 <li data-value="platReceive" data-state="platReceive" class="occurAtState">平台已收车</li>
@@ -101,6 +101,7 @@
             <td colspan="7">
               <a class="button search-button" href="javascript:;" id="allrepair">信息修复</a>
               <a class="button search-button" href="javascript:;" id="taskDistribution">任务分配</a>
+              <a class="button search-button" href="javascript:;" id="taskCheckout">任务审核</a>
               <a class="button search-button" href="javascript:;" id="closeTaskDistribute">任务关闭</a>
             </td>
           </tr>
@@ -185,6 +186,15 @@
         {{/each}}
       </tbody>
     </table>
+  </div>
+</script>
+<script type="text/template" id="task_checkout-template">
+	<div class="divied-width ">
+    <div class="divied-type">
+      <input type="radio" name="validState" value="1" class="through" />审核通过
+      <input type="radio" name="validState" value="2" class="through" />审核不通过
+    </div>
+    <textarea name="reason" class="textReason"></textarea>
   </div>
 </script>
 <script type="text/javascript">

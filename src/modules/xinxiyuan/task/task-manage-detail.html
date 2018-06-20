@@ -46,15 +46,18 @@
     </table>
     <p>备注信息</p>
     <div class="remark">{{data.remark}}</div>
+    {{if data.url}}
     <div class="imgRecord">
       <p>催收资料</p>
       {{each data.attachmentVoList data index}}
       <img src="{{viewImgRoot}}{{data.url}}" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" class="preview-img hand" /> {{/each}}
     </div>
+    {{/if}}
     <div class="upmainfile">
+      <p>违章信息</p>
       <div>
         <!--<a href="javascript:;" class="button" id="taskList-illegalList" data-id="{{taskId}}">违章信息修复</a>-->
-        <a href="javascript:;" class="button" id="addPeccancy" data-id="{{taskId}}">添加违章</a>
+        <a href="javascript:;" class="button pull-right" id="addPeccancy" data-id="{{taskId}}">添加违章</a>
       </div>
       <div>
         <table class="pull-left">
@@ -73,7 +76,7 @@
     </div>
     <p>保险信息</p>
     <div>
-      <a href="javascript:;" class="button" id="updateInsurance" data-id="{{taskId}}">更新保险</a>
+      <a href="javascript:;" style="margin-bottom:20px;" class="button pull-right" id="updateInsurance" data-id="{{taskId}}">更新保险</a>
     </div>
     {{if data.insurance}}
     <table class="taskTable">
@@ -94,6 +97,61 @@
         <td>{{data.insurance.receiveAddress}}</td>
       </tr>
     </table>
+    {{/if}}
+    {{if data.state === "clueChecking"}}
+    <div class="mainfile">
+      <p>线索信息</p>
+      {{if data.traceVoList&&data.traceVoList.length>0}}
+      <a href="javascript:;" class="button rejectClue">全部不采纳</a>
+      {{/if}} {{ each data.traceVoList data index }}
+      <div class="mt25">
+        <input type="radio" value="{{data.id}}" data-type="{{data.role}}" name="traceId" class="pull-left checkId" style="margin:80px 10px;cursor: pointer;" />
+        <div class="pull-left" {{if data.type == 0 }}style="width:90%;height:100%;border:1px solid #ccc;padding: 20px 10px;"  {{else}}style="width:74%;" {{/if}}>
+          <div class="upimg pull-left" style="margin-top:0px;">
+            <dl>
+              <dt>
+                <div class="upfile-item">
+                  <img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}" class="preview-img hand" onerror="this.src='/src/img/nopic.png'"/>
+                </div>
+                </dt>
+              <dd>全车背景照</dd>
+            </dl>
+          </div>
+          <div style="margin:1px 0;width: 84%;" class="pull-left">
+            <table class="taskTable">
+              <tr>
+                <th>上传人员</th>
+                <td>{{data.name}}----{{if data.role === 'type_A'}}线人{{/if}}{{if data.role === 'type_B'}}捕头----{{officerState(data.downstreamType)}}{{/if}}{{if data.role === 'type_C'}}自有线人{{/if}}</td>
+                <th>联系电话</th>
+                <td>{{data.phone}}</td>
+              </tr>
+              <tr>
+                <th>GPS信息</th>
+                <td colspan="3">{{data.location}}</td>
+              </tr>
+              <tr>
+                <th>定位</th>
+                <td colspan="3" id="{{data.carPhoto}}">{{getPositionByImage(data.carPhoto)}}</td>
+              </tr>
+              {{if data.role === 'type_A' || data.role === 'type_C'}}
+              <tr>
+                <th>GPS</th>
+                <td {{if data.gpsSource !== 1}}colspan="3"{{/if}}  id="install">{{if typeof data.gpsSource ==='number' }}{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装{{/if}}{{if data.gpsSource === 2}}未安装{{/if}}{{else}}未安装{{/if}}</td>
+
+                {{if data.gpsSource === 1}}
+                <th>安装人员</th>
+                <td>{{data.gpsPerson}}</td>
+                {{/if}}
+              </tr>
+              {{/if}}
+            </table>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      {{/each}}
+    </div>
+    <input type="submit" value="保存" class="button adopteInfo" />
     {{/if}}
   </div>
 </script>
@@ -121,11 +179,22 @@
         <tr>
           <th>省份：</th>
           <td>
-            <input type="text" name="province" id="" value="" />
+            <select name="province" id="changeProvince">
+              <option value="">请选择省份</option>
+              {{each cityList list index}}
+              <option value="{{list.pid}}">{{list.p}}</option>
+              {{/each}}
+            </select>
+            <select name="town" id="changeCity">
+              <option value="">请选择城市</option>
+              {{each cityList.city alist aindex}}
+              <option value="{{alist.cid}}">{{alist.c}}</option>
+              {{/each}}
+            </select>
           </td>
           <th>城市：</th>
           <td>
-            <input type="text" name="town" id="" value="" />
+            
           </td>
         </tr>
         <tr>
@@ -135,7 +204,7 @@
           </td>
           <th>时间：</th>
           <td>
-            <input type="text" class="search-input hand begin-input totle_input" readonly="readonly" name="occurAt" id="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})">
+            <input style="width:68% !important;" type="text" class="search-input hand begin-input totle_input" readonly="readonly" name="occurAt" id="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})">
           </td>
         </tr>
         <tr>
@@ -159,33 +228,33 @@
         <tr>
           <th>保险公司：</th>
           <td>
-            <input type="text" name="insurer" id="" value="" />
+            <input type="text" name="insurer" id="" value="{{insurance.insurer}}" />
           </td>
           <th>被保险人：</th>
           <td>
-            <input type="text" name="insurant" id="" value="" />
+            <input type="text" name="insurant" id="" value="{{insurance.insurant}}" />
           </td>
         </tr>
         <tr>
           <th>身份号码：</th>
           <td>
-            <input type="text" name="idNumber" maxlength="18" id="" value="" />
+            <input type="text" name="idNumber" maxlength="18" id="" value="{{insurance.idNumber}}" />
           </td>
           <th>联系号码：</th>
           <td>
-            <input type="text" name="contactPhone" maxlength="11" id="" value="" />
+            <input type="text" name="contactPhone" maxlength="11" id="" value="{{insurance.contactPhone}}" />
           </td>
         </tr>
         <tr>
           <th>户籍地址：</th>
           <td colspan="3">
-            <textarea name="domicileAddress" class="totle_input"></textarea>
+            <textarea name="domicileAddress" class="totle_input">{{insurance.domicileAddress}}</textarea>
           </td>
         </tr>
         <tr>
           <th>快递地址：</th>
           <td colspan="3">
-            <textarea name="receiveAddress" class="totle_input"></textarea>
+            <textarea name="receiveAddress" class="totle_input">{{insurance.receiveAddress}}</textarea>
           </td>
         </tr>
       </table>

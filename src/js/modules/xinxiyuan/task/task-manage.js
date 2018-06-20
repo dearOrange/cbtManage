@@ -10,10 +10,21 @@ define(function(require, exports, module) {
     var _this = this, stateStr = '', canExecute = '', occurAtStr = '';
     _this.id = 0;
     _this.form = $('#task-manage-form');
+    _this.roleType = sessionStorage.getItem('admin-roleType');
     this.init = function() {
       this.initContent();
       this.initTaskTotalCount();
       this.registerEvent();
+      if(_this.roleType !== 'info'){
+        $('#taskDistribution').addClass('hide');
+      }else{
+        $('#taskDistribution').removeClass('hide');
+      }
+      if(_this.roleType !== 'business'){
+        $('#taskCheckout').addClass('hide');
+      }else{
+        $('#taskCheckout').removeClass('hide');
+      }
     };
 
     this.initContent = function(isSearch) {
@@ -294,6 +305,51 @@ define(function(require, exports, module) {
           } else {
             _this.initContent('tab'); //手动点击则进行列表查询
           }
+        })
+      })
+      
+//    任务审核
+      $('#taskCheckout').click(function(){
+        var taskIds = jh.utils.getCheckboxValue('task-manage-container', "value");
+        if (!taskIds) {
+          jh.utils.alert({
+            content: "请先选中要审核的信息",
+            ok: true
+          })
+          return false;
+        }
+        var checkout = jh.utils.template('task_checkout-template',{});
+        jh.utils.alert({
+          title: '任务审核',
+          content: checkout,
+          ok:function(){
+            var throughState = $('.through').filter(':checked').val();
+            if(!throughState){
+              jh.utils.alert({
+                content: '请先选择条件',
+                ok: true
+              })
+              return false;
+            };
+            jh.utils.ajax.send({
+              url: '/task/verify',
+              data: {
+                  taskIds: taskIds,
+                  verifyStatus: throughState,
+                  reason: $('.textReason').val()
+              },
+              done: function(returnData) {
+                jh.utils.alert({
+                  content: '任务审核成功！',
+                  ok: function() {
+                    _this.initContent();
+                  },
+                  cancel: false
+                });
+              }
+            });
+          },
+          cancel:true
         })
       })
       

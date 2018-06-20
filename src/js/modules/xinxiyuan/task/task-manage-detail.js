@@ -26,9 +26,11 @@ define(function(require, exports, module) {
                     returnData.officerState = jh.utils.officerState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
                     returnData.getPositionByImage = jh.utils.getPositionByImage;
+                    _this.insurance = returnData.data.insurance;
                     var html = jh.utils.template('task_manage_detail_template', returnData);
                     $('.taskManageContent').html(html);
                     _this.searchIllegalInfo();
+                    
                 }
             });
         };
@@ -79,14 +81,30 @@ define(function(require, exports, module) {
                         }, 10000);
                     }
                 });
-
-
             });
             
+      var largeCity = jh.config.citylist;
+      $('body').off('change', '#changeProvince').on('change', '#changeProvince', function() {
+        $("#changeCity").empty();
+//      console.log($('body > #changeProvince'))
+//      console.log(1)
+          var val=this.value;
+          $.each(largeCity,function(index,item){
+//          var smallCity = (item.city);
+            $("#changeCity").prop("length",1);//清空原有的数据  
+            var str = '';
+            if(val == item.pid){
+              $.each(largeCity[index].city,function(indexCity,itemCity){
+                str += '<option value="' + itemCity.cid + '" ' + itemCity.c + '</option>'
+                $("body #changeCity").html(str);  
+              })
+            }
+          })
+      })
       //添加违章
       $('body').off('click', '#addPeccancy').on('click', '#addPeccancy', function() {
         args.car = decodeURIComponent(args.car);
-        var addIllegal = jh.utils.template('addIllegalInfo-template', {carNumber:args.car});
+        var addIllegal = jh.utils.template('addIllegalInfo-template', {carNumber:args.car, cityList:jh.config.citylist});
         jh.utils.alert({
           title: '添加违章',
           content: addIllegal,
@@ -111,7 +129,7 @@ define(function(require, exports, module) {
       //更新保险
       $('body').off('click', '#updateInsurance').on('click', '#updateInsurance', function() {
         args.car = decodeURIComponent(args.car);
-        var updateStr = jh.utils.template('updateInsurance-template', {carNumber:args.car});
+        var updateStr = jh.utils.template('updateInsurance-template', {carNumber:args.car,insurance:_this.insurance});
         jh.utils.alert({
           title: '更新保险',
           content: updateStr,
@@ -133,6 +151,39 @@ define(function(require, exports, module) {
         });
       })
       
+//    采纳情报
+        $('body').off('click', '.adopteInfo').on('click', '.adopteInfo', function() {
+          var checkId = $.trim($(".checkId").filter(":checked").val());
+          if (!checkId) {
+              jh.utils.confirm({
+                  content: '请选择具体线索！'
+              });
+              return false;
+          }
+          jh.utils.alert({
+              content: '确定采纳吗？',
+              ok: function() {
+                  var adoptData = {
+                      taskId: args.id,
+                      traceId: checkId
+                  };
+                  jh.utils.ajax.send({
+                      url: '/task/adopt',
+                      data: adoptData,
+                      done: function(returnData) {
+                          jh.utils.alert({
+                              content: '已采纳！',
+                              ok: function() {
+                                  window.location.reload();
+                              }
+                          })
+                      }
+
+                  });
+              },
+              cancel: true
+          })
+        });
             
         };
     }
