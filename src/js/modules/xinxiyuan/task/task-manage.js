@@ -335,7 +335,7 @@ define(function(require, exports, module) {
               url: '/task/verify',
               data: {
                   taskIds: taskIds,
-                  verifyStatus: throughState,
+                  validState: throughState,
                   reason: $('.textReason').val()
               },
               done: function(returnData) {
