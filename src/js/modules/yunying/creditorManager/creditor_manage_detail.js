@@ -76,6 +76,9 @@ define(function(require, exports, module) {
         done: function(returnData) {
           returnData.menuState = jh.utils.menuState;
           returnData.viewImgRoot = jh.config.viewImgRoot;
+          returnData.REQUESTROOT = REQUESTROOT;
+          returnData.upstreamId = args.id;
+          returnData.token = sessionStorage.getItem('admin-X-Token');
           var creditorStr = jh.utils.template('admin_creditorDetail_template', returnData);
           $('.detail-content').html(creditorStr);
           var picArr = ['businessLicense', 'legalPersonIdImg', 'legalPersonHandIdImg', 'linkmanIdImg', 'linkmanHandIdImg'];
