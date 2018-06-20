@@ -128,7 +128,7 @@
           <th width="6%">违章地区</th>
           <th width="10%">违章时间</th>
           <th width="6%">保险</th>
-          <th width="6%">匹配状态</th>
+          <th width="6%">参与匹配</th>
           <th width="6">操作</th>
         </tr>
       </thead>
@@ -156,7 +156,7 @@
     <td>{{item.city}}</td>
     <td>{{item.occurAt}}</td>
     <td>{{item.insurer}}</td>
-    <td>{{item.insurer}}</td>
+    <td>{{if item.status == '1'}}是{{else}}否{{/if}}</td>
     <td>
       <a data-id="{{item.id}}" data-car="{{item.carNumber}}" class="detail button">详情</a>
     </td>

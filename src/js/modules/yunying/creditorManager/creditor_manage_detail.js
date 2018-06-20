@@ -115,6 +115,16 @@ define(function(require, exports, module) {
       });
     };
     this.registerEvent = function() {
+//    任务校验
+      $('body').off('click', '#taskCheckout').on('click', '#taskCheckout', function() {
+        $('#fileUpload').val('');
+        $('#fileUpload').click();
+        $('#fileUpload').change(function(){
+          $("#uploadimg-form").submit();
+          return false;
+        })
+      })
+      
       $('body').off('change', '#taskTypeFlag').on('change', '#taskTypeFlag', function() {
         var me = $(this);
         var val = me.val();

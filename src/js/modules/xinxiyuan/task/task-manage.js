@@ -256,8 +256,7 @@ define(function(require, exports, module) {
         canExecute = m.data('value').toString();
       })
       var state = [];
-      $('#taskState>li').each(function(index, item){  
-        
+      $('#taskState>li').each(function(index, item){
         $(item).click(function(){  
           var aaa = $(this).data('value');
           if(aaa === ''){

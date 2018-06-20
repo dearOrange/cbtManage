@@ -73,6 +73,9 @@ define(function(require, exports, module) {
         done: function(returnData) {
           returnData.menuState = jh.utils.menuState;
           returnData.viewImgRoot = jh.config.viewImgRoot;
+          returnData.REQUESTROOT = REQUESTROOT;
+          returnData.upstreamId = args.id;
+          returnData.token = sessionStorage.getItem('admin-X-Token');
           var creditorStr = jh.utils.template('admin_creditorDetail_template', returnData);
           $('.detail-content').html(creditorStr);
 
@@ -97,33 +100,22 @@ define(function(require, exports, module) {
             }
           });
           
-          //任务校验
-          jh.utils.uploader.init({
-            server: REQUESTROOT + '/task/excelCheck',
-            pick: {
-              id: '#task_yanzheng'
-            },
-            formData: {
-              upstreamId: args.id,
-              token: sessionStorage.getItem('admin-X-Token')
-            },
-            accept: {
-              title: 'Applications',
-              extensions: 'xls,xlsx',
-              mimeTypes: 'application/xls,application/xlsx'
-            }
-          }, {
-            uploadAccept: function(file, response) {
-              alert(response.data)
-            }
-          });
-
           _this.initLinkList();
           _this.initTaskList();
         }
       });
     };
     this.registerEvent = function() {
+//    任务校验
+      $('body').off('click', '#taskCheckout').on('click', '#taskCheckout', function() {
+        $('#fileUpload').val('');
+        $('#fileUpload').click();
+        $('#fileUpload').change(function(){
+          $("#uploadimg-form").submit();
+          return false;
+        })
+      })
+
       $('body').off('change', '#taskTypeFlag').on('change', '#taskTypeFlag', function() {
         var me = $(this);
         var val = me.val();
