@@ -17,8 +17,10 @@ define(function(require, exports, module) {
       this.registerEvent();
       if(_this.roleType !== 'info'){
         $('#taskDistribution').addClass('hide');
+        $('#allrepair').addClass('hide');
       }else{
         $('#taskDistribution').removeClass('hide');
+        $('#allrepair').removeClass('hide');
       }
       if(_this.roleType === 'business' || _this.roleType === 'businessmanager'){
         $('#taskCheckout').removeClass('hide');
