@@ -85,21 +85,20 @@ define(function(require, exports, module) {
             
       var largeCity = jh.config.citylist;
       $('body').off('change', '#changeProvince').on('change', '#changeProvince', function() {
-        $("#changeCity").empty();
-//      console.log($('body > #changeProvince'))
-//      console.log(1)
-          var val=this.value;
-          $.each(largeCity,function(index,item){
-//          var smallCity = (item.city);
-            $("#changeCity").prop("length",1);//清空原有的数据  
-            var str = '';
-            if(val == item.pid){
-              $.each(largeCity[index].city,function(indexCity,itemCity){
-                str += '<option value="' + itemCity.cid + '" ' + itemCity.c + '</option>'
-                $("body #changeCity").html(str);  
-              })
+        var changeCity = $(this).siblings()[0];
+        console.log(changeCity)
+        $(changeCity).empty();
+        var val=this.value;
+        $.each(largeCity,function(index,item){
+          $(changeCity).prop("length",1);//清空原有的数据  
+          var str = '<option value="">请选择城市</option>', itemCity = largeCity[index].city;
+          if(val == item.pid){
+            for(var i = 0;i<itemCity.length;i++){
+              str += '<option value="' + itemCity[i].cid + '">' + itemCity[i].c + '</option>';
+              $(changeCity).html(str);  
             }
-          })
+          }
+        })
       })
       //添加违章
       $('body').off('click', '#addPeccancy').on('click', '#addPeccancy', function() {
