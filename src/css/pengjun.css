@@ -1073,7 +1073,7 @@ input[type=text].search-del{
   height:0;
   border-width:30px 30px 0 0;
   border-style:solid;
-  border-color:greenyellow transparent transparent transparent;
+  border-color:#3380FF transparent transparent transparent;
   position:absolute;
   top:0;
   left:0;
@@ -1083,7 +1083,7 @@ input[type=text].search-del{
   height:0;
   border-width:30px 30px 0 0;
   border-style:solid;
-  border-color:pink transparent transparent transparent;
+  border-color:#FF7221 transparent transparent transparent;
   position:absolute;
   top:0;
   left:0;
@@ -1109,13 +1109,13 @@ input[type=text].search-del{
   height:125px;
 }
 .isYellow{
-  background-color:lightgoldenrodyellow;
+  background-color:#A6FFA7;
 }
 .isRed{
-  background-color:palevioletred;
+  background-color:#FFB492;
 }
 .isGrey{
-  background-color:gainsboro;
+  background-color:#E1E1E1;
 }
 li.occurAtState{
   border:1px solid #ccc;

@@ -286,6 +286,9 @@ define(function(require, exports, module) {
             }
             stateStr = state.join(',');
           }
+          if(state.length == 0){
+            $('.occurAtStateAll').addClass("occurAtActive");
+          }
           if (param && param === 'autoClick') {
             //自动触发则不进行处理
           } else {
