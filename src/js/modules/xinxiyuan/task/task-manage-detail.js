@@ -92,6 +92,9 @@ define(function(require, exports, module) {
           var str = '', itemCity = largeCity[index].city;
           if(val == item.p){
             for(var i = 0;i<itemCity.length;i++){
+              if(itemCity[i].c == ''){
+                itemCity[i].c = '';
+              }
               str += '<option value="' + itemCity[i].c + '">' + itemCity[i].c + '</option>';
             }
             $(changeCity).append(str); 
