@@ -43,7 +43,14 @@ define(function(require, exports, module) {
                     return false;
                 }
             });
-
+            
+            //查看任务详情
+            $('.dataShow').off('click', '.customer-track-detail').on('click', '.customer-track-detail', function() {
+                var me = $(this);
+                var infos = me.data('infos');
+                jh.utils.load('/src/modules/customerTrack/customer-track-detail', infos);
+            });
+            
             //添加
             $('body').off('click', '#increate-customer-track').on('click', '#increate-customer-track', function() {
                 var increateTrack = jh.utils.template('increate-track-template', {});
