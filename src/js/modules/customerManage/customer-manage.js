@@ -139,21 +139,28 @@ define(function(require, exports, module) {
           })
           return false;
         }
-        jh.utils.ajax.send({
-          url: '/upstreams/screen',
-          data: {
-            upstreamId: taskIds
-          },
-          done: function(returnData) {
-            jh.utils.alert({
-              content: '操作成功！',
-              ok: function() {
-                _this.initContent();
+        jh.utils.alert({
+          content: '确定将选中的任务通过初筛？',
+          ok: function() {
+            jh.utils.ajax.send({
+              url: '/upstreams/screen',
+              data: {
+                upstreamId: taskIds
               },
-              cancel: false
+              done: function(returnData) {
+                jh.utils.alert({
+                  content: '操作成功！',
+                  ok: function() {
+                    _this.initContent();
+                  },
+                  cancel: false
+                });
+              }
             });
-          }
-        });
+          },
+          cancel: false
+        })
+        
       })
       
     };
