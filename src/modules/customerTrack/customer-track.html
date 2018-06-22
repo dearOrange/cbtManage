@@ -62,14 +62,14 @@
         <td>{{item.traceAt}}</td>
         <td>{{if item.isRegister == '0'}}未注册{{else}}已注册{{/if}}</td>
         <td>
-          <a data-id="{{item.id}}" class="add-customer-track button">添加</a>
+          <a data-info="{{item}}" class="add-customer-track button">添加</a>
           <a data-infos="{{item}}" class="customer-track-detail oneStyle button">详情</a>
         </td>
     </tr>
     {{/each}}
 </script>
 <script type="text/template" id="increate-track-template">
-  <form id="increate-track-form">
+  <form id="increate-track-form" class="increate-track-form">
     <table>
       <tr>
         <th>债权方名称：</th>
@@ -98,6 +98,33 @@
         </td>
       </tr>
     </table>	
+  </form>
+</script>
+<!--单个添加-->
+<script type="text/template" id="singleIncreate-track-template">
+  <form id="singleIncreate-track-form" class="increate-track-form">
+    <table>
+      <tr>
+        <th>债权方名称：</th>
+        <td>{{upstreamName}}</td>
+        <th>联系人：</th>
+        <td>{{contacts}}</td>
+      </tr>
+      <tr>
+        <th>联系电话：</th>
+        <td>{{contactPhone}}</td>
+        <th>跟进时间：</th>
+        <td>
+          <input type="text" class="search-input hand" readonly="readonly" name="traceAt" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})">
+        </td>
+      </tr>
+      <tr>
+        <th>跟进描述：</th>
+        <td colspan="3">
+          <textarea name="content" value=""></textarea>
+        </td>
+      </tr>
+    </table>  
   </form>
 </script>
 <script type="text/javascript">

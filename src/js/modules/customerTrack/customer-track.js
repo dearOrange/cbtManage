@@ -120,6 +120,52 @@ define(function(require, exports, module) {
                   }
                 });
             });
+            
+            //单个添加
+            $('body').off('click', '.add-customer-track').on('click', '.add-customer-track', function() {
+                var info = $(this).data('info');
+                var singleIncreateTrack = jh.utils.template('singleIncreate-track-template', info);
+                jh.utils.alert({
+                  title:'添加跟踪记录',
+                  content:singleIncreateTrack,
+                  okValue:'保存',
+                  ok:function(){
+                    var singleIncreateForm = jh.utils.formToJson($('#singleIncreate-track-form'));
+                    singleIncreateForm.upstreamName = info.upstreamName;
+                    singleIncreateForm.contacts = info.contacts;
+                    singleIncreateForm.contactPhone = info.contactPhone;
+                    if(!singleIncreateForm.traceAt){
+                      jh.utils.alert({
+                        content: '请输入跟进时间',
+                        ok: true
+                      })
+                      return false;
+                    }
+                    if(!singleIncreateForm.content){
+                      jh.utils.alert({
+                        content: '请输入跟进内容',
+                        ok: true
+                      })
+                      return false;
+                    }
+                    jh.utils.ajax.send({
+                      method:'post',
+                      url: '/record/addTracke',
+                      data: singleIncreateForm,
+                      done: function(returnData){
+                        jh.utils.alert({
+                          content:'添加成功！',
+                          ok:function(){
+                            _this.initContent();
+                            jh.utils.closeArt();
+                          }
+                        })
+                      }
+                    });
+                  },
+                  cancel: true
+                })
+            });
 
         };
     }

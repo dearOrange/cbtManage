@@ -1027,17 +1027,17 @@ input[type=text].search-del{
   background-size:100% 100%;
 }
 /*客户跟踪*/
-#increate-track-form th {
+.increate-track-form th {
   background-color:transparent;
 }
-#increate-track-form td {
+.increate-track-form td {
   border:0;
 }
-#increate-track-form input {
+.increate-track-form input {
   border:1px solid #ccc;
   height:28px;
 }
-#increate-track-form textarea {
+.increate-track-form textarea {
   width:430px;
   height:130px;
   outline: initial;
