@@ -15,26 +15,26 @@
         <th>主体类型：</th>
         <td>{{menuState(data.type)}}</td>
         <th>注册帐户名：</th>
-        <td>{{menuState(data.entrust)}}</td>
+        <td>{{data.userName}}</td>
         <th>注册手机号：</th>
-        <td>{{data.upstreamName}}</td>
+        <td>{{data.mobile}}</td>
       </tr>
       {{if data.type === 'UPSTREAM_ENTERPRISE'}}
       <tr>
         <th>主体名称：</th>
-        <td>{{menuState(data.type)}}</td>
+        <td>{{data.companyName}}</td>
         <th>法人代表：</th>
-        <td>{{menuState(data.entrust)}}</td>
+        <td>{{data.legalPerson}}</td>
         <th>法人身份证号：</th>
-        <td>{{data.upstreamName}}</td>
+        <td>{{data.identityCard}}</td>
       </tr>
       {{/if}}
       <tr>
         {{if data.type === 'UPSTREAM_ENTERPRISE'}}
         <th>营业执照：</th>
-        <td>{{data.identityCard}}</td>
+        <td>{{data.businessLicenseNo}}</td>
         <th>详细地址：</th>
-        <td>{{data.identityCard}}</td>
+        <td>{{data.address}}</td>
         {{else}}
         <th>身份证号：</th>
         <td>{{data.identityCard}}</td>
@@ -98,7 +98,47 @@
         </dl>
       </div>
     </div>
-    <div class="upmainfile ">
+    <div class="upmainfile">
+      <form id="customer-detail-form">
+        <table class="common_query textLeft search-content">
+          <tbody class="new-style">
+            <tr>
+              <td>
+                <label class="label">车牌号：</label>
+                <input type="text" class="search-input" name="carNumber">
+              </td>
+              <td>
+                <label class="label">品牌：</label>
+                <input type="text" class="search-input" name="carBrand">
+              </td>
+              <td>
+                <label class="label">任务状态：</label>
+                <select name="state">
+                  <option value="">全部</option>
+                  <option value="new">待审核</option>
+                  <option value="invalid">审核未通过</option>
+                  <option value="undistributed">待分发</option>
+                  <option value="unarrange">待分配</option>
+                  <option value="tracing">查找中</option>
+                  <option value="clueChecking">已发现</option>
+                  <option value="unvaluation">待估价</option>
+                  <option value="unconfirmed">待出委托</option>
+                  <option value="voucherChecking">委托审核中</option>
+                  <option value="voucherInvalid">凭证审核未通过</option>
+                  <option value="hunterUnreceive">捕头待确认</option>
+                  <option value="hunterReceive">捕头已确认</option>
+                  <option value="platReceive">平台已收车</option>
+                  <option value="upstreamReceive">已完成</option>
+                  <option value="closed">已关闭</option>
+                </select>
+              </td>
+              <td>
+                <input type="submit" value="查询" class="button search-button">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
       <ol class="ordinary">
         <li class="hand" id="removeFile">+协助关闭任务</li>
         <li class="helpTask hand">+协助任务发布</li>
@@ -159,9 +199,11 @@
     <td>
       {{if item.state !== 'closed'}}
       <input type="checkbox" value="{{item.id}}" name="taskIds" />
+      {{else}}
+      &nbsp;&nbsp;
       {{/if}}
     </td>
-    <td> class="remark_position">{{index+1}}<p class="{{if item.canExecute == '0'}}isOptionRemark{{else}}isNoOptionRemark{{/if}}"></p><span id="span_remark">{{if item.canExecute == '0'}}任{{else}}执{{/if}}</span></td>
+    <td class="remark_position">{{index+1}}<p style="top:-10px;" class="{{if item.canExecute == '0'}}isOptionRemark{{else}}isNoOptionRemark{{/if}}"></p><span id="span_remark">{{if item.canExecute == '0'}}任{{else}}执{{/if}}</span></td>
     <td>{{item.carNumber}}</td>
     <td>{{item.carBrand}}</td>
     <td>{{item.carSeries}}-{{item.carModel}}</td>

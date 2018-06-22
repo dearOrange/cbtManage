@@ -1125,3 +1125,16 @@ li.occurAtState.occurAtActive{
   background-color:#ff8812;
   color:#fff;
 }
+#customer-detail-form .new-style{
+  background-color:#fafafa;
+}
+#customer-detail-form td{
+  border:0;
+}
+#customer-detail-form input[type=text]{
+  height: 20px;
+  border: 1px solid #cecece;
+  padding: 5px 0;
+  text-indent: 10px;
+  width: 200px;
+}

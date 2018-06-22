@@ -160,31 +160,6 @@ define(function(require, exports, module) {
         _this.initSheriff(taskIds);
       });
 
-      //查看违章
-//    $('body').off('dblclick', '.showTr').on('dblclick', '.showTr', function() {
-//      var me = $(this);
-//      _this.id = me.data('info').id;
-//      jh.utils.ajax.send({
-//        method: 'post',
-//        url: '/clue/illegalList',
-//        contentType: 'application/json',
-//        data: {
-//          pageNum: 1,
-//          pageSize: 10,
-//          params: {
-//            taskId: _this.id
-//          }
-//        },
-//        done: function(data) {
-//          var strInfo = jh.utils.template('searchIllegalInfo-template', data.data);
-//          jh.utils.alert({
-//            title: me.data('info').carNumber,
-//            content: strInfo
-//          })
-//        }
-//      })
-//    });
-      
       //一键修复
       $('body').off('click', '#allrepair').on('click', '#allrepair', function() {
         var checkId = jh.utils.getCheckboxValue('task-manage-container', "value");

@@ -16,9 +16,9 @@ define(function(require, exports, module) {
 
         this.initDetail = function() {
             jh.utils.ajax.send({
-                url: '/task/info/detail',
+                url: '/upstreams/detail',
                 data: {
-                    taskId: args.id
+                    upstreamId: args.id
                 },
                 done: function(returnData) {
                   returnData.menuState = jh.utils.menuState;
@@ -48,7 +48,20 @@ define(function(require, exports, module) {
                   });
         
                   _this.initLinkList();
-                  _this.initTaskList();  
+                  _this.initTaskList();
+                  
+                  // 搜索
+                  jh.utils.validator.init({
+                    id: 'customer-detail-form',
+                    submitHandler: function(form) {
+                      _this.initTaskList(true);
+                      return false;
+                    }
+                  });
+                  
+                  $('select').select2({
+                    minimumResultsForSearch: Infinity
+                  });
                 }
             });
         };
@@ -72,18 +85,18 @@ define(function(require, exports, module) {
           page.init();
         };
         
-        this.initTaskList = function() {
+        this.initTaskList = function(isSearch) {
           //任务记录列表
+          var taskForm = jh.utils.formToJson($('#customer-detail-form'));
+          taskForm.upstreamId = args.id;
           var pageTask = new jh.ui.page({
             data_container: $('#subTask_container'),
             page_container: $('#page_task_container'),
             method: 'post',
-            isSearch: true,
+            isSearch: isSearch,
             url: '/task/upstreamTask',
             contentType: 'application/json',
-            data: {
-              upstreamId: args.id
-            },
+            data: taskForm,
             callback: function(data) {
               return jh.utils.template('taskSubtotal_template', data);
             }
@@ -92,6 +105,7 @@ define(function(require, exports, module) {
         };
         
         this.registerEvent = function() {
+          
           $('body').off('change', '#taskTypeFlag').on('change', '#taskTypeFlag', function() {
             var me = $(this);
             var val = me.val();
@@ -339,7 +353,7 @@ define(function(require, exports, module) {
     //    任务记录详情
           $('body').off('click', '.record-detail').on('click', '.record-detail', function() {
             var tid = $(this).data('id');
-            jh.utils.load("/src/modules/yunying/creditorManager/creditor-task-detail", {
+            jh.utils.load("/src/modules/customerManage/creditor-task-detail", {
                 id: tid
             })
           });

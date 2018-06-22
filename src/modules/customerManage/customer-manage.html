@@ -40,7 +40,7 @@
                 <option value="available">已认证</option>
               </select>
             </td>
-            <td>
+            <td id="businessManager">
               <label class="label">运营经理：</label>
               <select name="businessManagerId" id="operateManage">
                 <option value="">全部</option>
@@ -92,29 +92,45 @@
       <input type="checkbox" value="{{item.id}}" data-id="{{item.id}}"/>
     </td>
     <td>{{index+1}}</td>
-    <td>{{item.carNumber}}</td>
-    <td>{{item.carBrand}}</td>
-    <td>{{item.upstreamName}}</td>
-    <td>{{item.createAt}}</td>
-    <td>{{item.businessManager}}</td>
-    <td>{{item.channelManager}}</td>
+    <td>{{item.companyName}}</td>
+    <td>{{item.username}}</td>
+    <td>{{menuState(item.type)}}</td>
+    <td>{{item.legalPerson}}</td>
+    <td>{{item.linkman}}</td>
+    <td>{{item.contactPhone}}</td>
     <td>{{menuState(item.state)}}</td>
-    <td>{{item.carPrice}}</td>
-    <td>{{menuState(item.entrust)}}</td>
-    <td>{{item.city}}</td>
+    <td>{{item.createAt}}</td>
+    <td>{{item.passAt}}</td>
+    <td>{{item.businessManagerName}}</td>
     <td>
       <a data-id="{{item.id}}" class="detail button">详情</a>
     </td>
   </tr>
   {{/each}}
 </script>
-<script type="text/template" id="task_checkout-template">
+<script type="text/template" id="customer-checkout-template">
   <div class="divied-width ">
-    <div class="divied-type">
-      <input type="radio" name="validState" value="1" class="through" />审核通过
-      <input type="radio" name="validState" value="2" class="through" />审核不通过
+    <p>将选中的一条任务分配给</p>
+    <div class="content">
+      <div>
+        <table>
+          <tr>
+            <td>
+              <form id="customer_distribution_form">
+                <div id="customer-distribution" class="divied-type" style="height:300px;overflow-y:auto;text-align:left;">
+                  {{each data item index}}
+                  <div>
+                    <input type="radio" name="businessManagerId" value="{{item.id}}" class="hand" />
+                    <span>{{item.name}}</span>
+                  </div>
+                  {{/each}}
+                </div>
+              </form>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
-    <textarea name="reason" class="textReason"></textarea>
   </div>
 </script>
 <script type="text/javascript">

@@ -10,9 +10,16 @@ define(function(require, exports, module) {
     var _this = this;
     _this.id = 0;
     _this.form = $('#customer-manage-form');
+    _this.roleType = sessionStorage.getItem('admin-roleType');
     this.init = function() {
       this.initContent();
       this.registerEvent();
+      if(_this.roleType === 'businessmanager'){
+        $('#taskDistribution').removeClass('hide');
+      }else{
+        $('#businessManager').html('');
+        $('#taskDistribution').addClass('hide');
+      }
     };
 
     this.initContent = function(isSearch) {
@@ -21,7 +28,7 @@ define(function(require, exports, module) {
         page_container: $('#page_container'),
         form_container: _this.form,
         method: 'post',
-        url: '/task/taskList',
+        url: '/upstreams/customerList',
         contentType: 'application/json',
         data: jh.utils.formToJson(_this.form),
         isSearch: isSearch,
@@ -34,32 +41,25 @@ define(function(require, exports, module) {
     
     this.initSheriff = function(taskIds) {
       jh.utils.ajax.send({
-        url: '/operator/getAllChannel',
+        url: '/operator/getAllBusiness',
         done: function(returnData) {
-          var str = _this.distributionSheriff(returnData.data);
+          var str = jh.utils.template('customer-checkout-template', returnData)
           jh.utils.alert({
+            title:'债权方分配',
             content: str,
             ok: function() {
-              var tab = $('.qd-distribution-tab li.active').index(),
-                taskObj = {};
-              if (!tab) {
-                var radio = $('#qd-distribution-tab0').find(':checked');
-                if (radio.length === 0) {
-                  jh.utils.alert({
-                    content: '请选择渠道经理！',
-                    ok: true,
-                    cancel: false
-                  });
-                  return false;
-                }
-                taskObj.type = 1;
-                taskObj.channelManagerId = radio.val();
-                taskObj.channelManagerName = radio.data('name');
-              } else {
-                taskObj.type = 2;
+              var radio = $('#customer-distribution').find(':checked'), customerObj = {};
+              if(!radio){
+                jh.utils.alert({
+                  content: '请选择商务经理！',
+                  ok: true,
+                  cancel: false
+                });
+                return false;
               }
-              taskObj.taskIds = taskIds;
-              _this.distribution(taskObj);
+              customerObj.upstreamId = taskIds;
+              customerObj.businessManagerId = radio.val();
+              _this.distribution(customerObj)
             },
             cancel: true
           });
@@ -67,20 +67,13 @@ define(function(require, exports, module) {
       });
     };
 
-    this.distributionSheriff = function(arr) {
-      var source = jh.utils.getChannelHtml();
-      var render = jh.utils.template.compile(source);
-      var str = render({ list: arr });
-      return str;
-    };
-
     this.distribution = function(taskObj) {
       jh.utils.ajax.send({
-        url: '/task/distributeTask',
+        url: '/upstreams/updatebusinessManager',
         data: taskObj,
         done: function(returnData) {
           jh.utils.alert({
-            content: '任务分配成功！',
+            content: '操作成功！',
             ok: function() {
               _this.initContent();
             },
@@ -136,49 +129,31 @@ define(function(require, exports, module) {
         _this.initSheriff(taskIds);
       });
 
-//    任务审核
+//    债权方初筛
       $('#taskCheckout').click(function(){
         var taskIds = jh.utils.getCheckboxValue('customer-manage-container', "value");
         if (!taskIds) {
           jh.utils.alert({
-            content: "请先选中要审核的信息",
+            content: "请先选中要初筛的信息",
             ok: true
           })
           return false;
         }
-        var checkout = jh.utils.template('task_checkout-template',{});
-        jh.utils.alert({
-          title: '任务审核',
-          content: checkout,
-          ok:function(){
-            var throughState = $('.through').filter(':checked').val();
-            if(!throughState){
-              jh.utils.alert({
-                content: '请先选择条件',
-                ok: true
-              })
-              return false;
-            };
-            jh.utils.ajax.send({
-              url: '/task/verify',
-              data: {
-                  taskIds: taskIds,
-                  validState: throughState,
-                  reason: $('.textReason').val()
-              },
-              done: function(returnData) {
-                jh.utils.alert({
-                  content: '操作成功！',
-                  ok: function() {
-                    _this.initContent();
-                  },
-                  cancel: false
-                });
-              }
-            });
+        jh.utils.ajax.send({
+          url: '/upstreams/screen',
+          data: {
+            upstreamId: taskIds
           },
-          cancel:true
-        })
+          done: function(returnData) {
+            jh.utils.alert({
+              content: '操作成功！',
+              ok: function() {
+                _this.initContent();
+              },
+              cancel: false
+            });
+          }
+        });
       })
       
     };
