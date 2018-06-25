@@ -180,6 +180,7 @@ define(function(require, exports, module) {
           taskId: args.id
         },
         done: function(returnData) {
+          returnData.attachmentVoList = returnData.data.attachmentVoList.length;
           _this.returnData = returnData.data;
           returnData.menuState = jh.utils.menuState;
           returnData.viewImgRoot = jh.config.viewImgRoot;

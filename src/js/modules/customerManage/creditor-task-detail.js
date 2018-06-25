@@ -20,6 +20,7 @@ define(function(require, exports, module) {
                   taskId: args.id
               },
               done: function(returnData) {
+                returnData.attachmentVoList = returnData.data.attachmentVoList.length;
                 returnData.menuState = jh.utils.menuState;
                 returnData.viewImgRoot = jh.config.viewImgRoot;
                 var str = jh.utils.template('creditor-taskDetail-template', returnData);
