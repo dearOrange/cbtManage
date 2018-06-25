@@ -46,7 +46,11 @@ define(function(require, exports, module) {
                     }
                   }, {
                     uploadAccept: function(file, response) {
-                      alert(response.data);
+                      if(response.data.length != 0){
+                        alert(response.data);
+                      }else{
+                        alert('导入成功');
+                      }
                     }
                   });
         
