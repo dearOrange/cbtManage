@@ -26,7 +26,7 @@
             </table>
         </form>
     </div>
-    <a href="javascript:;" class="button style-btn" id="increate-customer-track">添加</a>
+    <a href="javascript:;" class="button search-button" id="increate-customer-track">添加债权方</a>
     <div class="data-container mt25">
         <table class="dataShow">
             <thead>
@@ -62,7 +62,7 @@
         <td>{{item.traceAt}}</td>
         <td>{{if item.isRegister == '0'}}未注册{{else}}已注册{{/if}}</td>
         <td>
-          <a data-info="{{item}}" class="add-customer-track button">添加</a>
+          {{if item.isRegister == '0'}}<a data-info="{{item}}" class="add-customer-track button">添加</a>{{/if}}
           <a data-infos="{{item}}" class="customer-track-detail oneStyle button">详情</a>
         </td>
     </tr>

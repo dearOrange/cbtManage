@@ -23,6 +23,9 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                   returnData.menuState = jh.utils.menuState;
                   returnData.viewImgRoot = jh.config.viewImgRoot;
+                  returnData.REQUESTROOT = REQUESTROOT;
+                  returnData.upstreamId = args.id;
+                  returnData.token = sessionStorage.getItem('admin-X-Token');
                   var html = jh.utils.template('task_manage_detail_template', returnData);
                   $('.taskManageContent').html(html);
                   
@@ -105,7 +108,16 @@ define(function(require, exports, module) {
         };
         
         this.registerEvent = function() {
-          
+          //    任务校验
+          $('body').off('click', '#taskCheckout').on('click', '#taskCheckout', function() {
+            $('#fileUpload').val('');
+            $('#fileUpload').click();
+            $('#fileUpload').change(function(){
+              $("#uploadimg-form").submit();
+              return false;
+            })
+          })
+      
           $('body').off('change', '#taskTypeFlag').on('change', '#taskTypeFlag', function() {
             var me = $(this);
             var val = me.val();

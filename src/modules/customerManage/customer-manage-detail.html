@@ -99,6 +99,12 @@
       </div>
     </div>
     <div class="upmainfile">
+      <form id="uploadimg-form" style="position:absolute;top:-155px;opacity: 0;" enctype="multipart/form-data" action="{{REQUESTROOT}}/task/excelCheck" method="post">  
+        <input type="file" title="选择文件" name="file" id="fileUpload"/>
+        <input type="hidden" name="upstreamId" id="" value="{{upstreamId}}" />
+        <input type="hidden" name="token" id="" value="{{token}}" />
+        <input id="fileBtn" type="submit" class="btn" value="文件上传"/>  
+      </form>
       <form id="customer-detail-form">
         <table class="common_query textLeft search-content">
           <tbody class="new-style">
@@ -142,6 +148,7 @@
       <ol class="ordinary">
         <li class="hand" id="removeFile">+协助关闭任务</li>
         <li class="helpTask hand">+协助任务发布</li>
+        <li class="hand" id="taskCheckout">+任务校验</li>
         <div style="float:right;margin-top:22px;" id="importFile">+协助批量导入任务</div>
       </ol>
       <table>
