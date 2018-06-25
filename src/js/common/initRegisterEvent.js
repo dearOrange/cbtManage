@@ -40,7 +40,7 @@ define(function(require, exports, module) {
                     urlStr = '/src/modules/xinxiyuan/evidence/evidence-audit';
                     break;
                 case 9: 
-                    urlStr = '/src/modules/yunying/creditor-filter/creditor-filter';
+                    urlStr = '/src/modules/customerManage/customer-manage';
                     break;
                 case 10: 
                     urlStr = '/src/modules/qudao/informant/informant-manage';
