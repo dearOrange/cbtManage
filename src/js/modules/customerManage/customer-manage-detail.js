@@ -46,7 +46,7 @@ define(function(require, exports, module) {
                     }
                   }, {
                     uploadAccept: function(file, response) {
-                      // alert(response.data);
+                         alert(response.msg);
                     }
                   });
         
