@@ -141,7 +141,7 @@ define(function(require, exports, module) {
             jh.utils.validator.init({
               id: 'sub-customer-form',
               submitHandler: function(form) {
-                var dataForm = jh.utils.formToJson($('#sub-customer-form'));
+                var dataForm = jh.utils.formToJson(form);
                 if(!dataForm.contacts){
                   jh.utils.alert({
                     content: '请输入联系对象',
@@ -171,7 +171,7 @@ define(function(require, exports, module) {
                     jh.utils.alert({
                       content: '联系小计添加成功',
                       ok: function() {
-                        _this.initContent();
+                        _this.initLinkList();
                         jh.utils.closeArt();
                       },
                       cancel: false
