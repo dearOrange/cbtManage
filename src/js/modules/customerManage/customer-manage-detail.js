@@ -26,8 +26,8 @@ define(function(require, exports, module) {
                   returnData.REQUESTROOT = REQUESTROOT;
                   returnData.upstreamId = args.id;
                   returnData.token = sessionStorage.getItem('admin-X-Token');
-                  var html = jh.utils.template('task_manage_detail_template', returnData);
-                  $('.taskManageContent').html(html);
+                  var html = jh.utils.template('customer_manage_detail_template', returnData);
+                  $('.customerManageContent').html(html);
                   
                   //批量导入
                   jh.utils.uploader.init({
