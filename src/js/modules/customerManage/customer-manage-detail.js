@@ -29,6 +29,9 @@ define(function(require, exports, module) {
                   var html = jh.utils.template('customer_manage_detail_template', returnData);
                   $('.customerManageContent').html(html);
                   
+                  _this.initLinkList();
+                  _this.initTaskList(true);
+                  
                   //批量导入
                   jh.utils.uploader.init({
                     server: REQUESTROOT + '/task/import',
@@ -54,9 +57,6 @@ define(function(require, exports, module) {
                     }
                   });
         
-                  _this.initLinkList();
-                  _this.initTaskList();
-                  
                   // 搜索
                   jh.utils.validator.init({
                     id: 'customer-detail-form',
