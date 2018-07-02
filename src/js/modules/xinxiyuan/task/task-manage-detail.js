@@ -152,6 +152,31 @@ define(function(require, exports, module) {
         });
       })
       
+      //情报全部拒绝
+      $('body').off('click', '.rejectClue').on('click', '.rejectClue', function() {
+          jh.utils.alert({
+              content: '确定全部不通过吗？',
+              ok: function() {
+                  jh.utils.ajax.send({
+                      url: '/task/refuseAll',
+                      data: {
+                          taskId: args.id
+                      },
+                      done: function(returnData) {
+                          jh.utils.alert({
+                              content: '已全部拒绝！',
+                              ok: function() {
+                                  window.location.reload();
+                              }
+                          })
+                      }
+
+                  });
+              },
+              cancel: true
+          })
+      });
+      
 //    采纳情报
         $('body').off('click', '.adopteInfo').on('click', '.adopteInfo', function() {
           var checkId = $.trim($(".checkId").filter(":checked").val());
