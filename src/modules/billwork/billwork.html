@@ -35,9 +35,9 @@
             <label class="label bills-state hide">收款状态：</label>
             <select name="state" id="bill-state">
               <option value="">全部</option>
-              <option value="wait">未打款</option>
-              <option value="completed">已打款</option>
-              <option value="rejected">已取消</option>
+              <option value="wait">审核中</option>
+              <option value="completed">已放款</option>
+              <option value="rejected">已失效</option>
             </select>
           </td>
           <td>
@@ -89,7 +89,12 @@
     {{if tabVal==2}}
     <td>{{item.telephone}}</td>
     {{/if}}
-    <td>{{loanState(item.state)}}</td>
+    <td>{{if tabVal==2}}
+      {{if item.state === 'wait'}}
+      审核中{{/if}}
+      {{if item.state === 'completed'}}
+      已收款{{/if}}
+      {{else}}{{loanState(item.state)}}{{/if}}</td>
     <td>{{item.dealTime}}</td>
     <td>
       {{if item.state === "wait"}}

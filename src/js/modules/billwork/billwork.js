@@ -54,8 +54,8 @@ define(function(require, exports, module) {
         var val = mine.data('value');
         $(this).addClass("active").siblings().removeClass("active");
         $('#tabType').val(val);
-        var str1 = '<option value="">全部</option><option value="wait">未打款</option><option value="completed">已打款</option><option value="rejected">已取消</option>';
-        var str2 = '<option value="">全部</option><option value="withdrawing">未到账</option><option value="completed">已到账</option>';
+        var str1 = '<option value="">全部</option><option value="wait">审核中</option><option value="completed">已放款</option><option value="rejected">已失效</option>';
+        var str2 = '<option value="">全部</option><option value="wait">审核中</option><option value="completed">已收款</option>';
         
               
         if (param && param === 'autoClick') {
