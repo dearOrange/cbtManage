@@ -3,7 +3,7 @@
 		<form id="clue-manage-form">
 			<table class="common_query textLeft search-content">
 				<tr>
-					<td colspan="6">
+					<td colspan="7">
 						<ol id="taskState" class="stateChange pull-left">
 							<li data-value="1" data-state="matched" class="clueState active">已匹配成功线索</li>
 							<li data-value="0" data-state="unmatched" class="clueState">未匹配成功线索</li>
@@ -38,6 +38,14 @@
 							<option value="rejected">已拒绝</option>
 						</select>
 					</td>
+					<td>
+            <label class="label">执行状态：</label>
+            <select name="canExecute">
+              <option value="">全部</option>
+              <option value="1">可执行</option>
+              <option value="0">任务车</option>
+            </select>
+          </td>
 					<td>
 						<label class="label">城市：</label>
 						<input type="text" class="search-input" name="city">
