@@ -111,15 +111,15 @@
     </div>
     <form id="restoration-detail-form">
       <input type="hidden" name="taskId" id="taskId" value="">
-      {{if data.state === 'unvaluation'}}
       <div class="upmainfile">
         <p class="pull-left" style="margin:20px 0;">分配渠道</p>
+        {{if data.state === 'unvaluation'}}
         <p class="pull-right"><input type="submit" value="分配渠道" class="button clueInfo" /></p>
+        {{/if}}
         <div class="task-content">
           
         </div>
       </div>
-      {{/if}}
       <div class="hopeprice">
         {{if data.state === 'unvaluation'}}
         <p>预估费用</p>
