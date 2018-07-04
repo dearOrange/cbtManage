@@ -67,6 +67,24 @@
       </div>
       {{/each}}
     </div>
+    <p>议价小计</p><br />
+    <div class="upmainfile onlineSubtotal">
+      <table>
+        <thead>
+          <tr>
+            <th>&nbsp;</th>
+            <th>议价内容</th>
+            <th>联系对象</th>
+            <th>联系方式</th>
+            <th>联系时间</th>
+          </tr>
+        </thead>
+        <tbody id="moneytotal_container">
+          
+        </tbody>
+      </table>
+      <div class="page-box pagination" id="page_container"></div>
+    </div>
     <form id="restoration-detail-form">
       <input type="hidden" name="taskId" id="taskId" value="">
       {{if !data.estimatedMaxPrice && !data.estimatedMinPrice}}

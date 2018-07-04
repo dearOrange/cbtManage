@@ -3,7 +3,7 @@
 		<form id="clue-manage-form">
 			<table class="common_query textLeft search-content">
 				<tr>
-					<td colspan="7">
+					<td colspan="6">
 						<ol id="taskState" class="stateChange pull-left">
 							<li data-value="1" data-state="matched" class="clueState active">已匹配成功线索</li>
 							<li data-value="0" data-state="unmatched" class="clueState">未匹配成功线索</li>
@@ -38,14 +38,6 @@
 							<option value="rejected">已拒绝</option>
 						</select>
 					</td>
-					<td>
-            <label class="label">执行状态：</label>
-            <select name="canExecute">
-              <option value="">全部</option>
-              <option value="1">可执行</option>
-              <option value="0">任务车</option>
-            </select>
-          </td>
 					<td>
 						<label class="label">城市：</label>
 						<input type="text" class="search-input" name="city">
@@ -96,7 +88,7 @@
 <script type="text/template" id="clue-manage-template">
 	{{ each list item index }}
 	<tr class="{{if item.isRead == 0}}bgc_blue{{/if}}">
-		<td class="remark_position">{{index+1}}<p class="{{if item.canExecute == '0'}}isOptionRemark{{else}}isNoOptionRemark{{/if}}"></p><span id="span_remark">{{if item.canExecute == '0'}}任{{else}}执{{/if}}</span></td>
+		<td class="remark_position">{{index+1}}{{if passState == 1}}<p class="{{if item.canExecute == '0'}}isOptionRemark{{else}}isNoOptionRemark{{/if}}"></p><span id="span_remark">{{if item.canExecute == '0'}}任{{else}}执{{/if}}</span>{{/if}}</td>
 		<td><input type="checkbox" data-id="{{item.id}}"></td>
 		<td>{{item.carNumber}}</td>
 		<td class="imgWidth">

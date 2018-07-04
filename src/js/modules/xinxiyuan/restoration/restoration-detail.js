@@ -200,6 +200,7 @@ define(function(require, exports, module) {
           _this.numPlus = _this.num - $('#baileePrice').val();
 
           _this.initValidator();
+          _this.initLinkList();
           $('#taskId').val(args.id);
           var picArr = ['carPhoto', 'carNumberPhoto'];
           for (var i = 0; i < 2; i++) {
@@ -212,6 +213,24 @@ define(function(require, exports, module) {
           }
         }
       });
+    };
+    //议价小计
+    this.initLinkList = function() {
+        var page = new jh.ui.page({
+            data_container: $('#moneytotal_container'),
+            page_container: $('#page_container'),
+            method: 'post',
+            isSearch: true,
+            url: '/record/bargainList',
+            contentType: 'application/json',
+            data: {
+                taskId: args.id
+            },
+            callback: function(data) {
+                return jh.utils.template('addMoneytotal_template', data);
+            }
+        });
+        page.init();
     };
   }
   module.exports = RestorationDetail;
