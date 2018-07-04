@@ -183,29 +183,24 @@
         <p>确认费用</p>
         <div>
           <label>费用类型:</label>
-          <select name="entrust" id="unconfirmedType" class="ml10">
-            <option {{if data.entrust === 'all'}}selected{{/if}} value="all">找车并拖车</option>
-            <option {{if data.entrust === 'trace'}}selected{{/if}} value="trace">只找车</option>
-            <option {{if data.entrust === 'recycle'}}selected{{/if}} value="recycle">只拖车</option>
-          </select>
+          <span style="width:200px;">{{menuState(data.entrust)}}</span>
         </div>
         <div>
           <label>最终处置费用:</label>
-          <input type="text" name="finalPrice" maxlength="11" class="OnlyPrice finalPrice required" value="{{data.finalPrice}}"/>
+          <span>{{data.finalPrice}}</span>
         </div>
         <div>
           <label>其中受托人费用:</label>
-          <input type="text" name="baileePrice" maxlength="11" class="OnlyPrice baileePrice required" value="{{if data.finalPrice}}{{baileePrice}}{{/if}}"/>
+          <span>{{data.baileePrice}}</span>
         </div>
         <div>
           <label>资产查找费:</label>
-          <input type="text" name="assetPrice" maxlength="11" class="OnlyPrice assetPrice required" id="assetPrice" value="{{data.assetPrice}}" {{if data.infoMoneyStatus===1 }}readonly="readonly"{{/if}}/>
+          <span>{{data.assetPrice}}</span>
         </div>
         <div class="thirdpartyPrice_box">
           <label>第三方处置清收费:</label>
-          <input type="text" name="thirdpartyPrice" maxlength="11" class="OnlyPrice thirdpartyPrice required" id="thirdpartyPrice" value="{{data.thirdpartyPrice}}"/>
+          <span>{{data.thirdpartyPrice}}</span>
         </div>
-        <input type="submit" value="确认" class="button search-button surePrice" style="margin-bottom:40px;width:150px;height:30px;"> 
         {{/if}}
       </div>
     </form>
@@ -220,7 +215,7 @@
             <div id="qd-distribution-tab0" class="divied-type" style="height:300px;overflow-y:auto;text-align: left;">
               {{each data item index}}
               <div>
-                <input type="radio" name="managerId" {{if channelManagerId === item.id}}checked{{/if}} value="{{item.id}}" data-name="{{item.name}}" class="managerId" />
+                <input type="radio" name="managerId" {{if state === 'unconfirmed'}}disabled{{/if}} {{if channelManagerId === item.id}}checked{{/if}} value="{{item.id}}" data-name="{{item.name}}" class="managerId" />
                 <span>{{item.name}}</span>
                 <span>
                 {{each item.operatorProvinceVoList temp i}}

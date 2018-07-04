@@ -132,6 +132,7 @@ define(function(require, exports, module) {
       jh.utils.ajax.send({
         url: '/operator/getAllChannel',
         done: function(returnData) {
+          returnData.state = data.state;
           returnData.channelManagerId = data.channelManagerId;
           returnData.channelManager = data.channelManager;
           var strTemplate = jh.utils.template('xx_task_list', returnData);
