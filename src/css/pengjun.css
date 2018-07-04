@@ -1138,3 +1138,7 @@ li.occurAtState.occurAtActive{
   text-indent: 10px;
   width: 200px;
 }
+#qd-distribution-tab0 div{
+  border-bottom: 1px solid #eee;
+  padding:6px 0;
+}

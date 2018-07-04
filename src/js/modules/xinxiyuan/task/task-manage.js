@@ -76,7 +76,7 @@ define(function(require, exports, module) {
             ok: function() {
               var tab = $('.qd-distribution-tab li.active').index(),
                 taskObj = {};
-              if (!tab) {
+//            if (tab) {
                 var radio = $('#qd-distribution-tab0').find(':checked');
                 if (radio.length === 0) {
                   jh.utils.alert({
@@ -89,9 +89,9 @@ define(function(require, exports, module) {
                 taskObj.type = 1;
                 taskObj.channelManagerId = radio.val();
                 taskObj.channelManagerName = radio.data('name');
-              } else {
-                taskObj.type = 2;
-              }
+//            } else {
+//              taskObj.type = 2;
+//            }
               taskObj.taskIds = taskIds;
               _this.distribution(taskObj);
             },
