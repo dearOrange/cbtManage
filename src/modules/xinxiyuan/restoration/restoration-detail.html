@@ -111,7 +111,7 @@
     </div>
     <form id="restoration-detail-form">
       <input type="hidden" name="taskId" id="taskId" value="">
-      {{if !data.estimatedMaxPrice && !data.estimatedMinPrice}}
+      {{if data.state === 'unvaluation'}}
       <div class="upmainfile">
         <p class="pull-left" style="margin:20px 0;">分配渠道</p>
         <p class="pull-right"><input type="submit" value="分配渠道" class="button clueInfo" /></p>
@@ -217,7 +217,7 @@
       <tr>
         <td>
           <form id="task_adopt_form">
-            <div id="qd-distribution-tab0" class="divied-type" style="text-align: left;">
+            <div id="qd-distribution-tab0" class="divied-type" style="height:300px;overflow-y:auto;text-align: left;">
               {{each data item index}}
               <div>
                 <input type="radio" name="managerId" {{if channelManagerId === item.id}}checked{{/if}} value="{{item.id}}" data-name="{{item.name}}" class="managerId" />

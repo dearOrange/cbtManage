@@ -218,6 +218,7 @@ define(function(require, exports, module) {
           returnData.attachmentVoList = returnData.data.attachmentVoList.length;
           _this.returnData = returnData.data;
           returnData.menuState = jh.utils.menuState;
+          returnData.officerState = jh.utils.officerState;
           returnData.viewImgRoot = jh.config.viewImgRoot;
           returnData.getPositionByImage = jh.utils.getPositionByImage;
           returnData.taskId = args.id;
