@@ -211,6 +211,17 @@
     </table>
   </div>
 </script>
+<script type="text/template" id="resMoneytotal_template">
+  {{each list item index }}
+    <tr class="{{if item.isSelf === 0}}grey{{/if}}">
+        <td>{{index+1}}</td>
+        <td>{{item.content}}</td>
+        <td>{{item.contacts}}</td>
+        <td>{{item.contactPhone}}</td>
+        <td>{{item.createAt}}</td>
+    </tr>
+    {{/each}}
+</script>
 <script type="text/javascript">
 seajs.use('modules/xinxiyuan/restoration/restoration-detail', function(RestorationDetail) {
   var RestorationDetail = new RestorationDetail();

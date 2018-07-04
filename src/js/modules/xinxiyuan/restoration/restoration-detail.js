@@ -227,7 +227,7 @@ define(function(require, exports, module) {
                 taskId: args.id
             },
             callback: function(data) {
-                return jh.utils.template('addMoneytotal_template', data);
+                return jh.utils.template('resMoneytotal_template', data);
             }
         });
         page.init();
