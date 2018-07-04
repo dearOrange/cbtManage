@@ -43,6 +43,41 @@ define(function(require, exports, module) {
             _this.traceType();
           }
         });
+        
+        //分配渠道
+        $('body').off('click', '.clueInfo').on('click', '.clueInfo', function() {
+          var me = $(this);
+          var ids = '', opt;
+          if (me.hasClass('disabled')) {
+              return false;
+          }
+          me.addClass('disabled');
+
+          opt = {
+              url: '/task/distributeTask',
+              data: {
+                  taskIds: args.id
+              },
+              done: function(returnData) {
+                  jh.utils.alert({
+                      content: '任务分配成功！',
+                      ok: function(){
+                          window.location.reload();
+                      },
+                      cancel: false
+                  });
+                  me.removeClass('disabled');
+              },
+              fail: function() {
+                  me.removeClass('disabled');
+              }
+          };
+          var radio = $('#qd-distribution-tab0').find(':checked');
+          opt.data.type = 1;
+          opt.data.channelManagerId = radio.val();
+          opt.data.channelManagerName = radio.data('name');
+          jh.utils.ajax.send(opt);
+        });
       
     };
     this.allType = function() {
@@ -184,6 +219,7 @@ define(function(require, exports, module) {
           _this.returnData = returnData.data;
           returnData.menuState = jh.utils.menuState;
           returnData.viewImgRoot = jh.config.viewImgRoot;
+          returnData.getPositionByImage = jh.utils.getPositionByImage;
           returnData.taskId = args.id;
           returnData.baileePrice = (parseFloat(returnData.data.finalPrice) * 0.1).toFixed(2);
           var creditorStr = jh.utils.template('restoration_detail_template', returnData);

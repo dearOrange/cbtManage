@@ -49,21 +49,45 @@
     {{/if}}
     <div class="mainfile">
       <p>线索信息</p>
-      {{ each data.traceVoList item index }}
-      <div class="upimg">
+      {{ each data.traceVoList data index }}
+      <div class="upimg pull-left">
         <dl>
           <dt>
             <div class="upfile-item">
-              <img data-id="{{item.carPhoto}}" src="{{viewImgRoot}}{{item.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand" onerror="this.src='/src/img/nopic.png'" />
+              <img data-id="{{data.carPhoto}}" src="{{viewImgRoot}}{{data.carPhoto}}?imageMogr2/auto-orient/thumbnail/100x100" class="preview-img hand" onerror="this.src='/src/img/nopic.png'" />
             </div>
           </dt>
           <dd>全车背景照</dd>
         </dl>
       </div>
-      <div>
-        <p>线索上传时间：{{item.createAt}}</p>
-        <p>车架号后6位：{{item.carId}}</p>
-        <p>定位：{{item.location}}</p>
+      <div style="margin:1px 0;width: 84%;" class="pull-left">
+        <table class="taskTable">
+          <tr>
+            <th>上传人员</th>
+            <td>{{data.name}}----{{if data.role === 'type_A'}}线人{{/if}}{{if data.role === 'type_B'}}捕头----{{officerState(data.downstreamType)}}{{/if}}{{if data.role === 'type_C'}}自有线人{{/if}}</td>
+            <th>联系电话</th>
+            <td>{{data.phone}}</td>
+          </tr>
+          <tr>
+            <th>GPS信息</th>
+            <td colspan="3">{{data.location}}</td>
+          </tr>
+          <tr>
+            <th>定位</th>
+            <td colspan="3" id="{{data.carPhoto}}">{{getPositionByImage(data.carPhoto)}}</td>
+          </tr>
+          {{if data.role === 'type_A' || data.role === 'type_C'}}
+          <tr>
+            <th>GPS</th>
+            <td {{if data.gpsSource !== 1}}colspan="3"{{/if}}  id="install">{{if typeof data.gpsSource ==='number' }}{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装{{/if}}{{if data.gpsSource === 2}}未安装{{/if}}{{else}}未安装{{/if}}</td>
+
+            {{if data.gpsSource === 1}}
+            <th>安装人员</th>
+            <td>{{data.gpsPerson}}</td>
+            {{/if}}
+          </tr>
+          {{/if}}
+        </table>
       </div>
       {{/each}}
     </div>
@@ -89,9 +113,10 @@
       <input type="hidden" name="taskId" id="taskId" value="">
       {{if !data.estimatedMaxPrice && !data.estimatedMinPrice}}
       <div class="upmainfile">
-        <p style="margin:20px 0;">分配渠道</p>
+        <p class="pull-left" style="margin:20px 0;">分配渠道</p>
+        <p class="pull-right"><input type="submit" value="分配渠道" class="button clueInfo" /></p>
         <div class="task-content">
-  
+          
         </div>
       </div>
       {{/if}}

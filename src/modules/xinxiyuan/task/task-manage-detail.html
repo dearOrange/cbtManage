@@ -110,7 +110,11 @@
     <div class="mainfile">
       <p>线索信息</p>
       {{if data.traceVoList&&data.traceVoList.length>0}}
+      {{if roleType != 'info'}}
+      <a href="javascript:;" class="button" style="background:darkgrey;border:0;">全部不采纳</a>
+      {{else}}
       <a href="javascript:;" class="button rejectClue">全部不采纳</a>
+      {{/if}}
       {{/if}} {{ each data.traceVoList data index }}
       <div class="mt25">
         <input type="radio" value="{{data.id}}" data-type="{{data.role}}" name="traceId" class="pull-left checkId" style="margin:80px 10px;cursor: pointer;" />
@@ -159,7 +163,11 @@
       </div>
       {{/each}}
     </div>
-    <input type="submit" value="保存" class="button adopteInfo" />
+    {{if roleType != 'info'}}
+    <input type="submit" value="确认采纳" class="button" style="background:darkgrey;border:0;" />
+    {{else}}
+    <input type="submit" value="确认采纳" class="button adopteInfo" />
+    {{/if}}
     {{/if}}
   </div>
 </script>

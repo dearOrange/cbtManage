@@ -9,6 +9,7 @@ define(function(require, exports, module) {
     function TaskManageDetail() {
         var _this = this;
         var args = jh.utils.getURLValue().args;
+        _this.roleType = sessionStorage.getItem('admin-roleType');
         this.init = function() {
             this.initDetail();
             this.registerEvent();
@@ -21,6 +22,7 @@ define(function(require, exports, module) {
                     taskId: args.id
                 },
                 done: function(returnData) {
+                    returnData.roleType = _this.roleType;
                     returnData.attachmentVoList = returnData.data.attachmentVoList.length;
                     returnData.state = args.state;
                     returnData.menuState = jh.utils.menuState;
