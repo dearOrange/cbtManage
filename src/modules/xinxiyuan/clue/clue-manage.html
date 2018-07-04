@@ -96,7 +96,7 @@
 <script type="text/template" id="clue-manage-template">
 	{{ each list item index }}
 	<tr class="{{if item.isRead == 0}}bgc_blue{{/if}}">
-		<td>{{index+1}}</td>
+		<td class="remark_position">{{index+1}}<p class="{{if item.canExecute == '0'}}isOptionRemark{{else}}isNoOptionRemark{{/if}}"></p><span id="span_remark">{{if item.canExecute == '0'}}任{{else}}执{{/if}}</span></td>
 		<td><input type="checkbox" data-id="{{item.id}}"></td>
 		<td>{{item.carNumber}}</td>
 		<td class="imgWidth">
