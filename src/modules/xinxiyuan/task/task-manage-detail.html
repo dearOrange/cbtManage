@@ -169,6 +169,25 @@
     <input type="submit" value="确认采纳" class="button adopteInfo" />
     {{/if}}
     {{/if}}
+    {{if data.state === 'unconfirmed'}}
+    <div class="clearfix"></div>
+    <hr />
+    <p>确认费用</p>
+    <table class="taskTable">
+      <tr> 
+        <th>最终处置费用：</th>
+        <td>{{data.finalPrice}}</td>
+        <th>其中受托人费用：</th>
+        <td>{{data.baileePrice}}</td>
+      </tr>
+      <tr>
+        <th>资产查找费：</th>
+        <td>{{data.assetPrice}}</td>
+        <th>第三方处置清收费：</th>
+        <td>{{data.thirdpartyPrice}}</td>
+      </tr>
+    </table>
+    {{/if}}
   </div>
 </script>
 
@@ -247,11 +266,11 @@
         <tr>
           <th>身份号码：</th>
           <td>
-            <input type="text" name="idNumber" maxlength="18" id="" value="{{if insurance}}{{insurance.idNumber}}{{/if}}" />
+            <input type="text" name="idNumber" class="isIdCardNo" maxlength="18" id="" value="{{if insurance}}{{insurance.idNumber}}{{/if}}" />
           </td>
           <th>联系号码：</th>
           <td>
-            <input type="text" name="contactPhone" maxlength="11" id="" value="{{if insurance}}{{insurance.contactPhone}}{{/if}}" />
+            <input type="text" name="contactPhone" class="isMobile" maxlength="11" id="" value="{{if insurance}}{{insurance.contactPhone}}{{/if}}" />
           </td>
         </tr>
         <tr>

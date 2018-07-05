@@ -138,7 +138,15 @@ define(function(require, exports, module) {
           content: updateStr,
           okValue: '保存',
           ok: function() {
-            var insuranceForm = jh.utils.formToJson($('#update-insurance-form'));
+            $('#update-insurance-form').submit();
+            return false;
+          },
+          cancel: true
+        });
+        jh.utils.validator.init({
+          id: 'update-insurance-form',
+          submitHandler: function(form) {
+            var insuranceForm = jh.utils.formToJson(form);
             insuranceForm.taskId = args.id;
             insuranceForm.carNumber = args.car;
             jh.utils.ajax.send({
@@ -146,11 +154,17 @@ define(function(require, exports, module) {
               url: '/clue/updateInsurance',
               data: insuranceForm,
               done: function(data) {
-                _this.initDetail();
+                jh.utils.alert({
+                  content: '保险更新成功！',
+                  ok:function(){
+                    _this.initDetail();
+                    jh.utils.closeArt();
+                  }
+                });
               }
             })
-          },
-          cancel: true
+            return false;
+          }
         });
       })
       
