@@ -37,11 +37,15 @@
         		<td>{{data.createAt}}</td>
         	</tr>
         </table>
-        <div class="remark">{{data.remark}}</div>
+        <div>
+          <p>备注信息</p>
+          <div class="remark">{{data.remark}}</div>
+        </div>
         <div class="imgRecord">
-            {{each data.attachmentVoList item index}}
-            <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
-            {{/each}}
+          <p>催收记录</p>
+          {{each data.attachmentVoList item index}}
+          <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'" class="preview-img hand"/>
+          {{/each}}
         </div>
         <div class="mainfile">
         	<p>线索信息</p>
@@ -80,7 +84,7 @@
         </div>
         {{/if}}
         <div class="clearfix"></div>
-		<p>议价小计</p><br />
+		<p>议价小计</p>
 		<div class="upmainfile onlineSubtotal">
 			{{if data.state === "unvaluation"}}
 			<ol>

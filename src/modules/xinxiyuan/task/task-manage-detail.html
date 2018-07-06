@@ -62,9 +62,9 @@
     </div>
     {{/if}}
     <div class="upmainfile">
-      <p>违章信息</p>
+      
       <div>
-        <!--<a href="javascript:;" class="button" id="taskList-illegalList" data-id="{{taskId}}">违章信息修复</a>-->
+        <p class="pull-left">违章信息</p>
         <a href="javascript:;" class="button pull-right" id="addPeccancy" data-id="{{taskId}}">添加违章</a>
       </div>
       <div>
@@ -82,8 +82,8 @@
         <div class="page-box pagination" id="page_container"></div>
       </div>
     </div>
-    <p>保险信息</p>
     <div>
+      <p class="pull-left">保险信息</p>
       <a href="javascript:;" style="margin-bottom:20px;" class="button pull-right" id="updateInsurance" data-id="{{taskId}}">更新保险</a>
     </div>
     {{if data.insurance}}

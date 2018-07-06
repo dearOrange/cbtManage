@@ -38,11 +38,15 @@
         		<td>{{data.createAt}}</td>
         	</tr>
         </table>
-        <div class="remark">{{data.remark}}</div>
+        <div>
+          <p>备注信息</p>
+          <div class="remark">{{data.remark}}</div>
+        </div>
         <div class="imgRecord">
-            {{each data.attachmentVoList data index}}
-            <img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" class="preview-img hand"/>
-            {{/each}}
+          <p>催收记录</p>
+          {{each data.attachmentVoList data index}}
+          <img data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'" title="附件{{index+1}}" class="preview-img hand"/>
+          {{/each}}
         </div>
         <div class="upmainfile">
             <div>
