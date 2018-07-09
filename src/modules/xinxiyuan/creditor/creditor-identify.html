@@ -44,15 +44,16 @@
             <thead>
                 <tr>
                     <th width="4%">序号</th>
-                    <th width="20%">债权方名称</th>
+                    <th width="15%">债权方名称</th>
                     <th width="10%">债权方账号</th>
                     <th width="8%">主体类型</th>
-                    <th width="18%">法人</th>
-                    <th width="18%">负责人</th>
+                    <th width="8%">法人</th>
+                    <th width="8%">负责人</th>
                     <th width="8%">联系电话</th>
                     <th width="7%">认证状态</th>
-                    <th width="10%">通过认证时间</th>
-                    <th width="12%">操作</th>
+                    <th width="10%">提交认证时间</th>
+                    <th width="15%">通过认证时间</th>
+                    <th width="15%">操作</th>
                 </tr>
             </thead>
             <tbody id="creditor_identify_container">
@@ -73,6 +74,7 @@
         <td>{{item.linkman}}</td>
         <td>{{item.contactPhone}}</td>
         <td>{{officerClueState(item.state)}}</td>
+        <td>{{item.submitAt}}</td>
         <td>{{item.passAt}}</td>
         <td>
             <a data-id="{{item.id}}" class="creditor-detail button">详情</a>
