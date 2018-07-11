@@ -65,6 +65,12 @@ define(function(require, exports, module) {
         };
         
         this.registerEvent = function() {
+          $('body').off('click','.goBackTask').on('click','.goBackTask',function(){
+            jh.utils.load("/src/modules/xinxiyuan/task/task-manage");
+            window.setTimeout(function(){
+              window.location.reload();
+            }, 0)
+          })
             //信息修复
             $('body').off('click', '#taskList-illegalList').on('click', '#taskList-illegalList', function() {
                 var me = $(this);

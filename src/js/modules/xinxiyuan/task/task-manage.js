@@ -27,6 +27,7 @@ define(function(require, exports, module) {
       }else{
         $('#taskCheckout').addClass('hide');
       }
+      
     };
 
     this.initContent = function(isSearch) {
