@@ -11544,7 +11544,7 @@ define(function(require, exports, module) {
       var sets = m.settings;
       $.validator.setDefaults({
         onfocusout: function(element) {
-          // $(element).valid();
+             $(element).valid();
         },
         onkeyup: function() {},
         errorPlacement: sets.errorPlacement,
