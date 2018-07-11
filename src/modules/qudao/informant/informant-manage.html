@@ -20,7 +20,7 @@
             </select>
           </td>
           <td>
-            <label class="label">任务状态：</label>
+            <label class="label">认证状态：</label>
             <select name="state">
               <option value="">全部</option>
               <option value="wait">待认证</option>
@@ -43,7 +43,8 @@
                     <th width="10%">线人姓名</th>
                     <th width="8%">账号</th>
                     <th width="20%">区域</th>
-                    <th width="20%">线人类型</th>
+                    <th width="10%">线人类型</th>
+                    <th width="10%">认证状态</th>
                     <th width="10%">联系电话</th>
                     <th width="15%">注册时间</th>
                     <th width="15%">操作</th>
@@ -67,6 +68,7 @@
           {{if item.role === 'type_C'}}自有线人{{/if}}
           {{if item.role === 'type_A'}}兼职线人{{/if}}
         </td>
+        <td>{{officerClueState(item.state)}}</td>
         <td>{{item.phone}}</td>
         <td>{{item.createAt}}</td>
         <td>

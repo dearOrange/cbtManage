@@ -11176,7 +11176,7 @@ define(function(require, exports, module) {
       for(var item in originData) {
         var val = originData[item];
         var target = settings.form_container.find('[name=' + item + ']');
-        console.log(target[item])
+//      console.log(target[item])
         if(target.is('input')) {
           target.val(val);
           if(target.attr('type') === 'hidden') {
