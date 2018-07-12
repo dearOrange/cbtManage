@@ -13,7 +13,7 @@
     <p>基本信息</p>
     <br />
     <table class="taskTable">
-      <tr>
+      <tr> 
         <th>任务号：</th>
         <td>{{data.taskNo}}</td>
         <th>任务类型：</th>
@@ -22,20 +22,28 @@
         <td>{{data.upstreamName}}</td>
       </tr>
       <tr>
+        <th>车主姓名：</th>
+        <td>{{data.debtor}}</td>
         <th>车牌号：</th>
         <td>{{data.carNumber}}</td>
         <th>车型：</th>
         <td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
-        <th>颜色：</th>
-        <td>{{data.carColor}}</td>
       </tr>
       <tr>
+        <th>颜色：</th>
+        <td>{{data.carColor}}</td>
         <th>车辆识别号：</th>
         <td>{{data.carId}}</td>
         <th>车辆发动机号：</th>
         <td>{{data.engineId}}</td>
+      </tr>
+      <tr>
         <th>任务发布时间：</th>
         <td>{{data.createAt}}</td>
+        <th>商务姓名：</th>
+        <td>{{data.businessManager}}</td>
+        <th>渠道经理：</th>
+        <td>{{data.channelManager}}</td>
       </tr>
     </table>
     <p>备注信息</p>
@@ -67,6 +75,12 @@
             <td>{{data.name}}----{{if data.role === 'type_A'}}兼职线人{{/if}}{{if data.role === 'type_B'}}捕头----{{officerState(data.downstreamType)}}{{/if}}{{if data.role === 'type_C'}}自有线人{{/if}}</td>
             <th>联系电话</th>
             <td>{{data.phone}}</td>
+          </tr>
+          <tr>
+            <th>上传时间</th>
+            <td>{{data.createAt}}</td>
+            <th>车架号后六位</th>
+            <td>{{data.carId}}</td>
           </tr>
           <tr>
             <th>GPS信息</th>

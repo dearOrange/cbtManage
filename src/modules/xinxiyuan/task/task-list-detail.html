@@ -12,37 +12,37 @@
 		<hr /><br />
 		<p>基本信息</p><br />
 		<table class="taskTable">
-			<tr>
-				<th>任务号：</th>
-				<td>{{data.taskNo}}</td>
-				<th>任务类型：</th>
-				<td>{{menuState(data.entrust)}}</td>
-				<th>任务发起：</th>
-				<td>{{data.upstreamName}}</td>
-			</tr>
-			<tr>
-				<th>车牌号：</th>
-				<td>{{data.carNumber}}</td>
-				<th>车型：</th>
-				<td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
-				<th>颜色：</th>
-				<td>{{data.carColor}}</td>
-			</tr>
-			<tr>
-				<th>车辆识别号：</th>
-				<td>{{data.carId}}</td>
-				<th>车辆发动机号：</th>
-				<td>{{data.engineId}}</td>
-				<th>任务发布时间：</th>
-				<td>{{data.createAt}}</td>
-			</tr>
-			<tr>
+			<tr> 
+        <th>任务号：</th>
+        <td>{{data.taskNo}}</td>
+        <th>任务类型：</th>
+        <td>{{menuState(data.entrust)}}</td>
+        <th>任务发起：</th>
+        <td>{{data.upstreamName}}</td>
+      </tr>
+      <tr>
+        <th>车主姓名：</th>
+        <td>{{data.debtor}}</td>
+        <th>车牌号：</th>
+        <td>{{data.carNumber}}</td>
+        <th>车型：</th>
+        <td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+      </tr>
+      <tr>
+        <th>颜色：</th>
+        <td>{{data.carColor}}</td>
+        <th>车辆识别号：</th>
+        <td>{{data.carId}}</td>
+        <th>车辆发动机号：</th>
+        <td>{{data.engineId}}</td>
+      </tr>
+      <tr>
+        <th>任务发布时间：</th>
+        <td>{{data.createAt}}</td>
         <th>商务姓名：</th>
         <td>{{data.businessManager}}</td>
-        <th>商务电话：</th>
-        <td>{{data.businessManagerMobile}}</td>
-        <th>&nbsp;&nbsp;</th>
-        <td>&nbsp;&nbsp;</td>
+        <th>渠道经理：</th>
+        <td>{{data.channelManager}}</td>
       </tr>
 		</table>
 		<div class="remark">{{data.remark}}</div>
@@ -98,6 +98,12 @@
 								<th>联系电话</th>
 								<td>{{data.phone}}</td>
 							</tr>
+							<tr>
+                <th>上传时间</th>
+                <td>{{data.createAt}}</td>
+                <th>车架号后六位</th>
+                <td>{{data.carId}}</td>
+              </tr>
 							<tr>
 								<th>GPS信息</th>
 								<td colspan="3">{{data.location}}</td>

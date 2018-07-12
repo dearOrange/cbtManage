@@ -11176,20 +11176,16 @@ define(function(require, exports, module) {
       for(var item in originData) {
         var val = originData[item];
         var target = settings.form_container.find('[name=' + item + ']');
-//      console.log(target[item])
         if(target.is('input')) {
           target.val(val);
           if(target.attr('type') === 'hidden') {
-            target.siblings('[data-value=' + val + ']').trigger('click', ['autoClick']);
+            target.siblings('[data-value="' + val + '"]').trigger('click', ['autoClick']);
           }
         } else if(target.is('select')) {
           target.val(val).attr('selectedVal', val);
           target.select2({
             minimumResultsForSearch: Infinity
           });
-        }else{
-//        console.log(val)
-//        console.log(target.is('ol'))
         }
       }
     };

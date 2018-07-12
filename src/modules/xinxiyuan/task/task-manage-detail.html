@@ -6,22 +6,22 @@
     <p class="pull-left detail_css">
       任务详情
     </p>
-    <a href="javascript:;" class="button gobackPage goBackTask">返回</a>
+    <a href="javascript:;" class="button gobackPage goBack">返回</a>
     <div class="clearfix"></div>
     <hr /><br />
     <p>基本信息</p><br />
     <table class="taskTable">
       <tr> 
-        <th>车主姓名：</th>
-        <td>{{data.debtor}}</td>
         <th>任务号：</th>
         <td>{{data.taskNo}}</td>
         <th>任务类型：</th>
         <td>{{menuState(data.entrust)}}</td>
-      </tr>
-      <tr>
         <th>任务发起：</th>
         <td>{{data.upstreamName}}</td>
+      </tr>
+      <tr>
+        <th>车主姓名：</th>
+        <td>{{data.debtor}}</td>
         <th>车牌号：</th>
         <td>{{data.carNumber}}</td>
         <th>车型：</th>
@@ -40,16 +40,8 @@
         <td>{{data.createAt}}</td>
         <th>商务姓名：</th>
         <td>{{data.businessManager}}</td>
-        <th>商务电话：</th>
-        <td>{{data.businessManagerMobile}}</td>
-      </tr>
-      <tr>
         <th>渠道经理：</th>
         <td>{{data.channelManager}}</td>
-        <th>&nbsp;&nbsp;</th>
-        <td>&nbsp;&nbsp;</td>
-        <th>&nbsp;&nbsp;</th>
-        <td>&nbsp;&nbsp;</td>
       </tr>
     </table>
     <p>备注信息</p>
@@ -62,7 +54,6 @@
     </div>
     {{/if}}
     <div class="upmainfile">
-      
       <div>
         <p class="pull-left">违章信息</p>
         <a href="javascript:;" class="button pull-right" id="addPeccancy" data-id="{{taskId}}">添加违章</a>
@@ -136,6 +127,12 @@
                 <td>{{data.name}}----{{if data.role === 'type_A'}}兼职线人{{/if}}{{if data.role === 'type_B'}}捕头----{{officerState(data.downstreamType)}}{{/if}}{{if data.role === 'type_C'}}自有线人{{/if}}</td>
                 <th>联系电话</th>
                 <td>{{data.phone}}</td>
+              </tr>
+              <tr>
+                <th>上传时间</th>
+                <td>{{data.createAt}}</td>
+                <th>车架号后六位</th>
+                <td>{{data.carId}}</td>
               </tr>
               <tr>
                 <th>GPS信息</th>

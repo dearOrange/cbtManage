@@ -24,6 +24,8 @@ define(function(require, exports, module) {
                 done: function(returnData) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
+                    returnData.officerState = jh.utils.officerState;
+                    returnData.getPositionByImage = jh.utils.getPositionByImage;
                     returnData.trailer = returnData.data.trailerFailList.length;
                     var html = jh.utils.template('creditor_detail_template', returnData);
                     $('.creditorOrderContent').html(html);

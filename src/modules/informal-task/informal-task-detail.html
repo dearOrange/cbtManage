@@ -15,7 +15,7 @@
                 <th>车牌号：</th>
                 <td>{{data.carNumber}}</td>
                 <th>车型：</th>
-                <td>{{data.carBrand}}</td>
+                <td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
             </tr>
             <tr>
                 <th>来源：</th>
@@ -44,6 +44,12 @@
                         <td>{{item.name}}----{{if item.role === 'type_A'}}线人{{else}}捕头{{/if}}</td>
                         <th>联系电话</th>
                         <td>{{item.phone}}</td>
+                    </tr>
+                    <tr>
+                      <th>上传时间</th>
+                      <td>{{data.createAt}}</td>
+                      <th>车架号后六位</th>
+                      <td>{{data.carId}}</td>
                     </tr>
                     <tr>
                         <th>GPS信息</th>

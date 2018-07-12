@@ -43,6 +43,7 @@ define(function(require, exports, module) {
                     returnData.menuState = jh.utils.menuState;
                     returnData.viewImgRoot = jh.config.viewImgRoot;
                     returnData.officerState = jh.utils.officerState;
+                    returnData.getPositionByImage = jh.utils.getPositionByImage;
                     returnData.attachmentVoList = returnData.data.attachmentVoList.length;
                     returnData.taskId = args.id;
                     var html = jh.utils.template('admin-clueAuditDetail-template', returnData);

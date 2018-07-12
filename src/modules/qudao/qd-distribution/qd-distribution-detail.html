@@ -22,33 +22,41 @@
         		<td>{{data.upstreamName}}</td>
         	</tr>
         	<tr>
+        	  <th>车主姓名：</th>
+            <td>{{data.debtor}}</td>
         		<th>车牌号：</th>
         		<td>{{data.carNumber}}</td>
         		<th>车型：</th>
         		<td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
-        		<th>颜色：</th>
-        		<td>{{data.carColor}}</td>
         	</tr>
         	<tr>
+        		<th>颜色：</th>
+        		<td>{{data.carColor}}</td>
         		<th>车辆识别号：</th>
         		<td>{{data.carId}}</td>
         		<th>车辆发动机号：</th>
         		<td>{{data.engineId}}</td>
+        	</tr>
+          <tr>
         		<th>任务发布时间：</th>
         		<td>{{data.createAt}}</td>
-        	</tr>
-              <tr>
-                <th>法院立案：</th>
-                <td>{{isDetail(data.isFiling)}}</td>
-                <th>财产保全：</th>
-                <td>{{isDetail(data.isPreser)}}</td>
-                <td>判决生效：</td>
-                <td>{{isDetail(data.isEffect)}}</td>
-            </tr>
-            <tr>
-                <th>案件执行：</th>
-                <td>{{isDetail(data.isExecute)}}</td>
-            </tr>
+        		<th>商务姓名：</th>
+            <td>{{data.businessManager}}</td>
+            <th>渠道经理：</th>
+            <td>{{data.channelManager}}</td>
+          </tr>
+          <tr>
+            <th>法院立案：</th>
+            <td>{{isDetail(data.isFiling)}}</td>
+            <th>财产保全：</th>
+            <td>{{isDetail(data.isPreser)}}</td>
+            <th>判决生效：</th>
+            <td>{{isDetail(data.isEffect)}}</td>
+          </tr>
+          <tr>
+            <th>案件执行：</th>
+            <td>{{isDetail(data.isExecute)}}</td>
+          </tr>
         </table>
         <div>
           <p>备注信息</p>

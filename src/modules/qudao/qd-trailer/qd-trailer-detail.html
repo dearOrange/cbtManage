@@ -13,30 +13,38 @@
         <p>基本信息</p><br />
         
         <table class="taskTable">
-        	<tr>
-        		<th>任务号：</th>
-        		<td>{{data.taskNo}}</td>
-        		<th>任务类型：</th>
-        		<td>{{menuState(data.entrust)}}</td>
-        		<th>任务发起：</th>
-        		<td>{{data.upstreamName}}</td>
-        	</tr>
-        	<tr>
-        		<th>车牌号：</th>
-        		<td>{{data.carNumber}}</td>
-        		<th>车型：</th>
-        		<td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
-        		<th>颜色：</th>
-        		<td>{{data.carColor}}</td>
-        	</tr>
-        	<tr>
-        		<th>车辆识别号：</th>
-        		<td>{{data.carId}}</td>
-        		<th>车辆发动机号：</th>
-        		<td>{{data.engineId}}</td>
-        		<th>任务发布时间：</th>
-        		<td>{{data.createAt}}</td>
-        	</tr>
+        	<tr> 
+            <th>任务号：</th>
+            <td>{{data.taskNo}}</td>
+            <th>任务类型：</th>
+            <td>{{menuState(data.entrust)}}</td>
+            <th>任务发起：</th>
+            <td>{{data.upstreamName}}</td>
+          </tr>
+          <tr>
+            <th>车主姓名：</th>
+            <td>{{data.debtor}}</td>
+            <th>车牌号：</th>
+            <td>{{data.carNumber}}</td>
+            <th>车型：</th>
+            <td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+          </tr>
+          <tr>
+            <th>颜色：</th>
+            <td>{{data.carColor}}</td>
+            <th>车辆识别号：</th>
+            <td>{{data.carId}}</td>
+            <th>车辆发动机号：</th>
+            <td>{{data.engineId}}</td>
+          </tr>
+          <tr>
+            <th>任务发布时间：</th>
+            <td>{{data.createAt}}</td>
+            <th>商务姓名：</th>
+            <td>{{data.businessManager}}</td>
+            <th>渠道经理：</th>
+            <td>{{data.channelManager}}</td>
+          </tr>
         </table>
         <div>
           <p>备注信息</p>
@@ -61,14 +69,40 @@
                     <dd>全车背景照</dd>
                 </dl>
             </div>
-            <div class="pull-left">
-                <p>{{data.name}}----{{if data.role === 'type_A'}}线人-----{{data.phone}}{{else}}捕头{{/if}}</p>
-                <p>线索上传时间：{{data.clueUploadAt}}</p>
-                <p>车架号后6位：{{data.carId}}</p>
-                <p>定位：{{data.location}}</p>
-                {{if data.role === 'type_A'}}
-				<p>GPS:{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装(安装人员{{data.gpsPerson}}){{/if}}{{if data.gpsSource === 2}}未安装{{/if}}</p>
-				{{/if}}
+            <div style="margin:1px 0;width: 84%;" class="pull-left">
+              <table class="taskTable">
+                <tr>
+                  <th>上传人员</th>
+                  <td>{{data.name}}----{{if data.role === 'type_A'}}兼职线人{{/if}}{{if data.role === 'type_B'}}捕头----{{officerState(data.downstreamType)}}{{/if}}{{if data.role === 'type_C'}}自有线人{{/if}}</td>
+                  <th>联系电话</th>
+                  <td>{{data.phone}}</td>
+                </tr>
+                <tr>
+                  <th>上传时间</th>
+                  <td>{{data.clueUploadAt}}</td>
+                  <th>车架号后六位</th>
+                  <td>{{data.carId}}</td>
+                </tr>
+                <tr>
+                  <th>GPS信息</th>
+                  <td colspan="3">{{data.location}}</td>
+                </tr>
+                <tr>
+                  <th>定位</th>
+                  <td colspan="3" id="{{data.carPhoto}}">{{getPositionByImage(data.carPhoto)}}</td>
+                </tr>
+                {{if data.role === 'type_A' || data.role === 'type_C'}}
+                <tr>
+                  <th>GPS</th>
+                  <td {{if data.gpsSource !== 1}}colspan="3"{{/if}}  id="install">{{if typeof data.gpsSource ==='number' }}{{if data.gpsSource === 0}}自己安装{{/if}}{{if data.gpsSource === 1}}他人协助安装{{/if}}{{if data.gpsSource === 2}}未安装{{/if}}{{else}}未安装{{/if}}</td>
+  
+                  {{if data.gpsSource === 1}}
+                  <th>安装人员</th>
+                  <td>{{data.gpsPerson}}</td>
+                  {{/if}}
+                </tr>
+                {{/if}}
+              </table>
             </div>
             {{/each}}
         </div>

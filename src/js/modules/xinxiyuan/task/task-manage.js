@@ -7,7 +7,7 @@
 'use strict';
 define(function(require, exports, module) {
   function TaskManage() {
-    var _this = this, stateStr = '', canExecute = '', occurAtStr = '';
+    var _this = this;
     _this.id = 0;
     _this.form = $('#task-manage-form');
     _this.roleType = sessionStorage.getItem('admin-roleType');
@@ -31,10 +31,6 @@ define(function(require, exports, module) {
     };
 
     this.initContent = function(isSearch) {
-      var dataForm = jh.utils.formToJson(_this.form);
-      dataForm.state = stateStr;
-      dataForm.canExecute = canExecute;
-      dataForm.occurAt = occurAtStr;
       var page = new jh.ui.page({
         data_container: $('#task-manage-container'),
         page_container: $('#page_container'),
@@ -42,7 +38,7 @@ define(function(require, exports, module) {
         method: 'post',
         url: '/task/taskList',
         contentType: 'application/json',
-        data: dataForm,
+        data: jh.utils.formToJson(_this.form),
         isSearch: isSearch,
         callback: function(data) {
           return jh.utils.template('task-manage-template', data);
@@ -239,7 +235,8 @@ define(function(require, exports, module) {
       $('body').off('click', '#taskOccurAt>li.occurAtState').on('click', '#taskOccurAt>li.occurAtState', function(event, param) {
         var m = $(this);
         m.addClass('occurAtActive').siblings().removeClass('occurAtActive'); //tab状态切换
-        occurAtStr = m.data('value').toString();
+//      occurAtStr = m.data('value').toString();
+        $('#occurAt').val(m.data('value'))
         if (param && param === 'autoClick') {
           //自动触发则不进行处理
         } else {
@@ -250,14 +247,15 @@ define(function(require, exports, module) {
       $('body').off('click', '#taskCanExecute>li.occurAtState').on('click', '#taskCanExecute>li.occurAtState', function(event, param) {
         var m = $(this);
         m.addClass('occurAtActive').siblings().removeClass('occurAtActive'); //tab状态切换
-        canExecute = m.data('value').toString();
+//      canExecute = m.data('value').toString();
+        $('#canExecute').val(m.data('value'));
         if (param && param === 'autoClick') {
           //自动触发则不进行处理
         } else {
           _this.initContent('tab'); //手动点击则进行列表查询
         }
       })
-      var state = [];
+      var state = [], stateStr = '';
       $('#taskState>li').each(function(index, item){
         $(item).click(function(event, param){  
           var aaa = $(this).data('value');
@@ -281,6 +279,7 @@ define(function(require, exports, module) {
           if(state.length == 0){
             $('.occurAtStateAll').addClass("occurAtActive");
           }
+          $('#state').val(stateStr);
           if (param && param === 'autoClick') {
             //自动触发则不进行处理
           } else {
