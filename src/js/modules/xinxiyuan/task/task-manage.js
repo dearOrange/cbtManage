@@ -235,7 +235,6 @@ define(function(require, exports, module) {
       $('body').off('click', '#taskOccurAt>li.occurAtState').on('click', '#taskOccurAt>li.occurAtState', function(event, param) {
         var m = $(this);
         m.addClass('occurAtActive').siblings().removeClass('occurAtActive'); //tab状态切换
-//      occurAtStr = m.data('value').toString();
         $('#occurAt').val(m.data('value'))
         if (param && param === 'autoClick') {
           //自动触发则不进行处理
@@ -247,7 +246,6 @@ define(function(require, exports, module) {
       $('body').off('click', '#taskCanExecute>li.occurAtState').on('click', '#taskCanExecute>li.occurAtState', function(event, param) {
         var m = $(this);
         m.addClass('occurAtActive').siblings().removeClass('occurAtActive'); //tab状态切换
-//      canExecute = m.data('value').toString();
         $('#canExecute').val(m.data('value'));
         if (param && param === 'autoClick') {
           //自动触发则不进行处理
