@@ -11180,11 +11180,15 @@ define(function(require, exports, module) {
           target.val(val);
           if(target.attr('type') === 'hidden') {
             target.siblings('[data-value="' + val + '"]').trigger('click', ['autoClick']);
-            if(target.parent('li').length === 1 && target.val() != ''){
-              var stt = target.val().split(',');
-              for(var i=0;i<stt.length;i++){
-                target.parent().siblings('[data-value="' + stt[i] + '"]').addClass('occurAtActive');
-                target.parent().siblings('[data-value=""]').removeClass('occurAtActive')
+            if(target.parent('li').length === 1){
+              if(target.val() != ''){
+                var stt = target.val().split(',');
+                for(var i=0;i<stt.length;i++){
+                  target.parent().siblings('[data-value="' + stt[i] + '"]').addClass('occurAtActive');
+                  target.parent().siblings('[data-value=""]').removeClass('occurAtActive')
+                }
+              }else{
+                target.parent().siblings('[data-value=""]').addClass('occurAtActive')
               }
             }
           }

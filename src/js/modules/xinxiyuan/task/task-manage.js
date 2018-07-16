@@ -255,7 +255,8 @@ define(function(require, exports, module) {
       })
       var state = [], stateStr = '';
       $('#taskState>li').each(function(index, item){
-        $(item).click(function(event, param){  
+        $(item).click(function(event, param){
+          $('.occurAtStateAll').addClass("occurAtActive").siblings().removeClass('occurAtActive');
           var aaa = $(this).data('value');
           if(aaa === ''){
             $(this).addClass("occurAtActive").siblings().removeClass('occurAtActive');
