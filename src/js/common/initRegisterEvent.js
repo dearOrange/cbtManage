@@ -240,6 +240,14 @@ define(function(require, exports, module) {
                     theme: "minimal-dark"
                 });
             });
+//          捕头的窗口搜索
+            $('body').on('keyup', '#keyword', function() {
+              if ($("#keyword").val() == '') {
+                  $(".datalist").show();
+              }
+              $(".datalist div:contains(" + $("#keyword").val().trim() + ")").show();
+              $(".datalist div:not(:contains(" + $("#keyword").val().trim() + "))").hide();
+            });
             
         };
     }

@@ -12191,6 +12191,7 @@ define(function(require, exports, module) {
       var str = '<div id="distribution_public_template">' +
         '<div style="width:460px;">' +
         '<table>' +
+        '<tr><td><input style="border-radius:0; font-size:14px; height:40px;line-height:40px;width: 95%;margin: 10px 1%;border: 1px solid #66afe9;padding-left: 3%;" placeholder="输入名称可快速查找" type="text" id="keyword"></td></tr>' +
         '<tr>' +
         '<td>' +
         '<p class="pull-left">分配' + title + '</p>' +
@@ -12198,7 +12199,7 @@ define(function(require, exports, module) {
         '<div class="clearfix"></div>' +
         '<hr />' +
         '<form id="distribution_public_form">' +
-        '<div class="divied-type" style="height: 300px;overflow-y: auto;text-align: left;">' +
+        '<div class="divied-type datalist" style="height: 300px;overflow-y: auto;text-align: left;">' +
         '{{each list item index}}' +
         '<div>' +
         '<input type="' + checkType + '" value="{{item.id}}" class="hand" ' + name + '/>' +

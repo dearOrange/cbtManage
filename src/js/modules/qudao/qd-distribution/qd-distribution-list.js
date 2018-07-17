@@ -163,7 +163,7 @@ define(function(require, exports, module) {
                     return false;
                 }
             });
-
+            
             //查看任务详情
             $('.dataShow').off('click', '.detail').on('click', '.detail', function() {
                 var me = $(this);
@@ -178,6 +178,7 @@ define(function(require, exports, module) {
                 var taskId = me.data('id');
                 _this.initSheriff(taskId);
             });
+            
         };
     }
     module.exports = QDDistributionList;
