@@ -255,8 +255,8 @@ define(function(require, exports, module) {
       })
       var state = [], stateStr = '';
       $('#taskState>li').each(function(index, item){
+        $('.occurAtStateAll').addClass("occurAtActive").siblings().removeClass('occurAtActive');
         $(item).click(function(event, param){
-          $('.occurAtStateAll').addClass("occurAtActive").siblings().removeClass('occurAtActive');
           var aaa = $(this).data('value');
           if(aaa === ''){
             $(this).addClass("occurAtActive").siblings().removeClass('occurAtActive');
@@ -276,7 +276,7 @@ define(function(require, exports, module) {
             stateStr = state.join(',');
           }
           if(state.length == 0){
-            $('.occurAtStateAll').addClass("occurAtActive");
+            $('.occurAtStateAll').addClass("occurAtActive").siblings().removeClass('occurAtActive');
           }
           $('#state').val(stateStr);
           if (param && param === 'autoClick') {
