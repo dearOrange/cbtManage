@@ -18,6 +18,10 @@
                         <input type="text" class="search-input" name="downstream" maxlength="20">
                     </td>
                     <td>
+                        <label class="label">公司名称：</label>
+                        <input type="text" class="search-input" name="company" maxlength="20">
+                    </td>
+                    <td>
                         <label class="label">主体账号：</label>
                         <input type="text" class="search-input" name="phone" maxlength="11">
                     </td>
@@ -43,6 +47,7 @@
                 <tr>
                     <th width="4%">序号</th>
                     <th width="8%">主体名称</th>
+                    <th width="8%">公司名称</th>
                     <th width="10%">捕头类型</th>
                     <th width="10%">区域</th>
                     <th width="10%">主体账号</th>
@@ -69,6 +74,7 @@
         	{{/if}}
         	<span style="color:#68c8f8;">{{item.name}}</span>
         </td>
+        <td>{{item.company}}</td>
         <td>{{if item.property === 0}}个人{{else}}企业{{/if}}</td>
         <td>{{ each item.area data index }}
         {{data.provinceName}}
