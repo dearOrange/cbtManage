@@ -28,6 +28,7 @@ define(function(require, exports, module) {
                     returnData.taskId = args.id;
                     returnData.trailer = returnData.data.trailerFailList.length;
                     var trailerFailList = returnData.data.trailerFailList;
+                    console.log(trailerFailList)
                     for(var i=0;i<trailerFailList.length;i++){
                       if(trailerFailList[i].pictures){
                         returnData.data.trailerFailList[i].pictures = trailerFailList[i].pictures.split(',');
