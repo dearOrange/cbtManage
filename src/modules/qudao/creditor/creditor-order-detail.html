@@ -150,51 +150,67 @@
         <div class="mainfile">
         	<p>交车凭证</p>
         	<div class="upimg">
-        		<p style="font-weight: 100;margin-left:10px;">债权方交车照片</p>
-        		{{each data.receiveCarVoList data index}}
-        		<dl>
-					<dt>
-						<div class="upfile-item">
-							<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100">
-						</div>
-	    			</dt>
-				</dl>
-        		{{/each}}
-        		<div class="clearfix"></div>
+      	  {{if data.receiveCarVoList}}
+      		<p style="font-weight: 100;margin-left:10px;">债权方交车照片</p>
+      		{{each data.receiveCarVoList data index}}
+      		<dl>
+  					<dt>
+  						<div class="upfile-item">
+  							<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100">
+  						</div>
+  	    		</dt>
+  				</dl>
+      		{{/each}}
+      		{{else}}
+      		<p style="font-weight: 100;margin-left:10px;">债权方交车照片：无</p>
+      		{{/if}}
+      		<div class="clearfix"></div>
+      		{{if data.rectVoList}}
 	    		<p style="font-weight: 100;margin-left:10px;">交车单照片</p>
 	    		{{each data.rectVoList data index}}
 	    		<dl>
-					<dt>
-						<div class="upfile-item">
-							<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100">
-						</div>
-	    			</dt>
-				</dl>
-	        	{{/each}}
-	        	<div class="clearfix"></div>
-	        	<p style="font-weight: 100;margin-left:10px;">收车视频</p>
+  					<dt>
+  						<div class="upfile-item">
+  							<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100">
+  						</div>
+  	    		</dt>
+  				</dl>
+        	{{/each}}
+        	{{else}}
+        	<p style="font-weight: 100;margin-left:10px;">交车单照片：无</p>
+        	{{/if}}
+        	<div class="clearfix"></div>
+        	{{if data.receiveVideoList}}
+        	<p style="font-weight: 100;margin-left:10px;">收车视频</p>
           {{each data.receiveVideoList data index}}
           <dl>
-          <dt>
-            <div class="upfile-item">
-              <video width="150" height="150" controls="controls">
-                <source class="preview-img hand" src="{{viewImgRoot}}{{data.url}}" type="video/mp4"></source>
-              </video>
-            </div>
+            <dt>
+              <div class="upfile-item">
+                <video width="150" height="150" controls="controls">
+                  <source class="preview-img hand" src="{{viewImgRoot}}{{data.url}}" type="video/mp4"></source>
+                </video>
+              </div>
             </dt>
-        </dl>
-            {{/each}}
-            <div class="clearfix"></div>
-            <p style="font-weight: 100;margin-left:10px;">收车视频缩略图</p>
+          </dl>
+          {{/each}}
+          {{else}}
+          <p style="font-weight: 100;margin-left:10px;">收车视频：无</p>
+          {{/if}}
+          <div class="clearfix"></div>
+          {{if data.receiveVideoCoverList}}
+          <p style="font-weight: 100;margin-left:10px;">收车视频缩略图</p>
           {{each data.receiveVideoCoverList data index}}
           <dl>
-          <dt>
-            <div class="upfile-item">
-              <img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100">
-            </div>
+            <dt>
+              <div class="upfile-item">
+                <img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100">
+              </div>
             </dt>
-        </dl>
-            {{/each}}
+          </dl>
+          {{/each}}
+          {{else}}
+          <p style="font-weight: 100;margin-left:10px;">收车视频缩略图：无</p>
+          {{/if}}
         	</div>
         </div>
         {{/if}}

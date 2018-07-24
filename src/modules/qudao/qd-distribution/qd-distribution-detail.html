@@ -97,6 +97,7 @@
     			<span>上传凭证时间：{{data.createAt}}</span>
     			<span>备注说明：{{data.remark}}</span>
     		</p>
+    		{{if data.pictures}}
     		<p style="font-weight: 500;margin-left:20px;">图片凭证</p>
     		{{each data.pictures item index}}
     		<dl>
@@ -107,7 +108,11 @@
       			</dt>
   			</dl>
   			{{/each}}
+  			{{else}}
+  			<p style="font-weight: 500;margin-left:20px;">图片凭证：无</p>
+  			{{/if}}
 			<div class="clearfix"></div>
+			{{if data.videos}}
 			<p style="font-weight: 500;margin-left:20px;">视频凭证</p>
 			{{each data.videos item index}}
 			<dl>
@@ -120,6 +125,9 @@
     		</dt>
 			</dl>
 			{{/each}}
+			{{else}}
+			<p style="font-weight: 500;margin-left:20px;">视频凭证：无</p>
+			{{/if}}
     	</div>
     	{{/each}}
     	{{/if}}
