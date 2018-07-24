@@ -171,6 +171,26 @@
 	    			</dt>
 				</dl>
 	        	{{/each}}
+	        	<p style="font-weight: 100;margin-left:10px;">收车视频</p>
+          {{each data.receiveVideoList data index}}
+          <dl>
+          <dt>
+            <div class="upfile-item">
+              <img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100">
+            </div>
+            </dt>
+        </dl>
+            {{/each}}
+            <p style="font-weight: 100;margin-left:10px;">收车视频缩略图</p>
+          {{each data.receiveVideoCoverList data index}}
+          <dl>
+          <dt>
+            <div class="upfile-item">
+              <img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.url}}" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100">
+            </div>
+            </dt>
+        </dl>
+            {{/each}}
         	</div>
         </div>
         {{/if}}
