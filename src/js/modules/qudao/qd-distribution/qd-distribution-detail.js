@@ -27,8 +27,11 @@ define(function(require, exports, module) {
                      returnData.isDetail = jh.utils.isDetail;
                     returnData.taskId = args.id;
                     returnData.trailer = returnData.data.trailerFailList.length;
-                    returnData.data.trailerFailList[0].pictures = returnData.data.trailerFailList[0].pictures.split(',');
-                    returnData.data.trailerFailList[0].videos = returnData.data.trailerFailList[0].videos.split(',');
+                    var trailerFailList = returnData.data.trailerFailList;
+                    for(var i=0;i<trailerFailList.length;i++){
+                      returnData.data.trailerFailList[i].pictures = trailerFailList[i].pictures.split(',');
+                      returnData.data.trailerFailList[i].videos = trailerFailList[i].videos.split(',');
+                    }
                     var html = jh.utils.template('admin-qDDistributionDetail-template', returnData);
                     $('#admin-qDDistributionDetail-container').html(html);
                     _this.searchIllegalInfo();//查询违章信息
