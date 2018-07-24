@@ -29,9 +29,13 @@ define(function(require, exports, module) {
                     returnData.trailer = returnData.data.trailerFailList.length;
                     var trailerFailList = returnData.data.trailerFailList;
                     for(var i=0;i<trailerFailList.length;i++){
-                      returnData.data.trailerFailList[i].pictures = trailerFailList[i].pictures.split(',');
-                      returnData.data.trailerFailList[i].videos = trailerFailList[i].videos.split(',');
-                    }
+                      if(trailerFailList[i].pictures){
+                        returnData.data.trailerFailList[i].pictures = trailerFailList[i].pictures.split(',');
+                      }
+                      if(trailerFailList[i].videos){
+                        returnData.data.trailerFailList[i].videos = trailerFailList[i].videos.split(',');
+                      }
+                      }
                     var html = jh.utils.template('admin-qDDistributionDetail-template', returnData);
                     $('#admin-qDDistributionDetail-container').html(html);
                     _this.searchIllegalInfo();//查询违章信息
