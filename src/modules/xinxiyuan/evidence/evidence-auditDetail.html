@@ -139,13 +139,13 @@
     			<div class="upimg">
     			  <span style="padding:0 17px;">委托书原件</span>
             {{each data.entrustVoList item index}}
-            <img class="preview-img" src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" />
+            <img class="preview-img" src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" />
             {{/each}}
     			</div>
     			<div class="upimg" style="margin-top:10px;">
             <span style="padding:0 10px;">凭证资料清单</span>
             {{each data.voucherVoList item index}}
-            <img src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'"/>
+            <img class="preview-img" src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'"/>
             {{/each}}
           </div>
     			<a class="button search-button mt25 isSure" href="javascript:;">凭证审核</a>
