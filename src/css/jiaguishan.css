@@ -110,8 +110,12 @@
   height: 304px;
   border: 1px solid #ddd;
 }
-
-#poster_manage_addBannerForm input[type="text"] {
+#shop_manage_addGoodsForm .img-preview-content {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ddd;
+}
+#poster_manage_addBannerForm input[type="text"], #shop_manage_addGoodsForm input[type="text"] {
   width: 520px;
   height: 30px;
   border: 1px solid #ddd;
