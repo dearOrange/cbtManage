@@ -50,10 +50,12 @@ define(function(require, exports, module) {
             if(!obj){
                 obj = {};
                 conName = '新增';
+                _this.url = '/goods/addGoods';
             }else{
                 obj.showImgUrl = jh.config.viewImgRoot + obj.goodsImg;
                 conName = '编辑';
                 _this.id = obj.id;
+                _this.url = '/goods/updateGoods'
             }
             var str = jh.utils.template('shop_manage_addGoodsTemplate', obj);
             jh.utils.alert({
@@ -80,7 +82,7 @@ define(function(require, exports, module) {
                     };
                     
                     jh.utils.ajax.send({
-                        url: '/goods/addGoods',
+                        url: _this.url,
                         data: datas,
                         method: 'post',
                         done: function(returnData) {
