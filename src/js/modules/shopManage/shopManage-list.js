@@ -105,11 +105,25 @@ define(function(require, exports, module) {
             });
         };
         
-        this.upgrounding = function(ids, status){
+        this.upgrounding = function(ids, status, statusAs){
           var name = status == '1' ? '上架' : '下架';
           if(!ids){
             jh.utils.alert({
               content: '请先选择商品！',
+              ok: true
+            })
+            return false;
+          }
+          if(statusAs && statusAs.indexOf(status) != -1 ){
+            jh.utils.alert({
+              content: '已'+name+'的商品不能再进行'+name+'操作！',
+              ok: true
+            })
+            return false;
+          }
+          if(statusAs && statusAs.indexOf('9') != -1 ){
+            jh.utils.alert({
+              content: '待上架的商品不能进行下架操作！',
               ok: true
             })
             return false;
@@ -181,7 +195,8 @@ define(function(require, exports, module) {
               var me = $(this);
               var status = me.data('status');
               var id = jh.utils.getCheckboxValue('shop_manage_container');
-              _this.upgrounding(id, status);
+              var statusAs = jh.utils.getCheckboxStatus('shop_manage_container');
+              _this.upgrounding(id, status, statusAs);
           });
           //下架
           $('body').off('click', '.shop-undercarriage').on('click', '.shop-undercarriage', function() {
@@ -202,7 +217,35 @@ define(function(require, exports, module) {
               var me = $(this);
               var status = me.data('status');
               var id = jh.utils.getCheckboxValue('shop_manage_container');
-              _this.upgrounding(id, status);
+              var statusAs = jh.utils.getCheckboxStatus('shop_manage_container');
+              _this.upgrounding(id, status, statusAs);
+          });
+          
+          //删除
+          $('body').off('click', '.removeShop').on('click', '.removeShop', function() {
+              var me = $(this);
+              var id = me.data('id');
+              jh.utils.alert({
+                content: '确定删除该商品吗？',
+                ok: function(){
+                  jh.utils.ajax.send({
+                    url: '/goods/deleteGoods',
+                    data: {
+                      goodsIds: id
+                    },
+                    done: function() {
+                      jh.utils.alert({
+                        content: '商品成功删除！',
+                        ok: function(){
+                          _this.initContent();
+                        },
+                        cancel: false
+                      });
+                    }
+                  });
+                },
+                cancel: false
+              });
           });
         };
     }

@@ -11751,6 +11751,23 @@ define(function(require, exports, module) {
     }
     tammy.utils.getCheckboxValue = getCheckboxValueById;
   })();
+  (function() {
+    function getCheckboxValueByStatus(id, type) {
+      var list = $('#' + id).find(':checked');
+      var statusAll = [];
+      $.each(list, function(index, item) {
+        if(type && type === 'value') {
+          statusAll.push($(item).val());
+        } else {
+          statusAll.push($(item).data('status'));
+        }
+      });
+      statusAll = statusAll.join(',');
+
+      return statusAll;
+    }
+    tammy.utils.getCheckboxStatus = getCheckboxValueByStatus;
+  })();
   // 积分兑换
   (function() {
     var changer = function(state) {

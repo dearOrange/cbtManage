@@ -60,7 +60,7 @@
   <tr>
     <td>{{index+1}}</td>
     <td>
-      <input type="checkbox" data-id="{{item.id}}"/>
+      <input type="checkbox" data-id="{{item.id}}" data-status="{{item.status}}"/>
     </td>
     <td>{{item.goodsName}}</td>
     <td class="imgWidth">
@@ -71,9 +71,15 @@
     <td>{{item.rank}}</td>
     <td>{{stateToString(item.status)}}</td>
     <td>
-      <a data-id="{{item.id}}" data-status="1" class="shop-grounding button {{if item.status == '1'}}greyStyle{{/if}}">上架</a>
-      <a data-id="{{item.id}}" data-status="0" class="shop-undercarriage button {{if item.status == '0'}}greyStyle{{/if}}">下架</a>
+      {{if item.status == '0' || item.status == '9'}}
+      <a data-id="{{item.id}}" data-status="1" class="shop-grounding button">上架</a>
+      {{else}}
+      <a data-id="{{item.id}}" data-status="0" class="shop-undercarriage button">下架</a>
+      {{/if}}
       <a data-info="{{item}}" class="shopEdit button oneStyle">编辑</a>
+      {{if item.status == '9'}}
+      <a data-id="{{item.id}}" data-status="0" class="removeShop greyStyle button">删除</a>
+      {{/if}}
     </td>
   </tr>
   {{/each}}
