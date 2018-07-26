@@ -83,7 +83,7 @@
   <form id="shop_manage_addGoodsForm">
     <div class="mt10">
       <label>商品名称：</label>
-      <input type="text" name="goodsName" placeholder="输入商品名称（10字内）" maxlength="10" value="{{goodsName}}">
+      <input type="text" name="goodsName" class="required" placeholder="输入商品名称（10字内）" maxlength="10" value="{{goodsName}}">
     </div>
     <p>商品图片：</p>
     <div class="upimg">
@@ -105,15 +105,15 @@
     <div class="clearfix"></div>
     <div class="mt10">
       <label class="pull-left" style="margin:26px 14px 0 0">商品描述：</label>
-      <textarea style="width:520px;height:60px;resize: none;" name="goodsBrief" placeholder="输入商品描述语（20字内）" maxlength="20">{{goodsBrief}}</textarea>
+      <textarea style="width:520px;height:60px;resize: none;" class="required" name="goodsBrief" placeholder="输入商品描述语（20字内）" maxlength="20">{{goodsBrief}}</textarea>
     </div>
     <div class="mt10">
       <label>兑换金币数：</label>
-      <input type="text" name="price" class="required number" value="{{price}}" placeholder="输入商品兑换所需要的金币（数字）">
+      <input type="text" name="price" class="required number" value="{{price}}" placeholder="输入商品兑换所需要的金币（数字）" maxlength="10">
     </div>
     <div class="mt10">
       <label>商品排序号：</label>
-      <input type="text" name="rank" class="required number" placeholder="输入商品在商城中排列的序列数" value="{{rank}}">
+      <input type="text" name="rank" class="required number" placeholder="输入商品在商城中排列的序列数" value="{{rank}}" maxlength="10">
     </div>
   </form>
 </script>
