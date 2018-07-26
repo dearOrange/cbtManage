@@ -600,6 +600,10 @@ p.closeStatus {
 .oneStyle:hover {
 	background: #d73d33 !important;
 }
+.greyStyle {
+  border: 1px solid #bbb !important;
+  background: #bbb !important;
+}
 .dataContent .search-container .stateChange {
 	width: 100%;
 	border-bottom:1px solid #68C8F8;

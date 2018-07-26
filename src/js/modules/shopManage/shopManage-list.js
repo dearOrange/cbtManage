@@ -84,7 +84,6 @@ define(function(require, exports, module) {
                     jh.utils.ajax.send({
                         url: _this.url,
                         data: datas,
-                        method: 'post',
                         done: function(returnData) {
                             jh.utils.alert({
                                 content: '海报'+conName+'成功！',
@@ -107,7 +106,7 @@ define(function(require, exports, module) {
         };
         
         this.upgrounding = function(ids, status){
-          var name = status === '1' ? '上架' : '下架';
+          var name = status == '1' ? '上架' : '下架';
           if(!ids){
             jh.utils.alert({
               content: '请先选择商品！',
@@ -124,7 +123,6 @@ define(function(require, exports, module) {
                   goodsIds: ids,
                   status: status
                 },
-                method: 'post',
                 done: function() {
                   jh.utils.alert({
                     content: '商品成功'+name+'！',
@@ -161,13 +159,19 @@ define(function(require, exports, module) {
           //新增商品
           $('body').off('click', '#newcreated-goods').on('click', '#newcreated-goods', function() {
               var me = $(this);
-//            var id = me.data('id');
               _this.showBanner();
           });
           
           //上架
           $('body').off('click', '.shop-grounding').on('click', '.shop-grounding', function() {
               var me = $(this);
+              if(me.hasClass('greyStyle')){
+                jh.utils.alert({
+                  content: '该商品已上架！',
+                  ok: true
+                })
+                return false;
+              }
               var id = me.data('id');
               var status = me.data('status');
               _this.upgrounding(id, status);
@@ -182,6 +186,13 @@ define(function(require, exports, module) {
           //下架
           $('body').off('click', '.shop-undercarriage').on('click', '.shop-undercarriage', function() {
               var me = $(this);
+              if(me.hasClass('greyStyle')){
+                jh.utils.alert({
+                  content: '该商品已下架！',
+                  ok: true
+                })
+                return false;
+              }
               var id = me.data('id');
               var status = me.data('status');
               _this.upgrounding(id, status);
