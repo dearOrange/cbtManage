@@ -244,7 +244,7 @@ define(function(require, exports, module) {
                     }
                   });
                 },
-                cancel: false
+                cancel: true
               });
           });
         };

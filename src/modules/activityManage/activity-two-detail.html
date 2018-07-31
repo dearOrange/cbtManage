@@ -1,0 +1,46 @@
+<div class="dataContent activityDetailContent">
+  
+</div>
+<script type="text/template" id="activity_detail_template">
+    <div class="dialog-width public_css">
+        <p class="pull-left detail_css">心愿详情</p>
+        <a href="javascript:;" class="button gobackPage goBack">返回</a>
+        <p class="showTaskState pull-right">{{menuState(data.state)}}</p>
+        <div class="clearfix"></div>
+        <hr /><br />
+        <p>基本信息</p><br />
+        
+        <table class="taskTable">
+          <tr>
+            <th>姓名：</th>
+            <td>{{data.taskNo}}</td>
+            <th>联系电话：</th>
+            <td>{{menuState(data.entrust)}}</td>
+            <th>许愿日期：</th>
+            <td>{{data.upstreamName}}</td>
+          </tr>
+          <tr>
+            <th>许愿商品：</th>
+            <td>{{data.carNumber}}</td>
+            <th>商品价值：</th>
+            <td>{{data.carBrand}}-{{data.carSeries}}-{{data.carModel}}</td>
+            <th>所需金币：</th>
+            <td>{{data.carColor}}</td>
+          </tr>
+          <tr>
+            <th>已有金币：</th>
+            <td>{{data.carId}}</td>
+            <th>收货人电话：</th>
+            <td>{{data.engineId}}</td>
+            <th>收货地址：</th>
+            <td>{{data.createAt}}</td>
+          </tr>
+        </table>
+    </div>
+</script>
+<script type="text/javascript">
+seajs.use('modules/activityManage/activity-two-detail', function(ActivityTwoDetail) {
+    var ActivityTwoDetail = new ActivityTwoDetail();
+    ActivityTwoDetail.init();
+});
+</script>

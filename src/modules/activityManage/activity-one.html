@@ -1,0 +1,97 @@
+<div class="dataContent">
+  <div class="search-container">
+    <form id="activityOne-form">
+      <table class="common_query textLeft search-content">
+        <tr class="new-style">
+          <td>
+              <label class="label">联系人：</label>
+              <input type="text" class="search-input" name="downstreamName">
+          </td>
+          <td>
+              <label class="label">状态：</label>
+              <select name="status">
+                <option value="">全部</option>
+                <option value="1">已达标</option>
+                <option value="2">已确认</option>
+                <option value="0">未达标</option>
+                <option value="3">已发放</option>
+              </select>
+          </td>
+          <td>
+            <input type="submit" value="查询" class="button search-button">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div class="data-container">
+    <table class="dataShow">
+      <thead>
+        <tr>
+          <th width="5%">序号</th>
+          <th width="8%">姓名</th>
+          <th width="10%">联系电话</th>
+          <th width="15%">报名日期</th>
+          <th width="10%">拍照数量</th>
+          <th width="8%">推荐注册量</th>
+          <th width="8%">状态</th>
+          <th width="10%">操作</th>
+        </tr>
+      </thead>
+      <tbody id="activity_one_container">
+
+      </tbody>
+    </table>
+    <div class="page-box pagination" id="page_container"></div>
+  </div>
+</div>
+
+<script type="text/template" id="activity-one-template">
+  {{ each list item index }}
+  <tr>
+    <td>{{index+1}}</td>
+    <td>{{item.downstreamName}}</td>
+    <td>{{item.downstreamPhone}}</td>
+    <td>{{item.startTime}}</td>
+    <td>{{item.photoNum}}</td>
+    <td>{{item.recommendNum}}</td>
+    <td>{{stateToString(item.status)}}</td>
+    <td>
+      {{if item.status == '1'}}
+      <a data-info="{{item}}" class="sureGive greyStyle button">确认</a>
+      {{/if}}
+      {{if item.status == '2'}}
+      <a data-info="{{item}}" class="rewardWill button">发放奖励</a>
+      {{/if}}
+    </td>
+  </tr>
+  {{/each}}
+</script>
+
+<script type="text/template" id="send_awards_Template">
+  <form id="send_awards_Form">
+    <table class="noboder">
+        <tbody>
+          <tr>
+            <td>发放对象：</td>
+            <td>{{data.downstreamName}}</td>
+            <td>奖励金额：</td>
+            <td>{{data.amount}}（金币）</td>
+          </tr>
+          <tr>
+            <td>其他金额：</td>
+            <td colspan="3">
+              <input type="text" name="netCoin" id="" value="" placeholder="发放其他数额的奖励" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </form>
+</script>
+
+<script type="text/javascript">
+  seajs.use('modules/activityManage/activity-one', function(ActivityOne) {
+    var ActivityOne = new ActivityOne();
+    ActivityOne.init();
+  });
+</script>
