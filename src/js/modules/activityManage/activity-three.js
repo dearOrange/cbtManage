@@ -60,7 +60,8 @@ define(function(require, exports, module) {
                   var datas = jh.utils.formToJson(form);
                   datas.id = infos.id;
                   datas.status = 1;
-                  datas.netCoin = datas.netCoin === '' ? infos.amount : datas.netCoin;
+                  datas.netCoin = datas.netCoin === '' ? infos.getCoin : datas.netCoin;
+                  
                   jh.utils.ajax.send({
                       url: '/activity/sendActivity3',
                       data: datas,
@@ -143,7 +144,7 @@ define(function(require, exports, module) {
                             url: '/activity/sendUnOpenBonusPush',
                             data: {
                               id: infos.id,
-                              type: '3'
+                              type: 3
                             },
                             done: function(returnData) {
                               jh.utils.alert({

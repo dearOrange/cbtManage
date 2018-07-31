@@ -29,15 +29,18 @@ define(function(require, exports, module) {
                         var str = '';
                         switch(state){
                             case 0:
-                                str = '未达标';
+                                str = '新许愿';
                                 break;
                             case 1:
-                                str = '已达标';
+                                str = '未达成';
                                 break;
                             case 2:
-                                str = '已确认';
+                                str = '已达成';
                                 break;
                             case 3:
+                                str = '审核未通过';
+                                break;
+                            case 4:
                                 str = '已发放';
                                 break;
                         }
@@ -60,6 +63,14 @@ define(function(require, exports, module) {
                   _this.initContent(true);
                   return false;
               }
+          });
+          
+          //查看任务详情
+          $('.dataShow').off('click', '.activityTwoDetail').on('click', '.activityTwoDetail', function() {
+              var id = $(this).data('id');
+              jh.utils.load("/src/modules/activityManage/activity-two-detail", {
+                  id: id
+              })
           });
           
           //确认达标

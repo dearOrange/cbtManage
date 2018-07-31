@@ -38,7 +38,7 @@
           <th width="8%">所需金币</th>
           <th width="8%">已有金币</th>
           <th width="8%">状态</th>
-          <th width="10%">操作</th>
+          <th width="20%">操作</th>
         </tr>
       </thead>
       <tbody id="activity_two_container">
@@ -53,23 +53,28 @@
   {{ each list item index }}
   <tr>
     <td>{{index+1}}</td>
-    <td>{{item.downstreamName}}</td>
+    <td>{{item.contactNumber}}</td>
     <td>{{item.downstreamPhone}}</td>
-    <td>{{item.startTime}}</td>
+    <td>{{item.createAt}}</td>
     <td>{{item.photoNum}}</td>
-    <td>{{item.recommendNum}}</td>
-    <td>{{item.photoNum}}</td>
-    <td>{{item.recommendNum}}</td>
+    <td>{{item.goodsPrice}}</td>
+    <td>{{item.coin}}</td>
+    <td>{{item.fund}}</td>
     <td>{{stateToString(item.status)}}</td>
     <td>
-      {{if item.status == '1'}}
+      {{if item.status == '3' || item.status == '4'}}
+        {{if item.status == '3'}}
+        
+        {{/if}}
+      {{else}}
+      {{if item.status == '2'}}
       <a data-id="{{item.id}}" class="sureGive button">完成愿望</a>
       {{/if}}
-      {{if item.status == '2'}}
+      {{if item.status == '0'}}
       <a data-id="{{item.id}}" class="rewardWill button">审核</a>
-      <a data-id="{{item.id}}" class="rewardWill button">所需金币</a>
       {{/if}}
       <a data-id="{{item.id}}" class="activityTwoDetail greyStyle button">详情</a>
+      {{/if}}
     </td>
   </tr>
   {{/each}}

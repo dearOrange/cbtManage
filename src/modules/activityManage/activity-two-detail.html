@@ -5,7 +5,7 @@
     <div class="dialog-width public_css">
         <p class="pull-left detail_css">心愿详情</p>
         <a href="javascript:;" class="button gobackPage goBack">返回</a>
-        <p class="showTaskState pull-right">{{menuState(data.state)}}</p>
+        <p class="showTaskState pull-right">{{data.state}}</p>
         <div class="clearfix"></div>
         <hr /><br />
         <p>基本信息</p><br />
@@ -15,7 +15,7 @@
             <th>姓名：</th>
             <td>{{data.taskNo}}</td>
             <th>联系电话：</th>
-            <td>{{menuState(data.entrust)}}</td>
+            <td>{{data.entrust}}</td>
             <th>许愿日期：</th>
             <td>{{data.upstreamName}}</td>
           </tr>
