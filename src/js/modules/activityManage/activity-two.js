@@ -51,6 +51,38 @@ define(function(require, exports, module) {
             });
             page.init();
         };
+        this.sureRewards = function(wishStr, infos){
+          jh.utils.alert({
+            tittle: '完成愿望',
+            content: wishStr,
+            ok: function(){
+              $('#send_awards_two_Form').submit();
+              return false;
+            },
+            cancel: true
+          });
+          jh.utils.validator.init({
+              id: 'send_awards_two_Form',
+              submitHandler: function(form) {
+                  var datas = jh.utils.formToJson(form);
+                  datas.id = infos.id;
+                  jh.utils.ajax.send({
+                      url: '/activity/finishWishList',
+                      data: datas,
+                      done: function(returnData) {
+                          jh.utils.alert({
+                              content: '奖励发放成功！',
+                              ok: function() {
+                                  window.location.reload();
+                                  jh.utils.closeArt();
+                              }
+                          });
+                      }
+                  });
+                  return false;
+              }
+          });
+        };
         this.registerEvent = function() {
           $('select').select2({
               minimumResultsForSearch: Infinity
@@ -67,10 +99,8 @@ define(function(require, exports, module) {
           
           //查看任务详情
           $('.dataShow').off('click', '.activityTwoDetail').on('click', '.activityTwoDetail', function() {
-              var id = $(this).data('id');
-              jh.utils.load("/src/modules/activityManage/activity-two-detail", {
-                  id: id
-              })
+              var info = $(this).data('info');
+              jh.utils.load("/src/modules/activityManage/activity-two-detail", info)
           });
           $('body').off('click', '.isThrough').on('click', '.isThrough', function() {
             var me = $(this).val();
@@ -98,6 +128,21 @@ define(function(require, exports, module) {
                       ok: true
                     })
                     return false;
+                  }else{
+                    if(throughState == 1 && !($('#coin_val').val())){
+                      jh.utils.alert({
+                        content: '请填写金额',
+                        ok: true
+                      })
+                      return false;
+                    }
+                    if(throughState == 0 && !($('#identifyContent').val())){
+                      jh.utils.alert({
+                        content: '请填写拒绝原因',
+                        ok: true
+                      })
+                      return false;
+                    }
                   };
                   jh.utils.ajax.send({
                     url: '/activity/checkWishList',
@@ -124,29 +169,10 @@ define(function(require, exports, module) {
           
           //确认达标
           $('body').off('click', '.sureGive').on('click', '.sureGive', function() {
-              var me = $(this);
-              var id = me.data('id');
-              jh.utils.alert({
-                content: '确定用户活动目标已达成？',
-                ok: function(){
-//                jh.utils.ajax.send({
-//                  url: '/goods/deleteGoods',
-//                  data: {
-//                    goodsIds: id
-//                  },
-//                  done: function() {
-//                    jh.utils.alert({
-//                      content: '商品成功删除！',
-//                      ok: function(){
-//                        _this.initContent();
-//                      },
-//                      cancel: false
-//                    });
-//                  }
-//                });
-                },
-                cancel: true
-              });
+            var me = $(this);
+            var infos = me.data('info');
+            var wishStr = jh.utils.template('send_awards_two_Template', {data: infos});
+            _this.sureRewards(wishStr, infos);
           });
           
         };

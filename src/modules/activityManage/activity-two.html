@@ -68,32 +68,32 @@
         {{/if}}
       {{else}}
       {{if item.status == '2'}}
-      <a data-id="{{item.id}}" class="sureGive button">完成愿望</a>
+      <a data-info="{{item}}" class="sureGive button">完成愿望</a>
       {{/if}}
       {{if item.status == '0'}}
       <a data-id="{{item.id}}" class="rewardWill button">审核</a>
       {{/if}}
-      <a data-id="{{item.id}}" class="activityTwoDetail greyStyle button">详情</a>
+      <a data-info="{{item}}" class="activityTwoDetail greyStyle button">详情</a>
       {{/if}}
     </td>
   </tr>
   {{/each}}
 </script>
 <!--完成愿望-->
-<script type="text/template" id="send_awards_Template">
-  <form id="send_awards_Form">
+<script type="text/template" id="send_awards_two_Template">
+  <form id="send_awards_two_Form">
     <table class="noboder">
         <tbody>
           <tr>
             <td>发放礼品：</td>
-            <td>西瓜</td>
+            <td>{{data.goodsName}}</td>
             <td>价值：</td>
-            <td>5000元</td>
+            <td>{{data.goodsPrice}}元</td>
           </tr>
           <tr>
             <td>发放时间：</td>
             <td colspan="3">
-              <input type="text" class="search-input hand begin-input" readonly="readonly" name="" id="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})">
+              <input type="text" class="search-input hand begin-input" style="height:26px;border:1px solid #ccc;" readonly="readonly" name="sendTime" id="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true})">
             </td>
           </tr>
         </tbody>
@@ -106,11 +106,11 @@
   <div class="divied-width ">
     <div class="divied-type">
       <input type="radio" name="status" value="1" id="through" class="isThrough" />通过
-      <input type="radio" name="status" value="2" id="nothrough" class="isThrough" />拒绝
+      <input type="radio" name="status" value="0" id="nothrough" class="isThrough" />拒绝
     </div>
     <div class="divied-content sure_con hide">
       <label>所需金币：</label>
-      <input type="text" name="" id="coin_val" value="" placeholder="填写所需金币" />
+      <input type="text" name="" id="coin_val" value="" style="height:26px;border:1px solid #ccc;" placeholder="填写所需金币" />
     </div>
     <div class="divied-content result_con hide">
       <label>拒绝原因：</label>
