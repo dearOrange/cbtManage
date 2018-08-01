@@ -61,7 +61,6 @@ define(function(require, exports, module) {
                   datas.id = infos.id;
                   datas.status = 1;
                   datas.netCoin = datas.netCoin === '' ? infos.getCoin : datas.netCoin;
-                  
                   jh.utils.ajax.send({
                       url: '/activity/sendActivity3',
                       data: datas,

@@ -72,6 +72,55 @@ define(function(require, exports, module) {
                   id: id
               })
           });
+          $('body').off('click', '.isThrough').on('click', '.isThrough', function() {
+            var me = $(this).val();
+            if(me == 1){
+              $('.result_con').addClass('hide');
+              $('.sure_con').removeClass('hide');
+            }else{
+              $('.sure_con').addClass('hide');
+              $('.result_con').removeClass('hide');
+            }
+          });
+          //审核
+          $('body').off('click', '.rewardWill').on('click', '.rewardWill', function() {
+              var me = $(this);
+              var id = me.data('id');
+              var auditStr = jh.utils.template('wish_audit_template', {});
+              jh.utils.alert({
+                tittle: '心愿审核',
+                content: auditStr,
+                ok: function(){
+                  var throughState = $('.isThrough').filter(':checked').val();
+                  if(!throughState){
+                    jh.utils.alert({
+                      content: '请先选择条件',
+                      ok: true
+                    })
+                    return false;
+                  };
+                  jh.utils.ajax.send({
+                    url: '/activity/checkWishList',
+                    data: {
+                      id: id,
+                      reason: $('#identifyContent').val(),
+                      status: throughState,
+                      netcoin: $('#coin_val').val()
+                    },
+                    done: function() {
+                      jh.utils.alert({
+                        content: '操作成功！',
+                        ok: function(){
+                          _this.initContent();
+                        },
+                        cancel: false
+                      });
+                    }
+                  });
+                },
+                cancel: true
+              });
+          });
           
           //确认达标
           $('body').off('click', '.sureGive').on('click', '.sureGive', function() {
@@ -100,40 +149,6 @@ define(function(require, exports, module) {
               });
           });
           
-          //发放奖励
-          $('body').off('click', '.rewardWill').on('click', '.rewardWill', function() {
-              var me = $(this);
-              var id = me.data('id');
-              var rewardStr = jh.utils.template('send_awards_Template', {});
-              jh.utils.alert({
-                content: rewardStr,
-                ok: function(){
-                  $('#send_awards_Form').submit();
-                  return false;
-                },
-                cancel: true
-              });
-              jh.utils.validator.init({
-                id: 'send_awards_Form',
-                submitHandler: function(form) {
-                    var datas = jh.utils.formToJson(form);
-                    jh.utils.ajax.send({
-                        url: '/activity/sendCoinByBigRun',
-                        data: datas,
-                        done: function(returnData) {
-                            jh.utils.alert({
-                                content: '奖励发放成功！',
-                                ok: function() {
-                                    window.location.reload();
-                                    jh.utils.closeArt();
-                                }
-                            });
-                        }
-                    });
-                    return false;
-                }
-            });
-          });
         };
     }
     module.exports = ActivityTwo;

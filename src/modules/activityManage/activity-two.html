@@ -53,10 +53,10 @@
   {{ each list item index }}
   <tr>
     <td>{{index+1}}</td>
-    <td>{{item.contactNumber}}</td>
+    <td>{{item.downstreamName}}</td>
     <td>{{item.downstreamPhone}}</td>
     <td>{{item.createAt}}</td>
-    <td>{{item.photoNum}}</td>
+    <td>{{item.goodsName}}</td>
     <td>{{item.goodsPrice}}</td>
     <td>{{item.coin}}</td>
     <td>{{item.fund}}</td>
@@ -100,24 +100,19 @@
       </table>
   </form>
 </script>
-<!--所需金币-->
-<script type="text/template" id="">
-  <form id="">
-    <div>
-      <label>所需金币：</label>
-      <input type="text" name="" id="" value="" placeholder="填写所需金币" />
-    </div>
-  </form>
-</script>
 
 <!--心愿审核-->
-<script type="text/template" id="">
+<script type="text/template" id="wish_audit_template">
   <div class="divied-width ">
     <div class="divied-type">
-      <input type="radio" name="" value="1" id="through" class="" />通过
-      <input type="radio" name="" value="2" id="nothrough" class="" />拒绝
+      <input type="radio" name="status" value="1" id="through" class="isThrough" />通过
+      <input type="radio" name="status" value="2" id="nothrough" class="isThrough" />拒绝
     </div>
-    <div class="divied-content">
+    <div class="divied-content sure_con hide">
+      <label>所需金币：</label>
+      <input type="text" name="" id="coin_val" value="" placeholder="填写所需金币" />
+    </div>
+    <div class="divied-content result_con hide">
       <label>拒绝原因：</label>
       <textarea name="" maxlength="40" id="identifyContent"></textarea>
     </div>
