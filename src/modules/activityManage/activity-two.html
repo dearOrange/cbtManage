@@ -37,6 +37,7 @@
           <th width="8%">商品价值/元</th>
           <th width="8%">所需金币</th>
           <th width="8%">已有金币</th>
+          <th width="10%">发送时间</th>
           <th width="8%">状态</th>
           <th width="20%">操作</th>
         </tr>
@@ -60,6 +61,7 @@
     <td>{{item.goodsPrice}}</td>
     <td>{{item.coin}}</td>
     <td>{{item.fund}}</td>
+    <td>{{item.sendTime}}</td>
     <td>{{stateToString(item.status)}}</td>
     <td>
       {{if item.status == '3' || item.status == '4'}}
