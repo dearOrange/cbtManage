@@ -10,6 +10,8 @@ define(function(require, exports, module) {
         var _this = this;
         var args = jh.utils.getURLValue().args;
         args.mailingAddress = decodeURIComponent(args.mailingAddress);
+        args.downstreamName = decodeURIComponent(args.downstreamName);
+        args.goodsName = decodeURIComponent(args.goodsName);
         this.init = function() {
             this.initContent();
         };
