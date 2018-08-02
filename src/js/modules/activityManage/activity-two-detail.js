@@ -12,6 +12,7 @@ define(function(require, exports, module) {
         args.mailingAddress = decodeURIComponent(args.mailingAddress);
         args.downstreamName = decodeURIComponent(args.downstreamName);
         args.goodsName = decodeURIComponent(args.goodsName);
+        args.createAt = decodeURIComponent(args.createAt);
         this.init = function() {
             this.initContent();
         };
