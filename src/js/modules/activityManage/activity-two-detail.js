@@ -9,7 +9,7 @@ define(function(require, exports, module) {
     function ActivityTwoDetail() {
         var _this = this;
         var args = jh.utils.getURLValue().args;
-
+        args.mailingAddress = decodeURIComponent(args.mailingAddress);
         this.init = function() {
             this.initContent();
         };
