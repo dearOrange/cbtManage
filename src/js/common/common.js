@@ -10835,7 +10835,7 @@ define(function(require, exports, module) {
           var itemModule = item.children('a').data('url');
           var str1 = args.substring(0, args.lastIndexOf('/'));
           var str2 = itemModule.substring(0, args.lastIndexOf('/'));
-          if(args === itemModule + '.html' || str1 === str2) {
+          if(args === itemModule + '.html' && str1 === str2) {
             findFlag = true;
             if(typeof fn === 'function') {
               fn(item);
