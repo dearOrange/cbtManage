@@ -13,27 +13,27 @@
         <table class="taskTable">
           <tr>
             <th>姓名：</th>
-            <td>{{data.downstreamName}}</td>
+            <td>{{if data.downstreamName}}{{data.downstreamName}}{{/if}}</td>
             <th>联系电话：</th>
-            <td>{{data.downstreamPhone}}</td>
+            <td>{{if data.downstreamPhone}}{{data.downstreamPhone}}{{/if}}</td>
             <th>许愿日期：</th>
-            <td>{{data.createAt}}</td>
+            <td>{{if data.createAt}}{{data.createAt}}{{/if}}</td>
           </tr>
           <tr>
             <th>许愿商品：</th>
-            <td>{{data.goodsName}}</td>
+            <td>{{if data.goodsName}}{{data.goodsName}}{{/if}}</td>
             <th>商品价值：</th>
-            <td>{{data.goodsPrice}}（元）</td>
+            <td>{{if data.goodsPrice}}{{data.goodsPrice}}（元）{{/if}}</td>
             <th>所需金币：</th>
-            <td>{{data.coin}}</td>
+            <td>{{if data.coin}}{{data.coin}}{{/if}}</td>
           </tr>
           <tr>
             <th>已有金币：</th>
-            <td>{{data.fund}}</td>
+            <td>{{if data.fund}}{{data.fund}}{{/if}}</td>
             <th>收货人电话：</th>
-            <td>{{data.contactNumber}}</td>
+            <td>{{if data.contactNumber}}{{data.contactNumber}}{{/if}}</td>
             <th>收货地址：</th>
-            <td>{{data.mailingAddress}}</td>
+            <td>{{if data.mailingAddress}}{{data.mailingAddress}}{{/if}}</td>
           </tr>
         </table>
     </div>
