@@ -102,6 +102,16 @@ define(function(require, exports, module) {
               jh.utils.alert({
                 content: '确定用户活动目标已达成？',
                 ok: function(){
+                  var endTime = new Date(infos.endTime).getTime();
+                  var nowTime = new Date().getTime();
+                  if(endTime != nowTime){
+                    jh.utils.alert({
+                      content: '目前活动未结束！',
+                      ok: true
+                    })
+                    return false;
+                  }
+                 
                   jh.utils.ajax.send({
                     url: '/activity/sendCoinByBigRun',
                     data: {

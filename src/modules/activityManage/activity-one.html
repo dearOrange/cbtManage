@@ -39,6 +39,7 @@
           <th width="15%">报名日期</th>
           <th width="10%">拍照数量</th>
           <th width="8%">推荐注册量</th>
+          <th width="8%">金币</th>
           <th width="8%">状态</th>
           <th width="10%">操作</th>
         </tr>
@@ -60,6 +61,7 @@
     <td>{{item.startTime}}</td>
     <td>{{item.photoNum}}</td>
     <td>{{item.recommendNum}}</td>
+    <td>{{item.netCoin}}</td>
     <td>{{stateToString(item.status)}}</td>
     <td>
       {{if item.status == '1'}}
