@@ -62,7 +62,7 @@ define(function(require, exports, module) {
               submitHandler: function(form) {
                   var datas = jh.utils.formToJson(form);
                   datas.id = infos.id;
-                  datas.status = infos.status;
+                  datas.status = 3;
                   datas.netCoin = datas.netCoin === '' ? infos.amount : datas.netCoin;
                   jh.utils.ajax.send({
                       url: '/activity/sendCoinByBigRun',
