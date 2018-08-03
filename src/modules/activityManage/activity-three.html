@@ -12,6 +12,11 @@
               <input type="text" class="search-input" name="downstreamName">
           </td>
           <td>
+              <label class="label">报名时间：</label>
+              <input type="text" class="search-input hand begin-input" readonly="readonly" name="startTime" id="startTime" onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})"> 至
+              <input type="text" class="search-input hand end-input" readonly="readonly" name="endTime" id="endTime" onclick="WdatePicker({minDate:'#F{$dp.$D(\'startTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true})">
+          </td>
+          <td>
               <label class="label">状态：</label>
               <select name="status">
                 <option value="">全部</option>
