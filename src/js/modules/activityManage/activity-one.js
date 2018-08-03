@@ -104,7 +104,7 @@ define(function(require, exports, module) {
                 ok: function(){
                   var endTime = new Date(infos.endTime).getTime();
                   var nowTime = new Date().getTime();
-                  if(endTime != nowTime){
+                  if(endTime >= nowTime){
                     jh.utils.alert({
                       content: '目前活动未结束！',
                       ok: true
