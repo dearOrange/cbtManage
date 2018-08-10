@@ -160,16 +160,22 @@
                 </div>
               </dt>
             </dl>
-          {{/each}}
+            {{/each}}
           </div>
           {{else}}
           <span class="imgSpan">人车合影：无</span>
           {{/if}}
           {{if data.clearFileVoList != ''}}
           <span class="imgSpan">交车文件</span>
-          <div class="upfile-item">
+          <div class="upimg">
             {{each data.clearFileVoList data index}}
-            <img class="preview-img hand" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'">
+            <dl>
+              <dt>
+                <div class="upfile-item">
+                  <img class="preview-img hand" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'">
+                </div>
+              </dt>
+            </dl>
             {{/each}}
           </div>
           {{else}}
