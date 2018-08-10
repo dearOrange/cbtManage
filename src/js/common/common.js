@@ -10836,13 +10836,16 @@ define(function(require, exports, module) {
           var str1 = args.substring(0, args.lastIndexOf('/'));
           var str2 = itemModule.substring(0, args.lastIndexOf('/'));
           if(args === itemModule + '.html' && str1 === str2) {
-            findFlag = true;
+//          findFlag = true;
             if(typeof fn === 'function') {
               fn(item);
             } else {
               allMenu.removeClass('active');
               item.addClass('active');
             }
+          }
+          if(args === itemModule + '.html' || str1 === str2) {
+            findFlag = true;
           }
         }
         var txt = '';

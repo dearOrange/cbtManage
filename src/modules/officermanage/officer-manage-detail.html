@@ -113,8 +113,20 @@
 					<dt>
 						<img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.linkmanIdImg}}" src="{{viewImgRoot}}{{data.linkmanIdImg}}?imageMogr2/auto-orient/thumbnail/100x100">
 		    		</dt>
-					<dd>负责人身份证照片</dd>
+					<dd>负责人身份证正面照片</dd>
 				</dl>
+				<dl>
+          <dt>
+            <img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.linkmanIdBackImg}}" src="{{viewImgRoot}}{{data.linkmanHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100">
+            </dt>
+          <dd>负责人身份证反面照片</dd>
+        </dl>
+        <dl>
+          <dt>
+            <img class="preview-img hand" onerror="this.src='/src/img/nopic.png'" data-id="{{data.linkmanHandIdImg}}" src="{{viewImgRoot}}{{data.linkmanHandIdImg}}?imageMogr2/auto-orient/thumbnail/100x100">
+            </dt>
+          <dd>负责人手持身份证正面照片</dd>
+        </dl>
 				{{/if}}
 			</div>
 		</div>
