@@ -153,7 +153,7 @@
           <span class="imgSpan">人车合影</span>
           <div class="upfile-item">
             {{each data.groupVoList data index}}
-            <img class="preview-img hand" src="{{viewImgRoot}}{{data.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'">
+            <img class="preview-img hand" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'">
             {{/each}}
           </div>
           {{else}}
@@ -163,7 +163,7 @@
           <span class="imgSpan">交车文件</span>
           <div class="upfile-item">
             {{each data.clearFileVoList data index}}
-            <img class="preview-img hand" src="{{viewImgRoot}}{{data.url}}" alt="图片" onerror="this.src='/src/img/nopic.png'">
+            <img class="preview-img hand" src="{{viewImgRoot}}{{data.url}}?imageMogr2/auto-orient/thumbnail/100x100" alt="图片" onerror="this.src='/src/img/nopic.png'">
             {{/each}}
           </div>
           {{else}}
