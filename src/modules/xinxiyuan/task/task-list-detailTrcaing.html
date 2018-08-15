@@ -213,7 +213,7 @@
 		</div>
 		<br>
 		{{/if}}
-		{{if data.state === "unconfirmed" || data.state === "voucherInvalid" || data.state === "hunterUnreceive" || data.state === "hunterReceive" || data.state === "voucherChecking" && data.finalPrice!== ""}}
+		{{if data.state === "unconfirmed" || data.state === "hunterUnreceive" || data.state === "hunterReceive" || data.state === "voucherChecking" && data.finalPrice!== ""}}
 		<div class="hopeprice" style="width: 80%;">
 			<p>确认费用</p>
 			<table>
@@ -233,7 +233,7 @@
 		</div>
 		<br>
 		{{/if}}
-		{{if data.state === "voucherInvalid" || data.state === "hunterUnreceive" || data.state === "hunterReceive" || data.state === "voucherChecking"}}
+		{{if data.state === "hunterUnreceive" || data.state === "hunterReceive" || data.state === "voucherChecking"}}
 		<div class="upmainfile">
 			<p>凭证</p>
 			<div class="showImg">

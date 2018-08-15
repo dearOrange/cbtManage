@@ -149,8 +149,8 @@ define(function(require, exports, module) {
         matchForm.html(matchFormStr); //插入dom
 
         //任务状态数组
-        var taskStateKeyArr = ['unarrange', 'tracing', 'clueChecking', 'unvaluation', 'unconfirmed', 'voucherChecking', 'voucherInvalid', 'hunterUnreceive', 'hunterReceive', 'platReceive', 'upstreamReceive', 'closed'];
-        var taskStateValueArr = ['待分配', '查找中', '已发现', '待估价', '待出委托', '委托审核中', '凭证审核未通过', '捕头待确认', '捕头已确认', '平台已收车', '已完成', '已关闭'];
+        var taskStateKeyArr = ['unarrange', 'tracing', 'clueChecking', 'unvaluation', 'unconfirmed', 'voucherChecking', 'hunterUnreceive', 'hunterReceive', 'platReceive', 'upstreamReceive', 'closed'];
+        var taskStateValueArr = ['待分配', '查找中', '已发现', '待估价', '待出委托', '委托审核中', '捕头待确认', '捕头已确认', '平台已收车', '已完成', '已关闭'];
 
 
         var str = '<option value="">全部</option>';

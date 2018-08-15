@@ -125,10 +125,6 @@ define(function(require, exports, module) {
                     name: "凭证审核中",
                     flag: 'trcaing'
                 }, {
-                    val: 'voucherInvalid',
-                    name: "凭证审核未通过",
-                    flag: 'trcaing'
-                }, {
                     val: 'hunterUnreceive',
                     name: "捕头未接受",
                     flag: 'trcaing'
