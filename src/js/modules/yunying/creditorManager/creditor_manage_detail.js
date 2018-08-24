@@ -159,13 +159,6 @@ define(function(require, exports, module) {
               })
               return false;
             }
-            if(!dataForm.contactPhone){
-              jh.utils.alert({
-                content: '请输入联系方式',
-                ok: true
-              })
-              return false;
-            }
             if(!dataForm.content){
               jh.utils.alert({
                 content: '联系内容',

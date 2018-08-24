@@ -82,13 +82,6 @@ define(function(require, exports, module) {
                       })
                       return false;
                     }
-                    if(!increateForm.contactPhone){
-                      jh.utils.alert({
-                        content: '请输入联系方式',
-                        ok: true
-                      })
-                      return false;
-                    }
                     if(!increateForm.traceAt){
                       jh.utils.alert({
                         content: '请输入跟进时间',
