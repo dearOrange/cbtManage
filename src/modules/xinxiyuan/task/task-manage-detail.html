@@ -98,8 +98,23 @@
       </tr>
     </table>
     {{/if}}
-    
     {{if data.state === "voucherChecking" || data.state === "hunterUnreceive" || data.state === "hunterReceive" || data.state === "platReceive" || data.state === "upstreamReceive"}}
+    <div class="clearfix"></div>
+    <div class="mainfile">
+      <p>凭证资料</p>
+      <div class="upimg" style="border:1px dashed #ccc;padding:10px 0;">
+        <span style="padding:0 17px;">委托书原件</span>
+        {{each data.entrustVoList item index}}
+        <img class="preview-img" src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'" />
+        {{/each}}
+      </div>
+      <div class="upimg" style="margin-top:10px;border:1px dashed #ccc;padding:10px 0;">
+        <span style="padding:0 10px;">资料清单</span>
+        {{each data.voucherVoList item index}}
+        <img class="preview-img" src="{{viewImgRoot}}{{item.url}}?imageMogr2/auto-orient/thumbnail/100x100" onerror="this.src='/src/img/nopic.png'"/>
+        {{/each}}
+      </div>
+    </div>
     <div class="clearfix"></div>
     <p>收车信息</p>
     <div class="upimg showImg">
