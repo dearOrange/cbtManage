@@ -7,6 +7,7 @@
       任务详情
     </p>
     <a href="javascript:;" class="button gobackPage goBack">返回</a>
+    <p class="showTaskState pull-right">{{menuState(data.state)}}</p>
     <div class="clearfix"></div>
     <hr /><br />
     <p>基本信息</p><br />
@@ -98,7 +99,7 @@
     </table>
     {{/if}}
     
-    {{if data.state === "hunterReceive" || data.state === "platReceive" || data.state === "upstreamReceive"}}
+    {{if data.state === "voucherChecking" || data.state === "hunterUnreceive" || data.state === "hunterReceive" || data.state === "platReceive" || data.state === "upstreamReceive"}}
     <div class="clearfix"></div>
     <p>收车信息</p>
     <div class="upimg showImg">

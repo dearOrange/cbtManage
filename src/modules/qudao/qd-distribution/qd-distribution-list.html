@@ -25,6 +25,11 @@
                         <input type="submit" value="查询" class="button submit">
                     </td>
                 </tr>
+                <tr>
+                  <td colspan="4">
+                    <input type="button" class="button style-btn mt10" id="qd_distributeTask" value="批量分配">
+                  </td>
+                </tr>
             </table>
         </form>
     </div>
@@ -32,6 +37,9 @@
         <table class="dataShow">
             <thead>
                 <tr>
+                    <th width="3%">
+                      <input type="checkbox" id="checkAll" />
+                    </th>
                     <th width="4%">序号</th>
                     <th width="8%">车牌号</th>
                     <th width="10%">品牌</th>
@@ -50,6 +58,9 @@
 <script type="text/template" id="admin-qDDistributionList-template">
     {{ each list item index }}
     <tr>
+        <td>
+          <input type="checkbox" value="{{item.id}}" data-id="{{item.id}}" />
+        </td>
         <td>{{index+1}}</td>
         <td>{{item.carNumber}}</td>
         <td>{{item.carBrand}}</td>

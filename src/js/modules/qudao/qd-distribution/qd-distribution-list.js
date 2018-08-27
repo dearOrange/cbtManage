@@ -82,6 +82,37 @@ define(function(require, exports, module) {
             });
         };
         
+        this.initMoreSheriff = function(taskId) {
+            jh.utils.ajax.send({
+                url: '/task/downStreamListByChannel',
+                data: {
+                    taskId: taskId
+                },
+                done: function(returnData) {
+                    var str = _this.distributionSheriff(returnData.data);
+                    jh.utils.alert({
+                        content: str,
+                        ok: function() {
+                            var ids = jh.utils.getCheckboxValue('distribution_public_form', 'value'),
+                                obj = {};
+                            if (!ids) {
+                                jh.utils.alert({
+                                    content: '请选择捕头！',
+                                    ok: true,
+                                    cancel: false
+                                });
+                                return false;
+                            }
+                            obj.downstreamlist = ids;
+                            obj.taskIds = taskId;
+                            _this.moredistribution(obj);
+                        },
+                        cancel: true
+                    });
+                }
+            });
+        };
+        
         //已分配
         this.sheriffDownstream = function(arr){
             var inputs = $('#distribution_public_form').find(':checkbox');
@@ -154,6 +185,24 @@ define(function(require, exports, module) {
             };
             jh.utils.ajax.send(opt);
         };
+        
+        this.moredistribution = function(obj) {
+            var opt = {
+              method: 'post',
+                url: '/task/batchAllotDownStream',
+                data:obj,
+                done: function(returnData) {
+                    jh.utils.alert({
+                        content: '任务分配成功！',
+                        ok: function(){
+                            _this.initContent();
+                        },
+                        cancel: false
+                    });
+                }
+            };
+            jh.utils.ajax.send(opt);
+        };
         this.registerEvent = function() {
             //查询
             jh.utils.validator.init({
@@ -177,6 +226,20 @@ define(function(require, exports, module) {
                 var me = $(this);
                 var taskId = me.data('id');
                 _this.initSheriff(taskId);
+            });
+            
+            //批量分配
+            $('body').off('click', '#qd_distributeTask').on('click', '#qd_distributeTask', function() {
+              var me = $(this);
+              var taskIds = jh.utils.getCheckboxValue('admin-qDDistributionList-container');
+              if (!taskIds) {
+                jh.utils.alert({
+                  content: '请选择任务！',
+                  ok: true
+                });
+                return false;
+              }
+              _this.initMoreSheriff(taskIds);
             });
             
         };
