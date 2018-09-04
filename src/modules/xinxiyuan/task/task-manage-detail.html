@@ -47,6 +47,23 @@
     </table>
     <p>备注信息</p>
     <div class="remark">{{data.remark}}</div>
+    {{if data.state === 'unconfirmed' || data.state === 'voucherChecking' || data.state === 'hunterUnreceive' || data.state === 'hunterReceive' || data.state === 'platReceive' || data.state === 'upstreamReceive' || data.state === 'closed'}}
+    <p>处置费用</p>
+    <table class="taskTable">
+      <tr> 
+        <th>最终处置费用：</th>
+        <td>{{data.finalPrice}}</td>
+        <th>其中受托人费用：</th>
+        <td>{{data.baileePrice}}</td>
+      </tr>
+      <tr>
+        <th>资产查找费：</th>
+        <td>{{data.assetPrice}}</td>
+        <th>第三方处置清收费：</th>
+        <td>{{data.thirdpartyPrice}}</td>
+      </tr>
+    </table>
+    {{/if}}
     {{if attachmentVoList != 0}}
     <div class="imgRecord">
       <p>催收资料</p>
@@ -276,25 +293,6 @@
     {{else}}
     <input type="submit" value="确认采纳" class="button adopteInfo" />
     {{/if}}
-    {{/if}}
-    {{if data.state === 'unconfirmed'}}
-    <div class="clearfix"></div>
-    <hr />
-    <p>确认费用</p>
-    <table class="taskTable">
-      <tr> 
-        <th>最终处置费用：</th>
-        <td>{{data.finalPrice}}</td>
-        <th>其中受托人费用：</th>
-        <td>{{data.baileePrice}}</td>
-      </tr>
-      <tr>
-        <th>资产查找费：</th>
-        <td>{{data.assetPrice}}</td>
-        <th>第三方处置清收费：</th>
-        <td>{{data.thirdpartyPrice}}</td>
-      </tr>
-    </table>
     {{/if}}
   </div>
 </script>

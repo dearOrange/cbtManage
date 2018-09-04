@@ -50,6 +50,23 @@
           <p>备注信息</p>
           <div class="remark">{{data.remark}}</div>
         </div>
+        {{if data.state === 'unconfirmed' || data.state === 'voucherChecking' || data.state === 'hunterUnreceive' || data.state === 'hunterReceive' || data.state === 'platReceive' || data.state === 'upstreamReceive' || data.state === 'closed'}}
+        <p>处置费用</p>
+        <table class="taskTable">
+          <tr> 
+            <th>最终处置费用：</th>
+            <td>{{data.finalPrice}}</td>
+            <th>其中受托人费用：</th>
+            <td>{{data.baileePrice}}</td>
+          </tr>
+          <tr>
+            <th>资产查找费：</th>
+            <td>{{data.assetPrice}}</td>
+            <th>第三方处置清收费：</th>
+            <td>{{data.thirdpartyPrice}}</td>
+          </tr>
+        </table>
+        {{/if}}
         <div class="imgRecord">
           <p>催收记录</p>
           {{each data.attachmentVoList data index}}
@@ -122,29 +139,6 @@
             </table>
           </div>
         	{{/each}}
-        </div>
-        <div class="hopeprice">
-        	<p>处置费用</p>
-        	{{each data.traceVoList data index}}
-        	{{if data.role === 'type_B'}}
-        	<div>
-        		<label>意愿处置费用:</label>
-        		<span>{{data.estimatedCost}}</span>
-        	</div>
-        	{{/if}}
-        	{{/each}}
-        	<div>
-        		<label>处置费用:</label>
-        		<span>{{data.estimatedPrice}}</span>
-        	</div>
-        	<div>
-        		<label>资产查找费:</label>
-        		<span>{{data.assetPrice}}</span>
-        	</div>
-        	<div>
-        		<label>第三方处置清收费:</label>
-        		<span>{{data.thirdpartyPrice}}</span>
-        	</div>
         </div>
         {{if data.state === "hunterReceive" || data.state === "platReceive" || data.state === "upstreamReceive"}}
         <div class="mainfile">

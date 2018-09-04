@@ -50,6 +50,23 @@
           <p>备注信息</p>
           <div class="remark">备注信息：{{data.remark}}</div>
         </div>
+        {{if data.state === 'unconfirmed' || data.state === 'voucherChecking' || data.state === 'hunterUnreceive' || data.state === 'hunterReceive' || data.state === 'platReceive' || data.state === 'upstreamReceive' || data.state === 'closed'}}
+        <p>处置费用</p>
+        <table class="taskTable">
+          <tr> 
+            <th>最终处置费用：</th>
+            <td>{{data.finalPrice}}</td>
+            <th>其中受托人费用：</th>
+            <td>{{data.baileePrice}}</td>
+          </tr>
+          <tr>
+            <th>资产查找费：</th>
+            <td>{{data.assetPrice}}</td>
+            <th>第三方处置清收费：</th>
+            <td>{{data.thirdpartyPrice}}</td>
+          </tr>
+        </table>
+        {{/if}}
         <div class="imgRecord">
           <p>催收记录</p>
           {{each data.attachmentVoList item index}}
