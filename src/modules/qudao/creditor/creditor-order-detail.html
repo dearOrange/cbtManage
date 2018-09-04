@@ -55,10 +55,8 @@
         <table class="taskTable">
           <tr>
             {{each data.traceVoList data index}}
-            {{if data.role === 'type_B'}}
             <th>意愿处置费用：</th>
-            <td>{{data.estimatedCost}}</td>
-            {{/if}}
+            <td>{{if data.role === 'type_B'}}{{data.estimatedCost}}{{else}}0{{/if}}</td>
             {{/each}}
             <th>处置费用：</th>
             <td>{{data.estimatedPrice}}</td>
