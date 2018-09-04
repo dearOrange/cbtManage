@@ -54,10 +54,12 @@
         <p>处置费用</p>
         <table class="taskTable">
           <tr> 
-            <th>最终处置费用：</th>
-            <td>{{data.finalPrice}}</td>
-            <th>其中受托人费用：</th>
-            <td>{{data.baileePrice}}</td>
+            {{each data.traceVoList data index}}
+            <th>意愿处置费用：</th>
+            <td>{{if data.role === 'type_B'}}{{data.estimatedCost}}{{else}}0{{/if}}</td>
+            {{/each}}
+            <th>处置费用：</th>
+            <td>{{data.estimatedPrice}}</td>
           </tr>
           <tr>
             <th>资产查找费：</th>

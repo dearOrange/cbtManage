@@ -53,11 +53,15 @@
         {{if data.state === 'unconfirmed' || data.state === 'voucherChecking' || data.state === 'hunterUnreceive' || data.state === 'hunterReceive' || data.state === 'platReceive' || data.state === 'upstreamReceive' || data.state === 'closed'}}
         <p>处置费用</p>
         <table class="taskTable">
-          <tr> 
-            <th>最终处置费用：</th>
-            <td>{{data.finalPrice}}</td>
-            <th>其中受托人费用：</th>
-            <td>{{data.baileePrice}}</td>
+          <tr>
+            {{each data.traceVoList data index}}
+            {{if data.role === 'type_B'}}
+            <th>意愿处置费用：</th>
+            <td>{{data.estimatedCost}}</td>
+            {{/if}}
+            {{/each}}
+            <th>处置费用：</th>
+            <td>{{data.estimatedPrice}}</td>
           </tr>
           <tr>
             <th>资产查找费：</th>
